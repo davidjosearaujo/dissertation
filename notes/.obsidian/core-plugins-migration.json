@@ -7,21 +7,36 @@
   "canvas": true,
   "outgoing-link": true,
   "tag-pane": true,
+<<<<<<< Updated upstream
   "properties": true,
+=======
+  "properties": false,
+>>>>>>> Stashed changes
   "page-preview": true,
   "daily-notes": true,
   "templates": true,
   "note-composer": true,
   "command-palette": true,
+<<<<<<< Updated upstream
   "slash-command": true,
   "editor-status": true,
   "bookmarks": true,
   "markdown-importer": true,
+=======
+  "slash-command": false,
+  "editor-status": true,
+  "bookmarks": true,
+  "markdown-importer": false,
+>>>>>>> Stashed changes
   "zk-prefixer": false,
   "random-note": false,
   "outline": true,
   "word-count": true,
+<<<<<<< Updated upstream
   "slides": true,
+=======
+  "slides": false,
+>>>>>>> Stashed changes
   "audio-recorder": false,
   "workspaces": false,
   "file-recovery": true,

@@ -23,7 +23,11 @@
   "showedMobileNotice": true,
   "refreshSourceControlTimer": 7000,
   "showBranchStatusBar": true,
+<<<<<<< Updated upstream
   "setLastSaveToLastCommit": false,
+=======
+  "setLastSaveToLastCommit": true,
+>>>>>>> Stashed changes
   "submoduleRecurseCheckout": false,
   "gitDir": "",
   "showFileMenu": true,

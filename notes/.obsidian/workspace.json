@@ -1,18 +1,22 @@
 {
   "main": {
-    "id": "b5961f859607582f",
+    "id": "57a5b0c6c2709c25",
     "type": "split",
     "children": [
       {
-        "id": "f3a5916db33e605c",
+        "id": "c8e304595f5b52b2",
         "type": "tabs",
         "children": [
           {
-            "id": "9001e521b031f407",
+            "id": "12799620e3c55e8f",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "ROMARS Quick references/Trusted non-3GPP access.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -21,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "4639686a185e6a79",
+    "id": "411c12bd8658aa5d",
     "type": "split",
     "children": [
       {
-        "id": "ce99a6258f8c8b48",
+        "id": "157ef30cd7e7fadc",
         "type": "tabs",
         "children": [
           {
-            "id": "7a76f117d721b7bd",
+            "id": "870a0dee6ebe3642",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -39,7 +43,7 @@
             }
           },
           {
-            "id": "9c4371c65a6a61f1",
+            "id": "3addde1be4f06add",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -54,7 +58,7 @@
             }
           },
           {
-            "id": "92aa19a2fbc8dc1f",
+            "id": "8c4988825f2c715a",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -68,19 +72,20 @@
     "width": 300
   },
   "right": {
-    "id": "3efeb864d4218409",
+    "id": "a174be73487b4b8f",
     "type": "split",
     "children": [
       {
-        "id": "34202dadd8a53549",
+        "id": "2f1a28eda42649cd",
         "type": "tabs",
         "children": [
           {
-            "id": "c614d71aac82b071",
+            "id": "937d72ae4a4e3c9f",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "ROMARS Quick references/Trusted non-3GPP access.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -92,18 +97,19 @@
             }
           },
           {
-            "id": "79b57b3984d00ee4",
+            "id": "fa17b32ab2e4d839",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "ROMARS Quick references/Trusted non-3GPP access.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "2c34655a742ac086",
+            "id": "e04276af052d2a69",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -114,22 +120,12 @@
             }
           },
           {
-            "id": "79a37b08a83477d7",
+            "id": "d73934f58ee18f43",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
-            }
-          },
-          {
-            "id": "0128c27f31fcd0ca",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
               "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
+                "file": "ROMARS Quick references/Trusted non-3GPP access.md"
               }
             }
           }
@@ -148,10 +144,23 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "markdown-importer:Open format converter": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7a76f117d721b7bd",
-  "lastOpenFiles": []
+  "active": "12799620e3c55e8f",
+  "lastOpenFiles": [
+    "joplin_notes.jex",
+    "ROMARS Quick references/Untrusted non-3GPP access (N3IWF).md",
+    "ROMARS Quick references/Trusted non-3GPP access.md",
+    "Questions.md",
+    "ROMARS Quick references/Pasted image 20240926175520.png",
+    "ROMARS Quick references/Pasted image 20240926175453.png",
+    "Pasted.md",
+    "ROMARS Quick references/Pasted image 20240926175210.png",
+    "ROMARS Quick references/Pasted image 20240926175108.png",
+    "Untitled 1",
+    "Untitled",
+    "ROMARS Quick references",
+    "3GPP 23.501 Specification"
+  ]
 }
