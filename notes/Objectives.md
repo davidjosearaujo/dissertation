@@ -21,3 +21,8 @@ devices. Only the observed MAC address, which can be forged, is used to identify
 # Functional expansion
 
 Extended to improve security and extend 5G slicing concept with WLAN SSIDs or Ethernet VLAN as described in the following.
+
+## Improve non-5G devices authentication and authorization (AA) mechanisms
+
+N3IWF, TNGF and TWIF require devices to have 5G credentials in order to have a single point of provisioning.
+The foreseen solution is based on the interception of the RADIUS traffic between the authenticating entity and the respective RADIUS server. This allows the extraction of the device identity and obtain the result of the process.

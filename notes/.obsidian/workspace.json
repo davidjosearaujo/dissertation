@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Acronyms.md",
+                "file": "Objectives.md",
                 "mode": "source",
                 "source": false
               }
@@ -44,7 +44,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -172,7 +172,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7b1189faea9198b8",
+  "active": "a0379718abedbd6a",
   "lastOpenFiles": [
     "Acronyms.md",
     "Objectives.md",
