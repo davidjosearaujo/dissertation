@@ -7,28 +7,14 @@
   "canvas",
   "outgoing-link",
   "tag-pane",
-<<<<<<< Updated upstream
-  "properties",
-=======
->>>>>>> Stashed changes
   "page-preview",
   "daily-notes",
   "templates",
   "note-composer",
   "command-palette",
-<<<<<<< Updated upstream
-  "slash-command",
-  "editor-status",
-  "bookmarks",
-  "markdown-importer",
-  "outline",
-  "word-count",
-  "slides",
-=======
   "editor-status",
   "bookmarks",
   "outline",
   "word-count",
->>>>>>> Stashed changes
   "file-recovery"
 ]
