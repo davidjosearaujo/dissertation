@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ROMARS Quick references/Trusted non-3GPP access.md",
+                "file": "Quick references/Untrusted non-3GPP access (N3IWF).md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "ROMARS Quick references/Trusted non-3GPP access.md",
+                "file": "Quick references/Untrusted non-3GPP access (N3IWF).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "ROMARS Quick references/Trusted non-3GPP access.md",
+                "file": "Quick references/Untrusted non-3GPP access (N3IWF).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ROMARS Quick references/Trusted non-3GPP access.md"
+                "file": "Quick references/Untrusted non-3GPP access (N3IWF).md"
               }
             }
           }
@@ -147,21 +147,21 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "5976546828ee8577",
+  "active": "870a0dee6ebe3642",
   "lastOpenFiles": [
-    "ROMARS Quick references/Untrusted non-3GPP access (N3IWF).md",
+    "Quick references/Trusted non-3GPP access.md",
+    "Quick references/Untrusted non-3GPP access (N3IWF).md",
     "3GPP Specs",
-    "ROMARS Quick references/Trusted non-3GPP access.md",
     "2024-09-26.md",
     "joplin_notes.jex",
     "Questions.md",
-    "ROMARS Quick references/Pasted image 20240926175520.png",
-    "ROMARS Quick references/Pasted image 20240926175453.png",
+    "Quick references/Pasted image 20240926175520.png",
+    "Quick references/Pasted image 20240926175453.png",
     "Pasted.md",
-    "ROMARS Quick references/Pasted image 20240926175210.png",
-    "ROMARS Quick references/Pasted image 20240926175108.png",
+    "Quick references/Pasted image 20240926175210.png",
+    "Quick references/Pasted image 20240926175108.png",
     "Untitled 1",
-    "ROMARS Quick references",
+    "Quick references",
     "3GPP 23.501 Specification"
   ]
 }
