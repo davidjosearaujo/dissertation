@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "a0379718abedbd6a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Acronyms.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Quick references/Untrusted non-3GPP access (N3IWF).md",
+                "file": "Acronyms.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Quick references/Untrusted non-3GPP access (N3IWF).md",
+                "file": "Acronyms.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Quick references/Untrusted non-3GPP access (N3IWF).md"
+                "file": "Acronyms.md"
               }
             }
           }
@@ -147,10 +160,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "870a0dee6ebe3642",
+  "active": "a0379718abedbd6a",
   "lastOpenFiles": [
-    "Quick references/Trusted non-3GPP access.md",
     "Quick references/Untrusted non-3GPP access (N3IWF).md",
+    "Acronyms.md",
+    "Quick references/Trusted non-3GPP access.md",
     "3GPP Specs",
     "2024-09-26.md",
     "joplin_notes.jex",
