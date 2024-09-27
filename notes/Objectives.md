@@ -30,3 +30,5 @@ The foreseen solution is based on the interception of the RADIUS traffic between
 ## Implement ‘extended slices’
 
 Static mapping between devices IDs and 5G IDs must be supported and provisioned in the IWF.
+
+![[Pasted image 20240927153324.png]]
