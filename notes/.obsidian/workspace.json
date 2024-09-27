@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "7b1189faea9198b8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Objectives.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Acronyms.md",
+                "file": "Objectives.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Acronyms.md",
+                "file": "Objectives.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Acronyms.md"
+                "file": "Objectives.md"
               }
             }
           }
@@ -160,10 +172,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a0379718abedbd6a",
+  "active": "7b1189faea9198b8",
   "lastOpenFiles": [
-    "Quick references/Untrusted non-3GPP access (N3IWF).md",
     "Acronyms.md",
+    "Objectives.md",
+    "Quick references/Untrusted non-3GPP access (N3IWF).md",
     "Quick references/Trusted non-3GPP access.md",
     "3GPP Specs",
     "2024-09-26.md",

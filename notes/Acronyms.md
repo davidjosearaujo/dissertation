@@ -2,6 +2,7 @@
 | Acronym | Description                                                      |
 | ------- | ---------------------------------------------------------------- |
 | 5G-RG   | 5G Residential Gateway                                           |
+| AGF     | Access Gateway Function                                          |
 | AF      | Application Functions                                            |
 | AMF     | Access and Mobility Management Function                          |
 | AN      | Access Network                                                   |

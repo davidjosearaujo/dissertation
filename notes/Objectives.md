@@ -1,0 +1,7 @@
+Improve and extend an existing prototype of the target Interworking Function (IWF). The IWF corresponds to a BBF AGF for FN-RG but presenting itself to the 5G Core as a gNB, thus **eliminating the need for the 5G Cores to recognize other Access Node types**. It promotes, in a simplified and universal way, convergence between 5G and Ethernet
+based accesses, e.g. WLAN.
+
+The **existing IWF does not required devices to establish IPSec tunnels** and mobile **terminals to have 5G credentials**. For that purpose, the IWF is **provisioned with a set of 5G credentials**, also provisioned at the 5G core, which are used whenever a non 5G capable terminal requires data access. That process is triggered by Dynamic Host Configuration Protocol (DHCP), requiring the IWF to be the DHCP server of the IP segment the device is connected to, being the presented **MAC address used as the ID of the device and mapped to an available 5G identifier**. This mapping can be made static. Currently, only connection to a single slide is considered.
+
+It follows Software Defined Networking (SDN) principles and mechanisms to map WLAN
+connections to 5G sessions, under the common control of a single instance of 5G Core composedof three main blocks, which are depicted in Figure 33:
