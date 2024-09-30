@@ -42,9 +42,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "5537d47a737dfc72",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP 23.501 Specification/Untitled.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -110,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "3GPP 23.501 Specification/Untitled.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "3GPP 23.501 Specification/Untitled.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md"
+                "file": "3GPP 23.501 Specification/Untitled.md"
               }
             }
           }
@@ -172,10 +184,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7b1189faea9198b8",
+  "active": "870a0dee6ebe3642",
   "lastOpenFiles": [
-    "Objectives.md",
     "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+    "3GPP 23.501 Specification/Untitled.md",
+    "Objectives.md",
     "images/Pasted image 20240927153324.png",
     "images/Pasted image 20240927124739.png",
     "images/Pasted image 20240926175520.png",
