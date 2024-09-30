@@ -11,10 +11,6 @@ This clause specifies how a UE is authenticated to 5G network via an untrusted n
 When possible, the UE shall be authenticated by reusing the existing UE NAS security context in AMF.
 
 ![[Pasted image 20240930145000.png]]
-# 7A Security for trusted non-3GPP access to the 5G core network
-
-## 7A.2.1	Authentication for trusted non-3GPP access
-
-This clause specifies how a UE is authenticated to 5G network via a trusted non-3GPP access network. 
-
-This is based on the specified procedure in [[3GPP TS 23.502 V18.7.0]] clause 4.12a.2.2 "Registration procedure for trusted non-3GPP access". The authentication procedure is similar to the authentication procedure for Untrusted non-3GPP access defined in clause 7.2.1 with few differences, which are mentioned below:
+1. The UE connects to an untrusted non-3GPP access network with procedures outside the scope of 3GPP. When the UE decides to attach to 5GC network, the UE selects an N3IWF in a 5G PLMN, as described in TS 23.501 clause 6.3.6.
+2. The UE proceeds with the establishment of an IPsec Security Association (SA) with the selected N3IWF by initiating an IKE initial exchange according to RFC 7296. After step 2 all subsequent IKE messages are encrypted and integrity protected by using the IKE SA established in this step.
+3. The UE shall initiate an IKE_AUTH exchange by sending an IKE_AUTH request message. The AUTH payload is not included in the IKE_AUTH request message, which indicates that the IKE_AUTH exchange shall use EAP signalling (in this case EAP-5G signalling). As per the RFC 7296 [25], in the IDi the UE shall set the ID type as ID_KEY-ID in this message and set its value equal to any random number. The UE shall not use its GUTI/SUCI/SUPI as the Id in this step. If the UE is provisioned with the N3IWF root certificate, it shall include the CERTREQ payload within the IKE_AUTH request message to request N3IWF’s certificate.
