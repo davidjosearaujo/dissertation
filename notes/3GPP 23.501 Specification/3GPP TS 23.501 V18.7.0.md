@@ -15,3 +15,5 @@ An **untrusted non-3GPP** access network **shall be connected** to the 5G Core N
 
 A **trusted non-3GPP** access network **shall be connected** to the 5G Core Network **via a Trusted Non-3GPP Gateway Function (TNGF**), via **N3** interface. 
 
+# 5.2 Network Access Control
+
