@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Objectives.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Objectives.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Objectives.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Objectives.md"
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md"
               }
             }
           }
@@ -149,13 +149,13 @@
   },
   "active": "69b784b076ade2b4",
   "lastOpenFiles": [
+    "Objectives.md",
     "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
     "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
     "Quick references/Trusted non-3GPP access.md",
     "Quick references/Untrusted non-3GPP access (N3IWF).md",
     "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
     "Wireline Access in 5G.md",
-    "Objectives.md",
     "Untitled",
     "Links.md",
     "Questions.md",

@@ -12,6 +12,8 @@ Supports both untrusted non-3GPP access networks and trusted non-3GPP access net
 
 An **untrusted non-3GPP** access network **shall be connected** to the 5G Core Network **via a Non-3GPP InterWorking Function (N3IWF)**, via **N2** interface .
 
+
+
 # 6.2.1 AMF
 The Access and Mobility Management function (AMF) includes the following functionality:
 - Termination of RAN CP interface (N2)
