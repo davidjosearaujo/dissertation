@@ -33,3 +33,6 @@ The foreseen solution is based on the interception of the RADIUS traffic between
 Static mapping between devices IDs and 5G IDs must be supported and provisioned in the IWF.
 
 ![[Pasted image 20240927153324.png]]
+# W-AGF
+
+Mapping 5G authentication with non-5G authentication.
