@@ -5,4 +5,4 @@ The EAP-5G packets utilize the "Expanded" EAP type and the existing 3GPP Vendor-
 ## 4.12.2.2 Registration procedure for untrusted non-3GPP access
 
 ![[Pasted image 20241001102256.png]]
-1. When the UE decides to attach to 5GC network, the UE not operating in SNPN access mode for NWu interface selects an N3IWF in a 5G PLMN, as described in clause 6.3.6 of TS 23.501
+1. When the UE decides to attach to 5GC network, the UE not operating in SNPN access mode for NWu interface selects an N3IWF in a 5G PLMN, as described in clause **6.3.6 of TS 23.501**
