@@ -22,12 +22,22 @@ The Access and Mobility Management function (AMF) includes the following functio
 - Access Authentication
 - Access Authorization
 
+# 6.3.9 N3IWF
+The functionality of N3IWF in the case of untrusted non-3GPP access includes the following:
+- Support of IPsec tunnel establishment with the UE: The N3IWF terminates the IKEv2/IPsec protocols with the UE over NWu and relays over N2 the information needed to authenticate the UE and authorize its access to the 5G Core Network.
+- Termination of N2 and N3 interfaces to 5G Core Network for control - plane and user -plane respectively.
+- Relaying uplink and downlink control-plane NAS (N1) signalling between the UE and AMF.
+- Establishment of IPsec Security Association (IPsec SA) to support PDU Session traffic.
+- Relaying uplink and downlink user-plane packets between the UE and UPF. This involves:
+	- De-capsulation/ encapsulation of packets for IPSec and N3 tunnelling.
+- 
+
 # 6.3.6 N3IWF selection
 
 
 # 6.2.20 WAGF
 
-[SAGERAN W-AGF Devide](https://www.sageran.com/products/network-equipments/w-agf.html)
+[SAGERAN W-AGF Device](https://www.sageran.com/products/network-equipments/w-agf.html)
 
 W-AGF(Wireline Access Gateway Function ) is a wired access network function node based on 5G technology, defined by 3GPP and BBF. It acts as an intermediary between the RG and UPF, supporting N2 and N3 access to 5GC.
 
