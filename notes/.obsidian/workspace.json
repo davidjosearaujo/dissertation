@@ -18,21 +18,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "b1391be6d599d8bb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Links.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Links.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Links.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Links.md"
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md"
               }
             }
           }
@@ -160,10 +147,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b1391be6d599d8bb",
+  "active": "69b784b076ade2b4",
   "lastOpenFiles": [
-    "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
     "Links.md",
+    "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
     "Objectives.md",
     "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
     "Quick references/Trusted non-3GPP access.md",
@@ -171,7 +158,6 @@
     "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
     "Wireline Access in 5G.md",
     "Untitled",
-    "Links.md",
     "Questions.md",
     "6.3.6 of TS 23.501.md",
     "images/Pasted image 20241001102256.png",
