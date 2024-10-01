@@ -10,6 +10,7 @@
           {
             "id": "93d241549f6ea7e4",
             "type": "tabs",
+            "dimension": 53.70370370370371,
             "children": [
               {
                 "id": "3cb85839c5022289",
@@ -17,7 +18,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+                    "file": "Objectives.md",
                     "mode": "source",
                     "source": false
                   }
@@ -28,6 +29,7 @@
           {
             "id": "fe753e9a605e8d05",
             "type": "tabs",
+            "dimension": 46.2962962962963,
             "children": [
               {
                 "id": "217267935b7881ee",
@@ -110,7 +112,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "Objectives.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +129,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "Objectives.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +152,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md"
+                "file": "Objectives.md"
               }
             }
           }
@@ -174,13 +176,15 @@
   },
   "active": "3cb85839c5022289",
   "lastOpenFiles": [
+    "Questions.md",
+    "Objectives.md",
+    "Quick references/Untrusted non-3GPP access (N3IWF).md",
+    "Quick references/Trusted non-3GPP access.md",
+    "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
-    "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
     "6.3.6 of TS 23.501.md",
     "images/Pasted image 20241001102256.png",
-    "Objectives.md",
-    "Questions.md",
     "images/Pasted image 20240930145000.png",
     "Pasted image 20240930154010.png",
     "images/Pasted image 20240927153324.png",
@@ -192,8 +196,6 @@
     "images",
     "Pasted image 20240927124739.png",
     "Acronyms.md",
-    "Quick references/Untrusted non-3GPP access (N3IWF).md",
-    "Quick references/Trusted non-3GPP access.md",
     "3GPP Specs",
     "2024-09-26.md",
     "joplin_notes.jex",
