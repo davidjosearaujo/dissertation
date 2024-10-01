@@ -1,2 +1,1 @@
-- Trusted vs Untrested, which are we tackling?
 - Fixed UE vs Mobile UE?
