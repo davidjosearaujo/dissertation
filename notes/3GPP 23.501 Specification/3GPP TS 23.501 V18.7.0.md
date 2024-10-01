@@ -12,6 +12,9 @@ Supports both untrusted non-3GPP access networks and trusted non-3GPP access net
 
 An **untrusted non-3GPP** access network **shall be connected** to the 5G Core Network **via a Non-3GPP InterWorking Function (N3IWF)**, via **N2** interface .
 
+An untrusted non-3GPP access network shall be connected to the 5G Core Network via a Non-3GPP InterWorking Function (N3IWF), whereas a trusted non-3GPP access network shall be connected to the 5G Core Network via aTrusted Non-3GPP Gateway Function (TNGF).
+
+# 5.5 Non-3GPP access specific aspects
 
 
 # 6.2.1 AMF
