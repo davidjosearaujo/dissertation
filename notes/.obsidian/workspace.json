@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "fe753e9a605e8d05",
+        "id": "7638e482df6eafc6",
         "type": "tabs",
         "children": [
           {
-            "id": "13745430a3a8331a",
+            "id": "69b784b076ade2b4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wireline Access in 5G.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wireline Access in 5G.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wireline Access in 5G.md",
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wireline Access in 5G.md"
+                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md"
               }
             }
           }
@@ -147,17 +147,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "13745430a3a8331a",
+  "active": "69b784b076ade2b4",
   "lastOpenFiles": [
-    "Quick references/Untrusted non-3GPP access (N3IWF).md",
+    "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
     "Quick references/Trusted non-3GPP access.md",
-    "Wireline Access in 5G.md",
+    "Quick references/Untrusted non-3GPP access (N3IWF).md",
+    "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+    "Wireline Access in 5G.md",
     "Objectives.md",
     "Untitled",
     "Links.md",
-    "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
-    "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
     "Questions.md",
     "6.3.6 of TS 23.501.md",
     "images/Pasted image 20241001102256.png",
