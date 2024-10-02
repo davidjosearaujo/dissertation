@@ -1,13 +1,16 @@
 # Abbreviations
-| Abbreviation | Meaning                          |
-| ------------ | -------------------------------- |
-| CM           | Cable modem                      |
-| CMTS         | Cable modem termination system   |
-| CPE          | Customer premises equipment      |
-| CRG          | Cable Residential Gateway        |
-| HFC          | hybrid fiber-coax                |
-| NAS          | Non-Access Stratum               |
-| W-AGF        | Wireline Access Gateway Function |
+| Abbreviation | Meaning                                         |
+| ------------ | ----------------------------------------------- |
+| CM           | Cable modem                                     |
+| CMTS         | Cable modem termination system                  |
+| CPE          | Customer premises equipment                     |
+| CRG          | Cable Residential Gateway                       |
+| DOCSIS       | Data Over Cable Service Interface Specification |
+| HFC          | hybrid fiber-coax                               |
+| NAS          | Non-Access Stratum                              |
+| PDU          | Packer data unit                                |
+| W-AGF        | Wireline Access Gateway Function                |
+> **Data Over Cable Service Interface Specification (DOCSIS)** is an international  telecommunications standard that permits the addition of high-bandwidth data transfer to an existing cable television (CATV) system. It is used by many cable television operators to provide cable Internet access over their existing hybrid fiber-coaxial (HFC) infrastructure.
 
 # 5 Converged Architecture with the 3GPP 5G Core
 3GPP has identified reference architecture diagrams for the interworking and integration models of convergence; they are shown in Figure 1 and Figure 2, respectively. The following **hybrid fiber-coax (HFC)** network components are portrayed in the 3GPP reference architectures. ***We are only interested in two***
@@ -43,3 +46,11 @@ When the EAP-5G registration is complete and a security association is establish
 The **W-AGF must support network slicing** and NSSAI on behalf of individual FN-CRGs. The W-AGF **must allow the operator to configure the way in which the W-AGF selects slices** for the FN-CRG based on slice IDs received during FN-CRG registrations, DOCSIS flows initiated by the FN-CRG, or FN-CRG application.
 
 Upon FN-CRG registration, when no other information is available for network slice selection, the **W-AGF must select either the enhanced mobile broadband (eMBB) network slice specified by 3GPP for the 5GC to connect to default DOCSIS service flows or an operator-provisioned default slice in the W-AGF for the FN-CRG**. ^0fbf60
+
+The W-AGF must support operator configuration of slice types to FN-CRGs and DOCSIS service flow settings.
+
+## 7.7 Session Management
+The W-AGF must support session management procedures for each FN-CRG.
+
+The W-AGF must establish an IP PDU data session within the eMBB slice per operator configuration upon the CMTS completing default DOCSIS service flows for the FN-CRG.
+
