@@ -4,35 +4,47 @@
     "type": "split",
     "children": [
       {
-        "id": "7638e482df6eafc6",
-        "type": "tabs",
+        "id": "0137af87c3cc0879",
+        "type": "split",
         "children": [
           {
-            "id": "244b0a95c96fb3da",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
-                "mode": "source",
-                "source": false
+            "id": "58fe213b1c159019",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "3d60375203fe9a4e",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Misc/Questions.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
               }
-            }
+            ]
           },
           {
-            "id": "4ffc62a6b1e47a98",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Misc/Questions.md",
-                "mode": "source",
-                "source": false
+            "id": "bb021c21f14c34f3",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "a9d3b325539fbc3a",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
               }
-            }
+            ]
           }
         ],
-        "currentTab": 1
+        "direction": "horizontal"
       }
     ],
     "direction": "vertical"
@@ -160,10 +172,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4ffc62a6b1e47a98",
+  "active": "3d60375203fe9a4e",
   "lastOpenFiles": [
     "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
     "Misc/Questions.md",
+    "5G.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
     "().md",
     "Misc/Links.md",

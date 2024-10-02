@@ -34,5 +34,5 @@ For the FN-CRG, the **W-AGF must detect CM registration into the CMTS**. The W-A
 
 The W-AGF must be able to **detect CM unreachability by the CMTS** and report the idle status to the 5GC
 
-##### **The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.**
+**The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.** ^1d8e9f
 

@@ -1,1 +1,5 @@
-[The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation](5G)
+- Which is the method used to detect CM registration and reachability? [[5G Wireless Wireline Converged Core ArchitectureTechnical Report#^1d8e9f]]
+- 
+- 
+- 
+- 
