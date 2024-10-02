@@ -25,3 +25,7 @@ The **N2** reference point to the AMF carries access network **control messaging
 
 The **W-AGF acts as a 5G UE on behalf of the CM CPE** in the interworking model. It **manages registration into the 5GC**, data **session management**, and **slice selection** on behalf of the CPE.
 
+# 7 Requirements
+## 7.4 High Level W-AGF Requirements
+
+Each residential gateway may be assigned its own VLAN between the CMTS and the W-AGF to complete the user plane traffic flow between the HFC access network and the W-AGF. The W-AGF must support individual VLANs per residential gateway as received via the CMTS.
