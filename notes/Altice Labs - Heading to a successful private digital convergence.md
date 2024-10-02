@@ -17,3 +17,11 @@ That way, a 5G NPN consists in the usage of a 5G system for private use, being d
 
 As any 5G system, 5G NPN are composed of **user equipments (UE)** - terminals or end-systems -, 5G **accesses** - consisting of **next-generation NodeB (gNB)** units connecting UE via a 5G new radio (5G-NR) wireless interface, **and a 5G core (5GC)**.
 
+# Convergence and 5G
+With convergence, private industrial networking continues being a heterogeneous environment, but with common management and operation of all accesses as a single network, via a common 5G control plane and traffic aggregation entities. The 5GC control and data planes have the capability to serve other access technologies. In the scope of private deployments, potential 5GC shared services include:
+
+**Common and consistent authentication/registration** and global assignment of security policies;
+- **Unique IP** address management;
+- **Consistent traffic management** (e.g., routing, forwarding, inspection, policy enforcement, QoS handling, and reporting) across all access types;
+- Transversal slicing/virtual networking management;
+- Exposure to external entities as a single network.
