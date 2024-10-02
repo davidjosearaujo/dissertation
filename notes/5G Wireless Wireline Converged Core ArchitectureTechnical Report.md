@@ -23,7 +23,3 @@ The **N1 reference point supports UE authentication and network admission signal
 The **N2** reference point to the AMF carries access network **control messaging** as specified by 3GPP. This **control messaging is translated by the interfaces between the W-AGF and CMTS**
 
 The **W-AGF acts as a 5G UE on behalf of the CM CPE** in the interworking model. It **manages registration into the 5GC**, data **session management**, and **slice selection** on behalf of the CPE.
-
-## 5.2 3GPP R16 Integration Model for Convergence
-![[Pasted image 20241002161612.png]]
-The integrated model as depicted in Figure 2 places 3GPP 5G network functions throughout the HFC access network in order to support the promise of a single core across access networks. The CPE appears as a 5G UE to the 5GC.
