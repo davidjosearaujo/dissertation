@@ -27,3 +27,7 @@ With convergence, private industrial networking continues being a heterogeneous 
 - Exposure to external entities as a single network.
 
 Security mechanisms for authentication and data encryption are key aspects in convergence since they must be present whenever a terminal attaches to the network. However, they are deeply dependent on the nature of the used access network. A unified authentication framework was defined for 5G, where 5G authentication and key agreement (5G-AKA) and extensible authentication protocol (EAP) for the 3rd generation authentication and key agreement (EAP-AKA’) are mandatory 5G primary authentication methods.
+
+Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE accesses, respectively, the following four additional 5G access node types exist:
+
+- **Non-3GPP interworking function (N3IWF)**, which allows 5G capable terminals, supporting non-access stratum (NAS) to connect from untrusted WLAN or other accesses deployed by third-party entities, out of the scope of 5G network owner control.
