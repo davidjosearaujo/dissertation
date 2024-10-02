@@ -25,3 +25,5 @@ With convergence, private industrial networking continues being a heterogeneous 
 - **Consistent traffic management** (e.g., routing, forwarding, inspection, policy enforcement, QoS handling, and reporting) across all access types;
 - Transversal slicing/virtual networking management;
 - Exposure to external entities as a single network.
+
+Security mechanisms for authentication and data encryption are key aspects in convergence since they must be present whenever a terminal attaches to the network. However, they are deeply dependent on the nature of the used access network. A unified authentication framework was defined for 5G, where 5G authentication and key agreement (5G-AKA) and extensible authentication protocol (EAP) for the 3rd generation authentication and key agreement (EAP-AKA’) are mandatory 5G primary authentication methods.
