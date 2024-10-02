@@ -20,12 +20,12 @@
             }
           },
           {
-            "id": "463087ef17e6d29d",
+            "id": "244b0a95c96fb3da",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Altice Labs - Heading to a successful private digital convergence.md",
+                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Altice Labs - Heading to a successful private digital convergence.md",
+                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Altice Labs - Heading to a successful private digital convergence.md",
+                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Altice Labs - Heading to a successful private digital convergence.md"
+                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md"
               }
             }
           }
@@ -160,20 +160,21 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "463087ef17e6d29d",
+  "active": "244b0a95c96fb3da",
   "lastOpenFiles": [
-    "Pasted image 20241002103905.png",
     "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
+    "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+    "Misc/Links.md",
+    "Misc",
+    "Wireline Access in 5G.md",
     "Altice Labs - Heading to a successful private digital convergence.md",
-    "Links.md",
-    "Objectives.md",
+    "images/Pasted image 20241002103905.png",
+    "Misc/Objectives.md",
     "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
     "ROMARS/Trusted non-3GPP access.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
-    "Wireline Access in 5G.md",
-    "Untitled",
-    "Questions.md",
+    "Misc/Questions.md",
     "6.3.6 of TS 23.501.md",
     "images/Pasted image 20241001102256.png",
     "images/Pasted image 20240930145000.png",
@@ -185,8 +186,7 @@
     "images/Pasted image 20240926175210.png",
     "images/Pasted image 20240926175108.png",
     "images",
-    "Pasted image 20240927124739.png",
-    "Acronyms.md",
+    "Misc/Acronyms.md",
     "3GPP Specs",
     "2024-09-26.md",
     "joplin_notes.jex",
