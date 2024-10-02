@@ -1,1 +1,1 @@
-- Fixed UE vs Mobile UE?
+[The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation](5G)

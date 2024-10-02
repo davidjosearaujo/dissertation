@@ -8,24 +8,24 @@
         "type": "tabs",
         "children": [
           {
-            "id": "69b784b076ade2b4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "244b0a95c96fb3da",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4ffc62a6b1e47a98",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Misc/Questions.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "file": "Misc/Questions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "file": "Misc/Questions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md"
+                "file": "Misc/Questions.md"
               }
             }
           }
@@ -160,14 +160,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "244b0a95c96fb3da",
+  "active": "4ffc62a6b1e47a98",
   "lastOpenFiles": [
+    "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+    "Misc/Questions.md",
+    "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
+    "().md",
+    "Misc/Links.md",
+    "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
     "images/Pasted image 20241002170115.png",
     "images/Pasted image 20241002161612.png",
     "images/Pasted image 20241002154111.png",
-    "3GPP 23.501 Specification/3GPP TS 23.501 V18.7.0.md",
-    "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
-    "Misc/Links.md",
     "Misc",
     "Wireline Access in 5G.md",
     "Altice Labs - Heading to a successful private digital convergence.md",
@@ -177,7 +180,6 @@
     "ROMARS/Trusted non-3GPP access.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
-    "Misc/Questions.md",
     "6.3.6 of TS 23.501.md",
     "images/Pasted image 20241001102256.png",
     "images/Pasted image 20240930145000.png",
@@ -185,7 +187,6 @@
     "images/Pasted image 20240927153324.png",
     "images/Pasted image 20240927124739.png",
     "images/Pasted image 20240926175520.png",
-    "images/Pasted image 20240926175453.png",
     "images",
     "Misc/Acronyms.md",
     "3GPP Specs",
