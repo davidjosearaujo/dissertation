@@ -26,3 +26,4 @@ The **W-AGF acts as a 5G UE on behalf of the CM CPE** in the interworking model.
 
 ## 5.2 3GPP R16 Integration Model for Convergence
 ![[Pasted image 20241002161612.png]]
+The integrated model as depicted in Figure 2 places 3GPP 5G network functions throughout the HFC access network in order to support the promise of a single core across access networks. The CPE appears as a 5G UE to the 5GC.
