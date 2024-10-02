@@ -26,4 +26,7 @@ The **N2** reference point to the AMF carries access network **control messaging
 The **W-AGF acts as a 5G UE on behalf of the CM CPE** in the interworking model. It **manages registration into the 5GC**, data **session management**, and **slice selection** on behalf of the CPE.
 
 ## 5.3 Bridged CRG with Convergence of Services and Policy
-![[Pasted image 20241002170115.png]]
+![[Pasted image 20241002170115.png]]Figure 4 below illustrates the bridged CRG connected to a 5GC with converged services and policy for devices behind a residential gateway.
+
+This **CRG may take the form of the FN-CRG or 5G-CRG** and also operates in bridged mode as part of a strategy to support the 5G converged core by applying policy, addressing, and services to individual devices.
+
