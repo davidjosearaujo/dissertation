@@ -6,6 +6,7 @@
 | CPE          | Customer premises equipment      |
 | CRG          | Cable Residential Gateway        |
 | HFC          | hybrid fiber-coax                |
+| NAS          | Non-Access Stratum               |
 | W-AGF        | Wireline Access Gateway Function |
 
 # 5 Converged Architecture with the 3GPP 5G Core
@@ -36,3 +37,9 @@ The W-AGF must be able to **detect CM unreachability by the CMTS** and report th
 
 **The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.** ^c138a2
 
+When the EAP-5G registration is complete and a security association is established between the5G-CRG and the W-AGF, then the **5G-CRG must support NAS over TLS to the W-AGF for the balance of registration**.
+
+## 7.6 Slicing
+The **W-AGF must support network slicing** and NSSAI on behalf of individual FN-CRGs. The W-AGF **must allow the operator to configure the way in which the W-AGF selects slices** for the FN-CRG based on slice IDs received during FN-CRG registrations, DOCSIS flows initiated by the FN-CRG, or FN-CRG application.
+
+Upon FN-CRG registration, when no other information is available for network slice selection, the **W-AGF must select either the enhanced mobile broadband (eMBB) network slice specified by 3GPP for the 5GC to connect to default DOCSIS service flows or an operator-provisioned default slice in the W-AGF for the FN-CRG**. ^0fbf60
