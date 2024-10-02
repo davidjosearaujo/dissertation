@@ -1,5 +1,2 @@
-- Which is the method used to detect CM registration and reachability? [[5G Wireless Wireline Converged Core ArchitectureTechnical Report#^1d8e9f]]
-- 
-- 
-- 
+- [[5G Wireless Wireline Converged Core ArchitectureTechnical Report#^c138a2| Which is the method used to detect CM registration and reachability? ]]
 - 
