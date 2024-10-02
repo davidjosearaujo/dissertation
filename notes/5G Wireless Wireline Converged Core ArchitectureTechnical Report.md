@@ -27,5 +27,12 @@ The **W-AGF acts as a 5G UE on behalf of the CM CPE** in the interworking model.
 
 # 7 Requirements
 ## 7.4 High Level W-AGF Requirements
-
 Each residential gateway may be assigned its own VLAN between the CMTS and the W-AGF to complete the user plane traffic flow between the HFC access network and the W-AGF. The W-AGF must support individual VLANs per residential gateway as received via the CMTS.
+
+## 7.5 Registration, Authentication, and CPE Status
+For the FN-CRG, the **W-AGF must detect CM registration into the CMTS**. The W-AGF must report CM registrations and de-registrations.
+
+The W-AGF must be able to **detect CM unreachability by the CMTS** and report the idle status to the 5GC
+
+##### The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.
+
