@@ -94,7 +94,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 235.5
+    "width": 235.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -110,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "file": "Misc/Questions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "file": "Misc/Questions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md"
+                "file": "Misc/Questions.md"
               }
             }
           }
@@ -172,10 +173,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "006339f898faa887",
+  "active": "a9d3b325539fbc3a",
   "lastOpenFiles": [
-    "Misc/Questions.md",
     "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+    "Misc/Questions.md",
     "Misc/Links.md",
     "5G.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",

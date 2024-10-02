@@ -54,3 +54,4 @@ The W-AGF must support session management procedures for each FN-CRG.
 
 The W-AGF must establish an IP PDU data session within the eMBB slice per operator configuration upon the CMTS completing default DOCSIS service flows for the FN-CRG.
 
+TODO
