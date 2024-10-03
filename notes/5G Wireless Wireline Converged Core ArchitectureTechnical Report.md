@@ -6,6 +6,7 @@
 | CPE          | Customer premises equipment                     |
 | CRG          | Cable Residential Gateway                       |
 | DOCSIS       | Data Over Cable Service Interface Specification |
+| eMBB         | Enhanced Mobile Broadband                       |
 | HFC          | hybrid fiber-coax                               |
 | NAS          | Non-Access Stratum                              |
 | PDU          | Packer data unit                                |
@@ -54,4 +55,7 @@ The W-AGF must support session management procedures for each FN-CRG.
 
 The W-AGF must establish an IP PDU data session within the eMBB slice per operator configuration upon the CMTS completing default DOCSIS service flows for the FN-CRG.
 
-TODO
+If the operator has configured the FN-CRG to be a bridged gateway, then the W-AGF must establish an Ethernet PDU data session within the eMBB slice.
+
+The W-AGF must be able to support multiple PDU sessions for the FN-CRG and to map an individual PDU session to a specific DOCSIS service flow.
+
