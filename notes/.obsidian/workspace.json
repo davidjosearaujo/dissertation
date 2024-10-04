@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
@@ -116,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md"
+                "file": "3GPP Specification/3GPP TS 23.502 V18.7.0.md"
               }
             }
           }
@@ -180,9 +180,9 @@
   },
   "active": "79a9adc6109f252e",
   "lastOpenFiles": [
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "5G and Wi-Fi RAN Convergence.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Misc/Questions.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
