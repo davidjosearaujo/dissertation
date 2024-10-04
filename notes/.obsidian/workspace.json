@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md"
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md"
               }
             }
           }
@@ -149,11 +149,13 @@
   },
   "active": "006339f898faa887",
   "lastOpenFiles": [
-    "Altice Labs - Heading to a successful private digital convergence.md",
-    "Wireline Access in 5G.md",
+    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "images/Pasted image 20241004114652.png",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+    "Wireline - Access Gateway Function.md",
+    "Altice Labs - Heading to a successful private digital convergence.md",
+    "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
+    "images/Pasted image 20241004114652.png",
     "Misc/Acronyms.md",
     "Misc/Objectives.md",
     "Misc/Questions.md",
@@ -162,14 +164,12 @@
     "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
     "Misc/Links.md",
     "5G.md",
-    "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
     "().md",
     "images/Pasted image 20241002170115.png",
     "images/Pasted image 20241002161612.png",
     "images/Pasted image 20241002154111.png",
     "Misc",
     "images/Pasted image 20241002103905.png",
-    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "6.3.6 of TS 23.501.md",
     "images/Pasted image 20241001102256.png",
     "images/Pasted image 20240930145000.png",
