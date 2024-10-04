@@ -33,6 +33,24 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "f1682c9fbbabe0c2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ce017a3c7f141635",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Misc/Questions.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -82,7 +100,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 235.5
+    "width": 235.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -162,8 +181,9 @@
   },
   "active": "26cc82f1986c733c",
   "lastOpenFiles": [
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+    "Misc/Questions.md",
     "5G and Wi-Fi RAN Convergence.md",
+    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Wireline - Access Gateway Function.md",
@@ -172,7 +192,6 @@
     "images/Pasted image 20241004114652.png",
     "Misc/Acronyms.md",
     "Misc/Objectives.md",
-    "Misc/Questions.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
     "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",

@@ -1,2 +1,3 @@
 - [[5G Wireless Wireline Converged Core ArchitectureTechnical Report#^c138a2| Which is the method used to detect CM registration and reachability? ]]
 - [[5G Wireless Wireline Converged Core ArchitectureTechnical Report#^0fbf60 | How should the W-AGF select a slice for the FN-CRG ?]]
+- [[5G and Wi-Fi RAN Convergence#^478de6 | What is EAP-5G, IKEv2 and 5G NAS ?]]
