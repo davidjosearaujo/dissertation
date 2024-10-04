@@ -1,0 +1,1 @@
+# 3.6 Support for Wi-Fi Only Devices

@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "26cc82f1986c733c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5G and Wi-Fi RAN Convergence.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "5G and Wi-Fi RAN Convergence.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "5G and Wi-Fi RAN Convergence.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md"
+                "file": "5G and Wi-Fi RAN Convergence.md"
               }
             }
           }
@@ -147,11 +160,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "006339f898faa887",
+  "active": "26cc82f1986c733c",
   "lastOpenFiles": [
+    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+    "5G and Wi-Fi RAN Convergence.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Wireline - Access Gateway Function.md",
     "Altice Labs - Heading to a successful private digital convergence.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
