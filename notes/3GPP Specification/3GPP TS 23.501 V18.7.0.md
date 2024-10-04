@@ -27,6 +27,5 @@ The functionality of N3IWF in the case of untrusted non-3GPP access includes the
 	- De-capsulation/ encapsulation of packets for IPSec and N3 tunnelling.
 
 # 6.2.20 WAGF
+[[3GPP TS 23.316 V18.6.0| The functionality of W-AGF is specified in TS 23.316]]
 
-
-# 6.3.6 N3IWF selection

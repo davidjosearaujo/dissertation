@@ -13,25 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "26cc82f1986c733c",
+            "id": "79a9adc6109f252e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5G and Wi-Fi RAN Convergence.md",
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "f1682c9fbbabe0c2",
@@ -177,13 +178,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "006339f898faa887",
+  "active": "79a9adc6109f252e",
   "lastOpenFiles": [
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "5G and Wi-Fi RAN Convergence.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Misc/Questions.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Wireline - Access Gateway Function.md",
     "Altice Labs - Heading to a successful private digital convergence.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
