@@ -25,8 +25,21 @@
                 }
               }
             }
+          },
+          {
+            "id": "602a9022fd98f81e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -92,7 +105,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Tasks.md",
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -109,7 +122,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Tasks.md",
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,7 +145,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tasks.md"
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md"
               }
             }
           }
@@ -155,17 +168,20 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "87bf91be5796aa16",
+  "active": "602a9022fd98f81e",
   "lastOpenFiles": [
-    "Define subjects relevant to understand.md",
+    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+    "Articles and Papers/5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
+    "ROMARS/Trusted non-3GPP access.md",
     "Tasks.md",
+    "Define subjects relevant to understand.md",
     "2024-10-04.md",
     "Objectives.md",
     "Questions.md",
     "Articles and Papers",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Articles and Papers/5G and Wi-Fi RAN Convergence.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Articles and Papers/Wireline - Access Gateway Function.md",
@@ -173,9 +189,6 @@
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
     "images/Pasted image 20241004114652.png",
     "Misc/Acronyms.md",
-    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
-    "ROMARS/Trusted non-3GPP access.md",
-    "Articles and Papers/5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
     "Misc/Links.md",
     "5G.md",
     "().md",
