@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
@@ -31,8 +31,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "f1682c9fbbabe0c2",
@@ -100,8 +99,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 235.5,
-    "collapsed": true
+    "width": 235.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -117,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "5G and Wi-Fi RAN Convergence.md",
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "5G and Wi-Fi RAN Convergence.md",
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -157,7 +155,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "5G and Wi-Fi RAN Convergence.md"
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md"
               }
             }
           }
@@ -179,11 +177,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "26cc82f1986c733c",
+  "active": "006339f898faa887",
   "lastOpenFiles": [
-    "Misc/Questions.md",
-    "5G and Wi-Fi RAN Convergence.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+    "5G and Wi-Fi RAN Convergence.md",
+    "Misc/Questions.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Wireline - Access Gateway Function.md",
