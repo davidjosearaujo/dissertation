@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "file": "Misc/Acronyms.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 235.5,
-    "collapsed": true
+    "width": 235.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "file": "Misc/Acronyms.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+                "file": "Misc/Acronyms.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md"
+                "file": "Misc/Acronyms.md"
               }
             }
           }
@@ -148,9 +147,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "006339f898faa887",
+  "active": "870a0dee6ebe3642",
   "lastOpenFiles": [
+    "Misc/Objectives.md",
     "Misc/Questions.md",
+    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
+    "ROMARS/Trusted non-3GPP access.md",
     "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
     "Misc/Links.md",
     "5G.md",
@@ -164,10 +166,7 @@
     "Wireline Access in 5G.md",
     "Altice Labs - Heading to a successful private digital convergence.md",
     "images/Pasted image 20241002103905.png",
-    "Misc/Objectives.md",
     "3GPP 23.501 Specification/3GPP TS 23.502 V18.7.0.md",
-    "ROMARS/Trusted non-3GPP access.md",
-    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "3GPP 23.501 Specification/3GPP TS 33.501 V18.7.0.md",
     "6.3.6 of TS 23.501.md",
     "images/Pasted image 20241001102256.png",
