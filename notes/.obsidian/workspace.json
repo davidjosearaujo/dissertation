@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "17830e4f859beaa5",
+        "id": "3ee0e33b749e27c1",
         "type": "tabs",
         "children": [
           {
@@ -13,25 +13,38 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Objectives.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "87bf91be5796aa16",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Tasks.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
-        "id": "f1682c9fbbabe0c2",
+        "id": "17830e4f859beaa5",
         "type": "tabs",
         "children": [
           {
-            "id": "ce017a3c7f141635",
+            "id": "6ab6d6fdd473617a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Misc/Questions.md",
+                "file": "Questions.md",
                 "mode": "source",
                 "source": false
               }
@@ -103,7 +116,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Tasks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +133,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Tasks.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
+                "file": "Tasks.md"
               }
             }
           }
@@ -165,23 +178,25 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "006339f898faa887",
+  "active": "87bf91be5796aa16",
   "lastOpenFiles": [
+    "Objectives.md",
+    "Tasks.md",
+    "Questions.md",
+    "Articles and Papers",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "5G and Wi-Fi RAN Convergence.md",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "Articles and Papers/5G and Wi-Fi RAN Convergence.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
-    "Misc/Questions.md",
-    "Wireline - Access Gateway Function.md",
-    "Altice Labs - Heading to a successful private digital convergence.md",
+    "Articles and Papers/Wireline - Access Gateway Function.md",
+    "Articles and Papers/Altice Labs - Heading to a successful private digital convergence.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
     "images/Pasted image 20241004114652.png",
     "Misc/Acronyms.md",
-    "Misc/Objectives.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
-    "5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
+    "Articles and Papers/5G Wireless Wireline Converged Core ArchitectureTechnical Report.md",
     "Misc/Links.md",
     "5G.md",
     "().md",

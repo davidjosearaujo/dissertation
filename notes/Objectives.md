@@ -36,3 +36,4 @@ Static mapping between devices IDs and 5G IDs must be supported and provisioned 
 # W-AGF
 
 Mapping 5G authentication with non-5G authentication.
+
