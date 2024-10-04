@@ -26,9 +26,13 @@ The functionality of N3IWF in the case of untrusted non-3GPP access includes the
 - Relaying uplink and downlink user-plane packets between the UE and UPF. This involves:
 	- De-capsulation/ encapsulation of packets for IPSec and N3 tunnelling.
 # 6.2.20 WAGF
-[SAGERAN W-AGF Device](https://www.sageran.com/products/network-equipments/w-agf.html)
+TODO
 
-W-AGF(Wireline Access Gateway Function ) is a wired access network function node based on 5G technology, defined by 3GPP and BBF. It acts as an intermediary between the RG and UPF, supporting N2 and N3 access to 5GC.
+## [SAGERAN W-AGF Device](https://www.sageran.com/products/network-equipments/w-agf.html)
+
+![[Pasted image 20241004114652.png]]
+
+W-AGF(Wireline Access Gateway Function ) is a wired access network function node based on 5G technology, defined by 3GPP and BBF. **It acts as an intermediary between the RG and UPF, supporting N2 and N3 access to 5GC.**
 
 W-AGF is developed on the SageRAN's 5G Engine™ protocol stack platform and complies with 3GPP standards and the BBF WWC architecture, while adding processing logic for N1(NAS) protocol and SIM card information for network registration.
 
