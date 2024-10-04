@@ -1,5 +1,34 @@
-1. [ ] Define main objectives of the work
-2. [ ] Define subjects relevant to understand (Authentication methods, 5G components involved, etc)
-3. [ ] Organize state of the art as a knowledge pathway to understand the subject
-4. [ ] Propose main questions than need answers
-5. [ ] Structure the dissertation 
+---
+
+kanban-plugin: board
+
+---
+
+## TODO
+
+- [ ] Organize the state of the art documentation as a knowledge path to intuitively understand the problem the thesis is proposing to solve
+- [ ] Propose main questions that need answers
+- [ ] Structure the dissertation
+
+
+## In Progress
+
+- [ ] Define general objectives of the work
+- [ ] [[Define subjects relevant to understand]]
+
+
+## In Review
+
+
+
+## Done
+
+
+
+
+
+%% kanban:settings
+```
+{"kanban-plugin":"board","list-collapse":[false,false,false,false],"show-checkboxes":true,"move-dates":true}
+```
+%%

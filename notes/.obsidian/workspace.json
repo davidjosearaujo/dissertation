@@ -13,7 +13,7 @@
             "state": {
               "type": "kanban",
               "state": {
-                "file": "Untitled Kanban.md",
+                "file": "Tasks.md",
                 "kanbanViewState": {
                   "kanban-plugin": "board",
                   "list-collapse": [
@@ -23,24 +23,6 @@
                     false
                   ]
                 }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "168a0bdc363b3587",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "d410c2500335f03f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Tasks.md",
-                "mode": "source",
-                "source": false
               }
             }
           }
@@ -110,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Untitled Kanban.md",
+                "file": "Tasks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +109,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Untitled Kanban.md",
+                "file": "Tasks.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +132,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Untitled Kanban.md"
+                "file": "Tasks.md"
               }
             }
           }
@@ -175,8 +157,8 @@
   },
   "active": "87bf91be5796aa16",
   "lastOpenFiles": [
+    "Define subjects relevant to understand.md",
     "Tasks.md",
-    "Untitled Kanban.md",
     "2024-10-04.md",
     "Objectives.md",
     "Questions.md",
