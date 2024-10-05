@@ -14,7 +14,7 @@ In the case of FN-RG connected via W-5GAN, the specification defined in TS 23.50
 - **W-AGF performs the UE Registration procedure on behalf of the FN-RG**
 
 # 4.3.1 Registration management
-
 Registration management when 5G-RG or FN-RG is connected to 5GC via wireline access is described in [[3GPP TS 23.501 V18.7.0#5.5.1 Registration Management|TS 23.501 clause 5.5.1]]
 
-4.3.2 Connection **management*
+# 4.3.2 Connection management
+Connection management when 5G-RG or FN-RG is connected to 5GC via wireline access is described in [[3GPP TS 23.501 V18.7.0#5.5.2 Connection Management|clause 5.5.2 of TS 23.501]]
