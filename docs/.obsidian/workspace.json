@@ -24,7 +24,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f831ced502d63302",
+            "id": "bb4a6841e2c3c158",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -45,8 +45,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -112,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/23501-i70.pdf",
+                "file": "3GPP Specification/23316-i60.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,7 +128,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/23501-i70.pdf",
+                "file": "3GPP Specification/23316-i60.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -152,7 +151,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/23501-i70.pdf"
+                "file": "3GPP Specification/23316-i60.pdf"
               }
             }
           }
@@ -175,9 +174,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "bb33eb9ac2ffbc87",
+  "active": "68dff20e7c9c12f1",
   "lastOpenFiles": [
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "3GPP Specification/23501-i70.pdf",
     "3GPP Specification/23316-i60.pdf",
     "Articles/Wireline - Access Gateway Function.md",
@@ -196,8 +197,6 @@
     "Untitled 1.md",
     "Wireless Broadband Alliance/Notes.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Misc/Links.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "Tasks.md",
