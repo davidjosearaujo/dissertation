@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "af2631a825c61539",
+        "id": "52216810704f1608",
         "type": "tabs",
         "children": [
           {
-            "id": "8830e802026fcaed",
+            "id": "1a161a3def0ec5f6",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -16,6 +16,16 @@
                 "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
                 "mode": "source",
                 "source": false
+              }
+            }
+          },
+          {
+            "id": "95bc14a3a16611ea",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf"
               }
             }
           }
@@ -148,10 +158,13 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "8830e802026fcaed",
+  "active": "1a161a3def0ec5f6",
   "lastOpenFiles": [
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+    "Wireless Broadband Alliance/Untitled.md",
+    "Objectives.md",
+    "Untitled 1.md",
     "Wireless Broadband Alliance/Notes.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
@@ -163,7 +176,6 @@
     "Articles and Papers/Altice Labs - Heading to a successful private digital convergence.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
-    "Objectives.md",
     "Tasks.md",
     "W-AGF.md",
     "W-AGF",
@@ -191,9 +203,7 @@
     "images/Pasted image 20240927124739.png",
     "images",
     "3GPP Specs",
-    "2024-09-26.md",
     "joplin_notes.jex",
-    "Pasted.md",
     "Untitled 1"
   ]
 }
