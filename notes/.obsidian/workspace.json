@@ -4,28 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "52216810704f1608",
+        "id": "ecb837f628782634",
         "type": "tabs",
         "children": [
           {
-            "id": "1a161a3def0ec5f6",
+            "id": "92dfe5fc50ba94cc",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf-annotator",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "95bc14a3a16611ea",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf"
+                "file": "Wireless Broadband Alliance/Untitled.md"
               }
             }
           }
@@ -95,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Wireless Broadband Alliance/Untitled.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Wireless Broadband Alliance/Untitled.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -135,7 +123,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md"
+                "file": "Wireless Broadband Alliance/Untitled.md"
               }
             }
           }
@@ -158,11 +146,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "1a161a3def0ec5f6",
+  "active": "92dfe5fc50ba94cc",
   "lastOpenFiles": [
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Wireless Broadband Alliance/Untitled.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Objectives.md",
     "Untitled 1.md",
     "Wireless Broadband Alliance/Notes.md",
