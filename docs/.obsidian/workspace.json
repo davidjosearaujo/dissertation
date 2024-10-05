@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "ad5ae0eaf3808f87",
+        "id": "d765f108299c278f",
         "type": "tabs",
         "children": [
           {
-            "id": "4660aac84bf24b54",
+            "id": "68dff20e7c9c12f1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Articles and Papers/Wireline - Access Gateway Function.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Articles and Papers/Wireline - Access Gateway Function.md",
+                "file": "Articles/Wireline - Access Gateway Function.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +98,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Articles and Papers/Wireline - Access Gateway Function.md",
+                "file": "Articles/Wireline - Access Gateway Function.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +121,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Articles and Papers/Wireline - Access Gateway Function.md"
+                "file": "Articles/Wireline - Access Gateway Function.md"
               }
             }
           }
@@ -148,13 +144,13 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "4660aac84bf24b54",
+  "active": "870a0dee6ebe3642",
   "lastOpenFiles": [
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Altice Labs/Nexus.IWF.pdf",
     "Altice Labs/Notes.md",
     "Altice Labs",
-    "Articles and Papers/Wireline - Access Gateway Function.md",
+    "Articles/Wireline - Access Gateway Function.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
