@@ -14,7 +14,7 @@ kanban-plugin: board
 ## In Progress
 
 - [ ] Define general objectives of the work
-- [ ] [[Define subjects relevant to understand]]
+- [ ] Define subjects relevant to understand
 
 
 ## In Review
