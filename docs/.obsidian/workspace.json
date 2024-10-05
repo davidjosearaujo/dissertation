@@ -34,8 +34,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "bb33eb9ac2ffbc87",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "3GPP Specification/23501-i70.pdf"
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,8 +96,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 333.5,
-    "collapsed": true
+    "width": 333.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -102,7 +112,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "3GPP Specification/23501-i70.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +129,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "3GPP Specification/23501-i70.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +152,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
+                "file": "3GPP Specification/23501-i70.pdf"
               }
             }
           }
@@ -165,10 +175,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "f831ced502d63302",
+  "active": "bb33eb9ac2ffbc87",
   "lastOpenFiles": [
-    "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/23501-i70.pdf",
+    "3GPP Specification/23316-i60.pdf",
     "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Altice Labs/Nexus.IWF.pdf",
@@ -179,7 +190,6 @@
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "Broadband Forum",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
     "Wireless Broadband Alliance/Untitled.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Objectives.md",
