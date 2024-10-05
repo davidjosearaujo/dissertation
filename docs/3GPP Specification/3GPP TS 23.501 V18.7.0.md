@@ -17,6 +17,13 @@ and over trusted non-3GPP access are described in clause 4.12.2 and in clause 4.
 ## 4.2.8.1A General Concepts to support Wireline Access
 Wireline 5G Access Network (W-5GAN) shall be connected to the 5G Core Network via a **Wireline Access Gateway Function (W-AGF**). The W-AGF interfaces the 5G Core Network CP and UP functions via N2 and N3 interfaces,
 respectively.
+
+# 5.5.1 Registration Management
+TODO
+
+# 5.5.2 Connection Management
+TODO
+
 # 6.2.9 N3IWF
 The functionality of N3IWF in the case of untrusted non-3GPP access includes the following:
 - Support of IPsec tunnel establishment with the UE: The N3IWF terminates the IKEv2/IPsec protocols with the UE over NWu and relays over N2 the information needed to authenticate the UE and authorize its access to the 5G Core Network.

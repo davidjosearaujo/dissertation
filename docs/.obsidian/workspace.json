@@ -6,6 +6,7 @@
       {
         "id": "d765f108299c278f",
         "type": "tabs",
+        "dimension": 45.654993514915695,
         "children": [
           {
             "id": "68dff20e7c9c12f1",
@@ -16,12 +17,23 @@
                 "file": "3GPP Specification/23316-i60.pdf"
               }
             }
+          },
+          {
+            "id": "af5c47350537b6df",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "3GPP Specification/23501-i70.pdf"
+              }
+            }
           }
         ]
       },
       {
         "id": "6648cfe64ac12b0c",
         "type": "tabs",
+        "dimension": 54.345006485084305,
         "children": [
           {
             "id": "bb4a6841e2c3c158",
@@ -36,12 +48,14 @@
             }
           },
           {
-            "id": "bb33eb9ac2ffbc87",
+            "id": "cd8749f6979b621a",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "3GPP Specification/23501-i70.pdf"
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -178,9 +192,9 @@
   "lastOpenFiles": [
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "3GPP Specification/23501-i70.pdf",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Altice Labs/Nexus.IWF.pdf",
