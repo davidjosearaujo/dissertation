@@ -35,4 +35,10 @@ non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 
    How the CRG is configured to work in L2 bridge mode and how the W-AGF is triggered to apply procedures for N5GC devices is defined in [[WR-TR-5WWC-ARCH-V01-190820|CableLabs WR-TR-5WWC-ARCH]]
    The N5GC device send an EAP-Resp/Indentity including its Network Access Identifier (NAI) in the form of username@realm.
 3. W-AGF, on behalf of the N5GC device, sends a NAS Registration Request message to AMF with a device capability indicator that the device is non-5G capable. For this purpose, the W-AGF creates a NAS Registration Request message containing a SUCI. The W-AGF constructs the SUCI from the NAI received within EAP- Identity from the N5GC device as defined in TS 33.501
+   Over N2 there is a separate NGAP connection per N5GC device served by the W-AGF.
+   When it provides (over N2) ULI to be associated with a N5GC device, the W-AGF builds the N5GC's ULI using the GCI (see clause 4.7.9) of the CRG connecting the N5GC device.
+4. AMF selects a suitable AUSF as specified in TS 23.501 clause 6.3.4.
+5. EAP based authentication defined in TS 33.501 is performed between the AUSF and N5GC device.
+   Once the N5GC device has been authenticated, the AUSF provides relevant security related information to the AMF. AUSF shall return the SUPI (this SUPI corresponds to a NAI that contains the username of the N5GC device and a realm as defined in TS 33.501) to AMF only after the authentication is successful.
+
 # 7.2.1.1 5G-RG Registration via W-5GAN
