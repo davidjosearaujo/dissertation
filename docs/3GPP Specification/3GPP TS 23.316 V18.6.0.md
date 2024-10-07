@@ -25,4 +25,13 @@ Session management of FN-RG follows the principle defined in TS 23.501 clause 5.
 - FN-RG is connected to 5GC via wireline access instead of 3GPP access
 
 # 4.10a Non-5G capable device behind 5G-CRG and FN-CRG
-non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 5GC using EAP based authentication method(s) as defined in TS 33.501
+non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 5GC using EAP based authentication method(s) as defined in TS 33.501.
+
+**Roaming is not supported for N5GC devices.**
+
+![[2024-10-07_12-39.png]]
+1. The W-AGF registers the FN-CRG to 5GC as specified in clause 7.2.1.3 or the 5G-CRG registers to 5GC as specified in [[3GPP TS 23.316 V18.6.0#7.2.1.1 5G-RG Registration via W-5GAN|clause 7.2.1.1]]
+2. The CRG is configured as L2 bridge mode and forwards any L2 frame to W-AGF. 802.1x authentication may be triggered. This can be done either by N5GC device sending a EAPOL-start frame to W-AGF or W-AGF receives a frame from an unknown MAC address.
+   How the CRG is configured to work in L2 bridge mode and how the W-AGF is triggered to apply procedures for N5GC devices is defined in [[WR-TR-5WWC-ARCH-V01-190820|CableLabs WR-TR-5WWC-ARCH]]
+   
+# 7.2.1.1 5G-RG Registration via W-5GAN
