@@ -21,4 +21,8 @@ Connection management when 5G-RG or FN-RG is connected to 5GC via wireline acces
 
 # 4.4.2 Session management for FN-RG
 Session management of FN-RG follows the principle defined in TS 23.501 clause 5.6 with the following differences:
-- 
+- UE is replaced by W-AGF
+- FN-RG is connected to 5GC via wireline access instead of 3GPP access
+
+# 4.10a Non-5G capable device behind 5G-CRG and FN-CRG
+non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 5GC using EAP based authentication method(s) as defined in TS 33.501
