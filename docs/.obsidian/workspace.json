@@ -6,7 +6,7 @@
       {
         "id": "d765f108299c278f",
         "type": "tabs",
-        "dimension": 45.654993514915695,
+        "dimension": 55.06396588486141,
         "children": [
           {
             "id": "68dff20e7c9c12f1",
@@ -33,7 +33,7 @@
       {
         "id": "6648cfe64ac12b0c",
         "type": "tabs",
-        "dimension": 54.345006485084305,
+        "dimension": 44.93603411513859,
         "children": [
           {
             "id": "bb4a6841e2c3c158",
@@ -109,7 +109,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 333.5
+    "width": 333.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -125,7 +126,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "3GPP Specification/23316-i60.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -142,7 +143,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "3GPP Specification/23316-i60.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -165,7 +166,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
+                "file": "3GPP Specification/23316-i60.pdf"
               }
             }
           }
@@ -183,15 +184,17 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-git:Open Git source control": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "bb4a6841e2c3c158",
+  "active": "68dff20e7c9c12f1",
   "lastOpenFiles": [
-    "3GPP Specification/23316-i60.pdf",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "3GPP Specification/23501-i70.pdf",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/23316-i60.pdf",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",

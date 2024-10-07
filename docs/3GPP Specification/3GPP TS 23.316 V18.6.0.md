@@ -18,3 +18,7 @@ Registration management when 5G-RG or FN-RG is connected to 5GC via wireline acc
 
 # 4.3.2 Connection management
 Connection management when 5G-RG or FN-RG is connected to 5GC via wireline access is described in [[3GPP TS 23.501 V18.7.0#5.5.2 Connection Management|clause 5.5.2 of TS 23.501]]
+
+# 4.4.2 Session management for FN-RG
+Session management of FN-RG follows the principle defined in TS 23.501 clause 5.6 with the following differences:
+- 
