@@ -49,8 +49,9 @@ non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 
    Once the registration procedure is completed, the **W-AGF requests the establishment of a PDU Session on behalf of the N5GC device**. Only one PDU session per N5GC device is supported. The procedure is the same as the PDU Session establishment procedure specified in clause 7.3.4 with the difference as below:
 
 After successful registration, PDU Session establishment/modification/release procedure specified in clause 7.3.4, 7.3.6, and 7.3.7 apply with the difference as below:
-- FN-RG is replaced by N5GC device.
+- **FN-RG is replaced by N5GC device**.
+
 The W-AGF shall request the release of the NGAP connection for each N5GC device served by a CRG whose NGAP connection has been released.
 5G-CRG behaves as FN-CRG (i.e. L2 bridge mode) when handling N5GC devices.
-   
+
 # 7.2.1.1 5G-RG Registration via W-5GAN
