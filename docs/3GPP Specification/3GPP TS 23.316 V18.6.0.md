@@ -34,11 +34,23 @@ non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 
 2. The CRG is configured as L2 bridge mode and forwards any L2 frame to W-AGF. 802.1x authentication may be triggered. This can be done either by N5GC device sending a EAPOL-start frame to W-AGF or W-AGF receives a frame from an unknown MAC address.
    How the CRG is configured to work in L2 bridge mode and how the W-AGF is triggered to apply procedures for N5GC devices is defined in [[WR-TR-5WWC-ARCH-V01-190820|CableLabs WR-TR-5WWC-ARCH]]
    The N5GC device send an EAP-Resp/Indentity including its Network Access Identifier (NAI) in the form of username@realm.
-3. W-AGF, on behalf of the N5GC device, sends a NAS Registration Request message to AMF with a device capability indicator that the device is non-5G capable. For this purpose, the W-AGF creates a NAS Registration Request message containing a SUCI. The W-AGF constructs the SUCI from the NAI received within EAP- Identity from the N5GC device as defined in TS 33.501
+3. **W-AGF, on behalf of the N5GC device, sends a NAS Registration Request message to AMF with a device capability indicator that the device is non-5G capable. For this purpose, the W-AGF creates a NAS Registration Request message containing a SUCI. The W-AGF constructs the SUCI from the NAI received within EAP- Identity from the N5GC device as defined in TS 33.501**
    Over N2 there is a separate NGAP connection per N5GC device served by the W-AGF.
    When it provides (over N2) ULI to be associated with a N5GC device, the W-AGF builds the N5GC's ULI using the GCI (see clause 4.7.9) of the CRG connecting the N5GC device.
 4. AMF selects a suitable AUSF as specified in TS 23.501 clause 6.3.4.
-5. EAP based authentication defined in TS 33.501 is performed between the AUSF and N5GC device.
+5. **EAP based authentication defined in TS 33.501 is performed between the AUSF and N5GC device.**
    Once the N5GC device has been authenticated, the AUSF provides relevant security related information to the AMF. AUSF shall return the SUPI (this SUPI corresponds to a NAI that contains the username of the N5GC device and a realm as defined in TS 33.501) to AMF only after the authentication is successful.
+   
+> Each N5GC device is registered to 5GC with its own unique SUPI.
 
+6. The AMF performs other registration procedures as required (see TS 23.502 clause 4.2.2.2.2).
+   When providing a PEI for a N5GC device, the **W-AGF shall provide a PEI containing the MAC address of the N5GC device**. The **W-AGF may**, based on operator policy, **encode the MAC address of the N5GC device using the IEEE Extended Unique Identifier EUI-64 format** (see IEE Publication).
+7. **The AMF sends Registration Accept message to W-AGF.**
+   Once the registration procedure is completed, the **W-AGF requests the establishment of a PDU Session on behalf of the N5GC device**. Only one PDU session per N5GC device is supported. The procedure is the same as the PDU Session establishment procedure specified in clause 7.3.4 with the difference as below:
+
+After successful registration, PDU Session establishment/modification/release procedure specified in clause 7.3.4, 7.3.6, and 7.3.7 apply with the difference as below:
+- FN-RG is replaced by N5GC device.
+The W-AGF shall request the release of the NGAP connection for each N5GC device served by a CRG whose NGAP connection has been released.
+5G-CRG behaves as FN-CRG (i.e. L2 bridge mode) when handling N5GC devices.
+   
 # 7.2.1.1 5G-RG Registration via W-5GAN
