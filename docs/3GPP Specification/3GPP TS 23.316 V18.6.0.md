@@ -52,6 +52,8 @@ After successful registration, PDU Session establishment/modification/release pr
 - **FN-RG is replaced by N5GC device**.
 
 The W-AGF shall request the release of the NGAP connection for each N5GC device served by a CRG whose NGAP connection has been released.
+
 5G-CRG behaves as FN-CRG (i.e. L2 bridge mode) when handling N5GC devices.
 
+# 4.13 Support of FN-RG
 # 7.2.1.1 5G-RG Registration via W-5GAN
