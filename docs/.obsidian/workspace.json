@@ -59,7 +59,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -126,7 +127,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Questions.md",
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -143,7 +144,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Questions.md",
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -166,7 +167,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Questions.md"
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
               }
             }
           }
@@ -189,11 +190,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "bb4a6841e2c3c158",
+  "active": "fa9da262f36321df",
   "lastOpenFiles": [
+    "Questions.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "3GPP Specification/23316-i60.pdf",
-    "Questions.md",
     "Objectives.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "images/2024-10-07_12-39.png",
