@@ -138,4 +138,10 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
     The AMF may be configured by local policies to issue EIR check:
     - Only if the PEI is an IMEI; or
     - Only if the PEI is an IMEI or a user device trusted MAC address.
-    
+      
+    At FN-RG registration to UDM, **the Access Type non-3GPP access is used**. The UDM, based on Access and Mobility Subscription information authorizes the FN-RG to access the 5GC. For FN-CRG, the AMF compares the list of serving area restrictions it receives from the UDM against the ULI from the W-AGF to check if the location information is allowed for the FN-CRG, as defined in clause 9.5.1. The AMF may also interact with the PCF for obtaining the Access and Mobility policy for the FN-RG.
+
+12. 
+	1. Upon receiving NAS Security Mode Complete, the AMF shall send an N2 Initial Context Setup Request message as defined in TS 38.413 and TS 29.413 including possibly as additional W-AGF specific parameter the RG Level Wireline Access Characteristics to the W-AGF.
+	   
+	2. W-AGF notifies to the AMF that the FN-RG context was created by sending a N2 Initial Context Setup Response
