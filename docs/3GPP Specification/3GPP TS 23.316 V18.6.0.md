@@ -138,3 +138,4 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
     The AMF may be configured by local policies to issue EIR check:
     - Only if the PEI is an IMEI; or
     - Only if the PEI is an IMEI or a user device trusted MAC address.
+    
