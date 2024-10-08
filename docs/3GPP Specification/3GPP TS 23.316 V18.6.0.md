@@ -106,7 +106,15 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
    The **SUCI is built by the W-AGF** based on:
    - In the case of a BBF access: the **GLI** as defined in clause 4.7.8 **together with an identifier of the Home network** as described in TS 23.003.
    - In the case of a Cable access: the **GCI** as defined in clause 4.7.8 together with an identifier of the Home network as described in TS 23.003.
-   
+
+![[Pasted image 20241008121040.png]]
+
    The following differences exist, compared to 5G-RG case:
    - The W-AGF use SUCI
    - The Authenticated Indication indicates to AMF and 5GC that the FN-RG has been authenticated by the access network.
+
+4. **If the AMF receives a SUCI, the AMF shall select an AUSF** as specified in TS 23.501 clause 6.3.4 based on SUCI. **If 5G-GUTI** (5G Globally Unique Temporary Identity) is provided, there is no need to map SUCI to SUPI and **steps 5-9 can be skipped**.
+
+5. AMF sends an authentication request to the AUSF in the form of, Nausf_UEAuthentication_Authenticate. It contains the SUCI of the FN-RG. It also contains an indication that the W-5GAN has authenticated the FN-RG.
+
+6. 
