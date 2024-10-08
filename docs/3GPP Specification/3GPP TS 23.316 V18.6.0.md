@@ -80,6 +80,15 @@ The functionality of W-AGF in the case of Wireline 5G Access network includes th
 - In the case of FN-RG the W-AGF acts as end point of N1 on behalf of the FN-RG
 
 # 6.2.2 Control Plane Protocol Stacks between the FN-RG and the 5GC
+![[2024-10-08_11-29.png]]
+The control plane protocol stack between FN-RG and AMF is defined in figure 6.2.2-1. The W-AGF acts as an N1 termination point on behalf of FN-RG.
 
+For W-5GBAN, the L-W-CP protocol stack, between FN-BRG and W-AGF is defined in [[TR-456-AGF-Functional-Requirements.pdf|BBF TR-456]] and WT-457. For W-5GCAN, the L-W-CP protocol stack between FN-CRG and W-AGF is defined in [[WR-TR-5WWC-ARCH-V01-190820|WR-TR-5WWC-ARCH]]
+
+# 6.3.2 User Plane Protocol Stacks between the FN-RG and the 5GC
+![[2024-10-08_11-32.png]]
+The user plane protocol stack between FN-RG and UPF is defined in figure 6.3.2-1.
+
+For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [[TR-456-AGF-Functional-Requirements.pdf|BBF TR-456]] and WT-457. For W-5GCAN, the L-W-UP protocol stack between FN-CRG and W-AGF is defined in [[WR-TR-5WWC-ARCH-V01-190820|WR-TR-5WWC-ARCH]]
 
 # 7.2.1.1 5G-RG Registration via W-5GAN
