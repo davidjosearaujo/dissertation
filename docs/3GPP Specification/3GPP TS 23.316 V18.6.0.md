@@ -145,3 +145,9 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
 	1. Upon receiving NAS Security Mode Complete, the AMF shall send an N2 Initial Context Setup Request message as defined in TS 38.413 and TS 29.413 including possibly as additional W-AGF specific parameter the RG Level Wireline Access Characteristics to the W-AGF.
 	   
 	2. W-AGF notifies to the AMF that the FN-RG context was created by sending a N2 Initial Context Setup Response
+
+13. **The AMF sends the N2 Downlink NAS transport with NAS Registration Accept message** (5GS registration result, 5G-GUTI, Equivalent PLMNs or SNPNs, Non-3GPP TAI, Allowed NSSAI, Rejected NSSAI, Configured NSSAI, 5GS network feature support, network slicing indication, Non-3GPP de-registration timer value, Emergency number lists, SOR transport container, NSSAI inclusion mode) **to the W-AGF**. 
+
+14. The W-AGF sends a N2 Uplink NAS transport message, including a NAS Registration Complete message, back to the AMF when the procedure is completed. The W-AGF shall store the 5G-GUTI to be able to send it in potential later NAS procedures.
+
+15. The AMF performs step 23-24 in TS 23.502 [3] clause 4.2.2.2.2.
