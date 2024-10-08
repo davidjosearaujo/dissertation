@@ -96,5 +96,11 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
 
 1. The **FN-RG connects to a W-AGF (W-5GAN) via a layer-2 (L2)** connection, based on Wireline AN specific procedure.
    The FN-RG is authenticated by the W-5GAN based on Wireline AN specific mechanisms.
+   
 2. W-AGF selects an AMF based on the AN parameters and local policy. W-AGF may use the Line ID / HFC identifier provided from the Wireline AN to determine the 5GC and AN parameters to be used for the FN-RG registration. How the W-AGF can determine the necessary 5GC and AN parameters is defined in [[TR-456-AGF-Functional-Requirements.pdf|BBF TR-456]], WT-457 or [[WR-TR-5WWC-ARCH-V01-190820|CableLabs WR-TR-5WWC-ARCH]]
-3. 
+   
+3. W-AGF performs initial registration on behalf of the FN-RG to the 5GC. The W-AGF **sends a Registration Request** to the selected AMF within an N2 initial UE message (NAS Registration Request, ULI, Establishment cause, UE context request, Allowed NSSAI, Authenticated Indication).
+   
+   The **NAS Registration Request contains the SUCI (Subscription Concealed Identifier)** or 5G-GUTI of the FN-RG, security parameters/UE security capability, UE MM Core Network Capability, PDU Session Status, Follow-on request, Requested NSSAI. The 5G-GUTI, if available, has been received from the AMF during a previous registration and stored in W-AGF
+   
+4. 
