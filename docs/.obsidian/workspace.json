@@ -109,7 +109,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5
+    "width": 244.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -192,6 +193,7 @@
   "lastOpenFiles": [
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/23502-i70.pdf",
     "3GPP Specification/5G Identifiers.md",
     "images/Pasted image 20241008121040.png",
     "images/Pasted image 20241008121801.png",
@@ -214,7 +216,6 @@
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
-    "Broadband Forum",
     "Wireless Broadband Alliance/Untitled.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Untitled 1.md",

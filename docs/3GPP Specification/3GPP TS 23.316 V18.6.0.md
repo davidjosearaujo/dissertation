@@ -133,3 +133,6 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
 	   The NAS security mode command is sent from the AMF to the W-AGF in a N2 Downlink NAS transport message
 	   
 	2. W-AGF responds to the AMF with a NAS Security Mode Complete message in a N2 Uplink NAS transport message. A NAS security context is created between W-AGF and AMF
+
+11. The AMF performs steps 11-16 in TS 23.502 clause 4.2.2.2.2.
+    The AMF may be configured by local policies to issue EIR check:
