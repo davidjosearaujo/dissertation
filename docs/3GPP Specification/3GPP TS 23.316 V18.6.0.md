@@ -79,4 +79,7 @@ The functionality of W-AGF in the case of Wireline 5G Access network includes th
 - Termination of wireline access protocol on Y4 and Y5
 - In the case of FN-RG the W-AGF acts as end point of N1 on behalf of the FN-RG
 
+# 6.2.2 Control Plane Protocol Stacks between the FN-RG and the 5GC
+
+
 # 7.2.1.1 5G-RG Registration via W-5GAN
