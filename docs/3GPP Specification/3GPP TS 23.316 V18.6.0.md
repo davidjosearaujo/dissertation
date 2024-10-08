@@ -58,4 +58,11 @@ The W-AGF shall request the release of the NGAP connection for each N5GC device 
 # 4.13 Support of FN-RG
 FN-RG is a legacy type of residential gateway that does not support N1 signalling and is not 5GC capable.
 
+Support for FN-RG connectivity to 5GC is provided by means of W-AGF supporting 5G functionality on behalf of the FN-RG
+
+The W-AGF supports the following functionality on behalf of the FN- RG:
+- Has access to configuration information, as defined in [[TR-456-AGF-Functional-Requirements.pdf|BBF TR-456]], WT-457 and [[WR-TR-5WWC-ARCH-V01-190820|CableLabs WR-TR- 5WWC-ARCH]], to be able to serve FN-RGs and to construct AS and NAS messages.
+- Acting as end-point of N1 towards AMF, including maintaining CM and RM states and related dynamic information received from 5GC
+- 
+
 # 7.2.1.1 5G-RG Registration via W-5GAN

@@ -41,26 +41,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Questions.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "fa9da262f36321df",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,8 +97,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 333.5,
-    "collapsed": true
+    "width": 244.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -190,11 +176,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "fa9da262f36321df",
+  "active": "bb4a6841e2c3c158",
   "lastOpenFiles": [
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "Questions.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "images/2024-10-07_12-39.png",
@@ -206,7 +193,6 @@
     "Altice Labs/Nexus.IWF.pdf",
     "Altice Labs/Notes.md",
     "Altice Labs",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
