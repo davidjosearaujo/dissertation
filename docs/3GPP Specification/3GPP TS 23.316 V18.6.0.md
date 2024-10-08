@@ -101,6 +101,12 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
    
 3. W-AGF performs initial registration on behalf of the FN-RG to the 5GC. The W-AGF **sends a Registration Request** to the selected AMF within an N2 initial UE message (NAS Registration Request, ULI, Establishment cause, UE context request, Allowed NSSAI, Authenticated Indication).
    
-   The **NAS Registration Request contains the SUCI (Subscription Concealed Identifier)** or 5G-GUTI of the FN-RG, security parameters/UE security capability, UE MM Core Network Capability, PDU Session Status, Follow-on request, Requested NSSAI. The 5G-GUTI, if available, has been received from the AMF during a previous registration and stored in W-AGF
+   The **NAS Registration Request contains the SUCI (Subscription Concealed Identifier)** or 5G-GUTI of the FN-RG, security parameters/UE security capability, UE MM Core Network Capability, PDU Session Status, Follow-on request, Requested NSSAI. The 5G-GUTI, if available, has been received from the AMF during a previous registration and stored in W-AGF.
    
-4. 
+   The **SUCI is built by the W-AGF** based on:
+   - In the case of a BBF access: the **GLI** as defined in clause 4.7.8 **together with an identifier of the Home network** as described in TS 23.003.
+   - In the case of a Cable access: the **GCI** as defined in clause 4.7.8 together with an identifier of the Home network as described in TS 23.003.
+   
+   The following differences exist, compared to 5G-RG case:
+   - The W-AGF use SUCI
+   - The Authenticated Indication indicates to AMF and 5GC that the FN-RG has been authenticated by the access network.
