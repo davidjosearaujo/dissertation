@@ -117,4 +117,6 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
 
 5. AMF sends an authentication request to the AUSF in the form of, Nausf_UEAuthentication_Authenticate. It contains the SUCI of the FN-RG. It also contains an indication that the W-5GAN has authenticated the FN-RG.
 
-6. 
+6. AUSF selects a UDM as described in clause 6.3.8 of TS 23.501 and sends a Nudm_UEAuthentication_Get Request to the UDM. It contains the SUCI of the FN-RG and indication that the W-5GAN has authenticated the FN-RG.
+
+7. UDM invokes the SIDF to map the SUCI to a SUPI.

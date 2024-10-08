@@ -48,18 +48,19 @@
             }
           },
           {
-            "id": "11bc01c4cc3207c0",
+            "id": "7159e20341bac0b2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "file": "3GPP Specification/5G Identifiers.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -109,8 +110,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5,
-    "collapsed": true
+    "width": 244.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -126,7 +126,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "3GPP Specification/5G Identifiers.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -143,7 +143,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "3GPP Specification/5G Identifiers.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -166,7 +166,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
+                "file": "3GPP Specification/5G Identifiers.md"
               }
             }
           }
@@ -189,14 +189,15 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "bb4a6841e2c3c158",
+  "active": "7159e20341bac0b2",
   "lastOpenFiles": [
-    "3GPP Specification/23316-i60.pdf",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "Pasted image 20241008121040.png",
-    "Untitled.md",
-    "Pasted image 20241008115450.png",
+    "images/Pasted image 20241008121040.png",
+    "images/Pasted image 20241008121801.png",
+    "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/23316-i60.pdf",
+    "images/Pasted image 20241008115450.png",
     "images/2024-10-08_11-32.png",
     "images/2024-10-08_11-29.png",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
@@ -234,7 +235,6 @@
     "().md",
     "images/Pasted image 20241002170115.png",
     "images/Pasted image 20241002161612.png",
-    "images/Pasted image 20241002154111.png",
-    "images/Pasted image 20241002103905.png"
+    "images/Pasted image 20241002154111.png"
   ]
 }
