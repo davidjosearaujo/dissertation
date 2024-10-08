@@ -128,3 +128,8 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
    The procedure described in TS 23.502 [3] clause 4.2.2.2.3 may apply (the AMF decides if the Registration Request needs to be rerouted, where the initial AMF refers to the AMF)
 
 10. 
+	1. AMF initiates a NAS security mode command procedure upon successful authentication as defined in TS 33.501
+	   
+	   The NAS security mode command is sent from the AMF to the W-AGF in a N2 Downlink NAS transport message
+	   
+	2. W-AGF responds to the AMF with a NAS Security Mode Complete message in a N2 Uplink NAS transport message. A NAS security context is created between W-AGF and AMF
