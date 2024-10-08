@@ -150,4 +150,4 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
 
 14. The W-AGF sends a N2 Uplink NAS transport message, including a NAS Registration Complete message, back to the AMF when the procedure is completed. The W-AGF shall store the 5G-GUTI to be able to send it in potential later NAS procedures.
 
-15. The AMF performs step 23-24 in TS 23.502 [3] clause 4.2.2.2.2.
+15. The AMF performs step 23-24 in TS 23.502 clause 4.2.2.2.2.
