@@ -4,58 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "d765f108299c278f",
+        "id": "f6ef1e2d3f8ec3c0",
         "type": "tabs",
-        "dimension": 48.61407249466951,
         "children": [
           {
-            "id": "68dff20e7c9c12f1",
+            "id": "64a40c72e0d9435a",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "3GPP Specification/23316-i60.pdf"
-              }
-            }
-          },
-          {
-            "id": "af5c47350537b6df",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "3GPP Specification/23501-i70.pdf"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "id": "6648cfe64ac12b0c",
-        "type": "tabs",
-        "dimension": 51.385927505330486,
-        "children": [
-          {
-            "id": "bb4a6841e2c3c158",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "7159e20341bac0b2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/5G Identifiers.md",
-                "mode": "source",
-                "source": false
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
               }
             }
           }
@@ -109,8 +67,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5,
-    "collapsed": true
+    "width": 244.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -126,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -143,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -166,7 +123,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
               }
             }
           }
@@ -189,12 +146,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "bb4a6841e2c3c158",
+  "active": "64a40c72e0d9435a",
   "lastOpenFiles": [
-    "3GPP Specification/23316-i60.pdf",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/23502-i70.pdf",
     "3GPP Specification/5G Identifiers.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/23316-i60.pdf",
+    "3GPP Specification/23502-i70.pdf",
     "images/Pasted image 20241008121040.png",
     "images/Pasted image 20241008121801.png",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
