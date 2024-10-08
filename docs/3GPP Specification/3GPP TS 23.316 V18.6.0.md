@@ -92,3 +92,9 @@ The user plane protocol stack between FN-RG and UPF is defined in figure 6.3.2-1
 For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [[TR-456-AGF-Functional-Requirements.pdf|BBF TR-456]] and WT-457. For W-5GCAN, the L-W-UP protocol stack between FN-CRG and W-AGF is defined in [[WR-TR-5WWC-ARCH-V01-190820|WR-TR-5WWC-ARCH]]
 
 # 7.2.1.3 FN-RG Registration via W-5GAN
+![[Pasted image 20241008115450.png]]
+
+1. The **FN-RG connects to a W-AGF (W-5GAN) via a layer-2 (L2)** connection, based on Wireline AN specific procedure.
+   The FN-RG is authenticated by the W-5GAN based on Wireline AN specific mechanisms.
+2. W-AGF selects an AMF based on the AN parameters and local policy. W-AGF may use the Line ID / HFC identifier provided from the Wireline AN to determine the 5GC and AN parameters to be used for the FN-RG registration. How the W-AGF can determine the necessary 5GC and AN parameters is defined in [[TR-456-AGF-Functional-Requirements.pdf|BBF TR-456]], WT-457 or [[WR-TR-5WWC-ARCH-V01-190820|CableLabs WR-TR-5WWC-ARCH]]
+3. 
