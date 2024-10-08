@@ -46,6 +46,18 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "4a1f84d22b140568",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ]
       }
@@ -180,6 +192,7 @@
   "lastOpenFiles": [
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Questions.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
@@ -187,7 +200,6 @@
     "images/2024-10-07_12-39.png",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP Specification/23501-i70.pdf",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Altice Labs/Nexus.IWF.pdf",

@@ -63,6 +63,13 @@ Support for FN-RG connectivity to 5GC is provided by means of W-AGF supporting 5
 The W-AGF supports the following functionality on behalf of the FN- RG:
 - Has access to configuration information, as defined in [[TR-456-AGF-Functional-Requirements.pdf|BBF TR-456]], WT-457 and [[WR-TR-5WWC-ARCH-V01-190820|CableLabs WR-TR- 5WWC-ARCH]], to be able to serve FN-RGs and to construct AS and NAS messages.
 - Acting as end-point of N1 towards AMF, including maintaining CM and RM states and related dynamic information received from 5GC
+- Mapping between Y5 towards FN-RG and N1/N2 towards 5GC as well as mapping between a Y5 user plane connection and a PDU Session user plane tunnel on N3.
+
+Authentication of FN-RG may be done by the W-AGF, as defined by BBF and [[WR-TR-5WWC-ARCH-V01-190820|Cablelabs]]. The W-AGF provides an indication on N2 that the FN-RG has been authenticated.
+
+# 5.1 Network Function Functional description
+## 5.1.1 W-AGF
+The functionality of W-AGF in the case of Wireline 5G Access network includes the following:
 - 
 
 # 7.2.1.1 5G-RG Registration via W-5GAN
