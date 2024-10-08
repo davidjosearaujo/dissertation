@@ -48,12 +48,12 @@
             }
           },
           {
-            "id": "4a1f84d22b140568",
+            "id": "11bc01c4cc3207c0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
@@ -192,11 +192,11 @@
   "lastOpenFiles": [
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Questions.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "images/2024-10-07_12-39.png",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP Specification/23501-i70.pdf",
