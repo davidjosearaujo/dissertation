@@ -59,8 +59,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -126,7 +125,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/5G Identifiers.md",
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -143,7 +142,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/5G Identifiers.md",
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -166,7 +165,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/5G Identifiers.md"
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
               }
             }
           }
@@ -189,14 +188,14 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "7159e20341bac0b2",
+  "active": "bb4a6841e2c3c158",
   "lastOpenFiles": [
+    "3GPP Specification/23316-i60.pdf",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/5G Identifiers.md",
     "images/Pasted image 20241008121040.png",
     "images/Pasted image 20241008121801.png",
-    "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/23316-i60.pdf",
     "images/Pasted image 20241008115450.png",
     "images/2024-10-08_11-32.png",
     "images/2024-10-08_11-29.png",
