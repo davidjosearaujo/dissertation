@@ -56,6 +56,6 @@ The W-AGF shall request the release of the NGAP connection for each N5GC device 
 5G-CRG behaves as FN-CRG (i.e. L2 bridge mode) when handling N5GC devices.
 
 # 4.13 Support of FN-RG
-
+FN-RG is a legacy type of residential gateway that does not support N1 signalling and is not 5GC capable.
 
 # 7.2.1.1 5G-RG Registration via W-5GAN
