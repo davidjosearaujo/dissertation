@@ -4,63 +4,38 @@
     "type": "split",
     "children": [
       {
-        "id": "d765f108299c278f",
+        "id": "b984357a52525329",
         "type": "tabs",
-        "dimension": 55.06396588486141,
         "children": [
           {
-            "id": "68dff20e7c9c12f1",
+            "id": "64a40c72e0d9435a",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "3GPP Specification/23316-i60.pdf"
-              }
-            }
-          },
-          {
-            "id": "af5c47350537b6df",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "3GPP Specification/23501-i70.pdf"
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
               }
             }
           }
         ]
       },
       {
-        "id": "6648cfe64ac12b0c",
+        "id": "3ddc820781d82311",
         "type": "tabs",
-        "dimension": 44.93603411513859,
         "children": [
           {
-            "id": "bb4a6841e2c3c158",
+            "id": "63d2f72818dc11cc",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Questions.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "fa9da262f36321df",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Broadband Forum/TR-456.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,7 +85,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 333.5,
+    "width": 244.5,
     "collapsed": true
   },
   "right": {
@@ -127,7 +102,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Broadband Forum/TR-456.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -144,7 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Broadband Forum/TR-456.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -167,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
+                "file": "Broadband Forum/TR-456.md"
               }
             }
           }
@@ -190,35 +165,35 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "fa9da262f36321df",
+  "active": "870a0dee6ebe3642",
   "lastOpenFiles": [
-    "images/Pasted image 20241008121801.png",
-    "images/Pasted image 20241008121040.png",
-    "images/Pasted image 20241008115450.png",
+    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
+    "Broadband Forum/TR-456.md",
     "images/2024-10-08_14-41.png",
+    "3GPP Specification/5G Identifiers.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/23316-i60.pdf",
+    "3GPP Specification/23502-i70.pdf",
+    "images/Pasted image 20241008121040.png",
+    "images/Pasted image 20241008121801.png",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+    "images/Pasted image 20241008115450.png",
     "images/2024-10-08_11-32.png",
     "images/2024-10-08_11-29.png",
-    "Broadband Forum/TR-456.md",
-    "3GPP Specification/5G Identifiers.md",
-    "3GPP Specification/23316-i60.pdf",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Questions.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "images/2024-10-07_12-39.png",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP Specification/23501-i70.pdf",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Altice Labs/Nexus.IWF.pdf",
     "Altice Labs/Notes.md",
     "Altice Labs",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
-    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
-    "Broadband Forum",
     "Wireless Broadband Alliance/Untitled.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Untitled 1.md",
@@ -236,7 +211,6 @@
     "Misc/Acronyms.md",
     "5G.md",
     "images/Pasted image 20241002170115.png",
-    "images/Pasted image 20241002161612.png",
-    "images/Pasted image 20241002154111.png"
+    "images/Pasted image 20241002161612.png"
   ]
 }
