@@ -9,6 +9,7 @@ kanban-plugin: board
 - [ ] Organize the state of the art documentation as a knowledge path to intuitively understand the problem the thesis is proposing to solve
 - [ ] Propose main questions that need answers
 - [ ] Structure the dissertation
+- [ ] Learn about EDURAM authorization and authentication procedures
 
 
 ## In Progress

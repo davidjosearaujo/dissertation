@@ -83,7 +83,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -149,7 +149,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Broadband Forum/TR-456.md",
+                "file": "Tasks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -166,7 +166,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Broadband Forum/TR-456.md",
+                "file": "Tasks.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -189,7 +189,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Broadband Forum/TR-456.md"
+                "file": "Tasks.md"
               }
             }
           }
@@ -212,12 +212,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "f8b0009fe549d9e7",
+  "active": "870d86eac6f46ccf",
   "lastOpenFiles": [
+    "Broadband Forum/TR-456.md",
     "3GPP Specification/5G Identifiers.md",
     "Tasks.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "Broadband Forum/TR-456.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Questions.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
