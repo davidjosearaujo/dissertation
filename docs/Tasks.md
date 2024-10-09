@@ -13,7 +13,7 @@ kanban-plugin: board
 
 ## In Progress
 
-- [ ] Define general objectives of the work
+- [x] Define general objectives of the work
 - [ ] Define subjects relevant to understand
 
 
