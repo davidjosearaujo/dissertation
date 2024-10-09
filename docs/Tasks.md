@@ -6,16 +6,14 @@ kanban-plugin: board
 
 ## TODO
 
-- [ ] Organize the state of the art documentation as a knowledge path to intuitively understand the problem the thesis is proposing to solve
-- [ ] Propose main questions that need answers
-- [ ] Structure the dissertation
 - [ ] Learn about EDURAM authorization and authentication procedures
+- [ ] How does an FN-RG handles an UE's credentials for 5G
 
 
 ## In Progress
 
-- [x] Define general objectives of the work
-- [ ] Define subjects relevant to understand
+- [ ] Structure the dissertation
+- [ ] Organize the state of the art documentation as a knowledge path to intuitively understand the problem the thesis is proposing to solve
 
 
 ## In Review
@@ -24,6 +22,8 @@ kanban-plugin: board
 
 ## Done
 
+- [x] Define subjects relevant to understand
+- [x] Define general objectives of the work
 
 
 
