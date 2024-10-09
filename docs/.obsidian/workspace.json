@@ -213,9 +213,9 @@
   },
   "active": "f8b0009fe549d9e7",
   "lastOpenFiles": [
-    "images/Screenshot from 2024-10-09 14-05-39.png",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "Broadband Forum/TR-456.md",
+    "images/Screenshot from 2024-10-09 14-05-39.png",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Tasks.md",
     "3GPP Specification/5G Identifiers.md",
@@ -257,7 +257,6 @@
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
     "images/Pasted image 20241004114652.png",
     "Misc/Acronyms.md",
-    "5G.md",
-    "images/Pasted image 20241002170115.png"
+    "5G.md"
   ]
 }
