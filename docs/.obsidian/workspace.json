@@ -6,6 +6,7 @@
       {
         "id": "b984357a52525329",
         "type": "tabs",
+        "dimension": 54.957356076759055,
         "children": [
           {
             "id": "64a40c72e0d9435a",
@@ -22,6 +23,7 @@
       {
         "id": "3ddc820781d82311",
         "type": "tabs",
+        "dimension": 45.04264392324094,
         "children": [
           {
             "id": "63d2f72818dc11cc",
@@ -102,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Broadband Forum/TR-456.md",
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +121,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Broadband Forum/TR-456.md",
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +144,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Broadband Forum/TR-456.md"
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
               }
             }
           }
@@ -165,10 +167,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "870a0dee6ebe3642",
+  "active": "64a40c72e0d9435a",
   "lastOpenFiles": [
-    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "Broadband Forum/TR-456.md",
+    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "images/2024-10-08_14-41.png",
     "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
