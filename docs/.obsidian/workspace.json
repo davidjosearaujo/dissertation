@@ -6,17 +6,15 @@
       {
         "id": "b984357a52525329",
         "type": "tabs",
-        "dimension": 46.32352941176471,
+        "dimension": 44.79166666666667,
         "children": [
           {
             "id": "64a40c72e0d9435a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-                "mode": "source",
-                "source": false
+                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
               }
             }
           }
@@ -25,7 +23,7 @@
       {
         "id": "3ddc820781d82311",
         "type": "tabs",
-        "dimension": 53.67647058823529,
+        "dimension": 55.208333333333336,
         "children": [
           {
             "id": "63d2f72818dc11cc",
@@ -83,7 +81,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -133,7 +131,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5
+    "width": 244.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -149,7 +148,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Tasks.md",
+                "file": "Broadband Forum/TR-456.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -166,7 +165,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Tasks.md",
+                "file": "Broadband Forum/TR-456.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -189,7 +188,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tasks.md"
+                "file": "Broadband Forum/TR-456.md"
               }
             }
           }
@@ -212,16 +211,16 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "870d86eac6f46ccf",
+  "active": "f8b0009fe549d9e7",
   "lastOpenFiles": [
+    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "Broadband Forum/TR-456.md",
-    "3GPP Specification/5G Identifiers.md",
-    "Tasks.md",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+    "Tasks.md",
+    "3GPP Specification/5G Identifiers.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "Questions.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
-    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "images/Screenshot from 2024-10-09 10-53-55.png",
     "images/2024-10-08_14-41.png",
     "3GPP Specification/23316-i60.pdf",
