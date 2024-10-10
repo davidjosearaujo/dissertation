@@ -1,3 +1,5 @@
+# What is the problem we are trying to solve?
+
 # What is 3GPP and non-3GPP?
 
 ## What is trusted and untrusted 3GPP?
@@ -14,7 +16,7 @@
 
 ## What types of devices can connect to 5G?
 
-## 5GC device vs. N5GC device
+## 5GC vs. N5GC device. What is the difference?
 
-## How does a device each connect to a 5G network?
+## How does each device connect to a 5G network?
 

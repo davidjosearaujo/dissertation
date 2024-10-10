@@ -6,14 +6,27 @@
       {
         "id": "c409fa86e6c858b6",
         "type": "tabs",
+        "dimension": 42.48400852878465,
         "children": [
+          {
+            "id": "257850f9b0ce94d5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Questions.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
           {
             "id": "60ac34bc956c69ec",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Questions.md",
+                "file": "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
                 "mode": "source",
                 "source": false
               }
@@ -24,16 +37,23 @@
       {
         "id": "a1d26f62dcf4ac62",
         "type": "tabs",
+        "dimension": 57.51599147121536,
         "children": [
           {
-            "id": "cdbb4b0ac5198e94",
+            "id": "b28f5b694c021748",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
-                "mode": "source",
-                "source": false
+                "file": "Tasks.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false
+                  ]
+                }
               }
             }
           }
@@ -87,7 +107,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "539fab4d0b5f2fa0",
@@ -166,14 +187,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "60ac34bc956c69ec",
+  "active": "257850f9b0ce94d5",
   "lastOpenFiles": [
+    "Tasks.md",
+    "Questions.md",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
-    "Questions.md",
-    "Objectives.md",
-    "Tasks.md"
+    "Objectives.md"
   ]
 }
