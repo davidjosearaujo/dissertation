@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md"
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md"
               }
             }
           }
@@ -150,17 +150,17 @@
   },
   "active": "b9f9eedd06925c8f",
   "lastOpenFiles": [
+    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
+    "ROMARS/Trusted non-3GPP access.md",
+    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Tasks.md",
     "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
-    "ROMARS/Trusted non-3GPP access.md",
-    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Altice Labs/Notes.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Broadband Forum/TR-456.md",
