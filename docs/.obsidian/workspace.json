@@ -6,7 +6,6 @@
       {
         "id": "6f22def42c1f65d6",
         "type": "tabs",
-<<<<<<< HEAD
         "dimension": 44.791666666666664,
         "children": [
           {
@@ -39,11 +38,9 @@
         "children": [
           {
             "id": "63d2f72818dc11cc",
-=======
         "children": [
           {
             "id": "b9f9eedd06925c8f",
->>>>>>> e45f12ecc2e776bc71a57ab203a541695872aec4
             "type": "leaf",
             "state": {
               "type": "markdown",
