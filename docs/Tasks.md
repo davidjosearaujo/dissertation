@@ -12,8 +12,6 @@ kanban-plugin: board
 
 ## In Progress
 
-- [ ] Structure the dissertation
-	1. Significado
 - [ ] Organize the state of the art documentation as a knowledge path to intuitively understand the problem the thesis is proposing to solve
 
 

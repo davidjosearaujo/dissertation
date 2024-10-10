@@ -11,18 +11,11 @@
             "id": "b9f9eedd06925c8f",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "Tasks.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -92,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Tasks.md",
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -109,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Tasks.md",
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -132,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tasks.md"
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md"
               }
             }
           }
@@ -157,6 +150,7 @@
   },
   "active": "b9f9eedd06925c8f",
   "lastOpenFiles": [
+    "Tasks.md",
     "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "ROMARS/Trusted non-3GPP access.md",
@@ -171,7 +165,6 @@
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Broadband Forum/TR-456.md",
     "3GPP Specification/23316-i60.pdf",
-    "Tasks.md",
     "3GPP Specification/5G Identifiers.md",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "images/Screenshot from 2024-10-09 14-05-39.png",
