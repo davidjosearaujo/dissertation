@@ -11,11 +11,18 @@
             "id": "b9f9eedd06925c8f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "Articles/Wireline - Access Gateway Function.md",
-                "mode": "source",
-                "source": false
+                "file": "Tasks.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": [
+                    false,
+                    false,
+                    false,
+                    false
+                  ]
+                }
               }
             }
           }
@@ -85,7 +92,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Articles/Wireline - Access Gateway Function.md",
+                "file": "Tasks.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +109,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Articles/Wireline - Access Gateway Function.md",
+                "file": "Tasks.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +132,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Articles/Wireline - Access Gateway Function.md"
+                "file": "Tasks.md"
               }
             }
           }
@@ -150,6 +157,7 @@
   },
   "active": "b9f9eedd06925c8f",
   "lastOpenFiles": [
+    "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "ROMARS/Trusted non-3GPP access.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
@@ -180,7 +188,6 @@
     "Objectives.md",
     "images/2024-10-07_12-39.png",
     "3GPP Specification/23501-i70.pdf",
-    "Articles/Wireline - Access Gateway Function.md",
     "Altice Labs/Nexus.IWF.pdf",
     "Altice Labs",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
