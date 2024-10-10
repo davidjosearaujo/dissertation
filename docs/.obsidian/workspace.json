@@ -4,9 +4,10 @@
     "type": "split",
     "children": [
       {
-        "id": "b984357a52525329",
+        "id": "6f22def42c1f65d6",
         "type": "tabs",
-        "dimension": 44.79166666666667,
+<<<<<<< HEAD
+        "dimension": 44.791666666666664,
         "children": [
           {
             "id": "64a40c72e0d9435a",
@@ -34,46 +35,26 @@
       {
         "id": "3ddc820781d82311",
         "type": "tabs",
-        "dimension": 55.208333333333336,
+        "dimension": 55.20833333333333,
         "children": [
           {
             "id": "63d2f72818dc11cc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/5G Identifiers.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
+=======
+        "children": [
           {
-            "id": "f8b0009fe549d9e7",
+            "id": "b9f9eedd06925c8f",
+>>>>>>> e45f12ecc2e776bc71a57ab203a541695872aec4
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Broadband Forum/TR-456.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6739aff56b903286",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -123,8 +104,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5,
-    "collapsed": true
+    "width": 244.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -140,7 +120,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -157,7 +137,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -180,7 +160,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md"
               }
             }
           }
@@ -203,47 +183,47 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "6739aff56b903286",
+  "active": "b9f9eedd06925c8f",
   "lastOpenFiles": [
-    "3GPP Specification/23316-i60.pdf",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "Broadband Forum/TR-456.md",
+    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
+    "ROMARS/Trusted non-3GPP access.md",
+    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Tasks.md",
+    "Articles/Wireline - Access Gateway Function.md",
+    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+    "Altice Labs/Notes.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+    "Broadband Forum/TR-456.md",
+    "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/5G Identifiers.md",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "images/Screenshot from 2024-10-09 14-05-39.png",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Questions.md",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
     "images/Screenshot from 2024-10-09 10-53-55.png",
     "images/2024-10-08_14-41.png",
     "3GPP Specification/23502-i70.pdf",
     "images/Pasted image 20241008121040.png",
     "images/Pasted image 20241008121801.png",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "images/Pasted image 20241008115450.png",
     "images/2024-10-08_11-32.png",
     "images/2024-10-08_11-29.png",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
     "images/2024-10-07_12-39.png",
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "3GPP Specification/23501-i70.pdf",
-    "Articles/Wireline - Access Gateway Function.md",
-    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Altice Labs/Nexus.IWF.pdf",
-    "Altice Labs/Notes.md",
     "Altice Labs",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Wireless Broadband Alliance/Untitled.md",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Untitled 1.md",
     "Wireless Broadband Alliance/Notes.md",
     "Misc/Links.md",
-    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "W-AGF.md",
-    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
-    "ROMARS/Trusted non-3GPP access.md",
     "Define subjects relevant to understand.md",
     "2024-10-04.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
