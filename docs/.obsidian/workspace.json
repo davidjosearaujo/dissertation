@@ -1,51 +1,19 @@
 {
   "main": {
-    "id": "57a5b0c6c2709c25",
+    "id": "6de83bb268ebdd1d",
     "type": "split",
     "children": [
       {
-        "id": "6f22def42c1f65d6",
+        "id": "c409fa86e6c858b6",
         "type": "tabs",
-        "dimension": 44.791666666666664,
         "children": [
           {
-            "id": "64a40c72e0d9435a",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
-              }
-            }
-          },
-          {
-            "id": "e5d701d1c480bcf7",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "3GPP Specification/23316-i60.pdf"
-              }
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "3ddc820781d82311",
-        "type": "tabs",
-        "dimension": 55.20833333333333,
-        "children": [
-          {
-            "id": "63d2f72818dc11cc",
-        "children": [
-          {
-            "id": "b9f9eedd06925c8f",
+            "id": "cdbb4b0ac5198e94",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Questions.md",
                 "mode": "source",
                 "source": false
               }
@@ -57,25 +25,25 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "411c12bd8658aa5d",
+    "id": "df31251946699e1d",
     "type": "split",
     "children": [
       {
-        "id": "157ef30cd7e7fadc",
+        "id": "858ea99eacd4c1c6",
         "type": "tabs",
         "children": [
           {
-            "id": "870a0dee6ebe3642",
+            "id": "dc3466024be07aa4",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byCreatedTimeReverse"
+                "sortOrder": "alphabetical"
               }
             }
           },
           {
-            "id": "3addde1be4f06add",
+            "id": "15326c8c33dc68d2",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -90,7 +58,7 @@
             }
           },
           {
-            "id": "8c4988825f2c715a",
+            "id": "6afb897fcb08cf72",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -101,23 +69,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5
+    "width": 300
   },
   "right": {
-    "id": "a174be73487b4b8f",
+    "id": "539fab4d0b5f2fa0",
     "type": "split",
     "children": [
       {
-        "id": "2f1a28eda42649cd",
+        "id": "a39aba00d73f1687",
         "type": "tabs",
         "children": [
           {
-            "id": "937d72ae4a4e3c9f",
+            "id": "c495ad353a1beebc",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Questions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,19 +97,19 @@
             }
           },
           {
-            "id": "fa17b32ab2e4d839",
+            "id": "707b7026eb30c1f9",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Questions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "e04276af052d2a69",
+            "id": "35f6c3ed21d034ac",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -152,12 +120,12 @@
             }
           },
           {
-            "id": "d73934f58ee18f43",
+            "id": "c0959d64f94e705e",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md"
+                "file": "Questions.md"
               }
             }
           }
@@ -170,62 +138,20 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-git:Open Git source control": false,
+      "obsidian-kanban:Create new board": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Create new board": false
+      "command-palette:Open command palette": false
     }
   },
-  "active": "b9f9eedd06925c8f",
+  "active": "cdbb4b0ac5198e94",
   "lastOpenFiles": [
-    "ROMARS/Untrusted non-3GPP access (N3IWF).md",
-    "ROMARS/Trusted non-3GPP access.md",
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Tasks.md",
-    "Articles/Wireline - Access Gateway Function.md",
-    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
-    "Altice Labs/Notes.md",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "Broadband Forum/TR-456.md",
-    "3GPP Specification/23316-i60.pdf",
-    "3GPP Specification/5G Identifiers.md",
-    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
-    "images/Screenshot from 2024-10-09 14-05-39.png",
-    "Questions.md",
-    "images/Screenshot from 2024-10-09 10-53-55.png",
-    "images/2024-10-08_14-41.png",
-    "3GPP Specification/23502-i70.pdf",
-    "images/Pasted image 20241008121040.png",
-    "images/Pasted image 20241008121801.png",
-    "images/Pasted image 20241008115450.png",
-    "images/2024-10-08_11-32.png",
-    "images/2024-10-08_11-29.png",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
-    "images/2024-10-07_12-39.png",
-    "3GPP Specification/23501-i70.pdf",
-    "Altice Labs/Nexus.IWF.pdf",
-    "Altice Labs",
-    "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
-    "Wireless Broadband Alliance/Untitled.md",
-    "Untitled 1.md",
-    "Wireless Broadband Alliance/Notes.md",
-    "Misc/Links.md",
-    "W-AGF.md",
-    "Define subjects relevant to understand.md",
-    "2024-10-04.md",
-    "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
-    "images/Pasted image 20241004114652.png",
-    "Misc/Acronyms.md",
-    "5G.md"
+    "Questions.md"
   ]
 }

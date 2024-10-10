@@ -1,4 +1,13 @@
-- [[WR-TR-5WWC-ARCH-V01-190820#^c138a2| Which is the method used to detect CM registration and reachability? ]]
-- [[WR-TR-5WWC-ARCH-V01-190820#^0fbf60| How should the W-AGF select a slice for the FN-CRG ?]]
-- [[5G and Wi-Fi RAN Convergence#^478de6 | What is EAP-5G, IKEv2 and 5G NAS ?]]
-- [[3GPP TS 23.316 V18.6.0#4.10a Non-5G capable device behind 5G-CRG and FN-CRG | Are we interested in the authentication procedure for N5GC devices in a network (e.g. like the devices in a home network) or just the RG itself?]]
+# What is 3GPP and non-3GPP?
+
+# What is 5G?
+
+# What is the 5GC?
+
+## How does it work?
+
+## What components is it made out of?
+
+# How does a device connect to a 5G network?
+
+# 

@@ -8,11 +8,11 @@ kanban-plugin: board
 
 - [ ] Learn about EDURAM authorization and authentication procedures
 - [ ] How does an FN-RG handles an UE's credentials for 5G
+- [ ] Organize the state of the art documentation as a knowledge path to intuitively understand the problem the thesis is proposing to solve
 
 
 ## In Progress
 
-- [ ] Organize the state of the art documentation as a knowledge path to intuitively understand the problem the thesis is proposing to solve
 
 
 ## In Review
