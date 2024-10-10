@@ -1,4 +1,4 @@
-Starting from 3GPP release 16 \[2\], additional non-3GPP access mechanisms are defined, and specifically “trusted” ones. **Trusted means that the operator of the 5G Core Network is also in charge of operating and managing the non-3GPP access** which, in addition to WiFi, is also extended to terrestrial fixed access. These updates in rel-16 open to 4 new scenarios:
+Starting from 3GPP release 16, additional non-3GPP access mechanisms are defined, and specifically “trusted” ones. **Trusted means that the operator of the 5G Core Network is also in charge of operating and managing the non-3GPP access** which, in addition to WiFi, is also extended to terrestrial fixed access. These updates in rel-16 open to 4 new scenarios:
 ## Scenario 1
 
 Mobile 5G **UE devices that can register, access and exploit Core Network services both by 3GPP New Radio access and trusted WiFi**. This is **similar to** what already allowed by **N3IWF** with the difference that WiFi access points are coordinated and under the control of the same 5G network operator (also in terms of QoS). This scenario can be called Mobile Wireless Access (MWA).
