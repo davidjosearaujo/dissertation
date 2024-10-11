@@ -1,5 +1,9 @@
 # What is the problem we are trying to solve?
-[[5G and Wi-Fi RAN Convergence|Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.]]
+[[5G and Wi-Fi RAN Convergence#3.6 Support for Wi-Fi Only Devices|Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.]]
+
+This is an issue as the architecture expects all UE to support SIM based identity with credentials to connect to the 5GC over WLAN
+
+This imposes a limitation to use cases such as enterprise deployments or IOT, where WiFi-only devices are used and by no having a USIM included,
 
 # What is 3GPP and non-3GPP?
 
