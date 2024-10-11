@@ -3,7 +3,9 @@
 
 This is an issue as the architecture expects all UE to support SIM based identity with credentials to connect to the 5GC over WLAN
 
-This imposes a limitation to use cases such as enterprise deployments or IOT, where WiFi-only devices are used and by no having a USIM included,
+This imposes a limitation to use cases such as enterprise deployments or IOT, where WiFi-only devices are used and by no having a USIM included, won't be able to connect to the 5G control plane (NAS).
+
+This 
 
 # What is 3GPP and non-3GPP?
 

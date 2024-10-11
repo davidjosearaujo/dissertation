@@ -60,7 +60,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -127,7 +127,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Questions.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -144,7 +144,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Questions.md",
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -167,7 +167,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Questions.md"
+                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf"
               }
             }
           }
@@ -190,10 +190,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "b9f9eedd06925c8f",
+  "active": "15ad49c19b5d4784",
   "lastOpenFiles": [
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Questions.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
