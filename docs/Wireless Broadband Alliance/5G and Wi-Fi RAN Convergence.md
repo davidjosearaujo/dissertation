@@ -1,7 +1,9 @@
 # 3.6 Support for Wi-Fi Only Devices
 Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.
 
-The UE is shown as a dual radio device supporting both 3GPP and non- 3GPP radio per reference architectures in TS 23.501 clause 4.2.8.2, even though connectivity over the 3GPP access is shown as optional
+The UE is shown as a **dual radio device supporting both 3GPP and non-3GPP radio** per reference architectures in TS 23.501 clause 4.2.8.2, even though connectivity over the 3GPP access is shown as optional
+
+It supports **EAP-AKA'** and **5G-AKA** authentication methods for UE authentication over both 3GPP and non-3GPP access in PLMN networks.
 
 **A UE is required to support SIM based identity (SUPIbased or IMSI) and SIM credentials to connect to 5G Core over WLAN access.**
 
