@@ -1,7 +1,7 @@
 # 3.6 Support for Wi-Fi Only Devices
 Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.
 
-**A UE is required to support SIM based identity (SUPIbased on IMSI) and SIM credentials to connect to 5G Core over WLAN access.**
+**A UE is required to support SIM based identity (SUPIbased or IMSI) and SIM credentials to connect to 5G Core over WLAN access.**
 
 However, **most Wi-Fi only devices**, e.g. devices in enterprise deployments, **would not have a USIM included** even in cases where these devices can be upgraded to support 5G control plane (NAS) and user plane functionality. Hence, **it is important to enable Wi-Fi only devices without 3GPP IMSI based identity and SIM credentials to connect to 5G Core**, to provide 5G services and experiences across different enterprise and verticals deployments.
 
