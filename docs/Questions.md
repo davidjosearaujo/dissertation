@@ -1,4 +1,5 @@
 # What is the problem we are trying to solve?
+[[5G and Wi-Fi RAN Convergence|Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.]]
 
 # What is 3GPP and non-3GPP?
 
