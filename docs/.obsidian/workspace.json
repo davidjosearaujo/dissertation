@@ -29,13 +29,26 @@
             "id": "fcdaf6890b81b9d9",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
+                "file": "Altice Labs/Notes.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1365625bfbca48a1",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -101,7 +114,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
+                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +131,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
+                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -141,7 +154,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
+                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md"
               }
             }
           }
@@ -161,7 +174,8 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Create new board": false
+      "obsidian-kanban:Create new board": false,
+      "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
   "floating": {
@@ -201,14 +215,17 @@
       }
     ]
   },
-  "active": "fcdaf6890b81b9d9",
+  "active": "1365625bfbca48a1",
   "lastOpenFiles": [
-    "2024-10-14.md",
+    "Altice Labs/Notes.md",
+    "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
+    "Excalidraw/Drawing 2024-10-14 14.45.24.excalidraw.md",
+    "Excalidraw",
     "Questions.md",
+    "2024-10-14.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
-    "Altice Labs/Notes.md",
     "Articles/Wireline - Access Gateway Function.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
@@ -237,7 +254,6 @@
     "images/2024-10-07_12-39.png",
     "3GPP Specification/23501-i70.pdf",
     "Altice Labs/Nexus.IWF.pdf",
-    "Altice Labs",
     "Wireless Broadband Alliance/Untitled.md",
     "Untitled 1.md",
     "Wireless Broadband Alliance/Notes.md",
@@ -246,7 +262,6 @@
     "Define subjects relevant to understand.md",
     "2024-10-04.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
-    "images/Pasted image 20241004114652.png",
-    "Misc/Acronyms.md"
+    "images/Pasted image 20241004114652.png"
   ]
 }
