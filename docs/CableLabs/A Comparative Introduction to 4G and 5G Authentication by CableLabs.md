@@ -21,4 +21,10 @@ Service-based architecture (SBA) has been proposed for the 5G core network. Acco
 - **Unified data management (UDM)** is an entity that hosts functions related to data management, such as the **Authentication Credential Repository and Processing Function (ARPF)**, which **selects an authentication method based on subscriber identity and configured policy** and computes the authentication data and keying materials for the AUSF if needed.
 - The **Subscription Identifier De-concealing Function (SIDF) decrypts a Subscription Concealed Identifier (SUCI)** to obtain its long-term identity, namely the Subscription Permanent Identifier (SUPI), e.g., the IMSI. In 5G, a subscriber long-term identity is always transmitted over the radio interfaces in an encrypted form. More specifically, a **public key-based encryption is used to protect the SUPI**. Therefore, only the SIDF has access to the private key associated with a public key distributed to UEs for encrypting their SUPIs.
 # 5G Authentication Framework
+A unified authentication framework has been defined to make 5G authentication both open (e.g., with the support of EAP) and access-network agnostic (e.g., supporting both 3GGP access networks and non-3GPP access networks such as Wi-Fi and cable networks).
 
+![[Pasted image 20241014203612.png]]
+
+**When EAP** (Extensible Authentication Protocol) **is used** (e.g., EAP-AKA’ or EAP-TLS), EAP **authentication is between the UE** (an EAP peer) **and the AUSF** (an EAP server) **through the SEAF** (functioning as an EAP pass-through authenticator).
+
+When authentication is over untrusted, non-3GPP access networks, a new entity, namely the Non-3GPP Interworking Function (N3IWF), is required to function as a VPN server to allow the UE to access the 5G core over untrusted, non-3GPP networks through IPsec (IP Security) tunnels.
