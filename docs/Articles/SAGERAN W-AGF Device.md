@@ -9,4 +9,3 @@ W-AGF is developed on the SageRAN's 5G Engine™ protocol stack platform and com
 Additionally, W-AGF includes data routing and forwarding modules for registration and IP data link connections to the 5GC core network, providing standard fixed-mobile convergence network access technology for high-reliability, high-security, and unified authentication.
 
 W-AGF can be widely applied in dedicated network links for industries such as hospitals, banks, campuses, and small and medium enterprises.
-# [A Comparative Introduction to 4G and 5G Authentication](https://www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication)
