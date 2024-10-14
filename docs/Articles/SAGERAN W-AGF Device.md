@@ -9,9 +9,4 @@ W-AGF is developed on the SageRAN's 5G Engine™ protocol stack platform and com
 Additionally, W-AGF includes data routing and forwarding modules for registration and IP data link connections to the 5GC core network, providing standard fixed-mobile convergence network access technology for high-reliability, high-security, and unified authentication.
 
 W-AGF can be widely applied in dedicated network links for industries such as hospitals, banks, campuses, and small and medium enterprises.
-
-# [MPIRICAL](https://www.mpirical.com/blog/wireline-access-in-5g)
-The three fundamental pillars of 5G; **eMBB** (Enhanced Mobile Broadband), **MMTC** (Massive Machine Type Communications) and **URLLC** (Ultra Reliable Low Latency Communications) clearly emphasizes the importance of Massive IoT and Critical IoT into the overall 5G mix. Furthermore, 5G FWA (Fixed Wireless Access) and 5G as a transport network technology in the backhaul is also being deployed.
-
-5G is based upon a Service Based Architecture incorporating **NFV** (Network Functions Virtualization) and **SDN** (Software Defined Network) technology to drive down the total cost of ownership and to drastically improve network utilization and system elasticity.
 # [A Comparative Introduction to 4G and 5G Authentication](https://www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication)
