@@ -36,19 +36,8 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "1365625bfbca48a1",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md"
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -114,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
+                "file": "Altice Labs/Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -131,7 +120,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
+                "file": "Altice Labs/Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -154,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md"
+                "file": "Altice Labs/Notes.md"
               }
             }
           }
@@ -215,14 +204,15 @@
       }
     ]
   },
-  "active": "1365625bfbca48a1",
+  "active": "1f31d322283d231c",
   "lastOpenFiles": [
+    "Questions.md",
     "Altice Labs/Notes.md",
+    "Excalidraw/Drawing 2024-10-14 14.47.52.excalidraw.md",
     "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Excalidraw/Drawing 2024-10-14 14.45.24.excalidraw.md",
     "Excalidraw",
-    "Questions.md",
     "2024-10-14.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
@@ -261,7 +251,6 @@
     "W-AGF.md",
     "Define subjects relevant to understand.md",
     "2024-10-04.md",
-    "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
     "images/Pasted image 20241004114652.png"
   ]
 }

@@ -8,8 +8,7 @@ Private **cellular networks** are not new, but, as shown in Figure 1, from a cur
 ![[Pasted image 20241002103905.png]]
 
 # Private 5G networks
-In the technical specification related with service requirements for the 5G system, 3GPP describes **non-public networks (NPN)**, 3GPP’s terminology for private networks, as being "*intended for the sole use of a private entity
-such as an enterprise, and may be deployed in a variety of configurations, utilizing both virtual and physical elements. Specifically, they may be deployed as completely standalone networks, they may be hosted by a **public land mobile network (PLMN)**, or they may be offered as a slice of a PLMN*"
+In the technical specification related with service requirements for the 5G system, s. Specifically, they may be deployed as 3GPP describes **non-public networks (NPN)**, 3GPP’s terminology for private networks, as being "*intended for the sole use of a private entity such as an enterprise, and may be deployed in a variety of configurations, utilizing both virtual and physical element completely standalone networks, they may be hosted by a **public land mobile network (PLMN)**, or they may be offered as a slice of a PLMN*"
 
 That way, a 5G NPN consists in the usage of a 5G system for private use, being deployed as:
 - a **standalone NPN (SNPN**): operated by an NPN operator and not relying on network functions provided by a PLMN, or
