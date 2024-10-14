@@ -2,6 +2,13 @@
 >[[5G and Wi-Fi RAN Convergence#3.6 Support for Wi-Fi Only Devices|Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.]] *in [[5G and Wi-Fi RAN Convergence.pdf|5G and Wi-Fi RAN Convergence]]* 
 
 > [[WP_Heading-to-a-successful-private-digital-convergence.pdf|It can be observed the lack of standards to support pure WLAN devices connections to the 5GC. This is identified in the 5G work group by the Wireless Broadband Alliance (WBA), stating that “most Wi-Fi-only devices, e.g., devices in enterprise deployments, would not have a USIM included” recommending that “3GPP needs to define architecture and procedures for supporting Wi-Fi only UE with non-IMSI based identity and EAP-TLS/EAP-TTLS based authentication”. Altice Labs is aware of this limitation and is working towards an interim, proprietary solution, while this is not addressed by 3GPP.]]
+# What is 5G?
+
+# What is the 5GC?
+
+## How does it work?
+
+## What components is it made out of?
 # Private digital convergence
 
 ## Private 5G networks
@@ -24,10 +31,6 @@ With convergence, private industrial networking continues being a heterogeneous 
 A unified authentication framework was defined for 5G, where **5G authentication and key agreement** (5G-AKA) and **extensible authentication protocol (EAP) for the 3rd generation authentication and key agreemen**t (EAP-AKA’) are mandatory 5G primary authentication methods.
 
 That framework makes 5G-AKA procedure **suitable for both open and access-network agnostic scenarios**, relying on three authentication methods: 5G-AKA, EAP-AKA’, and EAP transport layer security (EAP-TLS)
-## 5G-AKA
-
-## EAP-AKA'
-
 ## Additional 5G Access nodes
 Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE accesses, respectively, the following four additional 5G access node types exist:
 - **Non-3GPP interworking function (N3IWF)**, which allows 5G capable terminals, supporting non-access stratum (NAS) to connect from untrusted WLAN or other accesses deployed by third-party entities, out of the scope of 5G network owner control.
@@ -37,14 +40,6 @@ Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE acces
 # What is 3GPP and non-3GPP?
 
 ## What is trusted and untrusted 3GPP?
-
-# What is 5G?
-
-# What is the 5GC?
-
-## How does it work?
-
-## What components is it made out of?
 
 # Connecting to 5G
 
