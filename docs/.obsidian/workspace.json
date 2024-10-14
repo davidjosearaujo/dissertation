@@ -4,64 +4,38 @@
     "type": "split",
     "children": [
       {
-        "id": "6f22def42c1f65d6",
+        "id": "eaa6fa7cd6161b32",
         "type": "tabs",
         "children": [
-          {
-            "id": "b9f9eedd06925c8f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Questions.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
           {
             "id": "1f31d322283d231c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Altice Labs/Notes.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "9e9db18ae39f008b",
         "type": "tabs",
         "children": [
           {
-            "id": "2c175e260bd95c0b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Objectives.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "15ad49c19b5d4784",
+            "id": "fcdaf6890b81b9d9",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf"
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -128,7 +102,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Questions.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -145,7 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+                "file": "Questions.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -168,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md"
+                "file": "Questions.md"
               }
             }
           }
@@ -191,12 +165,52 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "1f31d322283d231c",
+  "floating": {
+    "id": "dcbcd21e453a510c",
+    "type": "floating",
+    "children": [
+      {
+        "id": "5eefe4b4ee6b65bc",
+        "type": "window",
+        "children": [
+          {
+            "id": "bb20d5a0c84f9ed6",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "b9f9eedd06925c8f",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Questions.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 811,
+        "y": 0,
+        "width": 1109,
+        "height": 1080,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "b9f9eedd06925c8f",
   "lastOpenFiles": [
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Questions.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Objectives.md",
+    "Altice Labs/Notes.md",
+    "Articles/Wireline - Access Gateway Function.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Broadband Forum/TR-456.md",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
@@ -205,11 +219,8 @@
     "ROMARS/Trusted non-3GPP access.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Tasks.md",
-    "Articles/Wireline - Access Gateway Function.md",
-    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-    "Altice Labs/Notes.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/23316-i60.pdf",
