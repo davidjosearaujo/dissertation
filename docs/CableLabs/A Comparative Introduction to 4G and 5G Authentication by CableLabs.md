@@ -29,3 +29,4 @@ A unified authentication framework has been defined to make 5G authentication bo
 
 **When authentication is over untrusted, non-3GPP access networks**, a new entity, namely the **Non-3GPP Interworking Function (N3IWF), is required** to function **as a VPN server** to allow the UE to access the 5G core over untrusted, non-3GPP networks through IPsec (IP Security) tunnels.
 # 5G-AKA
+https://www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication
