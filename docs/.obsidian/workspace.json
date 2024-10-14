@@ -102,7 +102,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Questions.md",
+                "file": "Knowledge Path.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Questions.md",
+                "file": "Knowledge Path.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Questions.md"
+                "file": "Knowledge Path.md"
               }
             }
           }
@@ -184,7 +184,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Questions.md",
+                    "file": "Knowledge Path.md",
                     "mode": "source",
                     "source": false
                   }
@@ -205,9 +205,9 @@
   },
   "active": "b9f9eedd06925c8f",
   "lastOpenFiles": [
-    "Altice Labs/Notes.md",
-    "Questions.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
+    "Knowledge Path.md",
+    "Altice Labs/Notes.md",
     "Excalidraw/Drawing 2024-10-14 14.47.52.excalidraw.md",
     "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
     "Excalidraw/Drawing 2024-10-14 14.45.24.excalidraw.md",

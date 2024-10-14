@@ -12,6 +12,12 @@ As any 5G system, 5G NPN are composed of:
 - **5G core (5GC)**
 ## Convergence and 5G
 With convergence, private industrial networking continues being a heterogeneous environment, but with common management and operation of all accesses as a single network, via a common 5G control plane and traffic aggregation entities. The 5GC control and data planes have the capability to serve other access technologies. In the scope of private deployments, potential 5GC shared services include:
+- **Unique IP** address management;
+- **Consistent traffic management** (e.g., routing, forwarding, inspection, policy enforcement, QoS handling, and reporting) across all access types;
+- Transversal slicing/virtual networking management;
+- Exposure to external entities as a single network.
+
+Convergence in 5G is achieved at the core via functional entities placed at the 5G domain entrance, which adapt access specific protocols to standard N2 interface control plane (CP) and N3 interface data plane (DP). The N1 interface, used to convey non-radio signaling between the UE and the 5GC, may not be supported by the terminal equipment, forcing the adaptation entities to handle it on behalf of the terminal
 # What is 3GPP and non-3GPP?
 
 ## What is trusted and untrusted 3GPP?
