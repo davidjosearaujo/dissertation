@@ -1,5 +1,9 @@
 # What is the problem we are trying to solve?
 >[[5G and Wi-Fi RAN Convergence#3.6 Support for Wi-Fi Only Devices|Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.]] *in [[5G and Wi-Fi RAN Convergence.pdf|5G and Wi-Fi RAN Convergence]]* 
+
+> [[WP_Heading-to-a-successful-private-digital-convergence.pdf|It can be observed the **lack of standards to support pure WLAN devices connections to the 5GC**. This is identified in the 5G work group by the Wireless Broadband Alliance (WBA), stating that “**most Wi-Fi-only devices, e.g., devices in enterprise deployments, would not have a USIM included**,” recommending that “3GPP needs to define architecture and procedures for supporting Wi-Fi only UE with non-IMSI based identity and EAP-TLS/EAP-TTLS based authentication”. Altice Labs is aware of this limitation and is working towards an interim, proprietary solution, while this is not addressed by 3GPP.]]
+
+
 # Private digital convergence
 
 ## Private 5G networks
