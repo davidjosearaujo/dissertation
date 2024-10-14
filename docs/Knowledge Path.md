@@ -18,6 +18,8 @@ With convergence, private industrial networking continues being a heterogeneous 
 - Exposure to external entities as a single network.
 
 **Convergence in 5G** is achieved at the core **via functional entities placed at the 5G domain entrance**, which adapt access specific protocols to standard N2 interface control plane (CP) and N3 interface data plane (DP). The N1 interface, used to convey non-radio signaling between the UE and the 5GC, may not be supported by the terminal equipment, forcing the adaptation entities to handle it on behalf of the terminal
+
+A unified authentication framework was defined for 5G, where 5G authentication and key agreement (5G-AKA) and extensible authentication protocol (EAP) for the 3rd generation authentication and key agreement (EAP-AKA’) are mandatory 5G primary authentication methods.
 # What is 3GPP and non-3GPP?
 
 ## What is trusted and untrusted 3GPP?
