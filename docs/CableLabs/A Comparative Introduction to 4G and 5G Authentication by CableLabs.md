@@ -16,4 +16,5 @@ There are **two weaknesses in 4G EPS-AKA**.
 2. Second, a home network provides authentication vectors (AVs) when consulted by a serving network during UE authentication, but it is not a part of the authentication decision. Such a **decision is made solely by the serving network**.
 # 5G Authentication
 Service-based architecture (SBA) has been proposed for the 5G core network. Accordingly, new entities and new service requests have also been defined in 5G. Some of the new entities relevant to 5G authentication are listed below.
-- The Security Anchor Function (SEAF) is in a serving network and is a “middleman” during the authentication process between a UE and its home network. It can reject an authentication from the UE, but it relies on the UE’s home network to accept the authentication.
+- The **Security Anchor Function (SEAF)** is in a serving network and is a **“middleman” during the authentication** process between a UE and its home network. It can reject an authentication from the UE, but it relies on the UE’s home network to accept the authentication.
+- 
