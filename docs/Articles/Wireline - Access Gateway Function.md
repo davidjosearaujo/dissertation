@@ -1,4 +1,4 @@
-## [SAGERAN W-AGF Device](https://www.sageran.com/products/network-equipments/w-agf.html)
+# [SAGERAN W-AGF Device](https://www.sageran.com/products/network-equipments/w-agf.html)
 
 ![[Pasted image 20241004114652.png]]
 
@@ -10,5 +10,7 @@ Additionally, W-AGF includes data routing and forwarding modules for registratio
 
 W-AGF can be widely applied in dedicated network links for industries such as hospitals, banks, campuses, and small and medium enterprises.
 
-## [MPIRICAL](https://www.mpirical.com/blog/wireline-access-in-5g)
+# [MPIRICAL](https://www.mpirical.com/blog/wireline-access-in-5g)
+
+# [A Comparative Introduction to 4G and 5G Authentication](https://www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication)
 
