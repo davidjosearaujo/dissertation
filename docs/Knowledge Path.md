@@ -2,13 +2,10 @@
 >[[5G and Wi-Fi RAN Convergence#3.6 Support for Wi-Fi Only Devices|Current 3GPP standard does not define architecture to support Wi-Fi only devices without USIM connecting to 5G Core.]] *in [[5G and Wi-Fi RAN Convergence.pdf|5G and Wi-Fi RAN Convergence]]* 
 
 > [[WP_Heading-to-a-successful-private-digital-convergence.pdf|It can be observed the lack of standards to support pure WLAN devices connections to the 5GC. This is identified in the 5G work group by the Wireless Broadband Alliance (WBA), stating that “most Wi-Fi-only devices, e.g., devices in enterprise deployments, would not have a USIM included” recommending that “3GPP needs to define architecture and procedures for supporting Wi-Fi only UE with non-IMSI based identity and EAP-TLS/EAP-TTLS based authentication”. Altice Labs is aware of this limitation and is working towards an interim, proprietary solution, while this is not addressed by 3GPP.]]
-# What is 5G?
+# 5G Overview
 See [[Wireline Access in 5G - MPIRICAL|this]]
-# What is the 5GC?
+## How is it different from 4G?
 
-## How does it work?
-
-## What components is it made out of?
 # Private digital convergence
 
 ## Private 5G networks
@@ -36,16 +33,14 @@ Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE acces
 - **Non-3GPP interworking function (N3IWF)**, which allows 5G capable terminals, supporting non-access stratum (NAS) to connect from untrusted WLAN or other accesses deployed by third-party entities, out of the scope of 5G network owner control.
 - Trusted non-3GPP gateway function (TNGF) and trusted WLAN interworking function (TWIF), aimed for trusted non-3GPP and WLAN accesses, but requiring the UE to have 3GPPcredentials and, for the first case, to support NAS. They are based on the tight coupling between a trusted access point and a gateway or interworking function.
 - **Wireline access gateway function (W-AGF)**, which **connects a wireline 5G access network (W-5GAN) to the 5GC network**. It is similar to the TNGF for 5G residential gateways (5G-RG) and the TWIF for fixed-network residential gateways (FN-RG) but considering the specific characteristics of fixed access networks. **5G-RG units support NAS signaling and authenticate themselves**, while FN-RG do not support 5G capabilities and do not have 3GPP credentials in this specific context.
+# Connecting to 5G
 
-# What is 3GPP and non-3GPP?
+## What is 3GPP and non-3GPP?
 
 ## What is trusted and untrusted 3GPP?
-
-# Connecting to 5G
 
 ## What types of devices can connect to 5G?
 
 ## 5GC vs. N5GC device. What is the difference?
 
 ## How does each device connect to a 5G network?
-

@@ -36,6 +36,18 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "7a417b348967f597",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Articles/Wireline Access in 5G - MPIRICAL.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ]
       }
@@ -103,7 +115,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+                "file": "Knowledge Path.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+                "file": "Knowledge Path.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +155,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md"
+                "file": "Knowledge Path.md"
               }
             }
           }
@@ -167,17 +179,17 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "626e6ba5ea9e4c31",
+  "active": "b9f9eedd06925c8f",
   "lastOpenFiles": [
+    "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "Knowledge Path.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "images/Pasted image 20241014203612.png",
     "Pasted image 20241014173803.png",
     "3GPP Specification/5G Identifiers.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "images/Pasted image 20241014163827.png",
     "Objectives.md",
-    "Knowledge Path.md",
     "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
-    "Articles/Wireline Access in 5G - MPIRICAL.md",
     "images/Pasted image 20241014163143.png",
     "Articles/SAGERAN W-AGF Device.md",
     "images/Pasted image 20241014162545.png",
@@ -211,7 +223,6 @@
     "images/2024-10-08_14-41.png",
     "images/Pasted image 20241008121040.png",
     "images/Pasted image 20241008121801.png",
-    "images/Pasted image 20241008115450.png",
     "Wireless Broadband Alliance/Untitled.md",
     "Untitled 1.md",
     "Wireless Broadband Alliance/Notes.md"

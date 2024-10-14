@@ -27,4 +27,5 @@ A unified authentication framework has been defined to make 5G authentication bo
 
 **When EAP** (Extensible Authentication Protocol) **is used** (e.g., EAP-AKA’ or EAP-TLS), EAP **authentication is between the UE** (an EAP peer) **and the AUSF** (an EAP server) **through the SEAF** (functioning as an EAP pass-through authenticator).
 
-When authentication is over untrusted, non-3GPP access networks, a new entity, namely the Non-3GPP Interworking Function (N3IWF), is required to function as a VPN server to allow the UE to access the 5G core over untrusted, non-3GPP networks through IPsec (IP Security) tunnels.
+**When authentication is over untrusted, non-3GPP access networks**, a new entity, namely the **Non-3GPP Interworking Function (N3IWF), is required** to function **as a VPN server** to allow the UE to access the 5G core over untrusted, non-3GPP networks through IPsec (IP Security) tunnels.
+# 5G-AKA
