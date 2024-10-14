@@ -17,4 +17,5 @@ There are **two weaknesses in 4G EPS-AKA**.
 # 5G Authentication
 Service-based architecture (SBA) has been proposed for the 5G core network. Accordingly, new entities and new service requests have also been defined in 5G. Some of the new entities relevant to 5G authentication are listed below.
 - The **Security Anchor Function (SEAF)** is in a serving network and is a **“middleman” during the authentication** process between a UE and its home network. It can reject an authentication from the UE, but it relies on the UE’s home network to accept the authentication.
-- 
+- The A**uthentication Server Function (AUSF)** is in a home network and **performs authentication with a UE**. It makes the decision on UE authentication, but it **relies on backend service for** computing the authentication data and keying materials when **5G-AKA or EAP-AKA’** is used.
+- **Unified data management (UDM)** is an entity that hosts functions related to data management, such as the **Authentication Credential Repository and Processing Function (ARPF)**, which selects an authentication method based on subscriber identity and configured policy and computes the authentication data and keying materials for the AUSF if needed.
