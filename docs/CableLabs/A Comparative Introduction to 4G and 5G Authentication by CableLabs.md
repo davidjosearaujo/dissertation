@@ -9,5 +9,10 @@ Each UE has a universal integrated circuit card (UICC) hosting at least a univer
 ## 4G EPS-AKA
 The EPS-AKA is triggered after the UE completes the Radio Resource Control (RRC) procedure with eNodeB and sends an Attach Request message to the MME.
 
-The MME sends an Authentication Request, including **UE identity (i.e., IMSI)** and the serving network identifier, to the HSS located in the home network. The HSS performs cryptographic operations based on the shared secret key, Ki(shared with the UE), to derive one or more authentication vectors (AVs), which are sent back to the MME in an Authentication Response message. An AV consists of an authentication (AUTH) token and an expected authentication response (XAUTH) token, among other data.
+![[Pasted image 20241014173803.png]]
 
+There are **two weaknesses in 4G EPS-AKA**.
+1. The UE **identity is sent over radio networks without encryption**. Although a temporary identifier (e.g., Globally Unique Temporary Identity, GUTI) may be used to hide a subscriber’s long-term identity, researchers have shown that GUTI allocation is flawed: **GUTIs are not changed as frequently as necessary**, and GUTI allocation is predictable (e.g., with fixed bytes). More importantly, the **UE’s permanent identity may be sent in clear text** in an Identity Response message when responding to an Identity Request message from a network.
+2. Second, a home network provides authentication vectors (AVs) when consulted by a serving network during UE authentication, but it is not a part of the authentication decision. Such a **decision is made solely by the serving network**.
+# 5G Authentication
+Service-based architecture (SBA) has been proposed for the 5G core network. Accordingly, new entities and new service requests have also been defined in 5G. Some of the new entities relevant to 5G authentication are listed below.
