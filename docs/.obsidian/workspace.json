@@ -85,8 +85,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5,
-    "collapsed": true
+    "width": 244.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -102,7 +101,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Questions.md",
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Questions.md",
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +141,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Questions.md"
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
               }
             }
           }
@@ -202,8 +201,9 @@
       }
     ]
   },
-  "active": "b9f9eedd06925c8f",
+  "active": "fcdaf6890b81b9d9",
   "lastOpenFiles": [
+    "2024-10-14.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Questions.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
@@ -247,7 +247,6 @@
     "2024-10-04.md",
     "The method by which the W-AGF detects CM registration and reachability status from the  CMTS is per vendor implementation.md",
     "images/Pasted image 20241004114652.png",
-    "Misc/Acronyms.md",
-    "5G.md"
+    "Misc/Acronyms.md"
   ]
 }
