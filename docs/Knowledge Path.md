@@ -19,7 +19,13 @@ With convergence, private industrial networking continues being a heterogeneous 
 
 **Convergence in 5G** is achieved at the core **via functional entities placed at the 5G domain entrance**, which adapt access specific protocols to standard N2 interface control plane (CP) and N3 interface data plane (DP). The N1 interface, used to convey non-radio signaling between the UE and the 5GC, may not be supported by the terminal equipment, forcing the adaptation entities to handle it on behalf of the terminal
 
-A unified authentication framework was defined for 5G, where 5G authentication and key agreement (5G-AKA) and extensible authentication protocol (EAP) for the 3rd generation authentication and key agreement (EAP-AKA’) are mandatory 5G primary authentication methods.
+A unified authentication framework was defined for 5G, where **5G authentication and key agreement** (5G-AKA) and **extensible authentication protocol (EAP) for the 3rd generation authentication and key agreemen**t (EAP-AKA’) are mandatory 5G primary authentication methods.
+
+That framework makes 5G-AKA procedure **suitable for both open and access-network agnostic scenarios**, relying on three authentication methods: 5G-AKA, EAP-AKA’, and EAP transport layer security (EAP-TLS)
+## 5G-AKA
+
+## EAP-AKA'
+
 # What is 3GPP and non-3GPP?
 
 ## What is trusted and untrusted 3GPP?
