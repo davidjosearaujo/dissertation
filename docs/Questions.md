@@ -6,11 +6,12 @@
 3GPP describes **non-public networks (NPN)** as being "*intended for the sole use of a private entity such as an enterprise, and may be deployed in a variety of configurations, utilizing both virtual and physical element completely standalone networks, they may be hosted by a **public land mobile network (PLMN)**, or they may be offered as a slice of a PLMN*"
 
 As any 5G system, 5G NPN are composed of:
-- **user equipments (UE)**
+- **User equipment (UE)**
 - 5G **accesses**
-	- consisting of **next-generation NodeB (gNB)** units **connecting UE via a 5G new radio** (5G-NR) wireless interface
+	- Consisting of **next-generation NodeB (gNB)** units **connecting UE via a 5G new radio** (5G-NR) wireless interface
 - **5G core (5GC)**
 ## Convergence and 5G
+
 # What is 3GPP and non-3GPP?
 
 ## What is trusted and untrusted 3GPP?
