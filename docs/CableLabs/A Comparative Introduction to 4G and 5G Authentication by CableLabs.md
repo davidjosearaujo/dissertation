@@ -29,4 +29,6 @@ A unified authentication framework has been defined to make 5G authentication bo
 
 **When authentication is over untrusted, non-3GPP access networks**, a new entity, namely the **Non-3GPP Interworking Function (N3IWF), is required** to function **as a VPN server** to allow the UE to access the 5G core over untrusted, non-3GPP networks through IPsec (IP Security) tunnels.
 # 5G-AKA
-https://www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication
+![[Pasted image 20241015111210.png]]
+In 5G-AKA, the SEAF may start the authentication procedure after receiving any signaling message from the UE. Note that the **UE should send the SEAF a temporary identifier** (a 5G-GUTI) or an encrypted permanent identifier (a SUCI) if a 5G-GUTI has not been allocated by the serving network for the UE. **The SUCI is the encrypted form of the SUPI using the public key of the home network**. Thus, a UE’s permanent identifier, e.g., the IMSI, is never sent in clear text over the radio networks in 5G. This feature is considered a major security improvement over prior generations such as 4G.
+
