@@ -66,3 +66,7 @@ EAP-TLS is defined in 5G for subscriber authentication in limited use cases such
 **EAP-TLS fundamentally differs from 5G-AKA and EAP-AKA’ in its trust establishment between a UE and the network**, i.e., it uses a different a trust model. In EAP-TLS, **mutual authentication between a UE and a 5G network is obtained primarily based on the mutual trust of their public key certificates**, acknowledging that TLS with a PSK is possible but is rarely used except for session resumption. In AKA-based methods, such trust is based solely on a symmetric key shared between a UE and the network.
 
 Such a fundamental difference is significant in that EAP-TLS removes the need to store a large number of long-term keys in the home network (e.g., in UDM), thus reducing operational risks in the life cycle of symmetric key management.  On the other hand, EAP-TLS introduces new overhead in certificate management, such as certificate issuance and revocation.
+# Comparison
+Table 1 compares 4G and 5G authentication methods, highlighting differences between the two. For example, 5G authentication has different entities from 4G because 5G adopts service-based architecture. Other major differences include the trust models in methods based on EAP-TLS or AKA protocol, the entities that make authentication decisions, and anchor key hierarchy.
+![[Pasted image 20241015180643.png]]
+# Conclusions
