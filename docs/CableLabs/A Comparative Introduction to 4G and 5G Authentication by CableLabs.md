@@ -16,10 +16,14 @@ There are **two weaknesses in 4G EPS-AKA**.
 2. Second, a home network provides authentication vectors (AVs) when consulted by a serving network during UE authentication, but it is not a part of the authentication decision. Such a **decision is made solely by the serving network**.
 # 5G Authentication
 Service-based architecture (SBA) has been proposed for the 5G core network. Accordingly, new entities and new service requests have also been defined in 5G. Some of the new entities relevant to 5G authentication are listed below.
-- The **Security Anchor Function (SEAF)** is in a serving network and is a **“middleman” during the authentication** process between a UE and its home network. It can reject an authentication from the UE, but it relies on the UE’s home network to accept the authentication.
-- The **Authentication Server Function (AUSF)** is in a home network and **performs authentication with a UE**. It makes the decision on UE authentication, but it **relies on backend service for** computing the authentication data and keying materials when **5G-AKA or EAP-AKA’** is used.
-- **Unified data management (UDM)** is an entity that hosts functions related to data management, such as the **Authentication Credential Repository and Processing Function (ARPF)**, which **selects an authentication method based on subscriber identity and configured policy** and computes the authentication data and keying materials for the AUSF if needed.
-- The **Subscription Identifier De-concealing Function (SIDF) decrypts a Subscription Concealed Identifier (SUCI)** to obtain its long-term identity, namely the Subscription Permanent Identifier (SUPI), e.g., the IMSI. In 5G, a subscriber long-term identity is always transmitted over the radio interfaces in an encrypted form. More specifically, a **public key-based encryption is used to protect the SUPI**. Therefore, only the SIDF has access to the private key associated with a public key distributed to UEs for encrypting their SUPIs.
+## SEAF
+The **Security Anchor Function (SEAF)** is in a serving network and is a **“middleman” during the authentication** process between a UE and its home network. It can reject an authentication from the UE, but it relies on the UE’s home network to accept the authentication.
+## AUSF
+The **Authentication Server Function (AUSF)** is in a home network and **performs authentication with a UE**. It makes the decision on UE authentication, but it **relies on backend service for** computing the authentication data and keying materials when **5G-AKA or EAP-AKA’** is used.
+## UDM
+**Unified data management (UDM)** is an entity that hosts functions related to data management, such as the **Authentication Credential Repository and Processing Function (ARPF)**, which **selects an authentication method based on subscriber identity and configured policy** and computes the authentication data and keying materials for the AUSF if needed.
+## SIDF
+The **Subscription Identifier De-concealing Function (SIDF) decrypts a Subscription Concealed Identifier (SUCI)** to obtain its long-term identity, namely the Subscription Permanent Identifier (SUPI), e.g., the IMSI. In 5G, a subscriber long-term identity is always transmitted over the radio interfaces in an encrypted form. More specifically, a **public key-based encryption is used to protect the SUPI**. Therefore, only the SIDF has access to the private key associated with a public key distributed to UEs for encrypting their SUPIs.
 # 5G Authentication Framework
 A unified authentication framework has been defined to make 5G authentication both open (e.g., with the support of EAP) and access-network agnostic (e.g., supporting both 3GGP access networks and non-3GPP access networks such as Wi-Fi and cable networks).
 
@@ -29,6 +33,10 @@ A unified authentication framework has been defined to make 5G authentication bo
 
 **When authentication is over untrusted, non-3GPP access networks**, a new entity, namely the **Non-3GPP Interworking Function (N3IWF), is required** to function **as a VPN server** to allow the UE to access the 5G core over untrusted, non-3GPP networks through IPsec (IP Security) tunnels.
 # 5G-AKA
-![[Pasted image 20241015111210.png]]
 In 5G-AKA, the SEAF may start the authentication procedure after receiving any signaling message from the UE. Note that the **UE should send the SEAF a temporary identifier** (a 5G-GUTI) or an encrypted permanent identifier (a SUCI) if a 5G-GUTI has not been allocated by the serving network for the UE. **The SUCI is the encrypted form of the SUPI using the public key of the home network**. Thus, a UE’s permanent identifier, e.g., the IMSI, is never sent in clear text over the radio networks in 5G. This feature is considered a major security improvement over prior generations such as 4G.
 
+The SEAF starts authentication by sending an authentication request to the AUSF, which first verifies that the serving network requesting the authentication service is authorized. Upon success, the AUSF sends an authentication request to UDM/ARPF. If a SUCI is provided by the AUSF, then the SIDF will be invoked to decrypt the SUCI to obtain the SUPI, which is further used to select the authentication method configured for the subscriber. In this case, it is 5G-AKA, which is selected and to be executed.
+
+UDM/ARPF starts 5G-AKA by sending the authentication response to the AUSF with an authentication vector consisting of an AUTH token, an XRES token, the key KAUSF, and the SUPI if applicable (e.g., when a SUCI is included in the corresponding authentication request), among other data.
+
+![[Pasted image 20241015111210.png]]
