@@ -175,8 +175,7 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Create new board": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "obsidian-kanban:Create new board": false
     }
   },
   "active": "626e6ba5ea9e4c31",
