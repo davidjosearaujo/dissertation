@@ -48,4 +48,7 @@ The SEAF stores the HXRES and sends the AUTH token in an authentication request 
 Upon receiving the KSEAF, the **SEAF derives the AMF key (KAMF)** (and then deletes the KSEAF immediately) **and sends the KAMF to the co-located Access and Mobility Management Function (AMF)**. The AMF will then derive from the KAMF:
 - (a) - the confidentiality and integrity keys needed to protect signaling messages between the UE and the AMF and,
 - (b) - another key, KgNB, which is sent to the Next Generation NodeB (gNB) base station for deriving the keys used to protect subsequent communication between the UE and the gNB.
-Note that the UE has the long-term key, which is the root of the key derivation hierarchy. Thus, the UE can derive all above keys, resulting a shared set of keys between the UE and the network.
+Note that the **UE has the long-term key**, which is the **root of the key derivation hierarchy**. Thus, the **UE can derive all above keys, resulting a shared set of keys between the UE and the network**.
+
+5G-AKA differs from 4G EPS-AKA in primarily the following areas:
+- 
