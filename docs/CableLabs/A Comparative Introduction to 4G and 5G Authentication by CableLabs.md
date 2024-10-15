@@ -40,3 +40,12 @@ The SEAF starts authentication by sending an authentication request to the AUSF,
 UDM/ARPF starts 5G-AKA by sending the authentication response to the AUSF with an authentication vector consisting of an AUTH token, an XRES token, the key KAUSF, and the SUPI if applicable (e.g., when a SUCI is included in the corresponding authentication request), among other data.
 
 ![[Pasted image 20241015111210.png]]
+
+The AUSF computes a hash of the expected response token (HXRES), stores the KAUSF, and sends the authentication response to the SEAF, along with the AUTH token and the HXRES. Note that the SUPI is not sent to the SEAF in this authentication response. It is only sent to the SEAF after UE authentication succeeds.
+
+The SEAF stores the HXRES and sends the AUTH token in an authentication request to the UE. **The UE validates the AUTH token by using the secret key it shares with the home network**. If validation succeeds, the UE considers the network to be authenticated. The UE continues the authentication by computing and sending the SEAF a RES token, which is validated by the SEAF. Upon success, the RES token is further sent by the SEAF to the AUSF for validation.  **Note that the AUSF, which is in a home network, makes the final decision on authentication.** If the RES token from the UE is valid, the AUSF computes an anchor key (KSEAF) and sends it to the SEAF, along with the SUPI if applicable. The AUSF also informs UDM/ARPF of the authentication results so they can log the events, e.g., for the purpose of auditing.
+
+Upon receiving the KSEAF, the **SEAF derives the AMF key (KAMF)** (and then deletes the KSEAF immediately) **and sends the KAMF to the co-located Access and Mobility Management Function (AMF)**. The AMF will then derive from the KAMF:
+- (a) - the confidentiality and integrity keys needed to protect signaling messages between the UE and the AMF and,
+- (b) - another key, KgNB, which is sent to the Next Generation NodeB (gNB) base station for deriving the keys used to protect subsequent communication between the UE and the gNB.
+Note that the UE has the long-term key, which is the root of the key derivation hierarchy. Thus, the UE can derive all above keys, resulting a shared set of keys between the UE and the network.
