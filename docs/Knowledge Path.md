@@ -27,7 +27,11 @@ The **3GPP AKA protocol is a challenge-and-response authentication protocol base
 #### SEAF
 The **Security Anchor Function (SEAF)** is in a serving network and is a **“middleman” during the authentication** process between a UE and its home network.
 #### AUSF
-The **Authentication Server Function (AUSF)** is in a home network and **performs authentication with a UE**. 
+The **Authentication Server Function (AUSF)** is in a home network and **performs authentication with a UE**. It **relies on backend service for** computing the authentication data.
+#### UDM
+**Unified data management (UDM)** is an entity that hosts functions related to data management. It **selects an authentication method based on subscriber identity and configured policy**.
+#### SIDF
+The **Subscription Identifier De-concealing Function (SIDF) decrypts a Subscription Concealed Identifier (SUCI)** to obtain its long-term identity, namely the Subscription Permanent Identifier (SUPI), e.g., the IMSI. A **public key-based encryption is used to protect the SUPI**.
 # Private digital convergence
 
 ## Private 5G networks
