@@ -12,8 +12,7 @@ An **untrusted non-3GPP** access network **shall be connected** to the 5G Core N
 
 An untrusted non-3GPP access network shall be connected to the 5G Core Network via a Non-3GPP InterWorking Function (N3IWF), whereas a trusted non-3GPP access network shall be connected to the 5G Core Network via aTrusted Non-3GPP Gateway Function (TNGF).
 
-A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to register with the 5G Core Network over non-3GPP access. Further details about the UE registration to 5G Core Network over untrusted non-3GPP access
-and over trusted non-3GPP access are described in clause 4.12.2 and in clause 4.12.2a of TS 23.502 [3], respectively.
+A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to register with the 5G Core Network over non-3GPP access. Further details about the UE registration to 5G Core Network over untrusted non-3GPP access and over trusted non-3GPP access are described in clause 4.12.2 and in clause 4.12.2a of TS 23.502 [3], respectively.
 ## 4.2.8.1A General Concepts to support Wireline Access
 Wireline 5G Access Network (W-5GAN) shall be connected to the 5G Core Network via a **Wireline Access Gateway Function (W-AGF**). The W-AGF interfaces the 5G Core Network CP and UP functions via N2 and N3 interfaces,
 respectively.
