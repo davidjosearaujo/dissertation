@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "391c39af57edb1e6",
+        "id": "4c738cec9a8fb46e",
         "type": "tabs",
         "children": [
           {
-            "id": "7bec41a75d03c44a",
+            "id": "860d024f4563f14d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN).md",
                 "mode": "source",
                 "source": false
               }
@@ -69,7 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5
+    "width": 617.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN).md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md"
+                "file": "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN).md"
               }
             }
           }
@@ -185,21 +185,21 @@
       }
     ]
   },
-  "active": "7bec41a75d03c44a",
+  "active": "860d024f4563f14d",
   "lastOpenFiles": [
+    "3GPP Specification/24502-i70.pdf",
+    "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN).md",
+    "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS).md",
+    "3GPP Specification/23316-i60.pdf",
+    "3GPP Specification/System architecture for the 5G System (5GS).md",
+    "3GPP Specification/23501-i70.pdf",
+    "3GPP Specification/Security architecture and procedures for 5G system.md",
     "3GPP Specification/Procedures for the 5G System (5GS).md",
     "3GPP Specification/23502-i70.pdf",
-    "3GPP Specification/23501-i70.pdf",
-    "3GPP Specification/3GPP TS 24.502 V18.7.0.md",
-    "3GPP Specification/24502-i70.pdf",
-    "3GPP Specification/23316-i60.pdf",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Knowledge Path.md",
     "3GPP Specification/5G Identifiers.md",
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "Untitled.canvas",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Altice Labs/Notes.md",
