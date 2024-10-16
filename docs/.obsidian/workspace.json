@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Knowledge Path.md"
+                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md"
               }
             }
           }
@@ -166,7 +166,7 @@
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "Knowledge Path.md",
+                    "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
                     "mode": "source",
                     "source": false
                   }
@@ -187,8 +187,8 @@
   },
   "active": "d5a66993ef87c84b",
   "lastOpenFiles": [
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Knowledge Path.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
     "images/Pasted image 20241015161404.png",
     "images/Pasted image 20241015180643.png",

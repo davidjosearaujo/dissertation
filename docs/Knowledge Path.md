@@ -13,12 +13,19 @@ The 5G-RG could support both a wireless interface (Uu), similar to a FWA deploym
 ![[Pasted image 20241014163143.png]]
 In addition to the 5G RG, an alternative endpoint has also been defined termed the FN-RG (Fixed Network Residential Gateway). This operates in a similar way to the 5G RG however it does not support the 3GPP N1 reference point. As such, the W-AGF would need to deal with the NAS signalling on its behalf.
 ## How is it different from 4G?
+A cellular network consists of three main components: **UEs**, a **serving network (SN)**, and a **home network (HN)**
+
+![[Pasted image 20241014163827.png]]
+
 5G differs from prior generations primarily in that it will not only provide faster speed, higher bandwidth, and lower delays, but also support more use cases such as **enhanced mobile broadband (eMBB)**, **massive machine-type communications (mMTC)**, and **ultra-reliable low-latency communications (uRLLC)**.
 
 The **3GPP AKA protocol is a challenge-and-response authentication protocol based on a symmetric key** shared between a subscriber and a home network.
 ### Two weakness in 4G EPS-AKA
-1. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^5dd100]]
-2. 
+1. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^5dd100|The UE identity is sent over radio networks without encryption.]]
+2. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^a72d4c|The authentication decision is solely made by the serving network]] 
+
+[[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^2f8ec7|New entities and new service requests have also been defined in 5G]]
+
 # Private digital convergence
 
 ## Private 5G networks
