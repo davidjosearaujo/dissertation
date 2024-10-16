@@ -85,8 +85,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 244.5,
-    "collapsed": true
+    "width": 244.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -204,6 +203,7 @@
   },
   "active": "b83772f23d7c1d25",
   "lastOpenFiles": [
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "3GPP Specification/23501-i70.pdf",
     "Knowledge Path.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
@@ -211,7 +211,6 @@
     "3GPP Specification/24502-i70.pdf",
     "3GPP Specification/23502-i70.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
