@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "3ece0b3faf9ca557",
+        "id": "bc246a9b8989b19b",
         "type": "tabs",
         "children": [
           {
-            "id": "be24644e80b083ba",
+            "id": "375ebdd6c18bad98",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Altice Labs/Notes.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Altice Labs/Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Altice Labs/Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Altice Labs/Notes.md"
+              }
             }
           }
         ]
@@ -177,24 +185,27 @@
       }
     ]
   },
-  "active": "be24644e80b083ba",
+  "active": "375ebdd6c18bad98",
   "lastOpenFiles": [
+    "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "Articles/SAGERAN W-AGF Device.md",
+    "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
+    "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
+    "Broadband Forum/TR-456.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "Knowledge Path.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+    "Tasks.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
     "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
-    "Articles/SAGERAN W-AGF Device.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "Knowledge Path.md",
     "3GPP Specification/23502-i70.pdf",
-    "Broadband Forum/TR-456.md",
-    "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Altice Labs/Notes.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "images/Pasted image 20241015161404.png",
     "images/Pasted image 20241015180643.png",
@@ -215,10 +226,7 @@
     "Excalidraw",
     "2024-10-14.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
-    "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
-    "Tasks.md",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
     "images/Screenshot from 2024-10-09 14-05-39.png",
     "images/Screenshot from 2024-10-09 10-53-55.png",
     "Wireless Broadband Alliance/Untitled.md",

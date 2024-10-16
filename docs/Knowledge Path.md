@@ -74,4 +74,4 @@ In short:
 
 ## 5GC vs. N5GC device. What is the difference?
 
-## How does each device connect to a 5G network?
+## How does each device authenticate to a 5G network?
