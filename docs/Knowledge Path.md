@@ -24,7 +24,10 @@ The **3GPP AKA protocol is a challenge-and-response authentication protocol base
 1. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^5dd100|The UE identity is sent over radio networks without encryption.]]
 2. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^a72d4c|The authentication decision is solely made by the serving network]] 
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#5G Authentication|New entities and new service requests have also been defined in 5G]]
-
+#### SEAF
+The **Security Anchor Function (SEAF)** is in a serving network and is a **“middleman” during the authentication** process between a UE and its home network.
+#### AUSF
+The **Authentication Server Function (AUSF)** is in a home network and **performs authentication with a UE**. 
 # Private digital convergence
 
 ## Private 5G networks
