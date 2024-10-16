@@ -23,8 +23,7 @@ The **3GPP AKA protocol is a challenge-and-response authentication protocol base
 ### Two weakness in 4G EPS-AKA
 1. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^5dd100|The UE identity is sent over radio networks without encryption.]]
 2. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^a72d4c|The authentication decision is solely made by the serving network]] 
-
-[[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^2f8ec7|New entities and new service requests have also been defined in 5G]]
+### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#5G Authentication|New entities and new service requests have also been defined in 5G]]
 
 # Private digital convergence
 
