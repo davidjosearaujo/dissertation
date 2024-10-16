@@ -3,8 +3,13 @@
 
 > [[WP_Heading-to-a-successful-private-digital-convergence.pdf|It can be observed the lack of standards to support pure WLAN devices connections to the 5GC. This is identified in the 5G work group by the Wireless Broadband Alliance (WBA), stating that “most Wi-Fi-only devices, e.g., devices in enterprise deployments, would not have a USIM included” recommending that “3GPP needs to define architecture and procedures for supporting Wi-Fi only UE with non-IMSI based identity and EAP-TLS/EAP-TTLS based authentication”. Altice Labs is aware of this limitation and is working towards an interim, proprietary solution, while this is not addressed by 3GPP.]]
 # 5G Overview
-See [[Wireline Access in 5G - MPIRICAL|this]]
-## How is it different from 4G?
+5G is based upon a Service Based Architecture incorporating **NFV** (Network Functions Virtualization) and **SDN** (Software Defined Network) technology.
+
+**These benefits** are not solely confined to mobile networks and as such, **could also be incorporated by the fixed network or wireline service providers**.
+
+![[Pasted image 20241014162545.png]]
+The 5G-RG could support both a wireless interface (Uu), similar to a FWA deployment and the wireline interface (Y4) towards the 5G core via the W-AGF (Wireline – Access Gateway Function)
+## How is it different from 4G when it comes to security?
 
 # Private digital convergence
 
