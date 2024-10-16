@@ -3,7 +3,7 @@
 - **Wireline access User Plane protocol (W-UP)**: Protocol used to carry PDU Session user plane traffic between the 5G- RG and the W-AGF over the Y4 reference point. W-UP is specified by BBF and CableLabs. There is no assumption that W-UP refers to only a single protocol or only a specific protocol layer.
 
 # 4.2.2 Identification and authentication
-In the case of **FN-RG connected via W-5GAN**, the specification defined in [[System architecture for the 5G System (5GS)|TS 23.501 clause 5.2.3]] applies with the following differences:
+In the case of **FN-RG connected via W-5GAN**, the specification defined in [[System architecture for the 5G System (5GS) - 23.501|TS 23.501 clause 5.2.3]] applies with the following differences:
 - UE is replaced by FN-RG
 - The **W-AGF provides the NAS signalling** connection to the 5GC **on behalf of the FN-RG**.
 - The W-5GAN may authenticate the FN-BRG per BBF specification BBF TR-456 and WT-457. The W- 5GAN may authenticate the FN-CRG per [[WR-TR-5WWC-ARCH-V01-190820|CableLabs DOCSIS MULPI]].
@@ -14,10 +14,10 @@ In the case of FN-RG connected via W-5GAN, the specification defined in TS 23.50
 - **W-AGF performs the UE Registration procedure on behalf of the FN-RG**
 
 # 4.3.1 Registration management
-Registration management when 5G-RG or FN-RG is connected to 5GC via wireline access is described in [[System architecture for the 5G System (5GS)#5.5.1 Registration Management|TS 23.501 clause 5.5.1]]
+Registration management when 5G-RG or FN-RG is connected to 5GC via wireline access is described in [[System architecture for the 5G System (5GS) - 23.501#5.5.1 Registration Management|TS 23.501 clause 5.5.1]]
 
 # 4.3.2 Connection management
-Connection management when 5G-RG or FN-RG is connected to 5GC via wireline access is described in [[System architecture for the 5G System (5GS)#5.5.2 Connection Management|clause 5.5.2 of TS 23.501]]
+Connection management when 5G-RG or FN-RG is connected to 5GC via wireline access is described in [[System architecture for the 5G System (5GS) - 23.501#5.5.2 Connection Management|clause 5.5.2 of TS 23.501]]
 
 # 4.4.2 Session management for FN-RG
 Session management of FN-RG follows the principle defined in TS 23.501 clause 5.6 with the following differences:
@@ -30,7 +30,7 @@ non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 
 **Roaming is not supported for N5GC devices.**
 
 ![[2024-10-07_12-39.png]]
-1. The W-AGF registers the FN-CRG to 5GC as specified in [[Wireless and wireline convergence access support for the 5G System (5GS)#7.2.1.3 FN-RG Registration via W-5GAN|clause 7.2.1.3]] or the 5G-CRG registers to 5GC as specified in [[Wireless and wireline convergence access support for the 5G System (5GS)#7.2.1.1 5G-RG Registration via W-5GAN|clause 7.2.1.1]]
+1. The W-AGF registers the FN-CRG to 5GC as specified in [[Wireless and wireline convergence access support for the 5G System (5GS) - 23.316#7.2.1.3 FN-RG Registration via W-5GAN|clause 7.2.1.3]] or the 5G-CRG registers to 5GC as specified in [[Wireless and wireline convergence access support for the 5G System (5GS) - 23.316#7.2.1.1 5G-RG Registration via W-5GAN|clause 7.2.1.1]]
    
 2. The CRG is configured as L2 bridge mode and forwards any L2 frame to W-AGF. **802.1x authentication may be triggered**. This can be done either by N5GC device sending a EAPOL-start frame to W-AGF or W-AGF receives a frame from an unknown MAC address.
    

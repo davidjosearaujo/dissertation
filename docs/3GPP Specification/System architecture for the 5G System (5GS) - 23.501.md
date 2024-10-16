@@ -18,5 +18,5 @@ TODO
 # 5.5.2 Connection Management
 TODO
 # 6.2.20 WAGF
-[[Wireless and wireline convergence access support for the 5G System (5GS)| The functionality of W-AGF is specified in TS 23.316]]
+[[Wireless and wireline convergence access support for the 5G System (5GS) - 23.316| The functionality of W-AGF is specified in TS 23.316]]
 

@@ -74,7 +74,7 @@ In 3GPP architecture, trusted and untrusted refer to the way a non-3GPP network 
 This is a non-3GPP network that has been verified and trusted by the mobile operator. It connects directly to the core network using secure protocols and behaves similarly to 3GPP networks. For example, a mobile operator’s managed Wi-Fi network might be treated as trusted.
 #### Untrusted 3GPP access
 This is when a non-3GPP network (e.g., public Wi-Fi) isn’t under the mobile operator’s control or doesn’t meet their security standards. To access the core network, traffic must go through an additional security layer called the evolved Packet Data Gateway (ePDG), which provides encryption and authentication.
-### [[System architecture for the 5G System (5GS)#General Concepts|General concepts]]
+### [[System architecture for the 5G System (5GS) - 23.501#General Concepts|General concepts]]
 An untrusted non-3GPP access network shall be connected to the 5G Core Network via a **Non-3GPP InterWorking Function (N3IWF)**, whereas a trusted non-3GPP access network shall be connected to the 5G Core Network via a **Trusted Non-3GPP Gateway Function (TNGF)**. Both the N3IWF and the TNGF interface with the 5G Core Network **CP and UP functions via the N2 and N3 interfaces**, respectively.
 
 A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to register with the 5G Core Network over non-3GPP access. Further details about the UE registration to 5G Core Network over untrusted non-3GPP access and over trusted non-3GPP access are described in clause 4.12.2 and in clause 4.12.2a of TS 23.502, respectively.
