@@ -11,11 +11,9 @@
             "id": "375ebdd6c18bad98",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "Altice Labs/Notes.md",
-                "mode": "source",
-                "source": false
+                "file": "3GPP Specification/23501-i70.pdf"
               }
             }
           }
@@ -85,7 +83,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Altice Labs/Notes.md",
+                "file": "3GPP Specification/23501-i70.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +100,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Altice Labs/Notes.md",
+                "file": "3GPP Specification/23501-i70.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +123,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Altice Labs/Notes.md"
+                "file": "3GPP Specification/23501-i70.pdf"
               }
             }
           }
@@ -187,25 +185,28 @@
   },
   "active": "375ebdd6c18bad98",
   "lastOpenFiles": [
+    "3GPP Specification/23316-i60.pdf",
+    "3GPP Specification/24502-i70.pdf",
+    "3GPP Specification/23502-i70.pdf",
+    "3GPP Specification/23501-i70.pdf",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+    "3GPP Specification/5G Identifiers.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
+    "Altice Labs/Notes.md",
+    "Knowledge Path.md",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Articles/SAGERAN W-AGF Device.md",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-456.md",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
-    "Knowledge Path.md",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Tasks.md",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/5G Identifiers.md",
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
-    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "3GPP Specification/23502-i70.pdf",
-    "Altice Labs/Notes.md",
     "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "images/Pasted image 20241015161404.png",
     "images/Pasted image 20241015180643.png",
@@ -225,8 +226,6 @@
     "Excalidraw/Drawing 2024-10-14 14.45.24.excalidraw.md",
     "Excalidraw",
     "2024-10-14.md",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
-    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "images/Screenshot from 2024-10-09 14-05-39.png",
     "images/Screenshot from 2024-10-09 10-53-55.png",
     "Wireless Broadband Alliance/Untitled.md",
