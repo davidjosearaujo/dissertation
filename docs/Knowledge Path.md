@@ -68,7 +68,13 @@ Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE acces
 In short:
 - **3GPP**: Cellular (e.g., 4G, 5G)
 - **Non-3GPP**: Other networks (e.g., Wi-Fi) integrated with cellular networks.
-## What is trusted and untrusted 3GPP?
+## What is trusted and untrusted non-3GPP?
+In 3GPP architecture, trusted and untrusted refer to the way a non-3GPP network (like Wi-Fi) connects to the mobile core network.
+#### Trusted 3GPP access
+This is a non-3GPP network that has been verified and trusted by the mobile operator. It connects directly to the core network using secure protocols and behaves similarly to 3GPP networks. For example, a mobile operator’s managed Wi-Fi network might be treated as trusted.
+#### Untrusted 3GPP access
+This is when a non-3GPP network (e.g., public Wi-Fi) isn’t under the mobile operator’s control or doesn’t meet their security standards. To access the core network, traffic must go through an additional security layer called the evolved Packet Data Gateway (ePDG), which provides encryption and authentication.
+### [[3GPP TS 23.501 V18.7.0#General Concepts|General concepts]]
 
 ## What types of devices can connect to 5G?
 
