@@ -61,7 +61,13 @@ Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE acces
 - **Wireline access gateway function (W-AGF)**, which **connects a wireline 5G access network (W-5GAN) to the 5GC network**. It is similar to the TNGF for 5G residential gateways (5G-RG) and the TWIF for fixed-network residential gateways (FN-RG) but considering the specific characteristics of fixed access networks. **5G-RG units support NAS signaling and authenticate themselves**, while FN-RG do not support 5G capabilities and do not have 3GPP credentials in this specific context.
 # Connecting to 5G
 ## What is 3GPP and non-3GPP?
+3GPP (3rd Generation Partnership Project) refers to the standards developed for mobile networks, including 3G, 4G (LTE), and 5G. These are cellular technologies used by mobile carriers to provide network services.
 
+**Non-3GPP** refers to other access technologies not standardized by 3GPP but still capable of integrating with 3GPP networks, such as Wi-Fi or satellite networks. These networks can provide connectivity, typically offloading traffic from 3GPP networks, but they follow different standards (e.g., IEEE for Wi-Fi).
+
+In short:
+- **3GPP**: Cellular (e.g., 4G, 5G)
+- **Non-3GPP**: Other networks (e.g., Wi-Fi) integrated with cellular networks.
 ## What is trusted and untrusted 3GPP?
 
 ## What types of devices can connect to 5G?
