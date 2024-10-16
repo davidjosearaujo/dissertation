@@ -45,30 +45,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "65ca671e08d1420a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "2c4934081f21532f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "1ceab474563676f3",
             "type": "leaf",
             "state": {
@@ -92,8 +68,7 @@
               }
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -159,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "3GPP Specification/24502-i70.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -176,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+                "file": "3GPP Specification/24502-i70.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -199,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md"
+                "file": "3GPP Specification/24502-i70.pdf"
               }
             }
           }
@@ -259,15 +234,15 @@
       }
     ]
   },
-  "active": "0c940c61b18d8050",
+  "active": "20df27f4bc6b0a1e",
   "lastOpenFiles": [
-    "3GPP Specification/24502-i70.pdf",
     "3GPP Specification/23316-i60.pdf",
-    "3GPP Specification/23502-i70.pdf",
+    "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
-    "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "3GPP Specification/24502-i70.pdf",
+    "3GPP Specification/23502-i70.pdf",
     "Knowledge Path.md",
     "Untitled.canvas",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
