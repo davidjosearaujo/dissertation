@@ -11,8 +11,12 @@
             "id": "3a56ed06cd7f8178",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md"
+              }
             }
           }
         ]
@@ -180,16 +188,16 @@
   "active": "3a56ed06cd7f8178",
   "lastOpenFiles": [
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
+    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
+    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "Knowledge Path.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
     "3GPP Specification/24502-i70.pdf",
-    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/23501-i70.pdf",
-    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "3GPP Specification/23502-i70.pdf",
     "3GPP Specification/23316-i60.pdf",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
-    "Knowledge Path.md",
     "3GPP Specification/5G Identifiers.md",
     "Untitled.canvas",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
