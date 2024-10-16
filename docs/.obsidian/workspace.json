@@ -8,18 +8,103 @@
         "type": "tabs",
         "children": [
           {
+            "id": "a69ac3db7ad45704",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Broadband Forum/TR-456.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "c66aac7aab1fa757",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "aab4d85cda85e493",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Articles/SAGERAN W-AGF Device.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "d5a66993ef87c84b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+                "file": "3GPP Specification/5G Identifiers.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f363e6e36455a6ed",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "37a00d8e9c84a00a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ad58f7b285e07094",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "9f43f4903927425c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -85,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +210,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Knowledge Path.md"
+                "file": "3GPP Specification/3GPP TS 23.316 V18.6.0.md"
               }
             }
           }
@@ -185,27 +270,33 @@
       }
     ]
   },
-  "active": "b83772f23d7c1d25",
+  "active": "ad58f7b285e07094",
   "lastOpenFiles": [
+    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
+    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+    "Articles/SAGERAN W-AGF Device.md",
+    "3GPP Specification/5G Identifiers.md",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+    "Broadband Forum/TR-456.md",
+    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
+    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
+    "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "Altice Labs/Notes.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Knowledge Path.md",
     "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
-    "Articles/Wireline Access in 5G - MPIRICAL.md",
     "images/Pasted image 20241015161404.png",
     "images/Pasted image 20241015180643.png",
     "images/Pasted image 20241015111210.png",
     "images/Pasted image 20241014203612.png",
     "images/Pasted image 20241014173803.png",
-    "3GPP Specification/5G Identifiers.md",
     "images/Pasted image 20241014163827.png",
     "Objectives.md",
     "images/Pasted image 20241014163143.png",
-    "Articles/SAGERAN W-AGF Device.md",
     "images/Pasted image 20241014162545.png",
     "www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication.md",
     "www.cablelabs.com/insights",
     "www.cablelabs.com",
-    "Altice Labs/Notes.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Excalidraw/Drawing 2024-10-14 14.47.52.excalidraw.md",
     "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
@@ -214,18 +305,12 @@
     "2024-10-14.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
-    "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-    "Broadband Forum/TR-456.md",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
-    "3GPP Specification/3GPP TS 33.501 V18.7.0.md",
     "Tasks.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.pdf",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-    "3GPP Specification/3GPP TS 23.316 V18.6.0.md",
-    "3GPP Specification/3GPP TS 23.502 V18.7.0.md",
     "3GPP Specification/23316-i60.pdf",
     "images/Screenshot from 2024-10-09 14-05-39.png",
     "images/Screenshot from 2024-10-09 10-53-55.png",
