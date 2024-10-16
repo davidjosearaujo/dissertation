@@ -9,7 +9,12 @@
 
 ![[Pasted image 20241014162545.png]]
 The 5G-RG could support both a wireless interface (Uu), similar to a FWA deployment and the wireline interface (Y4) towards the 5G core via the W-AGF (Wireline – Access Gateway Function)
-## How is it different from 4G when it comes to security?
+
+![[Pasted image 20241014163143.png]]
+In addition to the 5G RG, an alternative endpoint has also been defined termed the FN-RG (Fixed Network Residential Gateway). This operates in a similar way to the 5G RG however it does not support the 3GPP N1 reference point. As such, the W-AGF would need to deal with the NAS signalling on its behalf.
+## How is it different from 4G?
+5G differs from prior generations primarily in that it will not only provide faster speed, higher bandwidth, and lower delays, but also support more use cases such as enhanced mobile broadband (eMBB), massive machine-type communications (mMTC), and ultra-reliable low-latency communications (uRLLC).
+
 
 # Private digital convergence
 
