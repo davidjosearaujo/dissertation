@@ -4,45 +4,38 @@
     "type": "split",
     "children": [
       {
-        "id": "58305f36cb14a212",
-        "type": "split",
+        "id": "bc246a9b8989b19b",
+        "type": "tabs",
         "children": [
           {
-            "id": "bc246a9b8989b19b",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "375ebdd6c18bad98",
-                "type": "leaf",
-                "state": {
-                  "type": "pdf",
-                  "state": {
-                    "file": "3GPP Specification/23501-i70.pdf"
-                  }
-                }
+            "id": "375ebdd6c18bad98",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "3GPP Specification/23501-i70.pdf"
               }
-            ]
-          },
-          {
-            "id": "c817960cc3577a80",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "3866f00ca41b5459",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
-                    "mode": "source",
-                    "source": false
-                  }
-                }
-              }
-            ]
+            }
           }
-        ],
-        "direction": "horizontal"
+        ]
+      },
+      {
+        "id": "f8b68611277eb301",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3866f00ca41b5459",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,7 +102,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "3GPP Specification/23501-i70.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -126,7 +119,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "3GPP Specification/23501-i70.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -149,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Knowledge Path.md"
+                "file": "3GPP Specification/23501-i70.pdf"
               }
             }
           }
@@ -209,10 +202,10 @@
       }
     ]
   },
-  "active": "b83772f23d7c1d25",
+  "active": "375ebdd6c18bad98",
   "lastOpenFiles": [
-    "3GPP Specification/23501-i70.pdf",
     "Knowledge Path.md",
+    "3GPP Specification/23501-i70.pdf",
     "3GPP Specification/3GPP TS 23.501 V18.7.0.md",
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/24502-i70.pdf",

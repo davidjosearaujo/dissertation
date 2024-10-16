@@ -75,7 +75,7 @@ This is a non-3GPP network that has been verified and trusted by the mobile oper
 #### Untrusted 3GPP access
 This is when a non-3GPP network (e.g., public Wi-Fi) isn’t under the mobile operator’s control or doesn’t meet their security standards. To access the core network, traffic must go through an additional security layer called the evolved Packet Data Gateway (ePDG), which provides encryption and authentication.
 ### [[3GPP TS 23.501 V18.7.0#General Concepts|General concepts]]
-
+An untrusted non-3GPP access network shall be connected to the 5G Core Network via a **Non-3GPP InterWorking Function (N3IWF)**, whereas a trusted non-3GPP access network shall be connected to the 5G Core Network via a **Trusted Non-3GPP Gateway Function (TNGF)**. Both the N3IWF and the TNGF interface with the 5G Core Network **CP and UP functions via the N2 and N3 interfaces**, respectively.
 ## What types of devices can connect to 5G?
 
 ## 5GC vs. N5GC device. What is the difference?
