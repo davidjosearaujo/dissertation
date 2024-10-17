@@ -35,3 +35,5 @@ The N5CW device provides its Network Access Identity (NAI). The Trusted WLAN Acc
 The TWIF creates a 5GC Registration Request message on behalf of the N5CW device. **The TWIF uses default values to populate the parameters in the Registration Request message, which are the same for all N5CW devices.** The Registration type indicates "Initial Registration".
 
 If the TWIF receives a Decorated NAI, in Registration Request message the TWIF send the NAI which corresponds to the HPLMN by removing the decoration, for example `NAI=type1.rid678.schid0.useriduser17@ nai.5gc-nn.mnc<MNC_Home>.mcc<MCC_Home>.3gppnetwork.org`
+#### Step 4
+The TWIF selects an AMF by using the 5G-GUTI in the NAI, or selects the AMF of the VPLMN indicates by the realm of the decoration in the Decorated NAI, for example "mnc<MNC_visited>.mcc<MCC_visited>.3gppnetwork.org" or selects the AMF by using the local configuration. TWIF sends an N2 message to the AMF including the Registration Request, the User Location and an AN Type.
