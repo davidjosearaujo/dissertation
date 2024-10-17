@@ -29,7 +29,9 @@ An EAP-5G procedure is executed as the one specified in clause 4.12.2.2 for the 
 ![[Pasted image 20241017151526.png]]
 **Devices that do not support 5GC NAS** signalling over WLAN access (referred to as "Non-5G-Capable over WLAN" devices, or N5CW devices for short), **may access 5GC** in a PLMN or an SNPN **via a trusted WLAN Access Network** that supports a Trusted WLAN Interworking Function (TWIF). The following clause specifies how a N5CW device can be registered to 5GC and how it can send data via a PDU Session.
 ![[Pasted image 20241017151801.png]]
+#### Step 2
+The N5CW device provides its Network Access Identity (NAI). The Trusted WLAN Access Point (TWAP) selects a Trusted WLAN Interworking Function (TWIF), e.g. based on the received realm and sends an AAA request to the selected TWIF.
 #### Step 3
-The TWIF creates a 5GC Registration Request message on behalf of the N5CW device. The TWIF uses default values to populate the parameters in the Registration Request message, which are the same for all N5CW devices. The Registration type indicates "Initial Registration".
+The TWIF creates a 5GC Registration Request message on behalf of the N5CW device. **The TWIF uses default values to populate the parameters in the Registration Request message, which are the same for all N5CW devices.** The Registration type indicates "Initial Registration".
 
-If the TWIF receives a Decorated NAI, in Registration Request message the TWIF send the NAI which corresponds to the HPLMN by removing the decoration, for example NAI=type1.rid678.schid0.useriduser17@ nai.5gc-nn.mnc<MNC_Home>.mcc<MCC_Home>.3gppnetwork.org.
+If the TWIF receives a Decorated NAI, in Registration Request message the TWIF send the NAI which corresponds to the HPLMN by removing the decoration, for example `NAI=type1.rid678.schid0.useriduser17@ nai.5gc-nn.mnc<MNC_Home>.mcc<MCC_Home>.3gppnetwork.org`

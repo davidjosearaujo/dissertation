@@ -1,3 +1,6 @@
+# 5G NR Global Unique Temporary Identifier (GUTI)
+5G Global Unique Temporary Identifier (5G–GUTI) is a core network temporary identifier and allocated by Access and Mobility Management function (AMF) to the UE.
+![[Pasted image 20241017155024.png]]
 # Subscription Permanent Identifier (SUPI) or IMSI
 5G Subscription Permanent Identifier is a **globally unique identifier that is assigned to each subscriber in the 5G system**, which is provisioned in the UDM/UDR. A SUPI is usually a string of 15 decimal digits. The first three digits represent the Mobile Country Code (MCC), the next two or three represent the Mobile Network Code (MNC) identifying the network operator. The remainder represents the Mobile Subscriber identification number (MSIN). It represents the individual user of that particular operator. SUPI is equivalent to IMSI which uniquely identifies the ME, which is a string of 15 digits. It is used only within the 3GPP system. The SUPI must contain the address of the home network in order to enable roaming scenarios. For interworking with the EPC, the SUPI allocated to the UE is based on the IMSI number. 
 
