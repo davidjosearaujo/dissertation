@@ -15,3 +15,12 @@ In this case, the "EAP-5G" method is used between the UE and the TNGF and is uti
 
 In Registration and subsequent Registration procedures via trusted non-3GPP access, the NAS messages are always exchanged between the UE and the AMF. When possible, the UE can be authenticated by reusing the existing UE security context in AMF.
 ![[Registration via Trusted non-3GPP Access.png]]
+#### Step 1
+A layer-2 connection is established between the UE and the TNAP. In the case of IEEE Std 802.11, this step corresponds to an 802.11 Association. In the case of PPP, this step corresponds to a PPP LCP negotiation. In other types of non-3GPP access (e.g. Ethernet), this step may not be required.
+#### Step 2-3
+An EAP procedure is initiated.
+#### Step 4-10
+An EAP-5G procedure is executed as the one specified in clause 4.12.2.2 for the untrusted non-3GPP access with the following modifications:
+- The registration request may contain an indication that the UE supports TNGF selection based on the slices the UE wishes to use over trusted non-3GPP access (i.e. that the UE supports Extended WLANSP rule).
+- A TNGF key (instead of an N3IWF key) is created in the UE and in the AMF after the successful authentication. The TNGF key is transferred from the AMF to TNGF in step 10a (within the N2 Initial Context Setup Request). The TNGF derives a TNAP key, which is provided to the TNAP. The TNAP key depends on the non-3GPP access technology (e.g. it is a Pairwise Master Key in the case of IEEE Std 802.11).
+# 4.12b  Procedures for devices that do not support 5GC NAS over WLAN access 
