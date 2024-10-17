@@ -14,3 +14,4 @@ Clause 4.12.2 specifies how a UE can register to 5GC via an untrusted non-3GPP A
 In this case, the "EAP-5G" method is used between the UE and the TNGF and is utilized for encapsulating NAS messages.
 
 In Registration and subsequent Registration procedures via trusted non-3GPP access, the NAS messages are always exchanged between the UE and the AMF. When possible, the UE can be authenticated by reusing the existing UE security context in AMF.
+![[Registration via Trusted non-3GPP Access.png]]
