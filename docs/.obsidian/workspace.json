@@ -126,7 +126,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "3GPP Specification/23502-i70.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -136,7 +136,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Knowledge Path"
+              "title": "Backlinks for 23502-i70"
             }
           },
           {
@@ -145,12 +145,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "3GPP Specification/23502-i70.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Knowledge Path"
+              "title": "Outgoing links from 23502-i70"
             }
           },
           {
@@ -172,10 +172,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Knowledge Path.md"
+                "file": "3GPP Specification/23502-i70.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of Knowledge Path"
+              "title": "Outline of 23502-i70"
             }
           }
         ]
@@ -197,10 +197,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "4a59acd752cb3d8a",
+  "active": "dfef8eec973d58fd",
   "lastOpenFiles": [
-    "3GPP Specification/23502-i70.pdf",
     "Knowledge Path.md",
+    "3GPP Specification/23502-i70.pdf",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
