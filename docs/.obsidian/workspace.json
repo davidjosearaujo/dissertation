@@ -4,37 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "e3af44b540063d8a",
+        "id": "b896c4b07f323f0e",
         "type": "tabs",
         "children": [
           {
-            "id": "3a56ed06cd7f8178",
+            "id": "4a59acd752cb3d8a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Procedures for the 5G System (5GS) - 23.502"
-            }
-          },
-          {
-            "id": "22275ac23ab661bd",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.7.4"
-              },
-              "icon": "lucide-file",
-              "title": "Release Notes 1.7.4"
+              "title": "New tab"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +89,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -116,7 +98,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Procedures for the 5G System (5GS) - 23.502"
+              "title": "Backlinks"
             }
           },
           {
@@ -125,12 +107,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Procedures for the 5G System (5GS) - 23.502"
+              "title": "Outgoing links"
             }
           },
           {
@@ -151,11 +132,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Procedures for the 5G System (5GS) - 23.502"
+              "title": "Outline"
             }
           }
         ]
@@ -177,11 +156,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "22275ac23ab661bd",
+  "active": "4a59acd752cb3d8a",
   "lastOpenFiles": [
+    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
-    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "Knowledge Path.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
