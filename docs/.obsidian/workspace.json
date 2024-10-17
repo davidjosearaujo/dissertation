@@ -131,7 +131,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+                "file": "3GPP Specification/23502-i70.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -141,7 +141,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Procedures for the 5G System (5GS) - 23.502"
+              "title": "Backlinks for 23502-i70"
             }
           },
           {
@@ -150,12 +150,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+                "file": "3GPP Specification/23502-i70.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Procedures for the 5G System (5GS) - 23.502"
+              "title": "Outgoing links from 23502-i70"
             }
           },
           {
@@ -177,10 +177,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md"
+                "file": "3GPP Specification/23502-i70.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of Procedures for the 5G System (5GS) - 23.502"
+              "title": "Outline of 23502-i70"
             }
           }
         ]
@@ -239,10 +239,10 @@
       }
     ]
   },
-  "active": "787fa35b29f7e5d2",
+  "active": "dfef8eec973d58fd",
   "lastOpenFiles": [
-    "3GPP Specification/23502-i70.pdf",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "3GPP Specification/23502-i70.pdf",
     "Knowledge Path.md",
     "images/registration_via_untrusted_non-3GPP_access.png",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",

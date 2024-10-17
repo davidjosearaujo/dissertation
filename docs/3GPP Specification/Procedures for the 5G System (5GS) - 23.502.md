@@ -8,4 +8,5 @@ Clause 4.12.2 specifies how a UE can register to 5GC via an untrusted non-3GPP A
 ![[registration_via_untrusted_non-3GPP_access.png]]
 1. The **UE connects to an untrusted non-3GPP Access Network** with any appropriate authentication procedure and it is assigned an IP address. For example, **a non-3GPP authentication method can be used**, e.g. no authentication (in the case of a free WLAN), EAP with pre-shared key, username/password, etc.
 	1. When the UE decides to attach to 5GC network, **the UE** not operating in SNPN access mode for NWu interface **selects an N3IWF in a 5G PLMN**
-2. 
+2. The UE proceeds with the establishment of an IPsec Security Association (SA) with the selected N3IWF by initiating an IKE initial exchange.
+3. ...
