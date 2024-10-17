@@ -97,8 +97,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 446.5,
-    "collapsed": true
+    "width": 320.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -114,7 +113,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf",
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -124,7 +123,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 23502-i70"
+              "title": "Backlinks for Procedures for the 5G System (5GS) - 23.502"
             }
           },
           {
@@ -133,12 +132,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf",
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 23502-i70"
+              "title": "Outgoing links from Procedures for the 5G System (5GS) - 23.502"
             }
           },
           {
@@ -160,10 +159,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf"
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 23502-i70"
+              "title": "Outline of Procedures for the 5G System (5GS) - 23.502"
             }
           }
         ]
@@ -222,10 +221,20 @@
       }
     ]
   },
-  "active": "dfef8eec973d58fd",
+  "active": "e7bc52f2f7a1e223",
   "lastOpenFiles": [
-    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "3GPP Specification/23502-i70.pdf",
+    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "images/Pasted image 20240926175453.png",
+    "images/Pasted image 20240926175210.png",
+    "images/Pasted image 20240926175108.png",
+    "images/Pasted image 20241015180643.png",
+    "images/Pasted image 20241014203612.png",
+    "images/Pasted image 20241014173803.png",
+    "images/Pasted image 20241014163827.png",
+    "images/Pasted image 20241014163143.png",
+    "images/Pasted image 20241014162545.png",
+    "images/Screenshot from 2024-10-09 10-53-55.png",
     "Knowledge Path.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
@@ -249,15 +258,7 @@
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
     "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
-    "images/Pasted image 20241015161404.png",
-    "images/Pasted image 20241015180643.png",
-    "images/Pasted image 20241015111210.png",
-    "images/Pasted image 20241014203612.png",
-    "images/Pasted image 20241014173803.png",
-    "images/Pasted image 20241014163827.png",
     "Objectives.md",
-    "images/Pasted image 20241014163143.png",
-    "images/Pasted image 20241014162545.png",
     "www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication.md",
     "www.cablelabs.com/insights",
     "www.cablelabs.com",
@@ -266,8 +267,6 @@
     "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
     "Excalidraw/Drawing 2024-10-14 14.45.24.excalidraw.md",
     "2024-10-14.md",
-    "images/Screenshot from 2024-10-09 14-05-39.png",
-    "images/Screenshot from 2024-10-09 10-53-55.png",
     "Wireless Broadband Alliance/Untitled.md",
     "Untitled 1.md"
   ]
