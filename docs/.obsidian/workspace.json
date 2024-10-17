@@ -6,6 +6,7 @@
       {
         "id": "b896c4b07f323f0e",
         "type": "tabs",
+        "dimension": 47.22814498933902,
         "children": [
           {
             "id": "e7bc52f2f7a1e223",
@@ -20,12 +21,28 @@
               "icon": "lucide-file",
               "title": "Procedures for the 5G System (5GS) - 23.502"
             }
+          },
+          {
+            "id": "787fa35b29f7e5d2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Procedures for the 5G System (5GS) - 23.502"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "38a3ca69be85ef5c",
         "type": "tabs",
+        "dimension": 52.771855010660985,
         "children": [
           {
             "id": "4a59acd752cb3d8a",
@@ -97,7 +114,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 320.5
+    "width": 320.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -113,7 +131,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +141,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Backlinks for Procedures for the 5G System (5GS) - 23.502"
             }
           },
           {
@@ -132,12 +150,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Outgoing links from Procedures for the 5G System (5GS) - 23.502"
             }
           },
           {
@@ -159,10 +177,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md"
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Outline of Procedures for the 5G System (5GS) - 23.502"
             }
           }
         ]
@@ -207,41 +225,26 @@
                   "icon": "lucide-file-text",
                   "title": "23502-i70"
                 }
-              },
-              {
-                "id": "3aeba6e63f95c9fa",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "A Comparative Introduction to 4G and 5G Authentication by CableLabs"
-                }
               }
-            ],
-            "currentTab": 1
+            ]
           }
         ],
         "direction": "vertical",
-        "x": 960,
+        "x": 757,
         "y": 0,
-        "width": 960,
+        "width": 1163,
         "height": 1080,
         "maximize": false,
         "zoom": 0
       }
     ]
   },
-  "active": "3aeba6e63f95c9fa",
+  "active": "787fa35b29f7e5d2",
   "lastOpenFiles": [
-    "Knowledge Path.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "3GPP Specification/23502-i70.pdf",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "Knowledge Path.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "images/4_2_2_2_2_general_registration_procedure.png",
     "images/Pasted image 20240926175453.png",
     "images/Pasted image 20240926175210.png",
