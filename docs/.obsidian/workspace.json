@@ -55,8 +55,7 @@
               "title": "A Comparative Introduction to 4G and 5G Authentication by CableLabs"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -128,7 +127,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+                "file": "3GPP Specification/23502-i70.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +137,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Backlinks for 23502-i70"
             }
           },
           {
@@ -147,12 +146,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+                "file": "3GPP Specification/23502-i70.pdf",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Outgoing links from 23502-i70"
             }
           },
           {
@@ -174,10 +173,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md"
+                "file": "3GPP Specification/23502-i70.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Outline of 23502-i70"
             }
           }
         ]
@@ -236,10 +235,12 @@
       }
     ]
   },
-  "active": "3aeba6e63f95c9fa",
+  "active": "dfef8eec973d58fd",
   "lastOpenFiles": [
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "Knowledge Path.md",
     "3GPP Specification/23502-i70.pdf",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "images/4_2_2_2_2_general_registration_procedure.png",
     "images/Pasted image 20240926175453.png",
     "images/Pasted image 20240926175210.png",
@@ -250,7 +251,6 @@
     "images/Pasted image 20241014163827.png",
     "images/Pasted image 20241014163143.png",
     "images/Pasted image 20241014162545.png",
-    "Knowledge Path.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
@@ -258,7 +258,6 @@
     "3GPP Specification/24502-i70.pdf",
     "3GPP Specification/23501-i70.pdf",
     "3GPP Specification/23316-i60.pdf",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "3GPP Specification/5G Identifiers.md",
     "Untitled.canvas",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
