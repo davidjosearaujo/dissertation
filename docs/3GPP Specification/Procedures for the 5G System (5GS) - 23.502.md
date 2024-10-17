@@ -3,4 +3,5 @@ Aspects related to dual registration in 3GPP and non-3GPP access are described i
 ### 4.2.2.2.2 General Registration
 ![[4_2_2_2_2_general_registration_procedure.png]]
 *General Registration procedure*
-# 4.12 Procedures for Untrusted non-3GPP access
+# 4.12.2 Registration via Untrusted non-3GPP Access
+Clause 4.12.2 specifies how a UE can register to 5GC via an untrusted non-3GPP Access Network. It is based on the Registration procedure specified in clause [[#4.2.2.2.2 General Registration|4.2.2.2.2]] and it uses a vendor-specific EAP method called "EAP-5G". The EAP-5G packets utilize the "Expanded" EAP type and the existing 3GPP Vendor-Id registered with IANA under the SMI Private Enterprise Code registry. The "EAP-5G" method is used between the UE and the N3IWF and is utilized only for encapsulating NAS messages (not for authentication). If the UE needs to be authenticated, mutual authentication is executed between the UE and AUSF. The details of the authentication procedure are specified in [[Security architecture and procedures for 5G system - 33.501|TS 33.501]]
