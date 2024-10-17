@@ -127,7 +127,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf",
+                "file": "Knowledge Path.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -137,7 +137,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 23502-i70"
+              "title": "Backlinks for Knowledge Path"
             }
           },
           {
@@ -146,12 +146,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf",
+                "file": "Knowledge Path.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 23502-i70"
+              "title": "Outgoing links from Knowledge Path"
             }
           },
           {
@@ -173,10 +173,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf"
+                "file": "Knowledge Path.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 23502-i70"
+              "title": "Outline of Knowledge Path"
             }
           }
         ]
@@ -235,12 +235,12 @@
       }
     ]
   },
-  "active": "dfef8eec973d58fd",
+  "active": "4a59acd752cb3d8a",
   "lastOpenFiles": [
-    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
-    "Knowledge Path.md",
-    "3GPP Specification/23502-i70.pdf",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "3GPP Specification/23502-i70.pdf",
+    "Knowledge Path.md",
+    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "images/4_2_2_2_2_general_registration_procedure.png",
     "images/Pasted image 20240926175453.png",
     "images/Pasted image 20240926175210.png",
