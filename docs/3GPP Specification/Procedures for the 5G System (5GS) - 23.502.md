@@ -28,4 +28,4 @@ An EAP-5G procedure is executed as the one specified in clause 4.12.2.2 for the 
 # 4.12b  Procedures for devices that do not support 5GC NAS over WLAN access
 ![[Pasted image 20241017151526.png]]
 **Devices that do not support 5GC NAS** signalling over WLAN access (referred to as "Non-5G-Capable over WLAN" devices, or N5CW devices for short), **may access 5GC** in a PLMN or an SNPN **via a trusted WLAN Access Network** that supports a Trusted WLAN Interworking Function (TWIF). The following clause specifies how a N5CW device can be registered to 5GC and how it can send data via a PDU Session.
-
+![[Pasted image 20241017151801.png]]
