@@ -131,7 +131,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf",
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -141,7 +141,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 23502-i70"
+              "title": "Backlinks for Procedures for the 5G System (5GS) - 23.502"
             }
           },
           {
@@ -150,12 +150,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf",
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 23502-i70"
+              "title": "Outgoing links from Procedures for the 5G System (5GS) - 23.502"
             }
           },
           {
@@ -177,10 +177,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/23502-i70.pdf"
+                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 23502-i70"
+              "title": "Outline of Procedures for the 5G System (5GS) - 23.502"
             }
           }
         ]
@@ -239,11 +239,12 @@
       }
     ]
   },
-  "active": "dfef8eec973d58fd",
+  "active": "787fa35b29f7e5d2",
   "lastOpenFiles": [
-    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "3GPP Specification/23502-i70.pdf",
     "Knowledge Path.md",
+    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "images/registration_via_untrusted_non-3GPP_access.png",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "images/4_2_2_2_2_general_registration_procedure.png",
     "images/Pasted image 20240926175453.png",
@@ -254,7 +255,6 @@
     "images/Pasted image 20241014173803.png",
     "images/Pasted image 20241014163827.png",
     "images/Pasted image 20241014163143.png",
-    "images/Pasted image 20241014162545.png",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
