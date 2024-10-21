@@ -17,3 +17,4 @@ For a trusted non-3GPP access network, the communication between the UE and the 
 
 or a trusted non-3GPP access network, the UE establishes secure connection to the 5GCN over trusted non-3GPP access to the TNGF. The UE uses 3GPP-based authentication for connecting to a non-3GPP access and establishes an IPsec Security Association (SA) with the TNGF in order to register to the 5GCN by using the registration procedure as specified in TS 24.501. After the registration, the UE supports NAS signalling with the 5GCN using the N1 reference point as specified in TS 24.501.
 # 6 UE - 5GC network protocols
+mm
