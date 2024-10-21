@@ -13,3 +13,5 @@ The Subscription Permanent Identifier (SUPI) is defined in TS 33.501. The SUPI c
 
 The Subscription Concealed Identifier (SUCI) is a privacy preserving identifier containing the concealed SUPI as specified in TS 33.501. SUCI is calculated from SUPI. When the SUPI contains an IMSI, the corresponding SUCI is derived as specified in TS 23.003. When the SUPI contains a network specific identifier, a GCI or a GLI, the corresponding SUCI in NAI format is derived as specified in TS 23.003.
 # 4.5 Trusted Access
+For a trusted non-3GPP access network, the communication between the UE and the 5GCN is secure. A trusted non-3GPP access network is connected to the 5GCN via a trusted non-3GPP gateway function (TNGF) as specified in TS 23.501. The TNGF interfaces the 5GCN CP function via the N2 interface to the AMF and the 5GCN UP functions via N3 interface to the UPF as described in TS 23.501.
+
