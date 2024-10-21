@@ -9,3 +9,6 @@ For an untrusted non-3GPP access network, to secure communication between the UE
 ## 4.3.1 User identities
 When the UE accesses the 5GCN over non-3GPP access networks, the same permanent identities for 3GPP access are used to identify the subscriber for non-3GPP access authentication, authorization and accounting services.
 
+The Subscription Permanent Identifier (SUPI) is defined in TS 33.501. The SUPI can contain an IMSI, a network specific identifier, a GCI or a GLI as specified in TS 23.501. A SUPI containing an IMSI is defined in TS 23.003. A SUPI containing a network specific identifier, a GCI or a GLI always takes the form of a NAI as defined in TS 23.003.
+
+The Subscription Concealed Identifier (SUCI) is a privacy preserving identifier containing the concealed SUPI as specified in TS 33.501. SUCI is calculated from SUPI. When the SUPI contains an IMSI, the corresponding SUCI is derived as specified in TS 23.003. When the SUPI contains a network specific identifier, a GCI or a GLI, the corresponding SUCI in NAI format is derived as specified in TS 23.003.
