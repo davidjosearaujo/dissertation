@@ -14,3 +14,5 @@ The acronyms used on the above image are as follows: ME=Mobile Equipment, SN=Ser
 # 3.2.6 Authentication Framework
 ## 3.2.6.2 Secondary Authentication
 EAP supports both primary (typically implemented during initial registration for example when a device is turned on for the first time) and secondary (executed for authorisation during the set-up of user plane connections, for example, to surf the web or to establish a call) authentication. **The secondary authentication allows the operator to delegate the authorisation to a third party.** It is meant for authentication between UE and external data networks (DN), residing outside the operator’s domain.
+
+n the 3GPP security specifications (TS 33.501), provisions for EAP based secondary authentication by an external DN authentication server are specified in the clause 11.1, within the section 11, defining general security procedures between UE and external data networks. Secondary authentication as defined in this clause is optional to use.
