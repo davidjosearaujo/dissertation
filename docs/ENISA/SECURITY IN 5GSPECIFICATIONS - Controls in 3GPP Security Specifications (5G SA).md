@@ -12,4 +12,5 @@ The specification defines a model of a security architecture, consisting of six 
 
 The acronyms used on the above image are as follows: ME=Mobile Equipment, SN=Serving Network, HE=Home environment
 # 3.2.6 Authentication Framework
-## 3.2.6.1 Primary Authentication
+## 3.2.6.2 Secondary Authentication
+EAP supports both primary (typically implemented during initial registration for example when a device is turned on for the first time) and secondary (executed for authorisation during the set-up of user plane connections, for example, to surf the web or to establish a call) authentication. **The secondary authentication allows the operator to delegate the authorisation to a third party.** It is meant for authentication between UE and external data networks (DN), residing outside the operator’s domain.
