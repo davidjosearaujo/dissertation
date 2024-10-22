@@ -16,4 +16,4 @@ The Subscription Concealed Identifier (SUCI) is a privacy preserving identifier 
 For a trusted non-3GPP access network, the communication between the UE and the 5GCN is secure. A trusted non-3GPP access network is connected to the 5GCN via a trusted non-3GPP gateway function (TNGF) as specified in TS 23.501. The TNGF interfaces the 5GCN CP function via the N2 interface to the AMF and the 5GCN UP functions via N3 interface to the UPF as described in TS 23.501.
 
 or a trusted non-3GPP access network, the UE establishes secure connection to the 5GCN over trusted non-3GPP access to the TNGF. The UE uses 3GPP-based authentication for connecting to a non-3GPP access and establishes an IPsec Security Association (SA) with the TNGF in order to register to the 5GCN by using the registration procedure as specified in TS 24.501. After the registration, the UE supports NAS signalling with the 5GCN using the N1 reference point as specified in TS 24.501.
-# 6 UE - 5GC network protocols
+# 6.3  Authentication and authorization for accessing 5GS via non-3GPP access network
