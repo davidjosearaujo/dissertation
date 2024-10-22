@@ -26,3 +26,10 @@ authentication. During EAP authentication, authentication and authorization for 
 
 In wireline access, the 5G-RG shall first establish connection using W-CP protocol stack with a W-AGF serving the 5G-RG using means out of scope of the present document.
 ## 6.3.2  Authentication of N5GC device behind a CRG over wireline access
+In order to register to 5GCN via wireline access, the N5GC device first establishes a layer-2 connection to W-AGF via the CRG as specified in CableLabs WR-TR-5WWC-ARCH- V02-200430. Once the layer-2 connection is established, authentication and authorization for access to 5GCN is performed.
+
+The W-AGF initiates an exchange of EAP-Request/Identity message and EAP-Response/Identity message as specified in RFC 3748 for obtaining the identity of the N5GC device. In wireline access, the W-AGF and the N5GC device exchange EAP-Request/Identity message and EAP-Response/Identity message via the CRG, encapsulated in the link layer protocol packets.
+
+Upon reception of EAP-Request/Identity message, the N5GC device shall:
+1. construct an EAP-Response/Identity message as described in RFC 3748 containing an NAI username@realm as specified in RFC 7542; and
+2. transmit the EAP-Response of identity type encapsulated in the link layer protocol packets towards the W-AGF.
