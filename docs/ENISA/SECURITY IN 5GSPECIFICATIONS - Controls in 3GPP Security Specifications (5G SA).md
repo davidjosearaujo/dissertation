@@ -9,4 +9,5 @@ The specification defines a model of a security architecture, consisting of six 
 - **Application domain security (IV)** - security features that enable user and provider domain applications to exchange messages securely. 33.501 specifications do not cover application domain security.
 - **Service Based Architecture (SBA) domain security (V)** - a new set of security features that enable network functions of the SBA to communicate securely within serving and other network domains.
 - **Visibility and configurability of security (VI)** - security features that enable the user to be informed regarding which security features are in operation or not.
+
 The acronyms used on the above image are as follows: ME=Mobile Equipment, SN=Serving Network, HE=Home environment.
