@@ -17,3 +17,12 @@ For a trusted non-3GPP access network, the communication between the UE and the 
 
 or a trusted non-3GPP access network, the UE establishes secure connection to the 5GCN over trusted non-3GPP access to the TNGF. The UE uses 3GPP-based authentication for connecting to a non-3GPP access and establishes an IPsec Security Association (SA) with the TNGF in order to register to the 5GCN by using the registration procedure as specified in TS 24.501. After the registration, the UE supports NAS signalling with the 5GCN using the N1 reference point as specified in TS 24.501.
 # 6.3  Authentication and authorization for accessing 5GS via non-3GPP access network
+## 6.3.1  General
+In order to register to the 5G core network (5GCN) via untrusted non-3GPP IP access, the UE first needs to be configured with a local IP address from the untrusted non-3GPP access network (N3AN).
+
+Once the UE is configured with a local IP address, the UE shall select the Non-3GPP InterWorking Function (N3IWF) as described in clause 7.2 and shall initiate the IKEv2 SA establishment procedure as described in clause 7.3. During the IKEv2 SA establishment procedure, authentication and authorization for access to 5GCN is performed.
+
+authentication. During EAP authentication, authentication and authorization for access to 5GCN is performed by exchange of EAP-5G message encapsulated in the link layer protocol between the UE and the TNAN, see clause 7.3A.2.1. Upon completion of EAP authentication, the UE shall be assigned an IP address by that TNAN. Once the UE is configured with an IP address, it shall initiate the IKEv2 SA establishment procedure as described in clause 7.3A.
+
+In wireline access, the 5G-RG shall first establish connection using W-CP protocol stack with a W-AGF serving the 5G-RG using means out of scope of the present document.
+## 6.3.2  Authentication of N5GC device behind a CRG over wireline access
