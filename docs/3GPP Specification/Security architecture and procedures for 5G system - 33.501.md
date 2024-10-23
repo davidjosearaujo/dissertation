@@ -55,3 +55,7 @@ The EAP framework is specified in RFC 3748. It defines the following roles: **pe
 ## 6.1.3 Authentication procedures
 ### 6.1.3.1 Authentication procedure for EAP-AKA'
 The 3GPP 5G profile for EAP-AKA' is specified in the normative Annex F. The selection of using EAP-AKA' is described in sub-clause 6.1.2 of the present document.
+![[Pasted image 20241023153444.png]]
+### 6.1.3.2 Authentication procedure for 5G AKA
+5G AKA enhances EPS AKA by providing the home network with proof of successful authentication of the UE from the visited network. The proof is sent by the visited network in an Authentication Confirmation message.
+![[Pasted image 20241023153659.png]]
