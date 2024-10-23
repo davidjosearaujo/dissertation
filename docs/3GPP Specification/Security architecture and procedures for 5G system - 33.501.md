@@ -17,4 +17,11 @@ The 5G System architecture introduces the following security entities in the 5G 
 ## 5.5.3 Subscriber privacy
 - The AMF shall support to trigger primary authentication using the SUCI.
 - The AMF shall support assigning 5G-GUTI to the UE.
-- 
+- The AMF shall support reallocating 5G-GUTI to UE.
+# 5.6	Requirements on the SEAF
+The security anchor function (SEAF) provides the authentication functionality via the AMF in the serving network. The SEAF shall fulfil the following requirements:
+- The SEAF shall support primary authentication using SUCI.
+# 5.8	Requirements on the UDM 
+## 5.8.1	Generic requirements
+The long-term key(s) used for authentication and security association setup purposes shall be protected from physical attacks and shall never leave the secure environment of the UDM/ARPF unprotected.
+## 5.8.2	Subscriber privacy related requirements to UDM and SIDF
