@@ -66,6 +66,3 @@ The 3GPP 5G profile for EAP-AKA' is specified in the normative Annex F. The sele
 #### 6.2.2.2 Keys in the UE
 For every key in a network entity, there is a corresponding key in the UE.
 ![[Pasted image 20241023172927.png]]
-##### Keys in the USIM
-The USIM shall store the same long-term key K that is stored in the ARPF. During an authentication and key agreement procedure, the USIM shall generate key material from K that it forwards to the ME. If provisioned by the home operator, the USIM shall store the Home Network Public Key used for concealing the SUPI.
-##### Keys in the ME
