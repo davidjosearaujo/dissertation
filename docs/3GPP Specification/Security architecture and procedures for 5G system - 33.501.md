@@ -6,5 +6,9 @@ The 5G System architecture introduces the following security entities in the 5G 
 - **ARPF**: 	Authentication credential Repository and Processing Function;
 - **SIDF**:	Subscription Identifier De-concealing Function;
 - **SEAF**:    SEcurity Anchor Function.
-# 5.2.5 Subscriber privacy
+# 5.2 Requirements on the UE
+## 5.2.5 Subscriber privacy
 - The UE shall support 5G-GUTI
+- The Home Network Public Key shall be stored in the USIM.
+- The protection scheme identifier shall be stored in the USIM.
+- The Home Network Public Key Identifier shall be stored in the USIM.
