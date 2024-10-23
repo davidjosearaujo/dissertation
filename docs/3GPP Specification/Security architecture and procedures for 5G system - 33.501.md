@@ -5,4 +5,4 @@ The 5G System architecture introduces the following security entities in the 5G 
 - **AUSF**: 	AUthentication Server Function;
 - **ARPF**: 	Authentication credential Repository and Processing Function;
 - **SIDF**:	Subscription Identifier De-concealing Function;
-- SEAF:    SEcurity Anchor Function.
+- **SEAF**:    SEcurity Anchor Function.
