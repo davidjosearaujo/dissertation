@@ -59,3 +59,6 @@ The 3GPP 5G profile for EAP-AKA' is specified in the normative Annex F. The sele
 ### 6.1.3.2 Authentication procedure for 5G AKA
 5G AKA enhances EPS AKA by providing the home network with proof of successful authentication of the UE from the visited network. The proof is sent by the visited network in an Authentication Confirmation message.
 ![[Pasted image 20241023153659.png]]
+## 6.2 Key hierarchy, key derivation, and distribution scheme
+### 6.2.1 Key hierarchy
+![[Pasted image 20241023161036.png]]
