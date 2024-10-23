@@ -35,3 +35,4 @@ The UDM shall hold the Home Network Public Key Identifier(s) for the private/pub
 
 The algorithm used for subscriber privacy shall be executed in the secure environment of the UDM.
 # 5.8a Requirements on AUSF
+The Authentication server function (AUSF) shall handle authentication requests for both, 3GPP access and non-3GPP access.
