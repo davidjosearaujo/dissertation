@@ -50,3 +50,5 @@ The EAP framework is specified in RFC 3748. It defines the following roles: **pe
 - The UE takes the role of the peer.
 - The SEAF takes the role of pass-through authenticator.
 - The AUSF takes the role of the backend authentication server.
+## 6.1.2  Initiation of authentication and selection of authentication method
+![[Pasted image 20241023152054.png]]
