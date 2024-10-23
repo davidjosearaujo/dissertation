@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "8be1b76c4c2a1b95",
+        "id": "3772ab16eabe00f5",
         "type": "tabs",
         "children": [
           {
-            "id": "cfd8b430f27a54c9",
+            "id": "31ab44df1b219aac",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Security architecture and procedures for 5G system - 33.501"
+              "title": "New tab"
             }
           }
         ]
@@ -165,12 +161,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "cfd8b430f27a54c9",
+  "active": "31ab44df1b219aac",
   "lastOpenFiles": [
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/23501-i70.pdf",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/5G Identifiers.md",
     "images/2024-10-22_11-38.png",
     "ENISA/ENISA Report - Security in 5G Specifications.pdf",
