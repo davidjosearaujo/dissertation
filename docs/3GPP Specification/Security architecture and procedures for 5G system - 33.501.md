@@ -37,3 +37,5 @@ The algorithm used for subscriber privacy shall be executed in the secure enviro
 # 5.8a Requirements on AUSF
 The Authentication server function (AUSF) shall handle authentication requests for both, 3GPP access and non-3GPP access.
 # 6 Security procedures between UE and 5G network functions
+## 6.1 Primary authentication and key agreement
+### 6.1.1 Authentication framework
