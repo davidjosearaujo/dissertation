@@ -14,3 +14,4 @@ The 5G System architecture introduces the following security entities in the 5G 
 - The Home Network Public Key Identifier shall be stored in the USIM.
 - The SUCI calculation indication, either USIM or ME calculating the SUCI, shall be stored in USIM.
 # 5.3 Requirements on the gNB
+- 
