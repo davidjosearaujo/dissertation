@@ -25,3 +25,13 @@ The security anchor function (SEAF) provides the authentication functionality vi
 ## 5.8.1	Generic requirements
 The long-term key(s) used for authentication and security association setup purposes shall be protected from physical attacks and shall never leave the secure environment of the UDM/ARPF unprotected.
 ## 5.8.2	Subscriber privacy related requirements to UDM and SIDF
+The SIDF is responsible for de-concealment of the SUCI and shall fulfil the following requirements:
+- The SIDF shall be a service offered by UDM.
+- The SIDF shall resolve the SUPI from the SUCI based on the protection scheme used to generate the SUCI.
+
+The Home Network Private Key used for subscriber privacy shall be protected from physical attacks in the UDM. 
+
+The UDM shall hold the Home Network Public Key Identifier(s) for the private/public key pair(s) used for subscriber privacy.
+
+The algorithm used for subscriber privacy shall be executed in the secure environment of the UDM.
+# 5.8a Requirements on AUSF
