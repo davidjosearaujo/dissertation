@@ -62,3 +62,4 @@ The 3GPP 5G profile for EAP-AKA' is specified in the normative Annex F. The sele
 ## 6.2 Key hierarchy, key derivation, and distribution scheme
 ### 6.2.1 Key hierarchy
 ![[Pasted image 20241023161036.png]]
+# 6.2.2	Key derivation and distribution scheme
