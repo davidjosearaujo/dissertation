@@ -52,3 +52,6 @@ The EAP framework is specified in RFC 3748. It defines the following roles: **pe
 - The AUSF takes the role of the backend authentication server.
 ## 6.1.2  Initiation of authentication and selection of authentication method
 ![[Pasted image 20241023152054.png]]
+## 6.1.3 Authentication procedures
+### 6.1.3.1 Authentication procedure for EAP-AKA'
+The 3GPP 5G profile for EAP-AKA' is specified in the normative Annex F. The selection of using EAP-AKA' is described in sub-clause 6.1.2 of the present document.
