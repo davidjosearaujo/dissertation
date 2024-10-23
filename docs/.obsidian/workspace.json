@@ -77,7 +77,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 464.5
+    "width": 464.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -166,6 +167,7 @@
   },
   "active": "31ab44df1b219aac",
   "lastOpenFiles": [
+    "images/2024-10-23_10-39.png",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/23501-i70.pdf",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
