@@ -78,3 +78,14 @@ This clause specifies how a UE is authenticated to 5G network via a trusted non-
 
 This is based on the specified procedure in TS 23.502 clause 4.12a.2.2 "Registration procedure for trusted non-3GPP access". The authentication procedure is similar to the authentication procedure for Untrusted non-3GPP access defined in clause 7.2.1 with few differences, which are mentioned below:
 ![[Pasted image 20241024112734.png]]
+### 7A.2.4 Authentication for devices that do not support 5GC NAS over WLAN access
+A N5CW device is capable to register to 5GC **with 3GPP credentials** and to establish 5GC connectivity via a trusted WLAN access network. The reference architecture is captured in clause 4.2.8.5.2 of TS 23.501. The 3GPP credentials are stored as defined in clause 6.1.1.1. The Trusted WLAN Interworking Function (TWIF) provides interworking functionality that enables connectivity with 5GC and implements the NAS protocol stack and exchanges NAS messages with the AMF on behalf of the N5CW device. A single EAP-AKA’ authentication procedure is executed for connecting the N5CW device both to the trusted WLAN access network and to the 5G core network.
+![[Pasted image 20241024113650.png]]
+# 7B Security for wireline access to the 5G core network
+To support Wireless and Wireline Convergence for the 5G system, two new network entities, 5G-RG and FN-RG, are introduced in the architecture specificaction TS 23.501.
+
+The 5G-RG acts as a 5G UE and can connect to 5GC via wireline access network (W-5GAN) or via Fixed Wireless Access (FWA). Existing security procedures defined in this document are reused. The 5G-RG also acts as end point of N1 and provides the NAS signaling connection to the 5GC on behalf of the AUN3 devices behind the 5G-RG.
+
+The FN-RG can connect to 5GC via wireline access network (W-5GAN). The W-AGF performs the registration procedure on behalf of the FN-RG. It acts as end point of N1 and provides the NAS signalling connection to the 5GC on behalf of the FN-RG.
+
+A 5G -capable UE can connect to 5GC through an RG that’s connected to the 5GC via wireline access network (W-5GAN) or NG-RAN. The UE supports untrusted non-3GPP access and/or trusted non-3GPP access.
