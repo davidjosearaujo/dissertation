@@ -89,4 +89,31 @@ The 5G-RG acts as a 5G UE and can connect to 5GC via wireline access network (W-
 The FN-RG can connect to 5GC via wireline access network (W-5GAN). The W-AGF performs the registration procedure on behalf of the FN-RG. It acts as end point of N1 and provides the NAS signalling connection to the 5GC on behalf of the FN-RG.
 
 A 5G-capable UE can connect to 5GC through an RG that’s connected to the 5GC via wireline access network (W-5GAN) or NG-RAN. The UE supports untrusted non-3GPP access and/or trusted non-3GPP access.
+## 7B.2	Authentication for 5G-RG
+The 5G-RG can be connected to 5GC via W-5GAN, NG RAN or via both accesses. The registration procedure for the 5G-RG connecting to 5GC via NG-RAN is specified in TS 23.316 clause 4.11. The registration procedure for the 5G-RG connecting to 5GC via W-5GAN is specified in TS 23.316 clause 7.2.1.
 
+The Untrusted non-3GPP access procedure defined in clause 7.2.1 is used as the basis for registration of the 5G-RG. The 5G-RG shall support both 5G-AKA and EAP-AKA’ and it shall be authenticated by the 3GPP home network. The 5G-RG is equivalent to a normal UE.
+
+As 5G-RG is a UE from 5GC point of view, the authentication framework defined in clause 6.1.3 shall be used to authenticate the 5G-RG.
+
+In case of 5G-RG connects to 5GC via 5G-RAN, comparing to clause 6.1, the difference is:
+
+- UE is replaced by 5G-RG.
+
+In case of 5G-RG connects to 5GC via W-5GAN, a W-CP protocol stack message shall be used between the 5G-RG and the W-5GAN for encapsulating NAS message. The authentication method is executed between the 5G-RG and AUSF as shown below.
+![[Pasted image 20241024114720.png]]
+## 7B.3 Authentication for FN-RG
+The FN-RG connects to 5GC via W-5GAN, which has the W-AGF function that provides connectivity to the 5GC via N2 and N3 reference points. Since the FN-RG is a non-wireless entity defined by BBF or CableLabs, it doesn’t support N1. The W-AGF provides N1 connectivity on behalf of the FN-RG. The authentication method is executed between the FN-RG and AUSF as shown in Figure 7B.c.
+
+The W-AGF may authenticate the FN-RG; this is controlled by local policies.
+
+It is assumed that there is a trust relationship between the wireline operator that manages the W-5GAN and the PLMN operator managing the 5GC. The AMF trusts the W-5GAN based on mutual authentication executed when security is established on the interface between the two using NDS/IP or DTLS.
+![[Pasted image 20241024114851.png]]
+### 7B.4 Authentication for UE behind 5G-RG and FN-RG
+A UE that is connected to a 5G-RG or FN-RG, can access the 5GC via the N3IWF or via the TNGF.
+
+A **UE behind a FN-RG can use the untrusted non-3GPP access procedure** as defined in TS 23.502 clause 4.12.2.2 to access the 5GC via the N3IWF.
+
+A **UE behind a 5G-RG can use either the untrusted non-3GPP access** as defined in TS 23.502 clause 4.12.2.2, or trusted N3GPP-access as defined in TS 23.502 clause 4.12a.2.2.
+
+A **UE connecting to the 5G-RG or FN-RG via WLAN supporting IEEE 802.1X can use the NSWO authentication procedure** as specified in Annex S of the present document.
