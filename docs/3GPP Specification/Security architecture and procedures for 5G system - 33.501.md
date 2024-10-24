@@ -69,3 +69,8 @@ For every key in a network entity, there is a corresponding key in the UE.
 # 7 Security for non-3GPP access to the 5G core network
 ## 7.2 Security procedures
 ### 7.2.1 Authentication for Untrusted non-3GPP Access
+This clause specifies how a UE is authenticated to 5G network via an untrusted non-3GPP access network. It uses a vendor-specific EAP method called "EAP-5G", utilizing the "Expanded" EAP type and the existing 3GPP Vendor-Id, registered with IANA under the SMI Private Enterprise Code registry.
+
+ TheEAP-5G" method is used between the UE and the N3IWF and is utilized for encapsulating NAS messages. If the UE needs to be authenticated by the 3GPP home network, any of the authentication methods as described in clause 6.1.3 can be used. The method is executed between the UE and AUSF as shown below.
+ ![[Pasted image 20241024105055.png]]
+ 
