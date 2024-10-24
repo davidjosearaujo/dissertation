@@ -66,3 +66,4 @@ The 3GPP 5G profile for EAP-AKA' is specified in the normative Annex F. The sele
 #### 6.2.2.2 Keys in the UE
 For every key in a network entity, there is a corresponding key in the UE.
 ![[Pasted image 20241023172927.png]]
+# 7 Security for non-3GPP access to the 5G core network
