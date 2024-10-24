@@ -119,3 +119,7 @@ A **UE behind a 5G-RG can use either the untrusted non-3GPP access** as defined 
 A **UE connecting to the 5G-RG or FN-RG via WLAN supporting IEEE 802.1X can use the NSWO authentication procedure** as specified in Annex S of the present document.
 ## 7B.7 Authentication for AUN3 devices behind 5G-RG
 An AUN3 device behind 5G-RG, as defined in TS 23.316, shall be registered to the 5GC by the 5G-RG and shall be authenticated by 5GC using EAP-AKA’, as specified in RFC 5448
+### 7B.7.2 Authentication for AUN3 devices not supporting 5G key hierarchy
+![[Pasted image 20241024121648.png]]
+### 7B.7.3 Authentication for AUN3 devices supporting 5G key hierarchy
+![[Pasted image 20241024121712.png]]
