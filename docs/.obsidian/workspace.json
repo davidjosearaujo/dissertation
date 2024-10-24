@@ -164,8 +164,47 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "31ab44df1b219aac",
+  "floating": {
+    "id": "0121b2a4473433f1",
+    "type": "floating",
+    "children": [
+      {
+        "id": "9cf1071ef2142f74",
+        "type": "window",
+        "children": [
+          {
+            "id": "3ce8495cd99d1bfc",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "39fa1560f3b431c5",
+                "type": "leaf",
+                "state": {
+                  "type": "pdf",
+                  "state": {
+                    "file": "3GPP Specification/33501-i70.pdf"
+                  },
+                  "icon": "lucide-file-text",
+                  "title": "33501-i70"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 844,
+        "y": 0,
+        "width": 1076,
+        "height": 1080,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "39fa1560f3b431c5",
   "lastOpenFiles": [
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
+    "3GPP Specification/33501-i70.pdf",
     "images/Pasted image 20241024114851.png",
     "images/Pasted image 20241024114720.png",
     "images/Pasted image 20241024113650.png",
@@ -176,8 +215,6 @@
     "images/Pasted image 20241023153659.png",
     "images/Pasted image 20241023153444.png",
     "images/Pasted image 20241023152054.png",
-    "images/2024-10-23_10-39.png",
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/23501-i70.pdf",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
@@ -205,7 +242,6 @@
     "Tasks.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
-    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "Objectives.md",
     "www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication.md",
     "Excalidraw/Drawing 2024-10-14 14.47.52.excalidraw.md",
