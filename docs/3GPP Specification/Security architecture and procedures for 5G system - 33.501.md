@@ -88,4 +88,5 @@ The 5G-RG acts as a 5G UE and can connect to 5GC via wireline access network (W-
 
 The FN-RG can connect to 5GC via wireline access network (W-5GAN). The W-AGF performs the registration procedure on behalf of the FN-RG. It acts as end point of N1 and provides the NAS signalling connection to the 5GC on behalf of the FN-RG.
 
-A 5G -capable UE can connect to 5GC through an RG that’s connected to the 5GC via wireline access network (W-5GAN) or NG-RAN. The UE supports untrusted non-3GPP access and/or trusted non-3GPP access.
+A 5G-capable UE can connect to 5GC through an RG that’s connected to the 5GC via wireline access network (W-5GAN) or NG-RAN. The UE supports untrusted non-3GPP access and/or trusted non-3GPP access.
+
