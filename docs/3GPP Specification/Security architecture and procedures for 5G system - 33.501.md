@@ -124,3 +124,11 @@ An AUN3 device behind 5G-RG, as defined in TS 23.316, shall be registered to the
 ### 7B.7.3 Authentication for AUN3 devices supporting 5G key hierarchy
 ![[Pasted image 20241024121712.png]]
 # Annex O (Informative): Authentication for non-5G capable devices behind residential gateways
+This annex describes the authentication procedure, using EAP-TLS as an example, for Non-5G Capable (N5GC) devices behind Residential Gateways (RGs) in private networks or in isolated deployment scenarios (i.e., roaming is not considered) with wireline access. The registration procedure of N5GC devices behind Cable RGs is described in clause 4.10a of TS 23.316
+
+N5GC devices lack some key 5G capabilities, including NAS and the derivation of 5G key hierarchy. Those devices exist in wireline networks and need to be able to access the converged 5G core. The authentication of N5GC devices can be based on additional EAP methods other than EAP-AKA’.
+
+The procedure in O.3 uses EAP-TLS as in Annex B as an example, but it differs from the Annex B in the following:
+1. the W-AGF creates the registration request on behalf of the N5GC device,
+2. 5G related parameters (including ngKSI and ABBA) are not sent to the N5GC device. When received from the AMF, these parameters are ignored by the W-AGF, and
+3. Neither the N5GC device nor the AUSF derives any 5G related keys after EAP authentication.
