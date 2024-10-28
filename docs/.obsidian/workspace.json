@@ -177,15 +177,15 @@
             "type": "tabs",
             "children": [
               {
-                "id": "39fa1560f3b431c5",
+                "id": "637d78a808611041",
                 "type": "leaf",
                 "state": {
                   "type": "pdf",
                   "state": {
-                    "file": "3GPP Specification/33501-i70.pdf"
+                    "file": "3GPP Specification/23316-i60.pdf"
                   },
                   "icon": "lucide-file-text",
-                  "title": "33501-i70"
+                  "title": "23316-i60"
                 }
               }
             ]
@@ -201,11 +201,11 @@
       }
     ]
   },
-  "active": "39fa1560f3b431c5",
+  "active": "637d78a808611041",
   "lastOpenFiles": [
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
-    "images/Pasted image 20241028143737.png",
     "3GPP Specification/33501-i70.pdf",
+    "images/Pasted image 20241028143737.png",
     "images/Pasted image 20241024121712.png",
     "images/Pasted image 20241024121648.png",
     "images/Pasted image 20241024114851.png",
