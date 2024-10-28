@@ -80,9 +80,10 @@ This is when a non-3GPP network (e.g., public Wi-Fi) isn’t under the mobile op
 An untrusted non-3GPP access network shall be connected to the 5G Core Network via a **Non-3GPP InterWorking Function (N3IWF)**, whereas a trusted non-3GPP access network shall be connected to the 5G Core Network via a **Trusted Non-3GPP Gateway Function (TNGF)**. Both the N3IWF and the TNGF interface with the 5G Core Network **CP and UP functions via the N2 and N3 interfaces**, respectively.
 
 A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to register with the 5G Core Network over non-3GPP access. Further details about the UE registration to 5G Core Network over untrusted non-3GPP access and over trusted non-3GPP access are described in clause 4.12.2 and in clause 4.12.2a of TS 23.502, respectively.
-## 6.3 Authentication and authorization for accessing 5GS via non-3GPP access network
+## [[Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502|Authentication and authorization for accessing 5GS via non-3GPP access network]]
 >In order to register to the 5G core network (5GCN) via untrusted non-3GPP IP access, the UE first needs to be configured with a local IP address from the untrusted non-3GPP access network (N3AN).
 
+>During EAP authentication, authentication and authorization for access to 5GCN is performed by exchange of EAP-5G message encapsulated in the link layer protocol between the UE and the TNAN.
 ## Registration procedure for a regular device via a Non-3GPP Network
 [[Procedures for the 5G System (5GS) - 23.502#4.2.2 Registration Management procedures|Procedures for the 5G System (5GS) - 23.502]]
 ### Procedures for Untrusted non-3GPP access
