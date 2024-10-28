@@ -87,6 +87,8 @@ A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to
 ## [[Procedures for the 5G System (5GS) - 23.502#4.2.2 Registration Management procedures|Procedures for the 5G System (5GS)]]
 ### [[Procedures for the 5G System (5GS) - 23.502#4.12.2 Registration via Untrusted non-3GPP Access|Registration via Untrusted non-3GPP Access]]
 >Specifies how a UE can register to 5GC via an untrusted non-3GPP Access Network. It is based on the Registration procedure specified in clause [[#4.2.2.2.2 General Registration|4.2.2.2.2]] and it uses a vendor-specific EAP method called "EAP-5G".
+
+>The "EAP-5G" method is used between the UE and the N3IWF and is utilized only for encapsulating NAS messages (not for authentication).
 ### [[Procedures for the 5G System (5GS) - 23.502#4.12a.2 Registration via Trusted non-3GPP Access|Registration via Trusted non-3GPP Access]]
 
 ## 5G Identifiers
