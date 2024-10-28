@@ -68,6 +68,10 @@ Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE acces
 In short:
 - **3GPP**: Cellular (e.g., 4G, 5G)
 - **Non-3GPP**: Other networks (e.g., Wi-Fi) integrated with cellular networks.
+### Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN)
+>For an untrusted non-3GPP access network, to secure communication between the UE and the 5GCN, **a UE establishes secure connection to the 5G core network over untrusted non-3GPP access via the N3IWF**. 
+
+
 ## What is trusted and untrusted non-3GPP?
 In 3GPP architecture, trusted and untrusted refer to the way a non-3GPP network (like Wi-Fi) connects to the mobile core network.
 #### Trusted 3GPP access
@@ -89,4 +93,4 @@ A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to
 ## 5G Authentication
 See [[A Comparative Introduction to 4G and 5G Authentication by CableLabs]]
 ## Security Architecture and Procedures for 5G System
-[[SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA) | ]]
+[[SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA)|Security architecture model as defined in TS 33.501]]

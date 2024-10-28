@@ -205,20 +205,6 @@
                 }
               },
               {
-                "id": "d1bf27afcf8313ed",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA)"
-                }
-              },
-              {
                 "id": "26c4f364796026b2",
                 "type": "leaf",
                 "state": {
@@ -247,7 +233,7 @@
                 }
               }
             ],
-            "currentTab": 2
+            "currentTab": 1
           }
         ],
         "direction": "vertical",
@@ -260,16 +246,16 @@
       }
     ]
   },
-  "active": "31ab44df1b219aac",
+  "active": "31e9aee539ecf225",
   "lastOpenFiles": [
-    "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "Knowledge Path.md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
+    "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/23501-i70.pdf",
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/33501-i70.pdf",
     "images/Pasted image 20241028143737.png",
