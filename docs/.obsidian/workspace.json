@@ -192,19 +192,19 @@
           }
         ],
         "direction": "vertical",
-        "x": 771,
+        "x": 960,
         "y": 0,
-        "width": 1149,
+        "width": 960,
         "height": 1080,
         "maximize": false,
         "zoom": 0
       }
     ]
   },
-  "active": "39fa1560f3b431c5",
+  "active": "31ab44df1b219aac",
   "lastOpenFiles": [
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/33501-i70.pdf",
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "Pasted image 20241024121712.png",
     "Pasted image 20241024121648.png",
     "images/Pasted image 20241024114851.png",
