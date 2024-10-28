@@ -86,9 +86,8 @@ An untrusted non-3GPP access network shall be connected to the 5G Core Network v
 A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to register with the 5G Core Network over non-3GPP access. Further details about the UE registration to 5G Core Network over untrusted non-3GPP access and over trusted non-3GPP access are described in clause 4.12.2 and in clause 4.12.2a of TS 23.502, respectively.
 ## [[Procedures for the 5G System (5GS) - 23.502#4.2.2 Registration Management procedures|Procedures for the 5G System (5GS)]]
 ### [[Procedures for the 5G System (5GS) - 23.502#4.12.2 Registration via Untrusted non-3GPP Access|Registration via Untrusted non-3GPP Access]]
-
-### Procedures for Trusted non-3GPP access
-[[Procedures for the 5G System (5GS) - 23.502#4.12a.2 Registration via Trusted non-3GPP Access|4.12a.2 Registration via Trusted non-3GPP Access]]
+>Specifies how a UE can register to 5GC via an untrusted non-3GPP Access Network. It is based on the Registration procedure specified in clause [[#4.2.2.2.2 General Registration|4.2.2.2.2]] and it uses a vendor-specific EAP method called "EAP-5G".
+### [[Procedures for the 5G System (5GS) - 23.502#4.12a.2 Registration via Trusted non-3GPP Access|Registration via Trusted non-3GPP Access]]
 ## 5G Identifiers
 [[5G Identifiers]]
 ## 5G Authentication
