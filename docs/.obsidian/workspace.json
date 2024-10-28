@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
+                "file": "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Security architecture and procedures for 5G system - 33.501"
+              "title": "Wireless and wireline convergence access support for the 5G System (5GS) - 23.316"
             }
           }
         ]
@@ -201,8 +201,9 @@
       }
     ]
   },
-  "active": "637d78a808611041",
+  "active": "31ab44df1b219aac",
   "lastOpenFiles": [
+    "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/33501-i70.pdf",
     "images/Pasted image 20241028143737.png",
@@ -229,7 +230,6 @@
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
-    "3GPP Specification/23316-i60.pdf",
     "Untitled.canvas",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
