@@ -123,3 +123,4 @@ An AUN3 device behind 5G-RG, as defined in TS 23.316, shall be registered to the
 ![[Pasted image 20241024121648.png]]
 ### 7B.7.3 Authentication for AUN3 devices supporting 5G key hierarchy
 ![[Pasted image 20241024121712.png]]
+# Annex B (informative): Using additional EAP methods for primary authentication
