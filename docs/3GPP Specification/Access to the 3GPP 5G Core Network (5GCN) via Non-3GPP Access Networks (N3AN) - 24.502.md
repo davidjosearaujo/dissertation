@@ -19,7 +19,7 @@ In order to register to the 5G core network (5GCN) via untrusted non-3GPP IP acc
 
 Once the UE is configured with a local IP address, the UE shall select the Non-3GPP InterWorking Function (N3IWF) as described in clause 7.2 and shall initiate the IKEv2 SA establishment procedure as described in clause 7.3. During the IKEv2 SA establishment procedure, authentication and authorization for access to 5GCN is performed.
 
-During EAP authentication, authentication and authorization for access to 5GCN is performed by exchange of EAP-5G message encapsulated in the link layer protocol between the UE and the TNAN, see clause 7.3A.2.1. Upon completion of EAP authentication, the UE shall be assigned an IP address by that TNAN. Once the UE is configured with an IP address, it shall initiate the IKEv2 SA establishment procedure as described in clause 7.3A.
+authentication. During EAP authentication, authentication and authorization for access to 5GCN is performed by exchange of EAP-5G message encapsulated in the link layer protocol between the UE and the TNAN, see clause 7.3A.2.1. Upon completion of EAP authentication, the UE shall be assigned an IP address by that TNAN. Once the UE is configured with an IP address, it shall initiate the IKEv2 SA establishment procedure as described in clause 7.3A.
 
 In wireline access, the 5G-RG shall first establish connection using W-CP protocol stack with a W-AGF serving the 5G-RG using means out of scope of the present document.
 ## 6.3.2  Authentication of N5GC device behind a CRG over wireline access
