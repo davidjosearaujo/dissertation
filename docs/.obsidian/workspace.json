@@ -20,23 +20,8 @@
               "icon": "lucide-file",
               "title": "Knowledge Path"
             }
-          },
-          {
-            "id": "52b0111c5274224f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "System architecture for the 5G System (5GS) - 23.501"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -192,18 +177,6 @@
             "type": "tabs",
             "children": [
               {
-                "id": "1349ce7cc9430edc",
-                "type": "leaf",
-                "state": {
-                  "type": "pdf",
-                  "state": {
-                    "file": "3GPP Specification/23501-i70.pdf"
-                  },
-                  "icon": "lucide-file-text",
-                  "title": "23501-i70"
-                }
-              },
-              {
                 "id": "a7e3d86db02a078b",
                 "type": "leaf",
                 "state": {
@@ -286,12 +259,12 @@
       }
     ]
   },
-  "active": "52b0111c5274224f",
+  "active": "a7e3d86db02a078b",
   "lastOpenFiles": [
-    "3GPP Specification/23501-i70.pdf",
-    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
-    "Knowledge Path.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
+    "Knowledge Path.md",
+    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
+    "3GPP Specification/23501-i70.pdf",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
