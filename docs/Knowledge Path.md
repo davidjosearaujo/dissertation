@@ -88,3 +88,5 @@ A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to
 [[5G Identifiers]]
 ## 5G Authentication
 See [[A Comparative Introduction to 4G and 5G Authentication by CableLabs]]
+## Security Architecture and Procedures for 5G System
+[[SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA) | ]]
