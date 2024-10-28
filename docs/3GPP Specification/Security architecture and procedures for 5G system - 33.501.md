@@ -132,3 +132,6 @@ The procedure in O.3 uses EAP-TLS as in Annex B as an example, but it differs fr
 1. the W-AGF creates the registration request on behalf of the N5GC device,
 2. 5G related parameters (including ngKSI and ABBA) are not sent to the N5GC device. When received from the AMF, these parameters are ignored by the W-AGF, and
 3. Neither the N5GC device nor the AUSF derives any 5G related keys after EAP authentication.
+## O.3 Authentication procedure
+It uses EAP-TLS as an example, but other EAP methods can also be supported. The W-AGF acts on behalf of the N5GC device during the registration process. The link between the N5GC device and the RG, and between the RG and the W-AGF can be any data link (L2) that supports EAP encapsulation.
+![[Pasted image 20241028143737.png]]
