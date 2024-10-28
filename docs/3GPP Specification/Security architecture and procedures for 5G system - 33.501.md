@@ -124,3 +124,4 @@ An AUN3 device behind 5G-RG, as defined in TS 23.316, shall be registered to the
 ### 7B.7.3 Authentication for AUN3 devices supporting 5G key hierarchy
 ![[Pasted image 20241024121712.png]]
 # Annex B (informative): Using additional EAP methods for primary authentication
+It is provided as an example on how the 5G authentication framework for primary authentication can be applied to EAP methods other than EAP-AKA' The additional EAP methods are only intended for private networks or with IoT devices in isolated deployment scenarios, i.e. roaming is not considered, as specified in TS 22.261
