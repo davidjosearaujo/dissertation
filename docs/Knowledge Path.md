@@ -100,6 +100,13 @@ A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to
 
 >**Devices that do not support 5GC NAS** signalling over WLAN access (referred to as "Non-5G-Capable over WLAN" devices, or N5CW devices for short), **may access 5GC** in a PLMN or an SNPN **via a trusted WLAN Access Network** that supports a Trusted WLAN Interworking Function (TWIF).
 ## [[SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA)|Security Architecture and Procedures for 5G System]]
+UE requirements:
+- **The UE shall support 5G-GUTI**
+- The Home Network Public Key shall be stored in the USIM.
+- ...
+AMF requirements:
+- The AMF shall support assigning 5G-GUTI to the UE.
+- ...
 ### [[5G Identifiers|5G Identifiers]]
 
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
