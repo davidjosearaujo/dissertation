@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "Broadband Forum/TR-456.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Knowledge Path"
+              "title": "TR-456"
             }
           }
         ]
@@ -177,17 +177,15 @@
             "type": "tabs",
             "children": [
               {
-                "id": "52859e23dc08baa0",
+                "id": "5d642336f92899a6",
                 "type": "leaf",
                 "state": {
-                  "type": "markdown",
+                  "type": "pdf",
                   "state": {
-                    "file": "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
-                    "mode": "source",
-                    "source": false
+                    "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
                   },
-                  "icon": "lucide-file",
-                  "title": "Wireless and wireline convergence access support for the 5G System (5GS) - 23.316"
+                  "icon": "lucide-file-text",
+                  "title": "TR-456-AGF-Functional-Requirements"
                 }
               }
             ]
@@ -203,10 +201,12 @@
       }
     ]
   },
-  "active": "52859e23dc08baa0",
+  "active": "5d642336f92899a6",
   "lastOpenFiles": [
-    "Knowledge Path.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
+    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
+    "Broadband Forum/TR-456.md",
+    "Knowledge Path.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
@@ -239,8 +239,6 @@
     "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Articles/SAGERAN W-AGF Device.md",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
-    "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
-    "Broadband Forum/TR-456.md",
     "Tasks.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
