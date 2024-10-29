@@ -192,19 +192,19 @@
           }
         ],
         "direction": "vertical",
-        "x": 852,
+        "x": 786,
         "y": 0,
-        "width": 1068,
+        "width": 1134,
         "height": 1080,
         "maximize": false,
         "zoom": 0
       }
     ]
   },
-  "active": "31ab44df1b219aac",
+  "active": "5d642336f92899a6",
   "lastOpenFiles": [
-    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "Broadband Forum/TR-456.md",
+    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "Knowledge Path.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
