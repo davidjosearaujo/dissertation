@@ -95,6 +95,9 @@ A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to
 >![[Pasted image 20241017151444.png]]
 
 >In this case, the "EAP-5G" method is used between the UE and the TNGF and is utilized for encapsulating NAS messages.
+### [[Procedures for the 5G System (5GS) - 23.502#4.12b Procedures for devices that do not support 5GC NAS over WLAN access|Procedures for devices that do not support 5GC NAS over WLAN access]]
+>![[Pasted image 20241017151526.png]]
+
 ## 5G Identifiers
 [[5G Identifiers]]
 ## 5G Authentication
