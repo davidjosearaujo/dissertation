@@ -112,5 +112,6 @@ AMF requirements:
 ### [[Security architecture and procedures for 5G system - 33.501#7A.2.1 Authentication for Trusted non-3GPP access|Authentication for Trusted non-3GPP access]]
 >This is based on the specified procedure in TS 23.502 clause 4.12a.2.2 "Registration procedure for trusted non-3GPP access". 
 ### [[5G Identifiers|5G Identifiers]]
-
+SUCI and SUPI
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
+# Why AGF is interesting?
