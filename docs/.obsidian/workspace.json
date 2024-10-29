@@ -35,7 +35,8 @@
               "title": "TR-458"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -178,10 +179,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "31ab44df1b219aac",
+  "active": "66bfa8ad9dce01bc",
   "lastOpenFiles": [
-    "Broadband Forum/TR-458.md",
     "Knowledge Path.md",
+    "Broadband Forum/TR-458.md",
     "images/Pasted image 20241029154028.png",
     "images/Pasted image 20241029153655.png",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
