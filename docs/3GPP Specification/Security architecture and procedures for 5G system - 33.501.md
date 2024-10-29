@@ -42,8 +42,6 @@ The Authentication server function (AUSF) shall handle authentication requests f
 #### 6.1.1.1 General
 UE and serving network shall support EAP-AKA' and 5G AKA authentication methods.
 
-UE and serving network shall support EAP-AKA' and 5G AKA authentication methods.
-
 > Note 4: **EAP-AKA' and 5G AKA are the only authentication methods that are supported in UE and serving network**, hence only they are described in sub-clause 6.1.3 of the present document. For a private network using the 5G system as specified in an example of how additional authentication methods can be used with the EAP framework is given in the informative Annex B.
 #### 6.1.1.2 EAP framework
 The EAP framework is specified in RFC 3748. It defines the following roles: **peer**, **pass-through authenticator** and **back-end authentication server**. The back-end authentication server acts as the EAP server, which terminates the EAP authentication method with the peer. In the 5G system,  the EAP framework is supported in the following way:
