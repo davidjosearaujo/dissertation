@@ -107,6 +107,10 @@ UE requirements:
 AMF requirements:
 - The AMF shall support assigning 5G-GUTI to the UE.
 - ...
+### [[Security architecture and procedures for 5G system - 33.501#7.2.1 Authentication for Untrusted non-3GPP Access|Authentication for Untrusted non-3GPP Access]]
+>It uses a vendor-specific EAP method called "EAP-5G", utilizing the "Expanded" EAP type and the existing 3GPP Vendor-Id, registered with IANA under the SMI Private Enterprise Code registry.
+
+
 ### [[5G Identifiers|5G Identifiers]]
 
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
