@@ -177,15 +177,15 @@
             "type": "tabs",
             "children": [
               {
-                "id": "5d642336f92899a6",
+                "id": "031371f04ab4ec3e",
                 "type": "leaf",
                 "state": {
                   "type": "pdf",
                   "state": {
-                    "file": "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf"
+                    "file": "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf"
                   },
                   "icon": "lucide-file-text",
-                  "title": "TR-456-AGF-Functional-Requirements"
+                  "title": "TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification"
                 }
               }
             ]
@@ -201,9 +201,10 @@
       }
     ]
   },
-  "active": "5d642336f92899a6",
+  "active": "031371f04ab4ec3e",
   "lastOpenFiles": [
     "Broadband Forum/TR-456.md",
+    "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "Knowledge Path.md",
@@ -238,7 +239,6 @@
     "Altice Labs/Notes.md",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Articles/SAGERAN W-AGF Device.md",
-    "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Tasks.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
     "ROMARS/Trusted non-3GPP access.md",
