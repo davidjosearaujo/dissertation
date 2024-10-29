@@ -164,48 +164,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "floating": {
-    "id": "0121b2a4473433f1",
-    "type": "floating",
-    "children": [
-      {
-        "id": "9cf1071ef2142f74",
-        "type": "window",
-        "children": [
-          {
-            "id": "3ce8495cd99d1bfc",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "031371f04ab4ec3e",
-                "type": "leaf",
-                "state": {
-                  "type": "pdf",
-                  "state": {
-                    "file": "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf"
-                  },
-                  "icon": "lucide-file-text",
-                  "title": "TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 786,
-        "y": 0,
-        "width": 1134,
-        "height": 1080,
-        "maximize": false,
-        "zoom": 0
-      }
-    ]
-  },
-  "active": "031371f04ab4ec3e",
+  "active": "31ab44df1b219aac",
   "lastOpenFiles": [
+    "Pasted image 20241029153655.png",
+    "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-458.md",
     "Broadband Forum/TR-456.md",
-    "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
@@ -248,7 +212,6 @@
     "Excalidraw/Drawing 2024-10-14 14.47.52.excalidraw.md",
     "Excalidraw/Drawing 2024-10-14 14.46.15.excalidraw.md",
     "Excalidraw/Drawing 2024-10-14 14.45.24.excalidraw.md",
-    "2024-10-14.md",
-    "Wireless Broadband Alliance/Untitled.md"
+    "2024-10-14.md"
   ]
 }
