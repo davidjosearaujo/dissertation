@@ -98,9 +98,8 @@ A UE shall establish an IPsec tunnel with the N3IWF or with the TNGF in order to
 ### [[Procedures for the 5G System (5GS) - 23.502#4.12b Procedures for devices that do not support 5GC NAS over WLAN access|Procedures for devices that do not support 5GC NAS over WLAN access]]
 >![[Pasted image 20241017151526.png]]
 
-## 5G Identifiers
-[[5G Identifiers]]
-## 5G Authentication
-See [[A Comparative Introduction to 4G and 5G Authentication by CableLabs]]
-## Security Architecture and Procedures for 5G System
-[[SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA)|Security architecture model as defined in TS 33.501]]
+>**Devices that do not support 5GC NAS** signalling over WLAN access (referred to as "Non-5G-Capable over WLAN" devices, or N5CW devices for short), **may access 5GC** in a PLMN or an SNPN **via a trusted WLAN Access Network** that supports a Trusted WLAN Interworking Function (TWIF).
+## [[SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA)|Security Architecture and Procedures for 5G System]]
+### [[5G Identifiers|5G Identifiers]]
+
+### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
