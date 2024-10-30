@@ -114,6 +114,11 @@ AMF requirements:
 ### [[5G Identifiers|5G Identifiers]]
 SUCI and SUPI
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
-# Why AGF is interesting?
->[The AGF can serve both FN-RG and 5G-RG. Each RG type requires a different AGF control plane (CP) function. Operators utilize a combination of AGF functions to provide different types of broadband converged service(s). The AGF has access, network, and control signal interfaces. The access and network interface are user plane interfaces](TR-458)
-
+# Understanding EAP Framework
+The EAP process works as follows:
+1. A user requests connection to a wireless network through an AP.
+2. The AP requests identification data from the user and transmits that data to an authentication server. ***(What can be identity of a legacy IOT device in 5GC?)***
+3. The authentication server asks the AP for proof of the validity of the identification information.
+4. The AP obtains verification from the user and sends it back to the authentication server.
+5. The user is connected to the network as requested.
+## What can we use as _idendity_ in legacy devices
