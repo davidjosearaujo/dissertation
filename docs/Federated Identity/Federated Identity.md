@@ -49,3 +49,7 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >The key to federated identity is trust. The system that holds your information and the system that is requesting your information must trust each other.
 
 >The system requesting the information has to trust the sender to ensure they are getting accurate and trustworthy information.
+
+>The application does not perform any actions to verify the user’s identity itself. It just believes what the IdP says.
+
+>Before an application will believe an IdP, a trust relationship must be established. The application must be configured with the address of the IdP that it will be trusting. The IdP must be configured with the address of the application. In most cases, some type of keys will be exchanged between the two entities to actually establish the relationship.
