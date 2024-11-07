@@ -27,3 +27,5 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 
 >The IdP must trust the application or it will not send user information to the application. The application must trust the IdP or it will not trust the user identity information that comes from the IdP.
 ### 2.4.1. Identity Provider
+>You can have an IdP set up internally, or you can use a service provider to provide identity services for you. Users, also called entities, will authenticate against the IdP’s credential store. The IdP will then allow access to user’s identity information. It’s important to note that an IdP does more than just authenticate a user. It also holds the user’s identity information. Upon authentication, this information can be sent to whichever trusted partner needs it.
+
