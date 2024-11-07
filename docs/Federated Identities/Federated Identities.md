@@ -12,3 +12,5 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >Verification is the process that a system goes through to check that you are indeed who you say you are. This is what most people think of when they think of authentication. They don’t realize that the first part of the process is establishing your identity. Verification can be performed in many ways. You supply a password, a Personal Identification Number (PIN), or use some type of biometric identifier.
 
 #### 2.2.1.1.3
+>There is a certain type of digital certificate called a user certificate that is specifically designed for user authentication. After the certificate is created, the certificate is then mapped back to a user account. This user account is used to determine what access the user should have.
+
