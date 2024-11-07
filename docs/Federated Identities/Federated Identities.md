@@ -35,3 +35,4 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 
 >In general, with databases, credentials are stored in proprietary tables created by the user management application. One of the reasons **databases are often chosen as credential stores** is because a majority of developers have experience coding against a database, so it’s relatively easy for them to create code to authenticate users against one.
 ### 2.4.2. Service Provider
+>Service providers are the entities that provide services to others. These services could be applications, infrastructure, or data services. As “the cloud” grows in popularity, many people have become aware of the three main cloud services models.
