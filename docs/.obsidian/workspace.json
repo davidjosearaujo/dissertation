@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Federated Identities/Federated Identities.md",
+                "file": "Federated Identity/Federated Identity.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Federated Identities"
+              "title": "Federated Identity"
             }
           }
         ]
@@ -164,14 +164,14 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "870a0dee6ebe3642",
+  "active": "b74e19cc4d6f57cb",
   "lastOpenFiles": [
     "Extensible Authentication Protocol.md",
-    "Federated Identities/Federates Identities Primer citations.txt",
+    "Federated Identity/Federates Identities Primer citations.txt",
     "Federated Identities/ScienceDirect_citations_1730969684766.txt",
     "Federated Identities.md",
-    "Federated Identities/Federated Identities.md",
-    "Federated Identities",
+    "Federated Identity/Federated Identity.md",
+    "Federated Identity",
     "Knowledge Path.md",
     "images/Pasted image 20241030152521.png",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",

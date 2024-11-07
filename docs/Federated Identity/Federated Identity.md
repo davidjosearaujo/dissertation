@@ -36,3 +36,7 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 ### 2.4.2. Service Provider
 >Service providers are the entities that provide services to others. These services could be applications, infrastructure, or data services. As “the cloud” grows in popularity, many people have become aware of the three main cloud services models.
 ## Federated Identity
+>One of the biggest confusions that exist around federated identity is how it is related to federated authentication. 
+
+>**Federated authentication** can be considered a subset of a federated identity solution. Your digital identity is basically who you are, what you do in the digital world, and other characteristics.
+
