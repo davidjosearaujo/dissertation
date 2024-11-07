@@ -34,3 +34,4 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >There are two main types of authentication stores being used with IdPs today: **databases and directory stores**.
 
 >In general, with databases, credentials are stored in proprietary tables created by the user management application. One of the reasons **databases are often chosen as credential stores** is because a majority of developers have experience coding against a database, so it’s relatively easy for them to create code to authenticate users against one.
+### 2.4.2. Service Provider
