@@ -41,3 +41,6 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >**Federated authentication** can be considered a subset of a federated identity solution. Your digital identity is basically who you are, what you do in the digital world, and other characteristics.
 
 >Federated authentication is the actual login process that takes place. You log into one place and that login allows you access somewhere else. What happens after that login is where other components of federated identity may or may not kick in.
+
+>Federated authentication does not necessarily require an IdP to be in place. There may be some other systems in place where information is passed from one system to another. As I mentioned before, an IdP is necessary for you to have a true federated identity solution. So, what does this mean? **This means that you can have federated authentication without federated identity.**
+
