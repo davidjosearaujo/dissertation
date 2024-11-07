@@ -26,4 +26,4 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >The federated service model can be broken up into two required components: the **IdP** and the **service provider**. Without both of these components, you do not have a federated identity solution. Each of these components has distinct characteristics and responsibilities.
 
 >The IdP must trust the application or it will not send user information to the application. The application must trust the IdP or it will not trust the user identity information that comes from the IdP.
-
+### 2.4.1. Identity Provider
