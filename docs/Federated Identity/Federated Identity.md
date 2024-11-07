@@ -47,3 +47,5 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >Your information may only exist in one system. But, with federated identity, other systems can also have access this information.
 
 >The key to federated identity is trust. The system that holds your information and the system that is requesting your information must trust each other.
+
+>The system requesting the information has to trust the sender to ensure they are getting accurate and trustworthy information.
