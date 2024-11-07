@@ -44,3 +44,6 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 
 >Federated authentication does not necessarily require an IdP to be in place. There may be some other systems in place where information is passed from one system to another. As I mentioned before, an IdP is necessary for you to have a true federated identity solution. So, what does this mean? **This means that you can have federated authentication without federated identity.**
 
+>Your information may only exist in one system. But, with federated identity, other systems can also have access this information.
+
+>The key to federated identity is trust. The system that holds your information and the system that is requesting your information must trust each other.
