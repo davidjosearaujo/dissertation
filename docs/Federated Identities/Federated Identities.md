@@ -13,3 +13,8 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 #### 2.2.1.1.3
 >There is a certain type of digital certificate called a user certificate that is specifically designed for user authentication. After the certificate is created, the certificate is then mapped back to a user account. This user account is used to determine what access the user should have.
 
+>When the user attempts to access a resource, a certificate will be requested.
+
+>During the processing, the backend authentication system will look up the certificate and find the corresponding user account for that certificate.
+
+>This information is then submitted to the resource. The resource will then make authorization decisions based on the user account.
