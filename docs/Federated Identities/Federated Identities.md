@@ -20,3 +20,4 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >This information is then submitted to the resource. The resource will then make authorization decisions based on the user account.
 #### 2.2.1.2.1. Mutual Authentication
 >In mutual authentication, not only is the client authenticated, but the server is also authenticated. The server must do something to prove its identity. This could be in the form of a server certificate or some sort of private key. Once the server has been authenticated and the client trusts the server, then the client will send its credentials to the server. This provides for a more secure authentication process and a more secure environment overall.
+### 2.2.2. Authorization
