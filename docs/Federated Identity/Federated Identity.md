@@ -40,3 +40,5 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 
 >**Federated authentication** can be considered a subset of a federated identity solution. Your digital identity is basically who you are, what you do in the digital world, and other characteristics.
 
+>Federated authentication is the actual login process that takes place. You log into one place and that login allows you access somewhere else. What happens after that login is where other components of federated identity may or may not kick in.
+>
