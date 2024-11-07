@@ -1,0 +1,21 @@
+Derrick Rountree,
+Chapter 3 - Federated Identity Technologies,
+Editor(s): Derrick Rountree,
+Federated Identity Primer,
+Syngress,
+2013,
+Pages 37-60,
+ISBN 9780124071896,
+https://doi.org/10.1016/B978-0-12-407189-6.00003-0.
+(https://www.sciencedirect.com/science/article/pii/B9780124071896000030)
+
+Derrick Rountree,
+Chapter 2 - What Is Federated Identity?,
+Editor(s): Derrick Rountree,
+Federated Identity Primer,
+Syngress,
+2013,
+Pages 13-36,
+ISBN 9780124071896,
+https://doi.org/10.1016/B978-0-12-407189-6.00002-9.
+(https://www.sciencedirect.com/science/article/pii/B9780124071896000029)
