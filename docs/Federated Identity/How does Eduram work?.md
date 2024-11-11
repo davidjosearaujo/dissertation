@@ -10,3 +10,12 @@ In the context of eduroam, the institutions' RADIUS servers act as Identity Prov
 The RADIUS hierarchy forwards user credentials securely to the users’ home institutions, where they are verified and validated.
 
 To protect the privacy of the traffic from the user’s device over the wireless network, the latest up-to-date data encryption standards are used.
+
+The user’s home institution is responsible for maintaining and monitoring user information, even when the user is at a guest campus. Thus, this data is not shared with other connected institutions.
+# IEEE 802.1X
+IEEE 802.1X defines the encapsulation of the Extensible Authentication Protocol (EAP) over wired IEEE 802 networks  and over 802.11 wireless networks, which is known as "EAP over LAN" or EAPOL.
+![[Pasted image 20241111154114.png]]
+802.1X authentication involves three parties: a **supplicant**, an **authenticator**, and an **authentication server**.
+- The supplicant is a client device (such as a laptop) that wishes to attach to the LAN/WLAN;
+- The authenticator is a network device that provides a data link between the client and the network and can allow or block network traffic between the two, such as an Ethernet switch or wireless access point;
+- 
