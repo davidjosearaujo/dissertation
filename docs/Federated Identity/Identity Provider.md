@@ -5,3 +5,6 @@ A single, consistent identity usable across platforms, applications and networks
 # How do identity providers work?
 IdPs communicate with each other and other web service providers using languages, such as Security Assertion Markup Language ([SAML](https://www.techtarget.com/searchsecurity/definition/SAML)), or data formats, such as Open Authorization ([OAuth](https://www.techtarget.com/searchapparchitecture/definition/OAuth)).
 
+An IdP is responsible for sending three basic types of messages:
+1. An **authentication assertion** that shows the requesting device is who or what it claims to be.
+2. An **attribution assertion** that passes along all relevant data when a connection request is made.
