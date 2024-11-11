@@ -1,0 +1,2 @@
+# [What is an identity provider?](https://www.techtarget.com/searchsecurity/definition/identity-provider)
+An identity provider (IdP) is a system component that provides an end user or internet-connected device with a single set of login credentials that ensures the entity is who or what it says it is across multiple platforms, applications and networks.
