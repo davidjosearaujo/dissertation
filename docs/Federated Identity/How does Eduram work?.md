@@ -21,5 +21,5 @@ IEEE 802.1X defines the encapsulation of the Extensible Authentication Protocol 
 - The authentication server is typically a trusted server that can receive and respond to requests for network access, and can tell the authenticator if the connection is to be allowed, and various settings that should apply to that client's connection or setting.
 ## Typical authentication progression
 The typical authentication procedure consists of:
-1. **Initialization** On detection of a new supplicant, the port on the switch (authenticator) is enabled and set to the "unauthorized" state. In this state, only 802.1X traffic is allowed; other traffic, such as the Internet Protocol (and with that TCP and UDP), is dropped.
+1. **Initialization**: On detection of a new supplicant, the port on the switch (authenticator) is enabled and set to the "unauthorized" state. In this state, only 802.1X traffic is allowed; other traffic, such as the Internet Protocol (and with that TCP and UDP), is dropped.
 # RADIUS
