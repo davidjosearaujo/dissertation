@@ -18,4 +18,6 @@ IEEE 802.1X defines the encapsulation of the Extensible Authentication Protocol 
 802.1X authentication involves three parties: a **supplicant**, an **authenticator**, and an **authentication server**.
 - The supplicant is a client device (such as a laptop) that wishes to attach to the LAN/WLAN;
 - The authenticator is a network device that provides a data link between the client and the network and can allow or block network traffic between the two, such as an Ethernet switch or wireless access point;
-- 
+- The authentication server is typically a trusted server that can receive and respond to requests for network access, and can tell the authenticator if the connection is to be allowed, and various settings that should apply to that client's connection or setting.
+## Typical authentication progression
+# RADIUS
