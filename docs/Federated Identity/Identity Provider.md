@@ -8,3 +8,4 @@ IdPs communicate with each other and other web service providers using languages
 An IdP is responsible for sending three basic types of messages:
 1. An **authentication assertion** that shows the requesting device is who or what it claims to be.
 2. An **attribution assertion** that passes along all relevant data when a connection request is made.
+3. An **authorization assertion** that documents whether the user or requesting device was granted access to the online resource or not.
