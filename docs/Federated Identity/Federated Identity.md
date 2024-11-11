@@ -56,3 +56,6 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 ### 2.5.1 Authentication vs Authorization with Federated Identity
 >**One of the key characteristics of federated identity is that authentication is abstracted from authorization.**
 
+>With federated identity, the authentication request does not have to be performed by the application.
+
+>You can use a third-party system, like an internal or external IdP to provide the authentication. The IdP sends the authentication information back to the application.
