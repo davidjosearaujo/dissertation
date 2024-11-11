@@ -8,3 +8,5 @@ Participating institutions **must have operating RADIUS infrastructure** and agr
 In the context of eduroam, the institutions' RADIUS servers act as Identity Providers (IdPs). Each participating institution is responsible for authenticating its own users through their RADIUS server. The federation allows these institutions to trust each other’s authentication processes, enabling seamless roaming.
 
 The RADIUS hierarchy forwards user credentials securely to the users’ home institutions, where they are verified and validated.
+
+To protect the privacy of the traffic from the user’s device over the wireless network, the latest up-to-date data encryption standards are used.
