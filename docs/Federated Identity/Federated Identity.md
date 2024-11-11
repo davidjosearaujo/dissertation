@@ -59,3 +59,8 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >With federated identity, the authentication request does not have to be performed by the application.
 
 >You can use a third-party system, like an internal or external IdP to provide the authentication. The IdP sends the authentication information back to the application.
+
+### 2.5.2 Federated Identity Advantages and Disadvantages
+#### 2.5.2.1 Advantages
+##### 2.5.2.1.7 Highly Extensible
+>**Since the application itself does not know and generally does not care how the user was authenticated, you can use any method you choose for authentication.**
