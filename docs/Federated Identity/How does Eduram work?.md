@@ -24,4 +24,5 @@ IEEE 802.1X defines the encapsulation of the Extensible Authentication Protocol 
 The typical authentication procedure consists of:
 1. **Initialization**: On detection of a new supplicant, the port on the switch (authenticator) is enabled and set to the "unauthorized" state. In this state, only 802.1X traffic is allowed; other traffic, such as the Internet Protocol (and with that TCP and UDP), is dropped.
 2. **Initiation**: To initiate authentication the authenticator will periodically transmit EAP-Request Identity frames to a special Layer 2 MAC address (01:80:C2:00:00:03) on the local network segment. The supplicant listens at this address, and on receipt of the EAP-Request Identity frame, it responds with an EAP-Response Identity frame containing an identifier for the supplicant such as a User ID. The authenticator then encapsulates this Identity response in a RADIUS Access-Request packet and forwards it on to the authentication server.
+3. **Negotiation** _(Technically EAP negotiation)_
 # RADIUS
