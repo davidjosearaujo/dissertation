@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Federated Identity/Identity Provider.md",
+                "file": "Federated Identity/How does Eduram work?.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Identity Provider"
+              "title": "How does Eduram work?"
             }
           }
         ]
@@ -164,10 +164,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "b74e19cc4d6f57cb",
+  "active": "870a0dee6ebe3642",
   "lastOpenFiles": [
-    "Federated Identity/Federated Identity.md",
+    "Federated Identity/Pasted image 20241111152310.png",
     "Federated Identity/Identity Provider.md",
+    "Federated Identity/How does Eduram work?.md",
+    "Federated Identity/Federated Identity.md",
     "Extensible Authentication Protocol.md",
     "Federated Identity/Federates Identities Primer citations.txt",
     "Federated Identities/ScienceDirect_citations_1730969684766.txt",
@@ -210,8 +212,6 @@
     "Articles/SAGERAN W-AGF Device.md",
     "Tasks.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
-    "ROMARS/Trusted non-3GPP access.md",
-    "Objectives.md",
-    "www.cablelabs.com/insights/a-comparative-introduction-to-4g-and-5g-authentication.md"
+    "ROMARS/Trusted non-3GPP access.md"
   ]
 }
