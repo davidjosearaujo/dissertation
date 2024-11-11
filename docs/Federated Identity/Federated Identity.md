@@ -54,3 +54,5 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 
 >Before an application will believe an IdP, a trust relationship must be established. The application must be configured with the address of the IdP that it will be trusting. The IdP must be configured with the address of the application. In most cases, some type of keys will be exchanged between the two entities to actually establish the relationship.
 ### 2.5.1 Authentication vs Authorization with Federated Identity
+>**One of the key characteristics of federated identity is that authentication is abstracted from authorization.**
+>
