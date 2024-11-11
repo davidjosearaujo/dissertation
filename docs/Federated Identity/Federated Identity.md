@@ -35,7 +35,7 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >In general, with databases, credentials are stored in proprietary tables created by the user management application. One of the reasons **databases are often chosen as credential stores** is because a majority of developers have experience coding against a database, so it’s relatively easy for them to create code to authenticate users against one.
 ### 2.4.2. Service Provider
 >Service providers are the entities that provide services to others. These services could be applications, infrastructure, or data services. As “the cloud” grows in popularity, many people have become aware of the three main cloud services models.
-## Federated Identity
+## 2.5 Federated Identity
 >One of the biggest confusions that exist around federated identity is how it is related to federated authentication. 
 
 >**Federated authentication** can be considered a subset of a federated identity solution. Your digital identity is basically who you are, what you do in the digital world, and other characteristics.
@@ -53,3 +53,4 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 >The application does not perform any actions to verify the user’s identity itself. It just believes what the IdP says.
 
 >Before an application will believe an IdP, a trust relationship must be established. The application must be configured with the address of the IdP that it will be trusting. The IdP must be configured with the address of the application. In most cases, some type of keys will be exchanged between the two entities to actually establish the relationship.
+### 2.5.1 Authentication vs Authorization with Federated Identity
