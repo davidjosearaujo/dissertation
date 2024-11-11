@@ -9,3 +9,5 @@ An IdP is responsible for sending three basic types of messages:
 1. An **authentication assertion** that shows the requesting device is who or what it claims to be.
 2. An **attribution assertion** that passes along all relevant data when a connection request is made.
 3. An **authorization assertion** that documents whether the user or requesting device was granted access to the online resource or not.
+# Types of identity providers
+The **two main types of identity management providers** are **enterprise-based** and **social-based**. An enterprise identity provider is used in a corporate enterprise for identity and access management (IAM) or in personal computing to authenticate users for online activities that take place behind a registration wall, such as online shopping and access to subscription-based content. A social-based IdP allows users to login using social media accounts.
