@@ -64,3 +64,5 @@ https://www.okta.com/identity-101/what-is-federated-identity/
 #### 2.5.2.1 Advantages
 ##### 2.5.2.1.7 Highly Extensible
 >**Since the application itself does not know and generally does not care how the user was authenticated, you can use any method you choose for authentication.**
+
+>As long as the IdP sends the appropriate information to the application, it doesn’t matter what method the IdP used to authenticate the user.
