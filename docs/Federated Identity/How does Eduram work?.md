@@ -26,4 +26,4 @@ The typical authentication procedure consists of:
 2. **Initiation**: To initiate authentication the authenticator will periodically transmit EAP-Request Identity frames to a special Layer 2 MAC address (01:80:C2:00:00:03) on the local network segment. The supplicant listens at this address, and on receipt of the EAP-Request Identity frame, it responds with an EAP-Response Identity frame containing an identifier for the supplicant such as a User ID. The authenticator then encapsulates this Identity response in a RADIUS Access-Request packet and forwards it on to the authentication server.
 3. **Negotiation** _(Technically EAP negotiation)_
 4. **Authentication**: If the authentication server and supplicant agree on an EAP Method, EAP Requests and Responses are sent between the supplicant and the authentication server.
-# RADIUS
+# [RADIUS](https://www.techtarget.com/searchsecurity/definition/RADIUS)
