@@ -30,3 +30,5 @@ The typical authentication procedure consists of:
 RADIUS (Remote Authentication Dial-In User Service) is a client-server protocol and software that enables remote access servers to communicate with a central server to authenticate dial-in users and authorize their access to the requested system or service.
 
 RADIUS enables a company to maintain user profiles in a central database that all remote servers can share. Having a central database provides better security, enabling a company to set up a policy that can be applied at a single administered network point.
+
+RADIUS was originally designed to support large numbers of users connecting remotely to internet service providers (ISPs) or corporate networks via modem pools or other point-to-point serial line links.
