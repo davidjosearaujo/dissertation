@@ -45,3 +45,7 @@ Types of remote user access authentication servers can include:
 ![[Pasted image 20241112105316.png]]When an end user opens a connection with a remote network, the NAS initiates a RADIUS exchange with the authentication server.
 
 When a remote user initiates a connection through a NAS, the request can include the remote user ID, password and IP address. The NAS then sends a request for authentication to the RADIUS server.
+## How are RADIUS servers used?
+RADIUS authenticates using two approaches:
+- **Password Authentication Protocol (PAP)**. The RADIUS client forwards the remote user's user ID and password to the RADIUS authentication server. If the credentials are correct, the server authenticates the user and the RADIUS client enables the remote user to connect to the network.
+- **Challenge Handshake Authentication Protocol (CHAP)**. Also known as a three-way handshake, CHAP authentication relies on the client and server using an encrypted shared secret. Compared to PAP, CHAP authentication is considered more secure because it encrypts authentication exchanges and it can be configured to do repeated mid-session authentications.
