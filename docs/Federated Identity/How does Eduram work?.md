@@ -49,3 +49,5 @@ When a remote user initiates a connection through a NAS, the request can include
 RADIUS authenticates using two approaches:
 - **Password Authentication Protocol (PAP)**. The RADIUS client forwards the remote user's user ID and password to the RADIUS authentication server. If the credentials are correct, the server authenticates the user and the RADIUS client enables the remote user to connect to the network.
 - **Challenge Handshake Authentication Protocol (CHAP)**. Also known as a three-way handshake, CHAP authentication relies on the client and server using an encrypted shared secret. Compared to PAP, CHAP authentication is considered more secure because it encrypts authentication exchanges and it can be configured to do repeated mid-session authentications.
+
+A RADIUS proxy client can be configured to forward RADIUS authentication requests to other RADIUS servers. RADIUS proxies enable centralized authentication in large or geographically dispersed networks.
