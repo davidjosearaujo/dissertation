@@ -37,3 +37,9 @@ In the RADIUS protocol, remote network users connect to their networks through a
 
 Unlike other client-server applications, where the client is often an individual user, RADIUS clients are the NAS systems used to access a network and the authentication server is the RADIUS server.
 ![[Pasted image 20241112104926.png]]
+Types of remote user access authentication servers can include:
+- **Dial-in servers**, which mediate access to corporate or ISP networks through modem pools.
+- **Virtual private network servers**, which accept requests from remote users to set up secure connections to a private network.
+- **Wireless access points**, which accept requests from wireless clients to connect to a network.
+- **Managed network access switches** that implement the 802.1x authenticated access protocol to mediate access to networks by remote users.
+![[Pasted image 20241112105316.png]]
