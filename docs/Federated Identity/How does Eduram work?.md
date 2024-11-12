@@ -33,3 +33,7 @@ RADIUS enables a company to maintain user profiles in a central database that al
 
 RADIUS was originally designed to support large numbers of users connecting remotely to internet service providers (ISPs) or corporate networks via modem pools or other point-to-point serial line links.
 ## How does RADIUS authentication work?
+In the RADIUS protocol, remote network users connect to their networks through a network access server (NAS).
+
+Unlike other client-server applications, where the client is often an individual user, RADIUS clients are the NAS systems used to access a network and the authentication server is the RADIUS server.
+![[Pasted image 20241112104926.png]]
