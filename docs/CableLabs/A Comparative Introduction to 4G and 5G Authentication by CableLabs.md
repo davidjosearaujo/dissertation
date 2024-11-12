@@ -8,7 +8,6 @@ From an authentication perspective, a cellular network consists of three main co
 Each UE has a universal integrated circuit card (UICC) hosting at least a universal subscriber identity module (USIM) application, which **stores a cryptographic key that is shared with the subscriber’s home network**.
 ## 4G EPS-AKA
 The EPS-AKA is triggered after the UE completes the Radio Resource Control (RRC) procedure with eNodeB and sends an Attach Request message to the MME.
-
 ![[Pasted image 20241014173803.png]]
 
 There are **two weaknesses in 4G EPS-AKA**.
@@ -26,9 +25,7 @@ The **Authentication Server Function (AUSF)** is in a home network and **perform
 The **Subscription Identifier De-concealing Function (SIDF) decrypts a Subscription Concealed Identifier (SUCI)** to obtain its long-term identity, namely the Subscription Permanent Identifier (SUPI), e.g., the IMSI. In 5G, a subscriber long-term identity is always transmitted over the radio interfaces in an encrypted form. More specifically, a **public key-based encryption is used to protect the SUPI**. Therefore, only the SIDF has access to the private key associated with a public key distributed to UEs for encrypting their SUPIs.
 # 5G Authentication Framework
 A unified authentication framework has been defined to make 5G authentication both open (e.g., with the support of EAP) and access-network agnostic (e.g., supporting both 3GGP access networks and non-3GPP access networks such as Wi-Fi and cable networks).
-
 ![[Pasted image 20241014203612.png]]
-
 **When EAP** (Extensible Authentication Protocol) **is used** (e.g., EAP-AKA’ or EAP-TLS), EAP **authentication is between the UE** (an EAP peer) **and the AUSF** (an EAP server) **through the SEAF** (functioning as an EAP pass-through authenticator).
 
 **When authentication is over untrusted, non-3GPP access networks**, a new entity, namely the **Non-3GPP Interworking Function (N3IWF), is required** to function **as a VPN server** to allow the UE to access the 5G core over untrusted, non-3GPP networks through IPsec (IP Security) tunnels.
@@ -69,4 +66,3 @@ Such a fundamental difference is significant in that EAP-TLS removes the need to
 # Comparison
 Table 1 compares 4G and 5G authentication methods, highlighting differences between the two. For example, 5G authentication has different entities from 4G because 5G adopts service-based architecture. Other major differences include the trust models in methods based on EAP-TLS or AKA protocol, the entities that make authentication decisions, and anchor key hierarchy.
 ![[Pasted image 20241015180643.png]]
-# Conclusions

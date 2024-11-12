@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "3772ab16eabe00f5",
+        "id": "9e5eefa3e1f0d1cc",
         "type": "tabs",
         "children": [
           {
-            "id": "b74e19cc4d6f57cb",
+            "id": "c202dfecd8665ea5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Federated Identity/How does Eduram work?.md",
+                "file": "Broadband Forum/TR-470.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "How does Eduram work?"
+              "title": "TR-470"
             }
           }
         ]
@@ -77,7 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 231.5
+    "width": 415.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -164,15 +164,23 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "b74e19cc4d6f57cb",
+  "active": "c202dfecd8665ea5",
   "lastOpenFiles": [
+    "Broadband Forum/TR-458.md",
+    "Broadband Forum/TR-456.md",
+    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "CableLabs/Pasted image 20241014163827.png",
+    "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
+    "ENISA/2024-10-22_11-38.png",
+    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
+    "Federated Identity/How does Eduram work?.md",
     "Federated Identity/Pasted image 20241112105316.png",
     "Federated Identity/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111175529.png",
     "Federated Identity/Pasted image 20241111154114.png",
     "Federated Identity/Pasted image 20241111152310.png",
     "Federated Identity/Identity Provider.md",
-    "Federated Identity/How does Eduram work?.md",
     "Federated Identity/Federated Identity.md",
     "Extensible Authentication Protocol.md",
     "Federated Identity/Federates Identities Primer citations.txt",
@@ -183,30 +191,21 @@
     "images/Pasted image 20241030152521.png",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-470.md",
-    "Broadband Forum/TR-456.md",
-    "Broadband Forum/TR-458.md",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
-    "images/Pasted image 20241029160016.png",
-    "images/Pasted image 20241029155258.png",
-    "images/Pasted image 20241029154028.png",
-    "images/Pasted image 20241029153655.png",
+    "Broadband Forum/Pasted image 20241029160016.png",
+    "Broadband Forum/Pasted image 20241029155258.png",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
-    "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/23501-i70.pdf",
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/33501-i70.pdf",
-    "images/Pasted image 20241028143737.png",
     "3GPP Specification/5G Identifiers.md",
     "ENISA/ENISA Report - Security in 5G Specifications.pdf",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Untitled.canvas",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
-    "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "Altice Labs/Notes.md",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Articles/SAGERAN W-AGF Device.md",
