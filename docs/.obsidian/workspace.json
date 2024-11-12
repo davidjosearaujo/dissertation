@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Broadband Forum/TR-470.md",
+                "file": "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TR-470"
+              "title": "Security architecture and procedures for 5G system - 33.501"
             }
           }
         ]
@@ -166,6 +166,12 @@
   },
   "active": "c202dfecd8665ea5",
   "lastOpenFiles": [
+    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+    "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
+    "3GPP Specification/5G Identifiers.md",
+    "Altice Labs/Notes.md",
+    "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "Broadband Forum/TR-470.md",
     "Broadband Forum/TR-458.md",
     "Broadband Forum/TR-456.md",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
@@ -190,24 +196,18 @@
     "Knowledge Path.md",
     "images/Pasted image 20241030152521.png",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
-    "Broadband Forum/TR-470.md",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
     "Broadband Forum/Pasted image 20241029160016.png",
     "Broadband Forum/Pasted image 20241029155258.png",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
-    "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
-    "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/23501-i70.pdf",
     "3GPP Specification/23316-i60.pdf",
     "3GPP Specification/33501-i70.pdf",
-    "3GPP Specification/5G Identifiers.md",
     "ENISA/ENISA Report - Security in 5G Specifications.pdf",
     "Untitled.canvas",
-    "Altice Labs/Notes.md",
-    "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Articles/SAGERAN W-AGF Device.md",
     "Tasks.md",
     "ROMARS/Untrusted non-3GPP access (N3IWF).md",
