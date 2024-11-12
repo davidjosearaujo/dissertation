@@ -42,4 +42,6 @@ Types of remote user access authentication servers can include:
 - **Virtual private network servers**, which accept requests from remote users to set up secure connections to a private network.
 - **Wireless access points**, which accept requests from wireless clients to connect to a network.
 - **Managed network access switches** that implement the 802.1x authenticated access protocol to mediate access to networks by remote users.
-![[Pasted image 20241112105316.png]]
+![[Pasted image 20241112105316.png]]When an end user opens a connection with a remote network, the NAS initiates a RADIUS exchange with the authentication server.
+
+When a remote user initiates a connection through a NAS, the request can include the remote user ID, password and IP address. The NAS then sends a request for authentication to the RADIUS server.
