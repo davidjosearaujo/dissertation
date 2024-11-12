@@ -27,3 +27,6 @@ The typical authentication procedure consists of:
 3. **Negotiation** _(Technically EAP negotiation)_
 4. **Authentication**: If the authentication server and supplicant agree on an EAP Method, EAP Requests and Responses are sent between the supplicant and the authentication server.
 # [RADIUS](https://www.techtarget.com/searchsecurity/definition/RADIUS)
+RADIUS (Remote Authentication Dial-In User Service) is a client-server protocol and software that enables remote access servers to communicate with a central server to authenticate dial-in users and authorize their access to the requested system or service.
+
+RADIUS enables a company to maintain user profiles in a central database that all remote servers can share. Having a central database provides better security, enabling a company to set up a policy that can be applied at a single administered network point.
