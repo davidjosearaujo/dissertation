@@ -121,4 +121,4 @@ The EAP process works as follows:
 3. The authentication server asks the AP for proof of the validity of the identification information.
 4. The AP obtains verification from the user and sends it back to the authentication server.
 5. The user is connected to the network as requested.
-## What can we use as _idendity_ in legacy devices
+## What can we use as _identity_ in legacy devices

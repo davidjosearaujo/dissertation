@@ -11,10 +11,15 @@
             "id": "e44bd8b765c28535",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Knowledge Path.md",
+                "mode": "source",
+                "backlinks": false,
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Knowledge Path"
             }
           }
         ]
@@ -89,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
+                "file": "Knowledge Path.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Procedures for the 5G System (5GS) - 23.502"
+              "title": "Backlinks for Knowledge Path"
             }
           },
           {
@@ -135,18 +140,18 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md"
+                "file": "Knowledge Path.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Procedures for the 5G System (5GS) - 23.502"
+              "title": "Outline of Knowledge Path"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -162,6 +167,7 @@
   },
   "active": "e44bd8b765c28535",
   "lastOpenFiles": [
+    "Extensible Authentication Protocol.md",
     "3GPP Specification/4_2_2_2_2_general_registration_procedure.png",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
@@ -183,7 +189,6 @@
     "Federated Identity/Federated Identity.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Knowledge Path.md",
-    "Extensible Authentication Protocol.md",
     "images/Pasted image 20241030152521.png",
     "images",
     "Tasks.md",
@@ -195,7 +200,6 @@
     "images/Pasted image 20240926175453.png",
     "images/Pasted image 20240926175210.png",
     "images/Pasted image 20240926175108.png",
-    "3GPP Specification/Pasted image 20241017151403.png",
     "Altice Labs/Nexus.IWF.pdf",
     "Federated Identity/Federates Identities Primer citations.txt",
     "Federated Identities/ScienceDirect_citations_1730969684766.txt",
