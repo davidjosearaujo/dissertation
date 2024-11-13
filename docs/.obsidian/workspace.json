@@ -35,9 +35,21 @@
               "icon": "lucide-file",
               "title": "Questions"
             }
+          },
+          {
+            "id": "54cafb855a8a5c32",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.7.6"
+              },
+              "icon": "lucide-file",
+              "title": "Release Notes 1.7.6"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -154,11 +166,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Questions.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of Questions"
+              "title": "Outline"
             }
           }
         ],
@@ -180,7 +190,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "807aba7e4f0c2cdd",
+  "active": "54cafb855a8a5c32",
   "lastOpenFiles": [
     "Knowledge Path.md",
     "Questions.md",
