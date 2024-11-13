@@ -8,3 +8,4 @@ The identity of a 5G device is designed to be both constant and universal in cer
 - **Roaming and Handover**:
 	- Home and Visited Networks: The 5G identity allows devices to maintain their identity when moving between different network domains, like when roaming internationally or transitioning between different network segments of the same operator.
 	- **Network Interfaces (e.g., gNBs and Residential Gateways)**: The device's identity remains valid across different access points, such as antennas (gNBs) or fixed-wireless access points (residential gateways).
+A 5G device’s identity ensures that it can authenticate and maintain secure communication anywhere within the network coverage of its operator or partner networks during roaming. This universal recognition allows seamless mobility, regardless of which base station or residential gateway the device uses for access.
