@@ -20,3 +20,6 @@ Exactly, you've identified a critical limitation in your current prototype. The 
 #### MAC Address Characteristics
 - **Device-Specific**: It only serves as a unique address within a given network and doesn't inherently convey a constant, network-wide identity.
 - **Changeability**: MAC addresses can be changed or spoofed. Some devices allow for MAC randomization for privacy reasons, which means that the identity presented by the device can vary between different connections or networks.
+#### Gateway Dependence
+- **Local Scope**: A MAC address is specific to the local network layer (Layer 2) and doesn't persist across different gateways or broader network segments.
+- **Limited Universality**: Unlike credentials stored in a SIM or eSIM that are recognized across an entire 5G network, MAC-based identification does not provide a universal identity
