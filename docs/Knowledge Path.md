@@ -122,4 +122,10 @@ The EAP process works as follows:
 4. The AP obtains verification from the user and sends it back to the authentication server.
 5. The user is connected to the network as requested.
 # Challenges
-The current prototype has 
+The [[Current Prototype Limitations|current prototype has a major limitation]] in terms of device **identity consistency and universality**.
+
+We need to devise a solution that **enables a device to be identified universally in the network** and where its **identity is independent of its gateway**.
+
+A few solution may be taken into account.
+## Possible solutions
+### Federated Identity
