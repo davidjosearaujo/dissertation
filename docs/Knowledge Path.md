@@ -114,11 +114,12 @@ AMF requirements:
 ### [[5G Identifiers|5G Identifiers]]
 SUCI and SUPI
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
-# Understanding EAP Framework
+# [[Extensible Authentication Protocol|Understanding EAP Framework]]
 The EAP process works as follows:
 1. A user requests connection to a wireless network through an AP.
 2. The AP requests identification data from the user and transmits that data to an authentication server. ***(What can be identity of a legacy IOT device in 5GC?)***
 3. The authentication server asks the AP for proof of the validity of the identification information.
 4. The AP obtains verification from the user and sends it back to the authentication server.
 5. The user is connected to the network as requested.
-## What can we use as _identity_ in legacy devices
+# Challenges
+The current prototype has 
