@@ -17,3 +17,6 @@ A 5G device’s identity ensures that it can authenticate and maintain secure co
 ## Limitation of current prototype
 Exactly, you've identified a critical limitation in your current prototype. The reliance on **MAC addresses** as identifiers for legacy IoT devices introduces issues related to **consistency** and **universality**:
 ### Why MAC-Based Identity Is Not Constant or Universal
+#### MAC Address Characteristics
+- **Device-Specific**: It only serves as a unique address within a given network and doesn't inherently convey a constant, network-wide identity.
+- **Changeability**: MAC addresses can be changed or spoofed. Some devices allow for MAC randomization for privacy reasons, which means that the identity presented by the device can vary between different connections or networks.
