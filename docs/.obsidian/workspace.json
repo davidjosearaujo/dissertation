@@ -55,8 +55,7 @@
               "title": "Remote Authentication Dial-In User Service"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -202,9 +201,9 @@
   },
   "active": "2add179ffe8f269b",
   "lastOpenFiles": [
-    "RADIUS/Remote Authentication Dial-In User Service.md",
     "EAP/Extensible Authentication Protocol.md",
     "Knowledge Path.md",
+    "RADIUS/Remote Authentication Dial-In User Service.md",
     "Federated Identity/Federated Identity.md",
     "Federated Identity/Identity Provider.md",
     "Federated Identity/How does Eduram work?.md",

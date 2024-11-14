@@ -125,6 +125,4 @@ The EAP process works as follows:
 The [[Current Prototype Limitations|current prototype has a major limitation]] in terms of device **identity consistency and universality**.
 
 We need to devise a solution that **enables a device to be identified universally in the network** and where its **identity is independent of its gateway**.
-## Possible solutions
-### Federated Identity
-Implement a system where devices have centralized credentials managed by a federated identity provider. This would allow them to maintain a consistent identity recognized across various network access points.
+## Important Questions
