@@ -9,10 +9,9 @@ EAP uses the 802.1x standard as its authentication mechanism over a local area n
 **The organization or user must choose what type of EAP to use based on their requirements. EAP transfers authentication information between the user and authenticator database or server.**
 
 802.1X authentication involves three parties: a **supplicant**, an **authenticator**, and an **authentication server**.
-- The supplicant is a client device (such as a laptop) that wishes to attach to the LAN/WLAN;
-- The authenticator is a network device that provides a data link between the client and the network and can allow or block network traffic between the two, such as an Ethernet switch or wireless access point;
-- The authentication server is typically a trusted server that can receive and respond to requests for network access, and can tell the authenticator if the connection is to be allowed, and various settings that should apply to that client's connection or setting.
-![[Pasted image 20241030152521.png]]
+- The **supplicant** is a client device (such as a laptop) that wishes to attach to the LAN/WLAN;
+- The **authenticator** is a network device that provides a data link between the client and the network and can allow or block network traffic between the two, such as an Ethernet switch or wireless access point;
+- The **authentication server** is typically a trusted server that can receive and respond to requests for network access, and can tell the authenticator if the connection is to be allowed, and various settings that should apply to that client's connection or setting.
 ![[Pasted image 20241111154114.png]]
 ## Typical authentication progression
 ![[Pasted image 20241111175529.png]]

@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "2ba1ea6a1fe9f829",
+        "id": "d148614fbbdb7f6a",
         "type": "tabs",
         "children": [
           {
@@ -20,30 +20,15 @@
               "icon": "lucide-file",
               "title": "Knowledge Path"
             }
-          },
-          {
-            "id": "91a9436d5c7d9111",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Federated Identity/How does Eduram work?.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "How does Eduram work?"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
-        "id": "abfd9387f0a2b755",
+        "id": "2ba1ea6a1fe9f829",
         "type": "tabs",
         "children": [
           {
-            "id": "e44bd8b765c28535",
+            "id": "5c275ea2637b6012",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -55,8 +40,23 @@
               "icon": "lucide-file",
               "title": "Extensible Authentication Protocol"
             }
+          },
+          {
+            "id": "0cfb24185df7a0d8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "RADIUS/Remote Authentication Dial-In User Service.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Remote Authentication Dial-In User Service"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -112,7 +112,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 415.5
+    "width": 415.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -174,10 +175,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "EAP/Extensible Authentication Protocol.md"
+                "file": "RADIUS/Remote Authentication Dial-In User Service.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Extensible Authentication Protocol"
+              "title": "Outline of Remote Authentication Dial-In User Service"
             }
           }
         ],
@@ -199,19 +200,21 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "e44bd8b765c28535",
+  "active": "0cfb24185df7a0d8",
   "lastOpenFiles": [
+    "Federated Identity/Federated Identity.md",
+    "Federated Identity/Identity Provider.md",
     "Federated Identity/How does Eduram work?.md",
+    "RADIUS/Remote Authentication Dial-In User Service.md",
     "EAP/Extensible Authentication Protocol.md",
-    "Federated Identity/Pasted image 20241112105316.png",
-    "Federated Identity/Pasted image 20241112104926.png",
+    "Knowledge Path.md",
+    "RADIUS/Pasted image 20241112104926.png",
+    "Federated Identity/Pasted image 20241111152310.png",
+    "RADIUS",
+    "RADIUS/Pasted image 20241112105316.png",
     "EAP/Pasted image 20241111175529.png",
     "EAP/Pasted image 20241111154114.png",
-    "Federated Identity/Pasted image 20241111152310.png",
     "Current Prototype Limitations.md",
-    "Federated Identity/Identity Provider.md",
-    "Federated Identity/Federated Identity.md",
-    "Knowledge Path.md",
     "EAP/Pasted image 20241030152521.png",
     "EAP",
     "3GPP Specification/4_2_2_2_2_general_registration_procedure.png",
@@ -243,9 +246,7 @@
     "Federated Identity",
     "Broadband Forum/TR-470-5G-Wireless-Wireline-Convergence-Architecture.pdf",
     "Broadband Forum/TR-458-Wireless-and-Wireline-Convergence-with-Control-and-User-Plane-Separation.-Reference-Architecture,-Interface,-and-Protocol-Specification.pdf",
-    "3GPP Specification/23501-i70.pdf",
     "Untitled.canvas",
-    "Articles/SAGERAN W-AGF Device.md",
-    "ROMARS/Untrusted non-3GPP access (N3IWF).md"
+    "Articles/SAGERAN W-AGF Device.md"
   ]
 }
