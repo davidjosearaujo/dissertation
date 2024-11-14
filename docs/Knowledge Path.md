@@ -130,3 +130,6 @@ We need to devise a solution that **enables a device to be identified universall
 Federated Identity can use EAP as the mechanism for authenticating devices or users. In this scenario, EAP acts as a transport for authentication data that can be linked to a federated identity system, allowing secure credential exchange and verification.
 ### When does FID uses EAP?
 EAP is particularly common in network access control scenarios where devices or users are authenticated to access a network. For IoT or wireless access, EAP can be used in conjunction with federated identity systems to provide seamless authentication.
+### Is EAP Only Used for FID?
+No, EAP is not exclusively for Federated Identity. EAP is a versatile protocol used for various types of network access authentication:
+- 
