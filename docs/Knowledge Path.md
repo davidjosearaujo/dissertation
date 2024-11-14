@@ -128,3 +128,4 @@ We need to devise a solution that **enables a device to be identified universall
 ## Important Questions
 ### Relation Between Federated Identity and EAP (802.1x)
 Federated Identity can use EAP as the mechanism for authenticating devices or users. In this scenario, EAP acts as a transport for authentication data that can be linked to a federated identity system, allowing secure credential exchange and verification.
+### When does FID uses EAP?
