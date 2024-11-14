@@ -133,5 +133,10 @@ EAP is particularly common in network access control scenarios where devices or 
 ### Is EAP Only Used for FID?
 No, EAP is not exclusively for Federated Identity. EAP is a versatile protocol used for various types of network access authentication:
 - **Enterprise Wi-Fi Networks**: EAP is widely used in Wi-Fi authentication (e.g., WPA2-Enterprise) to securely connect users or devices.
-- - - **VPNs and Other Secure Access Points**: EAP can be implemented to authenticate users in different contexts without involving a federated identity system.
+- **VPNs and Other Secure Access Points**: EAP can be implemented to authenticate users in different contexts without involving a federated identity system.
 ### Is EAP Only for RADIUS?
+No, EAP is not limited to RADIUS (Remote Authentication Dial-In User Service), but they are commonly used together:
+- **RADIUS**: Often acts as an intermediary that carries EAP messages between a client and an authentication server.
+- **Other Protocols**: EAP can also be used with other transport protocols such as **Diameter** and directly with authentication servers without RADIUS as the intermediary.
+EAP is a framework that can operate on various backends and does not mandate the use of RADIUS.
+### Does FID Always Need RADIUS?

@@ -202,10 +202,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "EAP/Extensible Authentication Protocol.md"
+                "file": "Knowledge Path.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Extensible Authentication Protocol"
+              "title": "Outline of Knowledge Path"
             }
           }
         ],
@@ -227,10 +227,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "5c275ea2637b6012",
+  "active": "2add179ffe8f269b",
   "lastOpenFiles": [
-    "Federated Identity/Identity Provider.md",
     "EAP/Extensible Authentication Protocol.md",
+    "Federated Identity/Identity Provider.md",
     "Federated Identity/Federated Identity.md",
     "Knowledge Path.md",
     "Current Prototype Limitations.md",
