@@ -121,7 +121,7 @@ The EAP process works as follows:
 3. The authentication server asks the AP for proof of the validity of the identification information.
 4. The AP obtains verification from the user and sends it back to the authentication server.
 5. The user is connected to the network as requested.
-# Challenges
+# [[Current Prototype Limitations|Challenges]]
 The [[Current Prototype Limitations|current prototype has a major limitation]] in terms of device **identity consistency and universality**.
 
 We need to devise a solution that **enables a device to be identified universally in the network** and where its **identity is independent of its gateway**.
@@ -132,4 +132,6 @@ Federated Identity can use EAP as the mechanism for authenticating devices or us
 EAP is particularly common in network access control scenarios where devices or users are authenticated to access a network. For IoT or wireless access, EAP can be used in conjunction with federated identity systems to provide seamless authentication.
 ### Is EAP Only Used for FID?
 No, EAP is not exclusively for Federated Identity. EAP is a versatile protocol used for various types of network access authentication:
-- 
+- **Enterprise Wi-Fi Networks**: EAP is widely used in Wi-Fi authentication (e.g., WPA2-Enterprise) to securely connect users or devices.
+- - - **VPNs and Other Secure Access Points**: EAP can be implemented to authenticate users in different contexts without involving a federated identity system.
+### Is EAP Only for RADIUS?
