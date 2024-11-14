@@ -157,3 +157,6 @@ Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Securi
 #### Authorization Decisions
 - **Access Control**: Beyond simple authentication, RADIUS servers configured as IdPs can make **authorization decisions** based on policies defined by the institution. For instance, the server can check if a user is allowed to access certain network resources or services based on their roles or group memberships.
 - **Policy Enforcement**: The RADIUS server can enforce policies that control the level of access granted to authenticated users. This is often defined through **RADIUS attributes** that dictate the user's permissions once authenticated.
+#### Acting as an IdP in a Federated Identity Context
+- **Federation Role**: When acting as an IdP within a federated identity system like **eduroam**, the RADIUS server of the user’s home institution authenticates the user even when they are trying to connect from a different network. This allows the user to maintain a **consistent identity** across participating networks.
+- **Secure Credential Handling**: The user’s credentials are not exposed to the visiting (guest) network. Instead, the authentication request is securely routed to the home institution's RADIUS server, which validates the credentials and responds with a success or failure.
