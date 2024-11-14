@@ -126,7 +126,7 @@ The [[Current Prototype Limitations|current prototype has a major limitation]] i
 
 We need to devise a solution that **enables a device to be identified universally in the network** and where its **identity is independent of its gateway**.
 ## Important Questions
-### Relation Between Federated Identity and EAP (802.1x)
+### What's the Relation Between Federated Identity and EAP (802.1x)
 Federated Identity can use EAP as the mechanism for authenticating devices or users. In this scenario, EAP acts as a transport for authentication data that can be linked to a federated identity system, allowing secure credential exchange and verification.
 ### When does FID uses EAP?
 EAP is particularly common in network access control scenarios where devices or users are authenticated to access a network. For IoT or wireless access, EAP can be used in conjunction with federated identity systems to provide seamless authentication.
