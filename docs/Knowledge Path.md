@@ -148,3 +148,9 @@ Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Securi
 - **Client Certificates**: Ensure mutual authentication between the client and the server, providing a higher level of security.
 - **Use Cases**: This is often used in enterprise environments where devices and users need to establish secure connections using certificate-based credentials.
 ### How can RADIUS servers act as an IdP?
+#### Authentication and Credential Verification
+- **Primary Role**: A RADIUS server acting as an IdP is responsible for authenticating user credentials. When a client (e.g., an IoT device or a user device) connects to the network, the RADIUS server verifies these credentials against an **authentication database**.
+- **Integration with Backend Directories**: The RADIUS server can be configured to interface with backend directories such as **LDAP** (Lightweight Directory Access Protocol), **Active Directory**, or **SQL databases** where user identities and credentials are stored. This integration allows the RADIUS server to validate user credentials and ensure that access is granted only to authenticated users.
+#### Handling Authentication Protocols
+- **EAP (Extensible Authentication Protocol)**: RADIUS servers often support various EAP methods for secure authentication. This enables them to handle methods such as **EAP-TLS** (certificate-based), **EAP-PEAP**, or **EAP-TTLS**, which can use credentials like username/password combinations or digital certificates.
+- **Role in eduroam**: In the eduroam infrastructure, the home institution's RADIUS server acts as the **IdP** by receiving the authentication request routed through the eduroam RADIUS network and using an EAP method to verify the user.
