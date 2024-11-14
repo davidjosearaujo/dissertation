@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Knowledge Path.md",
+                "file": "Current Prototype Limitations.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Knowledge Path"
+              "title": "Current Prototype Limitations"
             }
           }
         ]
@@ -139,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Knowledge Path.md"
+                "file": "Current Prototype Limitations.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Knowledge Path"
+              "title": "Outline of Current Prototype Limitations"
             }
           }
         ],
@@ -166,8 +166,8 @@
   },
   "active": "e44bd8b765c28535",
   "lastOpenFiles": [
-    "EAP/Pasted image 20241030152521.png",
     "Knowledge Path.md",
+    "EAP/Pasted image 20241030152521.png",
     "EAP",
     "EAP/Extensible Authentication Protocol.md",
     "Current Prototype Limitations.md",
