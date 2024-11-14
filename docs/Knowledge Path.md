@@ -129,3 +129,4 @@ We need to devise a solution that **enables a device to be identified universall
 A few solution may be taken into account.
 ## Possible solutions
 ### Federated Identity
+Implement a system where devices have centralized credentials managed by a federated identity provider. This would allow them to maintain a consistent identity recognized across various network access points.
