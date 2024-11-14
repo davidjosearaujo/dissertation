@@ -175,10 +175,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "RADIUS/Remote Authentication Dial-In User Service.md"
+                "file": "Knowledge Path.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Remote Authentication Dial-In User Service"
+              "title": "Outline of Knowledge Path"
             }
           }
         ],
@@ -200,14 +200,14 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "0cfb24185df7a0d8",
+  "active": "2add179ffe8f269b",
   "lastOpenFiles": [
-    "Federated Identity/Federated Identity.md",
-    "Federated Identity/Identity Provider.md",
-    "Federated Identity/How does Eduram work?.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
     "EAP/Extensible Authentication Protocol.md",
     "Knowledge Path.md",
+    "Federated Identity/Federated Identity.md",
+    "Federated Identity/Identity Provider.md",
+    "Federated Identity/How does Eduram work?.md",
     "RADIUS/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111152310.png",
     "RADIUS",
