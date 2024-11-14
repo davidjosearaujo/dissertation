@@ -189,10 +189,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Federated Identity/How does Eduram work?.md"
+                "file": "Knowledge Path.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of How does Eduram work?"
+              "title": "Outline of Knowledge Path"
             }
           }
         ],
@@ -214,12 +214,12 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "1f09ca6e17128217",
+  "active": "2add179ffe8f269b",
   "lastOpenFiles": [
+    "Federated Identity/How does Eduram work?.md",
     "EAP/Extensible Authentication Protocol.md",
     "Federated Identity/Identity Provider.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
-    "Federated Identity/How does Eduram work?.md",
     "Current Prototype Limitations.md",
     "Knowledge Path.md",
     "Federated Identity/Federated Identity.md",

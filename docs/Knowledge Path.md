@@ -147,3 +147,4 @@ No, Federated Identity does not always need RADIUS. While RADIUS is a common pro
 Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Security) is one of the most secure and commonly implemented EAP methods that use client certificates instead of traditional username/password pairs.
 - **Client Certificates**: Ensure mutual authentication between the client and the server, providing a higher level of security.
 - **Use Cases**: This is often used in enterprise environments where devices and users need to establish secure connections using certificate-based credentials.
+### How can RADIUS servers act as an IdP?
