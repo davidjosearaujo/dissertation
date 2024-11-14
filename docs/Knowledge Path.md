@@ -160,3 +160,10 @@ Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Securi
 #### Acting as an IdP in a Federated Identity Context
 - **Federation Role**: When acting as an IdP within a federated identity system like **eduroam**, the RADIUS server of the user’s home institution authenticates the user even when they are trying to connect from a different network. This allows the user to maintain a **consistent identity** across participating networks.
 - **Secure Credential Handling**: The user’s credentials are not exposed to the visiting (guest) network. Instead, the authentication request is securely routed to the home institution's RADIUS server, which validates the credentials and responds with a success or failure.
+#### Support for Different User Authentication Methods
+- **Certificates**: In more secure configurations, the RADIUS server can verify **digital certificates** presented by the client, especially in **EAP-TLS** scenarios. This method ensures mutual authentication between the client and the server, enhancing security.
+#### How It Works in Practice
+1. **Authentication Request**: A user or device initiates a connection, and the local access point forwards the request to a RADIUS server.
+2. **Routing**: If the user is from a different institution (e.g., in eduroam), the request is routed through a chain of RADIUS servers until it reaches the home institution's RADIUS server.
+3. **Credential Verification**: The home RADIUS server (acting as the IdP) checks the credentials against its database or directory service.
+4. **Response**: The server sends an accept or reject response back through the network, ultimately reaching the original access point and determining the user's access.
