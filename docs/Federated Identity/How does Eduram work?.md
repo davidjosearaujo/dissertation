@@ -14,11 +14,8 @@ To protect the privacy of the traffic from the user’s device over the wireless
 The user’s home institution is responsible for maintaining and monitoring user information, even when the user is at a guest campus. Thus, this data is not shared with other connected institutions.
 # IEEE 802.1X
 IEEE 802.1X defines the encapsulation of the Extensible Authentication Protocol (EAP) over wired IEEE 802 networks  and over 802.11 wireless networks, which is known as "EAP over LAN" or EAPOL.
-![[Pasted image 20241111154114.png]]
-802.1X authentication involves three parties: a **supplicant**, an **authenticator**, and an **authentication server**.
-- The supplicant is a client device (such as a laptop) that wishes to attach to the LAN/WLAN;
-- The authenticator is a network device that provides a data link between the client and the network and can allow or block network traffic between the two, such as an Ethernet switch or wireless access point;
-- The authentication server is typically a trusted server that can receive and respond to requests for network access, and can tell the authenticator if the connection is to be allowed, and various settings that should apply to that client's connection or setting.
+
+
 ## Typical authentication progression
 ![[Pasted image 20241111175529.png]]
 The typical authentication procedure consists of:

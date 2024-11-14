@@ -20,8 +20,23 @@
               "icon": "lucide-file",
               "title": "Knowledge Path"
             }
+          },
+          {
+            "id": "91a9436d5c7d9111",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Federated Identity/How does Eduram work?.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "How does Eduram work?"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
         "id": "abfd9387f0a2b755",
@@ -39,20 +54,6 @@
               },
               "icon": "lucide-file",
               "title": "Extensible Authentication Protocol"
-            }
-          },
-          {
-            "id": "e6f6da05731361d9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Current Prototype Limitations.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Current Prototype Limitations"
             }
           }
         ]
@@ -111,8 +112,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 415.5,
-    "collapsed": true
+    "width": 415.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -201,9 +201,17 @@
   },
   "active": "e44bd8b765c28535",
   "lastOpenFiles": [
-    "Knowledge Path.md",
-    "Current Prototype Limitations.md",
+    "Federated Identity/How does Eduram work?.md",
     "EAP/Extensible Authentication Protocol.md",
+    "Federated Identity/Pasted image 20241112105316.png",
+    "Federated Identity/Pasted image 20241112104926.png",
+    "EAP/Pasted image 20241111175529.png",
+    "EAP/Pasted image 20241111154114.png",
+    "Federated Identity/Pasted image 20241111152310.png",
+    "Current Prototype Limitations.md",
+    "Federated Identity/Identity Provider.md",
+    "Federated Identity/Federated Identity.md",
+    "Knowledge Path.md",
     "EAP/Pasted image 20241030152521.png",
     "EAP",
     "3GPP Specification/4_2_2_2_2_general_registration_procedure.png",
@@ -222,20 +230,12 @@
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
-    "Federated Identity/How does Eduram work?.md",
-    "Federated Identity/Identity Provider.md",
-    "Federated Identity/Federated Identity.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "images",
     "Tasks.md",
     "images/Pasted image 20241004114652.png",
     "images/Pasted image 20241001102256.png",
     "images/Pasted image 20240927153324.png",
-    "images/Pasted image 20240927124739.png",
-    "images/Pasted image 20240926175520.png",
-    "images/Pasted image 20240926175453.png",
-    "images/Pasted image 20240926175210.png",
-    "images/Pasted image 20240926175108.png",
     "Altice Labs/Nexus.IWF.pdf",
     "Federated Identity/Federates Identities Primer citations.txt",
     "Federated Identities/ScienceDirect_citations_1730969684766.txt",

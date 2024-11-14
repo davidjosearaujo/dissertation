@@ -8,13 +8,19 @@ EAP uses the 802.1x standard as its authentication mechanism over a local area n
 
 **The organization or user must choose what type of EAP to use based on their requirements. EAP transfers authentication information between the user and authenticator database or server.**
 
-The EAP process works as follows:
-1. A user requests connection to a wireless network through an AP.
-2. The AP requests identification data from the user and transmits that data to an authentication server. ***(What can be identity of a legacy IOT device in 5GC?)***
-3. The authentication server asks the AP for proof of the validity of the identification information.
-4. The AP obtains verification from the user and sends it back to the authentication server.
-5. The user is connected to the network as requested.
+802.1X authentication involves three parties: a **supplicant**, an **authenticator**, and an **authentication server**.
+- The supplicant is a client device (such as a laptop) that wishes to attach to the LAN/WLAN;
+- The authenticator is a network device that provides a data link between the client and the network and can allow or block network traffic between the two, such as an Ethernet switch or wireless access point;
+- The authentication server is typically a trusted server that can receive and respond to requests for network access, and can tell the authenticator if the connection is to be allowed, and various settings that should apply to that client's connection or setting.
 ![[Pasted image 20241030152521.png]]
+![[Pasted image 20241111154114.png]]
+## Typical authentication progression
+![[Pasted image 20241111175529.png]]
+The typical authentication procedure consists of:
+1. **Initialization**: On detection of a new supplicant, the port on the switch (authenticator) is enabled and set to the "unauthorized" state. In this state, only 802.1X traffic is allowed; other traffic, such as the Internet Protocol (and with that TCP and UDP), is dropped.
+2. **Initiation**: To initiate authentication the authenticator will periodically transmit EAP-Request Identity frames to a special Layer 2 MAC address (01:80:C2:00:00:03) on the local network segment. The supplicant listens at this address, and on receipt of the EAP-Request Identity frame, it responds with an EAP-Response Identity frame containing an identifier for the supplicant such as a User ID. The authenticator then encapsulates this Identity response in a RADIUS Access-Request packet and forwards it on to the authentication server.
+3. **Negotiation** _(Technically EAP negotiation)_
+4. **Authentication**: If the authentication server and supplicant agree on an EAP Method, EAP Requests and Responses are sent between the supplicant and the authentication server.
 # Tunneled EAP methods
 There are upwards of 40 EAP methods, including several commonly used ones that are often called inner methods or tunneled EAP methods. These include the following.
 ## EAP-TLS (Transport Layer Security)
