@@ -140,3 +140,10 @@ No, EAP is not limited to RADIUS (Remote Authentication Dial-In User Service), b
 - **Other Protocols**: EAP can also be used with other transport protocols such as **Diameter** and directly with authentication servers without RADIUS as the intermediary.
 EAP is a framework that can operate on various backends and does not mandate the use of RADIUS.
 ### Does FID Always Need RADIUS?
+No, Federated Identity does not always need RADIUS. While RADIUS is a common protocol used for network access control and can work with EAP for transporting authentication data, federated identity systems can also use other technologies:
+- **Direct Protocols**: Federated systems might use protocols like **SAML** or **OAuth** for web-based applications without involving RADIUS.
+- **Alternative Mechanisms**: Federated identity systems may integrate with authentication services and databases through APIs or other methods beyond RADIUS.
+### **Can EAP Be Used with Certificates Instead of Username/Password?**
+Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Security) is one of the most secure and commonly implemented EAP methods that use client certificates instead of traditional username/password pairs.
+- **Client Certificates**: Ensure mutual authentication between the client and the server, providing a higher level of security.
+- **Use Cases**: This is often used in enterprise environments where devices and users need to establish secure connections using certificate-based credentials.
