@@ -56,34 +56,21 @@
             }
           },
           {
-            "id": "0cfb24185df7a0d8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "RADIUS/Remote Authentication Dial-In User Service.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Remote Authentication Dial-In User Service"
-            }
-          },
-          {
             "id": "1f09ca6e17128217",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Current Prototype Limitations.md",
+                "file": "Federated Identity/How does Eduram work?.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Current Prototype Limitations"
+              "title": "How does Eduram work?"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -202,10 +189,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Knowledge Path.md"
+                "file": "Federated Identity/How does Eduram work?.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Knowledge Path"
+              "title": "Outline of How does Eduram work?"
             }
           }
         ],
@@ -227,15 +214,15 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "2add179ffe8f269b",
+  "active": "1f09ca6e17128217",
   "lastOpenFiles": [
     "EAP/Extensible Authentication Protocol.md",
     "Federated Identity/Identity Provider.md",
-    "Federated Identity/Federated Identity.md",
-    "Knowledge Path.md",
-    "Current Prototype Limitations.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
     "Federated Identity/How does Eduram work?.md",
+    "Current Prototype Limitations.md",
+    "Knowledge Path.md",
+    "Federated Identity/Federated Identity.md",
     "RADIUS/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111152310.png",
     "RADIUS",
