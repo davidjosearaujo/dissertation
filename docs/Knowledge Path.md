@@ -200,6 +200,9 @@ EAP-TLS is already defined for subscriber authentication in private networks and
 The broader 5G authentication and identity management system is still heavily oriented around USIM-based identities. This creates a disconnect when trying to integrate non-USIM devices:
 1. **Identity Mapping**: There's no standardized way to **map EAP-TLS identities to the types of identities** (like SUPI) that the 5G core typically expects.
 2. **Key Derivation**: 5G security procedures often assume the presence of certain keys derived from the USIM, which may not be available in Wi-Fi-only devices.
+
+***In TS 33.501 Annex B, they specify the use of additional EAP methods for primary authentication. I guess this is more alligend with what I'm searching for in terms of authentication flow. The obvious challenge is that the flow begins with the UE sending a SUCI, which in our use case, a Non-5G device does not have, or does it? Since they say the SUPI and SUCI should be encoded using the NAI format, a normal non-5G device would be able to comply with this?***
+
 ### 2. Hybrid EAP Method:
 Develop a new EAP method that combines elements from existing methods (e.g., EAP-TLS, EAP-TTLS) with novel components designed for Wi-Fi-only device authentication in 5G networks.
 ## Universal Device Identification Scheme
