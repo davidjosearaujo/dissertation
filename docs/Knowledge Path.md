@@ -190,7 +190,11 @@ EAP-TLS is already defined for subscriber authentication in private networks and
 #### Currenty Implementation of EAP-TLS
 ***What is the limitation with EAP-TLS currently in place in 5G? It seems like it should work with WiFi-only non-5G devices, providing these are provisioned with valid certificated. Or is the current implementation using USIMs for that too (maybe to store the certificated or other function) ?***
 
-
+1. Limited Scope:
+	EAP-TLS in 5G is currently defined for specific use cases and is not universally implemented across all 5G networks.
+2. **Certificate Management**:
+	 **The challenge lies in how these certificates are provisioned, stored, and managed on Wi-Fi-only devices that may not have secure hardware storage like a USIM.**
+3. 
 ### 2. Hybrid EAP Method:
 Develop a new EAP method that combines elements from existing methods (e.g., EAP-TLS, EAP-TTLS) with novel components designed for Wi-Fi-only device authentication in 5G networks.
 ## Universal Device Identification Scheme
