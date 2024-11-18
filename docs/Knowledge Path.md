@@ -116,8 +116,12 @@ SUCI and SUPI
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
 ![[Pasted image 20241014203612.png]]
 >**When EAP** (Extensible Authentication Protocol) **is used** (e.g., EAP-AKA’ or EAP-TLS), EAP **authentication is between the UE** (an EAP peer) **and the AUSF** (an EAP server) **through the SEAF** (functioning as an EAP pass-through authenticator).
-#### [[|EAP-TLS]]
+#### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#EAP-TLS|EAP-TLS]]
+>EAP-TLS is defined in 5G for subscriber authentication in limited use cases such as private networks and IoT environments.
 
+>EAP-TLS is performed between the UE and the AUSF through the SEAF, which functions as a transparent EAP authenticator by forwarding EAP-TLS messages back and forth between the UE and the AUSF.
+
+>In EAP-TLS, **mutual authentication between a UE and a 5G network is obtained primarily based on the mutual trust of their public key certificates**
 # [[Extensible Authentication Protocol|Understanding EAP Framework]]
 EAP uses the 802.1x standard as its authentication mechanism over a local area network or a wireless LAN (WLAN). There are three primary components of 802.1X authentication:
 - the user's wireless device;
