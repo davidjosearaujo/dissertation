@@ -35,8 +35,7 @@
               "title": "Research Directions"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "2ba1ea6a1fe9f829",
@@ -190,10 +189,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Research Directions.md"
+                "file": "Knowledge Path.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Research Directions"
+              "title": "Outline of Knowledge Path"
             }
           }
         ],
@@ -215,10 +214,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "8e59108e2102ed90",
+  "active": "2add179ffe8f269b",
   "lastOpenFiles": [
-    "Knowledge Path.md",
     "Research Directions.md",
+    "Knowledge Path.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "EAP/Extensible Authentication Protocol.md",
     "Federated Identity/How does Eduram work?.md",
