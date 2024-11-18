@@ -181,3 +181,9 @@ Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Securi
 2. **Routing**: If the user is from a different institution (e.g., in eduroam), the request is routed through a chain of RADIUS servers until it reaches the home institution's RADIUS server.
 3. **Credential Verification**: The home RADIUS server (acting as the IdP) checks the credentials against its database or directory service.
 4. **Response**: The server sends an accept or reject response back through the network, ultimately reaching the original access point and determining the user's access.
+# Envisioning Solutions
+## Modifications to Existing EAP Methods
+### 1. EAP-TLS Enhancement
+EAP-TLS is already defined for subscriber authentication in private networks and IoT environments. We can propose extensions to EAP-TLS that specifically cater to Wi-Fi-only devices, possibly incorporating:
+- 
+### 2. 

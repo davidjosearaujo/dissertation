@@ -175,10 +175,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md"
+                "file": "Knowledge Path.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Outline of Knowledge Path"
             }
           }
         ],
@@ -200,10 +200,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "1c4b29d50dc6742b",
+  "active": "2add179ffe8f269b",
   "lastOpenFiles": [
-    "Knowledge Path.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "Knowledge Path.md",
     "EAP/Extensible Authentication Protocol.md",
     "Federated Identity/How does Eduram work?.md",
     "Federated Identity/Identity Provider.md",
