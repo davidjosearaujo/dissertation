@@ -71,7 +71,7 @@ This clause specifies how a UE is authenticated to 5G network via an untrusted n
 
  The "EAP-5G" method is used between the UE and the N3IWF and is utilized for encapsulating NAS messages. If the UE needs to be authenticated by the 3GPP home network, any of the authentication methods as described in clause 6.1.3 can be used. The method is executed between the UE and AUSF as shown below.
  ![[Pasted image 20241024105055.png]]
-### 7A.2.1	Authentication for Trusted non-3GPP access
+### 7A.2.1 Authentication for Trusted non-3GPP access
 This clause specifies how a UE is authenticated to 5G network via a trusted non-3GPP access network.
 
 This is based on the specified procedure in TS 23.502 clause 4.12a.2.2 "Registration procedure for trusted non-3GPP access". The authentication procedure is similar to the authentication procedure for Untrusted non-3GPP access defined in clause 7.2.1 with few differences, which are mentioned below:

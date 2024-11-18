@@ -197,6 +197,9 @@ EAP-TLS is already defined for subscriber authentication in private networks and
 3. Integration with 5G Core:
 	The current 5G specifications don't fully define how Wi-Fi-only devices using EAP-TLS should integrate with all aspects of the 5G core network, particularly in terms of identity management and session handling.
 
+The broader 5G authentication and identity management system is still heavily oriented around USIM-based identities. This creates a disconnect when trying to integrate non-USIM devices:
+1. **Identity Mapping**: There's no standardized way to **map EAP-TLS identities to the types of identities** (like SUPI) that the 5G core typically expects.
+2. **Key Derivation**: 5G security procedures often assume the presence of certain keys derived from the USIM, which may not be available in Wi-Fi-only devices.
 ### 2. Hybrid EAP Method:
 Develop a new EAP method that combines elements from existing methods (e.g., EAP-TLS, EAP-TTLS) with novel components designed for Wi-Fi-only device authentication in 5G networks.
 ## Universal Device Identification Scheme
