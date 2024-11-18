@@ -175,10 +175,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md"
+                "file": "3GPP Specification/33501-i70.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of Security architecture and procedures for 5G system - 33.501"
+              "title": "Outline of 33501-i70"
             }
           }
         ],
@@ -200,11 +200,11 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "d88d75ee9c41454a",
+  "active": "6bb97aa395bb1c15",
   "lastOpenFiles": [
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/Pasted image 20241118173418.png",
     "3GPP Specification/33501-i70.pdf",
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Knowledge Path.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
@@ -243,7 +243,6 @@
     "Tasks.md",
     "images/Pasted image 20241004114652.png",
     "images/Pasted image 20241001102256.png",
-    "images/Pasted image 20240927153324.png",
     "Altice Labs/Nexus.IWF.pdf",
     "Federated Identity/Federates Identities Primer citations.txt",
     "Federated Identities/ScienceDirect_citations_1730969684766.txt",
