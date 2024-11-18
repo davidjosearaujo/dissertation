@@ -175,10 +175,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/33501-i70.pdf"
+                "file": "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 33501-i70"
+              "title": "Outline of Security architecture and procedures for 5G system - 33.501"
             }
           }
         ],
@@ -200,10 +200,10 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "6bb97aa395bb1c15",
+  "active": "d88d75ee9c41454a",
   "lastOpenFiles": [
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/33501-i70.pdf",
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Knowledge Path.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
