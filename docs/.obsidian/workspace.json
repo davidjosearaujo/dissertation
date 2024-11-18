@@ -6,7 +6,7 @@
       {
         "id": "d148614fbbdb7f6a",
         "type": "tabs",
-        "dimension": 61.01265822784811,
+        "dimension": 52.78481012658228,
         "children": [
           {
             "id": "6bb97aa395bb1c15",
@@ -25,7 +25,7 @@
       {
         "id": "2ba1ea6a1fe9f829",
         "type": "tabs",
-        "dimension": 38.9873417721519,
+        "dimension": 47.21518987341772,
         "children": [
           {
             "id": "6e9f1f5d723b09d0",
@@ -40,8 +40,23 @@
               "icon": "lucide-file",
               "title": "A Comparative Introduction to 4G and 5G Authentication by CableLabs"
             }
+          },
+          {
+            "id": "d88d75ee9c41454a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Security architecture and procedures for 5G system - 33.501"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -160,10 +175,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md"
+                "file": "3GPP Specification/33501-i70.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of A Comparative Introduction to 4G and 5G Authentication by CableLabs"
+              "title": "Outline of 33501-i70"
             }
           }
         ],
@@ -185,20 +200,20 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "6e9f1f5d723b09d0",
+  "active": "6bb97aa395bb1c15",
   "lastOpenFiles": [
-    "Knowledge Path.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
+    "3GPP Specification/33501-i70.pdf",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "Knowledge Path.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "EAP/Extensible Authentication Protocol.md",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/23501-i70.pdf",
-    "3GPP Specification/33501-i70.pdf",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Research Directions.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Federated Identity/How does Eduram work?.md",
     "Federated Identity/Identity Provider.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
