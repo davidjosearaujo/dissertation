@@ -181,15 +181,8 @@ Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Securi
 2. **Routing**: If the user is from a different institution (e.g., in eduroam), the request is routed through a chain of RADIUS servers until it reaches the home institution's RADIUS server.
 3. **Credential Verification**: The home RADIUS server (acting as the IdP) checks the credentials against its database or directory service.
 4. **Response**: The server sends an accept or reject response back through the network, ultimately reaching the original access point and determining the user's access.
-# Envisioning Solutions
-## Modifications to Existing EAP Methods
-### 1. EAP-TLS Enhancement
-EAP-TLS is already defined for subscriber authentication in private networks and IoT environments. We can propose extensions to EAP-TLS that specifically cater to Wi-Fi-only devices, possibly incorporating:
-- Lightweight certificate formats suitable for resource-constrained IoT devices
-- Integration with device-specific identifiers that don't rely on USIM
-#### Currenty Implementation of EAP-TLS
+### Currenty Implementation of EAP-TLS
 ***What is the limitation with EAP-TLS currently in place in 5G? It seems like it should work with WiFi-only non-5G devices, providing these are provisioned with valid certificated. Or is the current implementation using USIMs for that too (maybe to store the certificated or other function) ?***
-
 1. Limited Scope:
 	EAP-TLS in 5G is currently defined for specific use cases and is not universally implemented across all 5G networks.
 2. **Certificate Management**:
@@ -202,6 +195,15 @@ The broader 5G authentication and identity management system is still heavily or
 2. **Key Derivation**: 5G security procedures often assume the presence of certain keys derived from the USIM, which may not be available in Wi-Fi-only devices.
 
 ***In TS 33.501 Annex B, they specify the use of additional EAP methods for primary authentication. I guess this is more alligend with what I'm searching for in terms of authentication flow. The obvious challenge is that the flow begins with the UE sending a SUCI, which in our use case, a Non-5G device does not have, or does it? Since they say the SUPI and SUCI should be encoded using the NAI format, a normal non-5G device would be able to comply with this?***
+The standard [[Security architecture and procedures for 5G system - 33.501#B.2.1.1 Security procedures|5G authentication flow]] begins with the UE sending a SUCI (Subscription Concealed Identifier), which is derived from the SUPI (Subscription Permanent Identifier). This presents a challenge for non-5G devices:
+1. **SUPI/SUCI Availability**: Non-5G devices, especially Wi-Fi-only devices, typically don't have a SUPI or the means to generate a SUCI as defined in 5G standards.
+2. 
+# Envisioning Solutions
+## Modifications to Existing EAP Methods
+### 1. EAP-TLS Enhancement
+EAP-TLS is already defined for subscriber authentication in private networks and IoT environments. We can propose extensions to EAP-TLS that specifically cater to Wi-Fi-only devices, possibly incorporating:
+- Lightweight certificate formats suitable for resource-constrained IoT devices
+- Integration with device-specific identifiers that don't rely on USIM
 
 ### 2. Hybrid EAP Method:
 Develop a new EAP method that combines elements from existing methods (e.g., EAP-TLS, EAP-TTLS) with novel components designed for Wi-Fi-only device authentication in 5G networks.
