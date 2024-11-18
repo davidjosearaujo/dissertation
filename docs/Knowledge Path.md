@@ -187,6 +187,10 @@ Yes, EAP can be used with certificates. In fact, EAP-TLS (Transport Layer Securi
 EAP-TLS is already defined for subscriber authentication in private networks and IoT environments. We can propose extensions to EAP-TLS that specifically cater to Wi-Fi-only devices, possibly incorporating:
 - Lightweight certificate formats suitable for resource-constrained IoT devices
 - Integration with device-specific identifiers that don't rely on USIM
+#### Currenty Implementation of EAP-TLS
+***What is the limitation with EAP-TLS currently in place in 5G? It seems like it should work with WiFi-only non-5G devices, providing these are provisioned with valid certificated. Or is the current implementation using USIMs for that too (maybe to store the certificated or other function) ?***
+
+
 ### 2. Hybrid EAP Method:
 Develop a new EAP method that combines elements from existing methods (e.g., EAP-TLS, EAP-TTLS) with novel components designed for Wi-Fi-only device authentication in 5G networks.
 ## Universal Device Identification Scheme
