@@ -124,10 +124,16 @@ An AUN3 device behind 5G-RG, as defined in TS 23.316, shall be registered to the
 # Annex B (Informative): Using additional EAP methods for primary authentication
 The present annex describes an example of the usage of additional EAP methods for primary authentication in private networks using the 5G system as specified in [TS 22.261](https://www.tech-invite.com/3m22/toc/tinv-3gpp-22-261_u.html#e-8-3). The additional EAP methods are only intended for private networks or with IoT devices in isolated deployment scenarios.
 
+>**TS 22.261**
+>*"The 5G system shall support operator-controlled alternative authentication methods (i.e. alternative to AKA) with different types of credentials for network access for IoT devices in isolated deployment scenarios (e.g. for industrial automation)."*
+>
+>*"The 5G system shall support a suitable framework (e.g. EAP) allowing alternative (e.g. to AKA) authentication methods with non-3GPP identities and credentials to be used for UE network access authentication in non-public networks."*
+
 When the 5G system is deployed in private networks, **the SUPI and SUCI should be encoded using the NAI format as specified in TS 23.501** . UE always includes the realm part in the NAI for routing to the correct UDM.
 ## B.2 Primary authentication and key agreement
 ### B.2.1 EAP TLS
 #### B.2.1.1 Security procedures
+EAP-TLS supports several TLS versions, and the negotiation of the TLS version is part of EAP-TLS. The main principle of negotiation goes as follows. The EAP server indicates the support for EAP-TLS in the EAP-Request. If the peer chooses EAP-TLS, it responds with an EAP-Response indicating in the ClientHello message which TLS versions the peer supports. The EAP server chooses the TLS version, and indicates the chosen version in the ServerHello message.
 
 # Annex O (Informative): Authentication for non-5G capable devices behind residential gateways
 This annex describes the authentication procedure, using EAP-TLS as an example, for Non-5G Capable (N5GC) devices behind Residential Gateways (RGs) in private networks or in isolated deployment scenarios (i.e., roaming is not considered) with wireline access. The registration procedure of N5GC devices behind Cable RGs is described in clause 4.10a of TS 23.316
