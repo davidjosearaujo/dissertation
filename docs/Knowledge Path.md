@@ -220,4 +220,5 @@ Propose an extended version of the Network Access Identifier that can accommodat
 
 Possible solutions would be:
 - **Pseudo-SUCI for Non-5G Devices**: A method to generate a pseudo-SUCI for non-5G devices that follows the NAI format. This wouldn't be a true SUCI but could serve a similar function in the authentication flow.
-### 4.  
+### 4.  Identity Mapping
+A mechanism to map existing non-5G device identifiers (like MAC addresses or unique device IDs) to a format compatible with the 5G authentication framework.
