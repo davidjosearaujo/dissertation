@@ -19,6 +19,18 @@
               "icon": "lucide-file-text",
               "title": "23501-i70"
             }
+          },
+          {
+            "id": "6bb97aa395bb1c15",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "3GPP Specification/33501-i70.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "33501-i70"
+            }
           }
         ]
       },
@@ -202,12 +214,12 @@
   },
   "active": "548fcabe8879a0e2",
   "lastOpenFiles": [
+    "3GPP Specification/33501-i70.pdf",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "EAP/Extensible Authentication Protocol.md",
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/23501-i70.pdf",
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
-    "3GPP Specification/33501-i70.pdf",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Knowledge Path.md",
     "Research Directions.md",
