@@ -1,11 +1,6 @@
 # [What is the Extensible Authentication Protocol?](https://www.techtarget.com/searchsecurity/definition/Extensible-Authentication-Protocol-EAP)
 EAP is used on encrypted networks to provide a secure way to send identifying information to provide network authentication. It supports various authentication methods, including as token cards, smart cards, certificates, one-time passwords and public key encryption.
 
-EAP uses the 802.1x standard as its authentication mechanism over a local area network or a wireless LAN (WLAN). There are three primary components of 802.1X authentication:
-- the user's wireless device;
-- the wireless access point (AP) or authenticator; and
-- the authentication database or the authentication server.
-
 **The organization or user must choose what type of EAP to use based on their requirements. EAP transfers authentication information between the user and authenticator database or server.**
 
 802.1X authentication involves three parties: a **supplicant**, an **authenticator**, and an **authentication server**.

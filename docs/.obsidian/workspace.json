@@ -28,7 +28,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "5c275ea2637b6012",
+            "id": "4b12571bd9a468b5",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -42,35 +42,21 @@
             }
           },
           {
-            "id": "d589f04791a46567",
+            "id": "1c4b29d50dc6742b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Federated Identity/Identity Provider.md",
+                "file": "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Identity Provider"
-            }
-          },
-          {
-            "id": "1f09ca6e17128217",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Federated Identity/How does Eduram work?.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "How does Eduram work?"
+              "title": "A Comparative Introduction to 4G and 5G Authentication by CableLabs"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -216,9 +202,10 @@
   },
   "active": "2add179ffe8f269b",
   "lastOpenFiles": [
-    "Federated Identity/How does Eduram work?.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Knowledge Path.md",
     "EAP/Extensible Authentication Protocol.md",
+    "Federated Identity/How does Eduram work?.md",
     "Federated Identity/Identity Provider.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
     "Current Prototype Limitations.md",
@@ -245,7 +232,6 @@
     "Broadband Forum/TR-456.md",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "images",

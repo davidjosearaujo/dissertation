@@ -114,13 +114,23 @@ AMF requirements:
 ### [[5G Identifiers|5G Identifiers]]
 SUCI and SUPI
 ### [[A Comparative Introduction to 4G and 5G Authentication by CableLabs|4G vs. 5G Authentication]]
+![[Pasted image 20241014203612.png]]
+>**When EAP** (Extensible Authentication Protocol) **is used** (e.g., EAP-AKA’ or EAP-TLS), EAP **authentication is between the UE** (an EAP peer) **and the AUSF** (an EAP server) **through the SEAF** (functioning as an EAP pass-through authenticator).
+#### [[|EAP-TLS]]
+
 # [[Extensible Authentication Protocol|Understanding EAP Framework]]
+EAP uses the 802.1x standard as its authentication mechanism over a local area network or a wireless LAN (WLAN). There are three primary components of 802.1X authentication:
+- the user's wireless device;
+- the wireless access point (AP) or authenticator; and
+- the authentication database or the authentication server.
+
 The EAP process works as follows:
 1. A user requests connection to a wireless network through an AP.
 2. The AP requests identification data from the user and transmits that data to an authentication server. ***(What can be identity of a legacy IOT device in 5GC?)***
 3. The authentication server asks the AP for proof of the validity of the identification information.
 4. The AP obtains verification from the user and sends it back to the authentication server.
 5. The user is connected to the network as requested.
+
 # [[Current Prototype Limitations|Challenges]]
 The [[Current Prototype Limitations|current prototype has a major limitation]] in terms of device **identity consistency and universality**.
 
