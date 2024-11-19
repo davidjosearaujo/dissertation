@@ -246,15 +246,7 @@ The standard [[Security architecture and procedures for 5G system - 33.501#B.2.1
 1. **SUPI/SUCI Availability**: Non-5G devices, especially Wi-Fi-only devices, typically don't have a SUPI or the means to generate a SUCI as defined in 5G standards.
 2. **NAI Format**: You're correct that both SUPI and SUCI are encoded using the NAI format. This is a potential avenue for integration.
 # Envisioning Solutions
-## [[#Authentication Method Extending or Reinventing EAP Flow|Modifications to Existing EAP Methods]]
-### 1. EAP-TLS Enhancement
-EAP-TLS is already defined for subscriber authentication in private networks and IoT environments. We can propose extensions to EAP-TLS that specifically cater to Wi-Fi-only devices, possibly incorporating:
-- Lightweight certificate formats suitable for resource-constrained IoT devices
-- Integration with device-specific identifiers that don't rely on USIM
-- **Modified EAP Flow**: Design a modified EAP authentication flow that can accommodate devices without a true SUPI/SUCI but still provide necessary identity and security assurances.
-### 2. Hybrid EAP Method:
-Develop a new EAP method that combines elements from existing methods (e.g., EAP-TLS, EAP-TTLS) with novel components designed for Wi-Fi-only device authentication in 5G networks.
-## Universal Device Identification Scheme
+## [[State of The Art#Device Identity Extending or Circumventing SUPI/SUCI|Universal Device Identification Scheme]]
 Developing a universal device identification scheme that works across different access technologies is critical for addressing the [[#^8dab82|limitations of the current prototype]]. Consider the following approaches:
 ### 1. Federated Identity Integration
 Explore how federated identity concepts can be applied to 5G networks, particularly for non-3GPP device authentication. This could involve:
@@ -269,3 +261,11 @@ Possible solutions would be:
 - **Pseudo-SUCI for Non-5G Devices**: A method to generate a pseudo-SUCI for non-5G devices that follows the NAI format. This wouldn't be a true SUCI but could serve a similar function in the authentication flow.
 ### 4.  Identity Mapping
 A mechanism to map existing non-5G device identifiers (like MAC addresses or unique device IDs) to a format compatible with the 5G authentication framework.
+## [[#Authentication Method Extending or Reinventing EAP Flow|Modifications to Existing EAP Methods]]
+### 1. EAP-TLS Enhancement
+EAP-TLS is already defined for subscriber authentication in private networks and IoT environments. We can propose extensions to EAP-TLS that specifically cater to Wi-Fi-only devices, possibly incorporating:
+- Lightweight certificate formats suitable for resource-constrained IoT devices
+- Integration with device-specific identifiers that don't rely on USIM
+- **Modified EAP Flow**: Design a modified EAP authentication flow that can accommodate devices without a true SUPI/SUCI but still provide necessary identity and security assurances.
+### 2. Hybrid EAP Method:
+Develop a new EAP method that combines elements from existing methods (e.g., EAP-TLS, EAP-TTLS) with novel components designed for Wi-Fi-only device authentication in 5G networks.
