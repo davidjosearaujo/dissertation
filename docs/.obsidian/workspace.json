@@ -13,10 +13,10 @@
             "state": {
               "type": "pdf",
               "state": {
-                "file": "Altice Labs/Nexus.IWF.pdf"
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "Nexus.IWF"
+              "title": "WP_Heading-to-a-successful-private-digital-convergence"
             }
           }
         ]
@@ -138,10 +138,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Altice Labs/Nexus.IWF.pdf"
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of Nexus.IWF"
+              "title": "Outline of WP_Heading-to-a-successful-private-digital-convergence"
             }
           }
         ],
@@ -165,10 +165,10 @@
   },
   "active": "6bb97aa395bb1c15",
   "lastOpenFiles": [
+    "Altice Labs/Nexus.IWF.pdf",
     "State of The Art.md",
     "Current Prototype Limitations.md",
     "3GPP Specification/33501-i70.pdf",
-    "Altice Labs/Nexus.IWF.pdf",
     "Altice Labs/Notes.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
