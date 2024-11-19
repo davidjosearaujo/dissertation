@@ -384,7 +384,7 @@
 \long\def\SECTION#1#2{\TEXT{\ua@font@size2\textbf{#1}}{\ua@font@size1#2}}
 
 % Used to display the list of members of the Supervisors
-\long\def\SUPERVISOR#1#2#3#4#5{, {#1}do Doutor {#2}, Professor {#3} {#4} {#5}}
+\long\def\SUPERVISOR#1#2#3#4#5{, {#1}do Doctor {#2}, Professor {#3} {#4} {#5}}
 \long\def\SUPERVISORA#1#2#3#4#5{, {#1}da Doutora {#2}, Professora {#3} {#4} {#5}}
 
 % Used to display the list of members of the Juri
@@ -532,35 +532,35 @@
   \TEXT{}{%
 \noindent%
 \ifdefined \ciDocumentTypeThesisProposal%
-Proposta de Tese%
+Thesis Proposal%
 \else
  \ifdefined \ciDocumentTypeThesis%
-Tese%
+Thesis%
  \else
     \ifdefined \ciDocumentTypeDissertation%
-Disserta\c c\~ao%
+Dissertation%
     \fi %
   \fi%
 \fi%
-~apresentada \`a Universidade de Aveiro para cumprimento dos requisitos necess\'arios \`a
+~presented to the University of Aveiro in fulfillment of the necessary requirements for the
 \ifdefined \ciDocumentTypeThesisProposal%
-conclusão da unidade curricular Proposta de Tese, condi\c c\~ao necess\'aria para
+completion of the curricular unit Thesis Proposal, a necessary condition for the
 \fi%
-obten\c c\~ao do grau de {\ciDegreeTitle}
+obtaining of the degree of {\ciDegreeTitle}
 \ifdefined \ciMAPProgram%
-no âmbito do Programa de Doutoramento
+within the Doctoral Program
 \fi%
-em {\ciDegreeName}%
+in {\ciDegreeName}%
 \ifdefined \ciMAPProgram%
-\ das Universidades do Minho, Aveiro e Porto (MAP-\ciMAPProgram)%
+\ of the Universities of Minho, Aveiro, and Porto (MAP-\ciMAPProgram)%
 \fi%
-, realizada sob a orienta\c c\~ao cient\'ifica 
+, conducted under the scientific supervision 
 \ifdefined \ciSupervisoraName%
-da Doutora {\ciSupervisoraName}, Professora {\ciSupervisoraTitle}
+of Doctor {\ciSupervisoraName}, Professor {\ciSupervisoraTitle}
 \else
-do {\ciSupervisorName}, {\ciSupervisorTitle}
+of {\ciSupervisorName}, {\ciSupervisorTitle} 
 \fi%
-do {\ua@textA} {\ua@textB} da Universidade de Aveiro\dolistloop{\ciSupervisorMember}.}
+of the {\ua@textA} {\ua@textB} at the University of Aveiro\dolistloop{\ciSupervisorMember}.}
     \vspace{75mm}
 \ifdefined \ciGrantFirst
     \SPONSOR{}
