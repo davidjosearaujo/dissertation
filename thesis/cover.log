@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.11.12)  19 NOV 2024 12:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.11.12)  19 NOV 2024 12:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -98,7 +98,12 @@ File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count199
 \l__pdf_internal_box=\box51
-) (./cover.aux)
+)
+
+LaTeX Warning: Unused global option(s):
+    [fina].
+
+(./cover.aux)
 \openout1 = `cover.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 231.
@@ -176,10 +181,10 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 24
 File: t1cmtt.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 ) [1] [1] [1] (./cover.aux) ) 
 Here is how much of TeX's memory you used:
- 3362 strings out of 477917
- 54951 string characters out of 5837564
+ 3366 strings out of 477917
+ 54990 string characters out of 5837564
  1855330 words of memory out of 5000000
- 23479 multiletter control sequences out of 15000+600000
+ 23482 multiletter control sequences out of 15000+600000
  538780 words of font info for 53 fonts, out of 8000000 for 9000
  83 hyphenation exceptions out of 8191
  72i,7n,76p,857b,398s stack positions out of 10000i,1000n,20000p,200000b,200000s
