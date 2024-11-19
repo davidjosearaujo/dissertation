@@ -151,6 +151,7 @@ Key considerations:
 - Ensure the new identity method provides similar levels of privacy and security as SUPI/SUCI.
 - Make it scalable and manageable for a large number of diverse devices.
 - Ensure compatibility with existing 5G core network functions.
+### Authentication Method: Extending or Reinventing EAP Flow
 
 ## Important Questions
 ### What's the Relation Between Federated Identity and EAP (802.1x)
