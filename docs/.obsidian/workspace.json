@@ -11,28 +11,17 @@
             "id": "6bb97aa395bb1c15",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "3GPP Specification/33501-i70.pdf"
+                "file": "State of The Art.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "33501-i70"
-            }
-          },
-          {
-            "id": "d88d75ee9c41454a",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Altice Labs/Nexus.IWF.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Nexus.IWF"
+              "icon": "lucide-file",
+              "title": "State of The Art"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -150,10 +139,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Altice Labs/Nexus.IWF.pdf"
+                "file": "State of The Art.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of Nexus.IWF"
+              "title": "Outline of State of The Art"
             }
           }
         ],
@@ -175,13 +164,15 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "d88d75ee9c41454a",
+  "active": "6bb97aa395bb1c15",
   "lastOpenFiles": [
+    "Current Prototype Limitations.md",
+    "State of The Art.md",
+    "3GPP Specification/33501-i70.pdf",
+    "Altice Labs/Nexus.IWF.pdf",
     "Altice Labs/Notes.md",
-    "Knowledge Path.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
-    "3GPP Specification/33501-i70.pdf",
     "3GPP Specification/Pasted image 20241118173418.png",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "EAP/Extensible Authentication Protocol.md",
@@ -194,7 +185,6 @@
     "Federated Identity/How does Eduram work?.md",
     "Federated Identity/Identity Provider.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
-    "Current Prototype Limitations.md",
     "Federated Identity/Federated Identity.md",
     "RADIUS/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111152310.png",
@@ -218,7 +208,6 @@
     "Tasks.md",
     "images/Pasted image 20241004114652.png",
     "images/Pasted image 20241001102256.png",
-    "Altice Labs/Nexus.IWF.pdf",
     "Federated Identity/Federates Identities Primer citations.txt",
     "Federated Identities/ScienceDirect_citations_1730969684766.txt",
     "Federated Identities.md",
