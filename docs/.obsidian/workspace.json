@@ -4,19 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "d148614fbbdb7f6a",
+        "id": "a16cae8d833d13fb",
         "type": "tabs",
         "children": [
           {
-            "id": "6bb97aa395bb1c15",
+            "id": "8713a83a947e4dd0",
             "type": "leaf",
             "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "WP_Heading-to-a-successful-private-digital-convergence"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -163,7 +161,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "6bb97aa395bb1c15",
+  "active": "d73934f58ee18f43",
   "lastOpenFiles": [
     "Altice Labs/Nexus.IWF.pdf",
     "State of The Art.md",
