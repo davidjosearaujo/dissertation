@@ -32,21 +32,9 @@
               "icon": "lucide-file",
               "title": "Knowledge Path"
             }
-          },
-          {
-            "id": "e01bba6139ac348d",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.7.7"
-              },
-              "icon": "lucide-file",
-              "title": "Release Notes 1.7.7"
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       },
       {
         "id": "c0bb87cbdd9c1138",
@@ -184,9 +172,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "Knowledge Path.md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Knowledge Path"
             }
           }
         ],
@@ -208,7 +198,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "e01bba6139ac348d",
+  "active": "d88d75ee9c41454a",
   "lastOpenFiles": [
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "Knowledge Path.md",

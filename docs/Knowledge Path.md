@@ -139,6 +139,8 @@ The EAP process works as follows:
 The [[Current Prototype Limitations|current prototype has a major limitation]] in terms of device **identity consistency and universality**.
 
 We need to devise a solution that **enables a device to be identified universally in the network** and where its **identity is independent of its gateway**.
+## Summary
+
 ## Important Questions
 ### What's the Relation Between Federated Identity and EAP (802.1x)
 Federated Identity can use EAP as the mechanism for authenticating devices or users. In this scenario, EAP acts as a transport for authentication data that can be linked to a federated identity system, allowing secure credential exchange and verification.
