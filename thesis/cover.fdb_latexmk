@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1731414480 "/home/davidjosearaujo/Documents/mc/second-year/dissertation-project/thesis/cover.tex" "cover.pdf" "cover" 1731414480 0
+["pdflatex"] 1732018454 "/home/davidjosearaujo/Documents/mc/second-year/dissertation-project/thesis/cover.tex" "cover.pdf" "cover" 1732018454 0
   "/etc/texmf/web2c/texmf.cnf" 1731410980 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/davidjosearaujo/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk" 1731414023 20008 8f2953ef36177823a1d5b324e525a77c ""
-  "/home/davidjosearaujo/Documents/mc/second-year/dissertation-project/thesis/cover.tex" 1731414480 11525 df90e38e7a218e425a7b8dbf1410dc37 ""
+  "/home/davidjosearaujo/Documents/mc/second-year/dissertation-project/thesis/cover.tex" 1732018454 11170 89f24838e044fceae223fce2683d5516 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvb8r.tfm" 1136768653 4484 b828043cbd581d289d955903c1339981 ""
@@ -53,8 +53,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1681034085 39561 34c98e380bf7c7201ee6a7909aff625a ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1731413829 165012 f177baa1c39a3ebd62c3096a43521a0d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1731413850 6555070 cf8027ee0327d01c8b1317c4d14bb8cd ""
-  "cover.aux" 1731414480 426 c80aa832fb4b3dcf1da35edb1e08970d "pdflatex"
-  "cover.tex" 1731414480 11525 df90e38e7a218e425a7b8dbf1410dc37 ""
+  "cover.aux" 1732018454 426 c80aa832fb4b3dcf1da35edb1e08970d "pdflatex"
+  "cover.tex" 1732018454 11170 89f24838e044fceae223fce2683d5516 ""
   "figs/uaLogoNew.pdf" 1731413373 2911 e3fb8f77330f913af87495e8c6b0dc02 ""
   "uaThesisTemplate.sty" 1731413373 19521 09f8eec40c24278e34496560bcef945a ""
   (generated)
