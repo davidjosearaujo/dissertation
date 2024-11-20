@@ -11,10 +11,14 @@
             "id": "8713a83a947e4dd0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "EAP/Extensible Authentication Protocol.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Extensible Authentication Protocol"
             }
           }
         ]
@@ -73,8 +77,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 415.5,
-    "collapsed": true
+    "width": 415.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -135,9 +138,11 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {},
+              "state": {
+                "file": "EAP/Extensible Authentication Protocol.md"
+              },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of Extensible Authentication Protocol"
             }
           }
         ],
@@ -154,14 +159,19 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "command-palette:Open command palette": false,
+      "obsidian-git:Open Git source control": false,
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "d73934f58ee18f43",
+  "active": "8713a83a947e4dd0",
   "lastOpenFiles": [
-    "Altice Labs/Nexus.IWF.pdf",
-    "State of The Art.md",
+    "Federated Identity/Identity Provider.md",
+    "Federated Identity/Federated Identity.md",
     "Current Prototype Limitations.md",
+    "State of The Art.md",
+    "Research Directions.md",
+    "Altice Labs/Nexus.IWF.pdf",
     "3GPP Specification/33501-i70.pdf",
     "Altice Labs/Notes.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
@@ -174,11 +184,8 @@
     "3GPP Specification/23501-i70.pdf",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
-    "Research Directions.md",
     "Federated Identity/How does Eduram work?.md",
-    "Federated Identity/Identity Provider.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
-    "Federated Identity/Federated Identity.md",
     "RADIUS/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111152310.png",
     "RADIUS",
