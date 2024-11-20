@@ -36,6 +36,7 @@ endif
 build: 
 	@echo "Building the document"
 	@mkdir -p "${OUT}/chapters"
+	biber "${OUT}/build"
 	cd "${OUT}" ; "${LATEXMK}" ${LATEXMK_FLAGS} -cd "${SRC}/cover.tex" "${SRC}/matter.tex"
 
 preview: build
