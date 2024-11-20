@@ -1,5 +1,0 @@
-[0] Config.pm:306> INFO - This is Biber 2.18
-[0] Config.pm:309> INFO - Logfile is 'matter.blg'
-[94] biber:340> INFO - === Wed Nov 20, 2024, 14:53:55
-[127] Utils.pm:399> ERROR - Cannot find 'matter.bcf'!
-[127] Biber.pm:135> INFO - ERRORS: 1

@@ -25,7 +25,7 @@ setup:
 	@echo "Current Distribution: $(DIST)"
 ifeq  ($(PLATFORM),Linux)
 ifeq ($(DIST),$(shell echo -n "${DIST}" | grep "Ubuntu\|Debian\|Kali"))
-	@sudo apt install -y texlive-latex-base texlive-lang-portuguese texlive-lang-english biber texlive-latex-extra texlive-science python3-pygments python3-proselint pandoc imagemagick latexmk ghostscript lacheck chktex
+	@sudo apt install texlive-latex-base texlive-lang-portuguese texlive-lang-english biber texlive-latex-extra texlive-science python3-pygments python3-proselint pandoc imagemagick latexmk ghostscript lacheck chktex
 else
 	@echo "Distribution not supported. Currently we support setup for: Ubuntu, Debian and Kali"
 endif
