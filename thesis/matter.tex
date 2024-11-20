@@ -117,8 +117,11 @@
 \usepackage{todonotes}
 
 % Setup bibliography with Biber using IEEE style for proper UTF-8 support
-\usepackage[backend=biber, style=ieee, sorting=none, natbib=true, mincitenames=1, maxcitenames=2]{biblatex}
-\bibliography{bib/references.bib}
+%\usepackage[backend=biber, style=ieee, sorting=none, natbib=true, mincitenames=1, maxcitenames=2]{biblatex}
+%\bibliography{bib/references.bib}
+
+\usepackage[style=numeric]{biblatex}
+\addbibresource{bib/references.bib}
 
 % Use acronyms
 \usepackage[printonlyused]{acronym} % For acronyms
