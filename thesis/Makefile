@@ -33,7 +33,7 @@ else
 	@echo "Platform not supported. Currently we support setup for: Linux"
 endif
 
-build: 
+build: clean
 	@echo "Building the document"
 	@mkdir -p "${OUT}/chapters"
 	cd "${OUT}" ; "${LATEXMK}" ${LATEXMK_FLAGS} -cd "${SRC}/cover.tex" "${SRC}/matter.tex"
