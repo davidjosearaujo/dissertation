@@ -14,9 +14,6 @@ In addition to the 5G RG, an alternative endpoint has also been defined termed t
 A cellular network consists of three main components: **UEs**, a **serving network (SN)**, and a **home network (HN)**
 
 ![[Pasted image 20241014163827.png]]
-
-5G differs from prior generations primarily in that it will not only provide faster speed, higher bandwidth, and lower delays, but also support more use cases such as **enhanced mobile broadband (eMBB)**, **massive machine-type communications (mMTC)**, and **ultra-reliable low-latency communications (uRLLC)**.
-
 The **3GPP AKA protocol is a challenge-and-response authentication protocol based on a symmetric key** shared between a subscriber and a home network.
 ### Two weakness in 4G EPS-AKA
 1. [[A Comparative Introduction to 4G and 5G Authentication by CableLabs#^5dd100|The UE identity is sent over radio networks without encryption.]]
