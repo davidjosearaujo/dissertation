@@ -99,6 +99,8 @@
 
 % For Multiple columns in Glossary
 %\usepackage{multicol}
+\usepackage[acronym]{glossaries}
+\makeglossaries
 
 % Add support for Math symbols
 \usepackage{amsmath}
@@ -349,6 +351,7 @@
 % Print Glossary
 \clearpage
 {\small\include{glossary}}
+\printglossary[type=\acronymtype]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main document starts here
