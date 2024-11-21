@@ -185,20 +185,17 @@
   \def\@oddhead{%
     \CJ@ruledhead
       \relax
-      \@shorttitle
-      \thepage}%
+      \@shorttitle}%
   \def\@evenhead{%
     \vbox to \headheight{\vss
    \let\textsuperscript\@gobble
     \CJ@ruledhead
-      \thepage
  %     {\@authors\@andorcomma\relax\@andorcomma\relax}%
      {\@shortauthors}%
-      \relax}}%
+      \relax
+      }}%
   \def\@oddfoot{%
-    \CJ@ruledhead\relax{%
-       \textsc\journalname,\quad\volumename\space\@volumenumber,\quad
-         \numbername\space\@issuenumber,\quad\@volumeyear}\relax}%
+    \CJ@ruledhead\relax{\thepage}\relax}%
   \let\@evenfoot\@oddfoot}
 \def\ps@title{%
   \def\@oddhead{%
@@ -208,9 +205,7 @@
     \vskip 14.5pt}}%
   \let\@evenhead\@oddhead
     \def\@oddfoot{%
-    \CJ@ruledhead\relax{%
-       \textsc\journalname,\quad\volumename\space\@volumenumber,\quad
-         \numbername\space\@issuenumber,\quad\@volumeyear}\relax}%
+    \CJ@ruledhead\relax{\thepage}\relax}
   \let\@evenfoot\@oddfoot}
 \def\CJ@ruledhead#1#2#3{%
   \vbox{%
@@ -426,7 +421,6 @@
     \def\@svsechd{#4{\hskip #1\relax #5}}%
   \fi
   \@xsect{#3}}
-\def\journalname{The Computer Journal}
 \def\copyrightname{Oxford University Press}
 \def\andname{and}
 \def\ppname{pp}
