@@ -22,6 +22,18 @@
             }
           },
           {
+            "id": "c28a2701e8db2762",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "WP_Heading-to-a-successful-private-digital-convergence"
+            }
+          },
+          {
             "id": "e96beb6319249bd3",
             "type": "leaf",
             "state": {
@@ -130,7 +142,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 237.5
+    "width": 237.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -192,10 +205,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3GPP Specification/23501-i70.pdf"
+                "file": "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of 23501-i70"
+              "title": "Outline of WP_Heading-to-a-successful-private-digital-convergence"
             }
           }
         ],
@@ -218,12 +231,13 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "e96beb6319249bd3",
+  "active": "c28a2701e8db2762",
   "lastOpenFiles": [
-    "State of The Art.md",
-    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/23501-i70.pdf",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
+    "State of The Art.md",
+    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Articles/Pasted image 20241014162545.png",
@@ -241,7 +255,6 @@
     "Altice Labs/Notes.md",
     "3GPP Specification/Pasted image 20241118173418.png",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
-    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Federated Identity/How does Eduram work?.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
     "RADIUS/Pasted image 20241112104926.png",
