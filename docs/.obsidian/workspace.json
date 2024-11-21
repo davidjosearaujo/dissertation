@@ -22,6 +22,18 @@
             }
           },
           {
+            "id": "e96beb6319249bd3",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "3GPP Specification/23501-i70.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "23501-i70"
+            }
+          },
+          {
             "id": "f11415d31bec5c35",
             "type": "leaf",
             "state": {
@@ -61,7 +73,8 @@
               "title": "A Comparative Introduction to 4G and 5G Authentication by CableLabs"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -117,8 +130,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 378.5,
-    "collapsed": true
+    "width": 237.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -180,10 +192,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "State of The Art.md"
+                "file": "3GPP Specification/23501-i70.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of State of The Art"
+              "title": "Outline of 23501-i70"
             }
           }
         ],
@@ -206,14 +218,15 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "a2d2013628aa0416",
+  "active": "e96beb6319249bd3",
   "lastOpenFiles": [
-    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
-    "Articles/Wireline Access in 5G - MPIRICAL.md",
     "State of The Art.md",
+    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
+    "3GPP Specification/23501-i70.pdf",
+    "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "Articles/Pasted image 20241014162545.png",
-    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
@@ -228,7 +241,6 @@
     "Altice Labs/Notes.md",
     "3GPP Specification/Pasted image 20241118173418.png",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
-    "3GPP Specification/23501-i70.pdf",
     "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Federated Identity/How does Eduram work?.md",
     "RADIUS/Remote Authentication Dial-In User Service.md",
