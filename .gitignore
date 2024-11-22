@@ -96,3 +96,4 @@ tramp
 
 *.obsidian/*
 docs/.obsidian/workspace.json
+docs/.obsidian/community-plugins.json
