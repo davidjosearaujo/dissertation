@@ -2,7 +2,7 @@
 \label{chapter:introduction}
 
 \begin{introduction}
-A short description of the chapter.
+This chapter summarizes the challenges and significance of integrating Wi-Fi-only devices into the 5G core network, highlighting the limitations of current standards and the need for innovative solutions to enable seamless connectivity and authentication.
 \end{introduction}
 
 \section{Background and Context}
@@ -16,18 +16,20 @@ Additionally, it is transforming private networks, which have traditionally reli
 % Briefly describe the Service Based Architecture of 5G, emphasizing the incorporation of Network Functions Virtualization (NFV) and Software Defined Networking (SDN).
 % Mention the various access nodes supported by the 5G system, including native 5G-NR and LTE accesses, and non-3GPP interworking functions.
 
-5G is not only a revolution in radio network infrastructure but also in the core network. Now based on Service Based Architecture, using \ac{NFV} and \ac{SDN}, it allows it to minimize cost and maximize utilization and elasticity of the infrastructure by seperating the \ac{UP} functions from the \ac{CP} function. This architecture supports various access nodes such as native \ac{NR}, LTE accesses, and non-3GPP interworking functions that facilitate connectivity from untrusted WLANs.~\cite{23.501}
+5G is not only a revolution in radio network infrastructure but also in the core network. Now based on Service Based Architecture, using \ac{NFV} and \ac{SDN}, it allows it to minimize cost and maximize utilization and elasticity of the infrastructure by seperating the \ac{UP} functions from the \ac{CP} function. This architecture supports various access nodes such as native \ac{NR}, LTE accesses, and non-\ac{3GPP} interworking functions that facilitate connectivity from untrusted WLANs.~\cite{23.501-p41}
 
 % Discuss the importance of integrating Wi-Fi networks with 5G to enhance connectivity options for users and devices.
 % Highlight the challenges posed by current standards that do not support Wi-Fi-only devices without USIM in connecting to the 5G Core.
 
-As wireless networks evolve, the convergence of 5G with existing Wi-Fi infrastructures becomes increasingly critical. However, current standards established by the \ac{3GPP} do not adequately address the integration of Wi-Fi-only devices that lack \ac{USIM} capabilities into the 5G core network.~\cite{wba-04-2021} This limitation is particularly evident in enterprise environments where many devices operate solely on Wi-Fi. To fully realize the potential of  technology, it is essential to develop solutions that enable integration of Wi-Fi-only devices into the \ac{5G} ecosystem. This includes addressing challenges related to authentication mechanisms, device identity, and overall interoperability between different network types.
+As wireless networks evolve, the convergence of 5G with existing Wi-Fi infrastructures becomes increasingly critical. However, current standards established by the \ac{3GPP} do not adequately address the integration of Wi-Fi-only devices that lack \ac{USIM} capabilities into the \ac{5GC} network.~\cite{wba-04-2021-p59} This limitation is particularly evident in enterprise environments where many devices operate solely on Wi-Fi. To fully realize the potential of  technology, it is essential to develop solutions that enable integration of Wi-Fi-only devices into the \ac{5G} ecosystem. This includes addressing challenges related to authentication mechanisms, device identity, and overall interoperability between different network types.
 
 \section{Problem Statement}
 
 % - Highlight that the current 3GPP standard does not define an architecture to support Wi-Fi-only devices without USIM connecting to the 5G Core.
 % - Emphasize the importance of this issue, especially in enterprise deployments where many devices lack USIM capabilities.
 % - Mention the Wireless Broadband Alliance (WBA) recommendation for 3GPP to define procedures for supporting Wi-Fi-only UE with non-IMSI based identity and EAP-TLS/EAP-TTLS based authentication.
+
+The current \ac{3GPP} standard lacks an architecture for integrating Wi-Fi-only devices without \ac{USIM} into the \acl{5GC}, creating a significant gap in connectivity. This limitation is problematic in enterprise environments, where many devices operate ony on Wi-Fi and do not possess \ac{USIM} capabilities. The \ac{WBA} has identified this issue, recommending that \ac{3GPP} develop procedures to support Wi-Fi-only \ac{UE} using non-\acs{IMSI} based identity and authentication methods such as \ac{EAP-TLS} or \ac{EAP-TTLS}. Addressing this challenge is crucial for enabling integration of diverse device types into the \ac{5G} ecosystem.
 
 \section{Research Objectives}
 
@@ -36,6 +38,32 @@ As wireless networks evolve, the convergence of 5G with existing Wi-Fi infrastru
 %   - Investigating authentication mechanisms compatible with both 5G and Wi-Fi networks.
 %   - Developing a method for device identification that works across 5G and non-3GPP networks.
 %   - Proposing extensions or alternatives to existing protocols to support seamless integration.
+
+The main goal of this research is to explore and develop solutions for integrating Wi-Fi-only devices without \ac{USIM} into the \ac{5GC} infrastructure. To achieve this, we have identified the following specific objectives:
+
+\begin{enumerate}
+    \item{
+        Investigate authentication mechanisms compatible with both \ac{5G} and Wi-Fi networks:
+        \begin{itemize}
+            \item Analyze existing authentication methods such as \ac{EAP-TLS} and \ac{EAP-TTLS} for their applicability in a converged 5G-Wi-Fi environment.
+            \item Explore potential modifications or extensions to these methods to ensure seamless authentication across different network types.
+        \end{itemize}
+    }
+    \item{
+        Develop a method for managing device identity that works across \ac{5G} and non-\ac{3GPP} networks:
+        \begin{itemize}
+            \item Investigate the possibility of designing an extended \ac{NAI} or alternative identifier that can accommodate Wi-Fi-only devices while maintaining compatibility with the \ac{5G} infrastructure.
+            \item Investigate the possibility of generating a pseudo-\ac{SUCI} and pseudo-\ac{SUPI} for \ac{N5GC} devices that follows the \ac{NAI} format and serves a similar function in the authentication flow.
+        \end{itemize}
+    }
+    \item{
+        Propose extensions or alternatives to existing protocols:
+        \begin{itemize}
+            \item Investigate the possibility for mapping existing \ac{N5GC} device identifiers (e.g., \ac{MAC} addresses) to a format compatible with the \ac{5G} authentication framework.
+            \item Explore the potential for enhancing or creating new \ac{EAP} methods specifically designed for \ac{N5GC} devices in a \ac{5G} context.
+        \end{itemize}
+    }
+\end{enumerate}
 
 \section{Significance of the Study}
 
