@@ -35,8 +35,7 @@
               "title": "5G Identifiers"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       },
       {
         "id": "bd5b2e7b4ef188f7",
@@ -164,7 +163,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 237.5
+    "width": 237.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -247,13 +247,12 @@
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "obsidian-git:Open Git source control": false,
-      "obsidian-kanban:Create new board": false
+      "command-palette:Open command palette": false
     }
   },
-  "active": "136884b87f063145",
+  "active": "a2d2013628aa0416",
   "lastOpenFiles": [
+    "3GPP Specification/5G Identifiers.md",
     "3GPP Specification/23501-i70.pdf",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "State of The Art.md",
@@ -290,7 +289,6 @@
     "EAP/Pasted image 20241030152521.png",
     "EAP",
     "3GPP Specification/4_2_2_2_2_general_registration_procedure.png",
-    "3GPP Specification/5G Identifiers.md",
     "Broadband Forum/TR-470.md",
     "Broadband Forum/TR-458.md",
     "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
