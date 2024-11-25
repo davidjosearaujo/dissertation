@@ -63,8 +63,6 @@ Besides gNB and next-generation e-NodeB (ng-eNB), for native 5G-NR and LTE acces
 In short:
 - **3GPP**: Cellular (e.g., 4G, 5G)
 - **Non-3GPP**: Other networks (e.g., Wi-Fi) integrated with cellular networks.
-### Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN)
->For an untrusted non-3GPP access network, to secure communication between the UE and the 5GCN, **a UE establishes secure connection to the 5G core network over untrusted non-3GPP access via the N3IWF**. 
 ### [[Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502|Authentication and authorization for accessing 5GS via non-3GPP access network]]
 >In order to register to the 5G core network (5GCN) via untrusted non-3GPP IP access, the UE first needs to be configured with a local IP address from the untrusted non-3GPP access network (N3AN).
 
