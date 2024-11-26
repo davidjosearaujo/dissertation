@@ -6,7 +6,7 @@
       {
         "id": "a16cae8d833d13fb",
         "type": "tabs",
-        "dimension": 44.53125,
+        "dimension": 50.37974683544304,
         "children": [
           {
             "id": "44983795a9e9df53",
@@ -56,7 +56,7 @@
       {
         "id": "4eddae968d1636f4",
         "type": "tabs",
-        "dimension": 55.46875,
+        "dimension": 49.62025316455696,
         "children": [
           {
             "id": "547a1053d407bf45",
@@ -71,7 +71,7 @@
             }
           },
           {
-            "id": "5f8e10f42017d5a7",
+            "id": "04033444350221c8",
             "type": "leaf",
             "state": {
               "type": "pdf",
@@ -82,7 +82,8 @@
               "title": "A-Comparative-Introduction-of-4G-and-5G-Authentication"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -138,7 +139,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 237.5,
+    "width": 234.5,
     "collapsed": true
   },
   "right": {
@@ -201,10 +202,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "State of The Art.md"
+                "file": "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of State of The Art"
+              "title": "Outline of A-Comparative-Introduction-of-4G-and-5G-Authentication"
             }
           }
         ],
@@ -224,14 +225,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "44983795a9e9df53",
+  "active": "04033444350221c8",
   "lastOpenFiles": [
-    "3GPP Specification/23501-i70.pdf",
     "State of The Art.md",
-    "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
-    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
-    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
+    "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf",
+    "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf.crdownload",
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
+    "CableLabs/Pasted image 20241014173803.png",
+    "3GPP Specification/23501-i70.pdf",
+    "CableLabs/Pasted image 20241014163827.png",
+    "CableLabs/Pasted image 20241002154111.png",
+    "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
+    "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
     "3GPP Specification/5G Identifiers.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
@@ -241,7 +248,6 @@
     "Broadband Forum/TR-456.md",
     "Articles/Pasted image 20241014162545.png",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
     "EAP/Extensible Authentication Protocol.md",
     "Federated Identity/Identity Provider.md",
@@ -260,16 +266,11 @@
     "RADIUS/Pasted image 20241112105316.png",
     "EAP/Pasted image 20241111175529.png",
     "EAP/Pasted image 20241111154114.png",
-    "EAP/Pasted image 20241030152521.png",
     "EAP",
-    "3GPP Specification/4_2_2_2_2_general_registration_procedure.png",
     "Broadband Forum/TR-470.md",
     "Broadband Forum/TR-458.md",
-    "Broadband Forum/TR-456-AGF-Functional-Requirements.pdf",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-    "images",
     "Tasks.md",
-    "images/Pasted image 20241004114652.png",
     "Federated Identities.md",
     "Untitled.canvas"
   ]
