@@ -6,7 +6,7 @@
       {
         "id": "a16cae8d833d13fb",
         "type": "tabs",
-        "dimension": 50.37974683544304,
+        "dimension": 43.734177215189874,
         "children": [
           {
             "id": "44983795a9e9df53",
@@ -56,20 +56,8 @@
       {
         "id": "4eddae968d1636f4",
         "type": "tabs",
-        "dimension": 49.62025316455696,
+        "dimension": 56.265822784810126,
         "children": [
-          {
-            "id": "547a1053d407bf45",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "3GPP Specification/23501-i70.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "23501-i70"
-            }
-          },
           {
             "id": "04033444350221c8",
             "type": "leaf",
@@ -82,8 +70,7 @@
               "title": "A-Comparative-Introduction-of-4G-and-5G-Authentication"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -227,19 +214,20 @@
   },
   "active": "04033444350221c8",
   "lastOpenFiles": [
+    "3GPP Specification/23501-i70.pdf",
     "State of The Art.md",
+    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
+    "3GPP Specification/5G Identifiers.md",
+    "EAP/Extensible Authentication Protocol.md",
+    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
+    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf",
     "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf.crdownload",
-    "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
-    "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
-    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "CableLabs/Pasted image 20241014173803.png",
-    "3GPP Specification/23501-i70.pdf",
     "CableLabs/Pasted image 20241014163827.png",
     "CableLabs/Pasted image 20241002154111.png",
     "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
-    "3GPP Specification/5G Identifiers.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
@@ -249,7 +237,6 @@
     "Articles/Pasted image 20241014162545.png",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "3GPP Specification/Procedures for the 5G System (5GS) - 23.502.md",
-    "EAP/Extensible Authentication Protocol.md",
     "Federated Identity/Identity Provider.md",
     "Federated Identity/Federated Identity.md",
     "Current Prototype Limitations.md",
