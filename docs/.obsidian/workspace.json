@@ -189,10 +189,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf"
+                "file": "State of The Art.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of A-Comparative-Introduction-of-4G-and-5G-Authentication"
+              "title": "Outline of State of The Art"
             }
           }
         ],
@@ -212,14 +212,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "04033444350221c8",
+  "active": "44983795a9e9df53",
   "lastOpenFiles": [
-    "3GPP Specification/23501-i70.pdf",
+    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "State of The Art.md",
+    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
+    "3GPP Specification/23501-i70.pdf",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "3GPP Specification/5G Identifiers.md",
     "EAP/Extensible Authentication Protocol.md",
-    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "3GPP Specification/Security architecture and procedures for 5G system - 33.501.md",
     "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf",
     "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf.crdownload",
@@ -231,7 +232,6 @@
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
-    "Altice Labs/WP_Heading-to-a-successful-private-digital-convergence.pdf",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Broadband Forum/TR-456.md",
     "Articles/Pasted image 20241014162545.png",
