@@ -23,7 +23,7 @@
 
 % Enable for for Overleaf support
 \usepackage{ifthen}
-\def\useoverleaf{0}  % change to non-zero (for instance, 1) to enable it
+\def\useoverleaf{1}  % change to non-zero (for instance, 1) to enable it
 
 \makeatletter
 \newcommand{\makecoverfile}[0]{%
@@ -98,9 +98,7 @@
 \usepackage{bookmark} % New Bookmarks
 
 % For Multiple columns in Glossary
-%\usepackage{multicol}
-\usepackage[acronym]{glossaries}
-\makeglossaries
+\usepackage{multicol}
 
 % Add support for Math symbols
 \usepackage{amsmath}
@@ -259,16 +257,16 @@
   \renewcommand*{\chapterheadstart}{\begingroup
     \vspace*{\beforechapskip}%
     \begin{adjustwidth}{}{-\chapindent}%
-      \hrulefill
-      \smash{\rule{0.4pt}{15mm}}
+    \hrulefill
+    \smash{\rule{0.4pt}{15mm}}
     \end{adjustwidth}\endgroup}
   \renewcommand*{\printchaptername}{}
   \renewcommand*{\chapternamenum}{}
   \renewcommand*{\printchapternum}{%
     \begin{adjustwidth}{}{-\chapindent}
-      \hfill
-      \raisebox{10mm}[0pt][0pt]{\fontsize{30}{25}\selectfont\chapnumfont \thechapter}%
-      \hspace*{1em}
+    \hfill
+    \raisebox{10mm}[0pt][0pt]{\fontsize{30}{25}\selectfont\chapnumfont \thechapter}%
+                              \hspace*{1em}
     \end{adjustwidth}\vspace*{-3.0\onelineskip}}
   \renewcommand*{\printchaptertitle}[1]{%
     \vskip\onelineskip
@@ -297,9 +295,9 @@
 \newenvironment{introduction}
 {%
   \begin{minipage}{\textwidth}%
-    \itshape%
-    }
-    {%
+   \itshape%
+}
+{%
   \end{minipage}%
   \par\addvspace{2\baselineskip plus 0.2\baselineskip minus 0.2\baselineskip}%
 }
@@ -332,12 +330,12 @@
 \RenewDocumentCommand \chapter { s O{#3} m }{%
   \FloatBarrier
   \IfValueTF{#1}  % if optional star is seen
-  {\oldchapter*{#2}}
-  {\oldchapter#1{#2}}
- }
+    {\oldchapter*{#2}}
+    {\oldchapter#1{#2}}
+}
 
-\renewcommand{\listingscaption}{Code}
-\renewcommand{\listoflistingscaption}{List of Code Snippets}
+%\renewcommand{\listingscaption}{Código}
+%\renewcommand{\listoflistingscaption}{Lista de Excertos de Código}
 %\clearpage
 %{\small\listoflistings}
 %\addcontentsline{toc}{chapter}{\listoflistingscaption}
@@ -351,7 +349,6 @@
 % Print Glossary
 \clearpage
 {\small\include{glossary}}
-\printglossary[type=\acronymtype]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Main document starts here
@@ -388,7 +385,7 @@
 % Redefine References name to Portuguese
 % Change if you are using english
 \defbibheading{bibliography}[References]{
-  \chapter{#1}
+	\chapter{#1}
 }
 \SingleSpacing
 \setlength\bibitemsep{8pt}
