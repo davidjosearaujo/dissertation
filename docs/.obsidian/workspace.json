@@ -20,7 +20,19 @@
             }
           },
           {
-            "id": "3dec8dee4c5b8e1e",
+            "id": "a665046ca4eab404",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Private-5G-and-Wi-Fi-Convergence-Use-Cases"
+            }
+          },
+          {
+            "id": "848e3a92d59bb646",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -32,45 +44,8 @@
               "icon": "lucide-file",
               "title": "State of The Art"
             }
-          },
-          {
-            "id": "242085b36a5eeaac",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "5G and Wi-Fi RAN Convergence"
-            }
-          },
-          {
-            "id": "3fa93365103fee03",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "3GPP Specification/23501-i70.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "23501-i70"
-            }
-          },
-          {
-            "id": "a41be3080b176190",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "3GPP Specification/33501-i70.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "33501-i70"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -189,10 +164,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "State of The Art.md"
+                "file": "WLESS03_Rajamanickam_6573_paper.pdf"
               },
               "icon": "lucide-list",
-              "title": "Outline of State of The Art"
+              "title": "Outline of WLESS03_Rajamanickam_6573_paper"
             }
           }
         ],
@@ -213,20 +188,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3dec8dee4c5b8e1e",
+  "active": "06e5012d9364c573",
   "lastOpenFiles": [
-    "WLESS03_Rajamanickam_6573_paper.pdf",
-    "3GPP Specification/5G Identifiers.md",
-    "3GPP Specification/23501-i70.pdf",
-    "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
-    "3GPP Specification/24502-i70.pdf",
-    "Articles/Wireline Access in 5G - MPIRICAL.md",
     "State of The Art.md",
     "Wireless Broadband Alliance/Private-5G-and-Wi-Fi-Convergence-Use-Cases.pdf",
-    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
+    "WLESS03_Rajamanickam_6573_paper.pdf",
+    "3GPP Specification/23501-i70.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "3GPP Specification/33501-i70.pdf",
     "3GPP Specification/23316-i60.pdf",
+    "3GPP Specification/5G Identifiers.md",
+    "3GPP Specification/Access to the 3GPP 5G Core Network (5GCN) via Non-3GPP Access Networks (N3AN) - 24.502.md",
+    "3GPP Specification/24502-i70.pdf",
+    "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "CableLabs/A-Comparative-Introduction-of-4G-and-5G-Authentication.pdf",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "ENISA/SECURITY IN 5GSPECIFICATIONS - Controls in 3GPP Security Specifications (5G SA).md",
     "ENISA/ENISA Report - Security in 5G Specifications.pdf",
