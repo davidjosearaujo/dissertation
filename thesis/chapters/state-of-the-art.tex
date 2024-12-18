@@ -1,4 +1,4 @@
-\chapter{State of the Art}%
+\chapter{State of the Art}
 \label{chapter:State of the Art}
 
 \begin{introduction}
@@ -18,7 +18,7 @@ The \ac{SN} includes network components that facilitate communication and provid
         The \ac{eNodeB} is a base station that manages the radio connection between the \ac{UE} and the network. It handles tasks like scheduling radio resources, modulating and demodulating signals, and ensuring reliable data transmission over the air interface.
     }
     \item {
-        The \ac{MME} is a core network element responsible for managing signaling between the \ac{UE} and the core network. It plays a key role in tasks such as authenticating the user, establishing bearers (data pathways), and ensuring mobility by managing handovers between eNodeBs as the \ac{UE} moves.
+        The \ac{MME} is a core network element responsible for managing signaling between the \ac{UE} and the core network. It plays a key role in tasks such as authenticating the user, establishing bearers (data pathways), and ensuring mobility by managing handovers between \acp{eNodeB} as the \ac{UE} moves.
     }
 \end{itemize}
 
@@ -232,7 +232,7 @@ As the \ac{5G} network evolves, it's important to recognize that not all devices
     \label{fig:Architecture for 5G Core Network for FN-RG with Wireline 5G Access network and NG RAN}
 \end{figure}
 
-For non-\ac{5G}-capable \acp{FN-RG}, such as legacy home routers, connected via \ac{W-5GAN} (see Figure \ref{fig:Architecture for 5G Core Network for FN-RG with Wireline 5G Access network and NG \ac{RAN}}), the \ac{W-AGF} handles N1 signaling on behalf of the \ac{FN-RG}. \acp{UE}, like smartphones or \ac{IoT} devices, connecting through these gateways can access the \ac{5GC} via either \ac{N3IWF} (untrusted access using Wi-Fi) or \ac{TNGF} (trusted access) depending on the network configuration.
+For non-\ac{5G}-capable \acp{FN-RG}, such as legacy home routers, connected via \ac{W-5GAN} (see Figure \ref{fig:Architecture for 5G Core Network for FN-RG with Wireline 5G Access network and NG RAN}), the \ac{W-AGF} handles N1 signaling on behalf of the \ac{FN-RG}. \acp{UE}, like smartphones or \ac{IoT} devices, connecting through these gateways can access the \ac{5GC} via either \ac{N3IWF} (untrusted access using Wi-Fi) or \ac{TNGF} (trusted access) depending on the network configuration.
 
 \begin{figure}
     \centering
@@ -258,13 +258,13 @@ For authentication over untrusted non-\ac{3GPP} networks (see Figure \ref{fig:Au
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figs/Authentication for untrusted non-3GPP access.png}
-    \caption{Authentication for untrusted non-3GPP access}
-    \label{fig:Authentication for untrusted non-\ac{3GPP} access}
+    \caption{Authentication for untrusted non-\ac{3GPP} access}
+    \label{fig:Authentication for untrusted non-3GPP access}
 \end{figure}
 
 Security for trusted non-\ac{3GPP} access to the \ac{5GC} involves the \ac{UE} registering to the \ac{5GC} via a \ac{TNAN} using the \ac{EAP-5G} procedure, similar to that used for untrusted access (see Figure \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_1}, \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_2} and \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_3} ). The link between the \ac{UE} and the \ac{TNAN} relies on Layer-2 security, making \ac{IPSec} encryption unnecessary between the \ac{UE} and the \ac{TNGF}, though integrity protection is ensured.
 
-During registration, the \ac{TNGF} terminates \ac{EAP-5G} signaling and forwards \ac{NAS} messages to the \ac{5GC}. At the registration's conclusion, an \ac{IPSec SA} (NWt) is established between the \ac{UE} and \ac{TNGF} to protect \ac{NAS} messages. Additional \acp{IPSec SA} are created during \ac{PDU} session establishment for user plane transport. Security policies, determined by the home operator, define whether non-\ac{3GPP} access is trusted based on security domains or other considerations.
+During registration, the \ac{TNGF} terminates \ac{EAP-5G} signaling and forwards \ac{NAS} messages to the \ac{5GC}. At the registration's conclusion, an \ac{IPSec} SA (NWt) is established between the \ac{UE} and \ac{TNGF} to protect \ac{NAS} messages. Additional \acp{IPSec} SA are created during \ac{PDU} session establishment for user plane transport. Security policies, determined by the home operator, define whether non-\ac{3GPP} access is trusted based on security domains or other considerations.
 
 For trusted non-\ac{3GPP} access authentication, key differences from untrusted access include avoiding \ac{IKEv2} encapsulation for \ac{EAP-5G} packets, utilizing \ac{5G-GUTI} or \ac{SUCI} for \ac{UE} identity, and deriving keys like $K_TNGF$ and $K_TNAP$ for secure communication. These keys are shared between the \ac{AMF}, \ac{TNGF}, and \ac{TNAP} to establish secure communication flows.
 
@@ -446,4 +446,4 @@ In summary, NAUN3 devices operate entirely locally, with no interaction with the
 
 \section{Wi-Fi-only Devices Integration Challenges}
 
-\section{Current Solutions and Proposals}'
+\section{Current Solutions and Proposals}
