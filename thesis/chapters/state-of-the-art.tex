@@ -66,21 +66,21 @@ The \ac{5G} System architecture, seen in Figure \ref{fig:5G-system-architecture}
 
 The system includes a unified authentication framework, supports stateless \acp{NF} by decoupling compute and storage resources, and enables capability exposure for network features. It allows concurrent access to local and centralized services and deploys \ac{UP} functions near the \acl{AN} to support low latency services and local data network access. Additionally, it supports roaming with both home-routed and local breakout traffic in visited networks, ensuring efficient and flexible operation.%cite 23.501 4.1
 
-In \ac{5G}, the security framework is built around a new way of organizing the network, known as \ac{SBA}. This setup introduces new entities and processes that focus on keeping the network secure, especially when it comes to authentication, which is the process of verifying users and devices.
+In \ac{5G}, the security framework is built around a new way of organizing the network, known as \ac{SBA}. This setup introduces new entities~\cite{33.501-p30} and processes that focus on keeping the network secure, especially when it comes to authentication, which is the process of verifying users and devices.
 
 % cite 23.501 6.2.X for each
 \begin{itemize}
     \item{
-        One of the key entities is the \ac{SEAF}, located in the serving network. Acting as an intermediary during the authentication process. The \ac{SEAF} receives authentication requests from a device (\ac{UE}), but it relies on the home network to decide whether the authentication is valid or not. It can reject the authentication, but the final decision rests with the home network.
+        One of the key entities is the \ac{SEAF}, located in the serving network. Acting as an intermediary during the authentication process~\cite{23.501-p48}. The \ac{SEAF} receives authentication requests from a device (\ac{UE}), but it relies on the home network to decide whether the authentication is valid or not. It can reject the authentication, but the final decision rests with the home network.
     }
     \item{
-        The \ac{AUSF} is the entity in the home network that actually decides whether the device should be allowed onto the network. The \ac{AUSF} looks at the information provided by the device and checks it against the home network's security policies. It then works with other backend services to compute the necessary data and keys needed to authenticate the device, using secure methods like \ac{5G-AKA} or \ac{EAP-AKA'}.
+        The \ac{AUSF}~\cite{23.501-p538} is the entity in the home network that actually decides whether the device should be allowed onto the network. The \ac{AUSF} looks at the information provided by the device and checks it against the home network's security policies. It then works with other backend services to compute the necessary data and keys needed to authenticate the device, using secure methods like \ac{5G-AKA} or \ac{EAP-AKA'}.
     }
     \item{
-        The \ac{UDM} is in charge of managing the data involved in authentication. One of its key roles is managing the \ac{ARPF}, which selects the right authentication method based on the device's identity and the network's policies. It also helps generate the keys and data that the \ac{AUSF} uses for authentication.
+        The \ac{UDM}~\cite{23.501-p538} is in charge of managing the data involved in authentication. One of its key roles is managing the \ac{ARPF}, which selects the right authentication method based on the device's identity and the network's policies. It also helps generate the keys and data that the \ac{AUSF} uses for authentication.
     }
     \item{
-        Finally, the \ac{SIDF} helps protect \ac{SUPI}. In \ac{5G}, this permanent identity, which could be something like a user’s \ac{IMSI}, is always kept hidden and encrypted when sent over the air to prevent hackers from tracking it. The \ac{SIDF} is the only part of the network that can decrypt the encrypted identity (called the \ac{SUCI}) using a private key, ensuring that no one else can access the user’s personal details.
+        Finally, the \ac{SIDF} helps protect \ac{SUPI}. In \ac{5G}, this permanent identity, which could be something like a user’s \ac{IMSI}, is always kept hidden and encrypted when sent over the air to prevent hackers from tracking it. The \ac{SIDF} is the only part of the network that can decrypt the encrypted identity~\cite{33.501-p37} (called the \ac{SUCI}) using a private key, ensuring that no one else can access the user’s personal details.
     }
 \end{itemize}
 
