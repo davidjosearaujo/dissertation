@@ -1,0 +1,3 @@
+> Blockchain technology has the potential to enhance the security and integrity of IoT data in high-speed networks. By leveraging the decentralized and immutable nature of blockchain, IoT devices can securely record and share data, ensuring transparency and tamper-resistance. Smart contracts on the blockchain can automate and govern interactions between devices, reducing the risk of unauthorized access and data manipulation.
+> [[Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed.pdf#page=4&selection=10,0,20,42|Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed, page 4]]
+

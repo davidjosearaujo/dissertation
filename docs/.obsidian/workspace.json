@@ -4,39 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "8e66877b5d2fc6ac",
+        "id": "3cb3bdc0e59984e0",
         "type": "tabs",
         "children": [
           {
-            "id": "a4efb48b897f28f3",
+            "id": "1813b1bed7134ef1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "SCTE TechExpo/Presented and first published at SCTE TechExpo24 1 5G and Wi-Fi 7 Network Convergence with End-to-End Network Slicing.md",
-                "mode": "source",
-                "source": false
+                "file": "Articles/Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed.pdf"
               },
-              "icon": "lucide-file",
-              "title": "Presented and first published at SCTE TechExpo24 1 5G and Wi-Fi 7 Network Convergence with End-to-End Network Slicing"
+              "icon": "lucide-file-text",
+              "title": "Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed"
             }
           }
         ]
       },
       {
-        "id": "4f5656735272646b",
+        "id": "8e2246b82453ffa4",
         "type": "tabs",
         "children": [
           {
-            "id": "228375e193597de9",
+            "id": "e62ec80553a2333b",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "SCTE TechExpo/WLESS03_Rajamanickam_6573_paper.pdf"
+                "file": "Articles/Internet of Things (IoT) Integration - Identifying Blockages and Optimizing Resource Allocation in 5G & 6G Networks.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "WLESS03_Rajamanickam_6573_paper"
+              "icon": "lucide-file",
+              "title": "Internet of Things (IoT) Integration - Identifying Blockages and Optimizing Resource Allocation in 5G & 6G Networks"
             }
           }
         ]
@@ -95,7 +95,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 234.5
+    "width": 387.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -181,28 +182,30 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "228375e193597de9",
+  "active": "1813b1bed7134ef1",
   "lastOpenFiles": [
-    "Articles/What Is Federated Identity.pdf",
-    "Articles/What Is Federated Identity.pdf.crdownload",
+    "Articles/Internet of Things (IoT) Integration - Identifying Blockages and Optimizing Resource Allocation in 5G & 6G Networks.md",
+    "Articles/Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed.pdf",
     "Articles/Novel Authentication Protocols Tailored for.pdf",
-    "Articles/Novel Authentication Protocols Tailored for.pdf.crdownload",
-    "Articles/The Impact of 5G on Network Security and IoT - C Solutions IT.pdf",
-    "Articles/The Impact of 5G on Network Security and IoT - C Solutions IT.pdf.crdownload",
+    "Articles/etr-09-cross-domain-identity-of-things.pdf",
+    "Articles/designs-08-00128.pdf",
     "Articles/The Impact of 5G on IoT Security Challenges and Opportunities – Siberoloji.pdf",
-    "Articles/The Impact of 5G on IoT Security Challenges and Opportunities – Siberoloji.pdf.crdownload",
+    "Articles/The Impact of 5G on Network Security and IoT - C Solutions IT.pdf",
+    "Articles/5G Anonymity and the SUCI - Mpirical.pdf",
+    "Federated Identity/A federated lightweight authentication protocol for the internet of things.pdf",
+    "Federated Identity/The_Case_for_Federated_Identity_Management_in_5G_Communications.pdf",
+    "Federated Identity/diss2019_05_Lagutin_paper.pdf",
+    "Articles/Wireline Access in 5G - MPIRICAL.md",
+    "Articles/Pasted image 20241014162545.png",
+    "Articles/Pasted image 20241014163143.png",
     "SCTE TechExpo/Presented and first published at SCTE TechExpo24 1 5G and Wi-Fi 7 Network Convergence with End-to-End Network Slicing.md",
-    "SCTE TechExpo/WLESS03_Rajamanickam_6573_paper.pdf",
-    "SCTE TechExpo",
     "Federated Identity/Federated Identity.md",
-    "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.pdf",
     "Federated Identity/How does Eduram work?.md",
     "State of The Art.md",
     "Wireless Broadband Alliance/5G and Wi-Fi RAN Convergence.md",
     "Federated Identity/Identity Provider.md",
     "Broadband Forum/TR-458.md",
     "Broadband Forum/TR-456.md",
-    "Articles/Wireline Access in 5G - MPIRICAL.md",
     "Broadband Forum/TR-470.md",
     "CableLabs/A Comparative Introduction to 4G and 5G Authentication by CableLabs.md",
     "3GPP Specification/5G Identifiers.md",
@@ -217,7 +220,6 @@
     "CableLabs/Pasted image 20241014163827.png",
     "CableLabs/Pasted image 20241002154111.png",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
-    "Articles/Pasted image 20241014162545.png",
     "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
     "Research Directions.md",
     "Altice Labs/Notes.md",
@@ -226,9 +228,7 @@
     "RADIUS/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111152310.png",
     "RADIUS/Pasted image 20241112105316.png",
-    "EAP/Pasted image 20241111175529.png",
     "CableLabs/WR-TR-5WWC-ARCH-V01-190820.md",
-    "Tasks.md",
     "Untitled.canvas"
   ]
 }
