@@ -4,39 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2ac11a747204752d",
+        "id": "845f148c9d8028df",
         "type": "tabs",
         "children": [
           {
-            "id": "e0c86c5635549b68",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "Articles/Novel Authentication Protocols Tailored for.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Novel Authentication Protocols Tailored for"
-            }
-          }
-        ]
-      },
-      {
-        "id": "b903b9292d184785",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "1a73dbfe4feb7709",
+            "id": "88c58a7ced3ac445",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Articles/Novel Authentication Protocols Tailored for Ambient IoT Devices in 3GPP 5G Networks.md",
+                "file": "RADIUS/Remote Authentication Dial-In User Service.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Novel Authentication Protocols Tailored for Ambient IoT Devices in 3GPP 5G Networks"
+              "title": "Remote Authentication Dial-In User Service"
             }
           }
         ]
@@ -181,25 +163,28 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1a73dbfe4feb7709",
+  "active": "88c58a7ced3ac445",
   "lastOpenFiles": [
+    "Federated Identity/wp-securing-5g-through-cyber-telecom-identity-federation.pdf",
+    "Federated Identity/A federated lightweight authentication protocol for the internet of things.pdf",
+    "Federated Identity/diss2019_05_Lagutin_paper.pdf",
+    "Federated Identity/Towards_a_Standardized_Identity_Federation_for_Internet_of_Things_in_5G_Networks.pdf",
+    "Federated Identity/Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network.pdf",
+    "Federated Identity/Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network.md",
+    "Federated Identity/Towards a standardized identity federation for Internet of Things in 5G Networks.md",
+    "Federated Identity/Network_Service_Federated_Identity_NS-_FId_Protocol_for_Service_Authorization_in_5G_Network.pdf",
+    "Articles/ML-AKA - An Authentication Protocol for Non-Standalone 5G-Based C-IoT Networks.md",
     "Articles/Novel Authentication Protocols Tailored for.pdf",
+    "Articles/Pasted image 20241014163143.png",
+    "Articles/Pasted image 20241014162545.png",
+    "Articles/Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed.pdf",
     "Articles/Novel Authentication Protocols Tailored for Ambient IoT Devices in 3GPP 5G Networks.md",
     "Articles/etr-09-cross-domain-identity-of-things.pdf",
     "Articles/CROSS-DOMAIN IDENTITY OF THINGS.md",
     "Articles/designs-08-00128.pdf",
-    "Articles/ML-AKA - An Authentication Protocol for Non-Standalone 5G-Based C-IoT Networks.md",
-    "Articles/Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed.pdf",
     "Articles/Internet of Things (IoT) Integration - Identifying Blockages and Optimizing Resource Allocation in 5G & 6G Networks.md",
     "Articles/The Impact of 5G on IoT Security Challenges and Opportunities – Siberoloji.pdf",
-    "Articles/The Impact of 5G on Network Security and IoT - C Solutions IT.pdf",
-    "Articles/5G Anonymity and the SUCI - Mpirical.pdf",
-    "Federated Identity/A federated lightweight authentication protocol for the internet of things.pdf",
-    "Federated Identity/The_Case_for_Federated_Identity_Management_in_5G_Communications.pdf",
-    "Federated Identity/diss2019_05_Lagutin_paper.pdf",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
-    "Articles/Pasted image 20241014162545.png",
-    "Articles/Pasted image 20241014163143.png",
     "SCTE TechExpo/Presented and first published at SCTE TechExpo24 1 5G and Wi-Fi 7 Network Convergence with End-to-End Network Slicing.md",
     "Federated Identity/Federated Identity.md",
     "Federated Identity/How does Eduram work?.md",
@@ -222,8 +207,6 @@
     "CableLabs/Pasted image 20241014163827.png",
     "CableLabs/Pasted image 20241002154111.png",
     "3GPP Specification/System architecture for the 5G System (5GS) - 23.501.md",
-    "3GPP Specification/Wireless and wireline convergence access support for the 5G System (5GS) - 23.316.md",
-    "Research Directions.md",
     "3GPP Specification/Pasted image 20241118173418.png",
     "RADIUS/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111152310.png",

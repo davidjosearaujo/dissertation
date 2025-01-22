@@ -1,0 +1,9 @@
+> In 5G, mobile subscribers with their User Equipment (UE) will be able to access the network services via multiple wireless access technologies and UE authentication will be provided locally to access 5G services. It will support multiple shareholders such as users, Mobile Network Oper- ators (MNO) and Service Providers (SP)
+> [[Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network.pdf#page=1&selection=77,0,82,38|Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network, page 1]]
+
+> There is also lack of mechanism that could provide a user with single identity (ID) to access ser- vice from multiple SPs from different security domains in 5G. Federated Identity Management (FIdM) has been discussed for network slicing provisioning and Internet of Things (IoT) but not for networks access and service provisioning, where we believe that use of Federated Identity (FId) and Single Sign On (SSO) will be an ideal solution to achieve robust authentication and ACL.
+> [[Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network.pdf#page=1&selection=150,30,158,23|Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network, page 1]]
+
+> With FId, multiple SPs can let subscribers use the same identification to obtain access to services in their networks. The user accesses protected services while the SP facilities the identification, authentication and authorization process handled by 3P such as Identity Provider (IdP).
+> [[Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network.pdf#page=2&selection=51,0,65,46|Network Service Federated Identity (NS-FId) Protocol for Service Authorization in 5G Network, page 2]]
+
