@@ -1,17 +1,24 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+CORE_IP = "192.168.56.10"
+GNB_IP = "192.168.56.11"
+UE_IP = "192.168.56.12"
+
+#### CORE INSTALL ####
+
 $core_install = <<-'SCRIPT'
 
 sudo add-apt-repository ppa:open5gs/latest
 sudo apt-get install -y gnupg curl ca-certificates
+sudo snap install yq
 
-echo "Adding MongoDB repos"
+echo -e "\nAdding MongoDB repos"
 curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
 
 echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 
-echo "Adding Node repos"
+echo -e "\nAdding Node repos"
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
 NODE_MAJOR=20
@@ -19,16 +26,24 @@ echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.co
 
 sudo apt-get update
 
-echo "Installing MongoDB, Nginx and Open5GS"
+echo -e "\nInstalling MongoDB, Nginx and Open5GS"
 sudo apt-get install -y mongodb-org open5gs nodejs nginx
 
+echo -e "\nReload MongoDB"
 sudo systemctl start mongod
 sudo systemctl enable mongod
 
-echo "Installing WebUI"
+echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
+cat /etc/open5gs/amf.yaml | yq '.amf.ngap.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/amf.yaml
+cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/upf.yaml
+
+sudo systemctl restart open5gs-amfd
+sudo systemctl restart open5gs-upfd
+
+echo -e "\nInstalling WebUI"
 curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
 
-echo "Exposing WebUI through a reverse proxy"
+echo -e "\nExposing WebUI through a reverse proxy"
 
 echo "server {
     listen 8080;
@@ -44,20 +59,60 @@ sudo ln -s /etc/nginx/sites-available/webui /etc/nginx/sites-enabled/
 sudo systemctl restart nginx
 
 SCRIPT
+$core_install.gsub!("CORE_IP", CORE_IP)
 
-$ue_install = <<-'SCRIPT'
+#### CORE INSTALL ####
+
+#### UERANSIM INSTALL ####
+
+$ueransim_install = <<-'SCRIPT'
 
 sudo apt update
 
 sudo apt install -y make git gcc g++ libsctp-dev lksctp-tools iproute2
 sudo snap install cmake --classic
+sudo snap install yq
 
+echo -e "\nInstalling UERANSIM"
 cd ~
 git clone https://github.com/aligungr/UERANSIM
 cd ~/UERANSIM
 make
 
 SCRIPT
+
+#### UERANSIM INSTALL ####
+
+#### gNodeB CONFIG ####
+
+$gnb_install = <<-'SCRIPT'
+cd ~/UERANSIM
+
+echo -e "\nUpdate gNodeB and Core IPs"
+cat config/open5gs-gnb.yaml | yq '.linkIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
+cat config/open5gs-gnb.yaml | yq '.ngapIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
+cat config/open5gs-gnb.yaml | yq '.gtpIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
+cat config/open5gs-gnb.yaml | yq '.amfConfigs[0].address = "CORE_IP"' | sudo tee config/open5gs-gnb.yaml
+
+build/nr-gnb -c config/open5gs-gnb.yaml &> /home/vagrant/gnb.log &
+
+SCRIPT
+$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP", GNB_IP)
+
+#### gNodeB CONFIG ####
+
+#### UE CONFIG ####
+
+$ue_install = <<-'SCRIPT'
+cd ~/UERANSIM
+
+echo -e "\nUpdate gNodeB IP"
+cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP"' | sudo tee config/open5gs-ue.yaml
+
+SCRIPT
+$ue_install.gsub!("GNB_IP", GNB_IP)
+
+#### UE CONFIG ####
 
 Vagrant.configure("2") do |config|
   
@@ -70,12 +125,32 @@ Vagrant.configure("2") do |config|
     end
 
     core.vm.hostname = "core"
-    core.vm.network "private_network", ip: "192.168.56.10"
+    core.vm.network "private_network", ip: CORE_IP
+
+    config.vm.synced_folder ".", "/var/log/open5gs"
 
     core.vm.provision "shell", inline: $core_install
   
     # Exposing WebUI
     core.vm.network "forwarded_port", guest: 8080, host: 9999
+  end
+
+  config.vm.define "gnb" do |gnb|
+    gnb.vm.box = "ubuntu/jammy64"
+
+    gnb.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    gnb.vm.hostname = "gnb"
+    gnb.vm.network "private_network", ip: GNB_IP
+
+    config.vm.synced_folder ".", "/home/vagrant"
+
+    gnb.vm.provision "shell", inline: $ueransim_install
+
+    gnb.vm.provision "shell", inline: $gnb_install
   end
 
   config.vm.define "ue" do |ue|
@@ -87,7 +162,11 @@ Vagrant.configure("2") do |config|
     end
 
     ue.vm.hostname = "ue"
-    ue.vm.network "private_network", ip: "192.168.56.11"
+    ue.vm.network "private_network", ip: UE_IP
+
+    config.vm.synced_folder ".", "/home/vagrant"
+
+    ue.vm.provision "shell", inline: $ueransim_install
 
     ue.vm.provision "shell", inline: $ue_install
   end
