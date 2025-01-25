@@ -57,7 +57,6 @@ echo "server {
 
 sudo ln -s /etc/nginx/sites-available/webui /etc/nginx/sites-enabled/
 sudo systemctl restart nginx
-
 SCRIPT
 $core_install.gsub!("CORE_IP", CORE_IP)
 
@@ -94,7 +93,6 @@ cat config/open5gs-gnb.yaml | yq '.ngapIp = "GNB_IP"' | sudo tee config/open5gs-
 cat config/open5gs-gnb.yaml | yq '.gtpIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
 cat config/open5gs-gnb.yaml | yq '.amfConfigs[0].address = "CORE_IP"' | sudo tee config/open5gs-gnb.yaml
 
-sudo mkdir /log
 build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb.log &
 
 SCRIPT
@@ -128,10 +126,8 @@ Vagrant.configure("2") do |config|
     core.vm.hostname = "core"
     core.vm.network "private_network", ip: CORE_IP
 
-    config.vm.synced_folder ".", "/var/log/open5gs"
-
     core.vm.provision "shell", inline: $core_install
-  
+
     # Exposing WebUI
     core.vm.network "forwarded_port", guest: 8080, host: 9999
   end
@@ -147,7 +143,7 @@ Vagrant.configure("2") do |config|
     gnb.vm.hostname = "gnb"
     gnb.vm.network "private_network", ip: GNB_IP
 
-    config.vm.synced_folder ".", "/log"
+    gnb.vm.synced_folder "./runtime_logs", "/log", create: true
 
     gnb.vm.provision "shell", inline: $ueransim_install
 
@@ -165,7 +161,7 @@ Vagrant.configure("2") do |config|
     ue.vm.hostname = "ue"
     ue.vm.network "private_network", ip: UE_IP
 
-    config.vm.synced_folder ".", "/log"
+    ue.vm.synced_folder "./runtime_logs", "/log", create: true
 
     ue.vm.provision "shell", inline: $ueransim_install
 
