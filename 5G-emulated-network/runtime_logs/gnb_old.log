@@ -1,0 +1,26 @@
+UERANSIM v3.2.6
+[2025-01-27 16:11:36.768] [sctp] [info] Trying to establish SCTP connection... (192.168.56.10:38412)
+[2025-01-27 16:11:36.801] [sctp] [info] SCTP connection established (192.168.56.10:38412)
+[2025-01-27 16:11:36.801] [sctp] [debug] SCTP association setup ascId[3]
+[2025-01-27 16:11:36.801] [ngap] [debug] Sending NG Setup Request
+[2025-01-27 16:11:36.812] [ngap] [debug] NG Setup Response received
+[2025-01-27 16:11:36.812] [ngap] [info] NG Setup procedure is successful
+[2025-01-27 16:21:33.258] [rrc] [debug] UE[1] new signal detected
+[2025-01-27 16:21:33.260] [rrc] [info] RRC Setup for UE[1]
+[2025-01-27 16:21:33.261] [ngap] [debug] Initial NAS message received from UE[1]
+[2025-01-27 16:21:33.328] [ngap] [debug] Initial Context Setup Request received
+[2025-01-27 16:21:33.548] [ngap] [info] PDU session resource(s) setup for UE[1] count[1]
+[2025-01-27 16:38:32.738] [rls] [debug] UE[1] signal lost
+[2025-01-27 16:56:37.208] [rls] [debug] UE[1] signal lost
+[2025-01-27 17:03:18.802] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2025-01-27 17:03:34.553] [rrc] [debug] UE[2] new signal detected
+[2025-01-27 17:03:35.557] [rls] [debug] UE[1] signal lost
+[2025-01-27 17:05:54.631] [rrc] [info] RRC Setup for UE[2]
+[2025-01-27 17:05:54.632] [ngap] [debug] Initial NAS message received from UE[2]
+[2025-01-27 17:05:54.632] [ngap] [debug] UE Context Release Command received
+[2025-01-27 17:05:54.633] [rrc] [info] Releasing RRC connection for UE[1]
+[2025-01-27 17:05:54.634] [ngap] [debug] Initial Context Setup Request received
+[2025-01-27 17:19:38.154] [rrc] [warning] Discarding RRC Setup Request, UE context already exists
+[2025-01-27 17:19:53.658] [rrc] [debug] UE[3] new signal detected
+[2025-01-27 17:19:55.462] [rls] [debug] UE[2] signal lost
+[2025-01-27 17:25:34.484] [rls] [debug] UE[3] signal lost
