@@ -10,7 +10,7 @@ UE_IP = "192.168.56.12"
 $core_install = <<-'SCRIPT'
 
 sudo add-apt-repository ppa:open5gs/latest
-sudo apt-get install -y gnupg curl ca-certificates
+sudo apt-get install -y gnupg curl
 sudo snap install yq
 
 echo -e "\nAdding MongoDB repos"
@@ -119,7 +119,7 @@ Vagrant.configure("2") do |config|
     core.vm.box = "ubuntu/jammy64"
 
     core.vm.provider "virtualbox" do |v|
-      v.memory = 1024
+      v.memory = 2048
       v.cpus = 1
     end
 

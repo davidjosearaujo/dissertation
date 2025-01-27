@@ -1,0 +1,912 @@
+Bringing machine 'core' up with 'virtualbox' provider...
+==> core: Importing base box 'ubuntu/jammy64'...
+[KProgress: 90%[K==> core: Matching MAC address for NAT networking...
+==> core: Checking if box 'ubuntu/jammy64' version '20241002.0.0' is up to date...
+==> core: Setting the name of the VM: 5G-emulated-network_core_1737972733917_82542
+==> core: Clearing any previously set network interfaces...
+==> core: Preparing network interfaces based on configuration...
+    core: Adapter 1: nat
+    core: Adapter 2: hostonly
+==> core: Forwarding ports...
+    core: 8080 (guest) => 9999 (host) (adapter 1)
+    core: 22 (guest) => 2222 (host) (adapter 1)
+==> core: Running 'pre-boot' VM customizations...
+==> core: Booting VM...
+==> core: Waiting for machine to boot. This may take a few minutes...
+    core: SSH address: 127.0.0.1:2222
+    core: SSH username: vagrant
+    core: SSH auth method: private key
+    core: 
+    core: Vagrant insecure key detected. Vagrant will automatically replace
+    core: this with a newly generated keypair for better security.
+    core: 
+    core: Inserting generated public key within guest...
+    core: Removing insecure key from the guest if it's present...
+    core: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> core: Machine booted and ready!
+==> core: Checking for guest additions in VM...
+    core: The guest additions on this VM do not match the installed version of
+    core: VirtualBox! In most cases this is fine, but in rare cases it can
+    core: prevent things such as shared folders from working properly. If you see
+    core: shared folder errors, please make sure the guest additions within the
+    core: virtual machine match the version of VirtualBox you have installed on
+    core: your host and reload your VM.
+    core: 
+    core: Guest Additions Version: 6.0.0 r127566
+    core: VirtualBox Version: 7.0
+==> core: Setting hostname...
+==> core: Configuring and enabling network interfaces...
+==> core: Mounting shared folders...
+    core: /home/davidjosearaujo/Documents/mc/second-year/dissertation-project/5G-emulated-network => /vagrant
+==> core: Running provisioner: shell...
+    core: Running: inline script
+    core: Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+    core: Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+    core: Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+    core: Get:4 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy InRelease [24.3 kB]
+    core: Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+    core: Get:6 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 Packages [3344 B]
+    core: Get:7 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [960 kB]
+    core: Get:8 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main Translation-en [2192 B]
+    core: Get:9 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+    core: Get:10 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [205 kB]
+    core: Get:11 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [19.5 kB]
+    core: Get:12 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [37.6 kB]
+    core: Get:13 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [8260 B]
+    core: Get:14 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [224 B]
+    core: Get:15 http://archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+    core: Get:16 http://archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+    core: Get:17 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+    core: Get:18 http://archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+    core: Get:19 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+    core: Get:20 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [2278 kB]
+    core: Get:21 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [383 kB]
+    core: Get:22 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1183 kB]
+    core: Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [289 kB]
+    core: Get:24 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [26.4 kB]
+    core: Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [44.5 kB]
+    core: Get:26 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [11.5 kB]
+    core: Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [440 B]
+    core: Get:28 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [67.7 kB]
+    core: Get:29 http://archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [11.1 kB]
+    core: Get:30 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [388 B]
+    core: Get:31 http://archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+    core: Get:32 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [30.0 kB]
+    core: Get:33 http://archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.6 kB]
+    core: Get:34 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [672 B]
+    core: Get:35 http://archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+    core: Fetched 26.4 MB in 24s (1093 kB/s)
+    core: Reading package lists...
+    core: PPA publishes dbgsym, you may need to include 'main/debug' component
+    core: Repository: 'deb https://ppa.launchpadcontent.net/open5gs/latest/ubuntu/ jammy main'
+    core: Description:
+    core: Open5GS is a C-language Open Source implementation of 5G Core and EPC, i.e. the core network of NR/LTE network (Release-17)
+    core: More info: https://launchpad.net/~open5gs/+archive/ubuntu/latest
+    core: Adding repository.
+    core: Adding deb entry to /etc/apt/sources.list.d/open5gs-ubuntu-latest-jammy.list
+    core: Adding disabled deb-src entry to /etc/apt/sources.list.d/open5gs-ubuntu-latest-jammy.list
+    core: Adding key to /etc/apt/trusted.gpg.d/open5gs-ubuntu-latest.gpg with fingerprint CA542085D893C03492F35E1EACC46E8E238249B1
+    core: Reading package lists...
+    core: Building dependency tree...
+    core: Reading state information...
+    core: curl is already the newest version (7.81.0-1ubuntu1.20).
+    core: curl set to manually installed.
+    core: gnupg is already the newest version (2.2.27-3ubuntu2.1).
+    core: gnupg set to manually installed.
+    core: 0 upgraded, 0 newly installed, 0 to remove and 6 not upgraded.
+    core: yq v4.44.5 from Mike Farah (mikefarah) installed
+    core: 
+    core: Adding MongoDB repos
+    core: deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse
+    core: 
+    core: Adding Node repos
+    core: deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main
+    core: Get:1 https://deb.nodesource.com/node_20.x nodistro InRelease [12.1 kB]
+    core: Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+    core: Hit:3 http://security.ubuntu.com/ubuntu jammy-security InRelease
+    core: Hit:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+    core: Get:5 https://deb.nodesource.com/node_20.x nodistro/main amd64 Packages [10.4 kB]
+    core: Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+    core: Get:7 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 InRelease [3005 B]
+    core: Get:8 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 Packages [20.5 kB]
+    core: Get:9 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse arm64 Packages [20.2 kB]
+    core: Hit:10 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy InRelease
+    core: Fetched 66.2 kB in 2s (42.8 kB/s)
+    core: Reading package lists...
+    core: 
+    core: Installing MongoDB, Nginx and Open5GS
+    core: Reading package lists...
+    core: Building dependency tree...
+    core: Reading state information...
+    core: The following additional packages will be installed:
+    core:   fontconfig-config fonts-dejavu-core libbson-1.0-0 libdeflate0 libfontconfig1
+    core:   libgd3 libidn12 libjbig0 libjpeg-turbo8 libjpeg8 libmicrohttpd12
+    core:   libmongoc-1.0-0 libmongocrypt0 libnginx-mod-http-geoip2
+    core:   libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+    core:   libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libsctp1
+    core:   libsnappy1v5 libtalloc2 libtiff5 libtins4.0 libwebp7 libxpm4
+    core:   mongodb-database-tools mongodb-mongosh mongodb-org-database
+    core:   mongodb-org-database-tools-extra mongodb-org-mongos mongodb-org-server
+    core:   mongodb-org-shell mongodb-org-tools nginx-common nginx-core open5gs-amf
+    core:   open5gs-ausf open5gs-bsf open5gs-common open5gs-hss open5gs-mme open5gs-nrf
+    core:   open5gs-nssf open5gs-pcf open5gs-pcrf open5gs-scp open5gs-sepp open5gs-sgwc
+    core:   open5gs-sgwu open5gs-smf open5gs-udm open5gs-udr open5gs-upf
+    core: Suggested packages:
+    core:   libgd-tools lksctp-tools fcgiwrap nginx-doc ssl-cert
+    core: The following NEW packages will be installed:
+    core:   fontconfig-config fonts-dejavu-core libbson-1.0-0 libdeflate0 libfontconfig1
+    core:   libgd3 libidn12 libjbig0 libjpeg-turbo8 libjpeg8 libmicrohttpd12
+    core:   libmongoc-1.0-0 libmongocrypt0 libnginx-mod-http-geoip2
+    core:   libnginx-mod-http-image-filter libnginx-mod-http-xslt-filter
+    core:   libnginx-mod-mail libnginx-mod-stream libnginx-mod-stream-geoip2 libsctp1
+    core:   libsnappy1v5 libtalloc2 libtiff5 libtins4.0 libwebp7 libxpm4
+    core:   mongodb-database-tools mongodb-mongosh mongodb-org mongodb-org-database
+    core:   mongodb-org-database-tools-extra mongodb-org-mongos mongodb-org-server
+    core:   mongodb-org-shell mongodb-org-tools nginx nginx-common nginx-core nodejs
+    core:   open5gs open5gs-amf open5gs-ausf open5gs-bsf open5gs-common open5gs-hss
+    core:   open5gs-mme open5gs-nrf open5gs-nssf open5gs-pcf open5gs-pcrf open5gs-scp
+    core:   open5gs-sepp open5gs-sgwc open5gs-sgwu open5gs-smf open5gs-udm open5gs-udr
+    core:   open5gs-upf
+    core: 0 upgraded, 58 newly installed, 0 to remove and 6 not upgraded.
+    core: Need to get 222 MB of archives.
+    core: After this operation, 883 MB of additional disk space will be used.
+    core: Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 fonts-dejavu-core all 2.37-2build1 [1041 kB]
+    core: Get:2 https://deb.nodesource.com/node_20.x nodistro/main amd64 nodejs amd64 20.18.2-1nodesource1 [31.8 MB]
+    core: Get:3 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-database-tools amd64 100.11.0 [55.7 MB]
+    core: Get:4 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-common amd64 2.7.2~jammy1 [3206 kB]
+    core: Get:5 http://archive.ubuntu.com/ubuntu jammy/main amd64 fontconfig-config all 2.13.1-4.2ubuntu5 [29.1 kB]
+    core: Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libbson-1.0-0 amd64 1.21.0-1build1 [83.7 kB]
+    core: Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 libdeflate0 amd64 1.10-2 [70.9 kB]
+    core: Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 libfontconfig1 amd64 2.13.1-4.2ubuntu5 [131 kB]
+    core: Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 libjpeg-turbo8 amd64 2.1.2-0ubuntu1 [134 kB]
+    core: Get:10 http://archive.ubuntu.com/ubuntu jammy/main amd64 libjpeg8 amd64 8c-2ubuntu10 [2264 B]
+    core: Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libjbig0 amd64 2.1-3.1ubuntu0.22.04.1 [29.2 kB]
+    core: Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libwebp7 amd64 1.2.2-2ubuntu0.22.04.2 [206 kB]
+    core: Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libtiff5 amd64 4.3.0-6ubuntu0.10 [185 kB]
+    core: Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxpm4 amd64 1:3.5.12-1ubuntu0.22.04.2 [36.7 kB]
+    core: Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgd3 amd64 2.3.0-2ubuntu2.3 [129 kB]
+    core: Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libidn12 amd64 1.38-4ubuntu1 [60.0 kB]
+    core: Get:17 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libmicrohttpd12 amd64 0.9.75-3ubuntu1 [77.6 kB]
+    core: Get:18 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libmongocrypt0 amd64 1.3.0-1ubuntu1 [93.9 kB]
+    core: Get:19 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsnappy1v5 amd64 1.1.8-1build3 [17.5 kB]
+    core: Get:20 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libmongoc-1.0-0 amd64 1.21.0-1build1 [311 kB]
+    core: Get:21 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 nginx-common all 1.18.0-6ubuntu14.5 [40.1 kB]
+    core: Get:22 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-http-geoip2 amd64 1.18.0-6ubuntu14.5 [12.0 kB]
+    core: Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-http-image-filter amd64 1.18.0-6ubuntu14.5 [15.5 kB]
+    core: Get:24 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-http-xslt-filter amd64 1.18.0-6ubuntu14.5 [13.8 kB]
+    core: Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-mail amd64 1.18.0-6ubuntu14.5 [45.8 kB]
+    core: Get:26 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-stream amd64 1.18.0-6ubuntu14.5 [72.8 kB]
+    core: Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libnginx-mod-stream-geoip2 amd64 1.18.0-6ubuntu14.5 [10.1 kB]
+    core: Get:28 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsctp1 amd64 1.0.19+dfsg-1build1 [9370 B]
+    core: Get:29 http://archive.ubuntu.com/ubuntu jammy/main amd64 libtalloc2 amd64 2.3.3-2build1 [25.6 kB]
+    core: Get:30 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libtins4.0 amd64 4.0-1build2 [226 kB]
+    core: Get:31 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 nginx-core amd64 1.18.0-6ubuntu14.5 [483 kB]
+    core: Get:32 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 nginx amd64 1.18.0-6ubuntu14.5 [3882 B]
+    core: Get:33 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-mme amd64 2.7.2~jammy1 [227 kB]
+    core: Get:34 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-sgwc amd64 2.7.2~jammy1 [64.3 kB]
+    core: Get:35 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-smf amd64 2.7.2~jammy1 [200 kB]
+    core: Get:36 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-amf amd64 2.7.2~jammy1 [193 kB]
+    core: Get:37 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-sgwu amd64 2.7.2~jammy1 [32.0 kB]
+    core: Get:38 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-upf amd64 2.7.2~jammy1 [47.5 kB]
+    core: Get:39 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-hss amd64 2.7.2~jammy1 [59.0 kB]
+    core: Get:40 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-pcrf amd64 2.7.2~jammy1 [43.9 kB]
+    core: Get:41 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-nrf amd64 2.7.2~jammy1 [36.1 kB]
+    core: Get:42 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-scp amd64 2.7.2~jammy1 [32.0 kB]
+    core: Get:43 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-sepp amd64 2.7.2~jammy1 [42.0 kB]
+    core: Get:44 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-ausf amd64 2.7.2~jammy1 [32.6 kB]
+    core: Get:45 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-udm amd64 2.7.2~jammy1 [48.5 kB]
+    core: Get:46 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-pcf amd64 2.7.2~jammy1 [60.4 kB]
+    core: Get:47 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-nssf amd64 2.7.2~jammy1 [24.0 kB]
+    core: Get:48 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-bsf amd64 2.7.2~jammy1 [27.7 kB]
+    core: Get:49 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs-udr amd64 2.7.2~jammy1 [30.5 kB]
+    core: Get:50 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy/main amd64 open5gs amd64 2.7.2~jammy1 [7240 B]
+    core: Get:51 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-mongosh amd64 2.3.8 [54.1 MB]
+    core: Get:52 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-org-shell amd64 8.0.4 [2986 B]
+    core: Get:53 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-org-server amd64 8.0.4 [41.5 MB]
+    core: Get:54 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-org-mongos amd64 8.0.4 [31.0 MB]
+    core: Get:55 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-org-database-tools-extra amd64 8.0.4 [7782 B]
+    core: Get:56 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-org-database amd64 8.0.4 [3426 B]
+    core: Get:57 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-org-tools amd64 8.0.4 [2768 B]
+    core: Get:58 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0/multiverse amd64 mongodb-org amd64 8.0.4 [2802 B]
+    core: dpkg-preconfigure: unable to re-open stdin: No such file or directory
+    core: Fetched 222 MB in 1min 8s (3246 kB/s)
+    core: Selecting previously unselected package fonts-dejavu-core.
+    core: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64144 files and directories currently installed.)
+    core: Preparing to unpack .../00-fonts-dejavu-core_2.37-2build1_all.deb ...
+    core: Unpacking fonts-dejavu-core (2.37-2build1) ...
+    core: Selecting previously unselected package fontconfig-config.
+    core: Preparing to unpack .../01-fontconfig-config_2.13.1-4.2ubuntu5_all.deb ...
+    core: Unpacking fontconfig-config (2.13.1-4.2ubuntu5) ...
+    core: Selecting previously unselected package libbson-1.0-0.
+    core: Preparing to unpack .../02-libbson-1.0-0_1.21.0-1build1_amd64.deb ...
+    core: Unpacking libbson-1.0-0 (1.21.0-1build1) ...
+    core: Selecting previously unselected package libdeflate0:amd64.
+    core: Preparing to unpack .../03-libdeflate0_1.10-2_amd64.deb ...
+    core: Unpacking libdeflate0:amd64 (1.10-2) ...
+    core: Selecting previously unselected package libfontconfig1:amd64.
+    core: Preparing to unpack .../04-libfontconfig1_2.13.1-4.2ubuntu5_amd64.deb ...
+    core: Unpacking libfontconfig1:amd64 (2.13.1-4.2ubuntu5) ...
+    core: Selecting previously unselected package libjpeg-turbo8:amd64.
+    core: Preparing to unpack .../05-libjpeg-turbo8_2.1.2-0ubuntu1_amd64.deb ...
+    core: Unpacking libjpeg-turbo8:amd64 (2.1.2-0ubuntu1) ...
+    core: Selecting previously unselected package libjpeg8:amd64.
+    core: Preparing to unpack .../06-libjpeg8_8c-2ubuntu10_amd64.deb ...
+    core: Unpacking libjpeg8:amd64 (8c-2ubuntu10) ...
+    core: Selecting previously unselected package libjbig0:amd64.
+    core: Preparing to unpack .../07-libjbig0_2.1-3.1ubuntu0.22.04.1_amd64.deb ...
+    core: Unpacking libjbig0:amd64 (2.1-3.1ubuntu0.22.04.1) ...
+    core: Selecting previously unselected package libwebp7:amd64.
+    core: Preparing to unpack .../08-libwebp7_1.2.2-2ubuntu0.22.04.2_amd64.deb ...
+    core: Unpacking libwebp7:amd64 (1.2.2-2ubuntu0.22.04.2) ...
+    core: Selecting previously unselected package libtiff5:amd64.
+    core: Preparing to unpack .../09-libtiff5_4.3.0-6ubuntu0.10_amd64.deb ...
+    core: Unpacking libtiff5:amd64 (4.3.0-6ubuntu0.10) ...
+    core: Selecting previously unselected package libxpm4:amd64.
+    core: Preparing to unpack .../10-libxpm4_1%3a3.5.12-1ubuntu0.22.04.2_amd64.deb ...
+    core: Unpacking libxpm4:amd64 (1:3.5.12-1ubuntu0.22.04.2) ...
+    core: Selecting previously unselected package libgd3:amd64.
+    core: Preparing to unpack .../11-libgd3_2.3.0-2ubuntu2.3_amd64.deb ...
+    core: Unpacking libgd3:amd64 (2.3.0-2ubuntu2.3) ...
+    core: Selecting previously unselected package libidn12:amd64.
+    core: Preparing to unpack .../12-libidn12_1.38-4ubuntu1_amd64.deb ...
+    core: Unpacking libidn12:amd64 (1.38-4ubuntu1) ...
+    core: Selecting previously unselected package libmicrohttpd12:amd64.
+    core: Preparing to unpack .../13-libmicrohttpd12_0.9.75-3ubuntu1_amd64.deb ...
+    core: Unpacking libmicrohttpd12:amd64 (0.9.75-3ubuntu1) ...
+    core: Selecting previously unselected package libmongocrypt0:amd64.
+    core: Preparing to unpack .../14-libmongocrypt0_1.3.0-1ubuntu1_amd64.deb ...
+    core: Unpacking libmongocrypt0:amd64 (1.3.0-1ubuntu1) ...
+    core: Selecting previously unselected package libsnappy1v5:amd64.
+    core: Preparing to unpack .../15-libsnappy1v5_1.1.8-1build3_amd64.deb ...
+    core: Unpacking libsnappy1v5:amd64 (1.1.8-1build3) ...
+    core: Selecting previously unselected package libmongoc-1.0-0.
+    core: Preparing to unpack .../16-libmongoc-1.0-0_1.21.0-1build1_amd64.deb ...
+    core: Unpacking libmongoc-1.0-0 (1.21.0-1build1) ...
+    core: Selecting previously unselected package nginx-common.
+    core: Preparing to unpack .../17-nginx-common_1.18.0-6ubuntu14.5_all.deb ...
+    core: Unpacking nginx-common (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package libnginx-mod-http-geoip2.
+    core: Preparing to unpack .../18-libnginx-mod-http-geoip2_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking libnginx-mod-http-geoip2 (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package libnginx-mod-http-image-filter.
+    core: Preparing to unpack .../19-libnginx-mod-http-image-filter_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking libnginx-mod-http-image-filter (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package libnginx-mod-http-xslt-filter.
+    core: Preparing to unpack .../20-libnginx-mod-http-xslt-filter_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking libnginx-mod-http-xslt-filter (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package libnginx-mod-mail.
+    core: Preparing to unpack .../21-libnginx-mod-mail_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking libnginx-mod-mail (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package libnginx-mod-stream.
+    core: Preparing to unpack .../22-libnginx-mod-stream_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking libnginx-mod-stream (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package libnginx-mod-stream-geoip2.
+    core: Preparing to unpack .../23-libnginx-mod-stream-geoip2_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking libnginx-mod-stream-geoip2 (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package libsctp1:amd64.
+    core: Preparing to unpack .../24-libsctp1_1.0.19+dfsg-1build1_amd64.deb ...
+    core: Unpacking libsctp1:amd64 (1.0.19+dfsg-1build1) ...
+    core: Selecting previously unselected package libtalloc2:amd64.
+    core: Preparing to unpack .../25-libtalloc2_2.3.3-2build1_amd64.deb ...
+    core: Unpacking libtalloc2:amd64 (2.3.3-2build1) ...
+    core: Selecting previously unselected package libtins4.0.
+    core: Preparing to unpack .../26-libtins4.0_4.0-1build2_amd64.deb ...
+    core: Unpacking libtins4.0 (4.0-1build2) ...
+    core: Selecting previously unselected package mongodb-database-tools.
+    core: Preparing to unpack .../27-mongodb-database-tools_100.11.0_amd64.deb ...
+    core: Unpacking mongodb-database-tools (100.11.0) ...
+    core: Selecting previously unselected package mongodb-mongosh.
+    core: Preparing to unpack .../28-mongodb-mongosh_2.3.8_amd64.deb ...
+    core: Unpacking mongodb-mongosh (2.3.8) ...
+    core: Selecting previously unselected package mongodb-org-shell.
+    core: Preparing to unpack .../29-mongodb-org-shell_8.0.4_amd64.deb ...
+    core: Unpacking mongodb-org-shell (8.0.4) ...
+    core: Selecting previously unselected package mongodb-org-server.
+    core: Preparing to unpack .../30-mongodb-org-server_8.0.4_amd64.deb ...
+    core: Unpacking mongodb-org-server (8.0.4) ...
+    core: Selecting previously unselected package mongodb-org-mongos.
+    core: Preparing to unpack .../31-mongodb-org-mongos_8.0.4_amd64.deb ...
+    core: Unpacking mongodb-org-mongos (8.0.4) ...
+    core: Selecting previously unselected package mongodb-org-database-tools-extra.
+    core: Preparing to unpack .../32-mongodb-org-database-tools-extra_8.0.4_amd64.deb ...
+    core: Unpacking mongodb-org-database-tools-extra (8.0.4) ...
+    core: Selecting previously unselected package mongodb-org-database.
+    core: Preparing to unpack .../33-mongodb-org-database_8.0.4_amd64.deb ...
+    core: Unpacking mongodb-org-database (8.0.4) ...
+    core: Selecting previously unselected package mongodb-org-tools.
+    core: Preparing to unpack .../34-mongodb-org-tools_8.0.4_amd64.deb ...
+    core: Unpacking mongodb-org-tools (8.0.4) ...
+    core: Selecting previously unselected package mongodb-org.
+    core: Preparing to unpack .../35-mongodb-org_8.0.4_amd64.deb ...
+    core: Unpacking mongodb-org (8.0.4) ...
+    core: Selecting previously unselected package nginx-core.
+    core: Preparing to unpack .../36-nginx-core_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking nginx-core (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package nginx.
+    core: Preparing to unpack .../37-nginx_1.18.0-6ubuntu14.5_amd64.deb ...
+    core: Unpacking nginx (1.18.0-6ubuntu14.5) ...
+    core: Selecting previously unselected package nodejs.
+    core: Preparing to unpack .../38-nodejs_20.18.2-1nodesource1_amd64.deb ...
+    core: Unpacking nodejs (20.18.2-1nodesource1) ...
+    core: Selecting previously unselected package open5gs-common:amd64.
+    core: Preparing to unpack .../39-open5gs-common_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-common:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-mme:amd64.
+    core: Preparing to unpack .../40-open5gs-mme_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-mme:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-sgwc:amd64.
+    core: Preparing to unpack .../41-open5gs-sgwc_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-sgwc:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-smf:amd64.
+    core: Preparing to unpack .../42-open5gs-smf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-smf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-amf:amd64.
+    core: Preparing to unpack .../43-open5gs-amf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-amf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-sgwu:amd64.
+    core: Preparing to unpack .../44-open5gs-sgwu_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-sgwu:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-upf:amd64.
+    core: Preparing to unpack .../45-open5gs-upf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-upf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-hss:amd64.
+    core: Preparing to unpack .../46-open5gs-hss_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-hss:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-pcrf:amd64.
+    core: Preparing to unpack .../47-open5gs-pcrf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-pcrf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-nrf:amd64.
+    core: Preparing to unpack .../48-open5gs-nrf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-nrf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-scp:amd64.
+    core: Preparing to unpack .../49-open5gs-scp_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-scp:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-sepp:amd64.
+    core: Preparing to unpack .../50-open5gs-sepp_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-sepp:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-ausf:amd64.
+    core: Preparing to unpack .../51-open5gs-ausf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-ausf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-udm:amd64.
+    core: Preparing to unpack .../52-open5gs-udm_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-udm:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-pcf:amd64.
+    core: Preparing to unpack .../53-open5gs-pcf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-pcf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-nssf:amd64.
+    core: Preparing to unpack .../54-open5gs-nssf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-nssf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-bsf:amd64.
+    core: Preparing to unpack .../55-open5gs-bsf_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-bsf:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs-udr:amd64.
+    core: Preparing to unpack .../56-open5gs-udr_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs-udr:amd64 (2.7.2~jammy1) ...
+    core: Selecting previously unselected package open5gs:amd64.
+    core: Preparing to unpack .../57-open5gs_2.7.2~jammy1_amd64.deb ...
+    core: Unpacking open5gs:amd64 (2.7.2~jammy1) ...
+    core: Setting up mongodb-mongosh (2.3.8) ...
+    core: Setting up libxpm4:amd64 (1:3.5.12-1ubuntu0.22.04.2) ...
+    core: Setting up mongodb-org-server (8.0.4) ...
+    core: Adding system user `mongodb' (UID 113) ...
+    core: Adding new user `mongodb' (UID 113) with group `nogroup' ...
+    core: Not creating home directory `/home/mongodb'.
+    core: Adding group `mongodb' (GID 121) ...
+    core: Done.
+    core: Adding user `mongodb' to group `mongodb' ...
+    core: Adding user mongodb to group mongodb
+    core: Done.
+    core: Setting up libdeflate0:amd64 (1.10-2) ...
+    core: Setting up nginx-common (1.18.0-6ubuntu14.5) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /lib/systemd/system/nginx.service.
+    core: Setting up nodejs (20.18.2-1nodesource1) ...
+    core: Setting up libtins4.0 (4.0-1build2) ...
+    core: Setting up libjbig0:amd64 (2.1-3.1ubuntu0.22.04.1) ...
+    core: Setting up libmicrohttpd12:amd64 (0.9.75-3ubuntu1) ...
+    core: Setting up libsnappy1v5:amd64 (1.1.8-1build3) ...
+    core: Setting up libtalloc2:amd64 (2.3.3-2build1) ...
+    core: Setting up libnginx-mod-http-xslt-filter (1.18.0-6ubuntu14.5) ...
+    core: Setting up mongodb-org-shell (8.0.4) ...
+    core: Setting up libbson-1.0-0 (1.21.0-1build1) ...
+    core: Setting up libidn12:amd64 (1.38-4ubuntu1) ...
+    core: Setting up fonts-dejavu-core (2.37-2build1) ...
+    core: Setting up mongodb-database-tools (100.11.0) ...
+    core: Setting up mongodb-org-mongos (8.0.4) ...
+    core: Setting up libjpeg-turbo8:amd64 (2.1.2-0ubuntu1) ...
+    core: Setting up mongodb-org-database-tools-extra (8.0.4) ...
+    core: Setting up libwebp7:amd64 (1.2.2-2ubuntu0.22.04.2) ...
+    core: Setting up libsctp1:amd64 (1.0.19+dfsg-1build1) ...
+    core: Setting up libnginx-mod-http-geoip2 (1.18.0-6ubuntu14.5) ...
+    core: Setting up libmongocrypt0:amd64 (1.3.0-1ubuntu1) ...
+    core: Setting up libjpeg8:amd64 (8c-2ubuntu10) ...
+    core: Setting up libnginx-mod-mail (1.18.0-6ubuntu14.5) ...
+    core: Setting up mongodb-org-database (8.0.4) ...
+    core: Setting up fontconfig-config (2.13.1-4.2ubuntu5) ...
+    core: Setting up libnginx-mod-stream (1.18.0-6ubuntu14.5) ...
+    core: Setting up libmongoc-1.0-0 (1.21.0-1build1) ...
+    core: Setting up mongodb-org-tools (8.0.4) ...
+    core: Setting up mongodb-org (8.0.4) ...
+    core: Setting up libtiff5:amd64 (4.3.0-6ubuntu0.10) ...
+    core: Setting up libfontconfig1:amd64 (2.13.1-4.2ubuntu5) ...
+    core: Setting up libnginx-mod-stream-geoip2 (1.18.0-6ubuntu14.5) ...
+    core: Setting up open5gs-common:amd64 (2.7.2~jammy1) ...
+    core: Setting up open5gs-pcrf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-pcrfd.service → /lib/systemd/system/open5gs-pcrfd.service.
+    core: Setting up open5gs-amf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-amfd.service → /lib/systemd/system/open5gs-amfd.service.
+    core: Setting up open5gs-pcf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-pcfd.service → /lib/systemd/system/open5gs-pcfd.service.
+    core: Setting up open5gs-nrf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-nrfd.service → /lib/systemd/system/open5gs-nrfd.service.
+    core: Setting up open5gs-upf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-upfd.service → /lib/systemd/system/open5gs-upfd.service.
+    core: Setting up libgd3:amd64 (2.3.0-2ubuntu2.3) ...
+    core: Setting up open5gs-udr:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-udrd.service → /lib/systemd/system/open5gs-udrd.service.
+    core: Setting up open5gs-hss:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-hssd.service → /lib/systemd/system/open5gs-hssd.service.
+    core: Setting up open5gs-bsf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-bsfd.service → /lib/systemd/system/open5gs-bsfd.service.
+    core: Setting up open5gs-scp:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-scpd.service → /lib/systemd/system/open5gs-scpd.service.
+    core: Setting up open5gs-smf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-smfd.service → /lib/systemd/system/open5gs-smfd.service.
+    core: Setting up open5gs-sepp:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-seppd.service → /lib/systemd/system/open5gs-seppd.service.
+    core: Setting up open5gs-sgwu:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-sgwud.service → /lib/systemd/system/open5gs-sgwud.service.
+    core: Setting up open5gs-ausf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-ausfd.service → /lib/systemd/system/open5gs-ausfd.service.
+    core: Setting up open5gs-mme:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-mmed.service → /lib/systemd/system/open5gs-mmed.service.
+    core: Setting up open5gs-sgwc:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-sgwcd.service → /lib/systemd/system/open5gs-sgwcd.service.
+    core: Setting up open5gs-nssf:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-nssfd.service → /lib/systemd/system/open5gs-nssfd.service.
+    core: Setting up libnginx-mod-http-image-filter (1.18.0-6ubuntu14.5) ...
+    core: Setting up open5gs-udm:amd64 (2.7.2~jammy1) ...
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-udmd.service → /lib/systemd/system/open5gs-udmd.service.
+    core: Setting up open5gs:amd64 (2.7.2~jammy1) ...
+    core: Setting up nginx-core (1.18.0-6ubuntu14.5) ...
+    core:  * Upgrading binary nginx
+    core:    ...done.
+    core: Setting up nginx (1.18.0-6ubuntu14.5) ...
+    core: Processing triggers for ufw (0.36.1-4ubuntu0.1) ...
+    core: Processing triggers for man-db (2.10.2-1) ...
+    core: Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+    core: 
+    core: Running kernel seems to be up-to-date.
+    core: 
+    core: No services need to be restarted.
+    core: 
+    core: No containers need to be restarted.
+    core: 
+    core: No user sessions are running outdated binaries.
+    core: 
+    core: No VM guests are running outdated hypervisor (qemu) binaries on this host.
+    core: 
+    core: Reload MongoDB
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/mongod.service → /lib/systemd/system/mongod.service.
+    core: 
+    core: Update AMF NGAP and UPF GTPU IPs
+    core: logger:
+    core:   file:
+    core:     path: /var/log/open5gs/amf.log
+    core: #  level: info   # fatal|error|warn|info(default)|debug|trace
+    core: 
+    core: global:
+    core:   max:
+    core:     ue: 1024 # The number of UE can be increased depending on memory size.
+    core: #    peer: 64
+    core: 
+    core: amf:
+    core:   sbi:
+    core:     server:
+    core:       - address: 127.0.0.5
+    core:         port: 7777
+    core:     client:
+    core:       #      nrf:
+    core:       #        - uri: http://127.0.0.10:7777
+    core:       scp:
+    core:         - uri: http://127.0.0.200:7777
+    core:   ngap:
+    core:     server:
+    core:       - address: 192.168.56.10
+    core:   metrics:
+    core:     server:
+    core:       - address: 127.0.0.5
+    core:         port: 9090
+    core:   guami:
+    core:     - plmn_id:
+    core:         mcc: 999
+    core:         mnc: 70
+    core:       amf_id:
+    core:         region: 2
+    core:         set: 1
+    core:   tai:
+    core:     - plmn_id:
+    core:         mcc: 999
+    core:         mnc: 70
+    core:       tac: 1
+    core:   plmn_support:
+    core:     - plmn_id:
+    core:         mcc: 999
+    core:         mnc: 70
+    core:       s_nssai:
+    core:         - sst: 1
+    core:   security:
+    core:     integrity_order: [NIA2, NIA1, NIA0]
+    core:     ciphering_order: [NEA0, NEA1, NEA2]
+    core:   network_name:
+    core:     full: Open5GS
+    core:     short: Next
+    core:   amf_name: open5gs-amf0
+    core:   time:
+    core:     #    t3502:
+    core:     #      value: 720   # 12 minutes * 60 = 720 seconds
+    core:     t3512:
+    core:       value: 540 # 9 minutes * 60 = 540 seconds
+    core: ################################################################################
+    core: # SBI Server
+    core: ################################################################################
+    core: #  o Override SBI address to be advertised to NRF
+    core: #  sbi:
+    core: #    server:
+    core: #      - dev:eth0
+    core: #        advertise: open5gs-amf.svc.local
+    core: #
+    core: #  sbi:
+    core: #    server:
+    core: #      - address: localhost
+    core: #        advertise:
+    core: #          - 127.0.0.99
+    core: #          - ::1
+    core: #
+    core: ################################################################################
+    core: # SBI Client
+    core: ################################################################################
+    core: #  o Direct communication with NRF interaction
+    core: #  sbi:
+    core: #    client:
+    core: #      nrf:
+    core: #        - uri: http://127.0.0.10:7777
+    core: #
+    core: #  o Indirect communication with delegated discovery
+    core: #  sbi:
+    core: #    client:
+    core: #      scp:
+    core: #        - uri: http://127.0.0.200:7777
+    core: #
+    core: #  o Indirect communication without delegated discovery
+    core: #  sbi:
+    core: #    client:
+    core: #      nrf:
+    core: #        - uri: http://127.0.0.10:7777
+    core: #      scp:
+    core: #        - uri: http://127.0.0.200:7777
+    core: #  discovery:
+    core: #    delegated: no
+    core: #
+    core: ################################################################################
+    core: # HTTPS scheme with TLS
+    core: ################################################################################
+    core: #  o Set as default if not individually set
+    core: #  default:
+    core: #    tls:
+    core: #      server:
+    core: #        scheme: https
+    core: #        private_key: /etc/open5gs/tls/amf.key
+    core: #        cert: /etc/open5gs/tls/amf.crt
+    core: #      client:
+    core: #        scheme: https
+    core: #        cacert: /etc/open5gs/tls/ca.crt
+    core: #  sbi:
+    core: #    server:
+    core: #      - address: amf.localdomain
+    core: #    client:
+    core: #      nrf:
+    core: #        - uri: https://nrf.localdomain
+    core: #
+    core: #  o Add client TLS verification
+    core: #  default:
+    core: #    tls:
+    core: #      server:
+    core: #        scheme: https
+    core: #        private_key: /etc/open5gs/tls/amf.key
+    core: #        cert: /etc/open5gs/tls/amf.crt
+    core: #        verify_client: true
+    core: #        verify_client_cacert: /etc/open5gs/tls/ca.crt
+    core: #      client:
+    core: #        scheme: https
+    core: #        cacert: /etc/open5gs/tls/ca.crt
+    core: #        client_private_key: /etc/open5gs/tls/amf.key
+    core: #        client_cert: /etc/open5gs/tls/amf.crt
+    core: #  sbi:
+    core: #    server:
+    core: #      - address: amf.localdomain
+    core: #    client:
+    core: #      nrf:
+    core: #        - uri: https://nrf.localdomain
+    core: #
+    core: ################################################################################
+    core: # NGAP Server
+    core: ################################################################################
+    core: #  o Listen on address available in `eth0` interface
+    core: #  ngap:
+    core: #    server:
+    core: #      - dev: eth0
+    core: #
+    core: ################################################################################
+    core: # 3GPP Specification
+    core: ################################################################################
+    core: #  o GUAMI
+    core: #  guami:
+    core: #    - plmn_id:
+    core: #        mcc: 999
+    core: #        mnc: 70
+    core: #      amf_id:
+    core: #        region: 2
+    core: #        set: 1
+    core: #        pointer: 4
+    core: #    - plmn_id:
+    core: #        mcc: 001
+    core: #        mnc: 01
+    core: #      amf_id:
+    core: #        region: 5
+    core: #        set: 2
+    core: #
+    core: #  o TAI
+    core: #  tai:
+    core: #    - plmn_id:
+    core: #        mcc: 001
+    core: #        mnc: 01
+    core: #      tac: [1, 3, 5]
+    core: #  tai:
+    core: #    - plmn_id:
+    core: #        mcc: 002
+    core: #        mnc: 02
+    core: #      tac: [6-10, 15-18]
+    core: #  tai:
+    core: #    - plmn_id:
+    core: #        mcc: 003
+    core: #        mnc: 03
+    core: #      tac: 20
+    core: #    - plmn_id:
+    core: #        mcc: 004
+    core: #        mnc: 04
+    core: #      tac: 21
+    core: #  tai:
+    core: #    - plmn_id:
+    core: #        mcc: 005
+    core: #        mnc: 05
+    core: #      tac: [22, 28]
+    core: #    - plmn_id:
+    core: #        mcc: 006
+    core: #        mnc: 06
+    core: #      tac: [30-32, 34, 36-38, 40-42, 44, 46, 48]
+    core: #    - plmn_id:
+    core: #        mcc: 007
+    core: #        mnc: 07
+    core: #      tac: 50
+    core: #    - plmn_id:
+    core: #        mcc: 008
+    core: #        mnc: 08
+    core: #      tac: 60
+    core: #    - plmn_id:
+    core: #        mcc: 009
+    core: #        mnc: 09
+    core: #      tac: [70, 80]
+    core: #
+    core: #  o PLMN Support
+    core: #  plmn_support:
+    core: #    - plmn_id:
+    core: #        mcc: 999
+    core: #        mnc: 70
+    core: #      s_nssai:
+    core: #        - sst: 1
+    core: #          sd: 010000
+    core: #    - plmn_id:
+    core: #        mcc: 999
+    core: #        mnc: 70
+    core: #      s_nssai:
+    core: #        - sst: 1
+    core: #
+    core: #  o Access Control
+    core: #  access_control:
+    core: #    - default_reject_cause: 13
+    core: #    - plmn_id:
+    core: #        reject_cause: 15
+    core: #        mcc: 001
+    core: #        mnc: 01
+    core: #    - plmn_id:
+    core: #        mcc: 002
+    core: #        mnc: 02
+    core: #    - plmn_id:
+    core: #        mcc: 999
+    core: #        mnc: 70
+    core: #
+    core: #  o Relative Capacity
+    core: #  relative_capacity: 100
+    core: logger:
+    core:   file:
+    core:     path: /var/log/open5gs/upf.log
+    core: #  level: info   # fatal|error|warn|info(default)|debug|trace
+    core: 
+    core: global:
+    core:   max:
+    core:     ue: 1024 # The number of UE can be increased depending on memory size.
+    core: #    peer: 64
+    core: 
+    core: upf:
+    core:   pfcp:
+    core:     server:
+    core:       - address: 127.0.0.7
+    core:     client:
+    core:     #      smf:     #  UPF PFCP Client try to associate SMF PFCP Server
+    core:     #        - address: 127.0.0.4
+    core:   gtpu:
+    core:     server:
+    core:       - address: 192.168.56.10
+    core:   session:
+    core:     - subnet: 10.45.0.0/16
+    core:       gateway: 10.45.0.1
+    core:     - subnet: 2001:db8:cafe::/48
+    core:       gateway: 2001:db8:cafe::1
+    core:   metrics:
+    core:     server:
+    core:       - address: 127.0.0.7
+    core:         port: 9090
+    core: ################################################################################
+    core: # PFCP Server
+    core: ################################################################################
+    core: # o Override PFCP address to be advertised to SMF in PFCP association
+    core: #  pfcp:
+    core: #    server:
+    core: #      - dev: eth0
+    core: #        advertise: open5gs-upf.svc.local
+    core: #
+    core: ################################################################################
+    core: # GTP-U Server
+    core: ################################################################################
+    core: #  o Override SGW-U GTP-U address to be advertised inside S1AP messages
+    core: #  gtpu:
+    core: #    server:
+    core: #      - dev: ens3
+    core: #        advertise: upf1.5gc.mnc001.mcc001.3gppnetwork.org
+    core: #
+    core: #  o User Plane IP Resource information
+    core: #  gtpu:
+    core: #    server:
+    core: #      - address:
+    core: #        - 127.0.0.7
+    core: #        - ::1
+    core: #        teid_range_indication: 4
+    core: #        teid_range: 10
+    core: #        network_instance: internet
+    core: #        source_interface: 0
+    core: #      - address: 127.0.10.4
+    core: #        teid_range_indication: 4
+    core: #        teid_range: 5
+    core: #        network_instance: ims
+    core: #        source_interface: 1
+    core: #
+    core: ################################################################################
+    core: # 3GPP Specification
+    core: ################################################################################
+    core: #
+    core: #  o Specific DNN/APN(e.g 'ims') uses 10.46.0.1/16, 2001:db8:babe::1/48
+    core: #  $ sudo ip addr add 10.45.0.1/16 dev ogstun
+    core: #  $ sudo ip addr add 2001:db8:cafe::1/48 dev ogstun2
+    core: #  $ sudo ip addr add 10.46.0.1/16 dev ogstun3
+    core: #  $ sudo ip addr add 2001:db8:babe::1/48 dev ogstun3
+    core: #
+    core: #  session:
+    core: #    - subnet: 10.45.0.0/16
+    core: #      gateway: 10.45.0.1
+    core: #      dnn: internet
+    core: #    - subnet: 2001:db8:cafe::/48
+    core: #      dnn: internet
+    core: #      dev: ogstun2
+    core: #    - subnet: 10.46.0.0/16
+    core: #      gateway: 10.46.0.1
+    core: #      dnn: ims
+    core: #      dev: ogstun3
+    core: #    - subnet: 2001:db8:babe::/48
+    core: #      dnn: ims
+    core: #      dev: ogstun3
+    core: 
+    core: Installing WebUI
+    core: 
+    core: ## Populating apt-get cache...
+    core: 
+    core: + apt-get update
+    core: Hit:1 https://deb.nodesource.com/node_20.x nodistro InRelease
+    core: Hit:2 http://security.ubuntu.com/ubuntu jammy-security InRelease
+    core: Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease
+    core: Hit:4 https://ppa.launchpadcontent.net/open5gs/latest/ubuntu jammy InRelease
+    core: Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+    core: Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+    core: Hit:7 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 InRelease
+    core: Reading package lists...
+    core: 
+    core: ## Download the Open5GS Source Code (v2.7.0)...
+    core: 
+    core: + curl -sLf 'https://github.com/open5gs/open5gs/archive/v2.7.0.tar.gz' | tar zxf -
+    core: 
+    core: ## Build the Open5GS WebUI...
+    core: 
+    core: + cd ./open5gs-2.7.0/webui && npm clean-install && npm run build
+    core: npm warn EBADENGINE Unsupported engine {
+    core: npm warn EBADENGINE   package: 'react-jsonschema-form@0.50.1',
+    core: npm warn EBADENGINE   required: { node: '>=6', npm: '^2.14.7' },
+    core: npm warn EBADENGINE   current: { node: 'v20.18.2', npm: '10.8.2' }
+    core: npm warn EBADENGINE }
+    core: 
+    core: added 813 packages, and audited 814 packages in 30s
+    core: 
+    core: 19 packages are looking for funding
+    core:   run `npm fund` for details
+    core: 
+    core: 91 vulnerabilities (4 low, 8 moderate, 41 high, 38 critical)
+    core: 
+    core: To address issues that do not require attention, run:
+    core:   npm audit fix
+    core: 
+    core: To address all issues (including breaking changes), run:
+    core:   npm audit fix --force
+    core: 
+    core: Run `npm audit` for details.
+    core: npm notice
+    core: npm notice New major version of npm available! 10.8.2 -> 11.0.0
+    core: npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.0.0
+    core: npm notice To update run: npm install -g npm@11.0.0
+    core: npm notice
+    core: 
+    core: > open5gs@2.7.0 build
+    core: > next build
+    core: 
+    core: > Using external babel configuration
+    core: > Location: "/home/vagrant/open5gs-2.7.0/webui/.babelrc"
+    core: 
+    core: ## Install the Open5GS WebUI...
+    core: 
+    core: + mkdir -p /usr/lib/node_modules
+    core: + mv ./open5gs-2.7.0/webui /usr/lib/node_modules/open5gs
+    core: + chown -R open5gs:open5gs /usr/lib/node_modules/open5gs
+    core: + cat << EOF > /lib/systemd/system/open5gs-webui.service
+    core: [Unit]
+    core: Description=Open5GS WebUI
+    core: Wants=mongodb.service mongod.service
+    core: 
+    core: [Service]
+    core: Type=simple
+    core: 
+    core: WorkingDirectory=/usr/lib/node_modules/open5gs
+    core: Environment=NODE_ENV=production
+    core: ExecStart=/usr/bin/node server/index.js
+    core: Restart=always
+    core: RestartSec=2
+    core: 
+    core: [Install]
+    core: WantedBy=multi-user.target
+    core: EOF
+    core: + systemctl daemon-reload
+    core: + systemctl enable open5gs-webui
+    core: Created symlink /etc/systemd/system/multi-user.target.wants/open5gs-webui.service → /lib/systemd/system/open5gs-webui.service.
+    core: + deb-systemd-invoke start open5gs-webui
+    core: 
+    core: ## Default Administrator Account [Username:admin, Password:1423]...
+    core: 
+    core: + mongosh open5gs ./open5gs-2.7.0/docs/assets/webui/mongo-init.js
+    core: + rm -rf ./open5gs-2.7.0
+    core: 
+    core: Exposing WebUI through a reverse proxy
+    core: server {
+    core:     listen 8080;
+    core: 
+    core:     location / {
+    core:         proxy_pass http://127.0.0.1:9999;
+    core:         proxy_set_header Host $host;
+    core:         proxy_set_header X-Real-IP $remote_addr;
+    core:     }
+    core: }
