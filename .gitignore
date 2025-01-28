@@ -98,3 +98,5 @@ tramp
 docs/.obsidian/workspace.json
 docs/.obsidian/community-plugins.json
 /5G-emulated-network/.vagrant
+/5G-emulated-network/runtime_logs
+/docs/.obsidian
