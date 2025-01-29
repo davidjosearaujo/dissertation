@@ -43,6 +43,15 @@ echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
 cat /etc/open5gs/amf.yaml | yq '.amf.ngap.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/amf.yaml
 cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/upf.yaml
 
+echo -e "\nEnabling support for multiple S-NSSAI in the AMF"
+UL=$(("PDU_SESSIONS"-1))
+for ((i=1;i<=$UL;i++)); do
+  SST=$(($i+1))
+  cat /etc/open5gs/amf.yaml \
+  | yq '.amf.plmn_support[0].s_nssai['$i'].sst = '$SST \
+  | sudo tee /etc/open5gs/amf.yaml
+done
+
 sudo systemctl restart open5gs-amfd
 sudo systemctl restart open5gs-upfd
 
@@ -107,16 +116,27 @@ $gnb_install = <<-'SCRIPT'
 cd ~/UERANSIM
 
 echo -e "\nUpdate gNodeB and Core IPs"
-cat config/open5gs-gnb.yaml | yq '.linkIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
-cat config/open5gs-gnb.yaml | yq '.ngapIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
-cat config/open5gs-gnb.yaml | yq '.gtpIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
-cat config/open5gs-gnb.yaml | yq '.amfConfigs[0].address = "CORE_IP"' | sudo tee config/open5gs-gnb.yaml
+cat config/open5gs-gnb.yaml \
+| yq '.linkIp = "GNB_IP"' \
+| yq '.ngapIp = "GNB_IP"' \
+| yq '.ngapIp = "GNB_IP"' \
+| yq '.gtpIp = "GNB_IP"' \
+| yq '.amfConfigs[0].address = "CORE_IP"' \
+| sudo tee config/open5gs-gnb.yaml
+
+UL=$(("PDU_SESSIONS"-1))
+for ((i=1;i<=$UL;i++)); do
+  SST=$(($i+1))
+  cat config/open5gs-gnb.yaml \
+  | yq '.slices['$i'].sst = '$SST \
+  | sudo tee config/open5gs-gnb.yaml
+done
 
 echo -e "\nRunning gNB"
 build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb_$(date +%s).log &
 
 SCRIPT
-$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP", GNB_IP)
+$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP", GNB_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### gNodeB CONFIG ####
 
