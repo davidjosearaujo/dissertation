@@ -9,6 +9,8 @@ UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
 UE_OPC = "E8ED289DEBA952E4283B54E88E6183CA"
 
+PDU_SESSIONS = "3"
+
 #### CORE INSTALL ####
 
 $core_install = <<-'SCRIPT'
@@ -62,11 +64,20 @@ echo "server {
 sudo ln -s /etc/nginx/sites-available/webui /etc/nginx/sites-enabled/
 sudo systemctl restart nginx
 
+echo -e "\nPre-loading UE in the AMF"
 sudo chmod +x open5gs-dbctl
 ./open5gs-dbctl add "UE_IMSI" "UE_KEY" "UE_OPC"
 
+echo -e "\nPre-loading UE Slices"
+
+UL=$(("PDU_SESSIONS"-1))
+for ((i=1;i<=$UL;i++)); do
+  SST=$(($i+1))
+  ./open5gs-dbctl update_slice "UE_IMSI" internet $SST 1
+done
+
 SCRIPT
-$core_install.gsub!("CORE_IP", CORE_IP).gsub!("UE_IMSI", UE_IMSI).gsub!("UE_KEY", UE_KEY).gsub!("UE_OPC", UE_OPC)
+$core_install.gsub!("CORE_IP", CORE_IP).gsub!("UE_IMSI", UE_IMSI).gsub!("UE_KEY", UE_KEY).gsub!("UE_OPC", UE_OPC).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### CORE INSTALL ####
 
@@ -101,6 +112,7 @@ cat config/open5gs-gnb.yaml | yq '.ngapIp = "GNB_IP"' | sudo tee config/open5gs-
 cat config/open5gs-gnb.yaml | yq '.gtpIp = "GNB_IP"' | sudo tee config/open5gs-gnb.yaml
 cat config/open5gs-gnb.yaml | yq '.amfConfigs[0].address = "CORE_IP"' | sudo tee config/open5gs-gnb.yaml
 
+echo -e "\nRunning gNB"
 build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb_$(date +%s).log &
 
 SCRIPT
@@ -116,10 +128,24 @@ cd ~/UERANSIM
 echo -e "\nUpdate gNodeB IP"
 cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP"' | sudo tee config/open5gs-ue.yaml
 
+UL=$(("PDU_SESSIONS"-1))
+for ((i=1;i<=$UL;i++)); do
+  SST=$(($i+1))
+  cat config/open5gs-ue.yaml \
+  | yq '.sessions['$i'].type = "IPv4"' \
+  | yq '.sessions['$i'].type style="single"' \
+  | yq '.sessions['$i'].apn = "internet"' \
+  | yq '.sessions['$i'].apn style="single"' \
+  | yq '.sessions['$i'].slice.sst = '$SST \
+  | yq '.configured-nssai['$i'].sst = '$SST \
+  | sudo tee config/open5gs-ue.yaml
+done
+
+echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
 SCRIPT
-$ue_install.gsub!("GNB_IP", GNB_IP)
+$ue_install.gsub!("GNB_IP", GNB_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### UE CONFIG ####
 
@@ -128,6 +154,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "core" do |core|
     core.vm.box = "ubuntu/jammy64"
 
+    # Open5GS 5GC needs at least 2GB of RAM
     core.vm.provider "virtualbox" do |v|
       v.memory = 2048
       v.cpus = 1
