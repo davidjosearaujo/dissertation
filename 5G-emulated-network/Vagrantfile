@@ -43,23 +43,44 @@ echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
 cat /etc/open5gs/amf.yaml | yq '.amf.ngap.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/amf.yaml
 cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/upf.yaml
 
+# TODO Requiring multiple slices? Or just multiple sessions?
 echo -e "\nEnabling support for multiple S-NSSAI in the AMF"
 UL=$(("PDU_SESSIONS"-1))
 for ((i=1;i<=$UL;i++)); do
   SST=$(($i+1))
   cat /etc/open5gs/amf.yaml \
-  | yq '.amf.plmn_support[0].s_nssai['$i'].sst = '$SST \
+  | yq '.amf.plmn_support['$i'].plmn_id.mcc = 999' \
+  | yq '.amf.plmn_support['$i'].plmn_id.mnc = 70' \
+  | yq '.amf.plmn_support['$i'].s_nssai[0].sst = '$SST \
+  | yq '.amf.plmn_support['$i'].s_nssai[0].sd = 00000'$SST \
   | sudo tee /etc/open5gs/amf.yaml
 done
 
+# TODO Currently this is not having any effect in the PDU Sessions, as the sessions being established are using the same subnet for some reason. Maybe if they were in the same slice this would have an effect? But I don't know really
+echo -e "\nEnabling support for multiple Sessions in the SMF and UPF"
+UL=$(("PDU_SESSIONS"))
+for ((i=2;i<=$UL;i++)); do
+  OCT=$((45+$i))
+
+  cat /etc/open5gs/smf.yaml \
+  | yq '.smf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
+  | yq '.smf.session['$i'].gateway = "10.'$OCT'.0.1"' \
+  | sudo tee /etc/open5gs/smf.yaml
+
+  cat /etc/open5gs/upf.yaml \
+  | yq '.upf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
+  | yq '.upf.session['$i'].gateway = "10.'$OCT'.0.1"' \
+  | sudo tee /etc/open5gs/upf.yaml
+done
+
 sudo systemctl restart open5gs-amfd
+sudo systemctl restart open5gs-smfd
 sudo systemctl restart open5gs-upfd
 
 echo -e "\nInstalling WebUI"
 curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
 
 echo -e "\nExposing WebUI through a reverse proxy"
-
 echo "server {
     listen 8080;
 
@@ -77,12 +98,12 @@ echo -e "\nPre-loading UE in the AMF"
 sudo chmod +x open5gs-dbctl
 ./open5gs-dbctl add "UE_IMSI" "UE_KEY" "UE_OPC"
 
+# TODO Requiring multiple slices? Or just multiple sessions? SD equals SST
 echo -e "\nPre-loading UE Slices"
-
 UL=$(("PDU_SESSIONS"-1))
 for ((i=1;i<=$UL;i++)); do
   SST=$(($i+1))
-  ./open5gs-dbctl update_slice "UE_IMSI" internet $SST 1
+  ./open5gs-dbctl update_slice "UE_IMSI" internet $SST 00000$SST
 done
 
 SCRIPT
@@ -124,11 +145,14 @@ cat config/open5gs-gnb.yaml \
 | yq '.amfConfigs[0].address = "CORE_IP"' \
 | sudo tee config/open5gs-gnb.yaml
 
+# TODO Requiring multiple slices? Or just multiple sessions?
+echo -e "\nEnabling multiple slices"
 UL=$(("PDU_SESSIONS"-1))
 for ((i=1;i<=$UL;i++)); do
   SST=$(($i+1))
   cat config/open5gs-gnb.yaml \
   | yq '.slices['$i'].sst = '$SST \
+  | yq '.slices['$i'].sd = 00000'$SST \
   | sudo tee config/open5gs-gnb.yaml
 done
 
@@ -148,6 +172,7 @@ cd ~/UERANSIM
 echo -e "\nUpdate gNodeB IP"
 cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP"' | sudo tee config/open5gs-ue.yaml
 
+echo -e "\nEnabling multiple PDU sessions"
 UL=$(("PDU_SESSIONS"-1))
 for ((i=1;i<=$UL;i++)); do
   SST=$(($i+1))
@@ -157,7 +182,9 @@ for ((i=1;i<=$UL;i++)); do
   | yq '.sessions['$i'].apn = "internet"' \
   | yq '.sessions['$i'].apn style="single"' \
   | yq '.sessions['$i'].slice.sst = '$SST \
+  | yq '.sessions['$i'].slice.sd = '$SST \
   | yq '.configured-nssai['$i'].sst = '$SST \
+  | yq '.configured-nssai['$i'].sd = 00000'$SST \
   | sudo tee config/open5gs-ue.yaml
 done
 
