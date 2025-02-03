@@ -73,6 +73,15 @@ for ((i=1;i<=$UL;i++)); do
   ./open5gs-dbctl update_apn "UE_IMSI" internet$i 0
 done
 
+echo -e "\nEnabling WAN connectivity via IP forwarding and NAT rules"
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -w net.ipv6.conf.all.forwarding=1
+sudo iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE
+sudo ip6tables -t nat -A POSTROUTING -s 2001:db8:cafe::/48 ! -o ogstun -j MASQUERADE
+
+echo -e "\nEnsuring firewall is off"
+sudo ufw disable
+
 SCRIPT
 $core_install.gsub!("CORE_IP", CORE_IP).gsub!("UE_IMSI", UE_IMSI).gsub!("UE_KEY", UE_KEY).gsub!("UE_OPC", UE_OPC).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
@@ -140,6 +149,9 @@ for ((i=1;i<=$UL;i++)); do
   | sudo tee config/open5gs-ue.yaml
 done
 
+echo -e "\nEnabling IP forwarding"
+sudo sysctl -w net.ipv4.ip_forward=1
+
 echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
@@ -197,13 +209,42 @@ Vagrant.configure("2") do |config|
     end
 
     ue.vm.hostname = "ue"
+    
+    # RAN interface
     ue.vm.network "private_network", ip: UE_IP
+
+    # LAN interface
+    ue.vm.network "private_network", ip: "192.168.60.1"
 
     ue.vm.synced_folder "./runtime_logs", "/log", create: true
 
     ue.vm.provision "shell", inline: $ueransim_install
 
     ue.vm.provision "shell", inline: $ue_install
+
+    # TESTING - Binding a LAN device to a specific interface, which in turn is bind to a specific PDU
+    # This is the future will need to be done dynamically. Meaning, the UE is already subscribed 
+    # at the 5GC with a X amount of possible PDU sessions, but only when the UE detects a new
+    # NAUN3 at its LAN interface, will it then request a new PDU session which in turn will
+    # create a new tunnel interface to which we can them create the rule bind the device to it
+  end
+
+  config.vm.define "naun3" do |naun3|
+    naun3.vm.box = "ubuntu/jammy64"
+
+    naun3.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    naun3.vm.hostname = "naun3"
+    naun3.vm.network "private_network", ip: "192.168.60.100"
+
+    naun3.vm.synced_folder "./runtime_logs", "/log", create: true
+
+    # TESTING - Removing all existing default gateways and making the UE the default GW, treating the UE like a 5G-RG
+    naun3.vm.provision "shell", inline: "ip route flush 0/0"
+    naun3.vm.provision "shell", inline: "ip route add default via 192.168.60.1"
   end
 
 end
