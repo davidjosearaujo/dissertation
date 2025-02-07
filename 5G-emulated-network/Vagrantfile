@@ -43,8 +43,39 @@ echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
 cat /etc/open5gs/amf.yaml | yq '.amf.ngap.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/amf.yaml
 cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/upf.yaml
 
-sudo systemctl restart open5gs-amfd
+# TESTING - So far it is not creating the interfaces
+echo -e "\nEnabling support for multiple Sessions in the SMF and UPF"
+cat /etc/open5gs/smf.yaml \
+| yq '.smf.session[0].dnn = "internet1"' \
+| sudo tee /etc/open5gs/smf.yaml
+
+cat /etc/open5gs/upf.yaml \
+| yq '.upf.session[0].dnn = "internet1"' \
+| yq '.upf.session[0].dev = "intun1"' \
+| sudo tee /etc/open5gs/upf.yaml
+
+UL=$(("PDU_SESSIONS"))
+for ((i=2;i<=$UL;i++)); do
+  OCT=$((45+$i))
+  
+  cat /etc/open5gs/smf.yaml \
+  | yq '.smf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
+  | yq '.smf.session['$i'].gateway = "10.'$OCT'.0.1"' \
+  | yq '.smf.session['$i'].dnn = "internet'$i'"' \
+  | sudo tee /etc/open5gs/smf.yaml
+  
+  cat /etc/open5gs/upf.yaml \
+  | yq '.upf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
+  | yq '.upf.session['$i'].gateway = "10.'$OCT'.0.1"' \
+  | yq '.upf.session['$i'].dnn = "internet'$i'"' \
+  | yq '.upf.session['$i'].dev = "intun'$i'"' \
+  | sudo tee /etc/open5gs/upf.yaml
+done
+
 sudo systemctl restart open5gs-upfd
+sudo systemctl restart open5gs-smfipi 
+sudo systemctl restart open5gs-amfd
+
 
 echo -e "\nInstalling WebUI"
 curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
@@ -221,12 +252,6 @@ Vagrant.configure("2") do |config|
     ue.vm.provision "shell", inline: $ueransim_install
 
     ue.vm.provision "shell", inline: $ue_install
-
-    # TESTING - Binding a LAN device to a specific interface, which in turn is bind to a specific PDU
-    # This is the future will need to be done dynamically. Meaning, the UE is already subscribed 
-    # at the 5GC with a X amount of possible PDU sessions, but only when the UE detects a new
-    # NAUN3 at its LAN interface, will it then request a new PDU session which in turn will
-    # create a new tunnel interface to which we can them create the rule bind the device to it
   end
 
   config.vm.define "naun3" do |naun3|
@@ -242,9 +267,6 @@ Vagrant.configure("2") do |config|
 
     naun3.vm.synced_folder "./runtime_logs", "/log", create: true
 
-    # TESTING - Removing all existing default gateways and making the UE the default GW, treating the UE like a 5G-RG
-    naun3.vm.provision "shell", inline: "ip route flush 0/0"
-    naun3.vm.provision "shell", inline: "ip route add default via 192.168.60.1"
   end
 
 end
