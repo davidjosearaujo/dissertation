@@ -49,6 +49,9 @@ cat /etc/open5gs/smf.yaml \
 | yq '.smf.session[0].dnn = "internet1"' \
 | sudo tee /etc/open5gs/smf.yaml
 
+sudo ip tuntap add dev intun1 mode tun
+sudo ip link set intun1 up
+
 cat /etc/open5gs/upf.yaml \
 | yq '.upf.session[0].dnn = "internet1"' \
 | yq '.upf.session[0].dev = "intun1"' \
@@ -64,6 +67,9 @@ for ((i=2;i<=$UL;i++)); do
   | yq '.smf.session['$i'].dnn = "internet'$i'"' \
   | sudo tee /etc/open5gs/smf.yaml
   
+  sudo ip tuntap add dev intun$i mode tun
+  sudo ip link set intun$i up
+
   cat /etc/open5gs/upf.yaml \
   | yq '.upf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
   | yq '.upf.session['$i'].gateway = "10.'$OCT'.0.1"' \
@@ -73,7 +79,7 @@ for ((i=2;i<=$UL;i++)); do
 done
 
 sudo systemctl restart open5gs-upfd
-sudo systemctl restart open5gs-smfipi 
+sudo systemctl restart open5gs-smfd 
 sudo systemctl restart open5gs-amfd
 
 
