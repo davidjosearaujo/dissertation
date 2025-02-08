@@ -45,31 +45,23 @@ cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo 
 
 # TESTING - So far it is not creating the interfaces
 echo -e "\nEnabling support for multiple Sessions in the SMF and UPF"
-cat /etc/open5gs/smf.yaml \
-| yq '.smf.session[0].dnn = "internet1"' \
-| sudo tee /etc/open5gs/smf.yaml
 
-sudo ip tuntap add dev intun1 mode tun
-sudo ip link set intun1 up
-
-cat /etc/open5gs/upf.yaml \
-| yq '.upf.session[0].dnn = "internet1"' \
-| yq '.upf.session[0].dev = "intun1"' \
-| sudo tee /etc/open5gs/upf.yaml
+sudo ip link delete ogstun
 
 UL=$(("PDU_SESSIONS"))
-for ((i=2;i<=$UL;i++)); do
+for ((i=0;i<$UL;i++)); do
   OCT=$((45+$i))
   
+  sudo ip tuntap add dev intun$i mode tun
+  sudo ip link set intun$i up
+  sudo ip addr add 10.$OCT.0.1/16 brd 10.$OCT.255.255 dev intun$i
+
   cat /etc/open5gs/smf.yaml \
   | yq '.smf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
   | yq '.smf.session['$i'].gateway = "10.'$OCT'.0.1"' \
   | yq '.smf.session['$i'].dnn = "internet'$i'"' \
   | sudo tee /etc/open5gs/smf.yaml
   
-  sudo ip tuntap add dev intun$i mode tun
-  sudo ip link set intun$i up
-
   cat /etc/open5gs/upf.yaml \
   | yq '.upf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
   | yq '.upf.session['$i'].gateway = "10.'$OCT'.0.1"' \
@@ -105,19 +97,10 @@ sudo chmod +x open5gs-dbctl
 ./open5gs-dbctl add "UE_IMSI" "UE_KEY" "UE_OPC"
 
 echo -e "\nPre-loading UE APN sessions"
-UL=$(("PDU_SESSIONS"-1))
-for ((i=1;i<=$UL;i++)); do
+UL=$(("PDU_SESSIONS"))
+for ((i=0;i<$UL;i++)); do
   ./open5gs-dbctl update_apn "UE_IMSI" internet$i 0
 done
-
-echo -e "\nEnabling WAN connectivity via IP forwarding and NAT rules"
-sudo sysctl -w net.ipv4.ip_forward=1
-sudo sysctl -w net.ipv6.conf.all.forwarding=1
-sudo iptables -t nat -A POSTROUTING -s 10.45.0.0/16 ! -o ogstun -j MASQUERADE
-sudo ip6tables -t nat -A POSTROUTING -s 2001:db8:cafe::/48 ! -o ogstun -j MASQUERADE
-
-echo -e "\nEnsuring firewall is off"
-sudo ufw disable
 
 SCRIPT
 $core_install.gsub!("CORE_IP", CORE_IP).gsub!("UE_IMSI", UE_IMSI).gsub!("UE_KEY", UE_KEY).gsub!("UE_OPC", UE_OPC).gsub!("PDU_SESSIONS", PDU_SESSIONS)
@@ -175,8 +158,8 @@ echo -e "\nUpdate gNodeB IP"
 cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP"' | sudo tee config/open5gs-ue.yaml
 
 echo -e "\nEnabling multiple PDU via different APNs in a single Slice"
-UL=$(("PDU_SESSIONS"-1))
-for ((i=1;i<=$UL;i++)); do
+UL=$(("PDU_SESSIONS"))
+for ((i=0;i<$UL;i++)); do
   cat config/open5gs-ue.yaml \
   | yq '.sessions['$i'].type = "IPv4"' \
   | yq '.sessions['$i'].type style="single"' \
