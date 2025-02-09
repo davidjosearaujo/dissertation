@@ -2,8 +2,11 @@
 # vi: set ft=ruby :
 
 CORE_IP = "192.168.56.10"
-GNB_IP = "192.168.56.11"
-UE_IP = "192.168.56.12"
+GNB_CORE_IP = "192.168.56.11"
+GNB_UE_IP = "192.168.57.11"
+UE_IP = "192.168.57.12"
+UE_LAN = "192.168.60.1"
+NAUN3 = "192.168.60.100"
 
 UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
@@ -73,7 +76,6 @@ done
 sudo systemctl restart open5gs-upfd
 sudo systemctl restart open5gs-smfd 
 sudo systemctl restart open5gs-amfd
-
 
 echo -e "\nInstalling WebUI"
 curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
@@ -145,7 +147,7 @@ echo -e "\nRunning gNB"
 build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb_$(date +%s).log &
 
 SCRIPT
-$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP", GNB_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
+$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP", GNB_CORE_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### gNodeB CONFIG ####
 
@@ -176,7 +178,7 @@ echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
 SCRIPT
-$ue_install.gsub!("GNB_IP", GNB_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
+$ue_install.gsub!("GNB_IP", GNB_UE_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### UE CONFIG ####
 
@@ -211,7 +213,12 @@ Vagrant.configure("2") do |config|
     end
 
     gnb.vm.hostname = "gnb"
-    gnb.vm.network "private_network", ip: GNB_IP
+
+    # gNB to Core
+    gnb.vm.network "private_network", ip: GNB_CORE_IP
+    
+    # gNB to Subs
+    gnb.vm.network "private_network", ip: GNB_UE_IP
 
     gnb.vm.synced_folder "./runtime_logs", "/log", create: true
 
@@ -234,7 +241,7 @@ Vagrant.configure("2") do |config|
     ue.vm.network "private_network", ip: UE_IP
 
     # LAN interface
-    ue.vm.network "private_network", ip: "192.168.60.1"
+    ue.vm.network "private_network", ip: UE_LAN
 
     ue.vm.synced_folder "./runtime_logs", "/log", create: true
 
@@ -252,7 +259,7 @@ Vagrant.configure("2") do |config|
     end
 
     naun3.vm.hostname = "naun3"
-    naun3.vm.network "private_network", ip: "192.168.60.100"
+    naun3.vm.network "private_network", ip: NAUN3
 
     naun3.vm.synced_folder "./runtime_logs", "/log", create: true
 
