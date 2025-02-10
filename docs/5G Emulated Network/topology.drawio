@@ -193,6 +193,9 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="5Ri5lC5DbLl869KqQcq1-1" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6881B3;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="180" width="390" height="140" as="geometry" />
+        </mxCell>
         <mxCell id="Ea14pY7_5P943b99f5jm-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;curved=1;endArrow=none;startFill=0;strokeWidth=2;strokeColor=#FFD966;" edge="1" parent="1" source="8WTbyolEIHGjAPuQ4QPl-1" target="8WTbyolEIHGjAPuQ4QPl-16">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
@@ -208,8 +211,8 @@
         <mxCell id="8WTbyolEIHGjAPuQ4QPl-2" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#6881B3;strokeWidth=2;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="1100" width="370" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="8WTbyolEIHGjAPuQ4QPl-3" value="Authenticator" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="1130" y="-80" width="140" height="40" as="geometry" />
+        <mxCell id="8WTbyolEIHGjAPuQ4QPl-3" value="Authenticator" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1135" y="-80" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell id="8WTbyolEIHGjAPuQ4QPl-5" value="enp0s9:&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(255, 255, 255), rgb(18, 18, 18));&quot;&gt;192.168.60.1&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#4C0099;fontColor=#FFFFFF;verticalAlign=top;align=left;spacingLeft=10;" vertex="1" parent="1">
           <mxGeometry x="1105" y="100" width="360" height="30" as="geometry" />
@@ -241,8 +244,8 @@
         <mxCell id="Ea14pY7_5P943b99f5jm-3" value="" style="fontColor=#0066CC;verticalAlign=top;verticalLabelPosition=bottom;labelPosition=center;align=center;html=1;outlineConnect=0;fillColor=#CCCCCC;strokeColor=#6881B3;gradientColor=none;gradientDirection=north;strokeWidth=2;shape=mxgraph.networks.server;" vertex="1" parent="1">
           <mxGeometry x="1055" y="-370" width="70" height="75" as="geometry" />
         </mxCell>
-        <mxCell id="Ea14pY7_5P943b99f5jm-4" value="Authentication Server" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
-          <mxGeometry x="1125" y="-330" width="215" height="40" as="geometry" />
+        <mxCell id="Ea14pY7_5P943b99f5jm-4" value="Authentication Server" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="-330" width="215" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Ea14pY7_5P943b99f5jm-6" value="Clients" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=#0066CC;fontColor=#FFFFFF;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="1200" y="-265" width="100" height="45" as="geometry" />
@@ -276,6 +279,9 @@
             <mxPoint x="1280" y="250" as="sourcePoint" />
             <mxPoint x="1380" y="150" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="5Ri5lC5DbLl869KqQcq1-2" value="Supplicants" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="280" width="140" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
