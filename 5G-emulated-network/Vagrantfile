@@ -5,8 +5,10 @@ CORE_IP = "192.168.56.10"
 GNB_IP_CORE = "192.168.56.11"
 GNB_IP_UE = "192.168.57.11"
 UE_IP = "192.168.57.12"
+UE_EAP_IP = "192.168.70.100"
 UE_LAN = "192.168.60.1"
 NAUN3 = "192.168.60.100"
+AUTH_SERVER_IP = "192.168.70.1"
 
 UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
@@ -181,6 +183,18 @@ $ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### UE CONFIG ####
 
+#### EAP AUTH SERVER CONFIG ####
+
+$auth_server_install = <<-'SCRIPT'
+
+sudo apt update
+
+sudo apt install -y freeradius
+
+SCRIPT
+
+#### EAP AUTH SERVER CONFIG ####
+
 Vagrant.configure("2") do |config|
   
   config.vm.define "core" do |core|
@@ -239,6 +253,9 @@ Vagrant.configure("2") do |config|
     # RAN interface
     ue.vm.network "private_network", ip: UE_IP
 
+    # EAP Auth Server interface
+    ue.vm.network "private_network", ip: UE_EAP_IP
+
     # LAN interface
     ue.vm.network "private_network", ip: UE_LAN
 
@@ -247,6 +264,24 @@ Vagrant.configure("2") do |config|
     ue.vm.provision "shell", inline: $ueransim_install
 
     ue.vm.provision "shell", inline: $ue_install
+  end
+
+  auth_server.vm.define "auth_server" do |auth_server|
+    auth_server.vm.box = "ubuntu/jammy64"
+
+    auth_server.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    auth_server.vm.hostname = "auth_server"
+    
+    # Authenticator Client interface
+    auth_server.vm.network "private_network", ip: AUTH_SERVER_IP
+
+    auth_server.vm.provision "shell", inline: $auth_server_install
+
+    auth_server.vm.synced_folder "./runtime_logs", "/log", create: true
   end
 
   config.vm.define "naun3" do |naun3|
@@ -261,7 +296,6 @@ Vagrant.configure("2") do |config|
     naun3.vm.network "private_network", ip: NAUN3
 
     naun3.vm.synced_folder "./runtime_logs", "/log", create: true
-
   end
 
 end
