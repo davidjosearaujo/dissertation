@@ -11,14 +11,12 @@
             "id": "58450117de08b23c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "5G Emulated Network/Notes.md",
-                "mode": "source",
-                "source": false
+                "file": "5G Emulated Network/topology.png"
               },
-              "icon": "lucide-file",
-              "title": "Notes"
+              "icon": "lucide-image",
+              "title": "topology"
             }
           }
         ]
@@ -78,7 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 261.5
+    "width": 237.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -166,9 +164,11 @@
   },
   "active": "58450117de08b23c",
   "lastOpenFiles": [
+    "5G Emulated Network/Notes.md",
+    "5G Emulated Network/topology.png",
+    "5G Emulated Network/topology.png.crdownload",
     "5G Emulated Network/topology.drawio",
     "Untitled.md",
-    "5G Emulated Network/Notes.md",
     "5G Emulated Network",
     "RADIUS/Remote Authentication Dial-In User Service.md",
     "Federated Identity/wp-securing-5g-through-cyber-telecom-identity-federation.pdf",
@@ -183,9 +183,7 @@
     "Articles/Novel Authentication Protocols Tailored for.pdf",
     "Articles/Pasted image 20241014163143.png",
     "Articles/Pasted image 20241014162545.png",
-    "Articles/Internet of Things (IoT) Integration_ Identifying Blockages and Optimizing Resource Allocation in 5G_6G Networks – IEEE 5G_6G Innovation Testbed.pdf",
     "Articles/Novel Authentication Protocols Tailored for Ambient IoT Devices in 3GPP 5G Networks.md",
-    "Articles/etr-09-cross-domain-identity-of-things.pdf",
     "Articles/CROSS-DOMAIN IDENTITY OF THINGS.md",
     "Articles/Internet of Things (IoT) Integration - Identifying Blockages and Optimizing Resource Allocation in 5G & 6G Networks.md",
     "Articles/Wireline Access in 5G - MPIRICAL.md",
@@ -211,7 +209,6 @@
     "3GPP Specification/Pasted image 20241118173418.png",
     "RADIUS/Pasted image 20241112104926.png",
     "Federated Identity/Pasted image 20241111152310.png",
-    "RADIUS/Pasted image 20241112105316.png",
     "Untitled.canvas"
   ]
 }

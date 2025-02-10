@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 CORE_IP = "192.168.56.10"
-GNB_CORE_IP = "192.168.56.11"
-GNB_UE_IP = "192.168.57.11"
+GNB_IP_CORE = "192.168.56.11"
+GNB_IP_UE = "192.168.57.11"
 UE_IP = "192.168.57.12"
 UE_LAN = "192.168.60.1"
 NAUN3 = "192.168.60.100"
@@ -136,10 +136,9 @@ cd ~/UERANSIM
 
 echo -e "\nUpdate gNodeB and Core IPs"
 cat config/open5gs-gnb.yaml \
-| yq '.linkIp = "GNB_IP"' \
-| yq '.ngapIp = "GNB_IP"' \
-| yq '.ngapIp = "GNB_IP"' \
-| yq '.gtpIp = "GNB_IP"' \
+| yq '.linkIp = "GNB_IP_UE"' \
+| yq '.ngapIp = "GNB_IP_CORE"' \
+| yq '.gtpIp = "GNB_IP_CORE"' \
 | yq '.amfConfigs[0].address = "CORE_IP"' \
 | sudo tee config/open5gs-gnb.yaml
 
@@ -147,7 +146,7 @@ echo -e "\nRunning gNB"
 build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb_$(date +%s).log &
 
 SCRIPT
-$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP", GNB_CORE_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
+$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP_CORE", GNB_IP_CORE).gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### gNodeB CONFIG ####
 
@@ -157,7 +156,7 @@ $ue_install = <<-'SCRIPT'
 cd ~/UERANSIM
 
 echo -e "\nUpdate gNodeB IP"
-cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP"' | sudo tee config/open5gs-ue.yaml
+cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP_UE"' | sudo tee config/open5gs-ue.yaml
 
 echo -e "\nEnabling multiple PDU via different APNs in a single Slice"
 UL=$(("PDU_SESSIONS"))
@@ -178,7 +177,7 @@ echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
 SCRIPT
-$ue_install.gsub!("GNB_IP", GNB_UE_IP).gsub!("PDU_SESSIONS", PDU_SESSIONS)
+$ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS)
 
 #### UE CONFIG ####
 
@@ -215,10 +214,10 @@ Vagrant.configure("2") do |config|
     gnb.vm.hostname = "gnb"
 
     # gNB to Core
-    gnb.vm.network "private_network", ip: GNB_CORE_IP
+    gnb.vm.network "private_network", ip: GNB_IP_CORE
     
     # gNB to Subs
-    gnb.vm.network "private_network", ip: GNB_UE_IP
+    gnb.vm.network "private_network", ip: GNB_IP_UE
 
     gnb.vm.synced_folder "./runtime_logs", "/log", create: true
 
