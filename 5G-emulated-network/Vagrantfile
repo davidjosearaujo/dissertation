@@ -4,11 +4,13 @@
 CORE_IP = "192.168.56.10"
 GNB_IP_CORE = "192.168.56.11"
 GNB_IP_UE = "192.168.57.11"
+
 UE_IP = "192.168.57.12"
-UE_EAP_IP = "192.168.70.100"
+UE_EAP_IP = "192.168.58.100"
 UE_LAN = "192.168.60.1"
+
 NAUN3 = "192.168.60.100"
-AUTH_SERVER_IP = "192.168.70.1"
+AUTH_SERVER_IP = "192.168.58.1"
 
 UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
@@ -266,7 +268,7 @@ Vagrant.configure("2") do |config|
     ue.vm.provision "shell", inline: $ue_install
   end
 
-  auth_server.vm.define "auth_server" do |auth_server|
+  config.vm.define "auth_server" do |auth_server|
     auth_server.vm.box = "ubuntu/jammy64"
 
     auth_server.vm.provider "virtualbox" do |v|
@@ -274,7 +276,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 1
     end
 
-    auth_server.vm.hostname = "auth_server"
+    auth_server.vm.hostname = "authserver"
     
     # Authenticator Client interface
     auth_server.vm.network "private_network", ip: AUTH_SERVER_IP

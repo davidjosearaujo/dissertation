@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "fdf0039308d5add1",
+        "id": "a824cf8c9432f321",
         "type": "tabs",
         "children": [
           {
-            "id": "58450117de08b23c",
+            "id": "b291a3358d3d70cc",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 237.5,
-    "collapsed": true
+    "width": 237.5
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -165,10 +164,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "58450117de08b23c",
+  "active": "b291a3358d3d70cc",
   "lastOpenFiles": [
-    "5G Emulated Network/topology.png",
+    "5G Emulated Network/topology-EAP.png",
     "5G Emulated Network/Notes.md",
+    "5G Emulated Network/topology-EAP.png.crdownload",
+    "5G Emulated Network/topology.png",
     "5G Emulated Network/topology.png.crdownload",
     "5G Emulated Network/topology.drawio",
     "Untitled.md",
@@ -183,7 +184,6 @@
     "Federated Identity/Towards a standardized identity federation for Internet of Things in 5G Networks.md",
     "Federated Identity/Network_Service_Federated_Identity_NS-_FId_Protocol_for_Service_Authorization_in_5G_Network.pdf",
     "Articles/ML-AKA - An Authentication Protocol for Non-Standalone 5G-Based C-IoT Networks.md",
-    "Articles/Novel Authentication Protocols Tailored for.pdf",
     "Articles/Pasted image 20241014163143.png",
     "Articles/Pasted image 20241014162545.png",
     "Articles/Novel Authentication Protocols Tailored for Ambient IoT Devices in 3GPP 5G Networks.md",
@@ -211,7 +211,6 @@
     "CableLabs/Pasted image 20241002154111.png",
     "3GPP Specification/Pasted image 20241118173418.png",
     "RADIUS/Pasted image 20241112104926.png",
-    "Federated Identity/Pasted image 20241111152310.png",
     "Untitled.canvas"
   ]
 }

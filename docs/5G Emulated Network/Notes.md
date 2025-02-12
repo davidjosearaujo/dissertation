@@ -9,6 +9,7 @@
 ## PDU Session Topology Perspective
 ![[topology.png]]
 # Implement EAP-TLS
+![[topology-EAP.png]]
 Try to follow instructions from here:
 - https://www.tp-link.com/us/support/faq/3456/
 - https://wiki.alpinelinux.org/wiki/FreeRadius_EAP-TLS_configuration
@@ -16,7 +17,7 @@ Try to follow instructions from here:
 ## Testing configurations
 We need to stop the running service
 ``` bash
-sudo systemctl stop freeradius
+sudo systemctl stop freeradius.service
 ```
 Then run in debug mode
 ```bash
@@ -26,11 +27,14 @@ sudo freeradius -X
 - [ ] Add new entry to `clients` file
 ```bash
 $ sudo nano /etc/freeradius/clients.conf
-client AP1 {                  #’AP1’ is the alias of your access point
-	ipaddr = 192.168.0.100/24 #The IP address of UE
+...
+client UE {                  #’AP1’ is the alias of your access point
+	ipaddr = 192.168.58.100 #The IP address of UE
 	secret = testing123     # The ’secret’ will be the ‘Authentication Password’
-}```
-- [ ] It shouldn't be necessary, but if requests are not being received, we may need to configure FreeRADIUS to listen on the specific interface:
+}
+...
+```
+- [ ] It shouldn't be necessary, but if requests are not being received, we may need to configure FreeRADIUS to listen (on `radiusd.conf` file) on the specific interface:
 ```bash
 listen {
 	type = auth
@@ -48,20 +52,29 @@ listen {
 }
 ```
 ## Enable EAP-TLS as a supported authentication method
-- [x] Edit `etc/freeradius/mods-enabled/eap`
+- [ ] Edit `etc/freeradius/mods-available/eap`
 ```bash
 default _eap_type = tls
 ```
+- [ ] Delete old and create new symlink (do it as freerad user)
+```bash
+$ sudo -s -u freerad
+$ rm /etc/freeradius/mods-enabled/eap
+$ ln -s /etc/freeradius/mods-available/eap /etc/freeradius/mods-enabled/eap
+```
 ## Make the certificates
 ```bash
-$ sudo -s
+$ sudo -s freerad
+
 $ cd /etc/freeradius/certs
 ```
-Note that you need to **clean up all the CAs each time before you recreate them**, or `openssl` Swill output ‘Nothing to be done’ and it won’t regenerate new CAs. Delete the existing files by the following command:
+- Note that you need to **clean up all the CAs each time before you recreate them**, or `openssl` Swill output ‘Nothing to be done’ and it won’t regenerate new CAs. Delete the existing files by the following command:
 ```bash
 $ rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 ```
-You can edit those \*.cnf files to meet your requirements. Here we just leave them all to default for testing purpose. After cleaning up the CAs, run make command to generate new CAs.
+- You can edit those \*.cnf files to meet your requirements. 
+	- If you wish to change the certificate password, do it in `ca.cnf` in field `output_password`. **ATTENTION**, if you do it, you must also change the password in `mods-available/eap` in the field o `tls > private_key_password`. By default the password should be `whatever`.
+- After cleaning up the CAs, run make command to generate new CAs.
 ```bash
 $ make
 ```
