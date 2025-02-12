@@ -11,12 +11,14 @@
             "id": "58450117de08b23c",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "5G Emulated Network/topology.png"
+                "file": "5G Emulated Network/Notes.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "topology"
+              "icon": "lucide-file",
+              "title": "Notes"
             }
           }
         ]
@@ -76,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 237.5
+    "width": 237.5,
+    "collapsed": true
   },
   "right": {
     "id": "a174be73487b4b8f",
@@ -164,8 +167,8 @@
   },
   "active": "58450117de08b23c",
   "lastOpenFiles": [
-    "5G Emulated Network/Notes.md",
     "5G Emulated Network/topology.png",
+    "5G Emulated Network/Notes.md",
     "5G Emulated Network/topology.png.crdownload",
     "5G Emulated Network/topology.drawio",
     "Untitled.md",
