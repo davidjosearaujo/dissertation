@@ -26,7 +26,7 @@ sudo freeradius -X
 ## Define UE as a authenticator (client)
 - [ ] Add new entry to `clients` file
 ```bash
-$ sudo nano /etc/freeradius/clients.conf
+$ sudo nano /etc/freeradius/3.0/clients.conf
 ...
 client UE {                  #’AP1’ is the alias of your access point
 	ipaddr = 192.168.58.100 #The IP address of UE
@@ -51,22 +51,11 @@ listen {
   port = 1812
 }
 ```
-## Enable EAP-TLS as a supported authentication method
-- [ ] Edit `etc/freeradius/mods-available/eap`
-```bash
-default _eap_type = tls
-```
-- [ ] Delete old and create new symlink (do it as freerad user)
-```bash
-$ sudo -s -u freerad
-$ rm /etc/freeradius/mods-enabled/eap
-$ ln -s /etc/freeradius/mods-available/eap /etc/freeradius/mods-enabled/eap
-```
 ## Make the certificates
 ```bash
 $ sudo -s freerad
 
-$ cd /etc/freeradius/certs
+$ cd /etc/freeradius/3.0/certs
 ```
 - Note that you need to **clean up all the CAs each time before you recreate them**, or `openssl` Swill output ‘Nothing to be done’ and it won’t regenerate new CAs. Delete the existing files by the following command:
 ```bash
@@ -78,12 +67,26 @@ $ rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 ```bash
 $ make
 ```
+## Enable EAP-TLS as a supported authentication method
+- [ ] Edit `/etc/freeradius/3.0/mods-available/eap`
+```bash
+default_eap_type = tls
+```
+- [ ] Delete old and create new symlink (do it as freerad user)
+```bash
+$ sudo -s -u freerad
+$ rm /etc/freeradius/3.0/mods-enabled/eap
+$ ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
+```
+
 ## Restart the FreeRADIUS server
 ```bash
 $ sudo systemctl restart freeradius
 ```
 ## Install the certificates on Users
-Copy the generated ca.der and client.p12 file
-Install ca.der. Then, install client.p12. Note that the password of the private key is ‘_whatever_’ by default (if you haven’t changed the configurations by editing /etc/freeradius/certs/\*.cnf).
-## Define NAUN3 as a suplicant (user)
-- [ ] Add new entry to `users` file, with support form EAP-TLS authentication method
+- Copy the generated ca.der and client.p12 file
+- Install ca.der.
+- Install client.p12.
+> *Note that the password of the private key is ‘whatever’ by default (if you haven’t changed the configurations by editing /etc/freeradius/3.0/certs/\*.cnf).*
+## Copy certificate to NAUN3
+- [ ] Install `ca.crt`, `client.crt` and `client.key`
