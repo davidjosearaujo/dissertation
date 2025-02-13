@@ -10,7 +10,9 @@ UE_EAP_IP = "192.168.58.100"
 UE_LAN = "192.168.60.1"
 
 NAUN3 = "192.168.60.100"
+
 AUTH_SERVER_IP = "192.168.58.1"
+CERT_PASSWD = "whatever"
 
 UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
@@ -193,7 +195,37 @@ sudo apt update
 
 sudo apt install -y freeradius
 
+sudo -s -u freerad
+
+echo -e "\nNew client secret"
+CLIENT_SECRET=$(hexdump -n8 -e'"%02x"' /dev/urandom)
+echo -e "\n\tClient Secret: $CLIENT_SECRET"
+
+echo -e "\nAdding UE as client"
+echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = $CLIENT_SECRET\n}" >> /etc/freeradius/3.0/clients.conf
+
+echo -e "Removing old certificates"
+cd /etc/freeradius/3.0/certs
+rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
+
+echo -e "Updating certificate"
+CERT_PASSWD=$(hexdump -n8 -e'"%02x"' /dev/urandom)
+echo -e "\n\tCertificate Password: $CERT_PASSWD\n"
+sed -i "s/input_password.*/input_password = $CERT_PASSWD/" /etc/freeradius/3.0/certs/ca.cnf
+sed -i "s/output_password.*/output_password = $CERT_PASSWD/" /etc/freeradius/3.0/certs/ca.cnf
+sed -i "s/private_key_password = .*/private_key_password = $CERT_PASSWD/" /etc/freeradius/3.0/mods-available/eap
+make
+
+echo -e "\nEnabling EAP-TLS"
+sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
+rm /etc/freeradius/3.0/mods-enabled/eap
+ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
+
+echo -e "\nRestarting FreeRADIUS to apply changes"
+# sudo systemctl restart freeradius.service
+
 SCRIPT
+$auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP)
 
 #### EAP AUTH SERVER CONFIG ####
 
@@ -235,7 +267,7 @@ Vagrant.configure("2") do |config|
     # gNB to Subs
     gnb.vm.network "private_network", ip: GNB_IP_UE
 
-    gnb.vm.synced_folder "./runtime_logs", "/log", create: true
+    gnb.vm.synced_folder "./runtime-logs", "/log", create: true
 
     gnb.vm.provision "shell", inline: $ueransim_install
 
@@ -261,7 +293,7 @@ Vagrant.configure("2") do |config|
     # LAN interface
     ue.vm.network "private_network", ip: UE_LAN
 
-    ue.vm.synced_folder "./runtime_logs", "/log", create: true
+    ue.vm.synced_folder "./runtime-logs", "/log", create: true
 
     ue.vm.provision "shell", inline: $ueransim_install
 
@@ -283,7 +315,7 @@ Vagrant.configure("2") do |config|
 
     auth_server.vm.provision "shell", inline: $auth_server_install
 
-    auth_server.vm.synced_folder "./runtime_logs", "/log", create: true
+    auth_server.vm.synced_folder "./runtime-logs", "/log", create: true
   end
 
   config.vm.define "naun3" do |naun3|
@@ -297,7 +329,7 @@ Vagrant.configure("2") do |config|
     naun3.vm.hostname = "naun3"
     naun3.vm.network "private_network", ip: NAUN3
 
-    naun3.vm.synced_folder "./runtime_logs", "/log", create: true
+    naun3.vm.synced_folder "./runtime-logs", "/log", create: true
   end
 
 end
