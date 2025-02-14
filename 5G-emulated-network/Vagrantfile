@@ -182,8 +182,25 @@ sudo sysctl -w net.ipv4.ip_forward=1
 echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
+
+echo -e "\nInstalling hostapd"
+git clone git://w1.fi/hostap.git ~/hostap
+cd ~/hostap/hostapd
+
+cp defconfig .config
+
+echo -e "Writing hostapd configurations"
+echo -e "interface=enp0s10
+logger_syslog=-1
+driver=wired
+#ssid=ue_ap_1
+#channel=1"\
+# EAP Configurations
+own_ip_addr="UE_EAP_IP"
+> hostapd.conf
+
 SCRIPT
-$ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS)
+$ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP)
 
 #### UE CONFIG ####
 
