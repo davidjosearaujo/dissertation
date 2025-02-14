@@ -24,7 +24,7 @@ Then run in debug mode
 sudo freeradius -X
 ```
 ## Define UE as a authenticator (client)
-- [ ] Add new entry to `clients` file
+- [ ] Add new entry to `/etc/freeradius/3.0/clients.conf` file
 ```bash
 $ sudo nano /etc/freeradius/3.0/clients.conf
 ...
@@ -78,11 +78,13 @@ $ sudo -s -u freerad
 $ rm /etc/freeradius/3.0/mods-enabled/eap
 $ ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
 ```
-
 ## Restart the FreeRADIUS server
 ```bash
 $ sudo systemctl restart freeradius
 ```
+## Config the UE as AP with client secret
+- Using [`hostapd`](https://wireless.docs.kernel.org/en/latest/en/users/documentation/hostapd.html)
+- We will need to use the `secret` we've defined on `/etc/freeradius/3.0/clients.conf`
 ## Install the certificates on Users
 - Copy the generated ca.der and client.p12 file
 - Install ca.der.
