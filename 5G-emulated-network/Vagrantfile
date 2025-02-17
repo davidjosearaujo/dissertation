@@ -12,12 +12,12 @@ UE_LAN = "192.168.60.1"
 NAUN3 = "192.168.60.100"
 
 AUTH_SERVER_IP = "192.168.58.1"
-CERT_PASSWD = "whatever"
+CERT_PASSWD = SecureRandom.alphanumeric(8)
+CLIENT_SECRET = SecureRandom.alphanumeric(8)
 
 UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
 UE_OPC = "E8ED289DEBA952E4283B54E88E6183CA"
-
 PDU_SESSIONS = "3"
 
 #### CORE INSTALL ####
@@ -52,11 +52,8 @@ echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
 cat /etc/open5gs/amf.yaml | yq '.amf.ngap.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/amf.yaml
 cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/upf.yaml
 
-# TESTING - So far it is not creating the interfaces
 echo -e "\nEnabling support for multiple Sessions in the SMF and UPF"
-
 sudo ip link delete ogstun
-
 UL=$(("PDU_SESSIONS"))
 for ((i=0;i<$UL;i++)); do
   OCT=$((45+$i))
@@ -197,6 +194,9 @@ driver=wired
 #channel=1"\
 # EAP Configurations
 own_ip_addr="UE_EAP_IP"
+auth_server_addr="AUTH_SERVER_IP"
+auth_server_port=1812
+auth_server_shared_secret=secret
 > hostapd.conf
 
 SCRIPT
@@ -215,7 +215,6 @@ sudo apt install -y freeradius
 sudo -s -u freerad
 
 echo -e "\nNew client secret"
-CLIENT_SECRET=$(hexdump -n8 -e'"%02x"' /dev/urandom)
 echo -e "\n\tClient Secret: $CLIENT_SECRET"
 
 echo -e "\nAdding UE as client"
