@@ -9,6 +9,7 @@
 ## PDU Session Topology Perspective
 ![[topology.png]]
 # Implement EAP-TLS
+## EAP Framework Topology Perspective
 ![[topology-EAP.png]]
 Try to follow instructions from here:
 - https://www.tp-link.com/us/support/faq/3456/
