@@ -84,6 +84,19 @@ $ sudo systemctl restart freeradius
 ```
 ## Config the UE as AP with client secret
 - Using [`hostapd`](https://wireless.docs.kernel.org/en/latest/en/users/documentation/hostapd.html)
+The `hostapd.conf` file will have the following configurations.
+```
+interface=enp0s10
+logger_syslog=-1
+driver=wired  # THIS NEEDS TO BE CHANGED TO USE 80211nl DRIVER
+#IEEE 802.11 Configs
+#ssid=ue_ap_1
+#channel=1
+own_ip_addr="UE_EAP_IP"
+auth_server_addr="AUTH_SERVER_IP"
+auth_server_port=1812
+auth_server_shared_secret=secret
+```
 - We will need to use the `secret` we've defined on `/etc/freeradius/3.0/clients.conf`
 ## Install the certificates on Users
 - Copy the generated ca.der and client.p12 file
