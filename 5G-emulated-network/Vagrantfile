@@ -1,24 +1,38 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
+# Network Configuration
+## 5GC IPs
 CORE_IP = "192.168.56.10"
+
+## gNodeB IPs
 GNB_IP_CORE = "192.168.56.11"
 GNB_IP_UE = "192.168.57.11"
 
+## UE IPs
 UE_IP = "192.168.57.12"
 UE_EAP_IP = "192.168.58.100"
 UE_LAN = "192.168.60.1"
 
-NAUN3 = "192.168.60.100"
-
-AUTH_SERVER_IP = "192.168.58.1"
-CERT_PASSWD = SecureRandom.alphanumeric(8)
-CLIENT_SECRET = SecureRandom.alphanumeric(8)
-
+## UE Configurations
 UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
 UE_OPC = "E8ED289DEBA952E4283B54E88E6183CA"
 PDU_SESSIONS = "3"
+
+## End Device IPs
+NAUN3 = "192.168.60.100"
+
+## EAP Auth Server IP
+AUTH_SERVER_IP = "192.168.58.1"
+
+## EAP Auth Server Configurations
+CERT_PASSWD = SecureRandom.alphanumeric(8)
+CLIENT_SECRET = SecureRandom.alphanumeric(8)
+
+puts "CERT_PASSWD: #{CERT_PASSWD}"
+puts "CLIENT_SECRET: #{CLIENT_SECRET}"
 
 #### CORE INSTALL ####
 
@@ -215,21 +229,18 @@ sudo apt install -y freeradius
 sudo -s -u freerad
 
 echo -e "\nNew client secret"
-echo -e "\n\tClient Secret: $CLIENT_SECRET"
 
 echo -e "\nAdding UE as client"
-echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = $CLIENT_SECRET\n}" >> /etc/freeradius/3.0/clients.conf
+echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = "CLIENT_SECRET"\n}" >> /etc/freeradius/3.0/clients.conf
 
 echo -e "Removing old certificates"
 cd /etc/freeradius/3.0/certs
 rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 
 echo -e "Updating certificate"
-CERT_PASSWD=$(hexdump -n8 -e'"%02x"' /dev/urandom)
-echo -e "\n\tCertificate Password: $CERT_PASSWD\n"
-sed -i "s/input_password.*/input_password = $CERT_PASSWD/" /etc/freeradius/3.0/certs/ca.cnf
-sed -i "s/output_password.*/output_password = $CERT_PASSWD/" /etc/freeradius/3.0/certs/ca.cnf
-sed -i "s/private_key_password = .*/private_key_password = $CERT_PASSWD/" /etc/freeradius/3.0/mods-available/eap
+sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
+sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
+sed -i "s/private_key_password = .*/private_key_password = "CERT_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
 make
 
 echo -e "\nEnabling EAP-TLS"
@@ -241,7 +252,7 @@ echo -e "\nRestarting FreeRADIUS to apply changes"
 # sudo systemctl restart freeradius.service
 
 SCRIPT
-$auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP)
+$auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("CERT_PASSWD", CERT_PASSWD).gsub!("CLIENT_SECRET", CLIENT_SECRET)
 
 #### EAP AUTH SERVER CONFIG ####
 
