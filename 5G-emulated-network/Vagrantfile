@@ -31,8 +31,10 @@ AUTH_SERVER_IP = "192.168.58.1"
 CERT_PASSWD = SecureRandom.alphanumeric(8)
 CLIENT_SECRET = SecureRandom.alphanumeric(8)
 
-puts "CERT_PASSWD: #{CERT_PASSWD}"
-puts "CLIENT_SECRET: #{CLIENT_SECRET}"
+open('ue-configs/eap-secrets', 'w'){ |f|
+  f.puts "Certificate Password: #{CERT_PASSWD}"
+  f.puts "Client Secret: #{CLIENT_SECRET}"
+}
 
 #### CORE INSTALL ####
 
@@ -187,34 +189,39 @@ for ((i=0;i<$UL;i++)); do
   | sudo tee config/open5gs-ue.yaml
 done
 
+# TODO: Mapping of NAUN3 to PDU Sessions and forwarding the packets
 echo -e "\nEnabling IP forwarding"
 sudo sysctl -w net.ipv4.ip_forward=1
 
 echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
-
 echo -e "\nInstalling hostapd"
 git clone git://w1.fi/hostap.git ~/hostap
 cd ~/hostap/hostapd
 
+echo -e "Enable wired driver and debug file"
 cp defconfig .config
+sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
+
+echo -e "Install dependencies and compile hostapd"
+sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev
+make
 
 echo -e "Writing hostapd configurations"
 echo -e "interface=enp0s10
-logger_syslog=-1
 driver=wired
-#ssid=ue_ap_1
-#channel=1"\
-# EAP Configurations
+logger_syslog=-1
 own_ip_addr="UE_EAP_IP"
 auth_server_addr="AUTH_SERVER_IP"
 auth_server_port=1812
-auth_server_shared_secret=secret
-> hostapd.conf
+auth_server_shared_secret="CLIENT_SECRET"" > hostapd.conf
+
+echo -e "Running hostapd"
+sudo ./hostapd ./hostapd.conf &> /log/hostapd_$(date +%s).log &
 
 SCRIPT
-$ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP)
+$ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("AUTH_SERVER_IP", AUTH_SERVER_IP).gsub!("CLIENT_SECRET", CLIENT_SECRET)
 
 #### UE CONFIG ####
 
