@@ -244,11 +244,14 @@ echo -e "Removing old certificates"
 cd /etc/freeradius/3.0/certs
 rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 
-echo -e "Updating certificate"
+echo -e "Generating new certificates"
 sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
 sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
 sed -i "s/private_key_password = .*/private_key_password = "CERT_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
 make
+
+echo -e "Copying certificates to shared folder"
+cp /etc/freeradius/3.0/certs/* /certs
 
 echo -e "\nEnabling EAP-TLS"
 sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
@@ -256,12 +259,42 @@ rm /etc/freeradius/3.0/mods-enabled/eap
 ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
 
 echo -e "\nRestarting FreeRADIUS to apply changes"
-# sudo systemctl restart freeradius.service
+sudo systemctl restart freeradius.service
 
 SCRIPT
 $auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("CERT_PASSWD", CERT_PASSWD).gsub!("CLIENT_SECRET", CLIENT_SECRET)
 
 #### EAP AUTH SERVER CONFIG ####
+
+#### NAUN3 CONFIG ####
+
+$naun3_install = <<-'SCRIPT'
+
+sudo apt update
+
+sudo apt-get update
+sudo apt-get -y install wpasupplicant
+
+echo -e "Writing wpa_supplicant configurations"
+echo -e 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
+ap_scan=0
+network={
+    key_mgmt=IEEE8021X
+    eap=TLS
+    ca_cert="/certs/ca.pem"
+    client_cert="/certs/client.pem"
+    private_key="/certs/client.pem"
+    private_key_passwd=""CLIENT_SECRET""
+    eapol_flags=0
+}' > wpa_supplicant.conf
+
+echo -e "Running wpasupplicant"
+sudo wpa_supplicant -ienp0s8 -Dwired -c./wpa_supplicant.conf &> /log/wpa_supplicant_$(date +%s).log &
+
+SCRIPT
+$naun3_install.gsub!("CLIENT_SECRET", CLIENT_SECRET)
+
+#### NAUN3 CONFIG ####
 
 Vagrant.configure("2") do |config|
   
@@ -277,12 +310,14 @@ Vagrant.configure("2") do |config|
     core.vm.hostname = "core"
     core.vm.network "private_network", ip: CORE_IP
 
-    config.vm.provision "file", source: "open5gs-dbctl", destination: "open5gs-dbctl"
-
-    core.vm.provision "shell", inline: $core_install
-
     # Exposing WebUI
     core.vm.network "forwarded_port", guest: 8080, host: 9999
+
+    # Copying the DBCTL script
+    config.vm.provision "file", source: "open5gs-dbctl", destination: "open5gs-dbctl"
+
+    # Open5GS installation
+    core.vm.provision "shell", inline: $core_install
   end
 
   config.vm.define "gnb" do |gnb|
@@ -301,11 +336,13 @@ Vagrant.configure("2") do |config|
     # gNB to Subs
     gnb.vm.network "private_network", ip: GNB_IP_UE
 
-    gnb.vm.synced_folder "./runtime-logs", "/log", create: true
-
+    # UERANSIM installation
     gnb.vm.provision "shell", inline: $ueransim_install
 
+    # gNodeB configuration
     gnb.vm.provision "shell", inline: $gnb_install
+
+    gnb.vm.synced_folder "./runtime-logs", "/log", create: true
   end
 
   config.vm.define "ue" do |ue|
@@ -327,11 +364,13 @@ Vagrant.configure("2") do |config|
     # LAN interface
     ue.vm.network "private_network", ip: UE_LAN
 
-    ue.vm.synced_folder "./runtime-logs", "/log", create: true
-
+    # UERANSIM installation
     ue.vm.provision "shell", inline: $ueransim_install
 
+    # UE configuration
     ue.vm.provision "shell", inline: $ue_install
+
+    ue.vm.synced_folder "./runtime-logs", "/log", create: true
   end
 
   config.vm.define "auth_server" do |auth_server|
@@ -347,7 +386,11 @@ Vagrant.configure("2") do |config|
     # Authenticator Client interface
     auth_server.vm.network "private_network", ip: AUTH_SERVER_IP
 
+    # Authenticator Server configuration
     auth_server.vm.provision "shell", inline: $auth_server_install
+
+    # EAP Auth Server Certs
+    auth_server.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
 
     auth_server.vm.synced_folder "./runtime-logs", "/log", create: true
   end
@@ -362,6 +405,12 @@ Vagrant.configure("2") do |config|
 
     naun3.vm.hostname = "naun3"
     naun3.vm.network "private_network", ip: NAUN3
+
+    # EAP Auth Server Certs
+    naun3.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
+
+    # NAUN3 configuration
+    naun3.vm.provision "shell", inline: $naun3_install
 
     naun3.vm.synced_folder "./runtime-logs", "/log", create: true
   end
