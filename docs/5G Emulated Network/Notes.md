@@ -15,6 +15,7 @@ Try to follow instructions from here:
 - https://www.tp-link.com/us/support/faq/3456/
 - https://wiki.alpinelinux.org/wiki/FreeRadius_EAP-TLS_configuration
 - https://simplificandoredes.com/en/freeradius-installation-and-configuration
+- https://www.systutorials.com/docs/linux/man/5-wpa_supplicant/ - Usefull for wpa_supplicant in wired mode
 ## Testing configurations
 We need to stop the running service
 ``` bash
@@ -29,7 +30,7 @@ sudo freeradius -X
 ```bash
 $ sudo nano /etc/freeradius/3.0/clients.conf
 ...
-client UE {                  #’AP1’ is the alias of your access point
+client UE {                  #’UE’ is the alias of your access point
 	ipaddr = 192.168.58.100 #The IP address of UE
 	secret = testing123     # The ’secret’ will be the ‘Authentication Password’
 }
@@ -69,11 +70,11 @@ $ rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 $ make
 ```
 ## Enable EAP-TLS as a supported authentication method
-- [ ] Edit `/etc/freeradius/3.0/mods-available/eap`
+- [x] Edit `/etc/freeradius/3.0/mods-available/eap`
 ```bash
 default_eap_type = tls
 ```
-- [ ] Delete old and create new symlink (do it as freerad user)
+- [x] Delete old and create new symlink (do it as freerad user)
 ```bash
 $ sudo -s -u freerad
 $ rm /etc/freeradius/3.0/mods-enabled/eap
@@ -96,12 +97,13 @@ driver=wired  # THIS NEEDS TO BE CHANGED TO USE 80211nl DRIVER
 own_ip_addr="UE_EAP_IP"
 auth_server_addr="AUTH_SERVER_IP"
 auth_server_port=1812
-auth_server_shared_secret=secret
+auth_server_shared_secret="CLIENT_SECRET"
 ```
 - We will need to use the `secret` we've defined on `/etc/freeradius/3.0/clients.conf`
 ## Install the certificates on Users
-- Copy the generated ca.der and client.p12 file
+- Copy the generated `ca.der`, `client.p12 file
 - Install ca.der.
+- 
 - Install client.p12.
 > *Note that the password of the private key is ‘whatever’ by default (if you haven’t changed the configurations by editing /etc/freeradius/3.0/certs/\*.cnf).*
 ## Copy certificate to NAUN3
