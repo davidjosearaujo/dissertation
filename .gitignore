@@ -99,3 +99,4 @@ tramp
 /5G-emulated-network/runtime-logs
 /5G-emulated-network/eap-radius-certs-sync
 /5G-emulated-network/ue-configs/eap-secrets
+/docs/.obsidian
