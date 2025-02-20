@@ -240,6 +240,11 @@ echo -e "\nNew client secret"
 echo -e "\nAdding UE as client"
 echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = "CLIENT_SECRET"\n}" >> /etc/freeradius/3.0/clients.conf
 
+echo -e "\nEnabling EAP-TLS"
+sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
+rm /etc/freeradius/3.0/mods-enabled/eap
+ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
+
 echo -e "Removing old certificates"
 cd /etc/freeradius/3.0/certs
 rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
@@ -252,11 +257,6 @@ make
 
 echo -e "Copying certificates to shared folder"
 cp /etc/freeradius/3.0/certs/* /certs
-
-echo -e "\nEnabling EAP-TLS"
-sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
-rm /etc/freeradius/3.0/mods-enabled/eap
-ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
 
 echo -e "\nRestarting FreeRADIUS to apply changes"
 sudo systemctl restart freeradius.service
