@@ -26,7 +26,7 @@ Then run in debug mode
 sudo freeradius -X
 ```
 ## Define UE as a authenticator (client)
-- [ ] Add new entry to `/etc/freeradius/3.0/clients.conf` file
+- [x] Add new entry to `/etc/freeradius/3.0/clients.conf` file
 ```bash
 $ sudo nano /etc/freeradius/3.0/clients.conf
 ...
@@ -36,7 +36,7 @@ client UE {                  #’UE’ is the alias of your access point
 }
 ...
 ```
-- [ ] It shouldn't be necessary, but if requests are not being received, we may need to configure FreeRADIUS to listen (on `radiusd.conf` file) on the specific interface:
+- [x] It shouldn't be necessary, but if requests are not being received, we may need to configure FreeRADIUS to listen (on `radiusd.conf` file) on the specific interface:
 ```bash
 listen {
 	type = auth
@@ -56,16 +56,15 @@ listen {
 ## Make the certificates
 ```bash
 $ sudo -s freerad
-
 $ cd /etc/freeradius/3.0/certs
 ```
-- Note that you need to **clean up all the CAs each time before you recreate them**, or `openssl` Swill output ‘Nothing to be done’ and it won’t regenerate new CAs. Delete the existing files by the following command:
+- [x] Note that you need to **clean up all the CAs each time before you recreate them**, or `openssl` Swill output ‘Nothing to be done’ and it won’t regenerate new CAs. Delete the existing files by the following command:
 ```bash
 $ rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 ```
-- You can edit those \*.cnf files to meet your requirements. 
+- [x] You can edit those \*.cnf files to meet your requirements. 
 	- If you wish to change the certificate password, do it in `ca.cnf` in field `output_password`. **ATTENTION**, if you do it, you must also change the password in `mods-available/eap` in the field o `tls > private_key_password`. By default the password should be `whatever`.
-- After cleaning up the CAs, run make command to generate new CAs.
+- [x] After cleaning up the CAs, run make command to generate new CAs.
 ```bash
 $ make
 ```
@@ -85,7 +84,7 @@ $ ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/
 $ sudo systemctl restart freeradius
 ```
 ## Config the UE as AP with client secret
-- Using [`hostapd`](https://wireless.docs.kernel.org/en/latest/en/users/documentation/hostapd.html)
+- [x] Configuring [`hostapd`](https://wireless.docs.kernel.org/en/latest/en/users/documentation/hostapd.html)
 The `hostapd.conf` file will have the following configurations.
 ```
 interface=enp0s10
@@ -99,12 +98,9 @@ auth_server_addr="AUTH_SERVER_IP"
 auth_server_port=1812
 auth_server_shared_secret="CLIENT_SECRET"
 ```
-- We will need to use the `secret` we've defined on `/etc/freeradius/3.0/clients.conf`
+- [x] We will need to use the `secret` we've defined on `/etc/freeradius/3.0/clients.conf`. In a Vagrantfile can be done by just using a variable.
 ## Install the certificates on Users
-- Copy the generated `ca.der`, `client.p12 file
-- Install ca.der.
-- 
-- Install client.p12.
+- [x] Copy the generated `ca.pem` and `client.pem` file
 > *Note that the password of the private key is ‘whatever’ by default (if you haven’t changed the configurations by editing /etc/freeradius/3.0/certs/\*.cnf).*
 ## Copy certificate to NAUN3
 - [ ] Install `ca.crt`, `client.crt` and `client.key`
