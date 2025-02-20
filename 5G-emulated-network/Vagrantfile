@@ -29,7 +29,7 @@ AUTH_SERVER_IP = "192.168.58.1"
 
 ## EAP Auth Server Configurations
 CERT_PASSWD = SecureRandom.alphanumeric(8)
-CLIENT_SECRET = SecureRandom.alphanumeric(8)
+CLIENT_SECRET = CERT_PASSWD
 
 open('ue-configs/eap-secrets', 'w'){ |f|
   f.puts "Certificate Password: #{CERT_PASSWD}"
@@ -252,6 +252,10 @@ rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 echo -e "Generating new certificates"
 sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
 sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
+sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
+sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
+sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
+sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
 sed -i "s/private_key_password = .*/private_key_password = "CERT_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
 make
 
