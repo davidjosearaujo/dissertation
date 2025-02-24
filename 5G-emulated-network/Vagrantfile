@@ -68,29 +68,30 @@ echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
 cat /etc/open5gs/amf.yaml | yq '.amf.ngap.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/amf.yaml
 cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/upf.yaml
 
-echo -e "\nEnabling support for multiple Sessions in the SMF and UPF"
-sudo ip link delete ogstun
-UL=$(("PDU_SESSIONS"))
-for ((i=0;i<$UL;i++)); do
-  OCT=$((45+$i))
-  
-  sudo ip tuntap add dev intun$i mode tun
-  sudo ip link set intun$i up
-  sudo ip addr add 10.$OCT.0.1/16 brd 10.$OCT.255.255 dev intun$i
+echo -e "\nAttributing DNN name to default APN"
+cat /etc/open5gs/smf.yaml \
+| yq '.smf.session[0].dnn = "backhaul"' \
+| sudo tee /etc/open5gs/smf.yaml
+cat /etc/open5gs/upf.yaml \
+| yq '.upf.session[0].dnn = "backhaul"' \
+| yq '.upf.session[0].dev = "ogstun"' \
+| sudo tee /etc/open5gs/upf.yaml
 
-  cat /etc/open5gs/smf.yaml \
-  | yq '.smf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
-  | yq '.smf.session['$i'].gateway = "10.'$OCT'.0.1"' \
-  | yq '.smf.session['$i'].dnn = "internet'$i'"' \
-  | sudo tee /etc/open5gs/smf.yaml
-  
-  cat /etc/open5gs/upf.yaml \
-  | yq '.upf.session['$i'].subnet = "10.'$OCT'.0.0/16"' \
-  | yq '.upf.session['$i'].gateway = "10.'$OCT'.0.1"' \
-  | yq '.upf.session['$i'].dnn = "internet'$i'"' \
-  | yq '.upf.session['$i'].dev = "intun'$i'"' \
-  | sudo tee /etc/open5gs/upf.yaml
-done
+echo -e "\nAdding DNN for NAUN3 PDU Sessions attribution"
+sudo ip tuntap add dev clienttun0 mode tun
+sudo ip link set clienttun0 up
+sudo ip addr add 10.46.0.1/16 brd 10.46.255.255 dev clienttun0
+cat /etc/open5gs/smf.yaml \
+| yq '.smf.session[1].subnet = "10.46.0.0/16"' \
+| yq '.smf.session[1].gateway = "10.46.0.1"' \
+| yq '.smf.session[1].dnn = "clients"' \
+| sudo tee /etc/open5gs/smf.yaml
+cat /etc/open5gs/upf.yaml \
+| yq '.upf.session[1].subnet = "10.46.0.0/16"' \
+| yq '.upf.session[1].gateway = "10.46.0.1"' \
+| yq '.upf.session[1].dnn = "clients"' \
+| yq '.upf.session[1].dev = "clienttun0"' \
+| sudo tee /etc/open5gs/upf.yaml
 
 sudo systemctl restart open5gs-upfd
 sudo systemctl restart open5gs-smfd 
@@ -118,13 +119,11 @@ sudo chmod +x open5gs-dbctl
 ./open5gs-dbctl add "UE_IMSI" "UE_KEY" "UE_OPC"
 
 echo -e "\nPre-loading UE APN sessions"
-UL=$(("PDU_SESSIONS"))
-for ((i=0;i<$UL;i++)); do
-  ./open5gs-dbctl update_apn "UE_IMSI" internet$i 0
-done
+./open5gs-dbctl update_apn "UE_IMSI" backhaul 0
+./open5gs-dbctl update_apn "UE_IMSI" clients 0
 
 SCRIPT
-$core_install.gsub!("CORE_IP", CORE_IP).gsub!("UE_IMSI", UE_IMSI).gsub!("UE_KEY", UE_KEY).gsub!("UE_OPC", UE_OPC).gsub!("PDU_SESSIONS", PDU_SESSIONS)
+$core_install.gsub!("CORE_IP", CORE_IP).gsub!("UE_IMSI", UE_IMSI).gsub!("UE_KEY", UE_KEY).gsub!("UE_OPC", UE_OPC)
 
 #### CORE INSTALL ####
 
@@ -165,7 +164,7 @@ echo -e "\nRunning gNB"
 build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb_$(date +%s).log &
 
 SCRIPT
-$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP_CORE", GNB_IP_CORE).gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS)
+$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP_CORE", GNB_IP_CORE).gsub!("GNB_IP_UE", GNB_IP_UE)
 
 #### gNodeB CONFIG ####
 
@@ -177,21 +176,23 @@ cd ~/UERANSIM
 echo -e "\nUpdate gNodeB IP"
 cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP_UE"' | sudo tee config/open5gs-ue.yaml
 
-echo -e "\nEnabling multiple PDU via different APNs in a single Slice"
+echo -e "\nEnabling 'backhaul' APN"
+cat config/open5gs-ue.yaml \
+| yq '.sessions[0].apn = "backhaul"' \
+| yq '.sessions[0].apn style="single"' \
+| sudo tee config/open5gs-ue.yaml
+
+echo -e "\nEnabling multiple PDU Sessions in 'clients' APN"
 UL=$(("PDU_SESSIONS"))
-for ((i=0;i<$UL;i++)); do
+for ((i=1;i<=$UL;i++)); do
   cat config/open5gs-ue.yaml \
   | yq '.sessions['$i'].type = "IPv4"' \
   | yq '.sessions['$i'].type style="single"' \
-  | yq '.sessions['$i'].apn = "internet'$i'"' \
+  | yq '.sessions['$i'].apn = "clients"' \
   | yq '.sessions['$i'].apn style="single"' \
   | yq '.sessions['$i'].slice.sst = 1' \
   | sudo tee config/open5gs-ue.yaml
 done
-
-# TODO: Mapping of NAUN3 to PDU Sessions and forwarding the packets
-echo -e "\nEnabling IP forwarding"
-sudo sysctl -w net.ipv4.ip_forward=1
 
 echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
