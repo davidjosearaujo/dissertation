@@ -8,6 +8,10 @@
 # Design a topology diagram for my POC
 ## PDU Session Topology Perspective
 ![[topology.png]]
+- [ ] Use only two DNNs
+	- [ ] One is the default one, for control
+	- [ ] Other is for NAUN3s
+		- [ ] In this one, the multiple PDU Sessions will be established
 # Implement EAP-TLS
 ## EAP Framework Topology Perspective
 ![[topology-EAP.png]]
@@ -16,6 +20,7 @@ Try to follow instructions from here:
 - https://wiki.alpinelinux.org/wiki/FreeRadius_EAP-TLS_configuration
 - https://simplificandoredes.com/en/freeradius-installation-and-configuration
 - https://www.systutorials.com/docs/linux/man/5-wpa_supplicant/ - Usefull for wpa_supplicant in wired mode
+- https://w1.fi/wpa_supplicant/devel/
 ## Testing configurations
 We need to stop the running service
 ``` bash
@@ -103,4 +108,5 @@ auth_server_shared_secret="CLIENT_SECRET"
 - [x] Copy the generated `ca.pem` and `client.pem` file
 > *Note that the password of the private key is ‘whatever’ by default (if you haven’t changed the configurations by editing /etc/freeradius/3.0/certs/\*.cnf).*
 ## Copy certificate to NAUN3
+- [ ] Disable IP on the NAUN3
 - [ ] Install `ca.crt`, `client.crt` and `client.key`
