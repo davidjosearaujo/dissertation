@@ -235,7 +235,8 @@ sudo apt install -y freeradius
 
 sudo -s -u freerad
 
-echo -e "\nNew client secret"
+echo -e "\Stopping FreeRADIUS service"
+sudo systemctl stop freeradius.service
 
 echo -e "\nAdding UE as client"
 echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = "CLIENT_SECRET"\n}" >> /etc/freeradius/3.0/clients.conf
@@ -262,8 +263,8 @@ make
 echo -e "Copying certificates to shared folder"
 cp /etc/freeradius/3.0/certs/* /certs
 
-echo -e "\nRestarting FreeRADIUS to apply changes"
-sudo systemctl restart freeradius.service
+echo -e "\Starting FreeRADIUS in full debugging"
+sudo freeradius -X &> /log/freeradius_$(date +%s).log &
 
 SCRIPT
 $auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("CERT_PASSWD", CERT_PASSWD).gsub!("CLIENT_SECRET", CLIENT_SECRET)
