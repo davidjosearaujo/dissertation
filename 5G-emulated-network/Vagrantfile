@@ -216,14 +216,26 @@ make
 echo -e "Writing hostapd configurations"
 echo -e "interface=enp0s10
 driver=wired
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=vagrant
+
 logger_syslog=-1
+logger_syslog_level=0
+
+ieee8021x=1 
 own_ip_addr="UE_EAP_IP"
+
+use_pae_group_addr=1
+
 auth_server_addr="AUTH_SERVER_IP"
 auth_server_port=1812
 auth_server_shared_secret="CLIENT_SECRET"" > hostapd.conf
 
-echo -e "Running hostapd"
-sudo ./hostapd ./hostapd.conf &> /log/hostapd_$(date +%s).log &
+LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
+cat hostapd.conf > ${LOG_FILE_PATH}
+
+echo -e "\nRunning hostapd"
+sudo ./hostapd -tvdd ./hostapd.conf &> ${LOG_FILE_PATH} &
 
 SCRIPT
 $ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("AUTH_SERVER_IP", AUTH_SERVER_IP).gsub!("CLIENT_SECRET", CLIENT_SECRET)
@@ -240,7 +252,7 @@ sudo apt install -y freeradius
 
 sudo -s -u freerad
 
-echo -e "\Stopping FreeRADIUS service"
+echo -e "\nStopping FreeRADIUS service"
 sudo systemctl stop freeradius.service
 
 echo -e "\nAdding UE as client"
@@ -275,11 +287,11 @@ ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/ea
 chmod 640 /etc/freeradius/3.0/certs/*
 chown freerad:freerad /etc/freeradius/3.0/certs/*
 
-echo -e "Copying certificates to shared folder"
+echo -e "\nCopying certificates to shared folder"
 cp /etc/freeradius/3.0/certs/* /certs
 
 echo -e "\nStarting FreeRADIUS in full debugging"
-sudo freeradius -X &> /log/freeradius_$(date +%s).log &
+sudo freeradius -X -xx &>> /log/freeradius_$(date +%s).log &
 
 SCRIPT
 $auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("CERT_PASSWD", CERT_PASSWD).gsub!("CLIENT_SECRET", CLIENT_SECRET)
@@ -295,24 +307,31 @@ sudo apt update
 sudo apt-get update
 sudo apt-get -y install wpasupplicant
 
-echo -e "Remove IP address"
+echo -e "\nRemove IP address"
 sudo ip addr del "NAUN3_IP"/24 dev enp0s8
 
-echo -e "Writing wpa_supplicant configurations"
+echo -e "\nWriting wpa_supplicant configurations"
 echo -e 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
 ap_scan=0
 network={
     eapol_flags=0
-    key_mgmt=WPA-EAP
+
+    key_mgmt=IEEE8021X
+
     eap=TLS
+
     identity="user@example.org"
     ca_cert="/certs/ca.pem"
-    private_key="/certs/client.key"
+    private_key="/certs/client.p12"
     private_key_passwd="CLIENT_SECRET"
+
 }' > wpa_supplicant.conf
 
-echo -e "Running wpasupplicant"
-sudo wpa_supplicant -ienp0s8 -Dwired -c./wpa_supplicant.conf &> /log/wpa_supplicant_$(date +%s).log &
+LOG_FILE_PATH="/log/wpa_supplicant_$(date +%s).log"
+cat wpa_supplicant.conf > ${LOG_FILE_PATH}
+
+echo -e "\nRunning wpa_supplicant"
+sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
 
 SCRIPT
 $naun3_install.gsub!("CLIENT_SECRET", CLIENT_SECRET).gsub!("NAUN3_IP", NAUN3_IP)
