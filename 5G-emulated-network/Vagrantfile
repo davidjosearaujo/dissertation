@@ -22,19 +22,24 @@ UE_OPC = "E8ED289DEBA952E4283B54E88E6183CA"
 PDU_SESSIONS = "3"
 
 ## End Device IPs
-NAUN3 = "192.168.60.100"
+NAUN3_IP = "192.168.60.100"
 
 ## EAP Auth Server IP
 AUTH_SERVER_IP = "192.168.58.1"
 
 ## EAP Auth Server Configurations
-CERT_PASSWD = SecureRandom.alphanumeric(8)
-CLIENT_SECRET = CERT_PASSWD
 
-open('ue-configs/eap-secrets', 'w'){ |f|
-  f.puts "Certificate Password: #{CERT_PASSWD}"
-  f.puts "Client Secret: #{CLIENT_SECRET}"
-}
+CERT_PASSWD = ""
+CLIENT_SECRET = ""
+if ARGV.include?("up") && ARGV.include?("auth_server")
+  CERT_PASSWD = SecureRandom.alphanumeric(8)
+  CLIENT_SECRET = CERT_PASSWD
+
+  open('eap-secrets', 'w'){ |f|
+    f.puts "Certificate Password: #{CERT_PASSWD}"
+    f.puts "Client Secret: #{CLIENT_SECRET}"
+  }
+end
 
 #### CORE INSTALL ####
 
@@ -242,11 +247,6 @@ sudo systemctl stop freeradius.service
 echo -e "\nAdding UE as client"
 echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = "CLIENT_SECRET"\n}" >> /etc/freeradius/3.0/clients.conf
 
-echo -e "\nEnabling EAP-TLS"
-sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
-rm /etc/freeradius/3.0/mods-enabled/eap
-ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
-
 echo -e "Removing old certificates"
 cd /etc/freeradius/3.0/certs
 rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
@@ -258,8 +258,19 @@ sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/
 sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
 sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
 sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
-sed -i "s/private_key_password = .*/private_key_password = "CERT_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
 make
+
+echo -e "\nEnabling EAP-TLS"
+rm /etc/freeradius/3.0/mods-enabled/eap
+sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
+sed -i "s/private_key_password = .*/private_key_password = "CERT_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
+sed -i "s#private_key_file = .*#private_key_file = /etc/freeradius/3.0/certs/server.key#" /etc/freeradius/3.0/mods-available/eap
+sed -i "s#certificate_file = .*#certificate_file = /etc/freeradius/3.0/certs/server.pem#" /etc/freeradius/3.0/mods-available/eap
+sed -i "s#ca_file = .*#ca_file = /etc/freeradius/3.0/certs/ca.pem#" /etc/freeradius/3.0/mods-available/eap
+ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
+
+chmod 640 /etc/freeradius/3.0/certs/*
+chown freerad:freerad /etc/freeradius/3.0/certs/*
 
 echo -e "Copying certificates to shared folder"
 cp /etc/freeradius/3.0/certs/* /certs
@@ -281,24 +292,27 @@ sudo apt update
 sudo apt-get update
 sudo apt-get -y install wpasupplicant
 
+echo -e "Remove IP address"
+sudo ip addr del "NAUN3_IP"/24 dev enp0s8
+
 echo -e "Writing wpa_supplicant configurations"
 echo -e 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
 ap_scan=0
 network={
-    key_mgmt=IEEE8021X
-    eap=TLS
-    ca_cert="/certs/ca.pem"
-    client_cert="/certs/client.pem"
-    private_key="/certs/client.pem"
-    private_key_passwd=""CLIENT_SECRET""
     eapol_flags=0
+    key_mgmt=WPA-EAP
+    eap=TLS
+    identity="user@example.org"
+    ca_cert="/certs/ca.pem"
+    private_key="/certs/client.p12"
+    private_key_passwd="CLIENT_SECRET"
 }' > wpa_supplicant.conf
 
 echo -e "Running wpasupplicant"
 sudo wpa_supplicant -ienp0s8 -Dwired -c./wpa_supplicant.conf &> /log/wpa_supplicant_$(date +%s).log &
 
 SCRIPT
-$naun3_install.gsub!("CLIENT_SECRET", CLIENT_SECRET)
+$naun3_install.gsub!("CLIENT_SECRET", CLIENT_SECRET).gsub!("NAUN3_IP", NAUN3_IP)
 
 #### NAUN3 CONFIG ####
 
@@ -380,6 +394,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "auth_server" do |auth_server|
+
     auth_server.vm.box = "ubuntu/jammy64"
 
     auth_server.vm.provider "virtualbox" do |v|
@@ -410,7 +425,7 @@ Vagrant.configure("2") do |config|
     end
 
     naun3.vm.hostname = "naun3"
-    naun3.vm.network "private_network", ip: NAUN3
+    naun3.vm.network "private_network", ip: NAUN3_IP
 
     # EAP Auth Server Certs
     naun3.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
