@@ -27,18 +27,17 @@ NAUN3_IP = "192.168.60.100"
 ## EAP Auth Server IP
 AUTH_SERVER_IP = "192.168.58.1"
 
-## EAP Auth Server Configurations
-
+## EAP Auth Configurations
+EAP_SECRETS_FILE = "eap-secrets" 
 CERT_PASSWD = ""
 CLIENT_SECRET = ""
 if ARGV.include?("up") && ARGV.include?("auth_server")
   CERT_PASSWD = SecureRandom.alphanumeric(8)
-  CLIENT_SECRET = CERT_PASSWD
-
-  open('eap-secrets', 'w'){ |f|
-    f.puts "Certificate Password: #{CERT_PASSWD}"
-    f.puts "Client Secret: #{CLIENT_SECRET}"
-  }
+  # TESTING
+  CLIENT_SECRET = CERT_PASSWD #SecureRandom.alphanumeric(8)
+  File.write(EAP_SECRETS_FILE, "#{CERT_PASSWD},#{CERT_PASSWD}")
+else
+  CERT_PASSWD, CLIENT_SECRET = File.read(EAP_SECRETS_FILE).split(",") if File.exist?(EAP_SECRETS_FILE)
 end
 
 #### CORE INSTALL ####
@@ -247,11 +246,12 @@ sudo systemctl stop freeradius.service
 echo -e "\nAdding UE as client"
 echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = "CLIENT_SECRET"\n}" >> /etc/freeradius/3.0/clients.conf
 
-echo -e "Removing old certificates"
+echo -e "\nRemoving old certificates"
 cd /etc/freeradius/3.0/certs
-rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
+make destroycerts
+make clean
 
-echo -e "Generating new certificates"
+echo -e "\nGenerating new certificates"
 sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
 sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
 sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
@@ -259,6 +259,9 @@ sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.
 sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
 sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
 make
+
+echo -e "\nVerifying certs"
+make verify
 
 echo -e "\nEnabling EAP-TLS"
 rm /etc/freeradius/3.0/mods-enabled/eap
@@ -275,7 +278,7 @@ chown freerad:freerad /etc/freeradius/3.0/certs/*
 echo -e "Copying certificates to shared folder"
 cp /etc/freeradius/3.0/certs/* /certs
 
-echo -e "\Starting FreeRADIUS in full debugging"
+echo -e "\nStarting FreeRADIUS in full debugging"
 sudo freeradius -X &> /log/freeradius_$(date +%s).log &
 
 SCRIPT
@@ -304,7 +307,7 @@ network={
     eap=TLS
     identity="user@example.org"
     ca_cert="/certs/ca.pem"
-    private_key="/certs/client.p12"
+    private_key="/certs/client.key"
     private_key_passwd="CLIENT_SECRET"
 }' > wpa_supplicant.conf
 
