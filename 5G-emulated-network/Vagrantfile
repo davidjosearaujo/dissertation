@@ -225,8 +225,6 @@ logger_syslog_level=0
 ieee8021x=1 
 own_ip_addr="UE_EAP_IP"
 
-use_pae_group_addr=1
-
 auth_server_addr="AUTH_SERVER_IP"
 auth_server_port=1812
 auth_server_shared_secret="CLIENT_SECRET"" > hostapd.conf
@@ -235,7 +233,7 @@ LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
 cat hostapd.conf > ${LOG_FILE_PATH}
 
 echo -e "\nRunning hostapd"
-sudo ./hostapd -tvdd ./hostapd.conf &> ${LOG_FILE_PATH} &
+sudo ./hostapd -tvdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
 
 SCRIPT
 $ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("AUTH_SERVER_IP", AUTH_SERVER_IP).gsub!("CLIENT_SECRET", CLIENT_SECRET)
@@ -312,12 +310,12 @@ sudo ip addr del "NAUN3_IP"/24 dev enp0s8
 
 echo -e "\nWriting wpa_supplicant configurations"
 echo -e 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
+eapol_version=2
 ap_scan=0
+
 network={
-    eapol_flags=0
-
+    ssid="wired"
     key_mgmt=IEEE8021X
-
     eap=TLS
 
     identity="user@example.org"
@@ -325,6 +323,7 @@ network={
     private_key="/certs/client.p12"
     private_key_passwd="CLIENT_SECRET"
 
+    eapol_flags=0
 }' > wpa_supplicant.conf
 
 LOG_FILE_PATH="/log/wpa_supplicant_$(date +%s).log"
