@@ -13,7 +13,7 @@ GNB_IP_UE = "192.168.57.11"
 ## UE IPs
 UE_IP = "192.168.57.12"
 UE_EAP_IP = "192.168.58.100"
-UE_LAN = "192.168.60.1"
+UE_LAN = "192.168.60.2"
 
 ## UE Configurations
 UE_IMSI = "999700000000001"
@@ -25,7 +25,7 @@ PDU_SESSIONS = "3"
 NAUN3_IP = "192.168.60.100"
 
 ## EAP Auth Server IP
-AUTH_SERVER_IP = "192.168.58.1"
+AUTH_SERVER_IP = "192.168.58.2"
 
 ## EAP Auth Configurations
 EAP_SECRETS_FILE = "eap-secrets" 
@@ -446,7 +446,7 @@ Vagrant.configure("2") do |config|
     end
 
     naun3.vm.hostname = "naun3"
-    naun3.vm.network "private_network", ip: NAUN3_IP
+    naun3.vm.network "private_network", ip: NAUN3_IP, auto_config: false
 
     # EAP Auth Server Certs
     naun3.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
