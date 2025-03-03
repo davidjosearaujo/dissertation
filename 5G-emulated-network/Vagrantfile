@@ -29,15 +29,15 @@ AUTH_SERVER_IP = "192.168.58.2"
 
 ## EAP Auth Configurations
 EAP_SECRETS_FILE = "eap-secrets" 
-CERT_PASSWD = ""
-CLIENT_SECRET = ""
-if ARGV.include?("up") && ARGV.include?("auth_server")
-  CERT_PASSWD = SecureRandom.alphanumeric(8)
-  # TESTING
-  CLIENT_SECRET = CERT_PASSWD #SecureRandom.alphanumeric(8)
-  File.write(EAP_SECRETS_FILE, "#{CERT_PASSWD},#{CERT_PASSWD}")
-else
-  CERT_PASSWD, CLIENT_SECRET = File.read(EAP_SECRETS_FILE).split(",") if File.exist?(EAP_SECRETS_FILE)
+CERT_CA_PASSWD = SecureRandom.alphanumeric(8)
+CERT_SERVER_PASSWD = SecureRandom.alphanumeric(8)
+CERT_CLIENT_PASSWD = SecureRandom.alphanumeric(8)
+CLIENT_SECRET = SecureRandom.alphanumeric(8)
+
+if ARGV.include?("up") && (ARGV.include?("auth_server") || !File.exist?(EAP_SECRETS_FILE))
+  File.write(EAP_SECRETS_FILE, "#{CERT_CA_PASSWD},#{CERT_SERVER_PASSWD},#{CERT_CLIENT_PASSWD},#{CLIENT_SECRET}")
+elsif File.exist?(EAP_SECRETS_FILE)
+  CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET, = File.read(EAP_SECRETS_FILE).split(",")
 end
 
 #### CORE INSTALL ####
@@ -233,7 +233,7 @@ LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
 cat hostapd.conf > ${LOG_FILE_PATH}
 
 echo -e "\nRunning hostapd"
-sudo ./hostapd -tvdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
+sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
 
 SCRIPT
 $ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("AUTH_SERVER_IP", AUTH_SERVER_IP).gsub!("CLIENT_SECRET", CLIENT_SECRET)
@@ -262,12 +262,12 @@ make destroycerts
 make clean
 
 echo -e "\nGenerating new certificates"
-sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
-sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
-sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
-sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
-sed -i "s/input_password.*/input_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
-sed -i "s/output_password.*/output_password = "CERT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
+sed -i "s/input_password.*/input_password = "CERT_CA_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
+sed -i "s/output_password.*/output_password = "CERT_CA_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
+sed -i "s/input_password.*/input_password = "CERT_SERVER_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
+sed -i "s/output_password.*/output_password = "CERT_SERVER_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
+sed -i "s/input_password.*/input_password = "CERT_CLIENT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
+sed -i "s/output_password.*/output_password = "CERT_CLIENT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
 make
 
 echo -e "\nVerifying certs"
@@ -276,7 +276,7 @@ make verify
 echo -e "\nEnabling EAP-TLS"
 rm /etc/freeradius/3.0/mods-enabled/eap
 sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
-sed -i "s/private_key_password = .*/private_key_password = "CERT_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
+sed -i "s/private_key_password = .*/private_key_password = "CERT_SERVER_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
 sed -i "s#private_key_file = .*#private_key_file = /etc/freeradius/3.0/certs/server.key#" /etc/freeradius/3.0/mods-available/eap
 sed -i "s#certificate_file = .*#certificate_file = /etc/freeradius/3.0/certs/server.pem#" /etc/freeradius/3.0/mods-available/eap
 sed -i "s#ca_file = .*#ca_file = /etc/freeradius/3.0/certs/ca.pem#" /etc/freeradius/3.0/mods-available/eap
@@ -292,7 +292,7 @@ echo -e "\nStarting FreeRADIUS in full debugging"
 sudo freeradius -X -xx &>> /log/freeradius_$(date +%s).log &
 
 SCRIPT
-$auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("CERT_PASSWD", CERT_PASSWD).gsub!("CLIENT_SECRET", CLIENT_SECRET)
+$auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("CERT_CA_PASSWD", CERT_CA_PASSWD).gsub!("CERT_SERVER_PASSWD", CERT_SERVER_PASSWD).gsub!("CERT_CLIENT_PASSWD", CERT_CLIENT_PASSWD).gsub!("CLIENT_SECRET", CLIENT_SECRET)
 
 #### EAP AUTH SERVER CONFIG ####
 
@@ -321,7 +321,7 @@ network={
     identity="user@example.org"
     ca_cert="/certs/ca.pem"
     private_key="/certs/client.p12"
-    private_key_passwd="CLIENT_SECRET"
+    private_key_passwd="CERT_CLIENT_PASSWD"
 
     eapol_flags=0
 }' > wpa_supplicant.conf
@@ -333,7 +333,7 @@ echo -e "\nRunning wpa_supplicant"
 sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
 
 SCRIPT
-$naun3_install.gsub!("CLIENT_SECRET", CLIENT_SECRET).gsub!("NAUN3_IP", NAUN3_IP)
+$naun3_install.gsub!("CERT_CLIENT_PASSWD", CERT_CLIENT_PASSWD).gsub!("NAUN3_IP", NAUN3_IP)
 
 #### NAUN3 CONFIG ####
 
