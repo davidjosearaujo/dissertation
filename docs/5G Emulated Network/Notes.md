@@ -108,5 +108,7 @@ auth_server_shared_secret="CLIENT_SECRET"
 - [x] Copy the generated `ca.pem` and `client.pem` file
 > *Note that the password of the private key is ‘whatever’ by default (if you haven’t changed the configurations by editing /etc/freeradius/3.0/certs/\*.cnf).*
 ## Copy certificate to NAUN3
-- [ ] Disable IP on the NAUN3
-- [ ] Install `ca.crt`, `client.crt` and `client.key`
+- [x] Disable IP on the NAUN3
+- [x] Install `ca.crt`, `client.crt` and `client.key`
+## Enabe `dnsmasq` as DHCP server on the UE
+

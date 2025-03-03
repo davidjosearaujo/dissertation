@@ -1,0 +1,940 @@
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
+eapol_version=2
+ap_scan=0
+
+network={
+    ssid="wired"
+    key_mgmt=IEEE8021X
+    eap=TLS
+
+    identity="user@example.org"
+    ca_cert="/certs/ca.pem"
+    private_key="/certs/client.p12"
+    private_key_passwd="6PFuuc69"
+
+    eapol_flags=0
+}
+1741011294.289995: wpa_supplicant v2.10
+1741011294.290363: random: getrandom() support available
+1741011294.290413: Successfully initialized wpa_supplicant
+1741011294.290471: Initializing interface 'enp0s8' conf './wpa_supplicant.conf' driver 'wired' ctrl_interface 'N/A' bridge 'N/A'
+1741011294.290524: Configuration file './wpa_supplicant.conf' -> '/home/vagrant/./wpa_supplicant.conf'
+1741011294.290568: Reading configuration file '/home/vagrant/./wpa_supplicant.conf'
+1741011294.290627: ctrl_interface='DIR=/var/run/wpa_supplicant GROUP=vagrant'
+1741011294.290674: eapol_version=2
+1741011294.290716: ap_scan=0
+1741011294.290758: Line: 5 - start of a new network block
+1741011294.290801: ssid - hexdump_ascii(len=5):
+     77 69 72 65 64                                    wired           
+1741011294.290895: key_mgmt: 0x8
+1741011294.290939: eap methods - hexdump(len=16): 00 00 00 00 0d 00 00 00 00 00 00 00 00 00 00 00
+1741011294.290982: identity - hexdump_ascii(len=16):
+     75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67   user@example.org
+1741011294.291066: ca_cert - hexdump_ascii(len=13):
+     2f 63 65 72 74 73 2f 63 61 2e 70 65 6d            /certs/ca.pem   
+1741011294.291151: private_key - hexdump_ascii(len=17):
+     2f 63 65 72 74 73 2f 63 6c 69 65 6e 74 2e 70 31   /certs/client.p1
+     32                                                2               
+1741011294.291276: private_key_passwd - hexdump_ascii(len=8):
+     36 50 46 75 75 63 36 39                           6PFuuc69        
+1741011294.291365: eapol_flags=0 (0x0)
+1741011294.291411: Priority group 0
+1741011294.291452:    id=0 ssid='wired'
+1741011294.306636: driver_wired_init_common: Added multicast membership with packet socket
+1741011294.306978: Add interface enp0s8 to a new radio N/A
+1741011294.307143: enp0s8: Own MAC address: 08:00:27:3b:09:f5
+1741011294.307196: enp0s8: RSN: flushing PMKID list in the driver
+1741011294.307262: enp0s8: Setting scan request: 0.100000 sec
+1741011294.307316: TDLS: TDLS operation not supported by driver
+1741011294.307360: TDLS: Driver uses internal link setup
+1741011294.307400: TDLS: Driver does not support TDLS channel switching
+1741011294.308704: enp0s8: WPS: UUID based on MAC address: 54cc39d4-2a4d-5a28-bc8c-035bea5f5a88
+1741011294.311414: ENGINE: Loading builtin engines
+1741011294.311899: ENGINE: Loading builtin engines
+1741011294.312097: EAPOL: SUPP_PAE entering state DISCONNECTED
+1741011294.312160: EAPOL: Supplicant port status: Unauthorized
+1741011294.312270: EAPOL: KEY_RX entering state NO_KEY_RECEIVE
+1741011294.312328: EAPOL: SUPP_BE entering state INITIALIZE
+1741011294.312379: EAP: EAP entering state DISABLED
+1741011294.312550: ctrl_interface_group=1000 (from group name 'vagrant')
+1741011294.312673: MBO: Update non-preferred channels, non_pref_chan=N/A
+1741011294.312736: enp0s8: Added interface enp0s8
+1741011294.312770: enp0s8: State: DISCONNECTED -> DISCONNECTED
+1741011294.407477: EAPOL: External notification - EAP success=0
+1741011294.407665: EAPOL: External notification - EAP fail=0
+1741011294.407710: EAPOL: External notification - portControl=Auto
+1741011294.407747: enp0s8: Already associated with a configured network - generating associated event
+1741011294.407806: enp0s8: Event ASSOC (0) received
+1741011294.407853: enp0s8: Association info event
+1741011294.407912: enp0s8: State: DISCONNECTED -> ASSOCIATED
+1741011294.407964: enp0s8: Associated to a new BSS: BSSID=01:80:c2:00:00:03
+1741011294.408008: enp0s8: Select network based on association information
+1741011294.408041: enp0s8: Network configuration found for the current AP
+1741011294.408075: enp0s8: WPA: clearing AP WPA IE
+1741011294.408105: enp0s8: WPA: clearing AP RSN IE
+1741011294.408136: enp0s8: WPA: clearing AP RSNXE
+1741011294.408167: enp0s8: WPA: clearing own WPA/RSN IE
+1741011294.408270: enp0s8: RSN: clearing own RSNXE
+1741011294.408304: enp0s8: Failed to get scan results
+1741011294.408335: EAPOL: External notification - EAP success=0
+1741011294.408368: EAPOL: External notification - EAP fail=0
+1741011294.408398: EAPOL: External notification - portControl=Auto
+1741011294.408431: enp0s8: Associated with 01:80:c2:00:00:03
+1741011294.408462: enp0s8: WPA: Association event - clear replay counter
+1741011294.408513: enp0s8: WPA: Clear old PTK
+1741011294.408554: TDLS: Remove peers on association
+1741011294.408614: EAPOL: External notification - portEnabled=0
+1741011294.408653: EAPOL: External notification - portValid=0
+1741011294.408683: EAPOL: External notification - portEnabled=1
+1741011294.408713: EAPOL: SUPP_PAE entering state CONNECTING
+1741011294.408743: EAPOL: SUPP_BE entering state IDLE
+1741011294.408772: EAP: EAP entering state INITIALIZE
+1741011294.408802: EAP: EAP entering state IDLE
+1741011294.408833: enp0s8: Cancelling scan request
+1741011294.408866: enp0s8: CTRL-EVENT-SUBNET-STATUS-UPDATE status=0
+1741011296.314119: EAPOL: startWhen --> 0
+1741011296.314273: EAPOL: SUPP_PAE entering state CONNECTING
+1741011296.314314: EAPOL: txStart
+1741011296.314354: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.314394: TX EAPOL - hexdump(len=4): 02 01 00 00
+1741011296.326485: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741011296.326613: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.326678: RX EAPOL - hexdump(len=46): 02 00 00 05 01 45 00 05 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741011296.326746: EAPOL: Received EAP-Packet frame
+1741011296.326805: EAPOL: SUPP_PAE entering state RESTART
+1741011296.326893: EAP: EAP entering state INITIALIZE
+1741011296.326995: EAP: EAP entering state IDLE
+1741011296.327045: EAPOL: SUPP_PAE entering state AUTHENTICATING
+1741011296.327090: EAPOL: SUPP_BE entering state REQUEST
+1741011296.327137: EAPOL: getSuppRsp
+1741011296.327176: EAP: EAP entering state RECEIVED
+1741011296.327231: EAP: Received EAP-Request id=69 method=1 vendor=0 vendorMethod=0
+1741011296.327273: EAP: EAP entering state IDENTITY
+1741011296.327312: enp0s8: CTRL-EVENT-EAP-STARTED EAP authentication started
+1741011296.327353: EAP: Status notification: started (param=)
+1741011296.327399: EAP: EAP-Request Identity data - hexdump_ascii(len=0):
+1741011296.327435: EAP: using real identity - hexdump_ascii(len=16):
+     75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67   user@example.org
+1741011296.327499: EAP: EAP entering state SEND_RESPONSE
+1741011296.327533: EAP: EAP entering state IDLE
+1741011296.327563: EAPOL: SUPP_BE entering state RESPONSE
+1741011296.327594: EAPOL: txSuppRsp
+1741011296.327625: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.327656: TX EAPOL - hexdump(len=25): 02 00 00 15 02 45 00 15 01 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67
+1741011296.327714: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.338519: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741011296.338650: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.338695: RX EAPOL - hexdump(len=46): 02 00 00 06 01 46 00 06 0d 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741011296.338735: EAPOL: Received EAP-Packet frame
+1741011296.338770: EAPOL: SUPP_BE entering state REQUEST
+1741011296.338807: EAPOL: getSuppRsp
+1741011296.338841: EAP: EAP entering state RECEIVED
+1741011296.338890: EAP: Received EAP-Request id=70 method=13 vendor=0 vendorMethod=0
+1741011296.338925: EAP: EAP entering state GET_METHOD
+1741011296.338959: enp0s8: CTRL-EVENT-EAP-PROPOSED-METHOD vendor=0 method=13
+1741011296.338996: EAP: Status notification: accept proposed method (param=TLS)
+1741011296.339031: EAP: Initialize selected EAP method: vendor 0 method 13 (TLS)
+1741011296.339077: TLS: using phase1 config options
+1741011296.340374: TLS: Trusted root certificate(s) loaded
+1741011296.346721: TLS: Successfully parsed PKCS12 data
+1741011296.346786: TLS: Got certificate from PKCS12: subject='/C=FR/ST=Radius/O=Example Inc./CN=user@example.org/emailAddress=user@example.org'
+1741011296.346890: TLS: Got private key from PKCS12
+1741011296.346929: OpenSSL: Reading PKCS#12 file --> OK
+1741011296.346961: SSL: Private key loaded successfully
+1741011296.346996: enp0s8: CTRL-EVENT-EAP-METHOD EAP vendor 0 method 13 (TLS) selected
+1741011296.347035: EAP: EAP entering state METHOD
+1741011296.347068: SSL: Received packet(len=6) - Flags 0x20
+1741011296.347103: EAP-TLS: Start
+1741011296.347146: SSL: (where=0x10 ret=0x1)
+1741011296.347204: SSL: (where=0x1001 ret=0x1)
+1741011296.347238: SSL: SSL_connect:before SSL initialization
+1741011296.347303: OpenSSL: TX ver=0x301 content_type=256 (TLS header info/)
+1741011296.347337: OpenSSL: Message - hexdump(len=5): 16 03 01 00 b3
+1741011296.347370: OpenSSL: TX ver=0x303 content_type=22 (handshake/client hello)
+1741011296.347401: OpenSSL: Message - hexdump(len=179): 01 00 00 af 03 03 c1 d7 ae 09 ca 20 32 74 fe ce 93 9b 96 10 c2 63 56 29 41 c6 5a 06 70 5c 7f 17 3f ce d9 81 78 1e 00 00 38 c0 2c c0 30 00 9f cc a9 cc a8 cc aa c0 2b c0 2f 00 9e c0 24 c0 28 00 6b c0 23 c0 27 00 67 c0 0a c0 14 00 39 c0 09 c0 13 00 33 00 9d 00 9c 00 3d 00 3c 00 35 00 2f 00 ff 01 00 00 4e 00 0b 00 04 03 00 01 02 00 0a 00 0c 00 0a 00 1d 00 17 00 1e 00 19 00 18 00 16 00 00 00 17 00 00 00 0d 00 2a 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02
+1741011296.347448: SSL: (where=0x1001 ret=0x1)
+1741011296.347482: SSL: SSL_connect:SSLv3/TLS write client hello
+1741011296.347513: SSL: (where=0x1002 ret=0xffffffff)
+1741011296.347544: SSL: SSL_connect:error in SSLv3/TLS write client hello
+1741011296.347576: SSL: SSL_connect - want more data
+1741011296.347606: SSL: 184 bytes pending from ssl_out
+1741011296.347638: SSL: Using TLS version TLSv1.2
+1741011296.347669: SSL: 184 bytes left to be sent out (of total 184 bytes)
+1741011296.347699: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970c4d90
+1741011296.347731: EAP: EAP entering state SEND_RESPONSE
+1741011296.347762: EAP: EAP entering state IDLE
+1741011296.347793: EAPOL: SUPP_BE entering state RESPONSE
+1741011296.347819: EAPOL: txSuppRsp
+1741011296.347845: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.347871: TX EAPOL - hexdump(len=194): 02 00 00 be 02 46 00 be 0d 00 16 03 01 00 b3 01 00 00 af 03 03 c1 d7 ae 09 ca 20 32 74 fe ce 93 9b 96 10 c2 63 56 29 41 c6 5a 06 70 5c 7f 17 3f ce d9 81 78 1e 00 00 38 c0 2c c0 30 00 9f cc a9 cc a8 cc aa c0 2b c0 2f 00 9e c0 24 c0 28 00 6b c0 23 c0 27 00 67 c0 0a c0 14 00 39 c0 09 c0 13 00 33 00 9d 00 9c 00 3d 00 3c 00 35 00 2f 00 ff 01 00 00 4e 00 0b 00 04 03 00 01 02 00 0a 00 0c 00 0a 00 1d 00 17 00 1e 00 19 00 18 00 16 00 00 00 17 00 00 00 0d 00 2a 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02
+1741011296.347932: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.361831: l2_packet_receive: src=08:00:27:cf:14:fc len=1008
+1741011296.361954: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.362009: RX EAPOL - hexdump(len=1008): 02 00 03 ec 01 47 03 ec 0d c0 00 00 0b 97 16 03 03 00 3d 02 00 00 39 03 03 08 9a ad e8 69 fd 7b 94 95 0a c5 b7 ff d6 96 94 99 95 38 99 25 63 4a 87 2f 2b 3a 84 d6 dc 71 1a 00 c0 30 00 00 11 ff 01 00 01 00 00 0b 00 04 03 00 01 02 00 17 00 00 16 03 03 09 45 0b 00 09 41 00 09 3e 00 04 3a 30 82 04 36 30 82 03 1e a0 03 02 01 02 02 01 01 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 7c 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 23 30 21 06 03 55 04 03 0c 1a 45 78 61 6d 70 6c 65 20 53 65 72 76 65 72 20 43 65 72 74 69 66 69 63 61 74 65 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 ad 13 a1 63 7b e4 0c 49 e2 f7 93 a3 43 7b 41 1b df cd d5 e7 7c d8 10 07 44 4f a0 f4 0a 77 ce 08 26 86 ce 8e 77 c7 03 60 f7 1f 13 f2 80 54 be 7f 56 f6 9d e3 0b c8 ce 58 75 be e5 42 3a b7 6e e8 8f 59 ba 9c 6a 7b 41 ec f7 aa 1e 6f 5d 7a 86 c4 ff 62 95 a6 60 0a 9a 97 1f 9c 88 10 41 63 bd 43 8d c7 58 b6 cb 66 51 b5 ae 40 ce 60 e7 a6 eb b1 4d bf 32 c0 9d 90 e1 e2 55 ed 89 85 86 4d 06 fb b7 32 05 e2 4d 38 dc a3 c5 1e 4b dc f8 6a 46 00 6c 9f 80 54 eb b7 e2 0e c7 d5 b4 2e 13 9e a4 ce ab 58 ff 65 56 e0 e1 53 c1 5c 51 84 ca b4 2a 11 2e ee 53 65 9c 59 b1 f1 aa 69 4a 1e 77 43 cc 51 83 e8 be b3 d0 9a 3f 03 f4 a8 c0 09 6d 9f 40 90 29 59 d3 95 c9 8d 30 fc 49 dc ae 22 cb b2 17 87 b3 cc ec b4 19 c8 fe 32 a9 25 c1 79 f9 d2 87 c1 a9 b7 e1 85 92 c9 3c 92 12 e2 f8 1f b0 c9 5e 25 02 03 01 00 01 a3 81 aa 30 81 a7 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 01 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 18 06 03 55 1d 20 04 11 30 0f 30 0d 06 0b 2b 06 01 04 01 82 be 68 01 03 02 30 1d 06 03 55 1d 0e 04 16 04 14 c0 b0 27 40 4b d3 e1 44 0e 3c a2 f8 71 a7 b2 b9 c4 85 73 6e 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 a9 2a cd 02 6d a8 c8 25 85 a3 cd 16 42 1f a9 77 5c 53 cf 13 fc 97 a4 84 f7 74 7c 05 29 21 35 70 7e 78 64 02 e2 8d 15 94 23 af 83 f8 12 4f 2d 07 bc 33 ac db 7b a9 e1 25 9d e1 72 d2 0b df f4 d9 59 af 83 a2 c9 d6 b3 ce 76 2b e7 25 0e 31 51 04 03 15 cc 0f 69 4e 1d
+1741011296.362195: EAPOL: Received EAP-Packet frame
+1741011296.362257: EAPOL: SUPP_BE entering state REQUEST
+1741011296.362314: EAPOL: getSuppRsp
+1741011296.362351: EAP: EAP entering state RECEIVED
+1741011296.362398: EAP: Received EAP-Request id=71 method=13 vendor=0 vendorMethod=0
+1741011296.362437: EAP: EAP entering state METHOD
+1741011296.362468: SSL: Received packet(len=1004) - Flags 0xc0
+1741011296.362493: SSL: TLS Message Length: 2967
+1741011296.362530: SSL: Need 1973 bytes more input data
+1741011296.362556: SSL: Building ACK (type=13 id=71 ver=0)
+1741011296.362589: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970c3360
+1741011296.362615: EAP: EAP entering state SEND_RESPONSE
+1741011296.362648: EAP: EAP entering state IDLE
+1741011296.362692: EAPOL: SUPP_BE entering state RESPONSE
+1741011296.362739: EAPOL: txSuppRsp
+1741011296.362786: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.362831: TX EAPOL - hexdump(len=10): 02 00 00 06 02 47 00 06 0d 00
+1741011296.362886: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.371546: l2_packet_receive: src=08:00:27:cf:14:fc len=1008
+1741011296.371596: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.371624: RX EAPOL - hexdump(len=1008): 02 00 03 ec 01 48 03 ec 0d c0 00 00 0b 97 77 33 7c bd 67 8b 38 7f 08 35 37 aa 4e 3a 5f ef 0c e3 05 c0 ad 8e a1 08 4b f4 70 72 1d 41 2e ef 71 aa f2 37 df f3 ed c2 d2 6f 2d 4a 5e f4 62 cf f5 f7 51 ef 8d 71 a7 9b 73 ee f8 e7 3d ec e6 69 33 1b ef cc 27 28 78 79 73 7a 7a 75 f6 fc 16 9b 22 12 46 7b 2d 3a 2b ba e3 d2 7b 27 b2 34 57 4a 9d 67 bc cf 31 94 8a 66 76 7c 45 80 5c e1 25 53 0e b3 e9 de c8 45 3e 49 17 61 d1 c7 33 77 7e fc ae 5e 82 00 1d b8 d4 7c 56 db c1 89 4d c6 57 a1 11 59 98 3d 2f c1 c4 09 ea 5c 36 dd da 37 d4 66 d5 12 58 ad 6f d9 07 bd dd 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45
+1741011296.371770: EAPOL: Received EAP-Packet frame
+1741011296.371802: EAPOL: SUPP_BE entering state REQUEST
+1741011296.371829: EAPOL: getSuppRsp
+1741011296.371860: EAP: EAP entering state RECEIVED
+1741011296.371890: EAP: Received EAP-Request id=72 method=13 vendor=0 vendorMethod=0
+1741011296.371922: EAP: EAP entering state METHOD
+1741011296.371948: SSL: Received packet(len=1004) - Flags 0xc0
+1741011296.371979: SSL: TLS Message Length: 2967
+1741011296.372007: SSL: Need 979 bytes more input data
+1741011296.372038: SSL: Building ACK (type=13 id=72 ver=0)
+1741011296.372066: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970a0500
+1741011296.372098: EAP: EAP entering state SEND_RESPONSE
+1741011296.372126: EAP: EAP entering state IDLE
+1741011296.372157: EAPOL: SUPP_BE entering state RESPONSE
+1741011296.372185: EAPOL: txSuppRsp
+1741011296.372209: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.372233: TX EAPOL - hexdump(len=10): 02 00 00 06 02 48 00 06 0d 00
+1741011296.372267: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.382169: l2_packet_receive: src=08:00:27:cf:14:fc len=993
+1741011296.382306: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.382358: RX EAPOL - hexdump(len=993): 02 00 03 dd 01 49 03 dd 0d 80 00 00 0b 97 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00 16 03 03 01 2c 0c 00 01 28 03 00 1d 20 78 a2 76 4d 44 ec f1 5f 02 4f e3 23 73 9e 9a 79 68 36 c8 93 bc 27 6c 2f b0 db 31 63 5c 9c f2 36 08 04 01 00 a8 87 37 db 01 f5 6f d9 cc 7e 5a 58 13 16 73 3a 03 63 0a 20 3b 74 2e f9 42 0f 2c 48 2a 62 b3 a2 52 0d 4a d3 e0 26 68 6c f0 82 5d 04 ed c5 07 14 19 33 68 50 3b c2 16 41 29 69 16 02 2d 3d a1 60 f4 b0 ec b0 fe 8a 55 84 a9 a6 66 e0 26 4b c1 53 87 4d cf 8b 69 09 f8 22 ce 68 ba 51 9a da 31 51 4f 15 d2 bc e3 dc d6 c9 15 e2 f4 5b 44 74 9e a0 76 ce 4a 5d ba c0 92 c6 e7 eb 10 f3 06 a3 81 4c d6 8d 6b 64 98 e7 4c b2 92 f2 71 89 ed 41 9e 6c 05 c1 54 48 3f 62 39 52 f9 b0 1e fa 46 60 68 10 4d f1 29 ef 62 bc f9 64 91 78 0b 5a 0f 95 62 ec c3 5d d4 ca 3d c4 35 63 1c ab c0 2c 77 bf 70 b1 25 6e ce ef aa 58 84 1d 7d 55 b2 14 12 78 89 29 d5 64 85 9e 7d 40 20 85 92 a9 8f 26 b6 a6 af eb 15 00 cb 5d c0 e9 f0 e4 21 e6 30 8c a2 25 98 68 77 d9 42 70 8b 26 39 03 5c 90 49 32 f7 5f dd 90 16 03 03 00 cc 0d 00 00 c8 03 01 02 40 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02 00 98 00 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 16 03 03 00 04 0e 00 00 00
+1741011296.382521: EAPOL: Received EAP-Packet frame
+1741011296.382568: EAPOL: SUPP_BE entering state REQUEST
+1741011296.382609: EAPOL: getSuppRsp
+1741011296.382644: EAP: EAP entering state RECEIVED
+1741011296.382721: EAP: Received EAP-Request id=73 method=13 vendor=0 vendorMethod=0
+1741011296.382790: EAP: EAP entering state METHOD
+1741011296.382877: SSL: Received packet(len=989) - Flags 0x80
+1741011296.382930: SSL: TLS Message Length: 2967
+1741011296.382996: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741011296.383058: OpenSSL: Message - hexdump(len=5): 16 03 03 00 3d
+1741011296.383104: SSL: (where=0x1001 ret=0x1)
+1741011296.383145: SSL: SSL_connect:SSLv3/TLS write client hello
+1741011296.383190: OpenSSL: RX ver=0x303 content_type=22 (handshake/server hello)
+1741011296.383231: OpenSSL: Message - hexdump(len=61): 02 00 00 39 03 03 08 9a ad e8 69 fd 7b 94 95 0a c5 b7 ff d6 96 94 99 95 38 99 25 63 4a 87 2f 2b 3a 84 d6 dc 71 1a 00 c0 30 00 00 11 ff 01 00 01 00 00 0b 00 04 03 00 01 02 00 17 00 00
+1741011296.383276: OpenSSL: Server selected cipher suite 0xc030
+1741011296.383323: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741011296.383364: OpenSSL: Message - hexdump(len=5): 16 03 03 09 45
+1741011296.383405: SSL: (where=0x1001 ret=0x1)
+1741011296.383444: SSL: SSL_connect:SSLv3/TLS read server hello
+1741011296.383486: OpenSSL: RX ver=0x303 content_type=22 (handshake/certificate)
+1741011296.383524: OpenSSL: Message - hexdump(len=2373): 0b 00 09 41 00 09 3e 00 04 3a 30 82 04 36 30 82 03 1e a0 03 02 01 02 02 01 01 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 7c 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 23 30 21 06 03 55 04 03 0c 1a 45 78 61 6d 70 6c 65 20 53 65 72 76 65 72 20 43 65 72 74 69 66 69 63 61 74 65 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 ad 13 a1 63 7b e4 0c 49 e2 f7 93 a3 43 7b 41 1b df cd d5 e7 7c d8 10 07 44 4f a0 f4 0a 77 ce 08 26 86 ce 8e 77 c7 03 60 f7 1f 13 f2 80 54 be 7f 56 f6 9d e3 0b c8 ce 58 75 be e5 42 3a b7 6e e8 8f 59 ba 9c 6a 7b 41 ec f7 aa 1e 6f 5d 7a 86 c4 ff 62 95 a6 60 0a 9a 97 1f 9c 88 10 41 63 bd 43 8d c7 58 b6 cb 66 51 b5 ae 40 ce 60 e7 a6 eb b1 4d bf 32 c0 9d 90 e1 e2 55 ed 89 85 86 4d 06 fb b7 32 05 e2 4d 38 dc a3 c5 1e 4b dc f8 6a 46 00 6c 9f 80 54 eb b7 e2 0e c7 d5 b4 2e 13 9e a4 ce ab 58 ff 65 56 e0 e1 53 c1 5c 51 84 ca b4 2a 11 2e ee 53 65 9c 59 b1 f1 aa 69 4a 1e 77 43 cc 51 83 e8 be b3 d0 9a 3f 03 f4 a8 c0 09 6d 9f 40 90 29 59 d3 95 c9 8d 30 fc 49 dc ae 22 cb b2 17 87 b3 cc ec b4 19 c8 fe 32 a9 25 c1 79 f9 d2 87 c1 a9 b7 e1 85 92 c9 3c 92 12 e2 f8 1f b0 c9 5e 25 02 03 01 00 01 a3 81 aa 30 81 a7 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 01 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 18 06 03 55 1d 20 04 11 30 0f 30 0d 06 0b 2b 06 01 04 01 82 be 68 01 03 02 30 1d 06 03 55 1d 0e 04 16 04 14 c0 b0 27 40 4b d3 e1 44 0e 3c a2 f8 71 a7 b2 b9 c4 85 73 6e 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 a9 2a cd 02 6d a8 c8 25 85 a3 cd 16 42 1f a9 77 5c 53 cf 13 fc 97 a4 84 f7 74 7c 05 29 21 35 70 7e 78 64 02 e2 8d 15 94 23 af 83 f8 12 4f 2d 07 bc 33 ac db 7b a9 e1 25 9d e1 72 d2 0b df f4 d9 59 af 83 a2 c9 d6 b3 ce 76 2b e7 25 0e 31 51 04 03 15 cc 0f 69 4e 1d 77 33 7c bd 67 8b 38 7f 08 35 37 aa 4e 3a 5f ef 0c e3 05 c0 ad 8e a1 08 4b f4 70 72 1d 41 2e ef 71 aa f2 37 df f3 ed c2 d2 6f 2d 4a 5e f4 62 cf f5 f7 51 ef 8d 71 a7 9b 73 ee f8 e7 3d ec e6 69 33 1b ef cc 27 28 78 79 73 7a 7a 75 f6 fc 16 9b 22 12 46 7b 2d 3a 2b ba e3 d2 7b 27 b2 34 57 4a 9d 67 bc cf 31 94 8a 66 76 7c 45 80 5c e1 25 53 0e b3 e9 de c8 45 3e 49 17 61 d1 c7 33 77 7e fc ae 5e 82 00 1d b8 d4 7c 56 db c1 89 4d c6 57 a1 11 59 98 3d 2f c1 c4 09 ea 5c 36 dd da 37 d4 66 d5 12 58 ad 6f d9 07 bd dd 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00
+1741011296.386731: OpenSSL: Peer certificate - depth 1
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            5f:94:ac:48:a7:4c:ba:bc:4b:de:9d:6b:bd:f0:38:e8:19:4c:70:c1
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=FR, ST=Radius, L=Somewhere, O=Example Inc./emailAddress=admin@example.org, CN=Example Certificate Authority
+        Validity
+            Not Before: Mar  3 12:46:36 2025 GMT
+            Not After : May  2 12:46:36 2025 GMT
+        Subject: C=FR, ST=Radius, L=Somewhere, O=Example Inc./emailAddress=admin@example.org, CN=Example Certificate Authority
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:b2:2c:84:9c:5c:32:93:02:9a:b6:27:39:54:4e:
+                    b3:88:27:f3:05:d4:93:5b:29:32:c1:d5:6e:0f:48:
+                    67:51:40:6c:af:64:8c:e1:28:91:e8:67:b2:59:9b:
+                    05:1d:02:c4:16:5a:c3:14:bb:3a:8d:2b:8a:47:86:
+                    e8:29:78:0f:20:b9:35:ce:79:2b:43:bd:be:ac:45:
+                    75:9f:35:2b:a7:c1:a2:bf:9c:8e:33:d4:70:10:04:
+                    c1:89:f8:0d:c1:25:7e:43:2f:cb:87:9d:f7:f2:cf:
+                    f3:ba:b5:d8:47:d4:ba:79:11:55:c0:9f:87:3a:74:
+                    8e:9f:3f:88:7a:47:07:0f:4a:41:86:23:ab:a0:57:
+                    00:73:2c:6f:e8:89:8a:4d:c7:14:cc:00:66:5c:27:
+                    24:e1:f0:a6:84:64:ed:aa:09:89:01:a8:5e:07:ad:
+                    ff:4b:43:d7:03:99:cd:84:ff:4f:3f:c9:e3:1f:3a:
+                    bf:8b:02:7b:29:42:69:56:ba:e4:af:e0:b1:fa:7f:
+                    63:92:c3:70:5a:d5:6d:99:44:f6:f8:c7:19:23:b1:
+                    89:64:76:39:4b:21:ec:62:9b:1e:e8:ed:b1:79:0b:
+                    9f:19:cc:8e:1a:5a:73:03:2a:8f:fb:76:6d:a7:d7:
+                    aa:35:89:c2:29:4b:8d:59:61:23:3f:39:77:45:e0:
+                    57:7f
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                6B:16:05:74:2C:90:AE:E1:F8:68:7B:49:7E:66:D1:CE:96:D7:11:35
+            X509v3 Authority Key Identifier: 
+                keyid:6B:16:05:74:2C:90:AE:E1:F8:68:7B:49:7E:66:D1:CE:96:D7:11:35
+                DirName:/C=FR/ST=Radius/L=Somewhere/O=Example Inc./emailAddress=admin@example.org/CN=Example Certificate Authority
+                serial:5F:94:AC:48:A7:4C:BA:BC:4B:DE:9D:6B:BD:F0:38:E8:19:4C:70:C1
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 CRL Distribution Points: 
+                Full Name:
+                  URI:http://www.example.org/example_ca.crl
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        24:0e:eb:d4:78:ca:e1:8e:97:bb:d4:70:19:42:5f:ff:55:08:
+        8f:75:e2:c6:87:6a:8d:cc:34:2b:4f:17:2b:00:82:cc:12:66:
+        54:6c:f9:39:2e:af:79:a1:d7:2c:07:c8:43:41:22:5c:b5:3a:
+        e6:18:b3:c7:60:06:e2:98:e3:e3:70:3d:43:54:3e:50:c0:66:
+        64:d9:7e:4c:5b:9f:22:63:f9:82:ad:3e:f1:ae:6f:ee:a4:09:
+        63:66:db:5b:d6:b3:c7:b9:07:7f:f2:42:68:43:29:f9:cb:3d:
+        3e:8a:95:09:61:65:4d:ae:9a:e8:36:9a:15:6f:6e:a1:8a:7b:
+        1c:f6:88:c3:cb:08:2d:f1:fe:25:f3:31:27:2f:a0:f4:10:97:
+        2b:30:58:cd:ef:51:8d:5f:7f:2e:27:20:91:26:32:5b:ed:5e:
+        a0:e2:0d:df:61:f8:70:3f:15:8d:a0:ac:74:b3:a5:7d:d1:30:
+        9e:ce:a0:87:83:6e:96:3b:25:27:4a:2c:a1:e9:fe:60:be:7e:
+        43:ba:d9:5b:e2:e2:25:b0:ea:9a:a0:c5:59:f9:5c:56:e5:02:
+        8f:66:43:7e:e5:c4:de:16:5e:32:c7:8f:08:00:5e:01:03:55:
+        3a:e9:5c:fa:b0:cb:62:bd:4e:6a:81:2b:79:6e:9f:2c:a2:02:
+        49:ff:04:00
+
+1741011296.387028: enp0s8: CTRL-EVENT-EAP-PEER-CERT depth=1 subject='/C=FR/ST=Radius/L=Somewhere/O=Example Inc./emailAddress=admin@example.org/CN=Example Certificate Authority' hash=4f7e08d606fbf94b912d2ca9ad6512c09a60cb75ef2f8df4b82e7dd12567af92
+1741011296.387282: TLS: tls_verify_cb - preverify_ok=1 err=0 (ok) ca_cert_verify=1 depth=1 buf='/C=FR/ST=Radius/L=Somewhere/O=Example Inc./emailAddress=admin@example.org/CN=Example Certificate Authority'
+1741011296.387856: OpenSSL: Peer certificate - depth 0
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=FR, ST=Radius, L=Somewhere, O=Example Inc./emailAddress=admin@example.org, CN=Example Certificate Authority
+        Validity
+            Not Before: Mar  3 12:46:36 2025 GMT
+            Not After : May  2 12:46:36 2025 GMT
+        Subject: C=FR, ST=Radius, O=Example Inc., CN=Example Server Certificate/emailAddress=admin@example.org
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:ad:13:a1:63:7b:e4:0c:49:e2:f7:93:a3:43:7b:
+                    41:1b:df:cd:d5:e7:7c:d8:10:07:44:4f:a0:f4:0a:
+                    77:ce:08:26:86:ce:8e:77:c7:03:60:f7:1f:13:f2:
+                    80:54:be:7f:56:f6:9d:e3:0b:c8:ce:58:75:be:e5:
+                    42:3a:b7:6e:e8:8f:59:ba:9c:6a:7b:41:ec:f7:aa:
+                    1e:6f:5d:7a:86:c4:ff:62:95:a6:60:0a:9a:97:1f:
+                    9c:88:10:41:63:bd:43:8d:c7:58:b6:cb:66:51:b5:
+                    ae:40:ce:60:e7:a6:eb:b1:4d:bf:32:c0:9d:90:e1:
+                    e2:55:ed:89:85:86:4d:06:fb:b7:32:05:e2:4d:38:
+                    dc:a3:c5:1e:4b:dc:f8:6a:46:00:6c:9f:80:54:eb:
+                    b7:e2:0e:c7:d5:b4:2e:13:9e:a4:ce:ab:58:ff:65:
+                    56:e0:e1:53:c1:5c:51:84:ca:b4:2a:11:2e:ee:53:
+                    65:9c:59:b1:f1:aa:69:4a:1e:77:43:cc:51:83:e8:
+                    be:b3:d0:9a:3f:03:f4:a8:c0:09:6d:9f:40:90:29:
+                    59:d3:95:c9:8d:30:fc:49:dc:ae:22:cb:b2:17:87:
+                    b3:cc:ec:b4:19:c8:fe:32:a9:25:c1:79:f9:d2:87:
+                    c1:a9:b7:e1:85:92:c9:3c:92:12:e2:f8:1f:b0:c9:
+                    5e:25
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 CRL Distribution Points: 
+                Full Name:
+                  URI:http://www.example.com/example_ca.crl
+            X509v3 Certificate Policies: 
+                Policy: 1.3.6.1.4.1.40808.1.3.2
+            X509v3 Subject Key Identifier: 
+                C0:B0:27:40:4B:D3:E1:44:0E:3C:A2:F8:71:A7:B2:B9:C4:85:73:6E
+            X509v3 Authority Key Identifier: 
+                6B:16:05:74:2C:90:AE:E1:F8:68:7B:49:7E:66:D1:CE:96:D7:11:35
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        a9:2a:cd:02:6d:a8:c8:25:85:a3:cd:16:42:1f:a9:77:5c:53:
+        cf:13:fc:97:a4:84:f7:74:7c:05:29:21:35:70:7e:78:64:02:
+        e2:8d:15:94:23:af:83:f8:12:4f:2d:07:bc:33:ac:db:7b:a9:
+        e1:25:9d:e1:72:d2:0b:df:f4:d9:59:af:83:a2:c9:d6:b3:ce:
+        76:2b:e7:25:0e:31:51:04:03:15:cc:0f:69:4e:1d:77:33:7c:
+        bd:67:8b:38:7f:08:35:37:aa:4e:3a:5f:ef:0c:e3:05:c0:ad:
+        8e:a1:08:4b:f4:70:72:1d:41:2e:ef:71:aa:f2:37:df:f3:ed:
+        c2:d2:6f:2d:4a:5e:f4:62:cf:f5:f7:51:ef:8d:71:a7:9b:73:
+        ee:f8:e7:3d:ec:e6:69:33:1b:ef:cc:27:28:78:79:73:7a:7a:
+        75:f6:fc:16:9b:22:12:46:7b:2d:3a:2b:ba:e3:d2:7b:27:b2:
+        34:57:4a:9d:67:bc:cf:31:94:8a:66:76:7c:45:80:5c:e1:25:
+        53:0e:b3:e9:de:c8:45:3e:49:17:61:d1:c7:33:77:7e:fc:ae:
+        5e:82:00:1d:b8:d4:7c:56:db:c1:89:4d:c6:57:a1:11:59:98:
+        3d:2f:c1:c4:09:ea:5c:36:dd:da:37:d4:66:d5:12:58:ad:6f:
+        d9:07:bd:dd
+
+1741011296.388103: OpenSSL: Certificate Policy 1.3.6.1.4.1.40808.1.3.2
+1741011296.388162: enp0s8: CTRL-EVENT-EAP-PEER-CERT depth=0 subject='/C=FR/ST=Radius/O=Example Inc./CN=Example Server Certificate/emailAddress=admin@example.org' hash=25b8fe851d6eda3b6a7f6c3170120ffdfbc3022c07575dde094433e274ba785f tod=2
+1741011296.388373: TLS: tls_verify_cb - preverify_ok=1 err=0 (ok) ca_cert_verify=1 depth=0 buf='/C=FR/ST=Radius/O=Example Inc./CN=Example Server Certificate/emailAddress=admin@example.org'
+1741011296.388438: EAP: Status notification: remote certificate verification (param=success)
+1741011296.388511: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741011296.388576: OpenSSL: Message - hexdump(len=5): 16 03 03 01 2c
+1741011296.388632: SSL: (where=0x1001 ret=0x1)
+1741011296.388681: SSL: SSL_connect:SSLv3/TLS read server certificate
+1741011296.388733: OpenSSL: RX ver=0x303 content_type=22 (handshake/server key exchange)
+1741011296.388783: OpenSSL: Message - hexdump(len=300): 0c 00 01 28 03 00 1d 20 78 a2 76 4d 44 ec f1 5f 02 4f e3 23 73 9e 9a 79 68 36 c8 93 bc 27 6c 2f b0 db 31 63 5c 9c f2 36 08 04 01 00 a8 87 37 db 01 f5 6f d9 cc 7e 5a 58 13 16 73 3a 03 63 0a 20 3b 74 2e f9 42 0f 2c 48 2a 62 b3 a2 52 0d 4a d3 e0 26 68 6c f0 82 5d 04 ed c5 07 14 19 33 68 50 3b c2 16 41 29 69 16 02 2d 3d a1 60 f4 b0 ec b0 fe 8a 55 84 a9 a6 66 e0 26 4b c1 53 87 4d cf 8b 69 09 f8 22 ce 68 ba 51 9a da 31 51 4f 15 d2 bc e3 dc d6 c9 15 e2 f4 5b 44 74 9e a0 76 ce 4a 5d ba c0 92 c6 e7 eb 10 f3 06 a3 81 4c d6 8d 6b 64 98 e7 4c b2 92 f2 71 89 ed 41 9e 6c 05 c1 54 48 3f 62 39 52 f9 b0 1e fa 46 60 68 10 4d f1 29 ef 62 bc f9 64 91 78 0b 5a 0f 95 62 ec c3 5d d4 ca 3d c4 35 63 1c ab c0 2c 77 bf 70 b1 25 6e ce ef aa 58 84 1d 7d 55 b2 14 12 78 89 29 d5 64 85 9e 7d 40 20 85 92 a9 8f 26 b6 a6 af eb 15 00 cb 5d c0 e9 f0 e4 21 e6 30 8c a2 25 98 68 77 d9 42 70 8b 26 39 03 5c 90 49 32 f7 5f dd 90
+1741011296.388995: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741011296.389068: OpenSSL: Message - hexdump(len=5): 16 03 03 00 cc
+1741011296.389180: SSL: (where=0x1001 ret=0x1)
+1741011296.389277: SSL: SSL_connect:SSLv3/TLS read server key exchange
+1741011296.389367: OpenSSL: RX ver=0x303 content_type=22 (handshake/certificate request)
+1741011296.389425: OpenSSL: Message - hexdump(len=204): 0d 00 00 c8 03 01 02 40 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02 00 98 00 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79
+1741011296.389531: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741011296.389594: OpenSSL: Message - hexdump(len=5): 16 03 03 00 04
+1741011296.389646: SSL: (where=0x1001 ret=0x1)
+1741011296.389690: SSL: SSL_connect:SSLv3/TLS read server certificate request
+1741011296.389762: OpenSSL: RX ver=0x303 content_type=22 (handshake/server hello done)
+1741011296.389810: OpenSSL: Message - hexdump(len=4): 0e 00 00 00
+1741011296.389874: SSL: (where=0x1001 ret=0x1)
+1741011296.389920: SSL: SSL_connect:SSLv3/TLS read server done
+1741011296.390039: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741011296.390096: OpenSSL: Message - hexdump(len=5): 16 03 03 09 20
+1741011296.390160: OpenSSL: TX ver=0x303 content_type=22 (handshake/certificate)
+1741011296.390202: OpenSSL: Message - hexdump(len=2336): 0b 00 09 1c 00 09 19 00 04 15 30 82 04 11 30 82 02 f9 a0 03 02 01 02 02 01 02 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 37 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 37 5a 30 71 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 19 30 17 06 03 55 04 03 0c 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 1f 30 1d 06 09 2a 86 48 86 f7 0d 01 09 01 16 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 d1 25 06 e2 46 c4 d3 90 e9 c3 c5 1a 7e 03 84 76 7b 10 30 2a a4 cb b4 4b 67 92 de 7e 81 7e c5 db 19 4b cd 7f c0 5b 13 33 11 65 c2 52 df 63 ba 64 77 72 4f 30 0f 9e b7 f3 f6 0d a7 aa 77 7d 1c 60 1a 40 55 be 51 02 39 55 b6 c4 68 37 7a 00 7f 3a 22 13 67 35 ca 7c 25 58 ea 7a 0b f5 31 a6 1c 96 71 43 d1 c7 4d 68 12 c6 02 08 c9 b7 b0 9b a4 9b 0c fa d1 27 7d 2f 39 f0 d0 8c 33 17 c6 95 c6 5d 5e d7 fe f4 3e 17 3b 72 ca 1d f9 9b 38 17 3a 71 8a c8 44 75 63 99 59 e3 3c 41 32 dd 91 47 ec ca bd 74 ce de e7 ce c4 d7 8c d9 bb 50 8e 8d 46 19 f9 83 ab d3 7a 88 9a 24 73 20 bb c9 54 27 64 2b e9 24 ee 28 80 82 32 eb 4e 25 86 84 bb 0c 1f 46 2b d2 b2 15 c9 e4 ce 0e 6d c9 8f 62 0e 3b 88 1b b0 1d 47 41 82 22 01 a1 59 74 b2 7b 86 3e 54 c1 ba a2 74 86 ba a4 2e fe c4 6d bb 8d 4d 62 0b e3 02 03 01 00 01 a3 81 90 30 81 8d 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 02 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 1d 06 03 55 1d 0e 04 16 04 14 d2 ed 4e fc b1 51 0f 0a 04 ba 57 34 40 54 98 35 3b 9c c5 91 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 8c 22 2c 48 bd d0 e1 da 67 ab 7e 5f 3a a9 aa 38 d2 3c ce 13 13 19 ff 3e 3c 6a c2 b2 af 46 b6 fc 61 80 be 44 d4 0e 7d 52 c0 1f cc 83 81 4d bc 78 b4 37 5b 73 21 e4 4f 9f 98 1c 81 6c 83 9e ee f3 c9 16 a5 2d f5 22 a6 53 da d3 bb 0b da c9 82 b3 3b c9 15 b9 61 9b 22 e2 fa 7f b5 d7 5f 15 4c e6 58 dd 7e d3 bf 6d b8 17 e8 0e 87 7b 33 7a b0 07 4b 93 01 d9 69 95 e2 c3 bf 64 80 41 47 cb 78 d2 58 63 43 1a 26 54 09 6c bb e8 2c ae ff 1f 20 e8 73 24 6b fb 5f c1 1d fd 96 ba bb 43 19 c9 6b ce 4a d3 52 41 7a 8d d1 51 b8 e0 38 b0 49 54 59 96 5f c4 6c 6f cd 02 f9 07 d0 cf f8 03 b5 56 8e 40 71 11 09 a8 0d 8d 37 c4 0f d4 d1 fd 04 cf 78 be 33 49 af 71 07 9a 42 b8 dd 34 66 0d 5c 4c cd 31 94 3a f9 6f 1c ae e6 30 b4 42 41 a9 9f e9 bb 11 05 ad 28 fa 6c 7b 41 b5 b0 20 2d 85 8e 82 4f 4b 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00
+1741011296.390533: SSL: (where=0x1001 ret=0x1)
+1741011296.390573: SSL: SSL_connect:SSLv3/TLS write client certificate
+1741011296.390740: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741011296.390788: OpenSSL: Message - hexdump(len=5): 16 03 03 00 25
+1741011296.390831: OpenSSL: TX ver=0x303 content_type=22 (handshake/client key exchange)
+1741011296.390872: OpenSSL: Message - hexdump(len=37): 10 00 00 21 20 24 29 ca 87 fe 44 43 fd a0 69 ad af 1c 3c b8 4b ca 95 1c 01 93 ea 11 92 38 98 34 35 0d 5f fb 57
+1741011296.390968: SSL: (where=0x1001 ret=0x1)
+1741011296.391014: SSL: SSL_connect:SSLv3/TLS write client key exchange
+1741011296.391904: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741011296.391955: OpenSSL: Message - hexdump(len=5): 16 03 03 01 08
+1741011296.392000: OpenSSL: TX ver=0x303 content_type=22 (handshake/certificate verify)
+1741011296.392044: OpenSSL: Message - hexdump(len=264): 0f 00 01 04 08 04 01 00 1c 66 27 b8 c1 dc 4a c1 5e 43 0d 3c bd 9a 6d 13 9f 95 12 d7 b6 a5 a1 ce 40 d7 43 13 67 65 7c 01 68 1e 54 ff 48 50 75 54 e4 3a 98 d6 4e 29 54 58 e4 cb 57 80 89 35 b0 b5 6e 26 04 19 fa b3 e4 eb 11 da df 0e 28 e0 4f 08 a1 77 dc bf 6d 52 59 a5 94 d2 2b d3 ec f1 8c b3 d0 a2 2a 7b e3 63 1d 81 6c 18 a7 9e 14 56 06 38 9e c1 d3 39 7c f8 22 a2 8c 5a 63 da a6 ef f9 11 b4 11 0d c3 fe 37 61 88 eb 12 14 37 a5 37 9b 22 e2 48 65 93 de a4 8e 3f a6 db 31 c9 da 9e 82 d9 47 a5 42 bc 42 36 ec 1c 85 22 28 13 10 28 f4 00 d6 d7 cb 8e 8d f7 f4 63 8a cc ba 2f 5f c7 47 e3 20 d7 98 6f 87 23 90 41 4f 48 c2 3b ed db 27 b6 86 1a 55 47 be af 31 6d fc 76 b8 0c 5d 3e 7a d7 18 7f 00 d3 2a 23 ac f6 08 5b f5 ee ee 03 e3 55 c6 50 fd 03 b7 c5 a1 3f 7a cb 62 09 f8 d5 42 d9 9c 8e c3 a0 eb 5a 9b 5f
+1741011296.392098: SSL: (where=0x1001 ret=0x1)
+1741011296.392141: SSL: SSL_connect:SSLv3/TLS write certificate verify
+1741011296.392183: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741011296.392227: OpenSSL: Message - hexdump(len=5): 14 03 03 00 01
+1741011296.392267: OpenSSL: TX ver=0x303 content_type=20 (change cipher spec/)
+1741011296.392306: OpenSSL: Message - hexdump(len=1): 01
+1741011296.392371: SSL: (where=0x1001 ret=0x1)
+1741011296.392415: SSL: SSL_connect:SSLv3/TLS write change cipher spec
+1741011296.392472: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741011296.392516: OpenSSL: Message - hexdump(len=5): 16 03 03 00 28
+1741011296.392557: OpenSSL: TX ver=0x303 content_type=22 (handshake/finished)
+1741011296.392600: OpenSSL: Message - hexdump(len=16): 14 00 00 0c d4 40 d7 4f 44 25 27 cf 83 8e c6 24
+1741011296.392642: SSL: (where=0x1001 ret=0x1)
+1741011296.392676: SSL: SSL_connect:SSLv3/TLS write finished
+1741011296.392721: SSL: (where=0x1002 ret=0xffffffff)
+1741011296.392761: SSL: SSL_connect:error in SSLv3/TLS write finished
+1741011296.392796: SSL: SSL_connect - want more data
+1741011296.392837: SSL: 2703 bytes pending from ssl_out
+1741011296.392882: SSL: Using TLS version TLSv1.2
+1741011296.392922: SSL: 2703 bytes left to be sent out (of total 2703 bytes)
+1741011296.392964: SSL: sending 1398 bytes, more fragments will follow
+1741011296.393004: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970f3cb0
+1741011296.393040: EAP: EAP entering state SEND_RESPONSE
+1741011296.393082: EAP: EAP entering state IDLE
+1741011296.393123: EAPOL: SUPP_BE entering state RESPONSE
+1741011296.393164: EAPOL: txSuppRsp
+1741011296.393205: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.393245: TX EAPOL - hexdump(len=1412): 02 00 05 80 02 49 05 80 0d c0 00 00 0a 8f 16 03 03 09 20 0b 00 09 1c 00 09 19 00 04 15 30 82 04 11 30 82 02 f9 a0 03 02 01 02 02 01 02 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 37 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 37 5a 30 71 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 19 30 17 06 03 55 04 03 0c 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 1f 30 1d 06 09 2a 86 48 86 f7 0d 01 09 01 16 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 d1 25 06 e2 46 c4 d3 90 e9 c3 c5 1a 7e 03 84 76 7b 10 30 2a a4 cb b4 4b 67 92 de 7e 81 7e c5 db 19 4b cd 7f c0 5b 13 33 11 65 c2 52 df 63 ba 64 77 72 4f 30 0f 9e b7 f3 f6 0d a7 aa 77 7d 1c 60 1a 40 55 be 51 02 39 55 b6 c4 68 37 7a 00 7f 3a 22 13 67 35 ca 7c 25 58 ea 7a 0b f5 31 a6 1c 96 71 43 d1 c7 4d 68 12 c6 02 08 c9 b7 b0 9b a4 9b 0c fa d1 27 7d 2f 39 f0 d0 8c 33 17 c6 95 c6 5d 5e d7 fe f4 3e 17 3b 72 ca 1d f9 9b 38 17 3a 71 8a c8 44 75 63 99 59 e3 3c 41 32 dd 91 47 ec ca bd 74 ce de e7 ce c4 d7 8c d9 bb 50 8e 8d 46 19 f9 83 ab d3 7a 88 9a 24 73 20 bb c9 54 27 64 2b e9 24 ee 28 80 82 32 eb 4e 25 86 84 bb 0c 1f 46 2b d2 b2 15 c9 e4 ce 0e 6d c9 8f 62 0e 3b 88 1b b0 1d 47 41 82 22 01 a1 59 74 b2 7b 86 3e 54 c1 ba a2 74 86 ba a4 2e fe c4 6d bb 8d 4d 62 0b e3 02 03 01 00 01 a3 81 90 30 81 8d 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 02 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 1d 06 03 55 1d 0e 04 16 04 14 d2 ed 4e fc b1 51 0f 0a 04 ba 57 34 40 54 98 35 3b 9c c5 91 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 8c 22 2c 48 bd d0 e1 da 67 ab 7e 5f 3a a9 aa 38 d2 3c ce 13 13 19 ff 3e 3c 6a c2 b2 af 46 b6 fc 61 80 be 44 d4 0e 7d 52 c0 1f cc 83 81 4d bc 78 b4 37 5b 73 21 e4 4f 9f 98 1c 81 6c 83 9e ee f3 c9 16 a5 2d f5 22 a6 53 da d3 bb 0b da c9 82 b3 3b c9 15 b9 61 9b 22 e2 fa 7f b5 d7 5f 15 4c e6 58 dd 7e d3 bf 6d b8 17 e8 0e 87 7b 33 7a b0 07 4b 93 01 d9 69 95 e2 c3 bf 64 80 41 47 cb 78 d2 58 63 43 1a 26 54 09 6c bb e8 2c ae ff 1f 20 e8 73 24 6b fb 5f c1 1d fd 96 ba bb 43 19 c9 6b ce 4a d3 52 41 7a 8d d1 51 b8 e0 38 b0 49 54 59 96 5f c4 6c 6f cd 02 f9 07 d0 cf f8 03 b5 56 8e 40 71 11 09 a8 0d 8d 37 c4 0f d4 d1 fd 04 cf 78 be 33 49 af 71 07 9a 42 b8 dd 34 66 0d 5c 4c cd 31 94 3a f9 6f 1c ae e6 30 b4 42 41 a9 9f e9 bb 11 05 ad 28 fa 6c 7b 41 b5 b0 20 2d 85 8e 82 4f 4b 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d
+1741011296.393746: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.404390: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741011296.404484: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.404542: RX EAPOL - hexdump(len=46): 02 00 00 06 01 4a 00 06 0d 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741011296.404599: EAPOL: Received EAP-Packet frame
+1741011296.404640: EAPOL: SUPP_BE entering state REQUEST
+1741011296.404685: EAPOL: getSuppRsp
+1741011296.404734: EAP: EAP entering state RECEIVED
+1741011296.404789: EAP: Received EAP-Request id=74 method=13 vendor=0 vendorMethod=0
+1741011296.404836: EAP: EAP entering state METHOD
+1741011296.404884: SSL: Received packet(len=6) - Flags 0x00
+1741011296.404928: SSL: 1305 bytes left to be sent out (of total 2703 bytes)
+1741011296.404974: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970c4230
+1741011296.405013: EAP: EAP entering state SEND_RESPONSE
+1741011296.405054: EAP: EAP entering state IDLE
+1741011296.405094: EAPOL: SUPP_BE entering state RESPONSE
+1741011296.405132: EAPOL: txSuppRsp
+1741011296.405173: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.405216: TX EAPOL - hexdump(len=1315): 02 00 05 1f 02 4a 05 1f 0d 00 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00 16 03 03 00 25 10 00 00 21 20 24 29 ca 87 fe 44 43 fd a0 69 ad af 1c 3c b8 4b ca 95 1c 01 93 ea 11 92 38 98 34 35 0d 5f fb 57 16 03 03 01 08 0f 00 01 04 08 04 01 00 1c 66 27 b8 c1 dc 4a c1 5e 43 0d 3c bd 9a 6d 13 9f 95 12 d7 b6 a5 a1 ce 40 d7 43 13 67 65 7c 01 68 1e 54 ff 48 50 75 54 e4 3a 98 d6 4e 29 54 58 e4 cb 57 80 89 35 b0 b5 6e 26 04 19 fa b3 e4 eb 11 da df 0e 28 e0 4f 08 a1 77 dc bf 6d 52 59 a5 94 d2 2b d3 ec f1 8c b3 d0 a2 2a 7b e3 63 1d 81 6c 18 a7 9e 14 56 06 38 9e c1 d3 39 7c f8 22 a2 8c 5a 63 da a6 ef f9 11 b4 11 0d c3 fe 37 61 88 eb 12 14 37 a5 37 9b 22 e2 48 65 93 de a4 8e 3f a6 db 31 c9 da 9e 82 d9 47 a5 42 bc 42 36 ec 1c 85 22 28 13 10 28 f4 00 d6 d7 cb 8e 8d f7 f4 63 8a cc ba 2f 5f c7 47 e3 20 d7 98 6f 87 23 90 41 4f 48 c2 3b ed db 27 b6 86 1a 55 47 be af 31 6d fc 76 b8 0c 5d 3e 7a d7 18 7f 00 d3 2a 23 ac f6 08 5b f5 ee ee 03 e3 55 c6 50 fd 03 b7 c5 a1 3f 7a cb 62 09 f8 d5 42 d9 9c 8e c3 a0 eb 5a 9b 5f 14 03 03 00 01 01 16 03 03 00 28 e0 27 41 bc cc 05 69 be b2 06 d1 9e fc ae 7c 3c a5 7d 3c fe 3f 5a 28 df 5e 97 33 49 03 ec b1 21 01 b4 9e f3 86 ee 5b 0d
+1741011296.405493: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.421958: l2_packet_receive: src=08:00:27:cf:14:fc len=65
+1741011296.422083: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.422134: RX EAPOL - hexdump(len=65): 02 00 00 3d 01 4b 00 3d 0d 80 00 00 00 33 14 03 03 00 01 01 16 03 03 00 28 f7 f3 7a 20 05 d4 87 1b 60 12 fb 71 20 1b 6d 5a a3 0e 4b cd 30 70 6c 80 6a 0f b8 72 0d 47 24 97 6c 34 06 89 4b 84 46 c2
+1741011296.422186: EAPOL: Received EAP-Packet frame
+1741011296.422224: EAPOL: SUPP_BE entering state REQUEST
+1741011296.422254: EAPOL: getSuppRsp
+1741011296.422291: EAP: EAP entering state RECEIVED
+1741011296.422338: EAP: Received EAP-Request id=75 method=13 vendor=0 vendorMethod=0
+1741011296.422376: EAP: EAP entering state METHOD
+1741011296.422413: SSL: Received packet(len=61) - Flags 0x80
+1741011296.422443: SSL: TLS Message Length: 51
+1741011296.422490: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741011296.422528: OpenSSL: Message - hexdump(len=5): 14 03 03 00 01
+1741011296.422566: SSL: (where=0x1001 ret=0x1)
+1741011296.422603: SSL: SSL_connect:SSLv3/TLS write finished
+1741011296.422653: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741011296.422690: OpenSSL: Message - hexdump(len=5): 16 03 03 00 28
+1741011296.422733: SSL: (where=0x1001 ret=0x1)
+1741011296.422771: SSL: SSL_connect:SSLv3/TLS read change cipher spec
+1741011296.422834: OpenSSL: RX ver=0x303 content_type=22 (handshake/finished)
+1741011296.422865: OpenSSL: Message - hexdump(len=16): 14 00 00 0c 96 a9 ab 6f fd 00 2f a0 87 39 ad 03
+1741011296.422903: SSL: (where=0x1001 ret=0x1)
+1741011296.422932: SSL: SSL_connect:SSLv3/TLS read finished
+1741011296.422976: SSL: (where=0x20 ret=0x1)
+1741011296.423013: SSL: (where=0x1002 ret=0x1)
+1741011296.423049: SSL: 0 bytes pending from ssl_out
+1741011296.423084: OpenSSL: Handshake finished - resumed=0
+1741011296.423115: SSL: No Application Data included
+1741011296.423151: SSL: Using TLS version TLSv1.2
+1741011296.423187: SSL: No data to be sent out
+1741011296.423227: EAP-TLS: Done
+1741011296.423282: EAP-TLS: Derived key - hexdump(len=64): 68 a2 72 87 e3 e9 eb 6b 0c 95 c5 76 f2 2c 57 8d 71 f4 34 c4 31 77 ed c4 5e 3d 19 40 05 ac 4a 79 fa aa 2b 56 74 5e 8f 91 ef be 6b 0e d9 82 cd f9 8b 1a 87 ac 4e c9 d6 3f cf 26 e3 3b a3 0b 7b 4b
+1741011296.423323: EAP-TLS: Derived EMSK - hexdump(len=64): 80 8a 9f 16 2a c2 ab f1 ab 05 a9 e0 ca 53 de 10 14 88 64 db 98 4d dc 44 90 16 0d 28 11 21 65 ea ea 04 61 8b 4f 0c cc e9 4b 8c 90 f5 3b 00 59 9a be d1 37 79 be a3 34 bf 10 2d f8 e4 7c ae d1 be
+1741011296.423362: EAP-TLS: Derived Session-Id - hexdump(len=65): 0d c1 d7 ae 09 ca 20 32 74 fe ce 93 9b 96 10 c2 63 56 29 41 c6 5a 06 70 5c 7f 17 3f ce d9 81 78 1e 08 9a ad e8 69 fd 7b 94 95 0a c5 b7 ff d6 96 94 99 95 38 99 25 63 4a 87 2f 2b 3a 84 d6 dc 71 1a
+1741011296.423405: SSL: Building ACK (type=13 id=75 ver=0)
+1741011296.423440: EAP: method process -> ignore=FALSE methodState=DONE decision=UNCOND_SUCC eapRespData=0x563c9709fcd0
+1741011296.423529: EAP: Session-Id - hexdump(len=65): 0d c1 d7 ae 09 ca 20 32 74 fe ce 93 9b 96 10 c2 63 56 29 41 c6 5a 06 70 5c 7f 17 3f ce d9 81 78 1e 08 9a ad e8 69 fd 7b 94 95 0a c5 b7 ff d6 96 94 99 95 38 99 25 63 4a 87 2f 2b 3a 84 d6 dc 71 1a
+1741011296.423568: EAP: EAP entering state SEND_RESPONSE
+1741011296.423605: EAP: EAP entering state IDLE
+1741011296.423640: EAPOL: SUPP_BE entering state RESPONSE
+1741011296.423677: EAPOL: txSuppRsp
+1741011296.423714: TX EAPOL: dst=01:80:c2:00:00:03
+1741011296.423751: TX EAPOL - hexdump(len=10): 02 00 00 06 02 4b 00 06 0d 00
+1741011296.423800: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.435539: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741011296.435621: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741011296.435662: RX EAPOL - hexdump(len=46): 02 00 00 04 03 4b 00 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741011296.435707: EAPOL: Received EAP-Packet frame
+1741011296.435744: EAPOL: SUPP_BE entering state REQUEST
+1741011296.435781: EAPOL: getSuppRsp
+1741011296.435811: EAP: EAP entering state RECEIVED
+1741011296.435856: EAP: Received EAP-Success
+1741011296.435886: EAP: Status notification: completion (param=success)
+1741011296.435926: EAP: EAP entering state SUCCESS
+1741011296.435963: enp0s8: CTRL-EVENT-EAP-SUCCESS EAP authentication completed successfully
+1741011296.435993: EAPOL: IEEE 802.1X for plaintext connection; no EAPOL-Key frames required
+1741011296.436029: enp0s8: WPA: EAPOL processing complete
+1741011296.436068: enp0s8: Cancelling authentication timeout
+1741011296.436107: enp0s8: State: ASSOCIATED -> COMPLETED
+1741011296.436147: enp0s8: CTRL-EVENT-CONNECTED - Connection to 01:80:c2:00:00:03 completed [id=0 id_str=]
+1741011296.436179: EAPOL: SUPP_PAE entering state AUTHENTICATED
+1741011296.436219: EAPOL: Supplicant port status: Authorized
+1741011296.436255: EAPOL: SUPP_BE entering state RECEIVE
+1741011296.436293: EAPOL: SUPP_BE entering state SUCCESS
+1741011296.436328: EAPOL: SUPP_BE entering state IDLE
+1741011296.436357: EAPOL authentication completed - result=SUCCESS
+1741011326.338090: EAPOL: authWhile --> 0
+1741011326.338241: EAPOL: startWhen --> 0
+1741011356.365387: EAPOL: idleWhile --> 0
+1741011356.365536: EAPOL: disable timer tick
+1741014899.802819: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741014899.802922: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.802966: RX EAPOL - hexdump(len=46): 02 00 00 05 01 e4 00 05 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741014899.803012: EAPOL: Received EAP-Packet frame
+1741014899.803054: EAPOL: SUPP_PAE entering state RESTART
+1741014899.803092: EAP: EAP entering state INITIALIZE
+1741014899.803134: EAP: maintaining EAP method data for fast reauthentication
+1741014899.803170: EAPOL: enable timer tick
+1741014899.803224: EAP: EAP entering state IDLE
+1741014899.803267: EAPOL: SUPP_PAE entering state AUTHENTICATING
+1741014899.803312: EAPOL: SUPP_BE entering state REQUEST
+1741014899.803359: EAPOL: getSuppRsp
+1741014899.803397: EAP: EAP entering state RECEIVED
+1741014899.803465: EAP: Received EAP-Request id=228 method=1 vendor=0 vendorMethod=0
+1741014899.803507: EAP: EAP entering state IDENTITY
+1741014899.803544: enp0s8: CTRL-EVENT-EAP-STARTED EAP authentication started
+1741014899.803588: EAP: Status notification: started (param=)
+1741014899.803635: EAP: EAP-Request Identity data - hexdump_ascii(len=0):
+1741014899.803675: EAP: using real identity - hexdump_ascii(len=16):
+     75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67   user@example.org
+1741014899.803750: EAP: EAP entering state SEND_RESPONSE
+1741014899.803785: EAP: EAP entering state IDLE
+1741014899.803820: EAPOL: SUPP_BE entering state RESPONSE
+1741014899.803854: EAPOL: txSuppRsp
+1741014899.803883: TX EAPOL: dst=01:80:c2:00:00:03
+1741014899.803917: TX EAPOL - hexdump(len=25): 02 00 00 15 02 e4 00 15 01 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67
+1741014899.804044: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.811335: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741014899.811439: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.811495: RX EAPOL - hexdump(len=46): 02 00 00 06 01 e5 00 06 0d 20 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741014899.811547: EAPOL: Received EAP-Packet frame
+1741014899.811593: EAPOL: SUPP_BE entering state REQUEST
+1741014899.811670: EAPOL: getSuppRsp
+1741014899.811715: EAP: EAP entering state RECEIVED
+1741014899.811777: EAP: Received EAP-Request id=229 method=13 vendor=0 vendorMethod=0
+1741014899.811823: EAP: EAP entering state GET_METHOD
+1741014899.811870: enp0s8: CTRL-EVENT-EAP-PROPOSED-METHOD vendor=0 method=13
+1741014899.811915: EAP: Status notification: accept proposed method (param=TLS)
+1741014899.811963: EAP: Using previous method data for fast re-authentication
+1741014899.812021: EAP: Initialize selected EAP method: vendor 0 method 13 (TLS)
+1741014899.812091: enp0s8: CTRL-EVENT-EAP-METHOD EAP vendor 0 method 13 (TLS) selected
+1741014899.812130: EAP: EAP entering state METHOD
+1741014899.812176: SSL: Received packet(len=6) - Flags 0x20
+1741014899.812219: EAP-TLS: Start
+1741014899.812270: SSL: (where=0x10 ret=0x1)
+1741014899.812329: SSL: (where=0x1001 ret=0x1)
+1741014899.812376: SSL: SSL_connect:before SSL initialization
+1741014899.812514: OpenSSL: TX ver=0x301 content_type=256 (TLS header info/)
+1741014899.812560: OpenSSL: Message - hexdump(len=5): 16 03 01 00 b3
+1741014899.812617: OpenSSL: TX ver=0x303 content_type=22 (handshake/client hello)
+1741014899.812668: OpenSSL: Message - hexdump(len=179): 01 00 00 af 03 03 16 f4 28 b3 92 c2 10 62 e7 d1 51 57 dc 69 65 38 44 78 64 c5 bb 84 98 45 24 89 fd 35 f7 70 d7 61 00 00 38 c0 2c c0 30 00 9f cc a9 cc a8 cc aa c0 2b c0 2f 00 9e c0 24 c0 28 00 6b c0 23 c0 27 00 67 c0 0a c0 14 00 39 c0 09 c0 13 00 33 00 9d 00 9c 00 3d 00 3c 00 35 00 2f 00 ff 01 00 00 4e 00 0b 00 04 03 00 01 02 00 0a 00 0c 00 0a 00 1d 00 17 00 1e 00 19 00 18 00 16 00 00 00 17 00 00 00 0d 00 2a 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02
+1741014899.812732: SSL: (where=0x1001 ret=0x1)
+1741014899.812783: SSL: SSL_connect:SSLv3/TLS write client hello
+1741014899.812839: SSL: (where=0x1002 ret=0xffffffff)
+1741014899.812892: SSL: SSL_connect:error in SSLv3/TLS write client hello
+1741014899.812948: SSL: SSL_connect - want more data
+1741014899.813001: SSL: 184 bytes pending from ssl_out
+1741014899.813052: SSL: Using TLS version TLSv1.2
+1741014899.813104: SSL: 184 bytes left to be sent out (of total 184 bytes)
+1741014899.813156: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970d7f10
+1741014899.813208: EAP: EAP entering state SEND_RESPONSE
+1741014899.813257: EAP: EAP entering state IDLE
+1741014899.813305: EAPOL: SUPP_BE entering state RESPONSE
+1741014899.813353: EAPOL: txSuppRsp
+1741014899.813402: TX EAPOL: dst=01:80:c2:00:00:03
+1741014899.813449: TX EAPOL - hexdump(len=194): 02 00 00 be 02 e5 00 be 0d 00 16 03 01 00 b3 01 00 00 af 03 03 16 f4 28 b3 92 c2 10 62 e7 d1 51 57 dc 69 65 38 44 78 64 c5 bb 84 98 45 24 89 fd 35 f7 70 d7 61 00 00 38 c0 2c c0 30 00 9f cc a9 cc a8 cc aa c0 2b c0 2f 00 9e c0 24 c0 28 00 6b c0 23 c0 27 00 67 c0 0a c0 14 00 39 c0 09 c0 13 00 33 00 9d 00 9c 00 3d 00 3c 00 35 00 2f 00 ff 01 00 00 4e 00 0b 00 04 03 00 01 02 00 0a 00 0c 00 0a 00 1d 00 17 00 1e 00 19 00 18 00 16 00 00 00 17 00 00 00 0d 00 2a 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02
+1741014899.813545: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.831485: l2_packet_receive: src=08:00:27:cf:14:fc len=1008
+1741014899.831591: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.831642: RX EAPOL - hexdump(len=1008): 02 00 03 ec 01 e6 03 ec 0d c0 00 00 0b 97 16 03 03 00 3d 02 00 00 39 03 03 c7 63 49 69 20 79 d5 a0 d7 3a 00 da 1f 6e d4 a5 33 46 40 36 ac 98 a6 48 c6 5d 1a 6b 58 53 15 14 00 c0 30 00 00 11 ff 01 00 01 00 00 0b 00 04 03 00 01 02 00 17 00 00 16 03 03 09 45 0b 00 09 41 00 09 3e 00 04 3a 30 82 04 36 30 82 03 1e a0 03 02 01 02 02 01 01 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 7c 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 23 30 21 06 03 55 04 03 0c 1a 45 78 61 6d 70 6c 65 20 53 65 72 76 65 72 20 43 65 72 74 69 66 69 63 61 74 65 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 ad 13 a1 63 7b e4 0c 49 e2 f7 93 a3 43 7b 41 1b df cd d5 e7 7c d8 10 07 44 4f a0 f4 0a 77 ce 08 26 86 ce 8e 77 c7 03 60 f7 1f 13 f2 80 54 be 7f 56 f6 9d e3 0b c8 ce 58 75 be e5 42 3a b7 6e e8 8f 59 ba 9c 6a 7b 41 ec f7 aa 1e 6f 5d 7a 86 c4 ff 62 95 a6 60 0a 9a 97 1f 9c 88 10 41 63 bd 43 8d c7 58 b6 cb 66 51 b5 ae 40 ce 60 e7 a6 eb b1 4d bf 32 c0 9d 90 e1 e2 55 ed 89 85 86 4d 06 fb b7 32 05 e2 4d 38 dc a3 c5 1e 4b dc f8 6a 46 00 6c 9f 80 54 eb b7 e2 0e c7 d5 b4 2e 13 9e a4 ce ab 58 ff 65 56 e0 e1 53 c1 5c 51 84 ca b4 2a 11 2e ee 53 65 9c 59 b1 f1 aa 69 4a 1e 77 43 cc 51 83 e8 be b3 d0 9a 3f 03 f4 a8 c0 09 6d 9f 40 90 29 59 d3 95 c9 8d 30 fc 49 dc ae 22 cb b2 17 87 b3 cc ec b4 19 c8 fe 32 a9 25 c1 79 f9 d2 87 c1 a9 b7 e1 85 92 c9 3c 92 12 e2 f8 1f b0 c9 5e 25 02 03 01 00 01 a3 81 aa 30 81 a7 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 01 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 18 06 03 55 1d 20 04 11 30 0f 30 0d 06 0b 2b 06 01 04 01 82 be 68 01 03 02 30 1d 06 03 55 1d 0e 04 16 04 14 c0 b0 27 40 4b d3 e1 44 0e 3c a2 f8 71 a7 b2 b9 c4 85 73 6e 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 a9 2a cd 02 6d a8 c8 25 85 a3 cd 16 42 1f a9 77 5c 53 cf 13 fc 97 a4 84 f7 74 7c 05 29 21 35 70 7e 78 64 02 e2 8d 15 94 23 af 83 f8 12 4f 2d 07 bc 33 ac db 7b a9 e1 25 9d e1 72 d2 0b df f4 d9 59 af 83 a2 c9 d6 b3 ce 76 2b e7 25 0e 31 51 04 03 15 cc 0f 69 4e 1d
+1741014899.831803: EAPOL: Received EAP-Packet frame
+1741014899.831844: EAPOL: SUPP_BE entering state REQUEST
+1741014899.831887: EAPOL: getSuppRsp
+1741014899.831926: EAP: EAP entering state RECEIVED
+1741014899.831994: EAP: Received EAP-Request id=230 method=13 vendor=0 vendorMethod=0
+1741014899.832039: EAP: EAP entering state METHOD
+1741014899.832079: SSL: Received packet(len=1004) - Flags 0xc0
+1741014899.832116: SSL: TLS Message Length: 2967
+1741014899.832155: SSL: Need 1973 bytes more input data
+1741014899.832196: SSL: Building ACK (type=13 id=230 ver=0)
+1741014899.832233: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970b3090
+1741014899.832272: EAP: EAP entering state SEND_RESPONSE
+1741014899.832312: EAP: EAP entering state IDLE
+1741014899.832350: EAPOL: SUPP_BE entering state RESPONSE
+1741014899.832388: EAPOL: txSuppRsp
+1741014899.832428: TX EAPOL: dst=01:80:c2:00:00:03
+1741014899.832466: TX EAPOL - hexdump(len=10): 02 00 00 06 02 e6 00 06 0d 00
+1741014899.832525: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.841025: l2_packet_receive: src=08:00:27:cf:14:fc len=1008
+1741014899.841105: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.841148: RX EAPOL - hexdump(len=1008): 02 00 03 ec 01 e7 03 ec 0d c0 00 00 0b 97 77 33 7c bd 67 8b 38 7f 08 35 37 aa 4e 3a 5f ef 0c e3 05 c0 ad 8e a1 08 4b f4 70 72 1d 41 2e ef 71 aa f2 37 df f3 ed c2 d2 6f 2d 4a 5e f4 62 cf f5 f7 51 ef 8d 71 a7 9b 73 ee f8 e7 3d ec e6 69 33 1b ef cc 27 28 78 79 73 7a 7a 75 f6 fc 16 9b 22 12 46 7b 2d 3a 2b ba e3 d2 7b 27 b2 34 57 4a 9d 67 bc cf 31 94 8a 66 76 7c 45 80 5c e1 25 53 0e b3 e9 de c8 45 3e 49 17 61 d1 c7 33 77 7e fc ae 5e 82 00 1d b8 d4 7c 56 db c1 89 4d c6 57 a1 11 59 98 3d 2f c1 c4 09 ea 5c 36 dd da 37 d4 66 d5 12 58 ad 6f d9 07 bd dd 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45
+1741014899.841295: EAPOL: Received EAP-Packet frame
+1741014899.841331: EAPOL: SUPP_BE entering state REQUEST
+1741014899.841367: EAPOL: getSuppRsp
+1741014899.841405: EAP: EAP entering state RECEIVED
+1741014899.841454: EAP: Received EAP-Request id=231 method=13 vendor=0 vendorMethod=0
+1741014899.841495: EAP: EAP entering state METHOD
+1741014899.841533: SSL: Received packet(len=1004) - Flags 0xc0
+1741014899.841568: SSL: TLS Message Length: 2967
+1741014899.841606: SSL: Need 979 bytes more input data
+1741014899.841644: SSL: Building ACK (type=13 id=231 ver=0)
+1741014899.841685: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970f23d0
+1741014899.841721: EAP: EAP entering state SEND_RESPONSE
+1741014899.841767: EAP: EAP entering state IDLE
+1741014899.841803: EAPOL: SUPP_BE entering state RESPONSE
+1741014899.841841: EAPOL: txSuppRsp
+1741014899.841875: TX EAPOL: dst=01:80:c2:00:00:03
+1741014899.841914: TX EAPOL - hexdump(len=10): 02 00 00 06 02 e7 00 06 0d 00
+1741014899.841970: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.850687: l2_packet_receive: src=08:00:27:cf:14:fc len=993
+1741014899.850755: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.850799: RX EAPOL - hexdump(len=993): 02 00 03 dd 01 e8 03 dd 0d 80 00 00 0b 97 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00 16 03 03 01 2c 0c 00 01 28 03 00 1d 20 ed 1f 61 46 32 84 2e 0c b8 36 69 cd 84 af 96 cc 32 ac 6f 4a f0 4a 53 94 b2 54 09 fb ec 09 5e 37 08 04 01 00 00 a3 e2 92 cf 60 ba b7 20 17 e5 2b db 49 18 6b 90 19 04 5c e3 8e 78 35 c5 d5 b9 8c 17 49 8b 3b 5f be e2 5c 8b 91 7c ca d6 1d 2a f1 ed fc dc bb a0 64 bd b8 7e 62 14 14 72 a1 28 5f 90 22 72 1a 9d 41 ce e6 1b 9e 9a 63 14 8b e6 bf 35 e8 1b 27 11 a8 ce b6 bc 5f ee a5 c9 e6 ad c9 6d 16 d1 6a 9d 15 3c a8 17 44 8e 57 fe a2 8e 16 f0 3f d1 1c e5 f8 e4 7b 96 60 78 38 5d b4 4e 22 99 f6 d0 d1 97 4d af f1 40 95 88 b5 ed 0d f0 f5 5e 10 e8 15 21 c5 9b 4e ab 87 34 29 26 bd e8 cc f6 19 e4 be a8 55 83 54 2e 7e 26 d8 c6 0d 49 ba cf 8f c2 84 7d 74 bf 6a 5f c8 dc 6a dd f2 3c 7d a6 e6 15 12 51 a6 29 35 86 55 16 f8 02 77 2c 3e f2 8b 86 a8 bc 54 0a 7b 7f 4d 77 76 b0 7f 9c 6f 3b 0b 73 77 3e 7a 95 5d 57 1d 65 03 53 70 56 11 32 c6 f9 39 28 4b a6 4b b5 34 67 d1 53 a5 f9 35 99 68 e3 be 16 03 03 00 cc 0d 00 00 c8 03 01 02 40 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02 00 98 00 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 16 03 03 00 04 0e 00 00 00
+1741014899.850896: EAPOL: Received EAP-Packet frame
+1741014899.850936: EAPOL: SUPP_BE entering state REQUEST
+1741014899.850970: EAPOL: getSuppRsp
+1741014899.851005: EAP: EAP entering state RECEIVED
+1741014899.851058: EAP: Received EAP-Request id=232 method=13 vendor=0 vendorMethod=0
+1741014899.851096: EAP: EAP entering state METHOD
+1741014899.851264: SSL: Received packet(len=989) - Flags 0x80
+1741014899.851307: SSL: TLS Message Length: 2967
+1741014899.851365: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741014899.851409: OpenSSL: Message - hexdump(len=5): 16 03 03 00 3d
+1741014899.851451: SSL: (where=0x1001 ret=0x1)
+1741014899.851493: SSL: SSL_connect:SSLv3/TLS write client hello
+1741014899.851539: OpenSSL: RX ver=0x303 content_type=22 (handshake/server hello)
+1741014899.851579: OpenSSL: Message - hexdump(len=61): 02 00 00 39 03 03 c7 63 49 69 20 79 d5 a0 d7 3a 00 da 1f 6e d4 a5 33 46 40 36 ac 98 a6 48 c6 5d 1a 6b 58 53 15 14 00 c0 30 00 00 11 ff 01 00 01 00 00 0b 00 04 03 00 01 02 00 17 00 00
+1741014899.851675: OpenSSL: Server selected cipher suite 0xc030
+1741014899.851732: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741014899.851775: OpenSSL: Message - hexdump(len=5): 16 03 03 09 45
+1741014899.851817: SSL: (where=0x1001 ret=0x1)
+1741014899.851858: SSL: SSL_connect:SSLv3/TLS read server hello
+1741014899.851904: OpenSSL: RX ver=0x303 content_type=22 (handshake/certificate)
+1741014899.851948: OpenSSL: Message - hexdump(len=2373): 0b 00 09 41 00 09 3e 00 04 3a 30 82 04 36 30 82 03 1e a0 03 02 01 02 02 01 01 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 7c 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 23 30 21 06 03 55 04 03 0c 1a 45 78 61 6d 70 6c 65 20 53 65 72 76 65 72 20 43 65 72 74 69 66 69 63 61 74 65 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 ad 13 a1 63 7b e4 0c 49 e2 f7 93 a3 43 7b 41 1b df cd d5 e7 7c d8 10 07 44 4f a0 f4 0a 77 ce 08 26 86 ce 8e 77 c7 03 60 f7 1f 13 f2 80 54 be 7f 56 f6 9d e3 0b c8 ce 58 75 be e5 42 3a b7 6e e8 8f 59 ba 9c 6a 7b 41 ec f7 aa 1e 6f 5d 7a 86 c4 ff 62 95 a6 60 0a 9a 97 1f 9c 88 10 41 63 bd 43 8d c7 58 b6 cb 66 51 b5 ae 40 ce 60 e7 a6 eb b1 4d bf 32 c0 9d 90 e1 e2 55 ed 89 85 86 4d 06 fb b7 32 05 e2 4d 38 dc a3 c5 1e 4b dc f8 6a 46 00 6c 9f 80 54 eb b7 e2 0e c7 d5 b4 2e 13 9e a4 ce ab 58 ff 65 56 e0 e1 53 c1 5c 51 84 ca b4 2a 11 2e ee 53 65 9c 59 b1 f1 aa 69 4a 1e 77 43 cc 51 83 e8 be b3 d0 9a 3f 03 f4 a8 c0 09 6d 9f 40 90 29 59 d3 95 c9 8d 30 fc 49 dc ae 22 cb b2 17 87 b3 cc ec b4 19 c8 fe 32 a9 25 c1 79 f9 d2 87 c1 a9 b7 e1 85 92 c9 3c 92 12 e2 f8 1f b0 c9 5e 25 02 03 01 00 01 a3 81 aa 30 81 a7 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 01 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 18 06 03 55 1d 20 04 11 30 0f 30 0d 06 0b 2b 06 01 04 01 82 be 68 01 03 02 30 1d 06 03 55 1d 0e 04 16 04 14 c0 b0 27 40 4b d3 e1 44 0e 3c a2 f8 71 a7 b2 b9 c4 85 73 6e 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 a9 2a cd 02 6d a8 c8 25 85 a3 cd 16 42 1f a9 77 5c 53 cf 13 fc 97 a4 84 f7 74 7c 05 29 21 35 70 7e 78 64 02 e2 8d 15 94 23 af 83 f8 12 4f 2d 07 bc 33 ac db 7b a9 e1 25 9d e1 72 d2 0b df f4 d9 59 af 83 a2 c9 d6 b3 ce 76 2b e7 25 0e 31 51 04 03 15 cc 0f 69 4e 1d 77 33 7c bd 67 8b 38 7f 08 35 37 aa 4e 3a 5f ef 0c e3 05 c0 ad 8e a1 08 4b f4 70 72 1d 41 2e ef 71 aa f2 37 df f3 ed c2 d2 6f 2d 4a 5e f4 62 cf f5 f7 51 ef 8d 71 a7 9b 73 ee f8 e7 3d ec e6 69 33 1b ef cc 27 28 78 79 73 7a 7a 75 f6 fc 16 9b 22 12 46 7b 2d 3a 2b ba e3 d2 7b 27 b2 34 57 4a 9d 67 bc cf 31 94 8a 66 76 7c 45 80 5c e1 25 53 0e b3 e9 de c8 45 3e 49 17 61 d1 c7 33 77 7e fc ae 5e 82 00 1d b8 d4 7c 56 db c1 89 4d c6 57 a1 11 59 98 3d 2f c1 c4 09 ea 5c 36 dd da 37 d4 66 d5 12 58 ad 6f d9 07 bd dd 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00
+1741014899.853505: OpenSSL: Peer certificate - depth 1
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            5f:94:ac:48:a7:4c:ba:bc:4b:de:9d:6b:bd:f0:38:e8:19:4c:70:c1
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=FR, ST=Radius, L=Somewhere, O=Example Inc./emailAddress=admin@example.org, CN=Example Certificate Authority
+        Validity
+            Not Before: Mar  3 12:46:36 2025 GMT
+            Not After : May  2 12:46:36 2025 GMT
+        Subject: C=FR, ST=Radius, L=Somewhere, O=Example Inc./emailAddress=admin@example.org, CN=Example Certificate Authority
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:b2:2c:84:9c:5c:32:93:02:9a:b6:27:39:54:4e:
+                    b3:88:27:f3:05:d4:93:5b:29:32:c1:d5:6e:0f:48:
+                    67:51:40:6c:af:64:8c:e1:28:91:e8:67:b2:59:9b:
+                    05:1d:02:c4:16:5a:c3:14:bb:3a:8d:2b:8a:47:86:
+                    e8:29:78:0f:20:b9:35:ce:79:2b:43:bd:be:ac:45:
+                    75:9f:35:2b:a7:c1:a2:bf:9c:8e:33:d4:70:10:04:
+                    c1:89:f8:0d:c1:25:7e:43:2f:cb:87:9d:f7:f2:cf:
+                    f3:ba:b5:d8:47:d4:ba:79:11:55:c0:9f:87:3a:74:
+                    8e:9f:3f:88:7a:47:07:0f:4a:41:86:23:ab:a0:57:
+                    00:73:2c:6f:e8:89:8a:4d:c7:14:cc:00:66:5c:27:
+                    24:e1:f0:a6:84:64:ed:aa:09:89:01:a8:5e:07:ad:
+                    ff:4b:43:d7:03:99:cd:84:ff:4f:3f:c9:e3:1f:3a:
+                    bf:8b:02:7b:29:42:69:56:ba:e4:af:e0:b1:fa:7f:
+                    63:92:c3:70:5a:d5:6d:99:44:f6:f8:c7:19:23:b1:
+                    89:64:76:39:4b:21:ec:62:9b:1e:e8:ed:b1:79:0b:
+                    9f:19:cc:8e:1a:5a:73:03:2a:8f:fb:76:6d:a7:d7:
+                    aa:35:89:c2:29:4b:8d:59:61:23:3f:39:77:45:e0:
+                    57:7f
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Subject Key Identifier: 
+                6B:16:05:74:2C:90:AE:E1:F8:68:7B:49:7E:66:D1:CE:96:D7:11:35
+            X509v3 Authority Key Identifier: 
+                keyid:6B:16:05:74:2C:90:AE:E1:F8:68:7B:49:7E:66:D1:CE:96:D7:11:35
+                DirName:/C=FR/ST=Radius/L=Somewhere/O=Example Inc./emailAddress=admin@example.org/CN=Example Certificate Authority
+                serial:5F:94:AC:48:A7:4C:BA:BC:4B:DE:9D:6B:BD:F0:38:E8:19:4C:70:C1
+            X509v3 Basic Constraints: critical
+                CA:TRUE
+            X509v3 CRL Distribution Points: 
+                Full Name:
+                  URI:http://www.example.org/example_ca.crl
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        24:0e:eb:d4:78:ca:e1:8e:97:bb:d4:70:19:42:5f:ff:55:08:
+        8f:75:e2:c6:87:6a:8d:cc:34:2b:4f:17:2b:00:82:cc:12:66:
+        54:6c:f9:39:2e:af:79:a1:d7:2c:07:c8:43:41:22:5c:b5:3a:
+        e6:18:b3:c7:60:06:e2:98:e3:e3:70:3d:43:54:3e:50:c0:66:
+        64:d9:7e:4c:5b:9f:22:63:f9:82:ad:3e:f1:ae:6f:ee:a4:09:
+        63:66:db:5b:d6:b3:c7:b9:07:7f:f2:42:68:43:29:f9:cb:3d:
+        3e:8a:95:09:61:65:4d:ae:9a:e8:36:9a:15:6f:6e:a1:8a:7b:
+        1c:f6:88:c3:cb:08:2d:f1:fe:25:f3:31:27:2f:a0:f4:10:97:
+        2b:30:58:cd:ef:51:8d:5f:7f:2e:27:20:91:26:32:5b:ed:5e:
+        a0:e2:0d:df:61:f8:70:3f:15:8d:a0:ac:74:b3:a5:7d:d1:30:
+        9e:ce:a0:87:83:6e:96:3b:25:27:4a:2c:a1:e9:fe:60:be:7e:
+        43:ba:d9:5b:e2:e2:25:b0:ea:9a:a0:c5:59:f9:5c:56:e5:02:
+        8f:66:43:7e:e5:c4:de:16:5e:32:c7:8f:08:00:5e:01:03:55:
+        3a:e9:5c:fa:b0:cb:62:bd:4e:6a:81:2b:79:6e:9f:2c:a2:02:
+        49:ff:04:00
+
+1741014899.853728: enp0s8: CTRL-EVENT-EAP-PEER-CERT depth=1 subject='/C=FR/ST=Radius/L=Somewhere/O=Example Inc./emailAddress=admin@example.org/CN=Example Certificate Authority' hash=4f7e08d606fbf94b912d2ca9ad6512c09a60cb75ef2f8df4b82e7dd12567af92
+1741014899.853861: TLS: tls_verify_cb - preverify_ok=1 err=0 (ok) ca_cert_verify=1 depth=1 buf='/C=FR/ST=Radius/L=Somewhere/O=Example Inc./emailAddress=admin@example.org/CN=Example Certificate Authority'
+1741014899.854169: OpenSSL: Peer certificate - depth 0
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=FR, ST=Radius, L=Somewhere, O=Example Inc./emailAddress=admin@example.org, CN=Example Certificate Authority
+        Validity
+            Not Before: Mar  3 12:46:36 2025 GMT
+            Not After : May  2 12:46:36 2025 GMT
+        Subject: C=FR, ST=Radius, O=Example Inc., CN=Example Server Certificate/emailAddress=admin@example.org
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:ad:13:a1:63:7b:e4:0c:49:e2:f7:93:a3:43:7b:
+                    41:1b:df:cd:d5:e7:7c:d8:10:07:44:4f:a0:f4:0a:
+                    77:ce:08:26:86:ce:8e:77:c7:03:60:f7:1f:13:f2:
+                    80:54:be:7f:56:f6:9d:e3:0b:c8:ce:58:75:be:e5:
+                    42:3a:b7:6e:e8:8f:59:ba:9c:6a:7b:41:ec:f7:aa:
+                    1e:6f:5d:7a:86:c4:ff:62:95:a6:60:0a:9a:97:1f:
+                    9c:88:10:41:63:bd:43:8d:c7:58:b6:cb:66:51:b5:
+                    ae:40:ce:60:e7:a6:eb:b1:4d:bf:32:c0:9d:90:e1:
+                    e2:55:ed:89:85:86:4d:06:fb:b7:32:05:e2:4d:38:
+                    dc:a3:c5:1e:4b:dc:f8:6a:46:00:6c:9f:80:54:eb:
+                    b7:e2:0e:c7:d5:b4:2e:13:9e:a4:ce:ab:58:ff:65:
+                    56:e0:e1:53:c1:5c:51:84:ca:b4:2a:11:2e:ee:53:
+                    65:9c:59:b1:f1:aa:69:4a:1e:77:43:cc:51:83:e8:
+                    be:b3:d0:9a:3f:03:f4:a8:c0:09:6d:9f:40:90:29:
+                    59:d3:95:c9:8d:30:fc:49:dc:ae:22:cb:b2:17:87:
+                    b3:cc:ec:b4:19:c8:fe:32:a9:25:c1:79:f9:d2:87:
+                    c1:a9:b7:e1:85:92:c9:3c:92:12:e2:f8:1f:b0:c9:
+                    5e:25
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 CRL Distribution Points: 
+                Full Name:
+                  URI:http://www.example.com/example_ca.crl
+            X509v3 Certificate Policies: 
+                Policy: 1.3.6.1.4.1.40808.1.3.2
+            X509v3 Subject Key Identifier: 
+                C0:B0:27:40:4B:D3:E1:44:0E:3C:A2:F8:71:A7:B2:B9:C4:85:73:6E
+            X509v3 Authority Key Identifier: 
+                6B:16:05:74:2C:90:AE:E1:F8:68:7B:49:7E:66:D1:CE:96:D7:11:35
+    Signature Algorithm: sha256WithRSAEncryption
+    Signature Value:
+        a9:2a:cd:02:6d:a8:c8:25:85:a3:cd:16:42:1f:a9:77:5c:53:
+        cf:13:fc:97:a4:84:f7:74:7c:05:29:21:35:70:7e:78:64:02:
+        e2:8d:15:94:23:af:83:f8:12:4f:2d:07:bc:33:ac:db:7b:a9:
+        e1:25:9d:e1:72:d2:0b:df:f4:d9:59:af:83:a2:c9:d6:b3:ce:
+        76:2b:e7:25:0e:31:51:04:03:15:cc:0f:69:4e:1d:77:33:7c:
+        bd:67:8b:38:7f:08:35:37:aa:4e:3a:5f:ef:0c:e3:05:c0:ad:
+        8e:a1:08:4b:f4:70:72:1d:41:2e:ef:71:aa:f2:37:df:f3:ed:
+        c2:d2:6f:2d:4a:5e:f4:62:cf:f5:f7:51:ef:8d:71:a7:9b:73:
+        ee:f8:e7:3d:ec:e6:69:33:1b:ef:cc:27:28:78:79:73:7a:7a:
+        75:f6:fc:16:9b:22:12:46:7b:2d:3a:2b:ba:e3:d2:7b:27:b2:
+        34:57:4a:9d:67:bc:cf:31:94:8a:66:76:7c:45:80:5c:e1:25:
+        53:0e:b3:e9:de:c8:45:3e:49:17:61:d1:c7:33:77:7e:fc:ae:
+        5e:82:00:1d:b8:d4:7c:56:db:c1:89:4d:c6:57:a1:11:59:98:
+        3d:2f:c1:c4:09:ea:5c:36:dd:da:37:d4:66:d5:12:58:ad:6f:
+        d9:07:bd:dd
+
+1741014899.854342: OpenSSL: Certificate Policy 1.3.6.1.4.1.40808.1.3.2
+1741014899.854385: enp0s8: CTRL-EVENT-EAP-PEER-CERT depth=0 subject='/C=FR/ST=Radius/O=Example Inc./CN=Example Server Certificate/emailAddress=admin@example.org' hash=25b8fe851d6eda3b6a7f6c3170120ffdfbc3022c07575dde094433e274ba785f tod=2
+1741014899.854490: TLS: tls_verify_cb - preverify_ok=1 err=0 (ok) ca_cert_verify=1 depth=0 buf='/C=FR/ST=Radius/O=Example Inc./CN=Example Server Certificate/emailAddress=admin@example.org'
+1741014899.854528: EAP: Status notification: remote certificate verification (param=success)
+1741014899.854582: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741014899.854621: OpenSSL: Message - hexdump(len=5): 16 03 03 01 2c
+1741014899.854659: SSL: (where=0x1001 ret=0x1)
+1741014899.854693: SSL: SSL_connect:SSLv3/TLS read server certificate
+1741014899.854729: OpenSSL: RX ver=0x303 content_type=22 (handshake/server key exchange)
+1741014899.854766: OpenSSL: Message - hexdump(len=300): 0c 00 01 28 03 00 1d 20 ed 1f 61 46 32 84 2e 0c b8 36 69 cd 84 af 96 cc 32 ac 6f 4a f0 4a 53 94 b2 54 09 fb ec 09 5e 37 08 04 01 00 00 a3 e2 92 cf 60 ba b7 20 17 e5 2b db 49 18 6b 90 19 04 5c e3 8e 78 35 c5 d5 b9 8c 17 49 8b 3b 5f be e2 5c 8b 91 7c ca d6 1d 2a f1 ed fc dc bb a0 64 bd b8 7e 62 14 14 72 a1 28 5f 90 22 72 1a 9d 41 ce e6 1b 9e 9a 63 14 8b e6 bf 35 e8 1b 27 11 a8 ce b6 bc 5f ee a5 c9 e6 ad c9 6d 16 d1 6a 9d 15 3c a8 17 44 8e 57 fe a2 8e 16 f0 3f d1 1c e5 f8 e4 7b 96 60 78 38 5d b4 4e 22 99 f6 d0 d1 97 4d af f1 40 95 88 b5 ed 0d f0 f5 5e 10 e8 15 21 c5 9b 4e ab 87 34 29 26 bd e8 cc f6 19 e4 be a8 55 83 54 2e 7e 26 d8 c6 0d 49 ba cf 8f c2 84 7d 74 bf 6a 5f c8 dc 6a dd f2 3c 7d a6 e6 15 12 51 a6 29 35 86 55 16 f8 02 77 2c 3e f2 8b 86 a8 bc 54 0a 7b 7f 4d 77 76 b0 7f 9c 6f 3b 0b 73 77 3e 7a 95 5d 57 1d 65 03 53 70 56 11 32 c6 f9 39 28 4b a6 4b b5 34 67 d1 53 a5 f9 35 99 68 e3 be
+1741014899.854925: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741014899.854966: OpenSSL: Message - hexdump(len=5): 16 03 03 00 cc
+1741014899.855002: SSL: (where=0x1001 ret=0x1)
+1741014899.855042: SSL: SSL_connect:SSLv3/TLS read server key exchange
+1741014899.855084: OpenSSL: RX ver=0x303 content_type=22 (handshake/certificate request)
+1741014899.855122: OpenSSL: Message - hexdump(len=204): 0d 00 00 c8 03 01 02 40 00 28 04 03 05 03 06 03 08 07 08 08 08 09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06 01 03 03 03 01 03 02 04 02 05 02 06 02 00 98 00 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79
+1741014899.855204: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741014899.855242: OpenSSL: Message - hexdump(len=5): 16 03 03 00 04
+1741014899.855278: SSL: (where=0x1001 ret=0x1)
+1741014899.855314: SSL: SSL_connect:SSLv3/TLS read server certificate request
+1741014899.855349: OpenSSL: RX ver=0x303 content_type=22 (handshake/server hello done)
+1741014899.855387: OpenSSL: Message - hexdump(len=4): 0e 00 00 00
+1741014899.855424: SSL: (where=0x1001 ret=0x1)
+1741014899.855453: SSL: SSL_connect:SSLv3/TLS read server done
+1741014899.855540: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741014899.855573: OpenSSL: Message - hexdump(len=5): 16 03 03 09 20
+1741014899.855611: OpenSSL: TX ver=0x303 content_type=22 (handshake/certificate)
+1741014899.855649: OpenSSL: Message - hexdump(len=2336): 0b 00 09 1c 00 09 19 00 04 15 30 82 04 11 30 82 02 f9 a0 03 02 01 02 02 01 02 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 37 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 37 5a 30 71 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 19 30 17 06 03 55 04 03 0c 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 1f 30 1d 06 09 2a 86 48 86 f7 0d 01 09 01 16 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 d1 25 06 e2 46 c4 d3 90 e9 c3 c5 1a 7e 03 84 76 7b 10 30 2a a4 cb b4 4b 67 92 de 7e 81 7e c5 db 19 4b cd 7f c0 5b 13 33 11 65 c2 52 df 63 ba 64 77 72 4f 30 0f 9e b7 f3 f6 0d a7 aa 77 7d 1c 60 1a 40 55 be 51 02 39 55 b6 c4 68 37 7a 00 7f 3a 22 13 67 35 ca 7c 25 58 ea 7a 0b f5 31 a6 1c 96 71 43 d1 c7 4d 68 12 c6 02 08 c9 b7 b0 9b a4 9b 0c fa d1 27 7d 2f 39 f0 d0 8c 33 17 c6 95 c6 5d 5e d7 fe f4 3e 17 3b 72 ca 1d f9 9b 38 17 3a 71 8a c8 44 75 63 99 59 e3 3c 41 32 dd 91 47 ec ca bd 74 ce de e7 ce c4 d7 8c d9 bb 50 8e 8d 46 19 f9 83 ab d3 7a 88 9a 24 73 20 bb c9 54 27 64 2b e9 24 ee 28 80 82 32 eb 4e 25 86 84 bb 0c 1f 46 2b d2 b2 15 c9 e4 ce 0e 6d c9 8f 62 0e 3b 88 1b b0 1d 47 41 82 22 01 a1 59 74 b2 7b 86 3e 54 c1 ba a2 74 86 ba a4 2e fe c4 6d bb 8d 4d 62 0b e3 02 03 01 00 01 a3 81 90 30 81 8d 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 02 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 1d 06 03 55 1d 0e 04 16 04 14 d2 ed 4e fc b1 51 0f 0a 04 ba 57 34 40 54 98 35 3b 9c c5 91 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 8c 22 2c 48 bd d0 e1 da 67 ab 7e 5f 3a a9 aa 38 d2 3c ce 13 13 19 ff 3e 3c 6a c2 b2 af 46 b6 fc 61 80 be 44 d4 0e 7d 52 c0 1f cc 83 81 4d bc 78 b4 37 5b 73 21 e4 4f 9f 98 1c 81 6c 83 9e ee f3 c9 16 a5 2d f5 22 a6 53 da d3 bb 0b da c9 82 b3 3b c9 15 b9 61 9b 22 e2 fa 7f b5 d7 5f 15 4c e6 58 dd 7e d3 bf 6d b8 17 e8 0e 87 7b 33 7a b0 07 4b 93 01 d9 69 95 e2 c3 bf 64 80 41 47 cb 78 d2 58 63 43 1a 26 54 09 6c bb e8 2c ae ff 1f 20 e8 73 24 6b fb 5f c1 1d fd 96 ba bb 43 19 c9 6b ce 4a d3 52 41 7a 8d d1 51 b8 e0 38 b0 49 54 59 96 5f c4 6c 6f cd 02 f9 07 d0 cf f8 03 b5 56 8e 40 71 11 09 a8 0d 8d 37 c4 0f d4 d1 fd 04 cf 78 be 33 49 af 71 07 9a 42 b8 dd 34 66 0d 5c 4c cd 31 94 3a f9 6f 1c ae e6 30 b4 42 41 a9 9f e9 bb 11 05 ad 28 fa 6c 7b 41 b5 b0 20 2d 85 8e 82 4f 4b 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00
+1741014899.855942: SSL: (where=0x1001 ret=0x1)
+1741014899.855986: SSL: SSL_connect:SSLv3/TLS write client certificate
+1741014899.856135: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741014899.856176: OpenSSL: Message - hexdump(len=5): 16 03 03 00 25
+1741014899.856212: OpenSSL: TX ver=0x303 content_type=22 (handshake/client key exchange)
+1741014899.856248: OpenSSL: Message - hexdump(len=37): 10 00 00 21 20 c0 7a 4e 4e 54 10 4c be f3 f7 ac 93 1a e3 e9 63 53 34 1c 6f 3b d8 78 74 46 08 f1 6d 89 be ad 2c
+1741014899.856310: SSL: (where=0x1001 ret=0x1)
+1741014899.856347: SSL: SSL_connect:SSLv3/TLS write client key exchange
+1741014899.856903: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741014899.856948: OpenSSL: Message - hexdump(len=5): 16 03 03 01 08
+1741014899.856981: OpenSSL: TX ver=0x303 content_type=22 (handshake/certificate verify)
+1741014899.857017: OpenSSL: Message - hexdump(len=264): 0f 00 01 04 08 04 01 00 be cb 99 03 c2 96 01 e3 c9 18 8b f0 5d 31 fc 01 26 7c 79 94 38 8d 31 e5 fe 0f 67 11 25 75 58 a3 d8 15 a7 e4 82 ac 66 a9 cd c9 dd 6b 94 43 6e cf 7b 7e d7 f6 fe ca 03 02 ac 05 17 2b ab 1f 3d 43 e8 99 1d 07 29 6a 6f e8 0b d0 e8 8a 68 8e 83 d2 a0 4a a1 64 a4 63 3b 12 5d da 17 f5 e3 c2 b2 d5 06 3c 2b 6e f7 0a 73 8b 8b 2d b4 3c 71 b9 ef 50 bf db 5e 7f 32 40 b6 b3 fc 83 61 fd 33 ba 51 76 78 de 6a ee cd 01 c6 c8 26 a2 34 97 b3 d7 d9 3a 17 f4 e0 ba a7 87 02 ab 97 dd c2 40 94 79 94 7a 4e 2a 31 4d 22 d1 6f 56 ab 0e b3 3b 4f 98 40 8d 5b a8 d4 22 33 ab 16 13 5e 33 08 07 14 30 fd 39 61 cd d1 d6 1e f9 10 32 9b a2 9c cf ca d1 fd 71 a8 79 d6 09 9a 13 6c 7e af f8 7e 20 8b 6a 67 63 56 ab c1 be fc 8d 37 d0 40 03 5f 2a a2 5c c7 71 c9 ad 5c e8 72 cc db 40 d6 ce fb 9e f1 11 92 96
+1741014899.857070: SSL: (where=0x1001 ret=0x1)
+1741014899.857105: SSL: SSL_connect:SSLv3/TLS write certificate verify
+1741014899.857141: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741014899.857179: OpenSSL: Message - hexdump(len=5): 14 03 03 00 01
+1741014899.857219: OpenSSL: TX ver=0x303 content_type=20 (change cipher spec/)
+1741014899.857253: OpenSSL: Message - hexdump(len=1): 01
+1741014899.857301: SSL: (where=0x1001 ret=0x1)
+1741014899.857340: SSL: SSL_connect:SSLv3/TLS write change cipher spec
+1741014899.857391: OpenSSL: TX ver=0x303 content_type=256 (TLS header info/)
+1741014899.857427: OpenSSL: Message - hexdump(len=5): 16 03 03 00 28
+1741014899.857465: OpenSSL: TX ver=0x303 content_type=22 (handshake/finished)
+1741014899.857500: OpenSSL: Message - hexdump(len=16): 14 00 00 0c 88 3b b1 3a c6 39 8e c5 22 c6 4b 91
+1741014899.857536: SSL: (where=0x1001 ret=0x1)
+1741014899.857574: SSL: SSL_connect:SSLv3/TLS write finished
+1741014899.857609: SSL: (where=0x1002 ret=0xffffffff)
+1741014899.857649: SSL: SSL_connect:error in SSLv3/TLS write finished
+1741014899.857725: SSL: SSL_connect - want more data
+1741014899.857762: SSL: 2703 bytes pending from ssl_out
+1741014899.857798: SSL: Using TLS version TLSv1.2
+1741014899.857833: SSL: 2703 bytes left to be sent out (of total 2703 bytes)
+1741014899.857868: SSL: sending 1398 bytes, more fragments will follow
+1741014899.857904: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970f74c0
+1741014899.857944: EAP: EAP entering state SEND_RESPONSE
+1741014899.857981: EAP: EAP entering state IDLE
+1741014899.858017: EAPOL: SUPP_BE entering state RESPONSE
+1741014899.858052: EAPOL: txSuppRsp
+1741014899.858099: TX EAPOL: dst=01:80:c2:00:00:03
+1741014899.858137: TX EAPOL - hexdump(len=1412): 02 00 05 80 02 e8 05 80 0d c0 00 00 0a 8f 16 03 03 09 20 0b 00 09 1c 00 09 19 00 04 15 30 82 04 11 30 82 02 f9 a0 03 02 01 02 02 01 02 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 37 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 37 5a 30 71 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 19 30 17 06 03 55 04 03 0c 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 1f 30 1d 06 09 2a 86 48 86 f7 0d 01 09 01 16 10 75 73 65 72 40 65 78 61 6d 70 6c 65 2e 6f 72 67 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 d1 25 06 e2 46 c4 d3 90 e9 c3 c5 1a 7e 03 84 76 7b 10 30 2a a4 cb b4 4b 67 92 de 7e 81 7e c5 db 19 4b cd 7f c0 5b 13 33 11 65 c2 52 df 63 ba 64 77 72 4f 30 0f 9e b7 f3 f6 0d a7 aa 77 7d 1c 60 1a 40 55 be 51 02 39 55 b6 c4 68 37 7a 00 7f 3a 22 13 67 35 ca 7c 25 58 ea 7a 0b f5 31 a6 1c 96 71 43 d1 c7 4d 68 12 c6 02 08 c9 b7 b0 9b a4 9b 0c fa d1 27 7d 2f 39 f0 d0 8c 33 17 c6 95 c6 5d 5e d7 fe f4 3e 17 3b 72 ca 1d f9 9b 38 17 3a 71 8a c8 44 75 63 99 59 e3 3c 41 32 dd 91 47 ec ca bd 74 ce de e7 ce c4 d7 8c d9 bb 50 8e 8d 46 19 f9 83 ab d3 7a 88 9a 24 73 20 bb c9 54 27 64 2b e9 24 ee 28 80 82 32 eb 4e 25 86 84 bb 0c 1f 46 2b d2 b2 15 c9 e4 ce 0e 6d c9 8f 62 0e 3b 88 1b b0 1d 47 41 82 22 01 a1 59 74 b2 7b 86 3e 54 c1 ba a2 74 86 ba a4 2e fe c4 6d bb 8d 4d 62 0b e3 02 03 01 00 01 a3 81 90 30 81 8d 30 13 06 03 55 1d 25 04 0c 30 0a 06 08 2b 06 01 05 05 07 03 02 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 63 6f 6d 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 1d 06 03 55 1d 0e 04 16 04 14 d2 ed 4e fc b1 51 0f 0a 04 ba 57 34 40 54 98 35 3b 9c c5 91 30 1f 06 03 55 1d 23 04 18 30 16 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 8c 22 2c 48 bd d0 e1 da 67 ab 7e 5f 3a a9 aa 38 d2 3c ce 13 13 19 ff 3e 3c 6a c2 b2 af 46 b6 fc 61 80 be 44 d4 0e 7d 52 c0 1f cc 83 81 4d bc 78 b4 37 5b 73 21 e4 4f 9f 98 1c 81 6c 83 9e ee f3 c9 16 a5 2d f5 22 a6 53 da d3 bb 0b da c9 82 b3 3b c9 15 b9 61 9b 22 e2 fa 7f b5 d7 5f 15 4c e6 58 dd 7e d3 bf 6d b8 17 e8 0e 87 7b 33 7a b0 07 4b 93 01 d9 69 95 e2 c3 bf 64 80 41 47 cb 78 d2 58 63 43 1a 26 54 09 6c bb e8 2c ae ff 1f 20 e8 73 24 6b fb 5f c1 1d fd 96 ba bb 43 19 c9 6b ce 4a d3 52 41 7a 8d d1 51 b8 e0 38 b0 49 54 59 96 5f c4 6c 6f cd 02 f9 07 d0 cf f8 03 b5 56 8e 40 71 11 09 a8 0d 8d 37 c4 0f d4 d1 fd 04 cf 78 be 33 49 af 71 07 9a 42 b8 dd 34 66 0d 5c 4c cd 31 94 3a f9 6f 1c ae e6 30 b4 42 41 a9 9f e9 bb 11 05 ad 28 fa 6c 7b 41 b5 b0 20 2d 85 8e 82 4f 4b 00 04 fe 30 82 04 fa 30 82 03 e2 a0 03 02 01 02 02 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 1e 17 0d 32 35 30 33 30 33 31 32 34 36 33 36 5a 17 0d 32 35 30 35 30 32 31 32 34 36 33 36 5a 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d
+1741014899.858366: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.868388: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741014899.868474: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.868519: RX EAPOL - hexdump(len=46): 02 00 00 06 01 e9 00 06 0d 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741014899.868563: EAPOL: Received EAP-Packet frame
+1741014899.868599: EAPOL: SUPP_BE entering state REQUEST
+1741014899.868636: EAPOL: getSuppRsp
+1741014899.868672: EAP: EAP entering state RECEIVED
+1741014899.868723: EAP: Received EAP-Request id=233 method=13 vendor=0 vendorMethod=0
+1741014899.868760: EAP: EAP entering state METHOD
+1741014899.868795: SSL: Received packet(len=6) - Flags 0x00
+1741014899.868833: SSL: 1305 bytes left to be sent out (of total 2703 bytes)
+1741014899.868871: EAP: method process -> ignore=FALSE methodState=MAY_CONT decision=FAIL eapRespData=0x563c970c4230
+1741014899.868907: EAP: EAP entering state SEND_RESPONSE
+1741014899.868942: EAP: EAP entering state IDLE
+1741014899.868976: EAPOL: SUPP_BE entering state RESPONSE
+1741014899.869012: EAPOL: txSuppRsp
+1741014899.869050: TX EAPOL: dst=01:80:c2:00:00:03
+1741014899.869086: TX EAPOL - hexdump(len=1315): 02 00 05 1f 02 e9 05 1f 0d 00 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 30 82 01 22 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0f 00 30 82 01 0a 02 82 01 01 00 b2 2c 84 9c 5c 32 93 02 9a b6 27 39 54 4e b3 88 27 f3 05 d4 93 5b 29 32 c1 d5 6e 0f 48 67 51 40 6c af 64 8c e1 28 91 e8 67 b2 59 9b 05 1d 02 c4 16 5a c3 14 bb 3a 8d 2b 8a 47 86 e8 29 78 0f 20 b9 35 ce 79 2b 43 bd be ac 45 75 9f 35 2b a7 c1 a2 bf 9c 8e 33 d4 70 10 04 c1 89 f8 0d c1 25 7e 43 2f cb 87 9d f7 f2 cf f3 ba b5 d8 47 d4 ba 79 11 55 c0 9f 87 3a 74 8e 9f 3f 88 7a 47 07 0f 4a 41 86 23 ab a0 57 00 73 2c 6f e8 89 8a 4d c7 14 cc 00 66 5c 27 24 e1 f0 a6 84 64 ed aa 09 89 01 a8 5e 07 ad ff 4b 43 d7 03 99 cd 84 ff 4f 3f c9 e3 1f 3a bf 8b 02 7b 29 42 69 56 ba e4 af e0 b1 fa 7f 63 92 c3 70 5a d5 6d 99 44 f6 f8 c7 19 23 b1 89 64 76 39 4b 21 ec 62 9b 1e e8 ed b1 79 0b 9f 19 cc 8e 1a 5a 73 03 2a 8f fb 76 6d a7 d7 aa 35 89 c2 29 4b 8d 59 61 23 3f 39 77 45 e0 57 7f 02 03 01 00 01 a3 82 01 42 30 82 01 3e 30 1d 06 03 55 1d 0e 04 16 04 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 30 81 d3 06 03 55 1d 23 04 81 cb 30 81 c8 80 14 6b 16 05 74 2c 90 ae e1 f8 68 7b 49 7e 66 d1 ce 96 d7 11 35 a1 81 99 a4 81 96 30 81 93 31 0b 30 09 06 03 55 04 06 13 02 46 52 31 0f 30 0d 06 03 55 04 08 0c 06 52 61 64 69 75 73 31 12 30 10 06 03 55 04 07 0c 09 53 6f 6d 65 77 68 65 72 65 31 15 30 13 06 03 55 04 0a 0c 0c 45 78 61 6d 70 6c 65 20 49 6e 63 2e 31 20 30 1e 06 09 2a 86 48 86 f7 0d 01 09 01 16 11 61 64 6d 69 6e 40 65 78 61 6d 70 6c 65 2e 6f 72 67 31 26 30 24 06 03 55 04 03 0c 1d 45 78 61 6d 70 6c 65 20 43 65 72 74 69 66 69 63 61 74 65 20 41 75 74 68 6f 72 69 74 79 82 14 5f 94 ac 48 a7 4c ba bc 4b de 9d 6b bd f0 38 e8 19 4c 70 c1 30 0f 06 03 55 1d 13 01 01 ff 04 05 30 03 01 01 ff 30 36 06 03 55 1d 1f 04 2f 30 2d 30 2b a0 29 a0 27 86 25 68 74 74 70 3a 2f 2f 77 77 77 2e 65 78 61 6d 70 6c 65 2e 6f 72 67 2f 65 78 61 6d 70 6c 65 5f 63 61 2e 63 72 6c 30 0d 06 09 2a 86 48 86 f7 0d 01 01 0b 05 00 03 82 01 01 00 24 0e eb d4 78 ca e1 8e 97 bb d4 70 19 42 5f ff 55 08 8f 75 e2 c6 87 6a 8d cc 34 2b 4f 17 2b 00 82 cc 12 66 54 6c f9 39 2e af 79 a1 d7 2c 07 c8 43 41 22 5c b5 3a e6 18 b3 c7 60 06 e2 98 e3 e3 70 3d 43 54 3e 50 c0 66 64 d9 7e 4c 5b 9f 22 63 f9 82 ad 3e f1 ae 6f ee a4 09 63 66 db 5b d6 b3 c7 b9 07 7f f2 42 68 43 29 f9 cb 3d 3e 8a 95 09 61 65 4d ae 9a e8 36 9a 15 6f 6e a1 8a 7b 1c f6 88 c3 cb 08 2d f1 fe 25 f3 31 27 2f a0 f4 10 97 2b 30 58 cd ef 51 8d 5f 7f 2e 27 20 91 26 32 5b ed 5e a0 e2 0d df 61 f8 70 3f 15 8d a0 ac 74 b3 a5 7d d1 30 9e ce a0 87 83 6e 96 3b 25 27 4a 2c a1 e9 fe 60 be 7e 43 ba d9 5b e2 e2 25 b0 ea 9a a0 c5 59 f9 5c 56 e5 02 8f 66 43 7e e5 c4 de 16 5e 32 c7 8f 08 00 5e 01 03 55 3a e9 5c fa b0 cb 62 bd 4e 6a 81 2b 79 6e 9f 2c a2 02 49 ff 04 00 16 03 03 00 25 10 00 00 21 20 c0 7a 4e 4e 54 10 4c be f3 f7 ac 93 1a e3 e9 63 53 34 1c 6f 3b d8 78 74 46 08 f1 6d 89 be ad 2c 16 03 03 01 08 0f 00 01 04 08 04 01 00 be cb 99 03 c2 96 01 e3 c9 18 8b f0 5d 31 fc 01 26 7c 79 94 38 8d 31 e5 fe 0f 67 11 25 75 58 a3 d8 15 a7 e4 82 ac 66 a9 cd c9 dd 6b 94 43 6e cf 7b 7e d7 f6 fe ca 03 02 ac 05 17 2b ab 1f 3d 43 e8 99 1d 07 29 6a 6f e8 0b d0 e8 8a 68 8e 83 d2 a0 4a a1 64 a4 63 3b 12 5d da 17 f5 e3 c2 b2 d5 06 3c 2b 6e f7 0a 73 8b 8b 2d b4 3c 71 b9 ef 50 bf db 5e 7f 32 40 b6 b3 fc 83 61 fd 33 ba 51 76 78 de 6a ee cd 01 c6 c8 26 a2 34 97 b3 d7 d9 3a 17 f4 e0 ba a7 87 02 ab 97 dd c2 40 94 79 94 7a 4e 2a 31 4d 22 d1 6f 56 ab 0e b3 3b 4f 98 40 8d 5b a8 d4 22 33 ab 16 13 5e 33 08 07 14 30 fd 39 61 cd d1 d6 1e f9 10 32 9b a2 9c cf ca d1 fd 71 a8 79 d6 09 9a 13 6c 7e af f8 7e 20 8b 6a 67 63 56 ab c1 be fc 8d 37 d0 40 03 5f 2a a2 5c c7 71 c9 ad 5c e8 72 cc db 40 d6 ce fb 9e f1 11 92 96 14 03 03 00 01 01 16 03 03 00 28 f1 9c db c4 8d ae 2d d0 e0 73 18 30 3e e1 c2 76 55 05 69 9b 58 eb 64 49 3d ac ce 84 67 e3 77 b5 59 52 1c 69 ff c0 f1 30
+1741014899.869271: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.884833: l2_packet_receive: src=08:00:27:cf:14:fc len=65
+1741014899.885009: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.885093: RX EAPOL - hexdump(len=65): 02 00 00 3d 01 ea 00 3d 0d 80 00 00 00 33 14 03 03 00 01 01 16 03 03 00 28 2a 8e cd 80 df cc a0 db cb d5 ba 28 3e c3 08 ce 3d 56 53 84 06 51 01 10 f1 59 86 eb e4 32 01 45 0e e4 f7 3a 49 46 e4 d8
+1741014899.885157: EAPOL: Received EAP-Packet frame
+1741014899.885207: EAPOL: SUPP_BE entering state REQUEST
+1741014899.885250: EAPOL: getSuppRsp
+1741014899.885296: EAP: EAP entering state RECEIVED
+1741014899.885361: EAP: Received EAP-Request id=234 method=13 vendor=0 vendorMethod=0
+1741014899.885410: EAP: EAP entering state METHOD
+1741014899.885453: SSL: Received packet(len=61) - Flags 0x80
+1741014899.885494: SSL: TLS Message Length: 51
+1741014899.885547: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741014899.885592: OpenSSL: Message - hexdump(len=5): 14 03 03 00 01
+1741014899.885635: SSL: (where=0x1001 ret=0x1)
+1741014899.885671: SSL: SSL_connect:SSLv3/TLS write finished
+1741014899.885726: OpenSSL: RX ver=0x303 content_type=256 (TLS header info/)
+1741014899.885775: OpenSSL: Message - hexdump(len=5): 16 03 03 00 28
+1741014899.885822: SSL: (where=0x1001 ret=0x1)
+1741014899.885866: SSL: SSL_connect:SSLv3/TLS read change cipher spec
+1741014899.885942: OpenSSL: RX ver=0x303 content_type=22 (handshake/finished)
+1741014899.885993: OpenSSL: Message - hexdump(len=16): 14 00 00 0c e6 dd 84 07 89 ed 1f 7b 7a 3e 88 37
+1741014899.886042: SSL: (where=0x1001 ret=0x1)
+1741014899.886119: SSL: SSL_connect:SSLv3/TLS read finished
+1741014899.886170: SSL: (where=0x20 ret=0x1)
+1741014899.886214: SSL: (where=0x1002 ret=0x1)
+1741014899.886255: SSL: 0 bytes pending from ssl_out
+1741014899.886302: OpenSSL: Handshake finished - resumed=0
+1741014899.886345: SSL: No Application Data included
+1741014899.886388: SSL: Using TLS version TLSv1.2
+1741014899.886429: SSL: No data to be sent out
+1741014899.886464: EAP-TLS: Done
+1741014899.886541: EAP-TLS: Derived key - hexdump(len=64): 9b d0 a2 b6 ed 8a 8f 50 bc e3 29 2c 77 89 15 63 20 fd 5f c8 e4 38 45 3a ca a8 ab 76 4b f5 7e cc f6 19 37 17 74 06 9f f1 4b 94 70 a9 52 59 35 d7 0e ce 70 05 cd 6a 00 9d 17 a1 b6 f4 49 b4 bc 15
+1741014899.886652: EAP-TLS: Derived EMSK - hexdump(len=64): 26 12 2f 3a 46 82 bf 09 6a 38 18 7f 79 4e ca 2c 1a 8a 33 4b 54 46 1c 28 48 8d 7c 5c 03 1e 84 0b 29 22 fa 68 f2 ac 22 e6 6b 2d 5d b0 1c fe 95 d4 30 6b db 72 9f c3 22 ac 1f 1d 1d 7a d9 79 4a c0
+1741014899.886703: EAP-TLS: Derived Session-Id - hexdump(len=65): 0d 16 f4 28 b3 92 c2 10 62 e7 d1 51 57 dc 69 65 38 44 78 64 c5 bb 84 98 45 24 89 fd 35 f7 70 d7 61 c7 63 49 69 20 79 d5 a0 d7 3a 00 da 1f 6e d4 a5 33 46 40 36 ac 98 a6 48 c6 5d 1a 6b 58 53 15 14
+1741014899.886753: SSL: Building ACK (type=13 id=234 ver=0)
+1741014899.886795: EAP: method process -> ignore=FALSE methodState=DONE decision=UNCOND_SUCC eapRespData=0x563c970d8e60
+1741014899.886836: EAP: Session-Id - hexdump(len=65): 0d 16 f4 28 b3 92 c2 10 62 e7 d1 51 57 dc 69 65 38 44 78 64 c5 bb 84 98 45 24 89 fd 35 f7 70 d7 61 c7 63 49 69 20 79 d5 a0 d7 3a 00 da 1f 6e d4 a5 33 46 40 36 ac 98 a6 48 c6 5d 1a 6b 58 53 15 14
+1741014899.886887: EAP: EAP entering state SEND_RESPONSE
+1741014899.886934: EAP: EAP entering state IDLE
+1741014899.886976: EAPOL: SUPP_BE entering state RESPONSE
+1741014899.887021: EAPOL: txSuppRsp
+1741014899.887068: TX EAPOL: dst=01:80:c2:00:00:03
+1741014899.887110: TX EAPOL - hexdump(len=10): 02 00 00 06 02 ea 00 06 0d 00
+1741014899.887194: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.898032: l2_packet_receive: src=08:00:27:cf:14:fc len=46
+1741014899.898136: enp0s8: RX EAPOL from 08:00:27:cf:14:fc
+1741014899.898192: RX EAPOL - hexdump(len=46): 02 00 00 04 03 ea 00 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+1741014899.898248: EAPOL: Received EAP-Packet frame
+1741014899.898296: EAPOL: SUPP_BE entering state REQUEST
+1741014899.898336: EAPOL: getSuppRsp
+1741014899.898377: EAP: EAP entering state RECEIVED
+1741014899.898426: EAP: Received EAP-Success
+1741014899.898478: EAP: Status notification: completion (param=success)
+1741014899.898530: EAP: EAP entering state SUCCESS
+1741014899.898572: enp0s8: CTRL-EVENT-EAP-SUCCESS EAP authentication completed successfully
+1741014899.898618: EAPOL: SUPP_PAE entering state AUTHENTICATED
+1741014899.898662: EAPOL: SUPP_BE entering state RECEIVE
+1741014899.898706: EAPOL: SUPP_BE entering state SUCCESS
+1741014899.898753: EAPOL: SUPP_BE entering state IDLE
+1741014899.898800: EAPOL authentication completed - result=SUCCESS
+1741014929.834072: EAPOL: authWhile --> 0
+1741014959.867195: EAPOL: idleWhile --> 0
+1741014959.867381: EAPOL: disable timer tick

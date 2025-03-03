@@ -201,6 +201,9 @@ done
 echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
+echo -e "Install dependencies for hostapd and dnsmasq"
+sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev dnsmasq
+
 echo -e "\nInstalling hostapd"
 git clone git://w1.fi/hostap.git ~/hostap
 cd ~/hostap/hostapd
@@ -209,8 +212,7 @@ echo -e "Enable wired driver and debug file"
 cp defconfig .config
 sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
 
-echo -e "Install dependencies and compile hostapd"
-sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev
+echo -e "\nCompile hostapd"
 make
 
 echo -e "Writing hostapd configurations"
@@ -234,6 +236,20 @@ cat hostapd.conf > ${LOG_FILE_PATH}
 
 echo -e "\nRunning hostapd"
 sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
+
+#echo -e "\nDisable systemd-resolved to free port 53 for dnsmasq"
+#sudo systemctl stop systemd-resolved
+#sudo systemctl disable systemd-resolved
+#sudo systemctl mask systemd-resolved
+
+echo -e "\nRunning dnsmasq DHCP server"
+sudo killall dnsmasq dhclient
+
+echo -e "interface=enp0s10
+dhcp-range=192.168.60.3,192.168.60.100,12h
+log-dhcp" > /etc/dnsmasq.conf
+
+#sudo dnsmasq -d &>> /log/dnsmasq_$(date +%s).log &
 
 SCRIPT
 $ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("AUTH_SERVER_IP", AUTH_SERVER_IP).gsub!("CLIENT_SECRET", CLIENT_SECRET)
