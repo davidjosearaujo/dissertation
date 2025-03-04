@@ -13,7 +13,7 @@ GNB_IP_UE = "192.168.57.11"
 ## UE IPs
 UE_IP = "192.168.57.12"
 UE_EAP_IP = "192.168.58.100"
-UE_LAN = "192.168.60.2"
+UE_LAN_IP = "192.168.60.2"
 
 ## UE Configurations
 UE_IMSI = "999700000000001"
@@ -22,7 +22,7 @@ UE_OPC = "E8ED289DEBA952E4283B54E88E6183CA"
 PDU_SESSIONS = "3"
 
 ## End Device IPs
-NAUN3_IP = "192.168.60.100"
+NAUN3_IP = "192.168.60.200"
 
 ## EAP Auth Server IP
 AUTH_SERVER_IP = "192.168.58.2"
@@ -34,7 +34,7 @@ CERT_SERVER_PASSWD = SecureRandom.alphanumeric(8)
 CERT_CLIENT_PASSWD = SecureRandom.alphanumeric(8)
 CLIENT_SECRET = SecureRandom.alphanumeric(8)
 
-if ARGV.include?("up") && (ARGV.include?("auth_server") || !File.exist?(EAP_SECRETS_FILE))
+if ARGV.include?("up") && !File.exist?(EAP_SECRETS_FILE)
   File.write(EAP_SECRETS_FILE, "#{CERT_CA_PASSWD},#{CERT_SERVER_PASSWD},#{CERT_CLIENT_PASSWD},#{CLIENT_SECRET}")
 elsif File.exist?(EAP_SECRETS_FILE)
   CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET, = File.read(EAP_SECRETS_FILE).split(",")
@@ -237,19 +237,21 @@ cat hostapd.conf > ${LOG_FILE_PATH}
 echo -e "\nRunning hostapd"
 sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
 
-#echo -e "\nDisable systemd-resolved to free port 53 for dnsmasq"
-#sudo systemctl stop systemd-resolved
-#sudo systemctl disable systemd-resolved
-#sudo systemctl mask systemd-resolved
+echo -e "\nConfiguring dnsmasq DHCP server"
+echo -e "interface=enp0s10
+bind-interfaces
+dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,12h
+dhcp-authoritative
+log-dhcp
+log-queries" > /etc/dnsmasq.conf
+
+systemctl stop dnsmasq
+
+LOG_FILE_PATH="/log/dnsmasq_$(date +%s).log"
+cat /etc/dnsmasq.conf > ${LOG_FILE_PATH}
 
 echo -e "\nRunning dnsmasq DHCP server"
-sudo killall dnsmasq dhclient
-
-echo -e "interface=enp0s10
-dhcp-range=192.168.60.3,192.168.60.100,12h
-log-dhcp" > /etc/dnsmasq.conf
-
-#sudo dnsmasq -d &>> /log/dnsmasq_$(date +%s).log &
+sudo dnsmasq -d &>> ${LOG_FILE_PATH} &
 
 SCRIPT
 $ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("AUTH_SERVER_IP", AUTH_SERVER_IP).gsub!("CLIENT_SECRET", CLIENT_SECRET)
@@ -330,7 +332,8 @@ eapol_version=2
 ap_scan=0
 
 network={
-    ssid="wired"
+    eapol_flags=0
+
     key_mgmt=IEEE8021X
     eap=TLS
 
@@ -338,8 +341,6 @@ network={
     ca_cert="/certs/ca.pem"
     private_key="/certs/client.p12"
     private_key_passwd="CERT_CLIENT_PASSWD"
-
-    eapol_flags=0
 }' > wpa_supplicant.conf
 
 LOG_FILE_PATH="/log/wpa_supplicant_$(date +%s).log"
@@ -419,7 +420,7 @@ Vagrant.configure("2") do |config|
     ue.vm.network "private_network", ip: UE_EAP_IP
 
     # LAN interface
-    ue.vm.network "private_network", ip: UE_LAN
+    ue.vm.network "private_network", ip: UE_LAN_IP
 
     # UERANSIM installation
     ue.vm.provision "shell", inline: $ueransim_install
