@@ -242,6 +242,8 @@ echo -e "interface=enp0s10
 bind-interfaces
 dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,12h
 dhcp-authoritative
+dhcp-option=3,192.168.60.2
+dhcp-option=6,192.168.60.2
 log-dhcp
 log-queries" > /etc/dnsmasq.conf
 
