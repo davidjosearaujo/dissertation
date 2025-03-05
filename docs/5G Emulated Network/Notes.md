@@ -12,6 +12,8 @@
 	- [ ] One is the default one, for control
 	- [ ] Other is for NAUN3s
 		- [ ] In this one, the multiple PDU Sessions will be established
+
+I've created an [issue](https://github.com/aligungr/UERANSIM/issues/756) in UERANSIM GitHub repo regarding the faillure in creating the multiple PDU Sessions.
 # Implement EAP-TLS
 ## EAP Framework Topology Perspective
 ![[topology-EAP.png]]
@@ -110,5 +112,9 @@ auth_server_shared_secret="CLIENT_SECRET"
 ## Copy certificate to NAUN3
 - [x] Disable IP on the NAUN3
 - [x] Install `ca.crt`, `client.crt` and `client.key`
-## Enabe `dnsmasq` as DHCP server on the UE
-
+# DHCP for authenticated hosts
+I need to check if a host is authenticated before leasing them an IP address.
+1. [ ] Check for new data frames on unknown hosts in `hostapd` log
+2. [ ] Check if that host authenticates successfully
+3. [ ] Lease IP
+# Create bind between LAN host and PDU Session interface
