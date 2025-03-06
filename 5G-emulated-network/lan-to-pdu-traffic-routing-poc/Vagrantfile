@@ -1,0 +1,116 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+WAN_IP = "192.168.56.2"
+
+UE_IP = "192.168.56.100"
+UE_LAN_IP = "192.168.60.2"
+
+HOST1_IP = "192.168.60.100"
+HOST2_IP = "192.168.60.200"
+
+$wan_install = <<-'SCRIPT'
+
+sudo ip link add link enp0s8 name enp0s8.1 type vlan id 1
+sudo ip addr add 10.46.0.1/24 dev enp0s8.1
+sudo ip link set enp0s8.1 up
+
+sudo ip link add link enp0s8 name enp0s8.2 type vlan id 2
+sudo ip addr add 10.46.0.2/24 dev enp0s8.2
+sudo ip link set enp0s8.2 up
+
+SCRIPT
+
+$ue_install = <<-'SCRIPT'
+
+# Create VLAN interfaces
+sudo ip link add link enp0s8 name enp0s8.1 type vlan id 1
+sudo ip addr add 10.46.0.100/24 dev enp0s8.1
+sudo ip link set enp0s8.1 up
+
+sudo ip link add link enp0s8 name enp0s8.2 type vlan id 2
+sudo ip addr add 10.46.0.200/24 dev enp0s8.2
+sudo ip link set enp0s8.2 up
+
+#Enable ip forwarding
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# Mangle table: mark packets
+iptables -t mangle -A PREROUTING -s 192.168.60.100 -j MARK --set-mark 10
+iptables -t mangle -A PREROUTING -s 192.168.60.200 -j MARK --set-mark 20
+
+# Create routing tables (add to /etc/iproute2/rt_tables)
+echo -e "100 table10
+200 table20" > /etc/iproute2/rt_tables
+
+# Add routes to tables (replace gateway IPs)
+ip route add 10.46.0.0/24 dev enp0s8.1 table table10
+ip route add 10.46.0.0/24 dev enp0s8.2 table table20
+
+# Add routing rules
+ip rule add fwmark 10 table table10
+ip rule add fwmark 20 table table20
+
+SCRIPT
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "wan" do |wan|
+    wan.vm.box = "ubuntu/jammy64"
+
+    wan.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    wan.vm.hostname = "wan"
+    wan.vm.network "private_network", ip: WAN_IP
+
+    # Interface configuration
+    wan.vm.provision "shell", inline: $wan_install
+  end
+
+  config.vm.define "ue" do |ue|
+    ue.vm.box = "ubuntu/jammy64"
+
+    ue.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    ue.vm.hostname = "ue"
+    
+    # WAN interface
+    ue.vm.network "private_network", ip: UE_IP
+
+    # LAN interface
+    ue.vm.network "private_network", ip: UE_LAN_IP
+
+    # Interface and Route configuration
+    ue.vm.provision "shell", inline: $ue_install
+  end
+
+  config.vm.define "host1" do |host1|
+    host1.vm.box = "ubuntu/jammy64"
+
+    host1.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    host1.vm.hostname = "host1"
+    host1.vm.network "private_network", ip: HOST1_IP
+  end
+
+  config.vm.define "host2" do |host2|
+    host2.vm.box = "ubuntu/jammy64"
+
+    host2.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    host2.vm.hostname = "host2"
+    host2.vm.network "private_network", ip: HOST2_IP
+  end
+end
