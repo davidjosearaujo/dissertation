@@ -19,11 +19,13 @@ sudo ip link add link enp0s8 name enp0s8.2 type vlan id 2
 sudo ip addr add 10.46.0.2/24 dev enp0s8.2
 sudo ip link set enp0s8.2 up
 
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+sudo sysctl -w net.ipv4.ip_forward=1
+
 SCRIPT
 
 $ue_install = <<-'SCRIPT'
 
-# Create VLAN interfaces
 sudo ip link add link enp0s8 name enp0s8.1 type vlan id 1
 sudo ip addr add 10.46.0.100/24 dev enp0s8.1
 sudo ip link set enp0s8.1 up
@@ -32,24 +34,25 @@ sudo ip link add link enp0s8 name enp0s8.2 type vlan id 2
 sudo ip addr add 10.46.0.200/24 dev enp0s8.2
 sudo ip link set enp0s8.2 up
 
-#Enable ip forwarding
-echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
+sudo sysctl -w net.ipv4.ip_forward=1
 
-# Mangle table: mark packets
-iptables -t mangle -A PREROUTING -s 192.168.60.100 -j MARK --set-mark 10
-iptables -t mangle -A PREROUTING -s 192.168.60.200 -j MARK --set-mark 20
+echo "101 vlan1" | sudo tee -a /etc/iproute2/rt_tables
+echo "102 vlan2" | sudo tee -a /etc/iproute2/rt_tables
 
-# Create routing tables (add to /etc/iproute2/rt_tables)
-echo -e "100 table10
-200 table20" > /etc/iproute2/rt_tables
+# For 192.168.60.100 -> Route via enp0s8.1
+sudo ip rule add from 192.168.60.100 lookup vlan1
+sudo ip route add default via 10.46.0.1 dev enp0s8.1 table vlan1
 
-# Add routes to tables (replace gateway IPs)
-ip route add 10.46.0.0/24 dev enp0s8.1 table table10
-ip route add 10.46.0.0/24 dev enp0s8.2 table table20
+# For 192.168.60.200 -> Route via enp0s8.2
+sudo ip rule add from 192.168.60.200 lookup vlan2
+sudo ip route add default via 10.46.0.2 dev enp0s8.2 table vlan2
 
-# Add routing rules
-ip rule add fwmark 10 table table10
-ip rule add fwmark 20 table table20
+SCRIPT
+
+$host_install = <<-'SCRIPT'
+
+sudo ip route add default via 192.168.60.2 dev enp0s8
 
 SCRIPT
 
@@ -100,6 +103,9 @@ Vagrant.configure("2") do |config|
 
     host1.vm.hostname = "host1"
     host1.vm.network "private_network", ip: HOST1_IP
+
+    # Interface and Route configuration
+    host1.vm.provision "shell", inline: $host_install
   end
 
   config.vm.define "host2" do |host2|
@@ -112,5 +118,8 @@ Vagrant.configure("2") do |config|
 
     host2.vm.hostname = "host2"
     host2.vm.network "private_network", ip: HOST2_IP
+
+    # Interface and Route configuration
+    host2.vm.provision "shell", inline: $host_install
   end
 end
