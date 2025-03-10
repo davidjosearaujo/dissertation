@@ -113,8 +113,6 @@ auth_server_shared_secret="CLIENT_SECRET"
 - [x] Disable IP on the NAUN3
 - [x] Install `ca.crt`, `client.crt` and `client.key`
 # DHCP for authenticated hosts
-I need to check if a host is authenticated before leasing them an IP address.
-1. [ ] Check for new data frames on unknown hosts in `hostapd` log
-2. [ ] Check if that host authenticates successfully
-3. [ ] Lease IP
-# Create bind between LAN host and PDU Session interface
+Create my on DHCP server that can check if devices have been successfully authenticated before leasing an IP.
+- I need to access `hostapd`to check authenticated devices. Check [this](https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html) documentation.
+- Needs to deauth users and request and close PDU Sessions
