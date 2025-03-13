@@ -1,0 +1,81 @@
+#!/bin/bash
+
+cd ~/UERANSIM
+
+echo -e "\nUpdate gNodeB IP"
+cat config/open5gs-ue.yaml | yq ".gnbSearchList[0] = \"$1\"" | sudo tee config/open5gs-ue.yaml
+
+echo -e "\nEnabling 'backhaul' APN"
+cat config/open5gs-ue.yaml \
+| yq '.sessions[0].apn = "backhaul"' \
+| yq '.sessions[0].apn style="single"' \
+| sudo tee config/open5gs-ue.yaml
+
+echo -e "\nEnabling multiple PDU Sessions in 'clients' APN"
+UL=$(($2))
+for ((i=1;i<=$UL;i++)); do
+  cat config/open5gs-ue.yaml \
+  | yq '.sessions['$i'].type = "IPv4"' \
+  | yq '.sessions['$i'].type style="single"' \
+  | yq '.sessions['$i'].apn = "clients"' \
+  | yq '.sessions['$i'].apn style="single"' \
+  | yq '.sessions['$i'].slice.sst = 1' \
+  | sudo tee config/open5gs-ue.yaml
+done
+
+echo -e "\nRunning UE"
+build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
+
+echo -e "Install dependencies for hostapd and dnsmasq"
+sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev dnsmasq
+
+echo -e "\nInstalling hostapd"
+git clone git://w1.fi/hostap.git ~/hostap
+cd ~/hostap/hostapd
+
+echo -e "Enable wired driver and debug file"
+cp defconfig .config
+sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
+
+echo -e "\nCompile hostapd"
+make
+
+echo -e "Writing hostapd configurations"
+echo -e "interface=enp0s10
+driver=wired
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=vagrant
+
+logger_syslog=-1
+logger_syslog_level=0
+
+ieee8021x=1 
+own_ip_addr=$3
+
+auth_server_addr=$4
+auth_server_port=1812
+auth_server_shared_secret=$5" > hostapd.conf
+
+LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
+cat hostapd.conf > ${LOG_FILE_PATH}
+
+echo -e "\nRunning hostapd"
+sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
+
+echo -e "\nConfiguring dnsmasq DHCP server"
+echo -e "interface=enp0s10
+bind-interfaces
+dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,12h
+dhcp-authoritative
+dhcp-option=3,192.168.60.2
+dhcp-option=6,192.168.60.2
+log-dhcp
+log-queries" > /etc/dnsmasq.conf
+
+systemctl stop dnsmasq
+
+LOG_FILE_PATH="/log/dnsmasq_$(date +%s).log"
+cat /etc/dnsmasq.conf > ${LOG_FILE_PATH}
+
+echo -e "\nRunning dnsmasq DHCP server"
+sudo dnsmasq -d &>> ${LOG_FILE_PATH} &

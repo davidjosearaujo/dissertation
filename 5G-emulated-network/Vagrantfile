@@ -40,322 +40,6 @@ elsif File.exist?(EAP_SECRETS_FILE)
   CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET, = File.read(EAP_SECRETS_FILE).split(",")
 end
 
-#### CORE INSTALL ####
-
-$core_install = <<-'SCRIPT'
-
-sudo add-apt-repository ppa:open5gs/latest
-sudo apt-get install -y gnupg curl
-sudo snap install yq
-
-echo -e "\nAdding MongoDB repos"
-curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
-
-echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
-
-echo -e "\nAdding Node repos"
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-
-NODE_MAJOR=20
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-
-sudo apt-get update
-
-echo -e "\nInstalling MongoDB, Nginx and Open5GS"
-sudo apt-get install -y mongodb-org open5gs nodejs nginx
-
-echo -e "\nReload MongoDB"
-sudo systemctl start mongod
-sudo systemctl enable mongod
-
-echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
-cat /etc/open5gs/amf.yaml | yq '.amf.ngap.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/amf.yaml
-cat /etc/open5gs/upf.yaml | yq '.upf.gtpu.server[0].address = "CORE_IP"' | sudo tee /etc/open5gs/upf.yaml
-
-echo -e "\nAttributing DNN name to default APN"
-cat /etc/open5gs/smf.yaml \
-| yq '.smf.session[0].dnn = "backhaul"' \
-| sudo tee /etc/open5gs/smf.yaml
-cat /etc/open5gs/upf.yaml \
-| yq '.upf.session[0].dnn = "backhaul"' \
-| yq '.upf.session[0].dev = "ogstun"' \
-| sudo tee /etc/open5gs/upf.yaml
-
-echo -e "\nAdding DNN for NAUN3 PDU Sessions attribution"
-sudo ip tuntap add dev clienttun0 mode tun
-sudo ip link set clienttun0 up
-sudo ip addr add 10.46.0.1/16 brd 10.46.255.255 dev clienttun0
-cat /etc/open5gs/smf.yaml \
-| yq '.smf.session[1].subnet = "10.46.0.0/16"' \
-| yq '.smf.session[1].gateway = "10.46.0.1"' \
-| yq '.smf.session[1].dnn = "clients"' \
-| sudo tee /etc/open5gs/smf.yaml
-cat /etc/open5gs/upf.yaml \
-| yq '.upf.session[1].subnet = "10.46.0.0/16"' \
-| yq '.upf.session[1].gateway = "10.46.0.1"' \
-| yq '.upf.session[1].dnn = "clients"' \
-| yq '.upf.session[1].dev = "clienttun0"' \
-| sudo tee /etc/open5gs/upf.yaml
-
-sudo systemctl restart open5gs-upfd
-sudo systemctl restart open5gs-smfd 
-sudo systemctl restart open5gs-amfd
-
-echo -e "\nInstalling WebUI"
-curl -fsSL https://open5gs.org/open5gs/assets/webui/install | sudo -E bash -
-
-echo -e "\nExposing WebUI through a reverse proxy"
-echo "server {
-    listen 8080;
-
-    location / {
-        proxy_pass http://127.0.0.1:9999;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-    }
-}" | sudo tee /etc/nginx/sites-available/webui
-
-sudo ln -s /etc/nginx/sites-available/webui /etc/nginx/sites-enabled/
-sudo systemctl restart nginx
-
-echo -e "\nPre-loading UE in the AMF"
-sudo chmod +x open5gs-dbctl
-./open5gs-dbctl add "UE_IMSI" "UE_KEY" "UE_OPC"
-
-echo -e "\nPre-loading UE APN sessions"
-./open5gs-dbctl update_apn "UE_IMSI" backhaul 0
-./open5gs-dbctl update_apn "UE_IMSI" clients 0
-
-SCRIPT
-$core_install.gsub!("CORE_IP", CORE_IP).gsub!("UE_IMSI", UE_IMSI).gsub!("UE_KEY", UE_KEY).gsub!("UE_OPC", UE_OPC)
-
-#### CORE INSTALL ####
-
-#### UERANSIM INSTALL ####
-
-$ueransim_install = <<-'SCRIPT'
-
-sudo apt update
-
-sudo apt install -y make git gcc g++ libsctp-dev lksctp-tools iproute2
-sudo snap install cmake --classic
-sudo snap install yq
-
-echo -e "\nInstalling UERANSIM"
-cd ~
-git clone https://github.com/aligungr/UERANSIM
-cd ~/UERANSIM
-make
-
-SCRIPT
-
-#### UERANSIM INSTALL ####
-
-#### gNodeB CONFIG ####
-
-$gnb_install = <<-'SCRIPT'
-cd ~/UERANSIM
-
-echo -e "\nUpdate gNodeB and Core IPs"
-cat config/open5gs-gnb.yaml \
-| yq '.linkIp = "GNB_IP_UE"' \
-| yq '.ngapIp = "GNB_IP_CORE"' \
-| yq '.gtpIp = "GNB_IP_CORE"' \
-| yq '.amfConfigs[0].address = "CORE_IP"' \
-| sudo tee config/open5gs-gnb.yaml
-
-echo -e "\nRunning gNB"
-build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb_$(date +%s).log &
-
-SCRIPT
-$gnb_install.gsub!("CORE_IP", CORE_IP).gsub!("GNB_IP_CORE", GNB_IP_CORE).gsub!("GNB_IP_UE", GNB_IP_UE)
-
-#### gNodeB CONFIG ####
-
-#### UE CONFIG ####
-
-$ue_install = <<-'SCRIPT'
-cd ~/UERANSIM
-
-echo -e "\nUpdate gNodeB IP"
-cat config/open5gs-ue.yaml | yq '.gnbSearchList[0] = "GNB_IP_UE"' | sudo tee config/open5gs-ue.yaml
-
-echo -e "\nEnabling 'backhaul' APN"
-cat config/open5gs-ue.yaml \
-| yq '.sessions[0].apn = "backhaul"' \
-| yq '.sessions[0].apn style="single"' \
-| sudo tee config/open5gs-ue.yaml
-
-echo -e "\nEnabling multiple PDU Sessions in 'clients' APN"
-UL=$(("PDU_SESSIONS"))
-for ((i=1;i<=$UL;i++)); do
-  cat config/open5gs-ue.yaml \
-  | yq '.sessions['$i'].type = "IPv4"' \
-  | yq '.sessions['$i'].type style="single"' \
-  | yq '.sessions['$i'].apn = "clients"' \
-  | yq '.sessions['$i'].apn style="single"' \
-  | yq '.sessions['$i'].slice.sst = 1' \
-  | sudo tee config/open5gs-ue.yaml
-done
-
-echo -e "\nRunning UE"
-build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
-
-echo -e "Install dependencies for hostapd and dnsmasq"
-sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev dnsmasq
-
-echo -e "\nInstalling hostapd"
-git clone git://w1.fi/hostap.git ~/hostap
-cd ~/hostap/hostapd
-
-echo -e "Enable wired driver and debug file"
-cp defconfig .config
-sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
-
-echo -e "\nCompile hostapd"
-make
-
-echo -e "Writing hostapd configurations"
-echo -e "interface=enp0s10
-driver=wired
-ctrl_interface=/var/run/hostapd
-ctrl_interface_group=vagrant
-
-logger_syslog=-1
-logger_syslog_level=0
-
-ieee8021x=1 
-own_ip_addr="UE_EAP_IP"
-
-auth_server_addr="AUTH_SERVER_IP"
-auth_server_port=1812
-auth_server_shared_secret="CLIENT_SECRET"" > hostapd.conf
-
-LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
-cat hostapd.conf > ${LOG_FILE_PATH}
-
-echo -e "\nRunning hostapd"
-sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
-
-echo -e "\nConfiguring dnsmasq DHCP server"
-echo -e "interface=enp0s10
-bind-interfaces
-dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,12h
-dhcp-authoritative
-dhcp-option=3,192.168.60.2
-dhcp-option=6,192.168.60.2
-log-dhcp
-log-queries" > /etc/dnsmasq.conf
-
-systemctl stop dnsmasq
-
-LOG_FILE_PATH="/log/dnsmasq_$(date +%s).log"
-cat /etc/dnsmasq.conf > ${LOG_FILE_PATH}
-
-echo -e "\nRunning dnsmasq DHCP server"
-sudo dnsmasq -d &>> ${LOG_FILE_PATH} &
-
-SCRIPT
-$ue_install.gsub!("GNB_IP_UE", GNB_IP_UE).gsub!("PDU_SESSIONS", PDU_SESSIONS).gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("AUTH_SERVER_IP", AUTH_SERVER_IP).gsub!("CLIENT_SECRET", CLIENT_SECRET)
-
-#### UE CONFIG ####
-
-#### EAP AUTH SERVER CONFIG ####
-
-$auth_server_install = <<-'SCRIPT'
-
-sudo apt update
-
-sudo apt install -y freeradius
-
-sudo -s -u freerad
-
-echo -e "\nStopping FreeRADIUS service"
-sudo systemctl stop freeradius.service
-
-echo -e "\nAdding UE as client"
-echo -e "client UE {\n\tipaddr = "UE_EAP_IP"\n\tsecret = "CLIENT_SECRET"\n}" >> /etc/freeradius/3.0/clients.conf
-
-echo -e "\nRemoving old certificates"
-cd /etc/freeradius/3.0/certs
-make destroycerts
-make clean
-
-echo -e "\nGenerating new certificates"
-sed -i "s/input_password.*/input_password = "CERT_CA_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
-sed -i "s/output_password.*/output_password = "CERT_CA_PASSWD"/" /etc/freeradius/3.0/certs/ca.cnf
-sed -i "s/input_password.*/input_password = "CERT_SERVER_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
-sed -i "s/output_password.*/output_password = "CERT_SERVER_PASSWD"/" /etc/freeradius/3.0/certs/server.cnf
-sed -i "s/input_password.*/input_password = "CERT_CLIENT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
-sed -i "s/output_password.*/output_password = "CERT_CLIENT_PASSWD"/" /etc/freeradius/3.0/certs/client.cnf
-make
-
-echo -e "\nVerifying certs"
-make verify
-
-echo -e "\nEnabling EAP-TLS"
-rm /etc/freeradius/3.0/mods-enabled/eap
-sed -i "s/default_eap_type = .*/default_eap_type = tls/" /etc/freeradius/3.0/mods-available/eap
-sed -i "s/private_key_password = .*/private_key_password = "CERT_SERVER_PASSWD"/" /etc/freeradius/3.0/mods-available/eap
-sed -i "s#private_key_file = .*#private_key_file = /etc/freeradius/3.0/certs/server.key#" /etc/freeradius/3.0/mods-available/eap
-sed -i "s#certificate_file = .*#certificate_file = /etc/freeradius/3.0/certs/server.pem#" /etc/freeradius/3.0/mods-available/eap
-sed -i "s#ca_file = .*#ca_file = /etc/freeradius/3.0/certs/ca.pem#" /etc/freeradius/3.0/mods-available/eap
-ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/eap
-
-chmod 640 /etc/freeradius/3.0/certs/*
-chown freerad:freerad /etc/freeradius/3.0/certs/*
-
-echo -e "\nCopying certificates to shared folder"
-cp /etc/freeradius/3.0/certs/* /certs
-
-echo -e "\nStarting FreeRADIUS in full debugging"
-sudo freeradius -X -xx &>> /log/freeradius_$(date +%s).log &
-
-SCRIPT
-$auth_server_install.gsub!("UE_EAP_IP", UE_EAP_IP).gsub!("CERT_CA_PASSWD", CERT_CA_PASSWD).gsub!("CERT_SERVER_PASSWD", CERT_SERVER_PASSWD).gsub!("CERT_CLIENT_PASSWD", CERT_CLIENT_PASSWD).gsub!("CLIENT_SECRET", CLIENT_SECRET)
-
-#### EAP AUTH SERVER CONFIG ####
-
-#### NAUN3 CONFIG ####
-
-$naun3_install = <<-'SCRIPT'
-
-sudo apt update
-
-sudo apt-get update
-sudo apt-get -y install wpasupplicant
-
-echo -e "\nRemove IP address"
-sudo ip addr del "NAUN3_IP"/24 dev enp0s8
-
-echo -e "\nWriting wpa_supplicant configurations"
-echo -e 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
-eapol_version=2
-ap_scan=0
-
-network={
-    eapol_flags=0
-
-    key_mgmt=IEEE8021X
-    eap=TLS
-
-    identity="user@example.org"
-    ca_cert="/certs/ca.pem"
-    private_key="/certs/client.p12"
-    private_key_passwd="CERT_CLIENT_PASSWD"
-}' > wpa_supplicant.conf
-
-LOG_FILE_PATH="/log/wpa_supplicant_$(date +%s).log"
-cat wpa_supplicant.conf > ${LOG_FILE_PATH}
-
-echo -e "\nRunning wpa_supplicant"
-sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
-
-SCRIPT
-$naun3_install.gsub!("CERT_CLIENT_PASSWD", CERT_CLIENT_PASSWD).gsub!("NAUN3_IP", NAUN3_IP)
-
-#### NAUN3 CONFIG ####
-
 Vagrant.configure("2") do |config|
   
   config.vm.define "core" do |core|
@@ -374,18 +58,22 @@ Vagrant.configure("2") do |config|
     core.vm.network "forwarded_port", guest: 8080, host: 9999
 
     # Copying the DBCTL script
-    config.vm.provision "file", source: "open5gs-dbctl", destination: "open5gs-dbctl"
+    core.vm.provision "file", source: "open5gs-dbctl", destination: "open5gs-dbctl"
 
     # Open5GS installation
-    core.vm.provision "shell", inline: $core_install
+    core.vm.provision "file", source: "core_install", destination: "core_install"
+    core.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash core_install $1 $2 $3 $4"
+      s.args    = [CORE_IP, UE_IMSI, UE_KEY, UE_OPC]
+    end
   end
 
   config.vm.define "gnb" do |gnb|
     gnb.vm.box = "ubuntu/jammy64"
 
     gnb.vm.provider "virtualbox" do |v|
-      v.memory = 1024
-      v.cpus = 1
+      v.memory  = 1024
+      v.cpus    = 1
     end
 
     gnb.vm.hostname = "gnb"
@@ -397,10 +85,17 @@ Vagrant.configure("2") do |config|
     gnb.vm.network "private_network", ip: GNB_IP_UE
 
     # UERANSIM installation
-    gnb.vm.provision "shell", inline: $ueransim_install
+    gnb.vm.provision "file", source: "ueransim_install", destination: "ueransim_install"
+    gnb.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash ueransim_install"
+    end
 
     # gNodeB configuration
-    gnb.vm.provision "shell", inline: $gnb_install
+    gnb.vm.provision "file", source: "gnb_install", destination: "gnb_install"
+    gnb.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash gnb_install $1 $2 $3"
+      s.args    = [CORE_IP, GNB_IP_CORE, GNB_IP_UE]
+    end
 
     gnb.vm.synced_folder "./runtime-logs", "/log", create: true
   end
@@ -409,8 +104,8 @@ Vagrant.configure("2") do |config|
     ue.vm.box = "ubuntu/jammy64"
 
     ue.vm.provider "virtualbox" do |v|
-      v.memory = 1024
-      v.cpus = 1
+      v.memory  = 1024
+      v.cpus    = 1
     end
 
     ue.vm.hostname = "ue"
@@ -425,10 +120,17 @@ Vagrant.configure("2") do |config|
     ue.vm.network "private_network", ip: UE_LAN_IP
 
     # UERANSIM installation
-    ue.vm.provision "shell", inline: $ueransim_install
+    ue.vm.provision "file", source: "ueransim_install", destination: "ueransim_install"
+    ue.vm.provision "shell" do |s|
+      s.inline = "/bin/bash ueransim_install"
+    end
 
     # UE configuration
-    ue.vm.provision "shell", inline: $ue_install
+    ue.vm.provision "file", source: "ue_install", destination: "ue_install"
+    ue.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash ue_install $1 $2 $3 $4 $5"
+      s.args    = [GNB_IP_UE, PDU_SESSIONS, UE_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET]
+    end
 
     ue.vm.synced_folder "./runtime-logs", "/log", create: true
   end
@@ -438,8 +140,8 @@ Vagrant.configure("2") do |config|
     auth_server.vm.box = "ubuntu/jammy64"
 
     auth_server.vm.provider "virtualbox" do |v|
-      v.memory = 1024
-      v.cpus = 1
+      v.memory  = 1024
+      v.cpus    = 1
     end
 
     auth_server.vm.hostname = "authserver"
@@ -448,7 +150,11 @@ Vagrant.configure("2") do |config|
     auth_server.vm.network "private_network", ip: AUTH_SERVER_IP
 
     # Authenticator Server configuration
-    auth_server.vm.provision "shell", inline: $auth_server_install
+    auth_server.vm.provision "file", source: "auth_server_install", destination: "auth_server_install"
+    auth_server.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash auth_server_install $1 $2 $3 $4 $5"
+      s.args    = [UE_EAP_IP, CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET]
+    end
 
     # EAP Auth Server Certs
     auth_server.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
@@ -471,7 +177,11 @@ Vagrant.configure("2") do |config|
     naun3.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
 
     # NAUN3 configuration
-    naun3.vm.provision "shell", inline: $naun3_install
+    naun3.vm.provision "file", source: "naun3_install", destination: "naun3_install"
+    naun3.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash naun3_install $1 $2"
+      s.args    = [CERT_CLIENT_PASSWD, NAUN3_IP]
+    end
 
     naun3.vm.synced_folder "./runtime-logs", "/log", create: true
   end

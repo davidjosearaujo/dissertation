@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sudo apt update
+
+sudo apt install -y make git gcc g++ libsctp-dev lksctp-tools iproute2
+sudo snap install cmake --classic
+sudo snap install yq
+
+echo -e "\nInstalling UERANSIM"
+cd ~
+git clone https://github.com/aligungr/UERANSIM
+cd ~/UERANSIM
+make

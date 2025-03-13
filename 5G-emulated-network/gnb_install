@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cd ~/UERANSIM
+
+echo -e "\nUpdate gNodeB and Core IPs"
+cat config/open5gs-gnb.yaml \
+| yq ".linkIp = \"$3\"" \
+| yq ".ngapIp = \"$2\"" \
+| yq ".gtpIp = \"$2\"" \
+| yq ".amfConfigs[0].address = \"$1\"" \
+| sudo tee config/open5gs-gnb.yaml
+
+echo -e "\nRunning gNB"
+build/nr-gnb -c config/open5gs-gnb.yaml &> /log/gnb_$(date +%s).log &
