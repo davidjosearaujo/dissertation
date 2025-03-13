@@ -115,4 +115,5 @@ auth_server_shared_secret="CLIENT_SECRET"
 # DHCP for authenticated hosts
 Create my on DHCP server that can check if devices have been successfully authenticated before leasing an IP.
 - I need to access `hostapd`to check authenticated devices. Check [this](https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html) documentation.
+- Read [this](https://w1.fi/cgit/hostap/tree/wpaspy) as how to connect to `hostapd` with Python
 - Needs to deauth users and request and close PDU Sessions
