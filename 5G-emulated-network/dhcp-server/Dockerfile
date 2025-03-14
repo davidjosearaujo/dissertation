@@ -3,7 +3,7 @@ FROM debian:12-slim
 COPY dhcp-server /dhcp-server
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install python3 python3-dev -y \
     git build-essential libnl-3-dev libnl-genl-3-dev \
     && rm -rf /var/lib/apt/lists/*
 

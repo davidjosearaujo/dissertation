@@ -27,7 +27,7 @@ echo -e "\nRunning UE"
 build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
 
 echo -e "Install dependencies for hostapd and dnsmasq"
-sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev dnsmasq
+sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev dnsmasq python3 python3-dev
 
 echo -e "\nInstalling hostapd"
 git clone git://w1.fi/hostap.git /hostap
