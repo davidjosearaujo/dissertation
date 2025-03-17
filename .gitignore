@@ -101,3 +101,4 @@ tramp
 /docs/.obsidian
 *.vagrant
 5G-emulated-network/lan-to-pdu-traffic-routing-poc/.vagrant/machines/naun31/virtualbox/action_provision
+*.venv

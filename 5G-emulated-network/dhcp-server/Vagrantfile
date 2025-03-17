@@ -1,0 +1,125 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+# Network Configuration
+## 5GC IPs
+CORE_IP = "192.168.56.10"
+
+## gNodeB IPs
+GNB_IP_CORE = "192.168.56.11"
+GNB_IP_UE = "192.168.57.11"
+
+## UE IPs
+UE_IP = "192.168.57.12"
+UE_EAP_IP = "192.168.58.100"
+UE_LAN_IP = "192.168.60.2"
+
+## UE Configurations
+UE_IMSI = "999700000000001"
+UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
+UE_OPC = "E8ED289DEBA952E4283B54E88E6183CA"
+PDU_SESSIONS = "3"
+
+## End Device IPs
+NAUN3_IP = "192.168.60.200"
+
+## EAP Auth Server IP
+AUTH_SERVER_IP = "192.168.58.2"
+
+## EAP Auth Configurations
+EAP_SECRETS_FILE = "eap-secrets" 
+CERT_CA_PASSWD = SecureRandom.alphanumeric(8)
+CERT_SERVER_PASSWD = SecureRandom.alphanumeric(8)
+CERT_CLIENT_PASSWD = SecureRandom.alphanumeric(8)
+CLIENT_SECRET = SecureRandom.alphanumeric(8)
+
+if ARGV.include?("up") && !File.exist?(EAP_SECRETS_FILE)
+  File.write(EAP_SECRETS_FILE, "#{CERT_CA_PASSWD},#{CERT_SERVER_PASSWD},#{CERT_CLIENT_PASSWD},#{CLIENT_SECRET}")
+elsif File.exist?(EAP_SECRETS_FILE)
+  CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET, = File.read(EAP_SECRETS_FILE).split(",")
+end
+
+Vagrant.configure("2") do |config|
+  
+  config.vm.define "ue" do |ue|
+    ue.vm.box = "ubuntu/jammy64"
+
+    ue.vm.provider "virtualbox" do |v|
+      v.memory  = 1024
+      v.cpus    = 1
+    end
+
+    ue.vm.hostname = "ue"
+    
+    # RAN interface
+    ue.vm.network "private_network", ip: UE_IP
+
+    # EAP Auth Server interface
+    ue.vm.network "private_network", ip: UE_EAP_IP
+
+    # LAN interface
+    ue.vm.network "private_network", ip: UE_LAN_IP
+
+    # UE configuration
+    ue.vm.provision "file", source: "ue_install", destination: "ue_install"
+    ue.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash ue_install $1 $2 $3 $4 $5"
+      s.args    = [GNB_IP_UE, PDU_SESSIONS, UE_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET]
+    end
+
+    ue.vm.synced_folder "./runtime-logs", "/log", create: true
+  end
+
+  config.vm.define "auth_server" do |auth_server|
+
+    auth_server.vm.box = "ubuntu/jammy64"
+
+    auth_server.vm.provider "virtualbox" do |v|
+      v.memory  = 1024
+      v.cpus    = 1
+    end
+
+    auth_server.vm.hostname = "authserver"
+    
+    # Authenticator Client interface
+    auth_server.vm.network "private_network", ip: AUTH_SERVER_IP
+
+    # Authenticator Server configuration
+    auth_server.vm.provision "file", source: "auth_server_install", destination: "auth_server_install"
+    auth_server.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash auth_server_install $1 $2 $3 $4 $5"
+      s.args    = [UE_EAP_IP, CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET]
+    end
+
+    # EAP Auth Server Certs
+    auth_server.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
+
+    auth_server.vm.synced_folder "./runtime-logs", "/log", create: true
+  end
+
+  config.vm.define "naun3" do |naun3|
+    naun3.vm.box = "ubuntu/jammy64"
+
+    naun3.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    naun3.vm.hostname = "naun3"
+    naun3.vm.network "private_network", ip: NAUN3_IP, auto_config: false
+
+    # EAP Auth Server Certs
+    naun3.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
+
+    # NAUN3 configuration
+    naun3.vm.provision "file", source: "naun3_install", destination: "naun3_install"
+    naun3.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash naun3_install $1 $2"
+      s.args    = [CERT_CLIENT_PASSWD, NAUN3_IP]
+    end
+
+    naun3.vm.synced_folder "./runtime-logs", "/log", create: true
+  end
+
+end
