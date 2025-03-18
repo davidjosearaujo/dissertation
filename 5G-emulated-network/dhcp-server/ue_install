@@ -15,7 +15,7 @@ sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
 echo -e "\nCompile hostapd"
 make
 
-ecjo -e "\nEnable IP forwarding"
+echo -e "\nEnable IP forwarding"
 sudo sysctl -w net.ipv4.ip_forward=1
 sudo iptables -A FORWARD -i enp0s10 -o eth0 -j ACCEPT
 sudo iptables -A FORWARD -i eth0 -o enp0s10 -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -36,11 +36,13 @@ auth_server_addr=$4
 auth_server_port=1812
 auth_server_shared_secret=$5" > hostapd.conf
 
-#LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
-#cat hostapd.conf > ${LOG_FILE_PATH}
+LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
+cat hostapd.conf > ${LOG_FILE_PATH}
 
-#echo -e "\nRunning hostapd"
-#sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
+echo -e "\nRunning hostapd"
+sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
+
+sudo touch /etc/allowed-macs.conf
 
 echo -e "\nConfiguring dnsmasq DHCP server"
 echo -e "interface=enp0s10
@@ -53,6 +55,7 @@ dhcp-option=3,192.168.60.2
 dhcp-option=6,192.168.60.2
 
 dhcp-ignore=tag:!known
+conf-file=/etc/allowed-macs.conf
 
 log-dhcp
 log-queries" > /etc/dnsmasq.conf
