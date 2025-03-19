@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"log"
 	"log/syslog"
@@ -24,22 +25,28 @@ type Interception interface {
 
 type Interceptor struct {
 	attached bool
-	conn    *net.UnixConn
-	remote  *net.UnixAddr
-	quit    chan struct{} // Channel to signal termination
-	wg      sync.WaitGroup
+	conn     *net.UnixConn
+	remote   *net.UnixAddr
+	quit     chan struct{} // Channel to signal termination
+	wg       sync.WaitGroup
 }
 
-var logger *syslog.Writer
+var (
+	logger *log.Logger
+	output = "syslog" // Set to false to use stdout instead of syslog
+)
 
 func init() {
-	var err error
-	logger, err = syslog.New(syslog.LOG_INFO|syslog.LOG_DAEMON, "interceptor")
-	if err != nil {
-		fmt.Println("Failed to connect to syslog:", err)
-		os.Exit(1)
+	if output == "debug" {
+		logger = log.New(os.Stdout, "", log.LstdFlags) // Use stdout
+	} else {
+		w, err := syslog.New(syslog.LOG_INFO|syslog.LOG_DAEMON, "interceptor")
+		if err != nil {
+			fmt.Println("Failed to connect to syslog:", err)
+			os.Exit(1)
+		}
+		logger = log.New(w, "", 0) // Use syslog
 	}
-	log.SetOutput(logger) // Redirect standard Go log package to syslog
 }
 
 func NewInterceptor(hostapdSocketPath string) (*Interceptor, error) {
@@ -71,15 +78,14 @@ func NewInterceptor(hostapdSocketPath string) (*Interceptor, error) {
 
 	// Return the interceptor
 	interceptor := &Interceptor{
-		conn:    localConn,  // Local socket
-		remote:  remoteAddr, // Remote address
+		conn:     localConn,  // Local socket
+		remote:   remoteAddr, // Remote address
 		attached: false,
-		quit:    make(chan struct{}), // Initialize quit channel
+		quit:     make(chan struct{}), // Initialize quit channel
 	}
 
 	return interceptor, nil
 }
-
 
 func (i *Interceptor) Request(data []byte) ([]byte, error) {
 	_, err := i.conn.WriteToUnix(data, i.remote)
@@ -137,9 +143,9 @@ func (i *Interceptor) Attach() error {
 
 // Shutdown cleans up resources gracefully
 func (i *Interceptor) Shutdown() {
-	close(i.quit)     // Signal the listener to stop
-	i.wg.Wait()       // Wait for goroutines to finish
-	i.conn.Close()   // Close the socket
+	close(i.quit)  // Signal the listener to stop
+	i.wg.Wait()    // Wait for goroutines to finish
+	i.conn.Close() // Close the socket
 }
 
 func UpdateAllowedMACs(mac string) error {
@@ -173,13 +179,13 @@ func RestartDnsmasq() error {
 func (i *Interceptor) ListenLoop() {
 	defer i.wg.Done() // Mark as done when exiting
 
-	log.Println("Listening for incoming messages...")
+	logger.Println("Listening for incoming messages...")
 
 	buf := make([]byte, 4096)
 	for {
 		select {
 		case <-i.quit:
-			log.Println("Stopping listener...")
+			logger.Println("Stopping listener...")
 			return // Exit loop on quit signal
 
 		default:
@@ -191,28 +197,28 @@ func (i *Interceptor) ListenLoop() {
 					// Suppress error if quitting
 					return
 				default:
-					log.Println("Error receiving message:", err)
+					logger.Println("Error receiving message:", err)
 				}
 			} else {
-				log.Println("Received:", string(buf[:n]))
+				logger.Println("Received:", string(buf[:n]))
 				if strings.Contains(string(buf[:n]), "CTRL-EVENT-EAP-SUCCESS") {
-					log.Println("EAP success detected for client: ", string(buf[:n]))
+					logger.Println("EAP success detected for client: ", string(buf[:n]))
 
 					// Extract MAC address
 					parts := strings.Split(string(buf[:n]), " ")
 					if len(parts) < 2 {
-						log.Println("Could not extract MAC address from event message.")
+						logger.Println("Could not extract MAC address from event message.")
 						return
 					}
-					
+
 					UpdateAllowedMACs(parts[1])
 
 					err = RestartDnsmasq()
 					if err != nil {
-						log.Println("Error restarting dnsmasq:", err)
+						logger.Println("Error restarting dnsmasq:", err)
 					}
 
-					log.Println("dnsmasq service restarted successfully.")
+					logger.Println("dnsmasq service restarted successfully.")
 				}
 			}
 		}
@@ -220,25 +226,29 @@ func (i *Interceptor) ListenLoop() {
 }
 
 func main() {
-	// Define paths
-	serverPath := "/var/run/hostapd/enp0s10" // Example external service
+
+	mode := flag.String("mode", "stdout", "Logging mode: syslog or stdout")
+	hostpad_int := flag.String("hostapd", "/var/run/hostapd/enp0s10", "Hostapd socket path")
+	flag.Parse() // Parse command-line flags
+	
+	output = *mode // Set logging mode
 
 	// Create interceptor
-	interceptor, err := NewInterceptor(serverPath)
+	interceptor, err := NewInterceptor(*hostpad_int)
 	if err != nil {
 		log.Println("Error creating interceptor:", err)
 		return
 	}
 	defer interceptor.Shutdown()
-	log.Println("Interceptor created")
+	logger.Println("Interceptor created")
 
 	// Attach to the external service
 	err = interceptor.Attach()
 	if err != nil {
-		log.Println("Error attaching to the external service:", err)
+		logger.Println("Error attaching to the external service:", err)
 		return
 	}
-	log.Println("Attached to", serverPath)
+	logger.Println("Attached to", *hostpad_int)
 
 	// Start listening in a separate goroutine
 	interceptor.wg.Add(1)
@@ -250,5 +260,5 @@ func main() {
 
 	// Wait for termination signal
 	<-sigChan
-	log.Println("Shutting down gracefully...")
+	logger.Println("Shutting down gracefully...")
 }
