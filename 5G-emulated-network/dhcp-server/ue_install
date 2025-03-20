@@ -58,12 +58,12 @@ dhcp-ignore=tag:!known
 conf-file=/etc/allowed-macs.conf
 
 log-dhcp
-log-queries" > /etc/dnsmasq.conf
+log-queries" | sudo tee /etc/dnsmasq.conf
 
-systemctl stop dnsmasq
+sudo systemctl restart dnsmasq
 
-LOG_FILE_PATH="/log/dnsmasq_$(date +%s).log"
-cat /etc/dnsmasq.conf > ${LOG_FILE_PATH}
+LOG_FILE_PATH="/log/interceptor_$(date +%s).log"
 
-echo -e "\nRunning dnsmasq DHCP server"
-sudo dnsmasq -d &>> ${LOG_FILE_PATH} &
+echo -e "\nStart Interceptor"
+cd /home/vagrant/
+./interceptor --mode="debug" &>> ${LOG_FILE_PATH} &

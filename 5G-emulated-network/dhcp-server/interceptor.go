@@ -32,12 +32,13 @@ type Interceptor struct {
 }
 
 var (
-	logger *log.Logger
-	output = "syslog" // Set to false to use stdout instead of syslog
+	logger         *log.Logger
+	mode           *string // Set to false to use stdout instead of syslog
+	dhcp_conf_file *string
 )
 
-func init() {
-	if output == "debug" {
+func SetLogging() {
+	if *mode == "debug" {
 		logger = log.New(os.Stdout, "", log.LstdFlags) // Use stdout
 	} else {
 		w, err := syslog.New(syslog.LOG_INFO|syslog.LOG_DAEMON, "interceptor")
@@ -150,7 +151,7 @@ func (i *Interceptor) Shutdown() {
 
 func UpdateAllowedMACs(mac string) error {
 	// Open file in append mode, create if not exists
-	f, err := os.OpenFile("/etc/allowed-macs.conf", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(*dhcp_conf_file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return fmt.Errorf("error opening file: %w", err)
 	}
@@ -162,7 +163,7 @@ func UpdateAllowedMACs(mac string) error {
 		return fmt.Errorf("error writing to file: %w", err)
 	}
 
-	log.Println("MAC address written successfully:", entry)
+	log.Println("MAC address written successfully:", mac)
 
 	return nil
 }
@@ -226,12 +227,12 @@ func (i *Interceptor) ListenLoop() {
 }
 
 func main() {
-
-	mode := flag.String("mode", "stdout", "Logging mode: syslog or stdout")
-	hostpad_int := flag.String("hostapd", "/var/run/hostapd/enp0s10", "Hostapd socket path")
+	mode = flag.String("mode", "syslog", "Logging mode: syslog or debug (Defaults to syslog)")
+	hostpad_int := flag.String("interface", "/var/run/hostapd/enp0s10", "Hostapd socket path")
+	dhcp_conf_file = flag.String("conf-out", "/etc/allowed-macs.conf", "Dnsmasq configuration file")
 	flag.Parse() // Parse command-line flags
-	
-	output = *mode // Set logging mode
+
+	SetLogging()
 
 	// Create interceptor
 	interceptor, err := NewInterceptor(*hostpad_int)
