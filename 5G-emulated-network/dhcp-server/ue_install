@@ -48,7 +48,7 @@ echo -e "\nConfiguring dnsmasq DHCP server"
 echo -e "interface=enp0s10
 bind-interfaces
 
-dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,12h
+dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,2m
 dhcp-authoritative
 
 dhcp-option=3,192.168.60.2
@@ -57,8 +57,9 @@ dhcp-option=6,192.168.60.2
 dhcp-ignore=tag:!known
 conf-file=/etc/allowed-macs.conf
 
-log-dhcp
-log-queries" | sudo tee /etc/dnsmasq.conf
+dhcp-script=/bin/echo
+
+log-dhcp" | sudo tee /etc/dnsmasq.conf
 
 sudo systemctl restart dnsmasq
 

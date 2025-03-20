@@ -19,11 +19,10 @@ type Interception interface {
 	// Intercept packets
 	Attach() error
 	Request(data []byte) ([]byte, error)
-	Receive() ([]byte, error)
 	Shutdown()
 }
 
-type Interceptor struct {
+type HostapdInterceptor struct {
 	attached bool
 	conn     *net.UnixConn
 	remote   *net.UnixAddr
@@ -35,6 +34,7 @@ var (
 	logger         *log.Logger
 	mode           *string // Set to false to use stdout instead of syslog
 	dhcp_conf_file *string
+	devices			map[string]int
 )
 
 func SetLogging() {
@@ -50,7 +50,7 @@ func SetLogging() {
 	}
 }
 
-func NewInterceptor(hostapdSocketPath string) (*Interceptor, error) {
+func NewInterceptor(hostapdSocketPath string) (*HostapdInterceptor, error) {
 	// Create a unique local socket path
 	localPath := fmt.Sprintf("/tmp/interceptor_%d.sock", os.Getpid())
 
@@ -78,7 +78,7 @@ func NewInterceptor(hostapdSocketPath string) (*Interceptor, error) {
 	}
 
 	// Return the interceptor
-	interceptor := &Interceptor{
+	interceptor := &HostapdInterceptor{
 		conn:     localConn,  // Local socket
 		remote:   remoteAddr, // Remote address
 		attached: false,
@@ -88,8 +88,8 @@ func NewInterceptor(hostapdSocketPath string) (*Interceptor, error) {
 	return interceptor, nil
 }
 
-func (i *Interceptor) Request(data []byte) ([]byte, error) {
-	_, err := i.conn.WriteToUnix(data, i.remote)
+func (i *HostapdInterceptor) Request(command []byte) ([]byte, error) {
+	_, err := i.conn.WriteToUnix(command, i.remote)
 	if err != nil {
 		return nil, fmt.Errorf("error sending command: %w", err)
 	}
@@ -110,17 +110,7 @@ func (i *Interceptor) Request(data []byte) ([]byte, error) {
 	return buf[:n], nil
 }
 
-func (i *Interceptor) Receive() ([]byte, error) {
-	buf := make([]byte, 4096)
-	n, _, err := i.conn.ReadFromUnix(buf)
-	if err != nil {
-		return nil, fmt.Errorf("error receiving response: %w", err)
-	}
-
-	return buf[:n], nil
-}
-
-func (i *Interceptor) Attach() error {
+func (i *HostapdInterceptor) Attach() error {
 	// Check if already attached
 	if i.attached {
 		return nil
@@ -143,13 +133,13 @@ func (i *Interceptor) Attach() error {
 }
 
 // Shutdown cleans up resources gracefully
-func (i *Interceptor) Shutdown() {
+func (i *HostapdInterceptor) Shutdown() {
 	close(i.quit)  // Signal the listener to stop
 	i.wg.Wait()    // Wait for goroutines to finish
 	i.conn.Close() // Close the socket
 }
 
-func UpdateAllowedMACs(mac string) error {
+func AllowMac(mac string) error {
 	// Open file in append mode, create if not exists
 	f, err := os.OpenFile(*dhcp_conf_file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
@@ -168,6 +158,38 @@ func UpdateAllowedMACs(mac string) error {
 	return nil
 }
 
+func DisallowMac(mac string) error {
+	// Check if file exists, if not return error
+	fileContent, err := os.ReadFile(*dhcp_conf_file)
+	if err != nil {
+		return fmt.Errorf("error opening file: %w", err)
+	}
+
+	// Split the file content into lines
+	lines := strings.Split(string(fileContent), "\n")
+
+	// Filter out the line to remove
+	var newLines []string
+	for _, line := range lines {
+		trimmedLine := strings.TrimSpace(line)
+		if !strings.Contains(trimmedLine, mac) {
+			newLines = append(newLines, line)
+		}
+	}
+
+	// Join the lines back into a single string
+	newContent := strings.Join(newLines, "\n")
+
+	// Write the new content back to the file
+	err = os.WriteFile(*dhcp_conf_file, []byte(newContent), 0644)
+	if err != nil {
+		return fmt.Errorf("error writing file: %w", err)
+	}
+
+	return nil
+	
+}
+
 // restartDnsmasq runs the systemctl command to restart dnsmasq
 func RestartDnsmasq() error {
 	cmd := exec.Command("systemctl", "restart", "dnsmasq")
@@ -176,8 +198,8 @@ func RestartDnsmasq() error {
 	return cmd.Run()
 }
 
-// ListenLoop continuously listens for incoming messages
-func (i *Interceptor) ListenLoop() {
+// HostapdListener continuously listens for incoming messages
+func (i *HostapdInterceptor) HostapdListener() {
 	defer i.wg.Done() // Mark as done when exiting
 
 	logger.Println("Listening for incoming messages...")
@@ -212,8 +234,10 @@ func (i *Interceptor) ListenLoop() {
 						return
 					}
 
-					UpdateAllowedMACs(parts[1])
+					// Add MAC to allowed devices list
+					AllowMac(parts[1])
 
+					// Restart dnsmasq service
 					err = RestartDnsmasq()
 					if err != nil {
 						logger.Println("Error restarting dnsmasq:", err)
@@ -226,6 +250,21 @@ func (i *Interceptor) ListenLoop() {
 	}
 }
 
+// Listener in the lease file (/var/lib/misc/dnsmasq.leases)
+func DnsmasqListener() {
+	for {
+		// 1. Listen for new lease
+		// 2. Increase lease counter for device
+		// 3. Check number of leases for this device
+		// 3.2 If =3
+		// 3.2.1 Disallow MAC address so it can't have any new leases
+		// 3.2.2 Remove entry from /var/lib/misc/dnsmasq.leases
+		// 3.2.3 Restart dnsmasq
+		// 
+		// Compare every time a timestamp changes for a given mac (meaning a renewal)
+	}
+}
+
 func main() {
 	mode = flag.String("mode", "syslog", "Logging mode: syslog or debug (Defaults to syslog)")
 	hostpad_int := flag.String("interface", "/var/run/hostapd/enp0s10", "Hostapd socket path")
@@ -234,6 +273,9 @@ func main() {
 
 	SetLogging()
 
+	// Initiate device counter
+	devices = make(map[string]int)
+
 	// Create interceptor
 	interceptor, err := NewInterceptor(*hostpad_int)
 	if err != nil {
@@ -241,7 +283,7 @@ func main() {
 		return
 	}
 	defer interceptor.Shutdown()
-	logger.Println("Interceptor created")
+	logger.Println("HostapdInterceptor created")
 
 	// Attach to the external service
 	err = interceptor.Attach()
@@ -253,7 +295,7 @@ func main() {
 
 	// Start listening in a separate goroutine
 	interceptor.wg.Add(1)
-	go interceptor.ListenLoop()
+	go interceptor.HostapdListener()
 
 	// Handle graceful shutdown
 	sigChan := make(chan os.Signal, 1)
