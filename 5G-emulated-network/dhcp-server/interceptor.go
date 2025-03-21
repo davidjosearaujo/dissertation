@@ -295,8 +295,9 @@ func DnsmasqListener(allowed_macs_file string, leases_file string) {
 						lease.expiration = expiration
 						allowed_devices[mac_address] = lease // Save back to map
 
+						logger.Printf("Lease #%v device: %v", lease.counter, mac_address)
 						if lease.counter == 3 {
-
+							logger.Printf("Disallowing device: %v", mac_address)
 							// Disallow mac for DHCP offers
 							DisallowMac(allowed_macs_file, mac_address)
 
@@ -305,17 +306,19 @@ func DnsmasqListener(allowed_macs_file string, leases_file string) {
 							if err != nil {
 								logger.Printf("DEAUTHENTICATE request for %v failed: %v\n", mac_address, err)
 							} else {
+								logger.Printf("Deauthenticating device: %v", mac_address)
 								logger.Println(res)
 							}
 
 							// Restarting dnsmasq
 							err = RestartDnsmasq()
 							if err != nil {
-								logger.Println("Error while restarting dnsmasq: %w", err)
+								logger.Printf("Error while restarting dnsmasq: %v", err)
 							}
 						}
 					}
 				} else {
+					logger.Printf("Lease #%v device: %v", 1, mac_address)
 					// Register for first time lease
 					allowed_devices[mac_address] = Lease{
 						counter:    1,
