@@ -57,8 +57,6 @@ dhcp-option=6,192.168.60.2
 dhcp-ignore=tag:!known
 conf-file=/etc/allowed-macs.conf
 
-dhcp-script=/bin/echo
-
 log-dhcp" | sudo tee /etc/dnsmasq.conf
 
 sudo systemctl restart dnsmasq

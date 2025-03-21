@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"strconv"
 	"strings"
 	"sync"
 	"syscall"
@@ -27,14 +28,20 @@ type HostapdInterceptor struct {
 	conn     *net.UnixConn
 	remote   *net.UnixAddr
 	quit     chan struct{} // Channel to signal termination
-	wg       sync.WaitGroup
+}
+
+type Lease struct {
+	expiration	int
+	counter		int
 }
 
 var (
-	logger         *log.Logger
-	mode           *string // Set to false to use stdout instead of syslog
-	dhcp_conf_file *string
-	devices			map[string]int
+	logger            *log.Logger
+	mode              *string // Set to false to use stdout instead of syslog
+	allowed_macs_file *string
+	devices           = make(map[string]Lease)
+	wg                sync.WaitGroup
+	hostapd_interceptor HostapdInterceptor
 )
 
 func SetLogging() {
@@ -135,13 +142,12 @@ func (i *HostapdInterceptor) Attach() error {
 // Shutdown cleans up resources gracefully
 func (i *HostapdInterceptor) Shutdown() {
 	close(i.quit)  // Signal the listener to stop
-	i.wg.Wait()    // Wait for goroutines to finish
 	i.conn.Close() // Close the socket
 }
 
 func AllowMac(mac string) error {
 	// Open file in append mode, create if not exists
-	f, err := os.OpenFile(*dhcp_conf_file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(*allowed_macs_file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return fmt.Errorf("error opening file: %w", err)
 	}
@@ -160,7 +166,7 @@ func AllowMac(mac string) error {
 
 func DisallowMac(mac string) error {
 	// Check if file exists, if not return error
-	fileContent, err := os.ReadFile(*dhcp_conf_file)
+	fileContent, err := os.ReadFile(*allowed_macs_file)
 	if err != nil {
 		return fmt.Errorf("error opening file: %w", err)
 	}
@@ -181,13 +187,13 @@ func DisallowMac(mac string) error {
 	newContent := strings.Join(newLines, "\n")
 
 	// Write the new content back to the file
-	err = os.WriteFile(*dhcp_conf_file, []byte(newContent), 0644)
+	err = os.WriteFile(*allowed_macs_file, []byte(newContent), 0644)
 	if err != nil {
 		return fmt.Errorf("error writing file: %w", err)
 	}
 
 	return nil
-	
+
 }
 
 // restartDnsmasq runs the systemctl command to restart dnsmasq
@@ -200,7 +206,7 @@ func RestartDnsmasq() error {
 
 // HostapdListener continuously listens for incoming messages
 func (i *HostapdInterceptor) HostapdListener() {
-	defer i.wg.Done() // Mark as done when exiting
+	defer wg.Done() // Mark as done when exiting
 
 	logger.Println("Listening for incoming messages...")
 
@@ -220,12 +226,12 @@ func (i *HostapdInterceptor) HostapdListener() {
 					// Suppress error if quitting
 					return
 				default:
-					logger.Println("Error receiving message:", err)
+					logger.Println("Error receiving message: %w", err)
 				}
 			} else {
 				logger.Println("Received:", string(buf[:n]))
 				if strings.Contains(string(buf[:n]), "CTRL-EVENT-EAP-SUCCESS") {
-					logger.Println("EAP success detected for client: ", string(buf[:n]))
+					logger.Println("EAP success detected for client: %w", string(buf[:n]))
 
 					// Extract MAC address
 					parts := strings.Split(string(buf[:n]), " ")
@@ -240,7 +246,7 @@ func (i *HostapdInterceptor) HostapdListener() {
 					// Restart dnsmasq service
 					err = RestartDnsmasq()
 					if err != nil {
-						logger.Println("Error restarting dnsmasq:", err)
+						logger.Println("Error restarting dnsmasq: %w", err)
 					}
 
 					logger.Println("dnsmasq service restarted successfully.")
@@ -251,42 +257,107 @@ func (i *HostapdInterceptor) HostapdListener() {
 }
 
 // Listener in the lease file (/var/lib/misc/dnsmasq.leases)
-func DnsmasqListener() {
+func DnsmasqListener(leases_file string)  {
+	defer wg.Done()
+
+	start_info, err := os.Stat(leases_file)
+	if err != nil {
+		logger.Println("Error retrieving leases file stats: ", err)
+	}
+
 	for {
-		// 1. Listen for new lease
-		// 2. Increase lease counter for device
-		// 3. Check number of leases for this device
-		// 3.2 If =3
-		// 3.2.1 Disallow MAC address so it can't have any new leases
-		// 3.2.2 Remove entry from /var/lib/misc/dnsmasq.leases
-		// 3.2.3 Restart dnsmasq
-		// 
-		// Compare every time a timestamp changes for a given mac (meaning a renewal)
+		temp_info, err := os.Stat(leases_file)
+		
+		if err != nil {
+			logger.Println("Error retrieving leases file stats: ", err)
+			return
+		}
+
+		if temp_info.ModTime() != start_info.ModTime() {
+			logger.Println("Leases updated")
+
+			// Check if file exists, if not return error
+			file, err := os.Open(leases_file) // Open the file
+			if err != nil {
+				logger.Println("Error opening leases file: ", err)
+			}
+
+			scanner := bufio.NewScanner(file) // Create a new scanner
+			for scanner.Scan() {              // Read line by line
+				fields := strings.Fields(scanner.Text())
+				if len(fields) < 2 {
+					logger.Println("Malformed line in leases file, skipping:", scanner.Text())
+					continue
+				}
+
+				expirationStr, macAddress := fields[0], fields[1]
+
+				expiration, err := strconv.Atoi(expirationStr)
+				if err != nil {
+					logger.Printf("Error converting expiration to int: %v", err)
+					continue
+				}
+				
+				if lease, exists := devices[macAddress]; exists{
+					if lease.expiration != expiration {
+						lease.counter++ // Update counter
+						lease.expiration = expiration
+						devices[macAddress] = lease // Save back to map
+
+						if lease.counter == 3 {
+							
+							// Disallow mac for DHCP offers
+							DisallowMac(macAddress)
+
+							// De-auth device from hostapd
+							res, err := hostapd_interceptor.Request([]byte(fmt.Sprintf("DEAUTHENTICATE %s", macAddress)))
+							if err != nil {
+								logger.Printf("DEAUTHENTICATE request for %v failed: %v\n", macAddress, err)
+							} else {
+								logger.Println(res)
+							}
+
+							// Restarting dnsmasq
+							err = RestartDnsmasq()
+							if err != nil {
+								logger.Println("Error while restarting dnsmasq: %w", err)
+							}
+						}
+					}
+				} else {
+					// Register for first time lease
+					devices[macAddress] = Lease{
+						counter: 1,
+						expiration: expiration,
+					}
+				}
+			}
+			file.Close()  // Explicit close
+			start_info = temp_info
+		}
 	}
 }
 
 func main() {
-	mode = flag.String("mode", "syslog", "Logging mode: syslog or debug (Defaults to syslog)")
+	mode = flag.String("mode", "syslog", "Logging mode: syslog or debug")
 	hostpad_int := flag.String("interface", "/var/run/hostapd/enp0s10", "Hostapd socket path")
-	dhcp_conf_file = flag.String("conf-out", "/etc/allowed-macs.conf", "Dnsmasq configuration file")
+	allowed_macs_file = flag.String("allowed", "/etc/allowed-macs.conf", "Dnsmasq allowed MACs file")
+	leases_file := flag.String("leases", "/var/lib/misc/dnsmasq.leases", "Dnsmasq DHCP leases files")
 	flag.Parse() // Parse command-line flags
 
 	SetLogging()
 
-	// Initiate device counter
-	devices = make(map[string]int)
-
 	// Create interceptor
-	interceptor, err := NewInterceptor(*hostpad_int)
+	hostapd_interceptor, err := NewInterceptor(*hostpad_int)
 	if err != nil {
 		log.Println("Error creating interceptor:", err)
 		return
 	}
-	defer interceptor.Shutdown()
+	defer hostapd_interceptor.Shutdown()
 	logger.Println("HostapdInterceptor created")
 
 	// Attach to the external service
-	err = interceptor.Attach()
+	err = hostapd_interceptor.Attach()
 	if err != nil {
 		logger.Println("Error attaching to the external service:", err)
 		return
@@ -294,8 +365,12 @@ func main() {
 	logger.Println("Attached to", *hostpad_int)
 
 	// Start listening in a separate goroutine
-	interceptor.wg.Add(1)
-	go interceptor.HostapdListener()
+	wg.Add(1)
+	go hostapd_interceptor.HostapdListener()
+
+	// Start listening for DHCP lease renewals
+	wg.Add(1)
+	go DnsmasqListener(*leases_file)
 
 	// Handle graceful shutdown
 	sigChan := make(chan os.Signal, 1)
