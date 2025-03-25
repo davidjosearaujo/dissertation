@@ -171,6 +171,8 @@ func DisallowMac(allowed_macs_file string, mac string) error {
 		trimmedLine := strings.TrimSpace(line)
 		if !strings.Contains(trimmedLine, mac) {
 			newLines = append(newLines, line)
+		} else {
+			newLines = append(newLines, "")
 		}
 	}
 
@@ -230,7 +232,7 @@ func HostapdListener(allowed_macs_file string) {
 						return
 					}
 
-					logger.Println("EAP success detected for client: ", parts[1])
+					logger.Println("Authentication success for client: ", parts[1])
 
 					// Add MAC to allowed allowed_devices list
 					AllowMac(allowed_macs_file, parts[1])
@@ -240,8 +242,6 @@ func HostapdListener(allowed_macs_file string) {
 					if err != nil {
 						logger.Println("Error restarting dnsmasq: ", err)
 					}
-
-					logger.Println("dnsmasq service restarted successfully!")
 				}
 			}
 		}
@@ -295,7 +295,7 @@ func DnsmasqListener(allowed_macs_file string, leases_file string) {
 						allowed_devices[mac_address] = lease // Save back to map
 
 						logger.Printf("Lease #%v device: %v", lease.counter, mac_address)
-						if lease.counter >= 3 {
+						if lease.counter == 3 {
 							// Disallow mac for DHCP offers
 							logger.Println("Disallowing device: ", mac_address)
 							DisallowMac(allowed_macs_file, mac_address)
@@ -318,6 +318,7 @@ func DnsmasqListener(allowed_macs_file string, leases_file string) {
 							}
 
 							// Forgetting device
+							logger.Println("Forgetting device: ", mac_address)
 							delete(allowed_devices, mac_address)
 						}
 					}
