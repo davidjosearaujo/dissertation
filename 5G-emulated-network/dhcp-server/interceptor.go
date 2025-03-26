@@ -249,7 +249,7 @@ func HostapdListener(allowed_macs_file string) {
 }
 
 // Listener in the lease file (/var/lib/misc/dnsmasq.leases)
-func DnsmasqListener(allowed_macs_file string, leases_file string) {
+func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi string) {
 	defer wg.Done()
 
 	start_info, err := os.Stat(leases_file)
@@ -337,11 +337,24 @@ func DnsmasqListener(allowed_macs_file string, leases_file string) {
 	}
 }
 
+// Establish new PDU Session
+func NewPDUSession(ue_imsi string) error {
+	// This uses the existing nr-cli bin from UERANSIM
+	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "\"ps-establish IPv4 --sst 1 --sd 0 --dnn clients\"")
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("failed to restart establish new PDU Session: %w", err)
+	}
+	logger.Println("New PDU Session established successfully")
+	return nil
+}
+
+
 func main() {
 	mode := flag.String("mode", "syslog", "Logging mode: syslog or debug")
 	hostpad_int := flag.String("interface", "/var/run/hostapd/enp0s10", "Hostapd socket path")
 	allowed_macs_file := flag.String("allowed", "/etc/allowed-macs.conf", "Dnsmasq allowed MACs file")
 	leases_file := flag.String("leases", "/var/lib/misc/dnsmasq.leases", "Dnsmasq DHCP leases files")
+	ue_imsi := flag.String("imsi", "imsi-999700000000001", "UE IMSI")
 	flag.Parse() // Parse command-line flags
 
 	SetLogging(*mode)
@@ -378,7 +391,7 @@ func main() {
 
 	// Start listening for DHCP lease renewals
 	wg.Add(1)
-	go DnsmasqListener(*allowed_macs_file, *leases_file)
+	go DnsmasqListener(*allowed_macs_file, *leases_file, *ue_imsi)
 
 	// Handle graceful shutdown
 	sigChan := make(chan os.Signal, 1)
