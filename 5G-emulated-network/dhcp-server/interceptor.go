@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"flag"
 	"fmt"
 	"log"
@@ -10,10 +11,13 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
 	"syscall"
+
+	"gopkg.in/yaml.v3"
 )
 
 type HostapdInterceptor struct {
@@ -23,9 +27,26 @@ type HostapdInterceptor struct {
 	quit     chan struct{} // Channel to signal termination
 }
 
+// Session represents a single PDU session
+type Session struct {
+	Id			int
+	State       string `yaml:"state"`
+	SessionType string `yaml:"session-type"`
+	APN         string `yaml:"apn"`
+	SNSSAI      struct {
+		SST string `yaml:"sst"`
+		SD  string `yaml:"sd"`
+	} `yaml:"s-nssai"`
+	Emergency   bool   `yaml:"emergency"`
+	Address     string `yaml:"address"`
+	AMBR        string `yaml:"ambr"`
+	DataPending bool   `yaml:"data-pending"`
+}
+
 type Lease struct {
-	expiration int
-	counter    int
+	expiration  int
+	counter     int
+	pdu_session *Session
 }
 
 var (
@@ -317,6 +338,10 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 								logger.Println("Deauthenticating device: ", mac_address)
 							}
 
+							//
+							logger.Println("Releasing PDU Session from device: ", mac_address)
+							ReleasePDUSession(ue_imsi, allowed_devices[mac_address].pdu_session.Id)
+
 							// Forgetting device
 							logger.Println("Forgetting device: ", mac_address)
 							delete(allowed_devices, mac_address)
@@ -328,6 +353,14 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 					allowed_devices[mac_address] = Lease{
 						counter:    1,
 						expiration: expiration,
+						pdu_session: func() *Session {
+							session, err := NewPDUSession(ue_imsi)
+							if err != nil {
+								logger.Println("Error creating PDU session: ", err)
+								return nil
+							}
+							return session
+						}(),
 					}
 				}
 			}
@@ -337,17 +370,71 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 	}
 }
 
-// Establish new PDU Session
-func NewPDUSession(ue_imsi string) error {
-	// This uses the existing nr-cli bin from UERANSIM
-	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "\"ps-establish IPv4 --sst 1 --sd 0 --dnn clients\"")
+// NewPDUSession retrieves the last session from the ps-list output
+func NewPDUSession(ue_imsi string) (*Session, error) {
+	// Establish a new PDU session
+	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "ps-establish IPv4 --sst 1 --dnn clients")
 	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("failed to restart establish new PDU Session: %w", err)
+		return nil, fmt.Errorf("failed to establish new PDU Session: %w", err)
 	}
-	logger.Println("New PDU Session established successfully")
-	return nil
+	log.Println("New PDU Session established successfully")
+
+	// Run ps-list and capture output
+	cmd = exec.Command("nr-cli", ue_imsi, "--exec", "ps-list")
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	if err := cmd.Run(); err != nil {
+		return nil, fmt.Errorf("failed to retrieve PDU Session listing: %w", err)
+	}
+
+	// Parse output as YAML
+	var pduSessions map[string]Session
+	if err := yaml.Unmarshal(out.Bytes(), &pduSessions); err != nil {
+		return nil, fmt.Errorf("failed to parse PDU Session listing as YAML: %w", err)
+	}
+
+	// Extract and sort session keys
+	var sessionKeys []int
+	sessionMap := make(map[int]Session)
+
+	for key, session := range pduSessions {
+		sessionNumStr := strings.TrimPrefix(key, "PDU Session")
+		sessionNum, err := strconv.Atoi(sessionNumStr)
+		if err != nil {
+			return nil, fmt.Errorf("invalid session ID: %s", key)
+		}
+
+		session.Id = sessionNum
+		sessionMap[sessionNum] = session
+		sessionKeys = append(sessionKeys, sessionNum)
+	}
+
+	// If no sessions were found, return an error
+	if len(sessionKeys) == 0 {
+		return nil, fmt.Errorf("no PDU sessions found")
+	}
+
+	// Sort session keys numerically
+	sort.Ints(sessionKeys)
+
+	// Get the last (highest ID) session
+	lastSessionID := sessionKeys[len(sessionKeys)-1]
+	lastSession := sessionMap[lastSessionID]
+
+	return &lastSession, nil
 }
 
+// Release PDU Session
+func ReleasePDUSession(ue_imsi string, pdu_id int) error {
+	// Establish a new PDU session
+	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "ps-release ", string(pdu_id))
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("failed to release PDU Session #%v: %w", pdu_id, err)
+	}
+	log.Println("PDU Session released successfully")
+
+	return nil
+}
 
 func main() {
 	mode := flag.String("mode", "syslog", "Logging mode: syslog or debug")
@@ -378,12 +465,17 @@ func main() {
 	logger.Println("Attached to ", *hostpad_int)
 
 	// Testing hostapd_cli request
-	res, err := hostapd_interceptor.Request([]byte(fmt.Sprintf("STATUS")))
+	_, err = hostapd_interceptor.Request([]byte(fmt.Sprintf("STATUS")))
 	if err != nil {
-		logger.Printf("Request for failed: %v", err)
-	} else {
-		logger.Println(string(res))
+		logger.Printf("Request for STATUS failed: %v", err)
 	}
+
+	//TESTING
+	_, err = NewPDUSession(*ue_imsi)
+	if err != nil {
+		logger.Printf("Request for new PDU Session failed: %v", err)
+	}
+	return
 
 	// Start listening in a separate goroutine
 	wg.Add(1)

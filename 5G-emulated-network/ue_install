@@ -37,6 +37,11 @@ echo -e "Enable wired driver and debug file"
 cp defconfig .config
 sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
 
+echo -e "\nEnable IP forwarding"
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo iptables -A FORWARD -i enp0s10 -o eth0 -j ACCEPT
+sudo iptables -A FORWARD -i eth0 -o enp0s10 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
 echo -e "\nCompile hostapd"
 make
 
@@ -62,20 +67,27 @@ cat hostapd.conf > ${LOG_FILE_PATH}
 echo -e "\nRunning hostapd"
 sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
 
+sudo touch /etc/allowed-macs.conf
+
 echo -e "\nConfiguring dnsmasq DHCP server"
 echo -e "interface=enp0s10
 bind-interfaces
-dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,12h
+
+dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,2m
 dhcp-authoritative
+
 dhcp-option=3,192.168.60.2
 dhcp-option=6,192.168.60.2
-log-dhcp
-log-queries" > /etc/dnsmasq.conf
 
-systemctl stop dnsmasq
+dhcp-ignore=tag:!known
+conf-file=/etc/allowed-macs.conf
 
-LOG_FILE_PATH="/log/dnsmasq_$(date +%s).log"
-cat /etc/dnsmasq.conf > ${LOG_FILE_PATH}
+log-dhcp" | sudo tee /etc/dnsmasq.conf
 
-echo -e "\nRunning dnsmasq DHCP server"
-sudo dnsmasq -d &>> ${LOG_FILE_PATH} &
+sudo systemctl restart dnsmasq
+
+LOG_FILE_PATH="/log/interceptor_$(date +%s).log"
+
+echo -e "\nStart Interceptor"
+cd /home/vagrant/
+sudo ./interceptor --mode="debug" &>> ${LOG_FILE_PATH} &
