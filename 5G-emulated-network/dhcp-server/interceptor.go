@@ -16,6 +16,7 @@ import (
 	"strings"
 	"sync"
 	"syscall"
+	"time"
 
 	"gopkg.in/yaml.v3"
 )
@@ -370,17 +371,45 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 	}
 }
 
-// NewPDUSession retrieves the last session from the ps-list output
+// NewPDUSession establishes a new session and waits until it is active
 func NewPDUSession(ue_imsi string) (*Session, error) {
 	// Establish a new PDU session
 	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "ps-establish IPv4 --sst 1 --dnn clients")
 	if err := cmd.Run(); err != nil {
 		return nil, fmt.Errorf("failed to establish new PDU Session: %w", err)
 	}
-	log.Println("New PDU Session established successfully")
+	log.Println("New PDU Session requested successfully, waiting for activation...")
 
-	// Run ps-list and capture output
-	cmd = exec.Command("nr-cli", ue_imsi, "--exec", "ps-list")
+	// Wait for session to become active
+	const maxRetries = 10
+	const sleepInterval = 1 * time.Second
+
+	var session *Session
+	var err error
+	for i := 0; i < maxRetries; i++ {
+		session, err = getLastPDUSession(ue_imsi)
+		if err != nil {
+			log.Printf("Retrying (%d/%d): Failed to retrieve session: %v", i+1, maxRetries, err)
+		} else if session != nil && session.State == "PS-ACTIVE" && session.Address != "" {
+			log.Println("PDU Session is now active!")
+			return session, nil
+		} else {
+			log.Printf("Retrying (%d/%d): Waiting for session activation (State: %s, Address: %s)...", i+1, maxRetries, session.State, session.Address)
+		}
+
+		time.Sleep(sleepInterval)
+	}
+
+	if session != nil {
+		ReleasePDUSession(ue_imsi, session.Id)
+	}
+
+	return nil, fmt.Errorf("PDU Session did not become active within timeout")
+}
+
+// getLastPDUSession retrieves the latest session from ps-list
+func getLastPDUSession(ue_imsi string) (*Session, error) {
+	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "ps-list")
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	if err := cmd.Run(); err != nil {
@@ -393,7 +422,7 @@ func NewPDUSession(ue_imsi string) (*Session, error) {
 		return nil, fmt.Errorf("failed to parse PDU Session listing as YAML: %w", err)
 	}
 
-	// Extract and sort session keys
+	// Extract session IDs and sort them
 	var sessionKeys []int
 	sessionMap := make(map[int]Session)
 
@@ -414,10 +443,8 @@ func NewPDUSession(ue_imsi string) (*Session, error) {
 		return nil, fmt.Errorf("no PDU sessions found")
 	}
 
-	// Sort session keys numerically
+	// Sort and get the last session
 	sort.Ints(sessionKeys)
-
-	// Get the last (highest ID) session
 	lastSessionID := sessionKeys[len(sessionKeys)-1]
 	lastSession := sessionMap[lastSessionID]
 
@@ -469,13 +496,6 @@ func main() {
 	if err != nil {
 		logger.Printf("Request for STATUS failed: %v", err)
 	}
-
-	//TESTING
-	_, err = NewPDUSession(*ue_imsi)
-	if err != nil {
-		logger.Printf("Request for new PDU Session failed: %v", err)
-	}
-	return
 
 	// Start listening in a separate goroutine
 	wg.Add(1)

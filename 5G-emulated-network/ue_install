@@ -46,7 +46,7 @@ echo -e "\nCompile hostapd"
 make
 
 echo -e "Writing hostapd configurations"
-echo -e "interface=enp0s10
+echo -e "interface=enp0s9
 driver=wired
 ctrl_interface=/var/run/hostapd
 ctrl_interface_group=vagrant
@@ -70,7 +70,7 @@ sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
 sudo touch /etc/allowed-macs.conf
 
 echo -e "\nConfiguring dnsmasq DHCP server"
-echo -e "interface=enp0s10
+echo -e "interface=enp0s9
 bind-interfaces
 
 dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,2m
@@ -90,4 +90,4 @@ LOG_FILE_PATH="/log/interceptor_$(date +%s).log"
 
 echo -e "\nStart Interceptor"
 cd /home/vagrant/
-sudo ./interceptor --mode="debug" &>> ${LOG_FILE_PATH} &
+sudo ./interceptor --mode="debug" --interface="enp0s9" &>> ${LOG_FILE_PATH} &
