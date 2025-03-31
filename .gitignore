@@ -1,7 +1,7 @@
 # Output
-.*build/*
+*/build/*
 # Ignore the contents of every subdirectory
-.*build/**/*
+*build/**/*
 # But not the directories themselves
 !build/**/
 # And allow gitkeeps
