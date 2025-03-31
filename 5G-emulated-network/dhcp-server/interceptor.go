@@ -477,16 +477,16 @@ func main() {
 	var err error
 	hostapd_interceptor, err = NewInterceptor(*hostpad_int)
 	if err != nil {
-		log.Println("Error creating interceptor: ", err)
+		log.Println("Error starting interceptor: ", err)
 		return
 	}
 	defer hostapd_interceptor.Shutdown()
-	logger.Println("HostapdInterceptor created")
+	logger.Println("Interceptor started!")
 
 	// Attach to the external service
 	err = hostapd_interceptor.Attach()
 	if err != nil {
-		logger.Println("Error attaching to the external service: ", err)
+		logger.Println("Error attaching to the hostapd: ", err)
 		return
 	}
 	logger.Println("Attached to ", *hostpad_int)
