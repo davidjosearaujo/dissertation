@@ -387,7 +387,7 @@ func NewPDUSession(ue_imsi string) (*Session, error) {
 	var session *Session
 	var err error
 	for i := 0; i < maxRetries; i++ {
-		session, err = getLastPDUSession(ue_imsi)
+		session, err = LastPDUSession(ue_imsi)
 		if err != nil {
 			log.Printf("Retrying (%d/%d): Failed to retrieve session: %v", i+1, maxRetries, err)
 		} else if session != nil && session.State == "PS-ACTIVE" && session.Address != "" {
@@ -407,8 +407,8 @@ func NewPDUSession(ue_imsi string) (*Session, error) {
 	return nil, fmt.Errorf("PDU Session did not become active within timeout")
 }
 
-// getLastPDUSession retrieves the latest session from ps-list
-func getLastPDUSession(ue_imsi string) (*Session, error) {
+// LastPDUSession retrieves the latest session from ps-list
+func LastPDUSession(ue_imsi string) (*Session, error) {
 	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "ps-list")
 	var out bytes.Buffer
 	cmd.Stdout = &out
@@ -454,7 +454,7 @@ func getLastPDUSession(ue_imsi string) (*Session, error) {
 // Release PDU Session
 func ReleasePDUSession(ue_imsi string, pdu_id int) error {
 	// Establish a new PDU session
-	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "ps-release ", string(pdu_id))
+	cmd := exec.Command("nr-cli", ue_imsi, "--exec", "ps-release ", strconv.Itoa(pdu_id))
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("failed to release PDU Session #%v: %w", pdu_id, err)
 	}
@@ -465,7 +465,7 @@ func ReleasePDUSession(ue_imsi string, pdu_id int) error {
 
 func main() {
 	mode := flag.String("mode", "syslog", "Logging mode: syslog or debug")
-	hostpad_int := flag.String("interface", "/var/run/hostapd/enp0s10", "Hostapd socket path")
+	hostpad_int := flag.String("interface", "/var/run/hostapd/enp0s9", "Hostapd socket path")
 	allowed_macs_file := flag.String("allowed", "/etc/allowed-macs.conf", "Dnsmasq allowed MACs file")
 	leases_file := flag.String("leases", "/var/lib/misc/dnsmasq.leases", "Dnsmasq DHCP leases files")
 	ue_imsi := flag.String("imsi", "imsi-999700000000001", "UE IMSI")

@@ -90,4 +90,4 @@ LOG_FILE_PATH="/log/interceptor_$(date +%s).log"
 
 echo -e "\nStart Interceptor"
 cd /home/vagrant/
-sudo ./interceptor --mode="debug" --interface="enp0s9" &>> ${LOG_FILE_PATH} &
+sudo ./interceptor --mode="debug" &>> ${LOG_FILE_PATH} &
