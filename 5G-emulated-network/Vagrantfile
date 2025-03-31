@@ -27,15 +27,17 @@ PDU_SESSIONS = "3"
 NAUN3_IP = "192.168.60.200"
 
 ## EAP Auth Configurations
-EAP_SECRETS_FILE = "eap-secrets" 
+EAP_SECRETS_FILE = "build/eap-secrets" 
 CERT_CA_PASSWD = SecureRandom.alphanumeric(8)
 CERT_SERVER_PASSWD = SecureRandom.alphanumeric(8)
 CERT_CLIENT_PASSWD = SecureRandom.alphanumeric(8)
 CLIENT_SECRET = SecureRandom.alphanumeric(8)
 
 if ARGV.include?("up") && !File.exist?(EAP_SECRETS_FILE)
+  puts `cd dhcp-server && go build -o ../build/ && cd ..`
   File.write(EAP_SECRETS_FILE, "#{CERT_CA_PASSWD},#{CERT_SERVER_PASSWD},#{CERT_CLIENT_PASSWD},#{CLIENT_SECRET}")
 elsif File.exist?(EAP_SECRETS_FILE)
+  puts `cd dhcp-server && go build -o ../build/`
   CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET, = File.read(EAP_SECRETS_FILE).split(",")
 end
 
@@ -74,9 +76,9 @@ Vagrant.configure("2") do |config|
     end
 
     # EAP Auth Server Certs
-    core.vm.synced_folder "./eap-radius-certs-sync", "/certs", create: true
+    core.vm.synced_folder "./build/eap-radius-certs-sync", "/certs", create: true
 
-    core.vm.synced_folder "./runtime-logs", "/log", create: true
+    core.vm.synced_folder "./build/runtime-logs", "/log", create: true
 
   end
 
@@ -109,7 +111,7 @@ Vagrant.configure("2") do |config|
       s.args    = [CORE_IP, GNB_IP_CORE, GNB_IP_UE]
     end
 
-    gnb.vm.synced_folder "./runtime-logs", "/log", create: true
+    gnb.vm.synced_folder "./build/runtime-logs", "/log", create: true
   end
 
   config.vm.define "ue" do |ue|
@@ -129,7 +131,7 @@ Vagrant.configure("2") do |config|
     ue.vm.network "private_network", ip: UE_LAN_IP
 
     # Interceptor for hostapd, dnsmasq and pdu session management
-    ue.vm.provision "file", source: "dhcp-server/interceptor", destination: "interceptor"
+    ue.vm.provision "file", source: "build/interceptor", destination: "interceptor"
 
     # UERANSIM installation
     ue.vm.provision "file", source: "ueransim_install", destination: "ueransim_install"
@@ -144,7 +146,7 @@ Vagrant.configure("2") do |config|
       s.args    = [GNB_IP_UE, PDU_SESSIONS, UE_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET]
     end
 
-    ue.vm.synced_folder "./runtime-logs", "/log", create: true
+    ue.vm.synced_folder "./build/runtime-logs", "/log", create: true
   end
 
   config.vm.define "naun3" do |naun3|
@@ -168,7 +170,7 @@ Vagrant.configure("2") do |config|
       s.args    = [CERT_CLIENT_PASSWD, NAUN3_IP]
     end
 
-    naun3.vm.synced_folder "./runtime-logs", "/log", create: true
+    naun3.vm.synced_folder "./build/runtime-logs", "/log", create: true
   end
 
 end
