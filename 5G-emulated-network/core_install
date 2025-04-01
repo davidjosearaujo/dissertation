@@ -1,5 +1,10 @@
 #!/bin/bash
 
+CORE_IP=$1
+UE_IMSI=$2
+UE_KEY=$3
+UE_OPC=$4
+
 sudo add-apt-repository ppa:open5gs/latest
 sudo apt-get install -y gnupg curl
 sudo snap install yq
@@ -25,8 +30,8 @@ sudo systemctl start mongod
 sudo systemctl enable mongod
 
 echo -e "\nUpdate AMF NGAP and UPF GTPU IPs"
-cat /etc/open5gs/amf.yaml | yq ".amf.ngap.server[0].address = \"$1\"" | sudo tee /etc/open5gs/amf.yaml
-cat /etc/open5gs/upf.yaml | yq ".upf.gtpu.server[0].address = \"$1\"" | sudo tee /etc/open5gs/upf.yaml
+cat /etc/open5gs/amf.yaml | yq ".amf.ngap.server[0].address = \"$CORE_IP\"" | sudo tee /etc/open5gs/amf.yaml
+cat /etc/open5gs/upf.yaml | yq ".upf.gtpu.server[0].address = \"$CORE_IP\"" | sudo tee /etc/open5gs/upf.yaml
 
 echo -e "\nAttributing DNN name to default APN"
 cat /etc/open5gs/smf.yaml \
@@ -76,8 +81,8 @@ sudo systemctl restart nginx
 
 echo -e "\nPre-loading UE in the AMF"
 sudo chmod +x open5gs-dbctl
-./open5gs-dbctl add $2 $3 $4
+./open5gs-dbctl add $UE_IMSI $UE_KEY $UE_OPC
 
 echo -e "\nPre-loading UE APN sessions"
-./open5gs-dbctl update_apn $2 backhaul 0
-./open5gs-dbctl update_apn $2 clients 0
+./open5gs-dbctl update_apn $UE_IMSI backhaul 0
+./open5gs-dbctl update_apn $UE_IMSI clients 0

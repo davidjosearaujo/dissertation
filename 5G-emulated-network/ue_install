@@ -1,9 +1,15 @@
 #!/bin/bash
 
+GNB_IP_UE=$1
+PDU_SESSIONS=$2
+CLIENT_EAP_IP=$3
+AUTH_SERVER_IP=$4
+CLIENT_SECRET=$5
+
 cd ~/UERANSIM
 
 echo -e "\nUpdate gNodeB IP"
-cat config/open5gs-ue.yaml | yq ".gnbSearchList[0] = \"$1\"" | sudo tee config/open5gs-ue.yaml
+cat config/open5gs-ue.yaml | yq ".gnbSearchList[0] = \"$GNB_IP_UE\"" | sudo tee config/open5gs-ue.yaml
 
 echo -e "\nEnabling 'backhaul' APN"
 cat config/open5gs-ue.yaml \
@@ -12,7 +18,7 @@ cat config/open5gs-ue.yaml \
 | sudo tee config/open5gs-ue.yaml
 
 echo -e "\nEnabling multiple PDU Sessions in 'clients' APN"
-UL=$(($2))
+UL=$(($PDU_SESSIONS))
 for ((i=1;i<=$UL;i++)); do
   cat config/open5gs-ue.yaml \
   | yq '.sessions['$i'].type = "IPv4"' \
@@ -37,11 +43,6 @@ echo -e "Enable wired driver and debug file"
 cp defconfig .config
 sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
 
-echo -e "\nEnable IP forwarding"
-sudo sysctl -w net.ipv4.ip_forward=1
-sudo iptables -A FORWARD -i enp0s10 -o eth0 -j ACCEPT
-sudo iptables -A FORWARD -i eth0 -o enp0s10 -m state --state ESTABLISHED,RELATED -j ACCEPT
-
 echo -e "\nCompile hostapd"
 make
 
@@ -55,13 +56,13 @@ logger_syslog=-1
 logger_syslog_level=0
 
 ieee8021x=1 
-own_ip_addr=$3
+own_ip_addr=$CLIENT_EAP_IP
 
-auth_server_addr=$4
+auth_server_addr=$AUTH_SERVER_IP
 auth_server_port=1812
-auth_server_shared_secret=$5" > hostapd.conf
+auth_server_shared_secret=$CLIENT_SECRET" > hostapd.conf
 
-LOG_FILE_PATH="/log/hostapd_$(date +%s).log"
+LOG_FILE_PATH="/log/$(cat /etc/hostname)_hostapd_$(date +%s).log"
 cat hostapd.conf > ${LOG_FILE_PATH}
 
 echo -e "\nRunning hostapd"
@@ -86,7 +87,7 @@ log-dhcp" | sudo tee /etc/dnsmasq.conf
 
 sudo systemctl restart dnsmasq
 
-LOG_FILE_PATH="/log/interceptor_$(date +%s).log"
+LOG_FILE_PATH="/log/$(cat /etc/hostname)_interceptor_$(date +%s).log"
 
 echo -e "\nStart Interceptor"
 cd /home/vagrant/

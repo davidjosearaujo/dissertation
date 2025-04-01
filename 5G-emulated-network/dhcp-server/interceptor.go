@@ -381,11 +381,12 @@ func NewPDUSession(ue_imsi string) (*Session, error) {
 	log.Println("New PDU Session requested successfully, waiting for activation...")
 
 	// Wait for session to become active
-	const maxRetries = 10
+	const maxRetries = 20
 	const sleepInterval = 1 * time.Second
 
 	var session *Session
 	var err error
+	
 	for i := 0; i < maxRetries; i++ {
 		session, err = LastPDUSession(ue_imsi)
 		if err != nil {
