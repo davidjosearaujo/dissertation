@@ -30,7 +30,7 @@ type HostapdInterceptor struct {
 
 // Session represents a single PDU session
 type Session struct {
-	Id			int
+	Id          int
 	State       string `yaml:"state"`
 	SessionType string `yaml:"session-type"`
 	APN         string `yaml:"apn"`
@@ -45,14 +45,18 @@ type Session struct {
 }
 
 type Lease struct {
-	expiration  int
-	counter     int
+	expiration int
+	counter    int
+}
+
+type Device struct {
+	lease       Lease
 	pdu_session *Session
 }
 
 var (
 	logger              *log.Logger
-	allowed_devices     = make(map[string]Lease)
+	allowed_devices     = make(map[string]Device)
 	wg                  sync.WaitGroup
 	hostapd_interceptor *HostapdInterceptor
 )
@@ -152,6 +156,14 @@ func (i *HostapdInterceptor) Attach() error {
 	return fmt.Errorf("ATTACH failed")
 }
 
+func (i *HostapdInterceptor) Deauth(mac_address string) error {
+	_, err := hostapd_interceptor.Request([]byte(fmt.Sprintf("DEAUTHENTICATE %s", mac_address)))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // Shutdown cleans up resources gracefully
 func (i *HostapdInterceptor) Shutdown() {
 	close(i.quit)  // Signal the listener to stop
@@ -221,7 +233,7 @@ func RestartDnsmasq() error {
 }
 
 // HostapdListener continuously listens for incoming messages
-func HostapdListener(allowed_macs_file string) {
+func HostapdListener(allowed_macs_file string, ue_imsi string) {
 	defer wg.Done() // Mark as done when exiting
 
 	logger.Println("Listening for incoming messages...")
@@ -253,11 +265,39 @@ func HostapdListener(allowed_macs_file string) {
 						logger.Println("Could not extract MAC address from event message.")
 						return
 					}
+					mac_address := parts[1]
 
-					logger.Println("Authentication success for client: ", parts[1])
+					logger.Println("Authentication success for client: ", mac_address)
 
-					// Add MAC to allowed allowed_devices list
-					AllowMac(allowed_macs_file, parts[1])
+					logger.Println("Requesting PDU Session for client: ", mac_address)
+					allowed_devices[mac_address] = Device{
+						lease: Lease{
+							counter:    0,
+							expiration: 0,
+						},
+						pdu_session: func() *Session {
+							session, err := NewPDUSession(ue_imsi)
+							if err != nil {
+								logger.Println("Error creating PDU session: ", err)
+								return nil
+							}
+							return session
+						}(),
+					}
+
+					if allowed_devices[mac_address].pdu_session != nil {
+						// Add MAC to allowed allowed_devices list
+						AllowMac(allowed_macs_file, mac_address)
+					} else {
+						logger.Println("Couldn't provide PDU Session for device: ", mac_address)
+						//De-auth device from hostapd
+						logger.Println("Deauthenticating device: ", mac_address)
+						err := hostapd_interceptor.Deauth(mac_address)
+						if err != nil {
+							logger.Printf("DEAUTHENTICATE request for %v failed: %v\n", mac_address, err)
+						}
+						delete(allowed_devices, mac_address)
+					}
 
 					// Restart dnsmasq service
 					err = RestartDnsmasq()
@@ -310,14 +350,14 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 					continue
 				}
 
-				if lease, exists := allowed_devices[mac_address]; exists {
-					if lease.expiration != expiration {
-						lease.counter++ // Update counter
-						lease.expiration = expiration
-						allowed_devices[mac_address] = lease // Save back to map
+				if device, exists := allowed_devices[mac_address]; exists {
+					if device.lease.expiration != expiration {
+						device.lease.counter++ // Update counter
+						device.lease.expiration = expiration
+						allowed_devices[mac_address] = device // Save back to map
 
-						logger.Printf("Lease #%v device: %v", lease.counter, mac_address)
-						if lease.counter == 3 {
+						logger.Printf("Lease #%v device: %v", device.lease.counter, mac_address)
+						if device.lease.counter == 3 {
 							// Disallow mac for DHCP offers
 							logger.Println("Disallowing device: ", mac_address)
 							DisallowMac(allowed_macs_file, mac_address)
@@ -332,14 +372,13 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 							}
 
 							//De-auth device from hostapd
-							_, err := hostapd_interceptor.Request([]byte(fmt.Sprintf("DEAUTHENTICATE %s", mac_address)))
+							logger.Println("Deauthenticating device: ", mac_address)
+							err := hostapd_interceptor.Deauth(mac_address)
 							if err != nil {
 								logger.Printf("DEAUTHENTICATE request for %v failed: %v\n", mac_address, err)
-							} else {
-								logger.Println("Deauthenticating device: ", mac_address)
 							}
 
-							//
+							// Releasing PDU Sessions
 							logger.Println("Releasing PDU Session from device: ", mac_address)
 							ReleasePDUSession(ue_imsi, allowed_devices[mac_address].pdu_session.Id)
 
@@ -347,21 +386,6 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 							logger.Println("Forgetting device: ", mac_address)
 							delete(allowed_devices, mac_address)
 						}
-					}
-				} else {
-					logger.Printf("Lease #%v device: %v", 1, mac_address)
-					// Register for first time lease
-					allowed_devices[mac_address] = Lease{
-						counter:    1,
-						expiration: expiration,
-						pdu_session: func() *Session {
-							session, err := NewPDUSession(ue_imsi)
-							if err != nil {
-								logger.Println("Error creating PDU session: ", err)
-								return nil
-							}
-							return session
-						}(),
 					}
 				}
 			}
@@ -382,11 +406,11 @@ func NewPDUSession(ue_imsi string) (*Session, error) {
 
 	// Wait for session to become active
 	const maxRetries = 20
-	const sleepInterval = 1 * time.Second
+	const sleepInterval = 3 * time.Second
 
 	var session *Session
 	var err error
-	
+
 	for i := 0; i < maxRetries; i++ {
 		session, err = LastPDUSession(ue_imsi)
 		if err != nil {
@@ -500,7 +524,7 @@ func main() {
 
 	// Start listening in a separate goroutine
 	wg.Add(1)
-	go HostapdListener(*allowed_macs_file)
+	go HostapdListener(*allowed_macs_file, *ue_imsi)
 
 	// Start listening for DHCP lease renewals
 	wg.Add(1)
