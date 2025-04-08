@@ -18,6 +18,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/vishvananda/netlink"
 	"gopkg.in/yaml.v3"
 )
 
@@ -50,6 +51,7 @@ type Lease struct {
 }
 
 type Device struct {
+	state       string
 	lease       Lease
 	pdu_session *Session
 }
@@ -232,6 +234,41 @@ func RestartDnsmasq() error {
 	return nil
 }
 
+func ForgetDevice(allowed_macs_file string, leases_file string, mac_address string, ue_imsi string) error {
+	// Disallow mac for DHCP offers
+	logger.Println("Disallowing device: ", mac_address)
+	DisallowMac(allowed_macs_file, mac_address)
+
+	// Delete lease
+	DisallowMac(leases_file, mac_address)
+
+	// Restarting dnsmasq
+	err := RestartDnsmasq()
+	if err != nil {
+		return fmt.Errorf("error restarting dnsmasq: %w", err)
+	}
+
+	//De-auth device from hostapd
+	logger.Println("Deauthenticating device: ", mac_address)
+	err = hostapd_interceptor.Deauth(mac_address)
+	if err != nil {
+		return fmt.Errorf("DEAUTHENTICATE request for %v failed: %v", mac_address, err)
+	}
+
+	// Releasing PDU Sessions
+	logger.Println("Releasing PDU Session from device: ", mac_address)
+	err = ReleasePDUSession(ue_imsi, allowed_devices[mac_address].pdu_session.Id)
+	if err != nil {
+		return fmt.Errorf("RELEASE request for %v failed: %v", mac_address, err)
+	}
+
+	// Forgetting device
+	logger.Println("Forgetting device: ", mac_address)
+	delete(allowed_devices, mac_address)
+
+	return nil
+}
+
 // HostapdListener continuously listens for incoming messages
 func HostapdListener(allowed_macs_file string, ue_imsi string) {
 	defer wg.Done() // Mark as done when exiting
@@ -257,7 +294,7 @@ func HostapdListener(allowed_macs_file string, ue_imsi string) {
 					logger.Println("Error receiving message: ", err)
 				}
 			} else {
-				logger.Println("Received: ", string(buf[:n]))
+				logger.Println(string(buf[3:n]))
 				if strings.Contains(string(buf[:n]), "CTRL-EVENT-EAP-SUCCESS") {
 					// Extract MAC address
 					parts := strings.Split(string(buf[:n]), " ")
@@ -271,6 +308,7 @@ func HostapdListener(allowed_macs_file string, ue_imsi string) {
 
 					logger.Println("Requesting PDU Session for client: ", mac_address)
 					allowed_devices[mac_address] = Device{
+						state: "AUTHENTICATED",
 						lease: Lease{
 							counter:    0,
 							expiration: 0,
@@ -338,7 +376,6 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 			for scanner.Scan() {              // Read line by line
 				fields := strings.Fields(scanner.Text())
 				if len(fields) < 2 {
-					logger.Println("Malformed line in leases file, skipping: ", scanner.Text())
 					continue
 				}
 
@@ -357,40 +394,44 @@ func DnsmasqListener(allowed_macs_file string, leases_file string, ue_imsi strin
 						allowed_devices[mac_address] = device // Save back to map
 
 						logger.Printf("Lease #%v device: %v", device.lease.counter, mac_address)
-						if device.lease.counter == 3 {
-							// Disallow mac for DHCP offers
-							logger.Println("Disallowing device: ", mac_address)
-							DisallowMac(allowed_macs_file, mac_address)
-
-							// Delete lease
-							DisallowMac(leases_file, mac_address)
-
-							// Restarting dnsmasq
-							err = RestartDnsmasq()
-							if err != nil {
-								logger.Println("Error while restarting dnsmasq: ", err)
-							}
-
-							//De-auth device from hostapd
-							logger.Println("Deauthenticating device: ", mac_address)
-							err := hostapd_interceptor.Deauth(mac_address)
-							if err != nil {
-								logger.Printf("DEAUTHENTICATE request for %v failed: %v\n", mac_address, err)
-							}
-
-							// Releasing PDU Sessions
-							logger.Println("Releasing PDU Session from device: ", mac_address)
-							ReleasePDUSession(ue_imsi, allowed_devices[mac_address].pdu_session.Id)
-
-							// Forgetting device
-							logger.Println("Forgetting device: ", mac_address)
-							delete(allowed_devices, mac_address)
-						}
 					}
 				}
 			}
 			file.Close() // Explicit close
 			start_info = temp_info
+		}
+	}
+}
+
+func HostDisconnectListener(allowed_macs_file string, leases_file string, ue_imsi string, link netlink.Link) {
+	defer wg.Done()
+
+	for {
+		// Get neighbor entries for that link
+		neighs, err := netlink.NeighList(link.Attrs().Index, netlink.FAMILY_V4)
+		if err != nil {
+			logger.Println(err)
+			return
+		}
+
+		for _, neigh := range neighs {
+			mac := neigh.HardwareAddr.String()
+
+			if device, exists := allowed_devices[mac]; exists {
+				if neigh.State == netlink.NUD_REACHABLE {
+					logger.Println("Device connected:", mac)
+					// Update device state
+					device.state = "REACHABLE"
+					allowed_devices[mac] = device
+				} else if device.state != "AUTHENTICATED" {
+					// Device is not reachable
+					logger.Println("Device not reachable:", mac)
+					err = ForgetDevice(allowed_macs_file, leases_file, mac, ue_imsi)
+					if err != nil {
+						logger.Println("Error forgetting device:", err)
+					}
+				}
+			}
 		}
 	}
 }
@@ -498,8 +539,16 @@ func main() {
 
 	SetLogging(*mode)
 
+	// Create link to the network interface, using the provided interface name
+	sl := strings.Split(*hostpad_int, "/")
+	linkName := sl[len(sl)-1]
+	link, err := netlink.LinkByName(linkName)
+	if err != nil {
+		log.Println("Error retrieving link by name: ", err)
+		return
+	}
+
 	// Create interceptor
-	var err error
 	hostapd_interceptor, err = NewInterceptor(*hostpad_int)
 	if err != nil {
 		log.Println("Error starting interceptor: ", err)
@@ -529,6 +578,10 @@ func main() {
 	// Start listening for DHCP lease renewals
 	wg.Add(1)
 	go DnsmasqListener(*allowed_macs_file, *leases_file, *ue_imsi)
+
+	// Start listening for host disconnects
+	wg.Add(1)
+	go HostDisconnectListener(*allowed_macs_file, *leases_file, *ue_imsi, link)
 
 	// Handle graceful shutdown
 	sigChan := make(chan os.Signal, 1)
