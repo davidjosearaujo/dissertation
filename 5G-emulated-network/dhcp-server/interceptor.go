@@ -418,12 +418,12 @@ func HostDisconnectListener(allowed_macs_file string, leases_file string, ue_ims
 			mac := neigh.HardwareAddr.String()
 
 			if device, exists := allowed_devices[mac]; exists {
-				if neigh.State == netlink.NUD_REACHABLE {
-					logger.Println("Device connected:", mac)
+				if neigh.State == netlink.NUD_REACHABLE && device.state == "AUTHENTICATED" {
+					logger.Println("Device authenticated and reachable:", mac)
 					// Update device state
 					device.state = "REACHABLE"
 					allowed_devices[mac] = device
-				} else if device.state != "AUTHENTICATED" {
+				} else if neigh.State != netlink.NUD_REACHABLE {
 					// Device is not reachable
 					logger.Println("Device not reachable:", mac)
 					err = ForgetDevice(allowed_macs_file, leases_file, mac, ue_imsi)
