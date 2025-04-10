@@ -259,7 +259,7 @@ func ForgetDevice(allowed_macs_file string, leases_file string, mac_address stri
 	logger.Println("Releasing PDU Session from device: ", mac_address)
 	err = ReleasePDUSession(ue_imsi, allowed_devices[mac_address].pdu_session.Id)
 	if err != nil {
-		return fmt.Errorf("RELEASE request for %v failed: %v", mac_address, err)
+		logger.Printf("RELEASE request for %v failed: %v", mac_address, err)
 	}
 
 	// Forgetting device
@@ -423,9 +423,9 @@ func HostDisconnectListener(allowed_macs_file string, leases_file string, ue_ims
 					// Update device state
 					device.state = "REACHABLE"
 					allowed_devices[mac] = device
-				} else if neigh.State != netlink.NUD_REACHABLE {
+				} else if neigh.State == netlink.NUD_STALE {
 					// Device is not reachable
-					logger.Println("Device not reachable:", mac)
+					logger.Println("Device is stale:", mac)
 					err = ForgetDevice(allowed_macs_file, leases_file, mac, ue_imsi)
 					if err != nil {
 						logger.Println("Error forgetting device:", err)

@@ -34,10 +34,10 @@ CERT_CLIENT_PASSWD = SecureRandom.alphanumeric(8)
 CLIENT_SECRET = SecureRandom.alphanumeric(8)
 
 if ARGV.include?("up") && !File.exist?(EAP_SECRETS_FILE)
-  puts `cd dhcp-server && go build -o ../build/ && cd ..`
+  puts `cd interceptor && go build -o ../build/ && cd ..`
   File.write(EAP_SECRETS_FILE, "#{CERT_CA_PASSWD},#{CERT_SERVER_PASSWD},#{CERT_CLIENT_PASSWD},#{CLIENT_SECRET}")
 elsif File.exist?(EAP_SECRETS_FILE)
-  puts `cd dhcp-server && go build -o ../build/ && cd ..`
+  puts `cd interceptor && go build -o ../build/ && cd ..`
   CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET, = File.read(EAP_SECRETS_FILE).split(",")
 end
 

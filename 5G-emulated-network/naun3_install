@@ -38,7 +38,11 @@ sleep 15
 
 sudo dhclient enp0s8
 
-sleep 15
+sleep 240
 
 sudo killall wpa_supplicant
 sudo killall dhclient
+
+sleep 5
+
+echo -e "\nwpa_supplicant and dhclient killed" >> ${LOG_FILE_PATH}
