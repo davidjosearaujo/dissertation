@@ -96,7 +96,7 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
    - In the case of a BBF access: the **GLI** as defined in clause 4.7.8 **together with an identifier of the Home network** as described in TS 23.003.
    - In the case of a Cable access: the **GCI** as defined in clause 4.7.8 together with an identifier of the Home network as described in TS 23.003.
 
-![[Pasted image 20241008121040.png]]
+![[suci-structure.png]]
 
    The following differences exist, compared to 5G-RG case:
    - The W-AGF use SUCI

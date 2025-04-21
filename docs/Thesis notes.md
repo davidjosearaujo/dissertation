@@ -28,3 +28,33 @@ Based on the identified problem of integrating Wi-Fi-only devices lacking native
     - **Transparency:** The underlying mechanism (local authentication, PDU session mapping) should be transparent. The 5GC should primarily see standard PDU Session management procedures initiated by the gateway. The Wi-Fi device should only perceive a standard Wi-Fi connection and EAP authentication process.
     - **Operator Manageability:** The solution, including the gateway logic and the associated EAP infrastructure, must be deployable and manageable by the network operator.
 These requirements collectively define the criteria for a successful solution capable of integrating unmodified Wi-Fi-only devices into a 5G network ecosystem with minimal disruption to existing components and processes.
+## Proposed Identity Management Solution
+### The Identity Management Challenge
+The fundamental challenge in integrating Wi-Fi-only or NAUN3 devices into the 5G ecosystem lies in identity management. Standard 5G identification relies on the SUPI, typically derived from credentials stored securely on a USIM, such as an IMSI or a NAI. For transmission over the air, the SUPI is concealed within a SUCI. Devices lacking a USIM and the associated 5G credentials cannot generate a SUPI or SUCI, rendering them incapable of direct identification, authentication, and management by standard 5GC procedures involving the UDM and AUSF.
+### Inspiration and Core Concept: PDU Session as Proxy Identity
+The proposed solution leverages the inherent capabilities of the 5G-RG and the flexibility of 5G session management. A 5G-RG, from the 5GC's perspective, functions essentially as a UE, possessing its own USIM, credentials (SUPI/SUCI), and the ability to establish and maintain multiple concurrent PDU Sessions. This capability allows a single UE (the 5G-RG) to segregate its traffic based on different service requirements or destinations.
+
+Inspiration was drawn from the concept of CGIDs described in 3GPP specifications [cite: 38, 39], where PDU Sessions can be used to manage traffic for groups of devices connected behind a gateway, potentially mapping groups to specific network interfaces (e.g., SSIDs, Ethernet ports). However, the specifications often imply a group-based segregation. We observed that since the 5G-RG incorporates routing logic and can dynamically request PDU Sessions, there was no fundamental limitation preventing a more granular approach.
+
+Therefore, the core concept of this proposed solution is to utilize a dedicated PDU Session, established and managed by the 5G-RG, as a one-to-one proxy identity for each individually authenticated NAUN3 device. Instead of grouping devices, each device is mapped to its own PDU Session. This not only provides connectivity via the 5GC (similar to the goal of CGIDs) but also allows the PDU Session itself to serve as the handle or identifier for managing that specific device's connection within the 5G system.
+### Establishing the Proxy Identity
+The creation of this proxy identity is triggered by the successful local authentication of an NAUN3 device via the EAP-TLS mechanism described previously. Upon receiving the EAP-Success indication for a device, the 5G-RG initiates a PDU Session Establishment procedure towards the 5GC (SMF via AMF). Crucially, this request is made using the 5G-RG's own registered 5G identity (SUPI/IMSI). The request specifies the dedicated `clients` DNN, indicating the intended purpose of this session. Once the 5GC establishes the PDU Session and assigns it resources (like an IP address) and an identifier, the 5G-RG internally associates this specific PDU Session with the locally authenticated NAUN3 device.
+### Gateway's Role in Identity Mapping
+The 5G-RG is central to this identity management scheme. It maintains a dynamic internal mapping table that links the local identifier of the NAUN3 device (e.g., its MAC address or the identity used in the EAP exchange) to the specific PDU Session ID assigned by the 5GC. This mapping is essential for correctly routing traffic between the device on the local network and its representation within the 5G network.
+### 5GC Perspective and Management
+From the 5GC's viewpoint, the process appears relatively standard. It interacts with a registered UE (the 5G-RG, identified by its SUPI) that requests the establishment and termination of multiple PDU Sessions associated with the `clients` DNN. The 5GC's Session Management Function (SMF) manages these sessions, allocating resources and applying policies (like QoS, charging rules) on a per-PDU session basis. The 5GC remains unaware of the specific local identities or the EAP-TLS authentication details of the individual NAUN3 devices connected behind the 5G-RG; it simply manages the sessions requested by the gateway.
+### Dynamic Mapping Lifecycle
+The gateway actively manages the lifecycle of this identity mapping:
+- **Creation:** A mapping entry is created when an NAUN3 device successfully authenticates via EAP-TLS and its corresponding PDU Session is established by the 5GC.
+- **Maintenance:** The gateway routes traffic for the device via the mapped PDU Session. It also periodically checks the connectivity status of the NAUN3 device on the local network (e.g., via keep-alives or monitoring association status).
+- **Termination:** If the gateway detects that a device's local connection has become stale or the device explicitly disconnects, it performs two actions:
+    1. It issues a deauthentication command locally (e.g., instructing `hostapd` to disassociate the device).    
+    2. It initiates a PDU Session Release procedure with the 5GC to terminate the corresponding proxy identity session.    
+        The internal mapping entry is then removed.
+### Advantages of this Approach
+This session-based proxy identity approach offers several advantages:
+- **Transparency:** It is largely transparent to both the 5GC, which manages standard PDU sessions, and the NAUN3 device, which undergoes standard local network authentication.
+- **Leverages Existing Mechanisms:** It builds upon the standard 5G PDU session management framework rather than requiring fundamental changes to core identity protocols.
+- **Gateway-Centric Complexity:** It concentrates the necessary adaptation logic within the 5G-RG, an entity typically managed by the network operator.
+- **No SUPI Required for End Devices:** It successfully integrates devices lacking 5G credentials without needing to provision them with SUPIs or USIMs.
+- **Individual Device Management:** By providing a per-device PDU session, it allows for potentially granular policy application (QoS, security) at the 5GC level based on the session, indirectly controlling individual device flows.
