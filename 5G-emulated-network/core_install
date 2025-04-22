@@ -94,5 +94,3 @@ sudo chmod +x open5gs-dbctl
 echo -e "\nPre-loading UE APN sessions"
 ./open5gs-dbctl update_apn $UE_IMSI backhaul 0
 ./open5gs-dbctl update_apn $UE_IMSI clients 0
-
-va

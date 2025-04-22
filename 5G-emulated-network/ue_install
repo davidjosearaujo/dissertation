@@ -93,4 +93,9 @@ echo -e "\nStart Interceptor"
 cd /home/vagrant/
 sudo ./interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> ${LOG_FILE_PATH} &
 
-sudo apt install -y build-essential net-tool dwarves
+sudo apt install -y \ 
+  linux-headers-$(uname -r) \
+  linux-modules-extra-$(uname -r) \
+  build-essential \
+  net-tool \
+  dwarves
