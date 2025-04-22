@@ -21,6 +21,6 @@ sudo apt install -y \
   linux-headers-$(uname -r) \
   linux-modules-extra-$(uname -r) \
   build-essential \
-  net-tool \
+  net-tools \
   dwarves
 ```
