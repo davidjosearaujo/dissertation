@@ -95,4 +95,6 @@ echo -e "\nPre-loading UE APN sessions"
 ./open5gs-dbctl update_apn $UE_IMSI clients 0
 
 echo -e "\nBuilding drivers for 5G modem"
+sudo apt install -y \
+    libqmi-glib-dev \
 cd /quectel/kernel_drivers
