@@ -95,4 +95,4 @@ echo -e "\nPre-loading UE APN sessions"
 ./open5gs-dbctl update_apn $UE_IMSI clients 0
 
 echo -e "\nBuilding drivers for 5G modem"
-cd /quectel/kernel_dri
+cd /quectel/kernel_drivers
