@@ -8,19 +8,16 @@ RUN apt-get update && sudo apt install -y \
     net-tools \
     minicom
 
-RUN systemctl stop ModemManager
-RUN systemctl disable ModemManager
-
 RUN cd /kernel_drivers && \
     make clean && \
     make install
 
-RUN cd qmi_wwan && \
+RUN cd /qmi_wwan && \
     make clean && \
     make install
 
-RUN cd qconnect && \
+RUN cd /qconnect && \
     make clean && \
     make
 
-RUN usermod -a $USER 
+RUN usermod -aG $USER dialout
