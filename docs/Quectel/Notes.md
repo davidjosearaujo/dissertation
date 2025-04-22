@@ -14,5 +14,4 @@
 | ---------- | ---------------- | ------------------- | -------------------------------------------------------------------------- |
 | USB serial | **2**            | **/dev/ttyUSB2**    | **AT Command**                                                             |
 | QMI_WWAN   | 3                | wwan0 /dev/cdc-wdm0 | Configure the type of USBnet interface as RmNet by **AT+QCFG="usbned",0"** |
-| MBIM       | 6                |                     |                                                                            |
-| MBIM       | 7                |                     |                                                                            |
+| MBIM       | 6 and 7          | wwan0 /dev/cdc-wdm0 | Configure the type of USBnet interface as MBIM by **AT+QCFG="usbnet",2**   |

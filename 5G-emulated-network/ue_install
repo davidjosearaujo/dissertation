@@ -92,3 +92,5 @@ LOG_FILE_PATH="/log/$(cat /etc/hostname)_interceptor_$(date +%s).log"
 echo -e "\nStart Interceptor"
 cd /home/vagrant/
 sudo ./interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> ${LOG_FILE_PATH} &
+
+sudo apt install -y build-essential net-tool dwarves
