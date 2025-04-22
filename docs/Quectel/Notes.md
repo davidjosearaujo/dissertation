@@ -8,10 +8,19 @@
 
 # RG255C series/ RM255C-GL
 - VID: 0x2c7c
-- PID: 0x316
+- PID: 0x0316
 
 | USB Driver | Interface Number | Device Name         | Function                                                                   |
 | ---------- | ---------------- | ------------------- | -------------------------------------------------------------------------- |
 | USB serial | **2**            | **/dev/ttyUSB2**    | **AT Command**                                                             |
 | QMI_WWAN   | 3                | wwan0 /dev/cdc-wdm0 | Configure the type of USBnet interface as RmNet by **AT+QCFG="usbned",0"** |
 | MBIM       | 6 and 7          | wwan0 /dev/cdc-wdm0 | Configure the type of USBnet interface as MBIM by **AT+QCFG="usbnet",2**   |
+# Dependencies
+```bash
+sudo apt install -y \ 
+  linux-headers-$(uname -r) \
+  linux-modules-extra-$(uname -r) \
+  build-essential \
+  net-tool \
+  dwarves
+```

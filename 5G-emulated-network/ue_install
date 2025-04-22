@@ -6,6 +6,13 @@ CLIENT_EAP_IP=$3
 AUTH_SERVER_IP=$4
 CLIENT_SECRET=$5
 
+echo -e "\nInstalling dependencies for 5G Modem"
+sudo apt install -y \ 
+  linux-headers-$(uname -r) \
+  linux-modules-extra-$(uname -r) \
+  build-essential \
+  net-tool \
+
 cd ~/UERANSIM
 
 echo -e "\nUpdate gNodeB IP"
@@ -92,10 +99,3 @@ LOG_FILE_PATH="/log/$(cat /etc/hostname)_interceptor_$(date +%s).log"
 echo -e "\nStart Interceptor"
 cd /home/vagrant/
 sudo ./interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> ${LOG_FILE_PATH} &
-
-sudo apt install -y \ 
-  linux-headers-$(uname -r) \
-  linux-modules-extra-$(uname -r) \
-  build-essential \
-  net-tool \
-  dwarves
