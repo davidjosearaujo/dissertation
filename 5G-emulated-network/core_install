@@ -6,7 +6,14 @@ UE_KEY=$3
 UE_OPC=$4
 
 sudo add-apt-repository ppa:open5gs/latest
-sudo apt-get install -y gnupg curl
+sudo apt-get update && apt-get install -y \
+    linux-headers-$(uname -r) \
+    build-essential \
+    net-tools \
+    minicom \
+    gnupg \
+    curl
+
 sudo snap install yq
 
 echo -e "\nAdding MongoDB repos"
@@ -86,3 +93,6 @@ sudo chmod +x open5gs-dbctl
 echo -e "\nPre-loading UE APN sessions"
 ./open5gs-dbctl update_apn $UE_IMSI backhaul 0
 ./open5gs-dbctl update_apn $UE_IMSI clients 0
+
+echo -e "\nBuilding drivers for 5G modem"
+cd /quectel/kernel_dri
