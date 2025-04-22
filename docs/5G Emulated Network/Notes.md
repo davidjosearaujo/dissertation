@@ -117,3 +117,6 @@ Create my on DHCP server that can check if devices have been successfully authen
 - Hostapd flags [docs](https://w1.fi/wpa_supplicant/devel/wpa__ctrl_8h.html)
 - [x] I need to access `hostapd`to check authenticated devices. Check [this](https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html) documentation.
 - [x] Needs to deauth users and request and close PDU Sessions
+# Cellular Modem
+- [ ] Understand how to connect
+- [ ] Can I connecti with serial and Modem Manager?
