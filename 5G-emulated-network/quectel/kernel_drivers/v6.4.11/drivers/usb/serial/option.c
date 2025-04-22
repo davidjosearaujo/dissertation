@@ -253,7 +253,6 @@ static void option_instat_callback(struct urb *urb);
 #define QUECTEL_PRODUCT_EM061K_LTA		0x0123
 #define QUECTEL_PRODUCT_EM061K_LMS		0x0124
 #define QUECTEL_PRODUCT_EC25			0x0125
-#define QUECTEL_PRODUCT_EM060K_128		0x0128
 #define QUECTEL_PRODUCT_EG91			0x0191
 #define QUECTEL_PRODUCT_EG95			0x0195
 #define QUECTEL_PRODUCT_BG96			0x0296
@@ -271,7 +270,6 @@ static void option_instat_callback(struct urb *urb);
 #define QUECTEL_PRODUCT_RM520N			0x0801
 #define QUECTEL_PRODUCT_EC200U			0x0901
 #define QUECTEL_PRODUCT_EC200S_CN		0x6002
-#define QUECTEL_PRODUCT_EC200A			0x6005
 #define QUECTEL_PRODUCT_EM061K_LWW		0x6008
 #define QUECTEL_PRODUCT_EM061K_LCN		0x6009
 #define QUECTEL_PRODUCT_EC200T			0x6026
@@ -635,7 +633,6 @@ static const struct usb_device_id option_ids[] = {
 	{ USB_DEVICE(0x05C6, 0x90DB) }, /* Quectel QCM6490 */
 	{ USB_DEVICE(0x2C7C, 0x0125) }, /* Quectel EC20(MDM9x07)/EC25/EG25 */
 	{ USB_DEVICE(0x2C7C, 0x0121) }, /* Quectel EC21 */
-    { USB_DEVICE(0x2C7C, 0x0122) }, /* Quectel RM551E*/
     { USB_DEVICE(0x2C7C, 0x030E) }, /* Quectel EM05G */
 	{ USB_DEVICE(0x2C7C, 0x0191) }, /* Quectel EG91 */
 	{ USB_DEVICE(0x2C7C, 0x0195) }, /* Quectel EG95 */
@@ -647,24 +644,16 @@ static const struct usb_device_id option_ids[] = {
 	{ USB_DEVICE(0x2C7C, 0x0700) }, /* Quectel BG95/BG77/BG600L-M3/BC69 */
 	{ USB_DEVICE(0x2C7C, 0x0435) }, /* Quectel AG35 */
 	{ USB_DEVICE(0x2C7C, 0x0415) }, /* Quectel AG15 */
-	{ USB_DEVICE(0x2C7C, 0x0452) }, /* Quectel AG520/AG529 */
+	{ USB_DEVICE(0x2C7C, 0x0452) }, /* Quectel AG520 */
 	{ USB_DEVICE(0x2C7C, 0x0455) }, /* Quectel AG550 */
 	{ USB_DEVICE(0x2C7C, 0x0620) }, /* Quectel EG20 */
 	{ USB_DEVICE(0x2C7C, 0x0800) }, /* Quectel RG500/RM500/RG510/RM510 */
 	{ USB_DEVICE(0x2C7C, 0x0801) }, /* Quectel RG520/RM520/SG520 */
     { USB_DEVICE(0x2C7C, 0x0122) }, /* Quectel RG650 SDX7X */
-    { USB_DEVICE(0x2C7C, 0x0133) }, /* Quectel RG650 SDX7X RNDIS */
-    { USB_DEVICE(0x2C7C, 0x0134) }, /* Quectel SDX35 AG531C */
     { USB_DEVICE(0x2C7C, 0x0316) }, /* Quectel RG255 SDX35 */
 	{ USB_DEVICE(0x2C7C, 0x6026) }, /* Quectel EC200 */
 	{ USB_DEVICE(0x2C7C, 0x6120) }, /* Quectel UC200 */
-    { USB_DEVICE(0x2C7C, 0x600B) }, /* Quectel ASR1903S */
-    { USB_DEVICE(0x2C7C, 0x600C) }, /* Quectel RG255A ASR1903L*/
 	{ USB_DEVICE(0x2C7C, 0x6000) }, /* Quectel EC200/UC200 */
-    { USB_DEVICE(0x2C7C, 0x7003) }, /* Quectel T750(META) */
-	{ USB_DEVICE(0x2C7C, 0x7008) }, /* Quectel T750 */
-    { USB_DEVICE(0x2C7C, 0x7005) }, /* Quectel T830(META) */
-    { USB_DEVICE(0x2C7C, 0x7006) }, /* Quectel T830 */
 	{ USB_DEVICE(0x3763, 0x3C93) }, /* Quectel GW */
 	{ USB_DEVICE(0x3C93, 0xFFFF) }, /* Quectel GW */
 	{ .match_flags = USB_DEVICE_ID_MATCH_VENDOR, .idVendor = 0x2C7C }, /* Match All Quectel Modules */
@@ -1197,10 +1186,6 @@ static const struct usb_device_id option_ids[] = {
 	{ USB_DEVICE(QUALCOMM_VENDOR_ID, 0x90fa),
 	  .driver_info = RSVD(3) },
 	/* u-blox products */
-	{ USB_DEVICE(UBLOX_VENDOR_ID, 0x1311) },	/* u-blox LARA-R6 01B */
-	{ USB_DEVICE(UBLOX_VENDOR_ID, 0x1312),		/* u-blox LARA-R6 01B (RMNET) */
-	  .driver_info = RSVD(4) },
-	{ USB_DEVICE_INTERFACE_CLASS(UBLOX_VENDOR_ID, 0x1313, 0xff) },	/* u-blox LARA-R6 01B (ECM) */
 	{ USB_DEVICE(UBLOX_VENDOR_ID, 0x1341) },	/* u-blox LARA-L6 */
 	{ USB_DEVICE(UBLOX_VENDOR_ID, 0x1342),		/* u-blox LARA-L6 (RMNET) */
 	  .driver_info = RSVD(4) },
@@ -1243,9 +1228,6 @@ static const struct usb_device_id option_ids[] = {
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM060K, 0xff, 0x00, 0x40) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM060K, 0xff, 0xff, 0x30) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM060K, 0xff, 0xff, 0x40) },
-	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM060K_128, 0xff, 0xff, 0x30) },
-	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM060K_128, 0xff, 0x00, 0x40) },
-	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM060K_128, 0xff, 0xff, 0x40) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM061K_LCN, 0xff, 0xff, 0x30) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM061K_LCN, 0xff, 0x00, 0x40) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EM061K_LCN, 0xff, 0xff, 0x40) },
@@ -1274,7 +1256,6 @@ static const struct usb_device_id option_ids[] = {
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_RM520N, 0xff, 0, 0) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, 0x0900, 0xff, 0, 0), /* RM500U-CN */
 	  .driver_info = ZLP },
-	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EC200A, 0xff, 0, 0) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EC200U, 0xff, 0, 0) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EC200S_CN, 0xff, 0, 0) },
 	{ USB_DEVICE_AND_INTERFACE_INFO(QUECTEL_VENDOR_ID, QUECTEL_PRODUCT_EC200T, 0xff, 0, 0) },
@@ -2397,11 +2378,6 @@ static int option_probe(struct usb_serial *serial,
 		&& serial->interface->cur_altsetting->desc.bInterfaceNumber >= 2)
 		return -ENODEV;
 
-    //Netprisma PCUL11-LD(MDM9205)'s interface 3 can be used as USB Network device
-        if (serial->dev->descriptor.idVendor == cpu_to_le16(0x3731) && serial->dev->descriptor.idProduct == cpu_to_le16(0x0102)
-                && serial->interface->cur_altsetting->desc.bInterfaceNumber >= 3)
-                return -ENODEV;    
-        
 	if (serial->dev->descriptor.idVendor == cpu_to_le16(0x2C7C)) {
 		__u16 idProduct = le16_to_cpu(serial->dev->descriptor.idProduct);
 		struct usb_interface_descriptor *intf = &serial->interface->cur_altsetting->desc;
@@ -2415,9 +2391,6 @@ static int option_probe(struct usb_serial *serial,
 			//MDM interface 4 is QMI
             if (idProduct == 0x0316 && intf->bInterfaceNumber == 3)   //SDX35
 				return -ENODEV;
-
-            if (idProduct == 0x0121 && intf->bInterfaceNumber == 4)   //EC21
-                return -ENODEV;
             
 			if (intf->bInterfaceNumber == 4 && intf->bNumEndpoints == 3
 				&& intf->bInterfaceSubClass == 0xFF && intf->bInterfaceProtocol == 0xFF)

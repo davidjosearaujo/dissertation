@@ -5,7 +5,7 @@ add_definitions(-Wall -Wextra -Werror -O1)
 option(USE_QRTR "Enable QRTR" OFF) 
 
 set( QL_CM_SRC
-     QmiWwanCM.c GobiNetCM.c main.c QCQMUX.c QMIThread.c util.c qmap_bridge_mode.c mbim-cm.c device.c
+     QmiWwanCM.c GobiNetCM.c main.c MPQMUX.c QMIThread.c util.c qmap_bridge_mode.c mbim-cm.c device.c
      atc.c atchannel.c at_tok.c
      udhcpc.c
      )
@@ -31,6 +31,6 @@ add_executable(quectel-atc-proxy quectel-atc-proxy.c atchannel.c at_tok.c util.c
 target_link_libraries(quectel-atc-proxy PUBLIC pthread) 
 install (TARGETS quectel-atc-proxy DESTINATION bin)
 
-#add_executable(quectel-qrtr-proxy quectel-qrtr-proxy.c)
-#target_link_libraries(quectel-qrtr-proxy PUBLIC pthread) 
-#install (TARGETS quectel-qrtr-proxy DESTINATION bin)
+add_executable(quectel-qrtr-proxy quectel-qrtr-proxy.c)
+target_link_libraries(quectel-qrtr-proxy PUBLIC pthread) 
+install (TARGETS quectel-qrtr-proxy DESTINATION bin)

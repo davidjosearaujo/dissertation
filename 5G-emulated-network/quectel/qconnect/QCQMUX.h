@@ -1,13 +1,18 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
+/******************************************************************************
+  @file    QCQMUX.h
 
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
+  DESCRIPTION
+  This module contains QMI QMUX module.
+
+  INITIALIZATION AND SEQUENCING REQUIREMENTS
+  None.
+
+  ---------------------------------------------------------------------------
+  Copyright (c) 2016 - 2023 Quectel Wireless Solution, Co., Ltd.  All Rights Reserved.
+  Quectel Wireless Solution Proprietary and Confidential.
+  ---------------------------------------------------------------------------
+******************************************************************************/
+
 
 #ifndef QCQMUX_H
 #define QCQMUX_H
@@ -394,25 +399,25 @@ typedef struct _QCTLV_PKT_STATISTICS
 //#ifdef QC_IP_MODE
 
 /*
-    \E2\80?Bit 0 \E2\80?Profile identifier
-    \E2\80?Bit 1 \E2\80?Profile name
-    \E2\80?Bit 2 \E2\80?PDP type
-    \E2\80?Bit 3 \E2\80?APN name
-    \E2\80?Bit 4 \E2\80?DNS address
-    \E2\80?Bit 5 \E2\80?UMTS/GPRS granted QoS
-    \E2\80?Bit 6 \E2\80?Username
-    \E2\80?Bit 7 \E2\80?Authentication Protocol
-    \E2\80?Bit 8 \E2\80?IP address
-    \E2\80?Bit 9 \E2\80?Gateway information (address and subnet mask)
-    \E2\80?Bit 10 \E2\80?PCSCF address using a PCO flag
-    \E2\80?Bit 11 \E2\80?PCSCF server address list
-    \E2\80?Bit 12 \E2\80?PCSCF domain name list
-    \E2\80?Bit 13 \E2\80?MTU
-    \E2\80?Bit 14 \E2\80?Domain name list
-    \E2\80?Bit 15 \E2\80?IP family
-    \E2\80?Bit 16 \E2\80?IM_CM flag
-    \E2\80?Bit 17 \E2\80?Technology name
-    \E2\80?Bit 18 \E2\80?Operator reserved PCO
+    â€?Bit 0 â€?Profile identifier
+    â€?Bit 1 â€?Profile name
+    â€?Bit 2 â€?PDP type
+    â€?Bit 3 â€?APN name
+    â€?Bit 4 â€?DNS address
+    â€?Bit 5 â€?UMTS/GPRS granted QoS
+    â€?Bit 6 â€?Username
+    â€?Bit 7 â€?Authentication Protocol
+    â€?Bit 8 â€?IP address
+    â€?Bit 9 â€?Gateway information (address and subnet mask)
+    â€?Bit 10 â€?PCSCF address using a PCO flag
+    â€?Bit 11 â€?PCSCF server address list
+    â€?Bit 12 â€?PCSCF domain name list
+    â€?Bit 13 â€?MTU
+    â€?Bit 14 â€?Domain name list
+    â€?Bit 15 â€?IP family
+    â€?Bit 16 â€?IM_CM flag
+    â€?Bit 17 â€?Technology name
+    â€?Bit 18 â€?Operator reserved PCO
 */
 #define QMIWDS_GET_RUNTIME_SETTINGS_MASK_IPV4DNS_ADDR       (1 << 4)
 #define QMIWDS_GET_RUNTIME_SETTINGS_MASK_IPV4_ADDR          (1 << 8)
@@ -604,28 +609,6 @@ typedef struct _QMIWDS_PROFILE_IDENTIFIER
    UCHAR  ProfileIndex;
 } __attribute__ ((packed)) QMIWDS_PROFILE_IDENTIFIER, *PQMIWDS_PROFILE_IDENTIFIER;
 
-typedef struct _QMIWDS_BRINGUP_APNTYPE
-{
-   UCHAR  TLVType;
-   USHORT TLVLength;
-   BOOL  bring_up_by_apn_type;
-} __attribute__ ((packed)) QMIWDS_BRINGUP_APNTYPE, *PQMIWDS_BRINGUP_APNTYPE;
-
-
-typedef struct _QMIWDS_BRINGUP_APNNAME
-{
-   UCHAR  TLVType;
-   USHORT TLVLength;
-   BOOL  bring_up_by_apn_name;
-} __attribute__ ((packed)) QMIWDS_BRINGUP_APNNAME, *PQMIWDS_BRINGUP_APNNAME;
-
-typedef struct _PQMIWDS_APN_TYPE
-{
-   UCHAR  TLVType;
-   USHORT TLVLength;
-   int    apn_type;
-} __attribute__ ((packed)) QMIWDS_APN_TYPE, *PQMIWDS_APN_TYPE;
-
 #if 0
 typedef struct _QMIWDS_IPADDRESS
 {
@@ -705,12 +688,12 @@ typedef struct _QMIWDS_USERNAME
    UCHAR  UserName;
 } __attribute__ ((packed)) QMIWDS_USERNAME, *PQMIWDS_USERNAME;
 
-typedef struct _QMIWDS_PD
+typedef struct _QMIWDS_PASSWD
 {
    UCHAR  TLVType;
    USHORT TLVLength;
-   UCHAR  Pd;
-} __attribute__ ((packed)) QMIWDS_PD, *PQMIWDS_PD;
+   UCHAR  Passwd;
+} __attribute__ ((packed)) QMIWDS_PASSWD, *PQMIWDS_PASSWD;
 
 typedef struct _QMIWDS_AUTH_PREFERENCE
 {

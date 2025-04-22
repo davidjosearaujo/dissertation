@@ -1,14 +1,3 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
-
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
-
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
 #ifndef _LINUX_QRTR_H
 #define _LINUX_QRTR_H

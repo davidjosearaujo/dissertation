@@ -1,13 +1,18 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
+/******************************************************************************
+  @file    main.c
+  @brief   The entry program.
 
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
+  DESCRIPTION
+  Connectivity Management Tool for USB network adapter of Quectel wireless cellular modules.
+
+  INITIALIZATION AND SEQUENCING REQUIREMENTS
+  None.
+
+  ---------------------------------------------------------------------------
+  Copyright (c) 2016 -2023 Quectel Wireless Solution, Co., Ltd.  All Rights Reserved.
+  Quectel Wireless Solution Proprietary and Confidential.
+  ---------------------------------------------------------------------------
+******************************************************************************/
 
 #include "QMIThread.h"
 #include <sys/wait.h>
@@ -28,7 +33,6 @@ extern int ql_get_netcard_driver_info(const char*);
 extern int ql_capture_usbmon_log(PROFILE_T *profile, const char *log_path);
 extern void ql_stop_usbmon_log(PROFILE_T *profile);
 //UINT ifc_get_addr(const char *ifname);
-extern int cdc_wdm_fd;
 static int s_link = -1;
 static void usbnet_link_change(int link, PROFILE_T *profile) {
     if (s_link == link)
@@ -247,8 +251,6 @@ static int usage(const char *progname) {
     dbg_time("-b                                     Enable network interface bridge function (default 0)");
     dbg_time("-v                                     Verbose log mode, for debug purpose.");
     dbg_time("-d                                     Obtain the IP address and dns through qmi");
-    dbg_time("-a                                     1:Device attempts to bring up a call with the APN name,if -a 1 need add -s apn_name ;2:Device attempts to bring up a call with the APN type,if -a 2 need add -y apn_type");
-    dbg_time("-y                                     Set APN type 0:APN type unspecified 1:internet traffic. 2:IMS");
     dbg_time("[Examples]");
     dbg_time("Example 1: %s ", progname);
     dbg_time("Example 2: %s -s 3gnet ", progname);
@@ -282,8 +284,6 @@ static int qmi_main(PROFILE_T *profile)
         if (!reattach_driver(profile)) 
             sleep(2);
     }
-
-    g_donot_exit_when_modem_hangup = 0;
 
     /* try to recreate FDs*/
     if (socketpair( AF_LOCAL, SOCK_STREAM, 0, signal_control_fd) < 0 ) {
@@ -349,12 +349,11 @@ static int qmi_main(PROFILE_T *profile)
         if (request_ops->requestGetIMSI)
             request_ops->requestGetIMSI();
     }
-if(profile->usb_dev.idProduct != 0x0316)
-{
+
     if (request_ops->requestGetProfile)
         request_ops->requestGetProfile(profile);
 
-    if (request_ops->requestSetProfile && (profile->apn || profile->user || profile->pd)) {
+    if (request_ops->requestSetProfile && (profile->apn || profile->user || profile->password)) {
         if (request_ops->requestSetProfile(profile) == 1) {
 #ifdef REBOOT_SIM_CARD_WHEN_APN_CHANGE //enable at only when customer asked 
             if (request_ops->requestRadioPower) {
@@ -364,7 +363,7 @@ if(profile->usb_dev.idProduct != 0x0316)
 #endif
         }
     }
-}
+
     request_ops->requestRegistrationState(&PSAttachedState);
 
 #ifdef CONFIG_ENABLE_QOS
@@ -436,7 +435,7 @@ if(profile->usb_dev.idProduct != 0x0316)
                             if (profile->enable_ipv4 && IPv4ConnectionStatus !=  QWDS_PKT_DATA_CONNECTED) {
                                 qmierr = request_ops->requestSetupDataCall(profile, IpFamilyV4);
 
-                                if ((qmierr > 0) && profile->user && profile->user[0] && profile->pd && profile->pd[0]) {
+                                if ((qmierr > 0) && profile->user && profile->user[0] && profile->password && profile->password[0]) {
                                     int old_auto =  profile->auth;
 
                                     //may be fail because wrong auth mode, try pap->chap, or chap->pap
@@ -637,14 +636,14 @@ if(profile->usb_dev.idProduct != 0x0316)
 
                     	case RIL_UNSOL_LOOPBACK_CONFIG_IND:
                         {
-                            QMI_WDA_SET_LOOPBACK_CONFIG_IND_MSG SetLoopBackInd;
+                        	QMI_WDA_SET_LOOPBACK_CONFIG_IND_MSG SetLoopBackInd;
                         	if (read(fd, &SetLoopBackInd, sizeof(SetLoopBackInd)) == sizeof(SetLoopBackInd)) {
                             	profile->loopback_state = SetLoopBackInd.loopback_state.TLVVaule;
                             	profile->replication_factor = le32_to_cpu(SetLoopBackInd.replication_factor.TLVVaule);
                             	dbg_time("SetLoopBackInd: loopback_state=%d, replication_factor=%u",
                                 	profile->loopback_state, profile->replication_factor);
-                                    if (profile->loopback_state)
-                                        send_signo_to_main(SIG_EVENT_START);
+                            	if (profile->loopback_state)
+                                	send_signo_to_main(SIG_EVENT_START);
                             }
                         }
                     	break;
@@ -696,26 +695,14 @@ static int quectel_CM(PROFILE_T *profile)
     else if (mhidevice_detect(qmichannel, usbnet_adapter, profile)) {
         profile->hardware_interface = HARDWARE_PCIE;
     }
-    else if (atdevice_detect(qmichannel, usbnet_adapter, profile)) {
+	else if (atdevice_detect(qmichannel, usbnet_adapter, profile)) {
         profile->hardware_interface = HARDWARE_PCIE;
     }
 #ifdef CONFIG_QRTR
-    else if (!access("/sys/class/net/rmnet_mhi0", F_OK)) {
+    else if (1) {
+        strcpy(qmichannel, "qrtr");
         strcpy(usbnet_adapter, "rmnet_mhi0");
         profile->hardware_interface = HARDWARE_PCIE;
-        strcpy(qmichannel, "qrtr");
-        profile->software_interface = SOFTWARE_QRTR;
-    }
-    else if (!access("/sys/class/net/rmnet_usb0", F_OK)) {
-        strcpy(usbnet_adapter, "rmnet_usb0");
-        profile->hardware_interface = HARDWARE_USB;
-        strcpy(qmichannel, "qrtr");
-        profile->software_interface = SOFTWARE_QRTR;
-    }
-    else if (!access("/sys/class/net/rmnet_ipa0", F_OK)) {
-        strcpy(usbnet_adapter, "rmnet_ipa0");
-        profile->hardware_interface = HARDWARE_IPA;
-        strcpy(qmichannel, "qrtr");
         profile->software_interface = SOFTWARE_QRTR;
     }
 #endif
@@ -734,7 +721,7 @@ static int quectel_CM(PROFILE_T *profile)
     if (profile->hardware_interface == HARDWARE_USB) {
         profile->software_interface = get_driver_type(profile);
     }
-
+  
     ql_qmap_mode_detect(profile);
 
     if (profile->software_interface == SOFTWARE_MBIM) {
@@ -785,7 +772,7 @@ error:
 
 static int parse_user_input(int argc, char **argv, PROFILE_T *profile) {
     int opt = 1;
-    int apn_name_or_type;
+
     profile->pdp = CONFIG_DEFAULT_PDP;
     profile->profile_index = CONFIG_DEFAULT_PDP;
 
@@ -801,7 +788,7 @@ static int parse_user_input(int argc, char **argv, PROFILE_T *profile) {
         switch (argv[opt++][1])
         {
             case 's':
-                profile->apn = profile->user = profile->pd = "";
+                profile->apn = profile->user = profile->password = "";
                 if (has_more_argv()) {
                     profile->apn = argv[opt++];
                 }
@@ -809,8 +796,8 @@ static int parse_user_input(int argc, char **argv, PROFILE_T *profile) {
                     profile->user = argv[opt++];
                 }
                 if (has_more_argv()) {
-                    profile->pd = argv[opt++];
-                    if (profile->pd && profile->pd[0])
+                    profile->password = argv[opt++];
+                    if (profile->password && profile->password[0])
                         profile->auth = 2; //default chap, customers may miss auth
                 }
                 if (has_more_argv()) {
@@ -915,21 +902,7 @@ static int parse_user_input(int argc, char **argv, PROFILE_T *profile) {
                     profile->kill_pdp = argv[opt++][0] - '0';
                 }
                 break;
-
-            case 'a':
-                if (has_more_argv()) {
-                    apn_name_or_type = argv[opt++][0] - '0';
-                    if(apn_name_or_type == 1)
-                    profile->bring_up_by_apn_name = apn_name_or_type;
-                    else if(apn_name_or_type == 2) 
-                    profile->bring_up_by_apn_type = apn_name_or_type;   
-                }
-                break;
-            case 'y':
-                if (has_more_argv()) {
-                    profile->apn_type = argv[opt++][0] - '0';
-                }
-                break;            
+            
             default:
                 return usage(argv[0]);
             break;
@@ -948,7 +921,7 @@ int main(int argc, char *argv[])
     int ret;
     PROFILE_T *ctx = &s_profile;
 
-    dbg_time("QConnectManager_Linux_V1.6.7");
+    dbg_time("QConnectManager_Linux_V1.6.5.1");
 
     ret = parse_user_input(argc, argv, ctx);
     if (!ret)

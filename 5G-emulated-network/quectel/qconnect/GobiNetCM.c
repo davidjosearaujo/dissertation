@@ -1,14 +1,18 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
+/******************************************************************************
+  @file    GobiNetCM.c
+  @brief   GobiNet driver.
 
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
+  DESCRIPTION
+  Connectivity Management Tool for USB network adapter of Quectel wireless cellular modules.
 
+  INITIALIZATION AND SEQUENCING REQUIREMENTS
+  None.
+
+  ---------------------------------------------------------------------------
+  Copyright (c) 2016 - 2023 Quectel Wireless Solution, Co., Ltd.  All Rights Reserved.
+  Quectel Wireless Solution Proprietary and Confidential.
+  ---------------------------------------------------------------------------
+******************************************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <termios.h>
@@ -60,7 +64,7 @@ static int GobiNetGetClientID(const char *qcqmi, UCHAR QMIType) {
     ClientId = cm_open_dev(qcqmi);
     if (ClientId == -1) {
         dbg_time("failed to open %s, errno: %d (%s)", qcqmi, errno, strerror(errno));
-        return 0;
+        return -1;
     }
 
     if (ioctl(ClientId, IOCTL_QMI_GET_SERVICE_FILE, QMIType) != 0) {

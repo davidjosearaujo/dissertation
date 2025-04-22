@@ -13,7 +13,7 @@ Dependencies: make (`sudo apt install build-essential net-tools`)
 	- do `sudo make install`
 
 2) Install the `wwan` drivers
-	- `cd qmi_wwan`
+	- `cd qmi_wwan_driver`
 	- do `sudo make install`
 
 3) Install QConnect Manager
@@ -26,7 +26,7 @@ Dependencies: make (`sudo apt install build-essential net-tools`)
 	- You can check its connection status with `sudo dmesg -w` to see when it connects.
 
 6) After it successfully connects:
-	- `cd qconnect`
+	- `cd qconnect/out`
 	- `sudo ./quectel-CM`
 
 7) Check it is working by pinging 1.1.1.1

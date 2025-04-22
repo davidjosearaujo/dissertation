@@ -1,14 +1,18 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
+/******************************************************************************
+  @file    quectel-qmi-proxy.c
+  @brief   The qmi proxy.
 
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
+  DESCRIPTION
+  Connectivity Management Tool for USB network adapter of Quectel wireless cellular modules.
 
+  INITIALIZATION AND SEQUENCING REQUIREMENTS
+  None.
+
+  ---------------------------------------------------------------------------
+  Copyright (c) 2016 - 2023 Quectel Wireless Solution, Co., Ltd.  All Rights Reserved.
+  Quectel Wireless Solution Proprietary and Confidential.
+  ---------------------------------------------------------------------------
+******************************************************************************/
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>

@@ -1,14 +1,18 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
+/******************************************************************************
+  @file    device.c
+  @brief   QMI device dirver.
 
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
+  DESCRIPTION
+  Connectivity Management Tool for USB network adapter of Quectel wireless cellular modules.
 
+  INITIALIZATION AND SEQUENCING REQUIREMENTS
+  None.
+
+  ---------------------------------------------------------------------------
+  Copyright (c) 2016 - 2023 Quectel Wireless Solution, Co., Ltd.  All Rights Reserved.
+  Quectel Wireless Solution Proprietary and Confidential.
+  ---------------------------------------------------------------------------
+******************************************************************************/
 #include <unistd.h>
 #include <sys/types.h>
 #include <fcntl.h>
@@ -39,9 +43,6 @@
 #define CM_MAX_PATHLEN 256
 
 #define CM_INVALID_VAL (~((int)0))
-
-static int RDNIS_MODEL = 0;
-
 /* get first line from file 'fname'
  * And convert the content into a hex number, then return this number */
 static int file_get_value(const char *fname, int base)
@@ -341,7 +342,7 @@ BOOL qmidevice_detect(char *qmichannel, char *usbnet_adapter, unsigned bufsize, 
             if (profile->usb_dev.idVendor == 0x2c7c) { //Quectel
                 switch (profile->usb_dev.idProduct) { //EC200U
                 case 0x0901: //EC200U
-                case 0x0902: //EC200D
+                case 0x0904: //EC200G
                 case 0x8101: //RG801H
                     atIntf = 2;
                 break;
@@ -352,16 +353,9 @@ BOOL qmidevice_detect(char *qmichannel, char *usbnet_adapter, unsigned bufsize, 
                 case 0x6005: //EC200A
                 case 0x6002: //EC200S
                 case 0x6001: //EC100Y
+                case 0x6007: //EG915Q-NA in ECM mode, it also could set atIntf to 4
                     atIntf = 3;
                 break;
-
-                case 0x6007: //EG915Q\EG800Q
-                    if(RDNIS_MODEL == 1)
-                        atIntf = 5;
-                    else
-                        atIntf = 3;
-                break;
-
                 default:
                    dbg_time("unknow at interface for USB idProduct:%04x\n", profile->usb_dev.idProduct);
                 break;
@@ -526,10 +520,8 @@ int get_driver_type(PROFILE_T *profile)
         }
     }
     else if (profile->usb_intf.bInterfaceClass == USB_CLASS_WIRELESS_CONTROLLER) {
-        if (profile->usb_intf.bInterfaceSubClass == 1 && profile->usb_intf.bInterfaceProtocol == 3) {
-            RDNIS_MODEL = 1;//Some modules in RNDIS mode the usb port definition is different, adding a marker bit to distinguish.
+        if (profile->usb_intf.bInterfaceSubClass == 1 && profile->usb_intf.bInterfaceProtocol == 3)
             return SOFTWARE_ECM_RNDIS_NCM;
-        }
     }
 
     dbg_time("%s unknow bInterfaceClass=%d, bInterfaceSubClass=%d", __func__,

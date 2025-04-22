@@ -1,13 +1,18 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
+/******************************************************************************
+  @file    QmiWwanCM.c
+  @brief   QMI WWAN connectivity manager.
 
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
+  DESCRIPTION
+  Connectivity Management Tool for USB network adapter of Quectel wireless cellular modules.
+
+  INITIALIZATION AND SEQUENCING REQUIREMENTS
+  None.
+
+  ---------------------------------------------------------------------------
+  Copyright (c) 2016 - 2023 Quectel Wireless Solution, Co., Ltd.  All Rights Reserved.
+  Quectel Wireless Solution Proprietary and Confidential.
+  ---------------------------------------------------------------------------
+******************************************************************************/
 
 #include <stdio.h>
 #include <string.h>
@@ -207,7 +212,7 @@ static int QmiWwanInit(PROFILE_T *profile) {
     if (!profile->proxy[0]) {
         for (i = 0; i < 10; i++) {
             ret = QmiThreadSendQMITimeout(ComposeQCTLMsg(QMICTL_SYNC_REQ, NULL, NULL), NULL, 1 * 1000, __func__);
-            if (ret != ETIMEDOUT)
+            if (!ret)
                 break;
             sleep(1);
         }

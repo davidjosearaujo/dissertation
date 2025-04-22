@@ -1,14 +1,18 @@
-/*
-    Copyright 2023 Quectel Wireless Solutions Co.,Ltd
+/******************************************************************************
+  @file    mbim-cm.c
+  @brief   MIBIM drivers.
 
-    Quectel hereby grants customers of Quectel a license to use, modify,
-    distribute and publish the Software in binary form provided that
-    customers shall have no right to reverse engineer, reverse assemble,
-    decompile or reduce to source code form any portion of the Software. 
-    Under no circumstances may customers modify, demonstrate, use, deliver 
-    or disclose any portion of the Software in source code form.
-*/
+  DESCRIPTION
+  Connectivity Management Tool for USB network adapter of Quectel wireless cellular modules.
 
+  INITIALIZATION AND SEQUENCING REQUIREMENTS
+  None.
+
+  ---------------------------------------------------------------------------
+  Copyright (c) 2016 - 2023 Quectel Wireless Solution, Co., Ltd.  All Rights Reserved.
+  Quectel Wireless Solution Proprietary and Confidential.
+  ---------------------------------------------------------------------------
+******************************************************************************/
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -823,7 +827,7 @@ static UINT32 TransactionId = 1;
 static unsigned mbim_default_timeout  = 30000;
 static const char *mbim_apn = NULL;
 static const char *mbim_user = NULL;
-static const char *mbim_pd = NULL;
+static const char *mbim_passwd = NULL;
 static int mbim_iptype = MBIMContextIPTypeDefault;
 static int mbim_auth = MBIMAuthProtocolNone;
 static int mbim_sessionID = 0;
@@ -1943,7 +1947,7 @@ static int mbim_populate_connect_data(MBIM_SET_CONNECT_T **connect_req_ptr) {
     _align_32(buflen);
     if (mbim_user && strlen(mbim_user) > 0) buflen += 2*strlen(mbim_user);
     _align_32(buflen);
-    if (mbim_pd && strlen(mbim_pd) > 0) buflen += 2*strlen(mbim_pd);
+    if (mbim_passwd && strlen(mbim_passwd) > 0) buflen += 2*strlen(mbim_passwd);
     _align_32(buflen);
 
     *connect_req_ptr = (MBIM_SET_CONNECT_T*)malloc(sizeof(MBIM_SET_CONNECT_T) + buflen);
@@ -1968,10 +1972,10 @@ static int mbim_populate_connect_data(MBIM_SET_CONNECT_T **connect_req_ptr) {
         _align_32(offset);
     }
 
-    if (mbim_pd && strlen(mbim_pd) > 0) {
-        (*connect_req_ptr)->PasswordSize = htole32(2*strlen(mbim_pd));
+    if (mbim_passwd && strlen(mbim_passwd) > 0) {
+        (*connect_req_ptr)->PasswordSize = htole32(2*strlen(mbim_passwd));
         (*connect_req_ptr)->PasswordOffset = htole32(offset + sizeof(MBIM_SET_CONNECT_T));
-        offset = char2wchar(mbim_pd, strlen(mbim_pd), &(*connect_req_ptr)->DataBuffer[offset], buflen - offset);
+        offset = char2wchar(mbim_passwd, strlen(mbim_passwd), &(*connect_req_ptr)->DataBuffer[offset], buflen - offset);
     }
 
     return buflen;
@@ -2296,8 +2300,8 @@ static int requestSetupDataCall(PROFILE_T *profile, int curIpFamily) {
         mbim_apn = profile->apn;
     if (profile->user)
         mbim_user = profile->user;
-    if (profile->pd)
-        mbim_pd = profile->pd;
+    if (profile->password)
+        mbim_passwd = profile->password;
     if (profile->auth)
         mbim_auth = profile->auth;
     if (profile->enable_ipv4)
