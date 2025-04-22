@@ -12,6 +12,7 @@ sudo apt install -y \
   linux-modules-extra-$(uname -r) \
   build-essential \
   net-tool \
+  dwarves
 
 cd ~/UERANSIM
 
