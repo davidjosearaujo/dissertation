@@ -3,7 +3,7 @@ COPY quectel/kernel_drivers/v6.1.1 /kernel_drivers
 COPY quectel/qconnect /qconnect
 COPY quectel/qmi_wwan /qmi_wwan
 
-RUN apt-get update && sudo apt install -y \
+RUN apt-get update && apt install -y \
     build-essential \
     net-tools \
     minicom
