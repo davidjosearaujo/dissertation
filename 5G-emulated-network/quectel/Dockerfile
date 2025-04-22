@@ -4,12 +4,12 @@ COPY quectel/qconnect /qconnect
 COPY quectel/qmi_wwan /qmi_wwan
 
 RUN apt-get update && apt install -y \
+    linux-headers-$(uname -r) \
     build-essential \
     net-tools \
     minicom
 
 RUN cd /kernel_drivers && \
-    make clean && \
     make install
 
 RUN cd /qmi_wwan && \
