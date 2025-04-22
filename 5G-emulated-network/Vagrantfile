@@ -61,9 +61,6 @@ Vagrant.configure("2") do |config|
     # Copying the DBCTL script
     core.vm.provision "file", source: "open5gs-dbctl", destination: "open5gs-dbctl"
 
-    # Copying QUECTEL drivers
-    core.vm.provision "file", source: "quectel", destination: "quectel"
-
     # Open5GS installation
     core.vm.provision "file", source: "core_install", destination: "core_install"
     core.vm.provision "shell" do |s|
@@ -132,6 +129,9 @@ Vagrant.configure("2") do |config|
 
     # LAN interface
     ue.vm.network "private_network", ip: UE_LAN_IP
+
+    # Copying QUECTEL drivers
+    ue.vm.provision "file", source: "quectel", destination: "quectel"
 
     # Interceptor for hostapd, dnsmasq and pdu session management
     ue.vm.provision "file", source: "build/interceptor", destination: "interceptor"
