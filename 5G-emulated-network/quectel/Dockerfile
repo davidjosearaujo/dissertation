@@ -5,8 +5,12 @@ COPY quectel/qmi_wwan /qmi_wwan
 
 RUN apt-get update && sudo apt install -y \
     build-essential \
-    net-tools 
-    
+    net-tools \
+    minicom
+
+RUN systemctl stop ModemManager
+RUN systemctl disable ModemManager
+
 RUN cd /kernel_drivers && \
     make clean && \
     make install
@@ -19,7 +23,4 @@ RUN cd qconnect && \
     make clean && \
     make
 
-FROM debian:bookworm-slim
-COPY --from=build /kernel_drivers /kernel_drivers
-COPY --from=build /qconnect/quectel-qmi-proxy /qconnect/quectel-qmi-proxy
-COPY --from=build /qmi_wwan /qmi_wwan
+RUN usermod -a $USER 
