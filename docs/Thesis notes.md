@@ -1,4 +1,4 @@
-[Gemini conversation](https://gemini.google.com/app/75915c139d9aa2a2)
+ [Gemini conversation](https://gemini.google.com/app/75915c139d9aa2a2)
 # Methodology and Proposed Framework
 ## Overall Research Approach
 This work took a constructivist route to come up with an innovative solution to bring Wi-Fi-only devices under \ac{5G} networks through the use of existing \ac{5G} system facilities and features, predominantly through repurposing.
@@ -58,3 +58,35 @@ This session-based proxy identity approach offers several advantages:
 - **Gateway-Centric Complexity:** It concentrates the necessary adaptation logic within the 5G-RG, an entity typically managed by the network operator.
 - **No SUPI Required for End Devices:** It successfully integrates devices lacking 5G credentials without needing to provision them with SUPIs or USIMs.
 - **Individual Device Management:** By providing a per-device PDU session, it allows for potentially granular policy application (QoS, security) at the 5GC level based on the session, indirectly controlling individual device flows.
+## Framework Architecture and Integration
+### Overall Architecture Overview
+![[general-topology.png]]
+Still have to add WiFi or cable medium to 5G-RG to NAUN3 comms
+### Component Integration and Interactions
+Describe how each component functions within the integrated framework:
+- **NAUN3 Device:** Interacts only with the 5G-RG over the local network using standard link-layer protocols and EAP-TLS for authentication. Unaware of the underlying 5G mechanisms.
+- **5G-RG (Gateway):** Acts as the orchestrator:
+    - Registers itself as a standard UE with the 5GC using its own SUPI/IMSI.
+    - Establishes a baseline PDU session for its own operational needs, including secure communication with the EAP Server (using the `backhaul` DNN).
+    - Relays EAP-TLS authentication between NAUN3 devices and the EAP Server.
+    - Upon successful authentication of an NAUN3 device, requests a _new, separate_ PDU session from the 5GC (using the `clients` DNN) on behalf of that device (but using its own 5G identity).
+    - Maintains the internal mapping between the NAUN3 device's local identity and its assigned `clients` PDU session.
+    - Routes user plane traffic between the NAUN3 device (local link) and the UPF tunnel associated with the device's dedicated `clients` PDU session.
+- **EAP Server:** Performs EAP-TLS authentication for NAUN3 devices, communicating with the 5G-RG via RADIUS (tunneled over the `backhaul` PDU session).
+- **5GC Network Functions (AMF, SMF, UPF, UDM/AUSF):** Perform their standard roles, primarily interacting with the _5G-RG_ as the registered UE. They manage the 5G-RG's registration, mobility, and all PDU sessions (both `backhaul` and multiple `clients` sessions) requested by it. They apply policies per PDU session.
+### Key Communication Flows in the Integrated System
+Illustrate the end-to-end flow for onboarding an NAUN3 device:
+- Initial 5G-RG registration with the 5GC.
+- Establishment of the `backhaul` PDU session for the 5G-RG.
+- NAUN3 device connects locally -> EAP-TLS authentication flow occurs (Device <-> RG <-> EAP Server via `backhaul` PDU session).
+- EAP-Success -> RG requests a new PDU session establishment for the `clients` DNN via AMF/SMF.
+- SMF interacts with UPF to set up the user plane path for the new `clients` PDU session.
+- 5G-RG receives confirmation, completes local setup, and starts mapping device traffic to the new UPF tunnel.
+### Interface and Protocol Integration
+- Reiterate that the solution primarily uses standard interfaces and protocols:
+    - Local Network: Ethernet/Wi-Fi, EAPoL, EAP-TLS.
+    - Gateway <-> 5GC: N1 (NAS), N2 (NGAP), N3 (GTP-U).
+    - Gateway <-> EAP Server: RADIUS (over IP, transported via GTP-U in the `backhaul` session).
+- Emphasize that the integration relies on configuring and orchestrating these standard elements rather than modifying the core protocols themselves.
+### Summary of Integration
+Conclude by summarizing how the architecture effectively integrates unmodified NAUN3 devices by leveraging the 5G-RG as a mediating entity, utilizing the PDU session framework for proxy identification and traffic management, and interfacing with standard 5GC and authentication server components.
