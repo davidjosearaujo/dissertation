@@ -88,10 +88,21 @@ Illustrate the end-to-end flow for onboarding an NAUN3 device:
 - SMF interacts with UPF to set up the user plane path for the new `clients` PDU session.
 - 5G-RG receives confirmation, completes local setup, and starts mapping device traffic to the new UPF tunnel.
 ### Interface and Protocol Integration
-- Reiterate that the solution primarily uses standard interfaces and protocols:
-    - Local Network: Ethernet/Wi-Fi, EAPoL, EAP-TLS.
-    - Gateway <-> 5GC: N1 (NAS), N2 (NGAP), N3 (GTP-U).
-    - Gateway <-> EAP Server: RADIUS (over IP, transported via GTP-U in the `backhaul` session).
-- Emphasize that the integration relies on configuring and orchestrating these standard elements rather than modifying the core protocols themselves.
+A key aspect of this framework's design is its reliance on standard, well-defined interfaces and protocols, minimizing the need for proprietary extensions. The integration is achieved by orchestrating these standard elements in a specific manner, primarily through the logic implemented within the 5G-RG.
+
+The main interfaces and protocols involved are:
+- **Local Network Interface (NAUN3 Device <-> 5G-RG):**
+    - **Link Layer:** Standard Ethernet (IEEE 802.3) or Wi-Fi (IEEE 802.11).    
+    - **Authentication:** Extensible Authentication Protocol over LAN (EAPoL - IEEE 802.1X) is used to transport EAP messages over the local link.    
+    - **EAP Method:** EAP-TLS is used for mutual authentication between the NAUN3 device (supplicant) and the EAP infrastructure (via the 5G-RG relay).    
+- **5G Interfaces (5G-RG <-> 5GC):**
+    - **N1 Interface:** Carries Non-Access Stratum (NAS) signaling between the 5G-RG (acting as UE) and the AMF for registration, authentication (of the RG itself), and session management procedures.
+    - **N2 Interface:** Carries Next Generation Application Protocol (NGAP) signaling between the 5G RAN (gNB, which connects the 5G-RG) and the AMF, primarily for UE context management and PDU session resource setup requests related to the 5G-RG.
+    - **N3 Interface:** Carries the user plane traffic encapsulated in GPRS Tunneling Protocol - User Plane (GTP-U) tunnels between the 5G RAN (gNB) and the UPF. This includes traffic for both the `backhaul` PDU session and all the individual `clients` PDU sessions.    
+- **Authentication Interface (5G-RG <-> EAP Server):**
+    - **Application Layer:** Remote Authentication Dial-In User Service (RADIUS) protocol is used to carry EAP messages between the 5G-RG (acting as a RADIUS client and EAP relay) and the external EAP Authentication Server (RADIUS server).    
+    - **Transport:** RADIUS messages are transported over IP, typically using UDP. This IP traffic is securely tunneled through the 5G-RG's dedicated `backhaul` PDU session via the N3 interface and UPF.    
+
+The framework integrates these components by ensuring the 5G-RG correctly handles protocol relay (EAPoL to RADIUS/EAP) and coordinates actions based on protocol outcomes (EAP-Success triggering NAS session management requests). The novelty lies not in modifying these protocols but in configuring the system components (5GC NFs, 5G-RG, EAP Server) and implementing the orchestration logic within the 5G-RG to manage the per-device proxy identity using standard 5G session management procedures.
 ### Summary of Integration
 Conclude by summarizing how the architecture effectively integrates unmodified NAUN3 devices by leveraging the 5G-RG as a mediating entity, utilizing the PDU session framework for proxy identification and traffic management, and interfacing with standard 5GC and authentication server components.
