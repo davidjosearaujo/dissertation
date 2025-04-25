@@ -61,7 +61,6 @@ This session-based proxy identity approach offers several advantages:
 ## Framework Architecture and Integration
 ### Overall Architecture Overview
 ![[general-topology.png]]
-Still have to add WiFi or cable medium to 5G-RG to NAUN3 comms
 ### Component Integration and Interactions
 Describe how each component functions within the integrated framework:
 - **NAUN3 Device:** Interacts only with the 5G-RG over the local network using standard link-layer protocols and EAP-TLS for authentication. Unaware of the underlying 5G mechanisms.
@@ -69,7 +68,7 @@ Describe how each component functions within the integrated framework:
     - Registers itself as a standard UE with the 5GC using its own SUPI/IMSI.
     - Establishes a baseline PDU session for its own operational needs, including secure communication with the EAP Server (using the `backhaul` DNN).
     - Relays EAP-TLS authentication between NAUN3 devices and the EAP Server.
-    - Upon successful authentication of an NAUN3 device, requests a _new, separate_ PDU session from the 5GC (using the `clients` DNN) on behalf of that device (but using its own 5G identity).
+    - Upon successful authentication of an NAUN3 device, requests a new, separate, PDU session from the 5GC (using the `clients` DNN) on behalf of that device (but using its own 5G identity).
     - Maintains the internal mapping between the NAUN3 device's local identity and its assigned `clients` PDU session.
     - Routes user plane traffic between the NAUN3 device (local link) and the UPF tunnel associated with the device's dedicated `clients` PDU session.
 - **EAP Server:** Performs EAP-TLS authentication for NAUN3 devices, communicating with the 5G-RG via RADIUS (tunneled over the `backhaul` PDU session).
