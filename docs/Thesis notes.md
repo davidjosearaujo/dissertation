@@ -62,18 +62,24 @@ This session-based proxy identity approach offers several advantages:
 ### Overall Architecture Overview
 ![[general-topology.png]]
 ### Component Integration and Interactions
-Describe how each component functions within the integrated framework:
-- **NAUN3 Device:** Interacts only with the 5G-RG over the local network using standard link-layer protocols and EAP-TLS for authentication. Unaware of the underlying 5G mechanisms.
-- **5G-RG (Gateway):** Acts as the orchestrator:
-    - Registers itself as a standard UE with the 5GC using its own SUPI/IMSI.
-    - Establishes a baseline PDU session for its own operational needs, including secure communication with the EAP Server (using the `backhaul` DNN).
-    - Relays EAP-TLS authentication between NAUN3 devices and the EAP Server.
-    - Upon successful authentication of an NAUN3 device, requests a new, separate, PDU session from the 5GC (using the `clients` DNN) on behalf of that device (but using its own 5G identity).
-    - Maintains the internal mapping between the NAUN3 device's local identity and its assigned `clients` PDU session.
-    - Routes user plane traffic between the NAUN3 device (local link) and the UPF tunnel associated with the device's dedicated `clients` PDU session.
-- **EAP Server:** Performs EAP-TLS authentication for NAUN3 devices, communicating with the 5G-RG via RADIUS (tunneled over the `backhaul` PDU session).
-- **5GC Network Functions (AMF, SMF, UPF, UDM/AUSF):** Perform their standard roles, primarily interacting with the _5G-RG_ as the registered UE. They manage the 5G-RG's registration, mobility, and all PDU sessions (both `backhaul` and multiple `clients` sessions) requested by it. They apply policies per PDU session.
+The proposed framework integrates several distinct components, coordinating their standard functionalities to achieve the goal of connecting NAUN3 devices to the 5G network. The interactions are orchestrated primarily by the 5G-RG, as illustrated in Figure [X.Z - Replace with actual figure number from the architecture diagram]:
+
+- **NAUN3 Device:** Its interaction is confined to the local network segment managed by the 5G-RG. It initiates connection via standard link-layer protocols (Wi-Fi/Ethernet) and participates in the EAP-TLS authentication process as a supplicant, communicating only with the 5G-RG's authenticator function. It remains unaware of the 5GC, PDU Sessions, or the underlying mechanisms used for its connectivity beyond the local authentication step.
+- **5G-RG (Gateway):** This component acts as the central integration point and performs multiple roles simultaneously:
+    - **Towards 5GC:** It registers and authenticates with the 5GC using its own 5G credentials (SUPI/IMSI) like a standard UE, utilizing the N1 interface for NAS signaling with the AMF. It establishes an initial PDU session (linked to the `backhaul` DNN) via the SMF for its own operational traffic, including communication with the EAP Server.
+    - **Towards NAUN3 Device:** It functions as a Layer 2 access point and an EAP authenticator (relay), managing the local connection and the EAPoL exchange.
+    - **Towards EAP Server:** It securely relays EAP messages encapsulated within RADIUS packets to the external EAP Authentication Server. This communication is tunneled through its established `backhaul` PDU session.
+    - **Orchestration Logic:** Upon receiving an EAP-Success via RADIUS for an NAUN3 device, its internal logic triggers a request to the SMF (via AMF) for a _new_ PDU session establishment, specifying the `clients` DNN. It then uses the internal mapping table to associate this new PDU session with the authenticated NAUN3 device and routes the device's user plane traffic accordingly between the local interface and the N3 user plane tunnel (GTP-U) established for that specific `clients` PDU session towards the UPF.
+- **EAP Authentication Server:** Its interaction is solely with the 5G-RG via the RADIUS protocol. It receives authentication requests, performs the EAP-TLS server-side operations, validates client certificates, and returns an Access-Accept (with EAP-Success) or Access-Reject (with EAP-Failure) message. All this communication is secured and transported over the 5G-RG's `backhaul` PDU session.
+- **5GC Network Functions (AMF, SMF, UPF):** These components perform their standard functions, treating the 5G-RG as the registered UE.
+    - **AMF:** Manages the registration, authentication (of the 5G-RG itself), and mobility of the 5G-RG. It forwards session management requests from the 5G-RG to the appropriate SMF.
+    - **SMF:** Handles all PDU session management procedures initiated by the 5G-RG for both the `backhaul` and the multiple `clients` DNNs. It selects the UPF, allocates IP addresses for each PDU session, and interacts with the UPF to establish the necessary user plane tunnels.    
+    - **UPF:** Establishes GTP-U tunnels as instructed by the SMF for each PDU session and forwards user plane traffic between the 5G RAN (via N3 interface towards the 5G-RG) and the respective Data Network (DN) associated with the DNN.    
+This integration ensures that while the NAUN3 device only undergoes local authentication, its traffic is securely tunneled through the 5GC via a dedicated, dynamically established PDU session managed by the mediating 5G-RG.
 ### Key Communication Flows in the Integrated System
+
+!! CREATE A FLOW CHART !!
+
 Illustrate the end-to-end flow for onboarding an NAUN3 device:
 - Initial 5G-RG registration with the 5GC.
 - Establishment of the `backhaul` PDU session for the 5G-RG.
