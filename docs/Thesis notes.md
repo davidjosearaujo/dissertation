@@ -98,7 +98,7 @@ The main interfaces and protocols involved are:
 - **5G Interfaces (5G-RG <-> 5GC):**
     - **N1 Interface:** Carries Non-Access Stratum (NAS) signaling between the 5G-RG (acting as UE) and the AMF for registration, authentication (of the RG itself), and session management procedures.
     - **N2 Interface:** Carries Next Generation Application Protocol (NGAP) signaling between the 5G RAN (gNB, which connects the 5G-RG) and the AMF, primarily for UE context management and PDU session resource setup requests related to the 5G-RG.
-    - **N3 Interface:** Carries the user plane traffic encapsulated in GPRS Tunneling Protocol - User Plane (GTP-U) tunnels between the 5G RAN (gNB) and the UPF. This includes traffic for both the `backhaul` PDU session and all the individual `clients` PDU sessions.    
+    - **N3 Interface:** Carries the user plane traffic encapsulated in GPRS Tunneling Protocol - User Plane (GTP-U) tunnels between the 5G RAN (gNB) and the UPF. This includes traffic for both the `backhaul` PDU session and all the individual `clients` PDU sessions.
 - **Authentication Interface (5G-RG <-> EAP Server):**
     - **Application Layer:** Remote Authentication Dial-In User Service (RADIUS) protocol is used to carry EAP messages between the 5G-RG (acting as a RADIUS client and EAP relay) and the external EAP Authentication Server (RADIUS server).    
     - **Transport:** RADIUS messages are transported over IP, typically using UDP. This IP traffic is securely tunneled through the 5G-RG's dedicated `backhaul` PDU session via the N3 interface and UPF.    
