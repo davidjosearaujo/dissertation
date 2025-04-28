@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14" pages="4">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="26.2.14" pages="5">
   <diagram id="iOh-ovBo9PdDLdqdy3Yk" name="General Topology">
     <mxGraphModel dx="1383" dy="166" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -539,6 +539,176 @@
         </mxCell>
         <mxCell id="4LJEn4p96SO-gmmG6LRc-22" value="192.168.56.0/24" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="790" y="269.58" width="90" height="18" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="57AgL0LsSItEshLQcoSN" name="System Setup and NAUN3 Onboarding Flow">
+    <mxGraphModel dx="1188" dy="683" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qcq0Y0QAwZUf_LgYURZx-2" target="qcq0Y0QAwZUf_LgYURZx-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-2" value="&lt;b&gt;5G-RG&lt;/b&gt;&lt;div&gt;&lt;b&gt;Registration With 5GC&lt;/b&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="80" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qcq0Y0QAwZUf_LgYURZx-3" target="qcq0Y0QAwZUf_LgYURZx-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-3" value="&lt;b&gt;Backhaul Control PDU Session&lt;br&gt;Establishment&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qcq0Y0QAwZUf_LgYURZx-5" target="WWepVgQ42jOT_GYmiVyu-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-5" value="&lt;b&gt;EAP-TLS Authentication&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-8" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="60" as="sourcePoint" />
+            <mxPoint x="600" y="60" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-9" value="&lt;b&gt;5G-RG&lt;/b&gt;" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="qcq0Y0QAwZUf_LgYURZx-8">
+          <mxGeometry x="-0.7389" y="-3" relative="1" as="geometry">
+            <mxPoint x="-48" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-10" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="300" as="sourcePoint" />
+            <mxPoint x="600" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qcq0Y0QAwZUf_LgYURZx-11" value="&lt;b&gt;NAUN3 + 5G-RG + 5GC&lt;/b&gt;" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="qcq0Y0QAwZUf_LgYURZx-10">
+          <mxGeometry x="-0.7389" y="-3" relative="1" as="geometry">
+            <mxPoint x="-48" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-1" target="WWepVgQ42jOT_GYmiVyu-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-5" value="&lt;b&gt;NO&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="WWepVgQ42jOT_GYmiVyu-4">
+          <mxGeometry x="-0.2034" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-1" target="WWepVgQ42jOT_GYmiVyu-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-8" value="&lt;b&gt;YES&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="WWepVgQ42jOT_GYmiVyu-7">
+          <mxGeometry x="-0.4724" y="2" relative="1" as="geometry">
+            <mxPoint x="-2" y="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-1" value="&lt;b&gt;Successful ?&lt;/b&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="340" y="420" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-3" value="&lt;b&gt;Local Connection Denied&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-6" target="WWepVgQ42jOT_GYmiVyu-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-6" value="&lt;b&gt;5G-RG Client PDU Session Establishment&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="560" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-9" value="&lt;b&gt;NAUN3 To PDU Session Mapping&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="660" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-11" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="540" as="sourcePoint" />
+            <mxPoint x="600" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-12" value="&lt;b&gt;5G-RG&lt;/b&gt;" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];fontSize=16;" vertex="1" connectable="0" parent="WWepVgQ42jOT_GYmiVyu-11">
+          <mxGeometry x="-0.7389" y="-3" relative="1" as="geometry">
+            <mxPoint x="-48" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-13" value="&lt;b&gt;NAUN3 To PDU Session Traffic Routing&lt;/b&gt;" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="780" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-21" target="WWepVgQ42jOT_GYmiVyu-27">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="920" />
+              <mxPoint x="580" y="810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-36" value="&lt;b&gt;NO&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="WWepVgQ42jOT_GYmiVyu-35">
+          <mxGeometry x="-0.0422" y="2" relative="1" as="geometry">
+            <mxPoint x="2" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-21" target="WWepVgQ42jOT_GYmiVyu-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-39" value="&lt;b&gt;YES&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="WWepVgQ42jOT_GYmiVyu-38">
+          <mxGeometry x="-0.1286" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-21" value="&lt;b&gt;Connection&lt;/b&gt;&lt;div&gt;&lt;b&gt;Lost ?&lt;/b&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="460" y="880" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-27" target="WWepVgQ42jOT_GYmiVyu-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-27" value="&lt;b&gt;NAUN3 Connection Status Listener&lt;/b&gt;" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="780" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-29" value="" style="line;strokeWidth=4;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="1">
+          <mxGeometry x="220" y="750" width="320" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.122;entryY=0.493;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;startFill=1;startArrow=classic;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-13" target="WWepVgQ42jOT_GYmiVyu-29">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="754" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.874;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;startFill=1;startArrow=classic;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-27" target="WWepVgQ42jOT_GYmiVyu-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="790" as="sourcePoint" />
+            <mxPoint x="270" y="767" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="500" y="754" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="752" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-37" target="WWepVgQ42jOT_GYmiVyu-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-37" value="&lt;b&gt;NAUN3 Deauthentication&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="1020" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-40" target="WWepVgQ42jOT_GYmiVyu-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="1240" />
+              <mxPoint x="620" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-40" value="&lt;b&gt;Routing Policy Erased&lt;/b&gt;" style="html=1;shape=mxgraph.infographic.ribbonSimple;notch1=0;notch2=20;align=left;verticalAlign=middle;fontSize=12;fontStyle=0;fillColor=#FFFFFF;whiteSpace=wrap;flipH=0;" vertex="1" parent="1">
+          <mxGeometry x="440" y="1220" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-50" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WWepVgQ42jOT_GYmiVyu-47" target="WWepVgQ42jOT_GYmiVyu-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WWepVgQ42jOT_GYmiVyu-47" value="&lt;b&gt;NAUN3&#39;s PDU Session Erased&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="1120" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
