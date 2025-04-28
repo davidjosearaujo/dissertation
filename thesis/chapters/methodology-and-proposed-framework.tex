@@ -241,7 +241,7 @@ A key aspect of this framework's design is its reliance on standard, well-define
 The main interfaces and protocols involved are:
 \begin{itemize}
     \item {
-        \textbf{Local Network Interface (between \ac{NAUN3} Device and \ac{5G-RG}):}
+        \textbf{Local Network Interface (between \ac{NAUN3} Device and the \ac{5G-RG}):}
         \begin{itemize}
             \item \textbf{Link Layer:} Standard Ethernet (\ac{IEEE} 802.3) or Wi-Fi (\ac{IEEE} 802.11).
             \item {Authentication:} Extensible Authentication Protocol over \ac{LAN} (\ac{EAPoL} - \ac{IEEE} 802.1X) is used to transport \ac{EAP} messages over the local link.
@@ -249,14 +249,28 @@ The main interfaces and protocols involved are:
         \end{itemize}
     }
     \item {
-        \textbf{\ac{5G} Interfaces (between \ac{5G-RG} and \ac{5GC}):}
+        \textbf{\ac{5G} Interfaces (between \ac{5G-RG} and the \ac{5GC}):}
         \begin{itemize}
             \item \textbf{N1 Interface:} Carries \ac{NAS} signaling between the \ac{5G-RG} and the \ac{AMF} for registration, authentication (of the \ac{RG} itself), and session management procedures.
-            \item 
+            \item \textbf{N2 Interface:} Carries \ac{NGAP} signaling between the \ac{gNB}, which connects the \ac{5G-RG}, and the \ac{AMF}, primarily for \ac{UE} context management and \ac{PDU} session resource setup requests related to the \ac{5G-RG}.
+            \item \textbf{N3 Interface:} Carries the user plane traffic encapsulated in \ac{GTP-U} tunnels between the \ac{gNB} and the \ac{UPF}. This includes traffic for both the \texttt{backhaul} \ac{PDU} session and all the individual \texttt{clients} \ac{PDU} sessions.
+        \end{itemize}
+    }
+    \item {
+        \textbf{Authentication Interface (between \ac{5G-RG} and the \ac{EAP} Authentication Server):}
+        \begin{itemize}
+            \item \textbf{Application Layer:} \ac{RADIUS} protocol is used to carry \ac{EAP} messages between the \ac{5G-RG} (acting as a \ac{RADIUS} client and \ac{EAP} authenticator) and the external authentication server).
+            \item \textbf{Transport:} \ac{RADIUS} messages are transported over \ac{IP}, using \ac{UDP}. This \ac{IP} traffic is securely tunneled through the \ac{5G-RG}'s dedicated \texttt{backhaul} \ac{PDU} session via the \ac{N3} interface and \ac{UPF}.
         \end{itemize}
     }
 \end{itemize}
 
+The novelty lies not in modifying these protocols but in configuring the system components (\ac{5GC} \acp{NF}, \ac{5G-RG}, \ac{EAP} Server) and implementing the orchestration logic within the \ac{5G-RG} to manage the per-device proxy identity using standard \ac{5G} session management procedures.
+
 \section{Scope and Assumptions}
 
-% Clearly state the boundaries of your proposed framework and any underlying assumptions made during its design (e.g., assumptions about the capabilities of the Wi-Fi device or the trustworthiness of certain network elements).
+This framework successfully brings \ac{NAUN3} devices into the \ac{5G} ecosystem by coordinating standard protocols and interfaces using smart logic centralized within the \ac{5G-RG}. Its main innovation is using individual \ac{PDU} Sessions, set up by the \ac{5G-RG}, as flexible proxy identities for each locally authenticated \ac{NAUN3} device. This method eliminates the need for devices to have native \ac{5G} credentials like \ac{SUPI} or \ac{USIM}.
+
+Integration is handled dynamically across the device's connection lifecycle. After a device completes local \ac{EAP-TLS} authentication, the \ac{5G-RG} requests a dedicated \ac{PDU} Session (under the \texttt{clients} \ac{DNN}) from the \ac{5GC}. The \ac{5G-RG} keeps an internal mapping between the device's local identity and its assigned \ac{PDU} Session. If the device disconnects or loses connectivity, the \ac{5G-RG} promptly terminates the related \ac{PDU} Session to free up \ac{5G} resources, ensuring only active and authenticated devices consume network capacity.
+
+Ultimately, this setup enables the \ac{5GC} to manage each device individually—applying policies like \ac{QoS} and routing—through standard \ac{PDU} Session management, all without requiring changes to the \ac{NAUN3} devices or \ac{5G} core network functions. Integration relies entirely on configurations and the gateway's mediation, avoiding any need to alter fundamental \ac{5G} protocols or the capabilities of the devices themselves.
