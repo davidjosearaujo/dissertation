@@ -1,1 +1,30 @@
-\chapter{Additional content}
+\chapter{Key Differences between \ac{NAUN3} and \ac{N5GC} devices}
+\begin{table}[ht]
+    \centering
+    \caption{Key Differences between \ac{NAUN3} and \ac{N5GC} devices}
+    \label{tab:Key Differences between NAUN3 and N5GC devices}
+    \begin{tabularx}{\textwidth} { 
+      | >{\raggedright\arraybackslash}X 
+      | >{\raggedright\arraybackslash}X 
+      | >{\raggedright\arraybackslash}X | }
+        \hline
+        \textbf{Feature} & \textbf{\ac{NAUN3} Devices} & \textbf{\ac{N5GC} Devices} \\
+        \hline
+        \textbf{\ac{5G} Capability} & No \ac{5G} capability, cannot access \ac{5GC} directly. & Limited \ac{5G} capability, requires assistance to connect to \ac{5GC}.\\
+        \hline
+        \textbf{Authentication} & Local (e.g., Wi-Fi passphrase, \ac{PIN}). & \ac{5GC} authentication via \ac{EAP} and \ac{W-AGF}.\\
+        \hline
+        \textbf{Access Type} & Wireless (e.g., Wi-Fi via \ac{5G-RG}). & Wireline (e.g., fiber via \ac{W-AGF}).\\
+        \hline
+        \textbf{Subscription Records} & None in \ac{UDM}/\ac{UDR}; operates under \ac{5G-RG} policies. & Unique subscription records separate from \ac{CRG}.\\
+        \hline
+        \textbf{\ac{NGAP} Connections} & Not applicable. & Separate \ac{NGAP} connections per device.\\
+        \hline
+        \textbf{Session Handling} & Handled by the \ac{5G-RG}. & Handled by \ac{W-AGF} and \ac{5GC}.\\
+        \hline
+        \textbf{Purpose} & Legacy \ac{IoT} or low-capability devices. & Wireline devices requiring \ac{5GC} services.\\
+        \hline
+        \textbf{Example} & Smart home appliance using Wi-Fi. & Desktop computer on a fiber network.\\
+        \hline
+    \end{tabularx}
+\end{table}

@@ -2,16 +2,16 @@
 \label{chapter:State of the Art}
 
 \begin{introduction}
-This chapter will provide a comprehensive review of current \ac{5G} and Wi-Fi integration efforts, existing authentication mechanisms, and challenges in device identification. It will also explore recent developments and proposed solutions in the field, setting the context for our research.
+This chapter will provide a comprehensive review of current \ac{5G} and Wi-Fi integration efforts, existing authentication mechanisms, and challenges in device identification, authentication and authorization. It will also explore recent developments and proposed solutions in the field, setting the context for our research.
 \end{introduction}
 
 \section{Why \ac{4G} needed improved security?}
 
-From the point of view of authentication, a cellular network consists of three main components: \ac{UE}, a \ac{SN}, and a \ac{HN}.
+From the point of view of authentication, a cellular network consists of three main components (see Figure \ref{fig:4G Cellular Network Architecture}): \ac{UE}, a \ac{SN}, and a \ac{HN}.
 
-The \ac{UE} refers to devices like smartphones, tablets, or IoT devices equipped with a \ac{UICC}  hosting at least a \ac{USIM} storing a cryptographic key that is shared with the subscriber’s home network. These devices connect to the network over radio signals. In \ac{4G} networks, these signals are based on technologies like \ac{LTE}, utilizing frequency bands allocated for mobile communication.
+The \ac{UE} refers to devices like smartphones, tablets, or IoT devices equipped with a \ac{UICC}  hosting at least a \ac{USIM} storing security related artifacts, including a cryptographic key that is shared with the subscriber’s home network. These devices connect to the network over radio signals. In \ac{4G} \ac{LTE} networks, these signals utilize specific frequency bands allocated for \ac{4G} communication.
 
-The \ac{SN} includes network components that facilitate communication and provide services to the \ac{UE} in a specific geographic area. Key elements of the \ac{SN} are the \ac{eNodeB} and the \ac{MME}.
+The \ac{SN} includes network components that establish communication and provide services to the \ac{UE} in a specific geographic area. Key elements of the \ac{SN} are the \ac{eNodeB} and the \ac{MME}.
 
 \begin{itemize}
     \item{
@@ -26,25 +26,32 @@ The Home Network (\ac{HN}) refers to the network operated by the user's mobile s
 
 \begin{itemize}
     \item {
-        The \ac{HSS} is a critical component that contains user-specific data, such as subscription profiles, service entitlements, and cryptographic keys. These keys are used during the authentication process to verify that the user is authorized to access the network. The \ac{HSS} communicates with the \ac{SN} to authenticate the \ac{UE} using protocols like Diameter over an IP-based system. This ensures secure and efficient exchange of authentication and session-related information.
+        The \ac{HSS} is a critical component that contains subscription-specific data, such as subscription profiles, service entitlements, and cryptographic keys. These keys are used during the authentication process to verify and authorize, under specific conditions, access to that user in the network. The \ac{HSS} communicates with the \ac{SN} to authenticate the \ac{UE} using protocols like Diameter over an IP-based system. This ensures secure and efficient exchange of authentication and session-related information.
     }
 \end{itemize}
 
+Together, these core components form the \ac{EPS}~\cite{cbl-comp-p3}, the architecture underlying \ac{4G} \ac{LTE} networks. The \ac{EPS} enables seamless connectivity and service delivery by integrating the radio access network (\acp{eNodeB}) with the core network components (e.g., \ac{MME} and \ac{HSS}). This design ensures that authentication, data management, and mobility are handled efficiently while providing high-speed, low-latency connections for the \ac{UE}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{figs/4G Cellular Network Architecture.png}
+    \caption{\ac{4G} Cellular Network Architecture}
+    \label{fig:4G Cellular Network Architecture}
+\end{figure}
+
 Communication between the \ac{SN} and \ac{HN} over the IP network is facilitated by core network protocols. The \ac{SN} sends a request to the \ac{HSS} containing the \ac{UE}’s credentials (e.g., \ac{IMSI}). The \ac{HSS} uses its stored keys to generate authentication vectors, which are then sent back to the \ac{SN}. The \ac{SN} uses these vectors to authenticate the \ac{UE} and establish a secure connection.
 
-Together, these components form the \ac{EPS}~\cite{cbl-comp-4G-5g-p3}, the architecture underlying \ac{4G} \ac{LTE} networks. The \ac{EPS} enables seamless connectivity and service delivery by integrating the radio access network (\acp{eNodeB}) with the core network components (e.g., \ac{MME} and \ac{HSS}). This design ensures that authentication, data management, and mobility are handled efficiently while providing high-speed, low-latency connections for the \ac{UE}.
+Prior generations to \ac{4G}, especially in \acp{RAN}, have faced significant security and privacy challenges. One major issue was the lack of network authentication in \ac{2G}~\cite{cbl-comp-p1}, which allowed attackers to perform network spoofing using fake base stations. For example, a fake base station could advertise a stronger signal and lure \ac{UE} away from its legitimate network, enabling the attacker to send fraudulent text messages to the user.
 
-Prior generations to \ac{4G}, especially in \acp{RAN}, have faced significant security and privacy challenges. One major issue was the lack of network authentication in \ac{2G}, which allowed attackers to perform network spoofing using fake base stations. For example, a fake base station could advertise a stronger signal and lure \ac{UE} away from its legitimate network, enabling the attacker to send fraudulent text messages to the user.
+Another issue was the lack of integrity protection for signaling messages~\cite{cbl-comp-p1}, which left them vulnerable to spoofing and tampering. For instance, fake base stations could send unprotected Identity Request messages (a \ac{NAS} signaling message in \ac{LTE}) to steal permanent \ac{UE} identifiers, such as the \ac{IMSI}.
 
-Another issue was the lack of integrity protection for signaling messages, which left them vulnerable to spoofing and tampering. For instance, fake base stations could send unprotected Identity Request messages (a \ac{NAS} signaling message in \ac{LTE}) to steal permanent \ac{UE} identifiers, such as the \ac{IMSI}.
+Additionally, certain messages lacked confidentiality~\cite{cbl-comp-p1}, resulting in privacy violations. For example, unencrypted paging messages could be intercepted to detect a user’s presence and track their precise location. 
 
-Additionally, certain messages lacked confidentiality, resulting in privacy violations. For example, unencrypted paging messages could be intercepted to detect a user’s presence and track their precise location. 
+To mitigate these vulnerabilities, the \ac{3GPP} introduced the \ac{AKA} protocol, which ensures entity authentication, message integrity, and message confidentiality. \ac{AKA} employs a challenge-response mechanism based on a symmetric key shared between the subscriber and their home network which is pre stored at the \ac{UE} in the \ac{UICC}/\ac{USIM} and in the network at the \ac{HSS}. It also derives cryptographic keying materials to protect both signaling messages and user plane data, including communications over radio channels. This protocol significantly enhances security and privacy in mobile networks.
 
-To mitigate these vulnerabilities, the 3GPP introduced the \ac{AKA} protocol, which ensures entity authentication, message integrity, and message confidentiality. \ac{AKA} employs a challenge-response mechanism based on a symmetric key shared between the subscriber and their home network. It also derives cryptographic keying materials to protect both signaling messages and user plane data, including communications over radio channels. This protocol significantly enhances security and privacy in mobile networks.
+In \ac{4G} \ac{EPS-AKA}, despite the enhancements brought by the \ac{3GPP} \ac{AKA} protocol, two significant flaws remain. First, during the initial stage of the authentication process (the flow is shown in Figure \ref{fig:4G-authentication-procedure}), the \ac{UE} must transmit its identity, specifically its \ac{IMSI}, to the serving network. This identity is sent over the radio network without encryption, leaving it vulnerable to interception~\cite{cbl-comp-p3}. Although the use of a temporary identifier, such as the \ac{GUTI}, is intended to mitigate this risk~\cite{eleftherakis-2024}, researchers have demonstrated that \ac{GUTI} allocation is flawed in that the identifiers either do not change frequently enough~\cite{gt-freq} or are assigned in predictable patterns~\cite{gt-pred}.
 
-In \ac{4G} \ac{EPS-AKA}, despite the enhancements brought by the 3GPP \ac{AKA} protocol, two significant flaws remain. First, during the initial stage of the authentication process (the flow is shown in Figure \ref{fig:4G-authentication-procedure}), the \ac{UE} must transmit its identity, specifically its \ac{IMSI}, to the serving network. This identity is sent over the radio network without encryption, leaving it vulnerable to interception~\cite{cbl-comp-4G-5g-p3}. Although the use of a temporary identifier, such as the \ac{GUTI}, is intended to mitigate this risk, researchers have demonstrated that \ac{GUTI} allocation is flawed in that the identifiers either do not change frequently enough~\cite{gt-freq} or are assigned in predictable patterns~\cite{gt-pred}.
-
-Second, during the authentication decision, the home network may provide an \ac{AV}, but this value is not directly included in the decision-making process, which is handled solely by the serving network~\cite{cbl-comp-4G-5g-p4}.
+Second, during the authentication decision, the home network may provide an \ac{AV}, but this value is not directly included in the decision-making process, which is handled solely by the serving network~\cite{cbl-comp-p4}.
 
 \begin{figure}[htbp]
     \centering
@@ -55,39 +62,37 @@ Second, during the authentication decision, the home network may provide an \ac{
 
 \section{\acs{5G} Architecture and Security Framework}
 
-The \ac{5G} System architecture, seen in Figure \ref{fig:5G-system-architecture}, is designed to support advanced techniques such as \ac{NFV} and \ac{SDN}. It separates \ac{CP} and \ac{UP} functions, enabling independent scalability, evolution, and flexible deployments in centralized or distributed locations. The architecture uses modular function design to support efficient network slicing and defines procedures as reusable services to enhance flexibility. It minimizes dependencies between the \ac{AN} and the \ac{CN} by integrating different access types, including \ac{3GPP} and non-\ac{3GPP}, through a converged core network.
+The \ac{5G} System architecture, presented in Figure \ref{fig:5G-system-architecture}, is designed to exploit advanced techniques such as \ac{NFV} and \ac{SDN}. Besides, it separates \ac{CP} and \ac{UP} functions, enabling independent scalability, evolution, and flexible deployments in centralized or distributed locations. The architecture adopts a modular function design to support efficient network slicing and defines procedures as reusable services to enhance flexibility and can be easily extended. It minimizes dependencies between the \ac{AN} and the \ac{CN} by integrating different access types, including \ac{3GPP} and non-\ac{3GPP}, through a converged core network.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figs/5g-system-architecture.png}
-    \caption{\ac{5G} System Architecture}
+    \caption{Non-Roaming \ac{5G} System Architecture}
     \label{fig:5G-system-architecture}
 \end{figure}
 
-The system includes a unified authentication framework, supports stateless \acp{NF} by decoupling compute and storage resources, and enables capability exposure for network features. It allows concurrent access to local and centralized services and deploys \ac{UP} functions near the \acl{AN} to support low latency services and local data network access. Additionally, it supports roaming with both home-routed and local breakout traffic in visited networks, ensuring efficient and flexible operation.%cite 23.501 4.1
+The system includes a unified authentication framework, supports stateless \acp{NF} by decoupling compute and storage resources, and enables capability exposure for network features. It allows concurrent access to local and centralized services and deploys \ac{UP} functions near the \acl{AN} to support low latency services and local data network access. Additionally, it supports roaming with both home-routed and local breakout traffic in visited networks, ensuring efficient and flexible operation~\cite{23.501-p41}.
 
 In \ac{5G}, the security framework is built around a new way of organizing the network, known as \ac{SBA}. This setup introduces new entities~\cite{33.501-p30} and processes that focus on keeping the network secure, especially when it comes to authentication, which is the process of verifying users and devices.
 
 \begin{itemize}
     \item{
-        One of the key entities is the \ac{SEAF}, located in the serving network. Acting as an intermediary during the authentication process~\cite{23.501-p48}. The \ac{SEAF} receives authentication requests from a device (\ac{UE}), but it relies on the home network to decide whether the authentication is valid or not. It can reject the authentication, but the final decision rests with the home network.
+        One of the key entities is the \ac{SEAF}, which is part of the \ac{AMF}, located in the serving network, acting as an intermediary during the authentication process~\cite{23.501-p48}. The \ac{SEAF} receives authentication requests from a device (\ac{UE}), but it relies on the home network to decide whether the authentication is valid or not. It can reject the authentication, but the final decision rests with the home network.
     }
     \item{
-        The \ac{AUSF}~\cite{23.501-p538} is the entity in the home network that actually decides whether the device should be allowed onto the network. The \ac{AUSF} looks at the information provided by the device and checks it against the home network's security policies. It then works with other backend services to compute the necessary data and keys needed to authenticate the device, using secure methods like \ac{5G-AKA} or \ac{EAP-AKA'}.
+        The \ac{AUSF}~\cite{23.501-p538} is the entity in the home network that actually decides whether the device should be allowed into the network. The \ac{AUSF} looks at the information provided by the device and checks it against the home network's security policies. It then works with other backend services to compute the necessary data and keys needed to authenticate the device, using secure methods like \ac{5G-AKA} or \ac{EAP-AKA'}.
     }
     \item{
         The \ac{UDM}~\cite{23.501-p538} is in charge of managing the data involved in authentication. One of its key roles is managing the \ac{ARPF}, which selects the right authentication method based on the device's identity and the network's policies. It also helps generate the keys and data that the \ac{AUSF} uses for authentication.
     }
     \item{
-        Finally, the \ac{SIDF} helps protect \ac{SUPI}. In \ac{5G}, this permanent identity, which could be something like a user’s \ac{IMSI}, is always kept hidden and encrypted when sent over the air to prevent hackers from tracking it. The \ac{SIDF} is the only part of the network that can decrypt the encrypted identity~\cite{33.501-p37} (called the \ac{SUCI}) using a private key, ensuring that no one else can access the user’s personal details.
+        Finally, the \ac{SIDF}, which is part of the \ac{UDM}, helps protect the \acl{SUPI} (\ac{SUPI}). In \ac{5G}, this permanent identity, which could be a user’s \ac{IMSI}, is always kept hidden and encrypted when sent over the air to prevent hackers from tracking it. The \ac{SIDF} is the only part of the network that can decrypt the encrypted identity~\cite{33.501-p37} (called the \ac{SUCI}) using a private key, ensuring that no one else can access the user’s personal details.
     }
 \end{itemize}
 
 At its core, this framework introduces a unified and flexible authentication system that seamlessly integrates both \ac{3GPP} (traditional cellular) and non-\ac{3GPP} (such as Wi-Fi or cable) networks. This cross-network compatibility is crucial for enabling a wide range of access methods and supporting the growing ecosystem of connected devices.
 
-Central to this framework is the \ac{EAP}, which facilitates secure communication between the \ac{UE} and the \ac{AUSF}. The \ac{SEAF} acts as an intermediary, relaying authentication messages between the \ac{UE} and \ac{AUSF}~\cite{33.501-p46}. This setup supports various authentication methods, including \ac{5G-AKA}, \ac{EAP-AKA'}, and \ac{EAP-TLS}, providing robust security for data exchange. For untrusted non-\ac{3GPP} access, the \ac{N3IWF} comes into play, establishing a secure \ac{IPsec} tunnel between the \ac{UE} and the \acl{5GC}, ensuring encrypted communication even over potentially insecure networks.
-
-A key innovation in the \ac{5G} authentication framework is its ability to establish multiple security contexts during a single authentication process. This feature allows users to transition seamlessly between different network types without the need for re-authentication, significantly enhancing user experience and maintaining continuous secure access. Furthermore, the framework introduces improved subscriber privacy through the use of \ac{SUCI}, protecting users from potential tracking or interception of their \ac{SUPI}.
+Central to this framework is the \ac{EAP}, which facilitates secure communication between the \ac{UE} and the \ac{AUSF}. The \ac{SEAF} acts as an intermediary, relaying authentication messages between the \ac{UE} and \ac{AUSF}~\cite{33.501-p46}. This setup supports various authentication methods, including \ac{5G-AKA}, \ac{EAP-AKA'}, and \ac{EAP-TLS}, providing robust security for data exchange.
 
 \subsection{Comparing \ac{5G-AKA}, \ac{EAP-AKA'} and \ac{EAP-TLS}}
 
@@ -98,7 +103,7 @@ A key innovation in the \ac{5G} authentication framework is its ability to estab
     \label{fig:Initiation of authentication procedure and selection of authentication method}
 \end{figure}
 
-The \ac{5G-AKA} authentication process begins when the \ac{SEAF} receives a request from the \ac{UE} seeking network access (see Figure \ref{fig:Initiation of authentication procedure and selection of authentication method}). The \ac{UE} provides either a \ac{5G-GUTI} or a \ac{SUCI} to begin the authentication. The \ac{AUSF} first ensures that the requesting network is legitimate, then it sends an authentication request to the \ac{UDM}/\ac{ARPF}. If the \ac{SUCI} is provided, the \ac{SIDF} decrypts it to obtain the \ac{SUPI}, which is used to determine the authentication method.~\cite{33.501-p48}
+The \ac{5G-AKA} authentication process begins when the \ac{SEAF} receives a request from the \ac{UE} seeking network access (see Figure \ref{fig:Initiation of authentication procedure and selection of authentication method}). The \ac{UE} provides either a \ac{5G-GUTI} or a \ac{SUCI} to begin the authentication. The \ac{AUSF} first ensures that the requesting \ac{SN} is legitimate, then it sends an authentication request to the \ac{UDM}/\ac{ARPF}. If the \ac{SUCI} is provided, the \ac{SIDF} decrypts it to obtain the \ac{SUPI}, which is used to determine the authentication method~\cite{33.501-p48}.
 
 \begin{figure}
     \centering
@@ -107,9 +112,9 @@ The \ac{5G-AKA} authentication process begins when the \ac{SEAF} receives a requ
     \label{fig:Authentication procedure for 5G AKA}
 \end{figure}
 
-Next, the \ac{UDM}/\ac{ARPF} generates an authentication response containing tokens and keys. These are sent to the \ac{AUSF}, which computes a hash (\textit{HXRES}) and checks the expected response. The \ac{AUSF} sends the authentication result, including the \textit{AUTH} token and \textit{HXRES}, to the \ac{SEAF}, ensuring that the \ac{SUPI} is not exposed to the \ac{SEAF}, preserving privacy. The \ac{SEAF} forwards the \textit{AUTH} token to the \ac{UE}, which then validates it using a secret key shared with the home network. If successful, the \ac{UE} computes a \textit{RES} token and sends it back to the \ac{SEAF}. The \ac{SEAF} forwards this to the \ac{AUSF}, which validates the response.
+Next the \ac{UDM}/\ac{ARPF} generates an authentication response containing tokens and keys (see Figure \ref{fig:Authentication procedure for 5G AKA} message 1). These are sent to the \ac{AUSF}(message 2), which computes a hash ($HXRES$) and checks the expected response (message 3). The \ac{AUSF} sends the authentication result, including the $AUTH$ token and $HXRES$, to the \ac{SEAF} (message 5), ensuring that the \ac{SUPI} is not exposed to the \ac{SEAF}, preserving privacy. The \ac{SEAF} forwards the $AUTH$ token to the \ac{UE} (message 6), which then validates it using a secret key shared with the home network (message 7). If successful, the \ac{UE} computes a $RES$ token and sends it back to the \ac{SEAF} (message 8). The \ac{SEAF} calculates the $HRES$ and compares it (message 9), and then forwards this to the \ac{AUSF} (message 10), which validates the response (message 11).
 
-Once the \textit{RES} token is verified, the \ac{AUSF} sends an anchor key to the \ac{SEAF}. The \ac{SEAF} derives an \acs{AMF} key, which the \acl{AMF} uses to generate further keys for securing signaling messages between the \ac{UE} and network elements. The \ac{UE}, using its root key, can derive all necessary keys for secure communication with the network, ensuring mutual trust and security.~\cite{33.501-p52}
+Once the $RES$ token is verified, the \ac{AUSF} sends an anchor key to the \ac{SEAF} (message 12). The \ac{SEAF} derives an \acs{AMF} key, which the \acl{AMF} uses to generate further keys for securing signaling messages between the \ac{UE} and network elements. The \ac{UE}, using its root key, can derive all necessary keys for secure communication with the network, ensuring mutual trust and security~\cite{33.501-p52}.
 
 \begin{figure}
     \centering
@@ -118,18 +123,18 @@ Once the \textit{RES} token is verified, the \ac{AUSF} sends an anchor key to th
     \label{fig:Authentication procedure for EAP-AKA'}
 \end{figure}
 
-An alternative authentication method in \ac{5G} is \ac{EAP-AKA'}, which provides mutual authentication between the \ac{UE} and the network using a shared cryptographic key. Unlike \ac{5G-AKA}, \ac{EAP-AKA'} uses \ac{EAP} messages within \ac{NAS} messages between the \ac{UE} and \ac{SEAF}, and between the \ac{SEAF} and \ac{AUSF}. In \ac{EAP-AKA'}, the \ac{SEAF} merely relays messages between the \ac{UE} and the \ac{AUSF} without making authentication decisions. In contrast, in \ac{5G-AKA}, the \ac{SEAF} verifies the \ac{UE}'s authentication response and can act on failures. The $K_{AUSF}$ key in \ac{5G-AKA} is generated by the \ac{UDM}/\ac{ARPF} and sent to the \ac{AUSF}, while in \ac{EAP-AKA'}, the \ac{AUSF} derives this key from the \ac{EMSK}, which is provided by \ac{UDM}/\ac{ARPF}.~\cite{33.501-p49}
+An alternative authentication method in \ac{5G} is \ac{EAP-AKA'}, which provides mutual authentication between the \ac{UE} and the network using a shared cryptographic key (see Figure \ref{fig:Authentication procedure for EAP-AKA'}). Unlike \ac{5G-AKA}, \ac{EAP-AKA'} uses \ac{EAP} messages within \ac{NAS} messages between the \ac{UE} and \ac{SEAF}, and between the \ac{SEAF} and \ac{AUSF}. In \ac{EAP-AKA'}, the \ac{SEAF} merely relays messages between the \ac{UE} and the \ac{AUSF} without making authentication decisions. In contrast, in \ac{5G-AKA}, the \ac{SEAF} verifies the \ac{UE}'s authentication response and can act on failures. The $K_{AUSF}$ key in \ac{5G-AKA} is generated by the \ac{UDM}/\ac{ARPF} and sent to the \ac{AUSF}, while in \ac{EAP-AKA'}, the \ac{AUSF} derives this key from the \ac{EMSK}, which is provided by \ac{UDM}/\ac{ARPF}~\cite{33.501-p49}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{figs/Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication.png}
+    \includegraphics[width=0.5\linewidth]{figs/Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication.png}
     \caption{Using \ac{EAP-TLS} Authentication Procedures over \ac{5G} Networks for initial authentication}
     \label{fig:Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication}
 \end{figure}
 
-Additionally, \ac{EAP-TLS} is another optional authentication method suitable for specific scenarios such as private networks or \ac{IoT} devices. Like \ac{EAP-AKA'}, \ac{EAP-TLS} involves mutual authentication via public key certificates or a \ac{PSK}. The \ac{SEAF} acts as an \ac{EAP} authenticator, forwarding \ac{EAP-TLS} messages between the \ac{UE} and the \ac{AUSF}. This method differs from the \ac{AKA}-based approaches by relying on public key certificates for trust, eliminating the need for symmetric keys shared between the \ac{UE} and the network. This reduces key management risks and does not require a traditional \ac{USIM}, although secure elements are still needed for storing credentials.~\cite{33.501-p232}
+Additionally, \ac{EAP-TLS} is another optional authentication method suitable for specific scenarios such as private networks or \ac{IoT} devices. Like \ac{EAP-AKA'}, \ac{EAP-TLS} involves mutual authentication via public key certificates or a \ac{PSK}. The \ac{SEAF} acts as an \ac{EAP} authenticator, forwarding \ac{EAP-TLS} messages between the \ac{UE} and the \ac{AUSF}. This method differs from the \ac{AKA}-based approaches by relying on public key certificates for trust, eliminating the need for symmetric keys shared between the \ac{UE} and the network. This reduces key management risks and does not require a traditional \ac{USIM}, although secure elements are still needed for storing credentials~\cite{33.501-p232}.
 
-\section{Identity Management in \acs{5G}} % Look for citations in TS 23.501 5.9 Identifiers 
+\section{Identity Management in \acs{5G}}
 
 In the transition to \ac{5G}, new mechanisms were introduced to address the vulnerabilities associated with exposed identifiers, such as the \ac{IMSI} (see Figure \ref{fig:International Mobile Subscriber Identity (IMSI)}), during \ac{RAN} communication. These enhancements ensure privacy, security, and compatibility with legacy systems.
 
@@ -140,7 +145,7 @@ In the transition to \ac{5G}, new mechanisms were introduced to address the vuln
     \label{fig:International Mobile Subscriber Identity (IMSI)}
 \end{figure}
 
-One of those mechanisms is the \ac{SUPI}, which serves as the globally unique identifier for each subscriber within the \ac{5G} system. Designed for authentication and provisioning, the \ac{SUPI} maintains compatibility with legacy formats such as the \ac{IMSI} and \ac{NAI}.~\cite{23.501-p243} This flexibility ensures seamless interworking with older systems, including the \ac{EPC}.
+One of those mechanisms is the \ac{SUPI}, which serves as the globally unique identifier for each subscriber within the \ac{5G} system. Designed for authentication and provisioning, the \ac{SUPI} maintains compatibility with legacy formats such as the \ac{IMSI} and \ac{NAI}~\cite{23.501-p243}. This flexibility ensures seamless interworking with older systems, including the \ac{EPC}.
 
 The \ac{SUPI} is typically structured as follows:
 \begin{itemize}
@@ -185,11 +190,11 @@ The \ac{SUCI} construction includes:
     }
 \end{itemize}
 
-The \ac{SUCI} computation is determined by the operator's policy stored in the \ac{USIM}. Depending on the configuration, the \ac{SUCI} may be calculated directly by the \ac{USIM} or delegated to the \ac{ME}.~\cite{23.003-p21}
+The \ac{SUCI} computation is determined by the operator's policy stored in the \ac{USIM}. Depending on the configuration, the \ac{SUCI} may be calculated directly by the \ac{USIM} or delegated to the \ac{ME}~\cite{23.003-p21}.
 
 An anonymous \ac{SUCI} is composed by setting the \ac{SUPI} Type field to 1 (Network-Specific Identifier), using the null protection scheme, and where the scheme output corresponds to a username set to either the "anonymous" string or to an empty string.
 
-To further enhance privacy, \ac{5G} utilizes temporary identifiers during communication. The \acl{5G-GUTI}~\cite{23.501-p244} is dynamically assigned by the \ac{AMF} and replaces the \ac{SUPI} in subsequent signaling exchanges. This frequent reassignment minimizes the risk of user tracking.
+To further enhance privacy, \ac{5G} utilizes temporary identifiers during communication. The \acl{5G-GUTI}~\cite{23.501-p244}(see Figure \ref{fig:5G Global Unique Temporary Identifier (5G–GUTI)}) is dynamically assigned by the \ac{AMF} and replaces the \ac{SUPI} in subsequent signaling exchanges. This frequent reassignment minimizes the risk of user tracking.
 
 \begin{figure}
     \centering
@@ -209,13 +214,13 @@ The \ac{5G-GUTI} is typically in a format comprising:
     }
 \end{enumerate}
 
-For efficient radio signaling, a shortened version, the \ac{5G-S-TMSI}, is utilized.
+For efficient radio signaling, a shortened version, the \ac{5G-S-TMSI}, is utilized. The \ac{5G-S-TMSI} is the shortened form of the \ac{GUTI} to enable more efficient radio signalling procedures (e.g. during Paging and Service Request)
 
-Additionally, the \ac{5G-GUTI} can be represented in an \ac{NAI} format when required.~\cite{23.003-p29} This flexibility supports interworking and ensures compatibility across diverse network scenarios.
+Additionally, the \ac{5G-GUTI} can be represented in an \ac{NAI} format when required~\cite{23.003-p29}. This flexibility supports interworking and ensures compatibility across diverse network scenarios.
 
 The \ac{AMF} retains the flexibility to assign new \ac{5G-GUTI} values at any time, though updates are generally synchronized with the next \ac{NAS} signaling exchange to avoid unnecessary interruptions. Despite these mechanisms, scenarios such as initial network access or failure to resolve a temporary identifier necessitate direct use of the \ac{SUPI}.
 
-In addition to subscriber identifiers, the \ac{PEI} uniquely distinguishes user equipment capable of accessing the network. The \ac{PEI} is critical for device management but is safeguarded to prevent unauthorized tracking.~\cite{23.501-p243}
+In addition to subscriber identifiers, the \ac{PEI} uniquely distinguishes user equipment capable of accessing the network. The \ac{PEI} is critical for device management but is safeguarded to prevent unauthorized tracking~\cite{23.501-p243}.
 
 The \ac{PEI} adheres to specific formats based on device type and use case:
 \begin{itemize}
@@ -232,11 +237,11 @@ The \ac{PEI} adheres to specific formats based on device type and use case:
 \subsection{\acs{3GPP} vs non-\acs{3GPP}}
 \ac{3GPP} encompasses standards for mobile networks like \ac{3G}, \ac{4G}, and \ac{5G}, which are cellular technologies enabling network services from mobile carriers. These networks operate on licensed spectrum, ensuring predictable performance, security, and quality of service.
 
-In contrast, non-\ac{3GPP} access refers to technologies not standardized by \ac{3GPP}, such as Wi-Fi or satellite networks. These networks operate on unlicensed or partially licensed spectrum, are typically managed by different standards bodies (e.g., IEEE for Wi-Fi), and are widely used for cost-effective and ubiquitous connectivity.~\cite{wba-04-2023-p3} While non-\ac{3GPP} networks were previously considered external to mobile networks, \ac{5G} allows their tighter integration into the core network, enabling seamless user experiences across both network types.
+In contrast, non-\ac{3GPP} access refers to technologies not standardized by \ac{3GPP}, such as Wi-Fi or satellite networks. These networks operate on unlicensed or partially licensed spectrum, are typically managed by different standards bodies (e.g., IEEE for Wi-Fi), and are widely used for cost-effective and ubiquitous connectivity~\cite{wba-04-2023-p3}. While non-\ac{3GPP} networks were previously considered external to mobile networks, \ac{5G} allows their tighter integration into the core network, enabling seamless user experiences across both network types.
 
-\ac{5G} introduces the capability to support communication across both \ac{3GPP} and non-\ac{3GPP} access networks, this integration extends beyond traditional cellular devices, allowing a wide range of \acp{UE} and non-\acp{UE} devices—such as \ac{IoT} sensors, laptops, and legacy equipment—to connect securely and efficiently.~\cite{23.501-p57}
+\ac{5G} introduces the capability to support communication across both \ac{3GPP} and non-\ac{3GPP} access networks. This integration extends beyond traditional cellular devices, allowing a wide range of \acp{UE} and non-\acp{UE} devices—such as \ac{IoT} sensors, laptops, and legacy equipment—to connect securely and efficiently~\cite{23.501-p57}.
 
-5G supports communication across \ac{3GPP} and non-\ac{3GPP} access networks using distinct architectures for trusted and untrusted access. Trusted non-\ac{3GPP} networks rely on the \ac{TNGF} as seen in Figure \ref{fig:architecture-for-5g-core-network-with-trusted-non-3gpp-access}, while untrusted networks leverage the \ac{N3IWF} as seen in Figure \ref{fig:architecture-for-5g-core-network-with-untrusted-non-3gpp-access}. Both gateway functions connect to the \ac{5GC}’s control and user planes via the N2 and N3 reference points.
+\ac{5G} supports communication across \ac{3GPP} and non-\ac{3GPP} access networks using distinct architectures for trusted and untrusted access. Trusted non-\ac{3GPP} networks rely on the \ac{TNGF} as seen in Figure \ref{fig:architecture-for-5g-core-network-with-trusted-non-3gpp-access}, while untrusted networks leverage the \ac{N3IWF} as seen in Figure \ref{fig:architecture-for-5g-core-network-with-untrusted-non-3gpp-access}. Both gateway functions connect to the \ac{5GC}’s control and user planes via the N2 and N3 reference points.
 
 \begin{figure}
     \centering
@@ -252,7 +257,9 @@ In contrast, non-\ac{3GPP} access refers to technologies not standardized by \ac
     \label{fig:architecture-for-5g-core-network-with-untrusted-non-3gpp-access}
 \end{figure}
 
-When using non-\ac{3GPP} access, \ac{UE}s establish secure \ac{IPsec} tunnels with the \ac{N3IWF} or \ac{TNGF} to register with the \ac{5GC}. Post-registration, the \ac{NAS} signaling between the \ac{UE} and the core network is protected using the same security mechanisms as \ac{3GPP} access.
+When using non-\ac{3GPP} access, \ac{UE}s establish secure \ac{IPSec} tunnels with the \ac{N3IWF} or \ac{TNGF} to register with the \ac{5GC}. Post-registration, the \ac{NAS} signaling between the \ac{UE} and the core network is protected using the same security mechanisms, N1, as \ac{3GPP} access.
+
+\ac{5G} also enables operators to merge fixed and mobile networks through functional convergence, offering a unified control plane for both wireline and wireless sessions. This approach enhances seamless access-independent services, supports multi-access connectivity, simplifies network operations, unifies technology and training, centralizes subscriber management, extends \ac{5G} core coverage, and broadens fixed access service offerings~\cite{bbf-tr-470-p8}.
 
 \begin{figure}
     \centering
@@ -261,7 +268,7 @@ When using non-\ac{3GPP} access, \ac{UE}s establish secure \ac{IPsec} tunnels wi
     \label{fig:Architecture for 5G Core Network for 5G-RG with Wireline 5G Access network and NG RAN}
 \end{figure}
 
-\ac{W-5GAN}, such as broadband fiber-optic networks, connect to the \ac{5GC} via the \ac{W-AGF} (see Figure \ref{fig:Architecture for 5G Core Network for 5G-RG with Wireline 5G Access network and NG RAN}), using N2 and N3 interfaces for control and user plane functions, respectively. When a \ac{5G-RG}, such as a home router with \ac{5G} capabilities, connects through both \ac{NG-RAN} , like a \ac{5G} cellular tower, and \ac{W-5GAN}, it maintains separate N1 signaling instances for each access. However, a single \ac{AMF} in the same \ac{5GC} serves the \ac{5G-RG}. \ac{NAS} signaling over \ac{W-5GAN} persists even after \ac{PDU} sessions are released or handed over to \ac{3GPP} access.~\cite{23.501-p66}
+\ac{W-5GAN}, such as broadband fiber-optic networks, connects to the \ac{5GC} via the \ac{W-AGF} (see Figure \ref{fig:Architecture for 5G Core Network for 5G-RG with Wireline 5G Access network and NG RAN}), using N2 and N3 interfaces for control and user plane functions, respectively. When a \ac{5G-RG}, such as a home router with \ac{5G} capabilities, connects through both \ac{NG-RAN} , like a \ac{5G} cellular tower (e.g. a \ac{FWA} context), and \ac{W-5GAN}, it maintains separate N1 signaling instances for each access. However, a single \ac{AMF} in the same \ac{5GC} serves the \ac{5G-RG}. \ac{NAS} signaling over \ac{W-5GAN} persists even after \ac{PDU} sessions are released\cite{23.501-p66}.
 
 \subsection{Device Diversity and Access Options}
 
@@ -270,11 +277,11 @@ As the \ac{5G} network evolves, it's important to recognize that not all devices
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{figs/Architecture for 5G Core Network for FN-RG with Wireline 5G Access network and NG RAN.png}
-    \caption{Architecture for \acl{5GC} for \ac{FN-RG} with \ac{W-5GAN} and \ac{NG-RAN}}
+    \caption{Architecture for \acl{5GC} for \acs{FN-RG} with \ac{W-5GAN} and \ac{NG-RAN}}
     \label{fig:Architecture for 5G Core Network for FN-RG with Wireline 5G Access network and NG RAN}
 \end{figure}
 
-For non-\ac{5G}-capable \acp{FN-RG}, such as legacy home routers, connected via \ac{W-5GAN} (see Figure \ref{fig:Architecture for 5G Core Network for FN-RG with Wireline 5G Access network and NG RAN}), the \ac{W-AGF} handles N1 signaling on behalf of the \ac{FN-RG}. \acp{UE}, like smartphones or \ac{IoT} devices, connecting through these gateways can access the \ac{5GC} via either \ac{N3IWF} (untrusted access using Wi-Fi) or \ac{TNGF} (trusted access) depending on the network configuration.
+For \acp{FN-RG}, such as legacy home routers, connected via \ac{W-5GAN} (see Figure \ref{fig:Architecture for 5G Core Network for FN-RG with Wireline 5G Access network and NG RAN}), the \ac{W-AGF} handles N1 signaling on behalf of the \ac{FN-RG}. \acp{UE}, like smartphones or \ac{IoT} devices, connecting through these gateways can access the \ac{5GC} via either \ac{N3IWF} (untrusted access using Wi-Fi) or \ac{TNGF} (trusted access) depending on the network configuration.
 
 \begin{figure}
     \centering
@@ -285,16 +292,16 @@ For non-\ac{5G}-capable \acp{FN-RG}, such as legacy home routers, connected via 
 
 There are also devices that are not \ac{5G}-capable over \ac{WLAN} access~\cite{23.501-p67}, referred to as \ac{N5CW} devices, cannot support \ac{5GC} \ac{NAS} signaling over \ac{WLAN} but may still operate as \ac{5G} \acp{UE} over \ac{NG-RAN}. \ac{3GPP} provides enhancements for N5CW devices to access \ac{5GC} via trusted \ac{WLAN} access networks (see Figure \ref{fig:Architecture for supporting 5GC access from N5CW devices}), which are a type of \ac{TNAN}, typically using IEEE 802.11 technology. These networks must support specific functions, such as the \ac{TWIF}, which enables \ac{N5CW} devices to register with the \ac{5GC}. When a \ac{N5CW} device performs a \ac{EAP}-based access authentication procedure to connect to a trusted \ac{WLAN} access network, it may simultaneously be registered to an \ac{5GC} of a \ac{PLMN} or \ac{SNPN}. The \ac{TWIF} handles authentication, \ac{AMF} selection, \ac{NAS} protocol communication, and relays user data between the \ac{WLAN} access network and the \ac{5GC}. In this specification, trusted \ac{WLAN} access for \ac{N5CW} devices only supports IP \ac{PDU} sessions.
 
-\subsection{Authentication Flow Across Networks}
+\subsection{Authentication Flow Across Trusted and Untrusted Networks}
 Examining the authentication flows for devices connecting to the \ac{5GC} via non-\ac{3GPP} access networks reveals differences in the mechanisms used for trusted and untrusted accesses.
 
-For untrusted non-\ac{3GPP} access, security is established using \ac{IKEv2} to set up \ac{IPsec} security associations between the \ac{UE} (acting as the \ac{IKE} initiator) and the \ac{N3IWF} (acting as the \ac{IKE} responder). The \ac{UE} and \ac{N3IWF} use a derived key from the \ac{AMF} to complete the authentication process.
+For untrusted non-\ac{3GPP} access, security is established using \ac{IKEv2} to set up \ac{IPSec} security associations between the \ac{UE} (acting as the \ac{IKE} initiator) and the \ac{N3IWF} (acting as the \ac{IKE} responder). The \ac{UE} and \ac{N3IWF} use a derived key from the \ac{AMF} to complete the authentication process.
 
 In non-roaming scenarios, the home operator (or \ac{HPLMN}) decides whether a non-\ac{3GPP} access network is trusted or untrusted based on its security features, while in roaming scenarios, the decision is made by the \ac{UDM} in the \ac{HPLMN}. This decision applies consistently across all \acp{DN} the \ac{UE} connects to via the same non-\ac{3GPP} access network.
 
 The \ac{UE} stores trusted non-\ac{3GPP} access network information in the \ac{USIM}, which takes priority over the \ac{ME}, the device itself.
 
-For authentication over untrusted non-\ac{3GPP} networks (see Figure \ref{fig:Authentication for untrusted non-3GPP access}), the \ac{UE} uses a vendor-specific \ac{EAP} method called "EAP-5G", which employs the "Expanded" \ac{EAP} type and the \ac{3GPP} Vendor-Id. The \ac{EAP-5G} method is used between the \ac{UE} and \ac{N3IWF} to encapsulate \ac{NAS} messages. If the \ac{UE} requires authentication by the \ac{3GPP} home network, standard authentication methods are applied between the \ac{UE} and the \ac{AUSF}. Whenever possible, the \ac{UE} will reuse the existing \ac{NAS} security context from the \ac{AMF} for authentication.~\cite{33.501-p128}
+For authentication over untrusted non-\ac{3GPP} networks (see Figure \ref{fig:Authentication for untrusted non-3GPP access}), the \ac{UE} uses a vendor-specific \ac{EAP} method called "EAP-5G", which employs the "Expanded" \ac{EAP} type and the \ac{3GPP} Vendor-Id. The \ac{EAP-5G} method is used between the \ac{UE} and \ac{N3IWF} to encapsulate \ac{NAS} messages. If the \ac{UE} requires authentication by the \ac{3GPP} home network, standard authentication methods are applied between the \ac{UE} and the \ac{AUSF}. Whenever possible, the \ac{UE} will reuse the existing \ac{NAS} security context from the \ac{AMF} for authentication~\cite{33.501-p128}.
 
 \begin{figure}
     \centering
@@ -303,9 +310,9 @@ For authentication over untrusted non-\ac{3GPP} networks (see Figure \ref{fig:Au
     \label{fig:Authentication for untrusted non-3GPP access}
 \end{figure}
 
-Security for trusted non-\ac{3GPP} access to the \ac{5GC} involves the \ac{UE} registering to the \ac{5GC} via a \ac{TNAN} using the \ac{EAP-5G} procedure, similar to that used for untrusted access (see Figure \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_1}, \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_2} and \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_3} ). The link between the \ac{UE} and the \ac{TNAN} relies on Layer-2 security, making \ac{IPsec} encryption unnecessary between the \ac{UE} and the \ac{TNGF}, though integrity protection is ensured.~\cite{33.501-p132}
+Security for trusted non-\ac{3GPP} access to the \ac{5GC} involves the \ac{UE} registering to the \ac{5GC} via a \ac{TNAN} using the \ac{EAP-5G} procedure, similar to that used for untrusted access (see Figure \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_1}, \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_2} and \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_3} ). The link between the \ac{UE} and the \ac{TNAN} relies on Layer-2 security, making \ac{IPSec} encryption unnecessary between the \ac{UE} and the \ac{TNGF}, though integrity protection is ensured~\cite{33.501-p132}.
 
-During registration, the \ac{TNGF} terminates \ac{EAP-5G} signaling and forwards \ac{NAS} messages to the \ac{5GC}. At the registration's conclusion, an \ac{IPsec} SA (NWt) is established between the \ac{UE} and \ac{TNGF} to protect \ac{NAS} messages. Additional \acp{IPsec} SA are created during \ac{PDU} session establishment for user plane transport. Security policies, determined by the home operator, define whether non-\ac{3GPP} access is trusted based on security domains or other considerations.
+During registration, the \ac{TNGF} terminates \ac{EAP-5G} signaling and forwards \ac{NAS} messages to the \ac{5GC}. At the registration's conclusion, an \ac{IPSec SA (NWt)} (an \acl{IPSec SA} managing secure communication parameters at a Network Termination point) is established between the \ac{UE} and \ac{TNGF} to protect \ac{NAS} messages. Additional \acp{IPSec SA} are created during \ac{PDU} session establishment for user plane transport. Security policies, determined by the home operator, define whether non-\ac{3GPP} access is trusted based on security domains or other considerations.
 
 For trusted non-\ac{3GPP} access authentication, key differences from untrusted access include avoiding \ac{IKEv2} encapsulation for \ac{EAP-5G} packets, utilizing \ac{5G-GUTI} or \ac{SUCI} for \ac{UE} identity, and deriving keys like $K_TNGF$ and $K_TNAP$ for secure communication. These keys are shared between the \ac{AMF}, \ac{TNGF}, and \ac{TNAP} to establish secure communication flows.
 
@@ -330,25 +337,19 @@ For trusted non-\ac{3GPP} access authentication, key differences from untrusted 
     \label{fig:Authentication and PDU Session establishment for trusted non-3GPP access_3}
 \end{figure}
 
-To support the integration of wireless and wireline technologies in the \ac{5G} system, two new network entities, the \ac{5G-RG} and \ac{FN-RG}, connect to the \ac{5GC} via \ac{W-5GAN} or \ac{FWA}. Both entities ensure that \ac{N5GC} devices, such as laptops and \ac{IoT} devices, behind them can connect to the \ac{5GC}. The \ac{5G-RG} handles \ac{NAS} signaling itself, while the \ac{FN-RG} relies on the \ac{W-AGF} for registration and signaling. The same \ac{5G} security procedures apply to both setups, ensuring consistency across wireless and wireline access.~\cite{33.501-p139}
-
-For example, in a smart home, devices could connect to the \ac{5GC} through a \ac{5G-RG} using fiber or \ac{FWA}. Similarly, in an enterprise environment, an \ac{FN-RG} could provide secure, high-speed access via wireline networks. The link between the \ac{RG} and \ac{W-5GAN} leverages \ac{5G}’s security framework to protect the connection, similar to wireless setups. However, roaming is not supported for these entities or the devices they serve. Additional \ac{EAP} methods may be applied in isolated setups, as we will discuss next, to ensure secure authentication for devices in unique configurations. For instance, a remote workstation connected via wireline can still securely access the \ac{5GC}. This approach enables secure, seamless convergence of \ac{5G} across both fixed and wireless network environments.
-
-The \ac{5G-RG} supports connections to the \ac{5GC} via \ac{NG-RAN}, \ac{W-5GAN}, or both. Its registration processes depend on the access type~\cite{23.316-p29}~\cite{23.316-p37}. As the \ac{5G-RG} is equivalent to a \ac{UE} from the \ac{5GC}’s viewpoint, it utilizes the standard authentication framework, including \ac{5G-AKA} and \ac{EAP-AKA'}. For \ac{W-5GAN} connections, \ac{W-CP} protocol stack messages are used to encapsulate \ac{NAS} signaling.
-
-In contrast, the \ac{FN-RG} connects solely via \ac{W-5GAN} and relies on the \ac{W-AGF} to manage N1 signaling on its behalf, as it does not inherently support N1. The \ac{W-AGF} provides connectivity to the \ac{5GC} through N2 and N3 interfaces and can authenticate the \ac{FN-RG} based on local policies. A mutual trust relationship between the wireline operator managing the \ac{W-5GAN} and the \ac{PLMN} operator managing the \ac{5GC} is established using secure protocols like \ac{NDS/IP} or \ac{DTLS}.~\cite{23.316-p41}
-
 \section{Device Support Behind Wireline}
 
-So far we have explored how \ac{3GPP} and non-\ac{3GPP} access types—trusted, untrusted, and wireline—enable diverse devices to connect to the \ac{5GC}. While trusted and untrusted non-\ac{3GPP} access methods typically require \ac{UE} to possess full \ac{5G} capabilities, including \ac{NAS} signaling and the ability to derive the \ac{5G} key hierarchy, wireline access uniquely bridges the gap for devices lacking these capabilities.~\cite{33.501-p279}
+As we shift focus from non-\ac{3GPP} access networks, it’s important to examine wireline access, which is crucial for connecting home devices like laptops, smart TVs, and \ac{IoT} devices to the \ac{5GC}. Many of these devices rely on wireline connections, often through home routers like \ac{5G-RG} and \ac{FN-RG}~\cite{33.501-p139}, to access the \ac{5G} network. Understanding how wireline access works is vital, as it bridges the gap for devices without full \ac{5G} capabilities, ensuring seamless integration across both fixed and wireless environments.
 
-It's important to note that some devices, such as \ac{N5CW} devices, occupy a middle ground. Despite lacking full \ac{5G} functionality over \ac{WLAN}, \ac{N5CW} devices can still register with the \ac{5GC}, establish PDU sessions, and utilize \ac{3GPP} credentials (\ac{USIM}) for authentication. They may even function as regular \ac{5G} \acp{UE} when connected via cellular networks. This contrasts with \ac{N5GC} devices, which lack these \ac{5G}-specific capabilities entirely.
+For instance, in a smart home, a \ac{5G-RG} might connect to the \ac{5GC} using fiber or \ac{FWA}, while an enterprise could use an \ac{FN-RG} for secure, high-speed access via wireline networks. The connection between the \ac{RG} and \ac{W-5GAN} leverages \ac{5G} security frameworks, similar to wireless setups. However, roaming is not supported for these entities or the devices they serve. In specific configurations, additional \ac{EAP} methods can be used to ensure secure authentication, enabling devices like remote workstations to securely access the \ac{5GC}. This enables seamless and secure integration of \ac{5G} across fixed and wireless environments.
 
-Unlike wireless access, which assumes \ac{RAN} functionality within the device, wireline access leverages network entities such as the \ac{FN-RG} and \ac{5G-RG} to facilitate connectivity. These gateways act on behalf of the devices, ensuring secure access to the \ac{5GC} even for non-\ac{5G}-capable devices in wireline environments. For instance, the \ac{W-AGF} can perform \ac{UE} registration procedures on behalf of an \ac{FN-RG}, bridging the gap for devices that cannot handle \ac{NAS} signaling themselves.
+The \ac{5G-RG} supports \ac{5GC} connections via \ac{NG-RAN}, \ac{W-5GAN}, or both, with registration processes varying by access type~\cite{23.316-p29}~\cite{23.316-p37}. As the \ac{5G-RG} is treated as a \ac{UE} by the \ac{5GC}, it uses the standard authentication framework, including \ac{5G-AKA} and \ac{EAP-AKA'}. For \ac{W-5GAN} connections, \ac{W-CP} protocol stack messages encapsulate \ac{NAS} signaling. In contrast, the \ac{FN-RG} connects exclusively via \ac{W-5GAN} and relies on the \ac{W-AGF} to handle N1 signaling on its behalf. The \ac{W-AGF} provides connectivity to the \ac{5GC} via N2 and N3 interfaces and can authenticate the \ac{FN-RG} based on local policies. Secure protocols like \ac{NDS/IP} or \ac{DTLS} establish mutual trust between the wireline operator managing the \ac{W-5GAN} and the \ac{PLMN} operator managing the \ac{5GC}~\cite{23.316-p41}.
 
-This approach enables a wide range of devices, from \ac{IoT} sensors to legacy equipment, to benefit from \ac{5G} connectivity without requiring full \ac{5G} capabilities. The flexibility to support diverse device types and access methods, including those with partial \ac{5G} capabilities like \ac{N5CW} devices, highlights the critical role of wireline access in achieving seamless \ac{5G} convergence across both fixed and wireless network environments.
+Devices such as \ac{N5CW} occupy a middle ground. While they lack full \ac{5G} functionality over \ac{WLAN}, they can still register with the \ac{5GC}, establish \ac{PDU} sessions, and authenticate using \ac{3GPP} credentials (\ac{USIM}). These devices may function as regular \acp{UE} when connected via cellular networks, unlike \ac{N5GC} devices, which lack \ac{5G}-specific capabilities~\cite{33.501-p279}.
 
-Given that \ac{N5GC} devices lack the capability to derive \ac{5G} keys and perform other \ac{UE}-expected procedures, the \ac{W-AGF} must handle additional responsibilities, including managing device identifiers. For \ac{N5GC} devices connecting via \ac{CRG}, the \ac{SUPI} contains a network-specific identifier in the form of a \ac{NAI}. The \ac{W-AGF} plays a crucial role in deriving the \ac{SUCI} from the \ac{EAP}-Identity message received from the \ac{N5GC} device and providing it to the \ac{AMF}. This \ac{SUCI}, formatted according to TS 23.003, serves as a secure identifier for the \ac{N5GC} device within the \ac{5G} system. By handling these identifier-related tasks, the \ac{W-AGF} effectively bridges the gap between \ac{N5GC} devices and the \ac{5GC}, enabling their integration into the \ac{5G} ecosystem despite their limited capabilities.~\cite{23.316-p23}
+In wireline access, gateways like the \ac{5G-RG} and \ac{FN-RG} enable connectivity for devices that cannot independently handle \ac{NAS} signaling or derive \ac{5G} keys. For example, the \ac{W-AGF} manages registration on behalf of \ac{FN-RG} devices and ensures secure communication with the \ac{5GC}. For \ac{N5GC} devices connecting via \ac{CRG}, the \ac{SUPI} includes a network-specific identifier (\ac{NAI}), and the \ac{W-AGF} derives the \ac{SUCI} from the \ac{EAP}-Identity message, passing it to the \ac{AMF} for secure identification~\cite{23.316-p23}.
+
+This architecture enables a diverse range of devices, from \ac{IoT} sensors to legacy systems, to benefit from \ac{5G} connectivity without requiring full \ac{5G} capabilities. It highlights the critical role of wireline access in achieving seamless convergence across fixed and wireless network environments while maintaining robust security.
 
 \subsection{\ac{5GC} Registration Process for \ac{N5GC} Devices}
 
@@ -369,7 +370,7 @@ Authentication of the \ac{N5GC} device is carried out by the \ac{AUSF} using \ac
 
 Following successful authentication, the \ac{AMF} completes additional registration procedures. If a \ac{PEI} is required, the \ac{W-AGF} uses the \ac{MAC} address of the \ac{N5GC} device, with an option to encode it in IEEE \ac{EUI-64} format depending on operator policy. Once registration is finalized, the \ac{W-AGF} communicates the \textit{Registration Accept} message to the \ac{N5GC} device, marking the completion of the process.
 
-After registration, the \AC{W-AGF} establishes a single \ac{PDU} session for each \ac{N5GC} device, ensuring each device is assigned its own unique data session within the \ac{5GC} while accounting for the device's limitations. This ensures secure and individualized connectivity. Additionally, the \ac{W-AGF} manages \ac{NGAP} connections, ensuring that if the \ac{NGAP} connection for a \ac{CRG} is released, all associated \ac{N5GC} device connections are also terminated. The \ac{CRG} continues to operate as an \ac{FN-CRG}, supporting seamless communication for connected devices.~\cite{23.316-p25}
+After registration, the \AC{W-AGF} establishes a single \ac{PDU} session for each \ac{N5GC} device, ensuring each device is assigned its own unique data session within the \ac{5GC} while accounting for the device's limitations. This ensures secure and individualized connectivity. Additionally, the \ac{W-AGF} manages \ac{NGAP} connections, ensuring that if the \ac{NGAP} connection for a \ac{CRG} is released, all associated \ac{N5GC} device connections are also terminated. The \ac{CRG} continues to operate as an \ac{FN-CRG}, supporting seamless communication for connected devices~\cite{23.316-p25}.
 
 \begin{figure}
     \centering
@@ -378,11 +379,11 @@ After registration, the \AC{W-AGF} establishes a single \ac{PDU} session for eac
     \label{fig:Detailed registration and authentication flow of a non-5G capable device to the 5GC}
 \end{figure}
 
-In Annex 0 of TS 33.501, we can get more detail regarding this registration and authentication process (see Firgure \ref{fig:Detailed registration and authentication flow of a non-5G capable device to the 5GC}).~\cite{33.501-p279}
+In Annex 0 of TS 33.501, we can get more detail regarding this registration and authentication process (see Firgure \ref{fig:Detailed registration and authentication flow of a non-5G capable device to the 5GC})~\cite{33.501-p279}.
 
 \subsection{\ac{N5GC} and \ac{NAUN3} devices}
 
-A \ac{NAUN3} device does not support \ac{NAS} signalling, is connected to \ac{5GC} via a \ac{RG} and does not support authentication with the \ac{5GC}.~\cite{23.316-p10}
+A \ac{NAUN3} device does not support \ac{NAS} signalling, is connected to \ac{5GC} via a \ac{RG} and does not support authentication with the \ac{5GC}~\cite{23.316-p10}.
 
 \ac{NAUN3} devices, which cannot be authenticated by the \ac{5GC}, may be locally authenticated by the \ac{5G-RG} using methods like pre-shared secrets. Examples of pre-shared secrets include Wi-Fi passphrases for \acp{SSID}, \ac{PIN} codes, or static security keys configured during device setup. Differentiated services, including \ac{QoS} and network slicing, can be applied to these devices through \acp{CGID} (see Figure \ref{fig:NAUN3 devices behind 5G-RG based on connectivity groups}).
 
@@ -397,9 +398,9 @@ Each \ac{CGID} corresponds to a specific physical or virtual port on the \ac{5G-
 
 The \ac{5G-RG} is configured with port information, such as \acp{VLAN} and \ac{SSID}, via standardized protocols like TR-69, TR-360, and TR-181. \ac{URSP} rules are provided to the \ac{5G-RG} to define how \acp{CGID} are mapped to \ac{PDU} Session parameters, such as the \ac{DNN} and \ac{S-NSSAI}. These mappings determine how traffic is routed and which network slice the devices use. For instance, a home office \ac{CGID} might map to a \ac{DNN} providing enterprise services and an \ac{S-NSSAI} prioritizing low latency for work-related tasks.
 
-Charging and \ac{QoS} differentiation for NAUN3 devices can be implemented through \ac{PCC} rules. These rules define service flows tied to specific \ac{PDU} Sessions, enabling detailed traffic management and billing policies. Additionally, isolation of devices using a specific \ac{CGID} into a separate network slice (associated with an \ac{S-NSSAI}) can provide enhanced security and service customization. For example, devices in a child’s \ac{CGID} could be isolated into a network slice with strict content filtering and bandwidth limitations. However, configuration specifics for connecting \ac{NAUN3} devices to particular ports or \acp{SSID} remain outside the scope of this specification.~\cite{23.316-p27}
+Charging and \ac{QoS} differentiation for NAUN3 devices can be implemented through \ac{PCC} rules. These rules define service flows tied to specific \ac{PDU} Sessions, enabling detailed traffic management and billing policies. Additionally, isolation of devices using a specific \ac{CGID} into a separate network slice (associated with an \ac{S-NSSAI}) can provide enhanced security and service customization. For example, devices in a child’s \ac{CGID} could be isolated into a network slice with strict content filtering and bandwidth limitations~\cite{23.316-p27}.
 
-The main difference between \ac{NAUN3} and \ac{N5GC} devices lies in their capabilities and how they interact with the \ac{5GC}, here is a summary of what we've seen soo far:
+The main difference between \ac{NAUN3} and \ac{N5GC} devices lies in their capabilities and how they interact with the \ac{5GC}, here is a summary of what we've seen soo far (also represented in Table \ref{tab:Key Differences between NAUN3 and N5GC devices}):
 
 \begin{itemize}
     \item {
@@ -415,7 +416,7 @@ The main difference between \ac{NAUN3} and \ac{N5GC} devices lies in their capab
                 \textbf{Subscription Records}: \ac{NAUN3} devices do not have subscription records in the \ac{5GC} and operate entirely under the configuration and policies of the \ac{5G-RG}.
             }
             \item {
-                \textbf{Purpose}: They are typically legacy or \ac{IoT} devices that do not need direct \ac{5GC} access but require differentiated services provided via local configuration and mapping.
+                \textbf{Purpose}: They are typically legacy or \ac{IoT} devices that do not need direct \ac{5GC} access but require differentiated services provided via local configuration and mapping, and need to be connected vi Layer 2 to \ac{5G} devices via extended slices.
             }
             \item {
                 \textbf{Example}: A smart home appliance connected to the \ac{5G-RG} via Wi-Fi using a pre-shared key, with its traffic routed through a dedicated network slice.
@@ -447,40 +448,4 @@ The main difference between \ac{NAUN3} and \ac{N5GC} devices lies in their capab
     }
 \end{itemize}
 
-\begin{table}[ht]
-    \centering
-    \caption{Key Differences between \ac{NAUN3} and \ac{N5GC} devices}
-    \label{tab:Key Differences between NAUN3 and N5GC devices}
-    \begin{tabularx}{\textwidth} { 
-      | >{\raggedright\arraybackslash}X 
-      | >{\raggedright\arraybackslash}X 
-      | >{\raggedright\arraybackslash}X | }
-        \hline
-        \textbf{Feature} & \textbf{\ac{NAUN3} Devices} & \textbf{\ac{N5GC} Devices} \\
-        \hline
-        \textbf{\ac{5G} Capability} & No \ac{5G} capability, cannot access \ac{5GC} directly. & Limited \ac{5G} capability, requires assistance to connect to \ac{5GC}.\\
-        \hline
-        \textbf{Authentication} & Local (e.g., Wi-Fi passphrase, \ac{PIN}). & \ac{5GC} authentication via \ac{EAP} and \ac{W-AGF}.\\
-        \hline
-        \textbf{Access Type} & Wireless (e.g., Wi-Fi via \ac{5G-RG}). & Wireline (e.g., fiber via \ac{W-AGF}).\\
-        \hline
-        \textbf{Subscription Records} & None in \ac{UDM}/\ac{UDR}; operates under \ac{5G-RG} policies. & Unique subscription records separate from \ac{CRG}.\\
-        \hline
-        \textbf{\ac{NGAP} Connections} & Not applicable. & Separate \ac{NGAP} connections per device.\\
-        \hline
-        \textbf{Session Handling} & Handled by the \ac{5G-RG}. & Handled by \ac{W-AGF} and \ac{5GC}.\\
-        \hline
-        \textbf{Purpose} & Legacy \ac{IoT} or low-capability devices. & Wireline devices requiring \ac{5GC} services.\\
-        \hline
-        \textbf{Example} & Smart home appliance using Wi-Fi. & Desktop computer on a fiber network.\\
-        \hline
-    \end{tabularx}
-\end{table}
-
 In summary, \ac{NAUN3} devices operate entirely locally, with no interaction with the \ac{5GC}, while \ac{N5GC} devices leverage intermediaries like the \ac{W-AGF} to authenticate and establish \ac{PDU} Sessions with the \ac{5GC}, maintaining unique subscription records and dedicated \ac{NGAP} connections.
-
-%%%%%% REVIEWED SOO FAR !!! %%%%%%
-
-\section{Wi-Fi-only Devices Integration Challenges}
-
-\section{Current Solutions and Proposals}
