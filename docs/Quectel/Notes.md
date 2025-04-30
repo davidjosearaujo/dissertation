@@ -24,3 +24,8 @@ sudo apt install -y \
   net-tools \
   dwarves
 ```
+# PDP Context
+## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
+- Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
+- Activating the PDP: `AT+cGACT=1,1`
+- Showing the PDP address: `AT+CGPADDR=1`
