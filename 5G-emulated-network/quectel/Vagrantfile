@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$script = <<-'SCRIPT'
+
+sudo apt update
+sudo apt install build-essential net-tools linux-headers-$(uname -r) -y
+
+cd kernel_drivers
+
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 2048
+    vb.cpus = 1
+    #vb.customize ["modifyvm", :id, "--usb", "on"]
+    #vb.customize ["modifyvm", :id, "--usbehci", "on"]
+    #vb.customize ["usbfilter", "add", "0", 
+    #  "--target", :id, 
+    #  "--name", "",
+    #  "--manufacturer", "",
+    #  "--product", ""]
+  end
+
+  config.vm.provision "file", source: "kernel_drivers/v5.15.1", destination: "kernel_drivers"
+  config.vm.provision "file", source: "qconnect", destination: "qconnect"
+  config.vm.provision "file", source: "qmi_wwan_driver", destination: "qmi_wwan_driver"
+
+  config.vm.provision "shell", inline: $script
+end
