@@ -95,7 +95,7 @@ Figure~\ref{fig:EAP-TLS-topology} illustrates the architecture, which comprises 
 
 \begin{enumerate}
     \item {
-        \textbf{Supplicant (NAUN3 Device):} Initiates the authentication using client-side \ac{EAP-TLS} and must be pre-provisioned with:
+        \textbf{Supplicant (\ac{NAUN3} Device):} Initiates the authentication using client-side \ac{EAP-TLS} and must be pre-provisioned with:
         \begin{itemize}
             \item A unique identity (e.g., username or \ac{MAC} address)
             \item A \ac{CA} certificate to validate the server
@@ -104,7 +104,7 @@ Figure~\ref{fig:EAP-TLS-topology} illustrates the architecture, which comprises 
         Standard software such as \texttt{wpa\_Supplicant} is used to handle this role.
     }
     \item {
-        \textbf{Authenticator (5G-RG):} Acts as a relay, not terminating the \ac{EAP-TLS} session. Responsibilities include:
+        \textbf{Authenticator (\ac{5G-RG}):} Acts as a relay, not terminating the \ac{EAP-TLS} session. Responsibilities include:
         \begin{itemize}
             \item Detecting device connection attempts
             \item Initiating the \ac{EAP} exchange (e.g., via \texttt{hostapd})
@@ -136,22 +136,22 @@ The \ac{EAP-TLS} authentication procedure, shown in Figure~\ref{fig:eap-tls-auth
 \begin{enumerate}
     \item Supplicant establishes a link-layer connection with the \ac{5G-RG} (e.g., via Wi-Fi or Ethernet).
     \item It sends an \ac{EAPOL}-Start to initiate authentication.
-    \item The 5G-RG replies with an \ac{EAP}-Request/Identity.
+    \item The \ac{5G-RG} replies with an \ac{EAP}-Request/Identity.
     \item The Supplicant responds with an \ac{EAP}-Response/Identity (potentially anonymous).
-    \item The 5G-RG relays this via a \ac{RADIUS} Access-Request to the Authentication Server.
+    \item The \ac{5G-RG} relays this via a \ac{RADIUS} Access-Request to the Authentication Server.
     \item The server replies with its certificate inside an \ac{EAP}-Request (via Access-Challenge).
     \item The Supplicant validates the server certificate using its \ac{CA}.
     \item The client certificate is returned via \ac{EAP}-Response (also through Access-Challenge).
     \item Mutual authentication is completed when the server verifies the client certificate.
     \item The server sends \ac{RADIUS} Access-Accept with \ac{EAP}-Success (or Access-Reject with \ac{EAP}-Failure).
-    \item The 5G-RG relays the final \ac{EAP} result to the Supplicant.
-    \item If successful, a secure link-layer connection is established (e.g., WPA2 4-Way Handshake).
+    \item The \ac{5G-RG} relays the final \ac{EAP} result to the Supplicant.
+    \item If successful, a secure link-layer connection is established (e.g., \ac{WPA}2 4-Way Handshake).
 \end{enumerate}
 
 The \ac{5G-RG} interprets the final \ac{EAP} message as follows:
 
 \begin{itemize}
-    \item \textbf{\ac{EAP}-Success:} Triggers the 5G-RG to initiate a \ac{PDU} Session via the \texttt{clients} \ac{DNN}, binding the session to the authenticated device and handling traffic mapping.
+    \item \textbf{\ac{EAP}-Success:} Triggers the \ac{5G-RG} to initiate a \ac{PDU} Session via the \texttt{clients} \ac{DNN}, binding the session to the authenticated device and handling traffic mapping.
     \item \textbf{\ac{EAP}-Failure:} Denies network access, terminating the process.
 \end{itemize}
 
@@ -165,7 +165,7 @@ The deployment of Wi-Fi-only, or \ac{NAUN3}, devices in the \ac{5G} network pose
 
 \subsection{Core Concept: \ac{PDU} Sessions as Proxy Identities}
 
-To remedy this, the solution takes advantage of the capabilities of the \ac{5G-RG} and the versatility of 5G session management. From the viewpoint of the \ac{5GC}, a \ac{5G-RG} will act like a regular \ac{UE}, including its own \ac{USIM}, credentials, and support for several simultaneous \ac{PDU} Sessions. This allows segregation of traffic for different services or endpoints.
+To remedy this, the solution takes advantage of the capabilities of the \ac{5G-RG} and the versatility of \ac{5G} session management. From the viewpoint of the \ac{5GC}, a \ac{5G-RG} will act like a regular \ac{UE}, including its own \ac{USIM}, credentials, and support for several simultaneous \ac{PDU} Sessions. This allows segregation of traffic for different services or endpoints.
 
 Taking a cue from the idea of \acp{CGID}, in which \ac{PDU} Sessions might represent a set of devices behind a gateway (collectively by \acp{SSID} or by Ethernet ports), the solution suggests a finer-grained approach: allocating each successfully authenticated \ac{NAUN3} device its very own dedicated \ac{PDU} Session, and not aggregating them.
 
@@ -173,9 +173,9 @@ In the proposed model, every \ac{PDU} Session, created and owned by the \ac{5G-R
 
 \subsection{Establishing the Proxy Identity}
 
-After a device has been successfully authenticated through \ac{EAP-TLS}, as described in the earlier section, the \ac{5G-RG} then initiates a \ac{PDU} Session Establishment procedure. This is done through its own credentials and \ac{SUPI}, to the \ac{SMF}, through the \ac{AMF}, and specifying the special-purpose \texttt{clients} \ac{DNN}.
+After a device has been successfully authenticated through \ac{EAP-TLS}, as described in the earlier section, the \ac{5G-RG} then initiates a \ac{PDU} Session establishment procedure. This is done through its own credentials and \ac{SUPI}, to the \ac{SMF}, through the \ac{AMF}, and specifying the special-purpose \texttt{clients} \ac{DNN}.
 
-Upon the assignment of resources — like an IP address — by the \ac{5GC} to the session, the session is bound by the \ac{5G-RG} to the authenticated \ac{NAUN3} device. From there on, the session becomes the device’s operational identity in the \ac{5G} system.
+Upon the assignment of resources — like an \ac{IP} address — by the \ac{5GC} to the session, the session is bound by the \ac{5G-RG} to the authenticated \ac{NAUN3} device. From there on, the session becomes the device’s operational identity in the \ac{5G} system.
 
 \subsection{Gateway’s Role in Identity Mapping}
 
@@ -216,7 +216,7 @@ This session-based proxy identification scheme offers a number of beneficial fea
 
     \item \textbf{Localized Complexity:} Complexity of all sorts is centralized in the \ac{5G-RG}, reducing the need to integrate with
     
-    \item \textbf{Fine-Grained Control:} End-device \ac{PDU} Sessions support per-device policy enforcement (i.e., traffic shaping or QoS) at the \ac{5GC}, providing fine-grained control
+    \item \textbf{Fine-Grained Control:} End-device \ac{PDU} Sessions support per-device policy enforcement (i.e., traffic shaping or \ac{QoS}) at the \ac{5GC}, providing fine-grained control
 \end{itemize}
 
 \section{Framework Architecture and Integration}
@@ -225,12 +225,12 @@ This session-based proxy identification scheme offers a number of beneficial fea
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.75\linewidth]{figs/overall-topology.png}
+    \includegraphics[width=1\linewidth]{figs/overall-topology.png}
     \caption{Overall Architecture}
     \label{fig:Overall Architecture}
 \end{figure}
 
-This top-level architecture Figure \ref{fig:Overall Architecture} shows the integration framework. The \ac{NAUN3} device connects locally (through Wi-Fi or cable) to the \ac{5G-RG}, the latter serving as a regular \ac{UE} to the \ac{5G} \ac{RAN} (\ac{gNB}) and to the \ac{5GC} (\ac{AMF}, \ac{SMF}, \ac{UPF}) and serving as an \ac{EAP} Authenticator forwarding requests to the external \ac{EAP-TLS} Authentication Server within the domain of the \ac{ISP}. The connection between the \ac{5G-RG} and the \ac{EAP} server is done through the use of \ac{RADIUS}, over a dedicated \ac{PDU} session belonging to the \texttt{backhaul} \ac{DNN}. Most importantly, when the local authentication of the \ac{5G-RG} was successful, the latter creates a different \ac{PDU} session for the \ac{NAUN3} device
+This top-level architecture Figure \ref{fig:Overall Architecture} shows the integration framework. The \ac{NAUN3} device connects locally (through Wi-Fi or cable) to the \ac{5G-RG}, the latter serving as a regular \ac{UE} to the \ac{gNB} and to the \ac{5GC} and serving as an \ac{EAP} Authenticator forwarding requests to the external \ac{EAP-TLS} Authentication Server within the domain of the \ac{ISP}. The connection between the \ac{5G-RG} and the \ac{EAP} server is done through the use of \ac{RADIUS}, over a dedicated \ac{PDU} session belonging to the \texttt{backhaul} \ac{DNN}. Most importantly, when the local authentication of the \ac{5G-RG} was successful, the latter creates a different \ac{PDU} session for the \ac{NAUN3} device
 
 \subsection{Key Communication Flows in the Integrated System}
 
@@ -244,7 +244,7 @@ The main interfaces and protocols involved are:
         \textbf{Local Network Interface (between \ac{NAUN3} Device and the \ac{5G-RG}):}
         \begin{itemize}
             \item \textbf{Link Layer:} Standard Ethernet (\ac{IEEE} 802.3) or Wi-Fi (\ac{IEEE} 802.11).
-            \item {Authentication:} Extensible Authentication Protocol over \ac{LAN} (\ac{EAPoL} - \ac{IEEE} 802.1X) is used to transport \ac{EAP} messages over the local link.
+            \item \textbf{Authentication:} Extensible Authentication Protocol over \ac{LAN} (\ac{EAPOL} - \ac{IEEE} 802.1X) is used to transport \ac{EAP} messages over the local link.
             \item \textbf{EAP Method:} \ac{EAP-TLS} is used for mutual authentication between the \ac{NAUN3} device (supplicant) and the \ac{EAP} infrastructure (via the \ac{5G-RG} relay).
         \end{itemize}
     }
@@ -260,7 +260,7 @@ The main interfaces and protocols involved are:
         \textbf{Authentication Interface (between \ac{5G-RG} and the \ac{EAP} Authentication Server):}
         \begin{itemize}
             \item \textbf{Application Layer:} \ac{RADIUS} protocol is used to carry \ac{EAP} messages between the \ac{5G-RG} (acting as a \ac{RADIUS} client and \ac{EAP} authenticator) and the external authentication server).
-            \item \textbf{Transport:} \ac{RADIUS} messages are transported over \ac{IP}, using \ac{UDP}. This \ac{IP} traffic is securely tunneled through the \ac{5G-RG}'s dedicated \texttt{backhaul} \ac{PDU} session via the \ac{N3} interface and \ac{UPF}.
+            \item \textbf{Transport:} \ac{RADIUS} messages are transported over \ac{IP}, using \ac{UDP}. This \ac{IP} traffic is securely tunneled through the \ac{5G-RG}'s dedicated \texttt{backhaul} \ac{PDU} session via the N3 interface and \ac{UPF}.
         \end{itemize}
     }
 \end{itemize}
@@ -269,8 +269,8 @@ The novelty lies not in modifying these protocols but in configuring the system 
 
 \section{Scope and Assumptions}
 
-This framework successfully brings \ac{NAUN3} devices into the \ac{5G} ecosystem by coordinating standard protocols and interfaces using smart logic centralized within the \ac{5G-RG}. Its main innovation is using individual \ac{PDU} Sessions, set up by the \ac{5G-RG}, as flexible proxy identities for each locally authenticated \ac{NAUN3} device. This method eliminates the need for devices to have native \ac{5G} credentials like \ac{SUPI} or \ac{USIM}.
+This framework is able to bring \ac{NAUN3} devices into the \ac{5G} ecosystem by coordinating standard protocols and interfaces using smart logic centralized within the \ac{5G-RG}. Its main innovation is using individual \ac{PDU} Sessions, set up by the \ac{5G-RG}, as flexible proxy identities for each locally authenticated \ac{NAUN3} device. This method eliminates the need for devices to have native \ac{5G} credentials like \ac{SUPI} or \ac{USIM}.
 
 Integration is handled dynamically across the device's connection lifecycle. After a device completes local \ac{EAP-TLS} authentication, the \ac{5G-RG} requests a dedicated \ac{PDU} Session (under the \texttt{clients} \ac{DNN}) from the \ac{5GC}. The \ac{5G-RG} keeps an internal mapping between the device's local identity and its assigned \ac{PDU} Session. If the device disconnects or loses connectivity, the \ac{5G-RG} promptly terminates the related \ac{PDU} Session to free up \ac{5G} resources, ensuring only active and authenticated devices consume network capacity.
 
-Ultimately, this setup enables the \ac{5GC} to manage each device individually—applying policies like \ac{QoS} and routing—through standard \ac{PDU} Session management, all without requiring changes to the \ac{NAUN3} devices or \ac{5G} core network functions. Integration relies entirely on configurations and the gateway's mediation, avoiding any need to alter fundamental \ac{5G} protocols or the capabilities of the devices themselves.
+Lastly, this setup enables the \ac{5GC} to manage each device individually—applying policies like \ac{QoS} and routing—through standard \ac{PDU} Session management, all without requiring changes to the \ac{NAUN3} devices or \ac{5G} core network functions. Integration relies entirely on configurations and the gateway's mediation, avoiding any need to alter fundamental \ac{5G} protocols or the capabilities of the devices themselves.
