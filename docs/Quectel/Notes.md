@@ -72,7 +72,7 @@ AT+C5GREG?
 This command specifies PDP context parameters for a specific context `<cid>`. A special form of the Write Command (`AT+CGDCONT=<cid>`) causes the values for context `<cid>` to become undefined. It is not allowed to change the definition of an already activated context.
 ```
 AT+CGDCONT?
-+CGDCONT: <cid>,<PDP_type>,<APN>,<PDP_addr>,<d_comp>,<h_comp>[,<IPv4AddrAlloc>[,<req uest_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref _access_type>,,[,<Always-on_req>]]]]]] […]
+AT+CGDCONT=[<cid>[,<PDP_type>[,<APN> [,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4 AddrAlloc>[,<request_type>,,,,,,,,[,<SSC_mo de>[,<S-NSSAI>[,<Pref_access_type>,,[,<Always-on_req>]]]]]]]]]]]]
 ```
 - `<cid>` - PDP context identifier. A numeric parameter which specifies a particular PDP context definition. The parameter is local to the TE-MT interface and is used in other PDP context-related commands. The range of supported values (minimum value =1) is returned by the test form of the command. Range: 1-16
 - `<PDP_type>` - Packet data protocol type, a string parameter which specifies the type of packet data protocol
@@ -94,6 +94,16 @@ AT+CGDCONT?
 - `<request_type>` - Indicate the type of PDP context activation request for the PDP context.
 	- `0` - PDP context is for new PDP context establishment or for handover from a non-3GPP access network (how the MT decides whether the PDP context is for new PDP context establishment or for handover is implementation specific)
 	- `1` - PDP context is for emergency bearer services
+- `<SSC_mode>` - Indicate the session and service continuity (SSC) mode for the PDU session in 5GS
+	- `0` - SSC mode 1
+	- `1` - SSC mode 2
+	- `2` - SSC mode 3
+- `<S-NSSAI>` - Dependent of the form, the string can be separated by dot(s) and semicolon(s). This parameter is associated with the PDU session for identifying a network slice in 5GS. The parameter has one of the forms:
+	- **sst** - only slice/service type (SST) is present
+	- **sst;mapped_sst** - SST and mapped configured SST are present
+	- **sst.sd** - SST and slice differentiator (SD) are present
+	- **sst.sd;mapped_sst** - SST, SD and mapped configured SST are present
+	- **sst.sd;mapped_sst.mapped_sd** - SST, SD, mapped configured SST and mapped configured SD are present
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
 - Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
 - Activating the PDP: `AT+CGACT=1,1`
