@@ -41,7 +41,12 @@ AT+COPS?
 - `<format>`
 	- `0` - Long format alphanumeric `<oper>` which can be up to 16 characters long
 	- `1` - Short format alphanumeric `<oper>`
-	- `2` - Numeric `<oper>`. GSM location area identification numer
+	- `2` - Numeric `<oper>`. GSM location area identification number
+- `<AcT>` - Access technology selected.
+	- `7` - E-UTRAN
+	- `10`- E-UTRAN conneced to a 5GCN
+	- `11`- NR connected to 5GCN
+	- `12`- NG-RAN
 ## 2. Register to Network
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
 This command queries the network registration status
