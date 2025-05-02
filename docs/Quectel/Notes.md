@@ -129,9 +129,16 @@ AT+CGDCONT=[<cid>[,<PDP_type>[,<APN>[,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4AddrA
 ## 4. (De)Activate PDP Contexts
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=150&selection=48,0,51,0|9.2 AT+CGACT Activate or Deactivate PDP Contexts]]
 This command activates or deactivates the specified PDP context(s). If any PDP context is already in the requested state, the state for that context remains unchanged.
-
-## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
-
 ```
-
++CGACT: <cid>,<state>    // Read command result
+AT+CGACT=<state>[,<cid>]    // Write command
+```
+- `<state>` - Indicate the state of PDP context activation
+	- `0` - Deactivated
+	- `1` - Activated
+## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
+This command returns a list of PDP addresses for the specified context identifiers. If no `<cid>` is specified, the addresses for all defined contexts are returned.
+```
++CGPADDR: list of defined <cid>    // Read command result
+AT+CGPADDR[=<cid>[,<cid>[,…]]]    // Write command
 ```
