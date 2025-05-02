@@ -29,16 +29,16 @@ sudo apt install -y \
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=63&selection=24,0,28,18|5.1 AT+COPS Operator Selection]]
 This command returns the current operators and their status, and allows automatic or manual network selection.
 ```
-AT+COPS=?
+AT+COPS?
 +COPS: (3,"268 02","268 02","26802",7),(3,"NOS","NOS","26803",7),(3,"vodafone P","voda P","26801",7),(3,"MEO","MEO","26806",7)
 ```
 `+COPS: <mode>[,<format>[,<oper>][,<AcT>]]`
 - `<mode>`
-	- **0** - Automatic. Operator selection
-	- **1** - Manual operator selection
-	- **2** - Deregister from network
-	- **3** - Set only `<format>`, and do not attempt registration/deregistration.
-	- **4** - Manual/automatic selection.
+	- `0` - Automatic. Operator selection
+	- `1` - Manual operator selection
+	- `2` - Deregister from network
+	- `3` - Set only `<format>`, and do not attempt registration/deregistration.
+	- `4` - Manual/automatic selection.
 ## 2. Register to Network
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
 This command queries the network registration status
@@ -47,17 +47,17 @@ AT+C5GREG?
 +C5GREG: <n>,<stat>[,[<tac>],[<ci>],[<AcT>],[<Allowed _NSSAI_length>],[<Allowed_NSSAI>]]
 ```
 - `<n>`
-	- **0** - Disable network registration unsolicited result code
-	- **1** - Enable network registration unsolicited result code `+C5GREG:<stat>`
-	- **2** - Enable network registration and location information unsolicited result code `+C5GREG: <stat>[,[<tac>],[<ci>],[<AcT>],[<Allowe d_NSSAI_length>],[<Allowed_NSSAI>]]`
+	- `0` - Disable network registration unsolicited result code
+	- `1` - Enable network registration unsolicited result code `+C5GREG:<stat>`
+	- `2` - Enable network registration and location information unsolicited result code `+C5GREG: <stat>[,[<tac>],[<ci>],[<AcT>],[<Allowe d_NSSAI_length>],[<Allowed_NSSAI>]]`
 - `<stat>`
-	- **0** - Not registered, MT is not currently searching an operator to register to
-	- **1** - Registered, home network
-	- **2** - Not registered, but MT is currently trying to attach or searching an operator to register to
-	- **3** - Registration denied
-	- **4** - Unknown
-	- **5** - Registered, roaming
-	- **8** - Registered for emergency services only
+	- `0` - Not registered, MT is not currently searching an operator to register to
+	- `1` - Registered, home network
+	- `2` - Not registered, but MT is currently trying to attach or searching an operator to register to
+	- `3` - Registration denied
+	- `4` - Unknown
+	- `5` - Registered, roaming
+	- `8` - Registered for emergency services only
 ## 3. Define a Packet Data Protocol (PDP) Context
 **This is the equivalent to the PDU Sessions** 
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
@@ -79,7 +79,13 @@ AT+CGDCONT?
 	- `2`- V.42bis
 - `<h_comp>` -  Controls PDP header compression 
 	- `0` - Off
-	- `4` - RFC3095ipa
+	- `4` - RFC3095
+- `<IPv4AddrAlloc>` - Control how the MT/TA requests to get the IPv4 address information
+	- `0` - IPv4 address allocation through NAS signalling
+	- `1` - IPv4 address allocated through DHCP
+- `<request_type>` - Indicate the type of PDP context activation request for the PDP context.
+	- `0` - PDP context is for new PDP context establishment or for handover from a non-3GPP access network (how the MT decides whether the PDP context is for new PDP context establishment or for handover is implementation specific)
+	- `1` - PDP context is for emergency bearer services
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
 - Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
 - Activating the PDP: `AT+CGACT=1,1`
