@@ -29,8 +29,8 @@ sudo apt install -y \
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=63&selection=24,0,28,18|5.1 AT+COPS Operator Selection]]
 This command returns the current operators and their status, and allows automatic or manual network selection.
 ```
-AT+COPS?
-+COPS: <mode>[,<format>[,<oper>[,<AcT>]]    // Write command
++COPS: <mode>[,<format>[,<oper>][,<AcT>]]    // Read command result
+AT+COPS: <mode>[,<format>[,<oper>[,<AcT>]]    // Write command
 ```
 - `<mode>`
 	- `0` - Automatic. Operator selection
@@ -52,8 +52,8 @@ AT+COPS?
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
 This command queries the network registration status
 ```
-AT+C5GREG?
-+C5GREG: <n>,<stat>[,[<tac>],[<ci>],[<AcT>],[<Allowed _NSSAI_length>],[<Allowed_NSSAI>]]    // Write command
++C5GREG: <n>,<stat>[,[<tac>],[<ci>],[<AcT>],[<Allowed _NSSAI_length>],[<Allowed_NSSAI>]]    // Read command result
+AT+C5GREG=[<n>]    // Write command
 ```
 - `<n>`
 	- `0` - Disable network registration unsolicited result code
