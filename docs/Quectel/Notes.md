@@ -126,7 +126,12 @@ AT+CGDCONT=[<cid>[,<PDP_type>[,<APN>[,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4AddrA
 - `<Always-on_req>` - Indicate whether the UE requests to establish the PDU session as an always-on PDU session.
 	- `0` - always-on not requested
 	- `1` - always-on requested
+## 4. (De)Activate PDP Contexts
+### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=150&selection=48,0,51,0|9.2 AT+CGACT Activate or Deactivate PDP Contexts]]
+This command activates or deactivates the specified PDP context(s). If any PDP context is already in the requested state, the state for that context remains unchanged.
+
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
-- Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
-- Activating the PDP: `AT+CGACT=1,1`
-- Showing the PDP address: `AT+CGPADDR=1`
+
+```
+
+```
