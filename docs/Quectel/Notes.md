@@ -25,6 +25,20 @@ sudo apt install -y \
   dwarves
 ```
 # Flow for AT Commands
+## 0. Set UE Functionality
+### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=27&selection=37,0,45,13|2.20 AT+CFUN Set UE Functionality]]
+This command controls the functionality level. It can also be used for resetting the UE.
+```
++CFUN: <fun>    // Read command result
+AT+CFUN=<fun>[,<rst>]    // Write command
+```
+- `<fun>` - Functionality level
+	- `0` - Minimum functionality
+	- `1` - Full functionality
+	- `4` - Disable both transmitting and receiving RF signals
+- `<rst>` - Whether to reset UE
+	- `0` - Do not reset the UE before setting it to `<fun>` power level
+	- `1` - Reset UE. Device is fully functional after the reset.
 ## 1. Get Operator Selection
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=63&selection=24,0,28,18|5.1 AT+COPS Operator Selection]]
 This command returns the current operators and their status, and allows automatic or manual network selection.
@@ -72,8 +86,9 @@ AT+C5GREG=[<n>]    // Write command
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
 This command specifies PDP context parameters for a specific context `<cid>`. A special form of the Write Command (`AT+CGDCONT=<cid>`) causes the values for context `<cid>` to become undefined. It is not allowed to change the definition of an already activated context.
 ```
-AT+CGDCONT?
-AT+CGDCONT=[<cid>[,<PDP_type>[,<APN> [,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4 AddrAlloc>[,<request_type>,,,,,,,,[,<SSC_mo de>[,<S-NSSAI>[,<Pref_access_type>,,[,<Always-on_req>]]]]]]]]]]]]
+CGDCONT: <cid>,<PDP_type>,<APN>,<PDP_ad dr>,<d_comp>,<h_comp>[,<IPv4AddrAlloc>[,<req uest_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref _access_type>,,[,<Always-on_req>]]]]]] […]    // Read command result
+
+AT+CGDCONT=[<cid>[,<PDP_type>[,<APN>[,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4AddrAlloc>[,<request_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref_access_type>,,[,<Always-on_req>]]]]]]]]]]]]    // Write command
 ```
 - `<cid>` - PDP context identifier. A numeric parameter which specifies a particular PDP context definition. The parameter is local to the TE-MT interface and is used in other PDP context-related commands. The range of supported values (minimum value =1) is returned by the test form of the command. Range: 1-16
 - `<PDP_type>` - Packet data protocol type, a string parameter which specifies the type of packet data protocol
