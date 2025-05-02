@@ -55,6 +55,7 @@ AT+CEREG?
 	- **3** - Registration denied
 	- **4** - Unknown
 	- **5** - Registered, roaming
+## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Statu]]
 
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
 This command specifies PDP context parameters for a specific context
