@@ -79,7 +79,7 @@ AT+CGDCONT?
 	- `2`- V.42bis
 - `<h_comp>` -  Controls PDP header compression 
 	- `0` - Off
-	- `4` - RFC3095
+	- `4` - RFC3095ipa
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
 - Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
 - Activating the PDP: `AT+CGACT=1,1`
