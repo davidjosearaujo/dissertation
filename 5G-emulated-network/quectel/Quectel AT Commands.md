@@ -1,4 +1,5 @@
 ##### Sometimes the minicom/serial output is not being sent/received. To fix it type:  `ate`
+
 ### Miscellaneous commands
 ```
 AT+CEREG=2;+C5GREG=2  # Something regarding registration
