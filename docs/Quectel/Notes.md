@@ -25,6 +25,7 @@ sudo apt install -y \
   dwarves
 ```
 # Flow for AT Commands
+Connect to modem's terminal via serial with `sudo screen /dev/ttyUSB2 9600`(`minicom`acts weird, as in freezes or doesn't show entire response outputs). 
 ## 0. Set UE Functionality
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=27&selection=37,0,45,13|2.20 AT+CFUN Set UE Functionality]]
 This command controls the functionality level. It can also be used for resetting the UE.
