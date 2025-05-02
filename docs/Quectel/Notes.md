@@ -25,7 +25,20 @@ sudo apt install -y \
   dwarves
 ```
 # PDP Context
-
+## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=63&selection=24,0,28,18|5.1 AT+COPS Operator Selection]]
+This command returns the current operators and their status, and allows automatic or manual network selection.
+```
+AT+COPS=?
++COPS: (3,"268 02","268 02","26802",7),(3,"NOS","NOS","26803",7),(3,"vodafone P","voda P","26801",7),(3,"MEO","MEO","26806",7)
+```
+`+COPS: <mode>[,<format>[,<oper>][,<AcT>]]`
+- `<mode>`
+	- **0** - Automatic. Operator selection
+	- **1** - Manual operator selection
+	- **2** - Deregister from network
+	- **3** - Set only `<format>`, and do not attempt registration/deregistration.
+	- **4** - Manual/automatic selection.
+[[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=65&selection=94,0,98,31|Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218, page 65]]
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
 This command specifies PDP context parameters for a specific context
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
