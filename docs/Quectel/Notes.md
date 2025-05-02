@@ -59,12 +59,27 @@ AT+C5GREG?
 	- **5** - Registered, roaming
 	- **8** - Registered for emergency services only
 ## 3. Define a Packet Data Protocol (PDP) Context
+**This is the equivalent to the PDU Sessions** 
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
 This command specifies PDP context parameters for a specific context `<cid>`. A special form of the Write Command (`AT+CGDCONT=<cid>`) causes the values for context `<cid>` to become undefined. It is not allowed to change the definition of an already activated context.
 ```
 AT+CGDCONT?
-+CGDCONT: <cid>,<PDP_type>,<APN>,<PDP_ad dr>,<d_comp>,<h_comp>[,<IPv4AddrAlloc>[,<req uest_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref _access_type>,,[,<Always-on_req>]]]]]] […]
++CGDCONT: <cid>,<PDP_type>,<APN>,<PDP_addr>,<d_comp>,<h_comp>[,<IPv4AddrAlloc>[,<req uest_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref _access_type>,,[,<Always-on_req>]]]]]] […]
 ```
+- `<cid>` - PDP context identifier. A numeric parameter which specifies a particular PDP context definition. The parameter is local to the TE-MT interface and is used in other PDP context-related commands. The range of supported values (minimum value =1) is returned by the test form of the command. Range: 1-16
+- `<PDP_type>` - Packet data protocol type, a string parameter which specifies the type of packet data protocol
+	- "IP" - IPv4
+	- "PPP" - Point to Point Protocol
+	- "IPV6" - IPv6
+	- "IPV4V6" - Virtual introduced to handle dual IP stack UE capability
+- `<APN>` - Access point name, which is a logical name used to select the GGSN or the external packet data network. If the value is null or omitted, then the subscription value will be requested
+- `<PDP_addr>` - Identify the MT in the address space applicable to the PDP. If the value is null or omitted, then a value may be provided by the TE during the PDP startup procedure or, failing that, a dynamic address will be requested. The allocated address may be read using the `AT+CGPADDR`
+- `<d_comp>` - Controls PDP data compression (applicable for SNDCP only) 
+	- `0` - Off
+	- `2`- V.42bis
+- `<h_comp>` -  Controls PDP header compression 
+	- `0` - Off
+	- `4` - RFC3095
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
 - Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
 - Activating the PDP: `AT+CGACT=1,1`
