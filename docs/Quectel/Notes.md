@@ -24,8 +24,9 @@ sudo apt install -y \
   net-tools \
   dwarves
 ```
-# PDP Context
-## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=63&selection=24,0,28,18|5.1 AT+COPS Operator Selection]]
+# Flow for AT Commands
+## 1. Get Operator Selection
+### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=63&selection=24,0,28,18|5.1 AT+COPS Operator Selection]]
 This command returns the current operators and their status, and allows automatic or manual network selection.
 ```
 AT+COPS=?
@@ -38,7 +39,8 @@ AT+COPS=?
 	- **2** - Deregister from network
 	- **3** - Set only `<format>`, and do not attempt registration/deregistration.
 	- **4** - Manual/automatic selection.
-## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
+## 2. Register to Network
+### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
 This command queries the network registration status
 ```
 AT+C5GREG?
@@ -56,8 +58,10 @@ AT+C5GREG?
 	- **4** - Unknown
 	- **5** - Registered, roaming
 	- **8** - Registered for emergency services only
-## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
-This command specifies PDP context parameters for a specific context
+## 3. Define a Packet Data Protocol (PDP) Context
+### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
+This command specifies PDP context parameters for a specific context `<cid>`. A special form of the Write Command (`AT+CGDCONT=<cid>`) causes the values for context `<cid>` to become undefined. It is not allowed to change the definition of an already activated context.
+
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
 - Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
 - Activating the PDP: `AT+CGACT=1,1`
