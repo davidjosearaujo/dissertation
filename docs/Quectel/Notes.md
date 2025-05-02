@@ -30,15 +30,18 @@ sudo apt install -y \
 This command returns the current operators and their status, and allows automatic or manual network selection.
 ```
 AT+COPS?
-+COPS: (3,"268 02","268 02","26802",7),(3,"NOS","NOS","26803",7),(3,"vodafone P","voda P","26801",7),(3,"MEO","MEO","26806",7)
++COPS: <mode>[,<format>[,<oper>][,<AcT>]]
 ```
-`+COPS: <mode>[,<format>[,<oper>][,<AcT>]]`
 - `<mode>`
 	- `0` - Automatic. Operator selection
 	- `1` - Manual operator selection
 	- `2` - Deregister from network
 	- `3` - Set only `<format>`, and do not attempt registration/deregistration.
 	- `4` - Manual/automatic selection.
+- `<format>`
+	- `0` - Long format alphanumeric `<oper>` which can be up to 16 characters long
+	- `1` - Short format alphanumeric `<oper>`
+	- `2` - Numeric `<oper>`. GSM location area identification numer
 ## 2. Register to Network
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
 This command queries the network registration status
