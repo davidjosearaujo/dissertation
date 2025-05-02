@@ -38,16 +38,16 @@ AT+COPS=?
 	- **2** - Deregister from network
 	- **3** - Set only `<format>`, and do not attempt registration/deregistration.
 	- **4** - Manual/automatic selection.
-## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=65&selection=94,0,98,31|5.2 AT+CEREG EPS Network Registration Status]]
+## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
 This command queries the network registration status
 ```
-AT+CEREG?
-+CEREG: <n>,<stat>[,<tac>,<ci>[,<AcT]]
+AT+C5GREG?
++C5GREG: <n>,<stat>[,[<tac>],[<ci>],[<AcT>],[<Allowed _NSSAI_length>],[<Allowed_NSSAI>]]
 ```
 - `<n>`
 	- **0** - Disable network registration unsolicited result code
-	- **1** - Enable network registration unsolicited result code `+CEREG:<stat>`
-	- **2** - Enable network registration and location information unsolicited result code `+CEREG: <stat>[,[<lac>],[<ci>],[<AcT>]]`
+	- **1** - Enable network registration unsolicited result code `+C5GREG:<stat>`
+	- **2** - Enable network registration and location information unsolicited result code `+C5GREG: <stat>[,[<tac>],[<ci>],[<AcT>],[<Allowe d_NSSAI_length>],[<Allowed_NSSAI>]]`
 - `<stat>`
 	- **0** - Not registered, MT is not currently searching an operator to register to
 	- **1** - Registered, home network
@@ -55,8 +55,7 @@ AT+CEREG?
 	- **3** - Registration denied
 	- **4** - Unknown
 	- **5** - Registered, roaming
-## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Statu]]
-
+	- **8** - Registered for emergency services only
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
 This command specifies PDP context parameters for a specific context
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
