@@ -30,7 +30,7 @@ sudo apt install -y \
 This command returns the current operators and their status, and allows automatic or manual network selection.
 ```
 AT+COPS?
-+COPS: <mode>[,<format>[,<oper>][,<AcT>]]
++COPS: <mode>[,<format>[,<oper>[,<AcT>]]    // Write command
 ```
 - `<mode>`
 	- `0` - Automatic. Operator selection
@@ -38,6 +38,7 @@ AT+COPS?
 	- `2` - Deregister from network
 	- `3` - Set only `<format>`, and do not attempt registration/deregistration.
 	- `4` - Manual/automatic selection.
+- `<oper>` - Operator in format as per `<format>`
 - `<format>`
 	- `0` - Long format alphanumeric `<oper>` which can be up to 16 characters long
 	- `1` - Short format alphanumeric `<oper>`
@@ -52,7 +53,7 @@ AT+COPS?
 This command queries the network registration status
 ```
 AT+C5GREG?
-+C5GREG: <n>,<stat>[,[<tac>],[<ci>],[<AcT>],[<Allowed _NSSAI_length>],[<Allowed_NSSAI>]]
++C5GREG: <n>,<stat>[,[<tac>],[<ci>],[<AcT>],[<Allowed _NSSAI_length>],[<Allowed_NSSAI>]]    // Write command
 ```
 - `<n>`
 	- `0` - Disable network registration unsolicited result code
@@ -104,6 +105,12 @@ AT+CGDCONT=[<cid>[,<PDP_type>[,<APN> [,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4 Add
 	- **sst.sd** - SST and slice differentiator (SD) are present
 	- **sst.sd;mapped_sst** - SST, SD and mapped configured SST are present
 	- **sst.sd;mapped_sst.mapped_sd** - SST, SD, mapped configured SST and mapped configured SD are present
+- `<Pref_access_type>` - Indicate the preferred access type for the PDU session in 5GS
+	- `0` - 3GPP
+	- `1` - non-3GPP
+- `<Always-on_req>` - Indicate whether the UE requests to establish the PDU session as an always-on PDU session.
+	- `0` - always-on not requested
+	- `1` - always-on requested
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
 - Defining a PDP context: `AT+CGDCONT=1,"IP","UNINET"`
 - Activating the PDP: `AT+CGACT=1,1`
