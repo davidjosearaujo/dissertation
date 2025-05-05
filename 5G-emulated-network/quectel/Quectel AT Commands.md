@@ -12,8 +12,7 @@ AT+QPING=1,"8.8.8.8"
 
 ### To select a `dnn` through AT commands:
 ```
-AT+CGDCONT=1,"IPV4v6","internet"
-```
+AT+CGDCONT=1,"IPV4v6","internet" 
 
 ### List available networks
 ```

@@ -83,7 +83,6 @@ AT+C5GREG=[<n>]    // Write command
 	- `5` - Registered, roaming
 	- `8` - Registered for emergency services only
 ## Define a Packet Data Protocol (PDP) Context
-**This is the equivalent to the PDU Sessions** 
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
 This command specifies PDP context parameters for a specific context `<cid>`. A special form of the Write Command (`AT+CGDCONT=<cid>`) causes the values for context `<cid>` to become undefined. It is not allowed to change the definition of an already activated context.
 ```
@@ -137,7 +136,8 @@ AT+CGACT=<state>[,<cid>]    // Write command
 - `<state>` - Indicate the state of PDP context activation
 	- `0` - Deactivated
 	- `1` - Activated
-## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
+## Get PDP Address
+### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=151&selection=72,0,76,18|9.3 AT+CGPADDR Show PDP Addresses]]
 This command returns a list of PDP addresses for the specified context identifiers. If no `<cid>` is specified, the addresses for all defined contexts are returned.
 ```
 +CGPADDR: list of defined <cid>    // Read command result
