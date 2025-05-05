@@ -141,14 +141,12 @@ AT+CGACT=<state>[,<cid>]    // Write command
 This command returns a list of PDP addresses for the specified context identifiers. If no `<cid>` is specified, the addresses for all defined contexts are returned.
 ```
 +CGPADDR: list of defined <cid>    // Read command result
-AT+CGPADDR[=<cid>[,<cid>[,…]]]    // Write command
+AT+CGPADDR=[<cid>[,<cid>[,…]]]    // Write command
 ```
 ## Registering and PDP Context Creation Flow
-1. Define functionalities
-2. Get available operators
-3. Operator selection
-4. Get network registration status
-	1. Register to network if needed
-5. Get PDP Contexts
-6. Define PDP context
-	1. `AT+CGDCONT=1,"IPV4V6","internet","",0,0`
+1. Define functionalities - `AT+CFUN=1`
+2. Get operator selection mode - `AT+COPS?`
+	1. Connect and register to operator - `AT+COPS=`
+3. Get network registration status - `AT+C5GREG?`
+4. Get PDP Contexts - `AT+CGDCONT?`
+	1. Define new PDP context - `AT+CGDCONT=1,"IPV4V6","internet","",0,0`
