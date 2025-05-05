@@ -24,9 +24,9 @@ sudo apt install -y \
   net-tools \
   dwarves
 ```
-# Flow for AT Commands
+# AT Commands
 Connect to modem's terminal via serial with `sudo screen /dev/ttyUSB2 9600`(`minicom`acts weird, as in freezes or doesn't show entire response outputs). 
-## 0. Set UE Functionality
+## Set UE Functionality
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=27&selection=37,0,45,13|2.20 AT+CFUN Set UE Functionality]]
 This command controls the functionality level. It can also be used for resetting the UE.
 ```
@@ -40,7 +40,7 @@ AT+CFUN=<fun>[,<rst>]    // Write command
 - `<rst>` - Whether to reset UE
 	- `0` - Do not reset the UE before setting it to `<fun>` power level
 	- `1` - Reset UE. Device is fully functional after the reset.
-## 1. Get Operator Selection
+## Get Operator Selection
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=63&selection=24,0,28,18|5.1 AT+COPS Operator Selection]]
 This command returns the current operators and their status, and allows automatic or manual network selection.
 ```
@@ -63,7 +63,7 @@ AT+COPS: <mode>[,<format>[,<oper>[,<AcT>]]    // Write command
 	- `10`- E-UTRAN conneced to a 5GCN
 	- `11`- NR connected to 5GCN
 	- `12`- NG-RAN
-## 2. Register to Network
+## Register to Network
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=66&selection=51,0,64,6|5.3 AT+C5GREG 5GS Network Registration Status]]
 This command queries the network registration status
 ```
@@ -82,7 +82,7 @@ AT+C5GREG=[<n>]    // Write command
 	- `4` - Unknown
 	- `5` - Registered, roaming
 	- `8` - Registered for emergency services only
-## 3. Define a Packet Data Protocol (PDP) Context
+## Define a Packet Data Protocol (PDP) Context
 **This is the equivalent to the PDU Sessions** 
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|5.6 AT+CGDCONT Define PDP Contexts]]
 This command specifies PDP context parameters for a specific context `<cid>`. A special form of the Write Command (`AT+CGDCONT=<cid>`) causes the values for context `<cid>` to become undefined. It is not allowed to change the definition of an already activated context.
@@ -127,7 +127,7 @@ AT+CGDCONT=[<cid>[,<PDP_type>[,<APN>[,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4AddrA
 - `<Always-on_req>` - Indicate whether the UE requests to establish the PDU session as an always-on PDU session.
 	- `0` - always-on not requested
 	- `1` - always-on requested
-## 4. (De)Activate PDP Contexts
+## (De)Activate PDP Contexts
 ### [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=150&selection=48,0,51,0|9.2 AT+CGACT Activate or Deactivate PDP Contexts]]
 This command activates or deactivates the specified PDP context(s). If any PDP context is already in the requested state, the state for that context remains unchanged.
 ```
