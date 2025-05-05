@@ -143,3 +143,12 @@ This command returns a list of PDP addresses for the specified context identifie
 +CGPADDR: list of defined <cid>    // Read command result
 AT+CGPADDR[=<cid>[,<cid>[,…]]]    // Write command
 ```
+## Registering and PDP Context Creation Flow
+1. Define functionalities
+2. Get available operators
+3. Operator selection
+4. Get network registration status
+	1. Register to network if needed
+5. Get PDP Contexts
+6. Define PDP context
+	1. `AT+CGDCONT=1,"IPV4V6","internet","",0,0`
