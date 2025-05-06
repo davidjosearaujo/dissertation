@@ -106,3 +106,42 @@ The main interfaces and protocols involved are:
 The framework integrates these components by ensuring the 5G-RG correctly handles protocol relay (EAPoL to RADIUS/EAP) and coordinates actions based on protocol outcomes (EAP-Success triggering NAS session management requests). The novelty lies not in modifying these protocols but in configuring the system components (5GC NFs, 5G-RG, EAP Server) and implementing the orchestration logic within the 5G-RG to manage the per-device proxy identity using standard 5G session management procedures.
 ### Summary of Integration
 Conclude by summarizing how the architecture effectively integrates unmodified NAUN3 devices by leveraging the 5G-RG as a mediating entity, utilizing the PDU session framework for proxy identification and traffic management, and interfacing with standard 5GC and authentication server components.
+# Development and Implementation
+## Development Environment and Tools
+To construct and validate the proposed framework, a virtualized multi-VM environment was orchestrated using Vagrant with VirtualBox as the provider.
+
+This approach allowed for the creation of a reproducible and isolated network testbed. The environment consists of four distinct Virtual Machines (VMs), each running **Ubuntu 22.04 LTS (Jammy Jellyfish)** as the base operating system. The roles and typical resource allocations for these VMs, as defined in the `Vagrantfile`, are:
+1. **`core` VM:** Hosts the 5G Core Network (5GC) functions and the EAP Authentication Server. Allocated 2GB RAM and 1 CPU.
+2. **`gnb` VM:** Runs the 5G RAN gNodeB simulator. Allocated 1GB RAM and 1 CPU.
+3. **`ue` VM:** Represents the 5G Residential Gateway (5G-RG), acting as a UE towards the 5GC and as an EAP Authenticator/Gateway towards the NAUN3 device. Allocated 1GB RAM and 1 CPU.
+4. **`naun3` VM:** Simulates the Wi-Fi-only/NAUN3 end device, acting as an EAP Supplicant. Allocated 1GB RAM and 1 CPU.
+
+The following core software components and tools were utilized across these VMs, installed and configured via shell scripts executed during Vagrant provisioning:
+
+1. **5G Network Simulation:**
+	1. **Open5GS:** The open-source implementation of 5G Core Network functions (AMF, SMF, UPF, NRF, AUSF, UDM, UDR, PCF, NSSF). Installed from the official PPA (`ppa:open5gs/latest`) on the `core` VM.
+	2. **MongoDB:** Used as the database backend for Open5GS, storing subscriber information and network function configurations. Installed from the official MongoDB repositories on the `core` VM.
+	3. **UERANSIM:** An open-source 5G RAN (gNB) and UE simulator. Cloned from its GitHub repository and compiled from source on the `gnb` VM (for gNB functionality) and the `ue` VM (for UE/5G-RG functionality). The `nr-cli` utility from UERANSIM was also made available.
+2. **Authentication Infrastructure:**
+	1. **FreeRADIUS:** Employed as the EAP-TLS Authentication Server. Installed on the `core` VM and configured to handle EAP-TLS, manage client (UE/5G-RG) definitions, and generate/use X.509 certificates.
+	2. **`hostapd`:** Utilized as the EAP Authenticator on the `ue` VM (5G-RG). Cloned from its official repository (`w1.fi/hostap.git`) and compiled from source with the `CONFIG_DRIVER_WIRED=y` option enabled to support EAP over wired interfaces for the NAUN3 device connection.
+	3. **`wpa_supplicant`:** Used as the EAP Supplicant on the `naun3` VM. Installed via `apt` and configured to perform EAP-TLS authentication using client certificates.
+3. **Networking and Utility Tools:**
+	1. **`dnsmasq`:** Configured as a DHCP server on the `ue` VM to provide IP addresses to NAUN3 devices connecting to its local network interface (`enp0s9`).
+	2. **`yq`:** A command-line YAML processor, installed via `snap`. Extensively used in provisioning scripts to modify Open5GS and UERANSIM configuration files (e.g., setting IP addresses, DNNs, APNs).
+	3. **Build Tools:** `make`, `git`, `gcc`, `g++`, `cmake` (via `snap`), `libsctp-dev`, `lksctp-tools`, `pkgconf`, `libssl-dev`, `libnl-3-dev`, `libnl-genl-3-dev` were installed for compiling UERANSIM and `hostapd` from source.
+	4. **System Utilities:** `iproute2`, `net-tools`, `curl`, `gnupg` were used for network configuration and repository management.
+	5. **Node.js and Nginx:** Installed on the `core` VM to support and expose the Open5GS WebUI.
+4. **Custom Tools and Scripts:**
+	1. **`open5gs-dbctl`:** A shell script provided and used on the `core` VM to interact with the MongoDB database for managing Open5GS subscriber entries (adding UEs, defining APNs and slices).
+	2. **`interceptor`:** A custom Go application (compiled from source located in an `interceptor` directory, as indicated in the `Vagrantfile`) deployed on the `ue` VM. This is the key tool developed to orchestrate the logic for monitoring `hostapd` events and managing PDU sessions. It's specific internal workings are detailed later.
+	3. **Provisioning Scripts:** A set of shell scripts (`core_install`, `gnb_install`, `ue_install`, `naun3_install`, `auth_server_install`, `ueransim_install`) were used by Vagrant to automate the installation and configuration of all software components on their respective VMs.
+### Network Topology and Configuration Management
+The `Vagrantfile` defines several private networks to interconnect the VMs, establishing distinct network segments for communication between the 5GC and gNB (`192.168.56.0/24`), gNB and UE/5G-RG (`192.168.57.0/24`), and the UE/5G-RG's local network for NAUN3 devices (`192.168.60.0/24`). IP addresses for various interfaces and services (e.g., `CORE_IP`, `GNB_IP_CORE`, `UE_LAN_IP`, `AUTH_SERVER_IP` for RADIUS communication over the `backhaul` tunnel) are explicitly defined and passed as arguments to the provisioning scripts.
+
+Vagrant's synced folder feature was utilized to share:
+- EAP/RADIUS certificates generated by FreeRADIUS on the `core` VM to the `naun3` VM (via `/certs` on the guest).
+- Runtime logs from all VMs to a `./build/runtime-logs` directory on the host machine.
+- The compiled `interceptor` binary to the `ue` VM.
+
+This comprehensive setup provides a fully functional, albeit simulated, environment for developing and testing the proposed solution for integrating NAUN3 devices into a 5G network.
