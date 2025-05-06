@@ -108,9 +108,7 @@ The framework integrates these components by ensuring the 5G-RG correctly handle
 Conclude by summarizing how the architecture effectively integrates unmodified NAUN3 devices by leveraging the 5G-RG as a mediating entity, utilizing the PDU session framework for proxy identification and traffic management, and interfacing with standard 5GC and authentication server components.
 # Development and Implementation
 ## Development Environment and Tools
-To construct and validate the proposed framework, a virtualized multi-VM environment was orchestrated using Vagrant with VirtualBox as the provider.
-
-This approach allowed for the creation of a reproducible and isolated network testbed. The environment consists of four distinct Virtual Machines (VMs), each running **Ubuntu 22.04 LTS (Jammy Jellyfish)** as the base operating system. The roles and typical resource allocations for these VMs, as defined in the `Vagrantfile`, are:
+To construct and validate the proposed framework, a virtualized multi-VM environment was orchestrated using Vagrant with VirtualBox as the provider This approach allowed for the creation of a reproducible and isolated network testbed. The environment consists of four distinct Virtual Machines (VMs), each running **Ubuntu 22.04 LTS (Jammy Jellyfish)** as the base operating system. The roles and typical resource allocations for these VMs, as defined in the `Vagrantfile`, are:
 1. **`core` VM:** Hosts the 5G Core Network (5GC) functions and the EAP Authentication Server. Allocated 2GB RAM and 1 CPU.
 2. **`gnb` VM:** Runs the 5G RAN gNodeB simulator. Allocated 1GB RAM and 1 CPU.
 3. **`ue` VM:** Represents the 5G Residential Gateway (5G-RG), acting as a UE towards the 5GC and as an EAP Authenticator/Gateway towards the NAUN3 device. Allocated 1GB RAM and 1 CPU.
