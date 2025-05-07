@@ -118,19 +118,7 @@ Create my on DHCP server that can check if devices have been successfully authen
 - [x] I need to access `hostapd`to check authenticated devices. Check [this](https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html) documentation.
 - [x] Needs to deauth users and request and close PDU Sessions
 # Cellular Modem
-- [ ] Understand how to connect
-- [ ] Can I connecti with serial and Modem Manager?
-## AT command set for User Equipment (UE) - 27.007
-### 10.1.00 General remark about 5GS PDU Sessions and EPS PDN connections
-
-| AT Commands      | Comments                                                      |
-| :--------------- | ------------------------------------------------------------- |
-| `+CGDCONT`       | Used to define a 5GS PDU session                              |
-| `+CGACT`         | Used to activate a 5GS PDU session                            |
-| `+CCSTATEREQ`    | Used to change the state of a PDU session                     |
-| `+CGCONTRDP`     | Used to show dynamically allocated 5GS PDU session parameters |
-| `+CGEV: xxx ...` | Used to indicate 5GS PDU session operation status             |
-| `+CGMOD`         | Used to modify a 5GS PDU session                              |
-
-
-
+- [x] Understand how to connect
+- [x] Can I connect with serial and Modem Manager?
+## [[Quectel/Notes|AT command set for User Equipment (UE) - 27.007]]
+See notes in this link
