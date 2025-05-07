@@ -192,7 +192,7 @@ Specifically, the \ac{5GC} has no knowledge of the device identities or the auth
 The \ac{5G-RG} takes charge of the entire life-cycle of the proxy identity:
 
 \begin{itemize}
-    \item \textbf{Creation:} Upon successful \ac{EAP-TLS} authentication of an \ac{NAUN3} device, the gateway creates a mapping entry and asks the \ac{5GC} to create a dedicated
+    \item \textbf{Creation:} Upon successful \ac{EAP-TLS} authentication of an \ac{NAUN3} device, the gateway creates a mapping entry and asks the \ac{5GC} to create a dedicated.
     
     \item \textbf{Maintenance:} The \ac{5G-RG} routes the device’s traffic through the corresponding \ac{PDU} Session and monitors the device’s local status (e.g., association state or heartbeat checks).
 
@@ -214,9 +214,9 @@ This session-based proxy identification scheme offers a number of beneficial fea
     \item \textbf{Transparency:} The solution is transparent to both the \ac{NAUN3} device (which experiences usual local verification) and the \ac{5GC} (which maintains regular \ac{PDU} sessions).
     \item \textbf{Reuses Existing Infrastructure:} It constructs on top of existing \ac{5G} session management without the need to make any modifications to the core identity frameworks.
 
-    \item \textbf{Localized Complexity:} Complexity of all sorts is centralized in the \ac{5G-RG}, reducing the need to integrate with
+    \item \textbf{Localized Complexity:} Complexity of all sorts is centralized in the \ac{5G-RG}, reducing the need to integrate with.
     
-    \item \textbf{Fine-Grained Control:} End-device \ac{PDU} Sessions support per-device policy enforcement (i.e., traffic shaping or \ac{QoS}) at the \ac{5GC}, providing fine-grained control
+    \item \textbf{Fine-Grained Control:} End-device \ac{PDU} Sessions support per-device policy enforcement (i.e., traffic shaping or \ac{QoS}) at the \ac{5GC}, providing fine-grained control.
 \end{itemize}
 
 \section{Framework Architecture and Integration}
@@ -230,9 +230,7 @@ This session-based proxy identification scheme offers a number of beneficial fea
     \label{fig:Overall Architecture}
 \end{figure}
 
-This top-level architecture Figure \ref{fig:Overall Architecture} shows the integration framework. The \ac{NAUN3} device connects locally (through Wi-Fi or cable) to the \ac{5G-RG}, the latter serving as a regular \ac{UE} to the \ac{gNB} and to the \ac{5GC} and serving as an \ac{EAP} Authenticator forwarding requests to the external \ac{EAP-TLS} Authentication Server within the domain of the \ac{ISP}. The connection between the \ac{5G-RG} and the \ac{EAP} server is done through the use of \ac{RADIUS}, over a dedicated \ac{PDU} session belonging to the \texttt{backhaul} \ac{DNN}. Most importantly, when the local authentication of the \ac{5G-RG} was successful, the latter creates a different \ac{PDU} session for the \ac{NAUN3} device
-
-\subsection{Key Communication Flows in the Integrated System}
+This top-level architecture Figure \ref{fig:Overall Architecture} shows the integration framework. The \ac{NAUN3} device connects locally (through Wi-Fi or cable) to the \ac{5G-RG}, the latter serving as a regular \ac{UE} to the \ac{gNB} and to the \ac{5GC} and serving as an \ac{EAP} Authenticator forwarding requests to the external \ac{EAP-TLS} Authentication Server within the domain of the \ac{ISP}. The connection between the \ac{5G-RG} and the \ac{EAP} server is done through the use of \ac{RADIUS}, over a dedicated \ac{PDU} session belonging to the \texttt{backhaul} \ac{DNN}. Most importantly, when the local authentication of the \ac{5G-RG} was successful, the latter creates a different \ac{PDU} session for the \ac{NAUN3} device.
 
 \subsection{Interface and Protocol Integration}
 

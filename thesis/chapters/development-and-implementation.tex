@@ -5,11 +5,87 @@
 Building upon the proposed framework, this chapter describes the practical development and implementation process undertaken. In this paper, the specific tools, technologies, and configurations used to realize the solution are described, including the construction of key modules and the configuration of the experimental environment required for subsequent validation.
 \end{introduction}
 
-\section{Development Environment Setup}
+\section{Development Environment and Tools}
 
-% Describe the hardware, software, operating systems, and network simulators (e.g., Open5GS, UERANSIM, ns-3) or testbeds used.
+To construct and validate the proposed framework, a virtualized multi-\ac{VM} environment was orchestrated using Vagrant with VirtualBox as the provider. This approach allowed for the creation of a reproducible and isolated network testbed. The environment consists of four distinct \acp{VM}, each running Ubuntu 22.04 LTS (Jammy Jellyfish) as the base operating system. The roles and typical resource allocations for these \acp{VM}, as defined in the \texttt{Vagrantfile}, are:
 
-% Mention specific libraries or tools employed (e.g., Python libraries for networking/crypto, Wireshark, etc.).
+\begin{enumerate}
+    \item \textbf{\texttt{core} \ac{VM}:} Hosts the \ac{5GC} functions and the \ac{EAP} Authentication Server. Allocated 2\ac{GB} \ac{RAM} and 1 \ac{CPU}.
+
+    \item \textbf{\texttt{gnb} \ac{VM}:} Runs the \ac{gNB} simulator. Allocated 1\ac{GB} \ac{RAM} and 1 \ac{CPU}.
+
+    \item \textbf{\texttt{ue} \ac{VM}:} Represents the \ac{5G-RG}, acting as a \ac{UE} towards the \ac{5GC} and as an \ac{EAP} Authenticator/Gateway towards the \ac{NAUN3} device. Allocated 1\ac{GB} \ac{RAM} and 1 \ac{CPU}.
+
+    \item \textbf{\texttt{naun3} \ac{VM}:} Simulates the Wi-Fi-only/\ac{NAUN3} end device, acting as an \ac{EAP} Supplicant. Allocated 1\ac{GB} \ac{RAM} and 1 \ac{CPU}.
+\end{enumerate}
+
+The following core software components and tools were utilized across these \acp{VM}, installed and configured via shell scripts executed during Vagrant provisioning:
+
+\begin{enumerate}
+    \item  {
+        \textbf{\ac{5G} Network Simulation:}
+        \begin{itemize}
+            \item \textbf{Open5GS:} The open-source implementation of \ac{5GC} functions (\ac{AMF}, \ac{SMF}, \ac{UPF}, \ac{NRF}, \ac{AUSF}, \ac{UDM}, \ac{UDR}, \ac{PCF}, \ac{NSSF}). Installed on the \texttt{core} \ac{VM}.
+
+            \item \textbf{MongoDB:} Used as the database backend for Open5GS, storing subscriber information and network function configurations. Installed from the official MongoDB repositories on the \texttt{core} \ac{VM}.
+
+            \item \textbf{UERANSIM:} An open-source \ac{gNB} and \ac{UE} simulator. Cloned from its GitHub repository and compiled from source on the \texttt{gnb} \ac{VM} (for \ac{gNB} functionality) and the \texttt{ue} \ac{VM} (for \ac{UE}/\ac{5G-RG} functionality). The \texttt{nr-cli} utility from UERANSIM was also made available
+        \end{itemize}
+    }
+
+    \item {
+        \textbf{Authentication Infrastructure:}
+        \begin{itemize}
+            \item \textbf{FreeRADIUS:} Employed as the \ac{EAP-TLS} Authentication Server. Installed on the \texttt{core} \ac{VM} and configured to handle \ac{EAP-TLS}, manage client (\ac{UE}/\ac{5G-RG}) definitions, and generate/use X.509 certificates.
+
+            \item \textbf{\texttt{hostapd}:} Utilized as the \ac{EAP} Authenticator on the \texttt{ue} \ac{VM} (\ac{5G-RG}). Cloned from its official repository (\texttt{w1.fi/hostap.git}) and compiled from source with the \texttt{CONFIG\_DRIVER\_WIRED=y} option enabled to support \ac{EAP} over wired interfaces for the \ac{NAUN3} device connection.
+
+            \item \textbf{\texttt{wpa\_supplicant}:} Used as the \ac{EAP} Supplicant on the \texttt{naun3} \ac{VM}. Installed via \texttt{apt} and configured to perform \ac{EAP-TLS} authentication using client certificates.
+        \end{itemize}
+    }
+
+    \item {
+        \textbf{Networking and Utility Tools:}
+        \begin{itemize}
+            \item \textbf{\texttt{dnsmasq}:} Configured as a \ac{DHCP} server on the \texttt{ue} \ac{VM} to provide \ac{IP} addresses to \ac{NAUN3} devices connecting to its local network interface (\texttt{enp0s9}).
+
+            \item \textbf{\texttt{yq}:} A command-line YAML processor, installed via \texttt{snap}. Extensively used in provisioning scripts to modify Open5GS and UERANSIM configuration files (e.g., setting \ac{IP} addresses, \acp{DNN}, \acp{APN}).
+
+            \item \textbf{Build Tools:} \texttt{make}, \texttt{git}, \texttt{gcc}, \texttt{g++}, \texttt{cmake} (via \texttt{snap}), \texttt{libsctp-dev}, \texttt{lksctp-tools}, \texttt{pkgconf}, \texttt{libssl-dev}, \texttt{libnl-3-dev}, \texttt{libnl-genl-3-dev} were installed for compiling UERANSIM and \texttt{hostapd} from source.
+
+            \item \textbf{System Utilities:} \texttt{iproute2}, \texttt{net-tools}, \texttt{curl}, \texttt{gnupg} were used for network configuration and repository management.
+
+            \item \textbf{Node.js and Nginx:} Installed on the \texttt{core} \ac{VM} to support and expose the Open5GS WebUI.
+        \end{itemize}
+    }
+
+    \item {
+        \textbf{Custom Tools and Scripts}
+        \begin{itemize}
+            \item \textbf{\texttt{open5gs-dbctl}:} A shell script provided and used on the \texttt{core} VM to interact with the MongoDB database for managing Open5GS subscriber entries (adding \acp{UE}, defining \acp{APN} and slices).
+
+            \item \textbf{\texttt{interceptor}:} A custom Go application (compiled from source located in an \texttt{interceptor} directory, as indicated in the \texttt{Vagrantfile}) deployed on the \texttt{ue} \ac{VM}. This is the key tool developed to orchestrate the logic for monitoring \texttt{hostapd} events and managing \ac{PDU} sessions. It's specific internal workings are detailed later.
+
+            \item \textbf{Provisioning Scripts:} A set of shell scripts (\texttt{core\_install}, \texttt{gnb\_install}, \texttt{ue\_install}, \texttt{naun3\_install}, \texttt{auth\_server\_install}, \texttt{ueransim\_install}) were used by Vagrant to automate the installation and configuration of all software components on their respective \acp{VM}.
+        \end{itemize}
+    }
+\end{enumerate}
+
+\subsection{Network Topology and Configuration Management}
+
+The \texttt{Vagrantfile} defines several private networks to interconnect the \acp{VM}, establishing distinct network segments for communication between the \ac{5GC} and \ac{gNB} (\texttt{192.168.56.0/24}), \texttt{gNB} and \ac{UE}/\ac{5G-RG} (\texttt{192.168.57.0/24}), and the \ac{UE}/\ac{5G-RG}'s local network for \ac{NAUN3} devices (\texttt{192.168.60.0/24}). \ac{IP} addresses for various interfaces and services (e.g., \texttt{CORE\_IP}, \texttt{GNB\_IP\_CORE}, \texttt{UE\_LAN\_IP}, \texttt{AUTH\_SERVER\_IP} for \ac{RADIUS} communication over the \texttt{backhaul} tunnel) are explicitly defined and passed as arguments to the provisioning scripts.
+
+Vagrant's synced folder feature was utilized to share:
+
+\begin{itemize}
+    \item \ac{EAP}/\ac{RADIUS} certificates generated by FreeRADIUS on the \texttt{core} \ac{VM} to the \texttt{naun3} \ac{VM} (via \texttt{/certs} on the guest).
+
+    \item Runtime logs from all \acp{VM} to a \texttt{./build/runtime-logs} directory on the host machine.
+
+    \item The compiled \texttt{interceptor} binary to the \texttt{ue} \ac{VM}.
+\end{itemize}
+
+This comprehensive setup provides a fully functional, albeit simulated, environment for developing and testing the proposed solution for integrating \ac{NAUN3} devices into a \ac{5G} network.
 
 \section{Implementation of Proposed Authentication Logic}
 
