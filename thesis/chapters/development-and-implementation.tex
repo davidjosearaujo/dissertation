@@ -2,7 +2,7 @@
 \label{chapter:development-and-implementation}
 
 \begin{introduction}
-Building upon the proposed framework, this chapter describes the practical development and implementation process undertaken. In this paper, the specific tools, technologies, and configurations used to realize the solution are described, including the construction of key modules and the configuration of the experimental environment required for subsequent validation.
+Building upon the proposed framework, this chapter describes the practical development and implementation process undertaken. In this thesis, the specific tools, technologies, and configurations used to realize the solution are described, including the construction of key modules and the configuration of the experimental environment required for subsequent validation.
 \end{introduction}
 
 \section{Development Environment and Tools}
@@ -72,6 +72,8 @@ The following core software components and tools were utilized across these \acp
 \end{enumerate}
 
 \subsection{Network Topology and Configuration Management}
+
+% TODO: Add diagram
 
 The \texttt{Vagrantfile} defines several private networks to interconnect the \acp{VM}, establishing distinct network segments for communication between the \ac{5GC} and \ac{gNB} (\texttt{192.168.56.0/24}), \texttt{gNB} and \ac{UE}/\ac{5G-RG} (\texttt{192.168.57.0/24}), and the \ac{UE}/\ac{5G-RG}'s local network for \ac{NAUN3} devices (\texttt{192.168.60.0/24}). \ac{IP} addresses for various interfaces and services (e.g., \texttt{CORE\_IP}, \texttt{GNB\_IP\_CORE}, \texttt{UE\_LAN\_IP}, \texttt{AUTH\_SERVER\_IP} for \ac{RADIUS} communication over the \texttt{backhaul} tunnel) are explicitly defined and passed as arguments to the provisioning scripts.
 

@@ -82,7 +82,7 @@ Together, these requirements establish the foundation for a solution that integr
 
 \section{Proposed Authentication Mechanism}
 
-To securely onboard \ac{NAUN3} devices lacking native \ac{5G} credentials, this framework employs \ac{EAP-TLS}—a mutual certificate-based authentication method offering strong security and compatibility with standard operator-managed components like \ac{RADIUS} servers. \ac{EAP-TLS} is particularly suitable for \ac{IoT} devices, where password-based methods are often impractical or insecure.
+To securely onboard \ac{NAUN3} devices lacking native \ac{5G} credentials, this framework employs \ac{EAP-TLS}—a mutual certificate-based authentication method offering strong security and compatibility with standard operator-managed components like \ac{RADIUS} servers. \ac{EAP-TLS} is particularly suitable for \ac{IoT} devices, where password-based methods are often impractical or insecure. Figure~\ref{fig:EAP-TLS-topology} illustrates the architecture, which comprises three roles:
 
 \begin{figure}
     \centering
@@ -90,8 +90,6 @@ To securely onboard \ac{NAUN3} devices lacking native \ac{5G} credentials, this 
     \caption{\ac{EAP-TLS} Topology}
     \label{fig:EAP-TLS-topology}
 \end{figure}
-
-Figure~\ref{fig:EAP-TLS-topology} illustrates the architecture, which comprises three roles:
 
 \begin{enumerate}
     \item {
@@ -159,11 +157,13 @@ This mechanism assumes that devices are securely provisioned in advance with the
 
 \section{Proposed Identity Management Solution}
 
+% TODO: !! Write introduction to following subsections !!
+
 \subsection{The Identity Management Challenge}
 
 The deployment of Wi-Fi-only, or \ac{NAUN3}, devices in the \ac{5G} network poses a fundamental identity management problem. Standard \ac{5G} identification depends on the \ac{SUPI}, usually derived from credentials stored securely in a \ac{USIM} (such as an \ac{IMSI} or \ac{NAI}). The \ac{SUPI} over the air is encrypted as a \ac{SUCI}. Devices without a \ac{USIM} cannot create a \ac{SUPI} or \ac{SUCI}, and hence cannot be recognized, verified, or managed via standard \ac{5GC} processes.
 
-\subsection{Core Concept: \ac{PDU} Sessions as Proxy Identities}
+\subsection{Core Concept: \acs{PDU} Sessions as Proxy Identities}
 
 To remedy this, the solution takes advantage of the capabilities of the \ac{5G-RG} and the versatility of \ac{5G} session management. From the viewpoint of the \ac{5GC}, a \ac{5G-RG} will act like a regular \ac{UE}, including its own \ac{USIM}, credentials, and support for several simultaneous \ac{PDU} Sessions. This allows segregation of traffic for different services or endpoints.
 
