@@ -143,4 +143,7 @@ AT+CGPADDR=[<cid>[,<cid>[,…]]]    // Write command
 	1. Connect and register to operator - `AT+COPS=`
 3. Get network registration status - `AT+C5GREG?`
 4. Get PDP Contexts - `AT+CGDCONT?`
-	1. Define new PDP context - `AT+CGDCONT=1,"IPV4V6","internet","",0,0`
+	1. Define new PDP context:
+		1. `AT+CGDCONT=1,"IPV4V6","backhaul","",0,0`
+		2. `AT+CGDCONT=2,"IPV4V6","client","",0,0`
+		3. `AT+CGDCONT=3,"IPV4V6","client","",0,0`, ...
