@@ -82,7 +82,7 @@ AT+C5GREG=[<n>]    // Write command
 ## [[Quectel_RG255C_Series_RM255C-GL_AT_Commands_Manual_V1.0.0_Preliminary_20231218.pdf#page=73&selection=20,0,20,3|Define a Packet Data Protocol (PDP) Context]]
 This command specifies PDP context parameters for a specific context `<cid>`. A special form of the Write Command (`AT+CGDCONT=<cid>`) causes the values for context `<cid>` to become undefined. It is not allowed to change the definition of an already activated context.
 ```
-CGDCONT: <cid>,<PDP_type>,<APN>,<PDP_ad dr>,<d_comp>,<h_comp>[,<IPv4AddrAlloc>[,<req uest_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref _access_type>,,[,<Always-on_req>]]]]]] […]    // Read command result
+CGDCONT: <cid>,<PDP_type>,<APN>,<PDP_ad --dmdr>,<d_comp>,<h_comp>[,<IPv4AddrAlloc>[,<req uest_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref _access_type>,,[,<Always-on_req>]]]]]] […]    // Read command result
 
 AT+CGDCONT=[<cid>[,<PDP_type>[,<APN>[,<PDP_addr>[,<d_comp>[,<h_comp>[,<IPv4AddrAlloc>[,<request_type>,,,,,,,,[,<SSC_mode>[,<S-NSSAI>[,<Pref_access_type>,,[,<Always-on_req>]]]]]]]]]]]]    // Write command
 ```
@@ -140,23 +140,40 @@ AT+CGPADDR=[<cid>[,<cid>[,…]]]    // Write command
 # Steps to create interfaces and PDP contexts
 1. To generated new interfaces, first unload the kernel module `qmi_wwan_q` and load it with the desired number of new interfaces.
 ```
-sudo rmod qmi_wwan_q
+sudo rmmod qmi_wwan_q
 sudo modprobe qmi_wwan_q qmap_mode=4 # or other number
 ```
+## [Modem interactions](https://www.freedesktop.org/software/libqmi/man/latest/qmicli.1.html)
+- Get device capabilities
+```
+qmicli -d /dev/cdc-wdm0 --device-open-qmi --dms-get-capabilites
+```
+- Scan for networks
+```
+qmicli -d /dev/cdc-wdm0 --device-open-qmi --nas-network-scan
+```
+- Get home network
+```
+qmicli -d /dev/cdc-wdm0 --device-open-qmi --nas-get-home-network
+```
+- PDP Contexts
+	- Get existing contexts: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-get-profile-list=3gpp`
+	- Delete context: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-delete-profile-list=3gpp,<id>`
+	- Modify context: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-modify-profile-list=3gpp,<id>,<key>=<value>`
+	- Create context: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile-list=3gpp[,<key>=<value>]`
+		- At specific index: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-swi-create-profile-list=3gpp,<index>[,<key>=<value>]`
+```
+# Example of creating a new PDP context
+sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-reate-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
+```
+- Get default settings: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-get-default-settings=3gpp`
+	- You may need to change the default profile: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-set-default-profile-number=3gpp,<id>`
 
-Now in the modem module:
-2. Define functionalities - `AT+CFUN=1`
-3. Get operator selection mode - `AT+COPS?`
-	1. Connect and register to operator - `AT+COPS=<cid>`
-4. Get network registration status - `AT+C5GREG?`
-5. Get existing PDP Contexts - `AT+CGDCONT?`
-	1. Define new PDP context:
-		1. `AT+CGDCONT=1,"IPV4V6","backhaul"`
-		2. `AT+CGDCONT=4,"IPV4V6","client"`, one for each client
- 
+Read [this](https://lists.freedesktop.org/archives/libqmi-devel/2018-July/002935.html) to understand how multiplexing interfaces works for qmi
+
 **NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able to redefine the first context from `internet` to `backhaul` but for new contexts in the `clients` DNN we will have to define them it a `cid` starting at 4 or greater. 
 
-7. Back in the machine, start the `quectel_qmi_proxy` and the `quectel-CM` tools while also defining the name of the DNNs to use.
+3. Back in the machine, start the `quectel_qmi_proxy` and the `quectel-CM` tools while also defining the name of the DNNs to use.
 ```
 sudo ./quectel-qmi-proxy
 sudo ./quectel-CM -n 1 -s <dnn1>
