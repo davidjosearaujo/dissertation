@@ -137,13 +137,29 @@ This command returns a list of PDP addresses for the specified context identifie
 +CGPADDR: list of defined <cid>    // Read command result
 AT+CGPADDR=[<cid>[,<cid>[,…]]]    // Write command
 ```
-## Flow for Registering and Creating a PDP Context Creation
-1. Define functionalities - `AT+CFUN=1`
-2. Get operator selection mode - `AT+COPS?`
-	1. Connect and register to operator - `AT+COPS=`
-3. Get network registration status - `AT+C5GREG?`
-4. Get PDP Contexts - `AT+CGDCONT?`
+# Steps to create interfaces and PDP contexts
+1. To generated new interfaces, first unload the kernel module `qmi_wwan_q` and load it with the desired number of new interfaces.
+```
+sudo rmod qmi_wwan_q
+sudo modprobe qmi_wwan_q qmap_mode=4 # or other number
+```
+
+Now in the modem module:
+2. Define functionalities - `AT+CFUN=1`
+3. Get operator selection mode - `AT+COPS?`
+	1. Connect and register to operator - `AT+COPS=<cid>`
+4. Get network registration status - `AT+C5GREG?`
+5. Get existing PDP Contexts - `AT+CGDCONT?`
 	1. Define new PDP context:
-		1. `AT+CGDCONT=1,"IPV4V6","backhaul","",0,0`
-		2. `AT+CGDCONT=2,"IPV4V6","client","",0,0`
-		3. `AT+CGDCONT=3,"IPV4V6","client","",0,0`, ...
+		1. `AT+CGDCONT=1,"IPV4V6","backhaul"`
+		2. `AT+CGDCONT=4,"IPV4V6","client"`, one for each client
+ 
+**NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able to redefine the first context from `internet` to `backhaul` but for new contexts in the `clients` DNN we will have to define them it a `cid` starting at 4 or greater. 
+
+7. Back in the machine, start the `quectel_qmi_proxy` and the `quectel-CM` tools while also defining the name of the DNNs to use.
+```
+sudo ./quectel-qmi-proxy
+sudo ./quectel-CM -n 1 -s <dnn1>
+sudo ./quectel-CM -n 4 -s <dnn2>
+# The -n flag corresponds to the PDP cid configured in the previous step
+```
