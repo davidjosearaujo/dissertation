@@ -156,28 +156,37 @@ qmicli -d /dev/cdc-wdm0 --device-open-qmi --nas-network-scan
 ```
 qmicli -d /dev/cdc-wdm0 --device-open-qmi --nas-get-home-network
 ```
-- PDP Contexts
-	- Get existing contexts: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-get-profile-list=3gpp`
-	- Delete context: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-delete-profile-list=3gpp,<id>`
-	- Modify context: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-modify-profile-list=3gpp,<id>,<key>=<value>`
-	- Create context: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile-list=3gpp[,<key>=<value>]`
-		- At specific index: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-swi-create-profile-list=3gpp,<index>[,<key>=<value>]`
-```
-# Example of creating a new PDP context
-sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-reate-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
-```
 - Get default settings: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-get-default-settings=3gpp`
 	- You may need to change the default profile: `qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-set-default-profile-number=3gpp,<id>`
+### PDP Contexts
+- Get existing contexts
+```
+qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-get-profile-list=3gpp
+```
+- Delete context
+```
+qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-delete-profile-list=3gpp,<id>
+```
+- Modify context
+```
+qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-modify-profile-list=3gpp,<id>,<key>=<value>
+```
+- Create context
+```
+qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile-list=3gpp[,<key>=<value>]
+```
+- **Example of creating a new PDP context**
+```
+sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
+```
 
 **NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able to redefine the first context from `internet` to `backhaul` but for new contexts in the `clients` DNN we will have to define them it a `cid` starting at 4 or greater. 
-
-3. Back in the machine, start the `quectel_qmi_proxy` and the `quectel-CM` tools while also defining the name of the DNNs to use.
+- Back in the machine, start the `quectel_qmi_proxy` and the `quectel-CM` tools while also defining the name of the DNNs to use.
 ```
 sudo ./quectel-qmi-proxy
 sudo ./quectel-CM -n 1 -s backhaul
 sudo ./quectel-CM -n 4 -s clients
-sudo ./quectel-CM -n 5 -s clients
-sudo ./quectel-CM -n 6 -s clients
+sudo ./quectel-CM -n 5 -s **clients**
 # The -n flag corresponds to the PDP cid configured in the previous step
 ```
 # Multiplexing connections
