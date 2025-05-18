@@ -8,10 +8,10 @@
 # Design a topology diagram for my POC
 ## PDU Session Topology Perspective
 ![[topology.png]]
-- [ ] Use only two DNNs
-	- [ ] One is the default one, for control
-	- [ ] Other is for NAUN3s
-		- [ ] In this one, the multiple PDU Sessions will be established
+- [x] Use only two DNNs
+	- [x] One is the default one, for control
+	- [x] Other is for NAUN3s
+		- [x] In this one, the multiple PDU Sessions will be established
 
 I've created an [issue](https://github.com/aligungr/UERANSIM/issues/756) in UERANSIM GitHub repo regarding the faillure in creating the multiple PDU Sessions.
 # Implement EAP-TLS
@@ -120,5 +120,23 @@ Create my on DHCP server that can check if devices have been successfully authen
 # Cellular Modem
 - [x] Understand how to connect
 - [x] Can I connect with serial and Modem Manager?
-## [[Quectel/Notes|AT command set for User Equipment (UE) - 27.007]]
-See notes in this link
+## How to user bridge and QMAP
+1. Enable `QUECTEL_BRIDGE_MODE` in `qmi_wwan_q.c`, line 134
+``` C
+#if 1
+/*#if defined(CONFIG_BRIDGE) || defined(CONFIG_BRIDGE_MODULE) || defined(CONFIG_BRIDGE_LAN)*/
+#define QUECTEL_BRIDGE_MODE
+#endif
+```
+2. Set `qmap_mode`to 4
+3. Add direct interface to bridge mapping. Enable
+``` C
+#ifdef QUECTEL_BRIDGE_MODE
+/*         static uint __read_mostly bridge_mode = 0/*|BIT(1)*/;*/
+static uint __read_mostly bridge_mode = BIT(1)|BIT(2)|BIT(3);
+module_param( bridge_mode, uint, S_IRUGO );
+#endif
+```
+4. Compile with `make install`
+5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=6`
+6. 
