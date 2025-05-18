@@ -12,18 +12,17 @@
 	- [x] One is the default one, for control
 	- [x] Other is for NAUN3s
 		- [x] In this one, the multiple PDU Sessions will be established
-
 I've created an [issue](https://github.com/aligungr/UERANSIM/issues/756) in UERANSIM GitHub repo regarding the faillure in creating the multiple PDU Sessions.
-# Implement EAP-TLS
+# Implement EAP-TLS with FreeRADIUS and `hostapd` 
 ## EAP Framework Topology Perspective
-![[topology-EAP.png]]
+![[topology_EAP.png]]
 Try to follow instructions from here:
-- https://www.tp-link.com/us/support/faq/3456/
-- https://wiki.alpinelinux.org/wiki/FreeRadius_EAP-TLS_configuration
-- https://simplificandoredes.com/en/freeradius-installation-and-configuration
-- https://www.systutorials.com/docs/linux/man/5-wpa_supplicant/ - Usefull for wpa_supplicant in wired mode
-- https://w1.fi/wpa_supplicant/devel/
-## Testing configurations
+- [Configuration Guide on EAP-TLS authentication for WPA-Enterprise (with FreeRADIUS)](https://www.tp-link.com/us/support/faq/3456/)
+- [Alpine FreeRadius EAP-TLS configuration](https://wiki.alpinelinux.org/wiki/FreeRadius_EAP-TLS_configuration)
+- [FreeRadius: Installation and Configuration](https://simplificandoredes.com/en/freeradius-installation-and-configuration)
+- [wpa_supplicant (5) - Linux Manuals](https://www.systutorials.com/docs/linux/man/5-wpa_supplicant/) - Useful for `wpa_supplicant` in wired mode
+- [`wpa_supplicant` Documentation](https://w1.fi/wpa_supplicant/devel/)
+## Testing FreeRADIUS configurations
 We need to stop the running service
 ``` bash
 sudo systemctl stop freeradius.service
@@ -33,7 +32,7 @@ Then run in debug mode
 sudo freeradius -X
 ```
 ## Define UE as a authenticator (client)
-- [x] Add new entry to `/etc/freeradius/3.0/clients.conf` file
+- Add new entry to `/etc/freeradius/3.0/clients.conf` file
 ```bash
 $ sudo nano /etc/freeradius/3.0/clients.conf
 ...
@@ -43,7 +42,7 @@ client UE {                  #’UE’ is the alias of your access point
 }
 ...
 ```
-- [x] It shouldn't be necessary, but if requests are not being received, we may need to configure FreeRADIUS to listen (on `radiusd.conf` file) on the specific interface:
+- It shouldn't be necessary, but if requests are not being received, we may need to configure FreeRADIUS to listen (on `radiusd.conf` file) on the specific interface:
 ```bash
 listen {
 	type = auth
@@ -65,22 +64,22 @@ listen {
 $ sudo -s freerad
 $ cd /etc/freeradius/3.0/certs
 ```
-- [x] Note that you need to **clean up all the CAs each time before you recreate them**, or `openssl` Swill output ‘Nothing to be done’ and it won’t regenerate new CAs. Delete the existing files by the following command:
+- Note that you need to **clean up all the CAs each time before you recreate them**, or `openssl` Swill output ‘Nothing to be done’ and it won’t regenerate new CAs. Delete the existing files by the following command:
 ```bash
 $ rm -f *csr *key *p12 *pem *crl *crt *der *mk *txt *attr *old serial dh
 ```
-- [x] You can edit those \*.cnf files to meet your requirements. 
+- You can edit those `\*.cnf` files to meet your requirements. 
 	- If you wish to change the certificate password, do it in `ca.cnf` in field `output_password`. **ATTENTION**, if you do it, you must also change the password in `mods-available/eap` in the field o `tls > private_key_password`. By default the password should be `whatever`.
-- [x] After cleaning up the CAs, run make command to generate new CAs.
+- After cleaning up the CAs, run make command to generate new CAs.
 ```bash
 $ make
 ```
 ## Enable EAP-TLS as a supported authentication method
-- [x] Edit `/etc/freeradius/3.0/mods-available/eap`
+- Edit `/etc/freeradius/3.0/mods-available/eap`
 ```bash
 default_eap_type = tls
 ```
-- [x] Delete old and create new symlink (do it as freerad user)
+- Delete old and create new symlink (do it as freerad user)
 ```bash
 $ sudo -s -u freerad
 $ rm /etc/freeradius/3.0/mods-enabled/eap
@@ -91,8 +90,8 @@ $ ln -s /etc/freeradius/3.0/mods-available/eap /etc/freeradius/3.0/mods-enabled/
 $ sudo systemctl restart freeradius
 ```
 ## Config the UE as AP with client secret
-- [x] Configuring [`hostapd`](https://wireless.docs.kernel.org/en/latest/en/users/documentation/hostapd.html)
-The `hostapd.conf` file will have the following configurations.
+### Configuring [`hostapd`](https://wireless.docs.kernel.org/en/latest/en/users/documentation/hostapd.html)
+- The `hostapd.conf` file will have the following configurations.
 ```
 interface=enp0s10
 logger_syslog=-1
@@ -105,22 +104,21 @@ auth_server_addr="AUTH_SERVER_IP"
 auth_server_port=1812
 auth_server_shared_secret="CLIENT_SECRET"
 ```
-- [x] We will need to use the `secret` we've defined on `/etc/freeradius/3.0/clients.conf`. In a Vagrantfile can be done by just using a variable.
+- We will need to use the `secret` we've defined on `/etc/freeradius/3.0/clients.conf`. In a Vagrantfile can be done by just using a variable.
 ## Install the certificates on Users
-- [x] Copy the generated `ca.pem` and `client.pem` file
+-  Copy the generated `ca.pem` and `client.pem` file
 > *Note that the password of the private key is ‘whatever’ by default (if you haven’t changed the configurations by editing /etc/freeradius/3.0/certs/\*.cnf).*
 ## Copy certificate to NAUN3
-- [x] Disable IP on the NAUN3
-- [x] Install `ca.crt`, `client.crt` and `client.key`
+- Disable IP on the NAUN3
+- Install `ca.crt`, `client.crt` and `client.key`
 # DHCP for authenticated hosts
 Create my on DHCP server that can check if devices have been successfully authenticated before leasing an IP.
 - Hostapd flags [docs](https://w1.fi/wpa_supplicant/devel/wpa__ctrl_8h.html)
-- [x] I need to access `hostapd`to check authenticated devices. Check [this](https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html) documentation.
-- [x] Needs to deauth users and request and close PDU Sessions
-# Cellular Modem
-- [x] Understand how to connect
-- [x] Can I connect with serial and Modem Manager?
-## How to user bridge and QMAP
+- I need to access `hostapd`to check authenticated devices. Check [this](https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html) documentation.
+- Needs to deauth users and request and close PDU Sessions
+# Establishing Multiple PDU Sessions/PDP Contexts/PDNs with Quectel Cellular Modem
+## How to use QMAP
+### With bridge and via Quectel-CM
 1. Enable `QUECTEL_BRIDGE_MODE` in `qmi_wwan_q.c`, line 134
 ``` C
 #if 1
@@ -139,4 +137,30 @@ module_param( bridge_mode, uint, S_IRUGO );
 ```
 4. Compile with `make install`
 5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=6`
-6. 
+6. Activate bridges
+```
+brctl addbr br2
+brctl addif br2 wwan0.2
+
+brctl addbr br3
+brctl addif br3 wwan0.3
+
+...
+
+brctl show
+```
+7. Active `./quectel-qmi-proxy -d /dev/cdc-wdm0 &`
+8. Use Quectel-CM to setup data call
+```
+./quectel-CM -n 1
+./quectel-CM -n 2
+./quectel-CM -n 3
+...
+```
+9. Get IP address via DHCP
+```
+udhcpc -i br2
+udhcpc -i br3
+...
+```
+### Via `qmicli`
