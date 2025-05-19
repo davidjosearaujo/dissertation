@@ -180,16 +180,7 @@ qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile-list=3gpp[,<key>=
 sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
 ```
 
-**NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able to redefine the first context from `internet` to `backhaul` but for new contexts in the `clients` DNN we will have to define them it a `cid` starting at 4 or greater. 
-- Back in the machine, start the `quectel_qmi_proxy` and the `quectel-CM` tools while also defining the name of the DNNs to use.
-```
-sudo ./quectel-qmi-proxy
-sudo ./quectel-CM -n 1 -s backhaul
-sudo ./quectel-CM -n 4 -s clients
-sudo ./quectel-CM -n 5 -s **clients**
-# The -n flag corresponds to the PDP cid configured in the previous step
-```
+**NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able 
 # Multiplexing connections
 Read these to understand how multiplexing interfaces works for qmi:
 - [HOWTO: using QMAP multiplexing with libqmi](https://lists.freedesktop.org/archives/libqmi-devel/2018-July/002935.html)
-- [Setting Up a Data Connection via QMI Interface on Raspberry Pi with Quectel Modem and Sixfab Shield](https://medium.com/slice-of-pi-innovations-hacks/setting-up-a-data-connection-via-qmi-interface-on-raspberry-pi-with-quectel-modem-and-sixfab-shield-aa2b2b3f3d5c)

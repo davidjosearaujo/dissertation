@@ -121,46 +121,67 @@ Create my on DHCP server that can check if devices have been successfully authen
 ### With bridge and via Quectel-CM
 1. Enable `QUECTEL_BRIDGE_MODE` in `qmi_wwan_q.c`, line 134
 ``` C
-#if 1
-/*#if defined(CONFIG_BRIDGE) || defined(CONFIG_BRIDGE_MODULE) || defined(CONFIG_BRIDGE_LAN)*/
 #define QUECTEL_BRIDGE_MODE
-#endif
 ```
+
 2. Set `qmap_mode`to 4
-3. Add direct interface to bridge mapping. Enable
+```C
+#define QUECTEL_WWAN_QMAP 4
+```
+
+3. Add direct interface to bridge mapping.
 ``` C
 #ifdef QUECTEL_BRIDGE_MODE
-/*         static uint __read_mostly bridge_mode = 0/*|BIT(1)*/;*/
-static uint __read_mostly bridge_mode = BIT(1)|BIT(2)|BIT(3);
+static uint __read_mostly bridge_mode = BIT(1)|BIT(2);
 module_param( bridge_mode, uint, S_IRUGO );
 #endif
 ```
+
 4. Compile with `make install`
-5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=6`
+5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=14`
 6. Activate bridges
+
+> You can install `brctl`via `sudo apt install bridge-util` or just use  *busybox*
+
 ```
 brctl addbr br2
 brctl addif br2 wwan0.2
 
 brctl addbr br3
 brctl addif br3 wwan0.3
-
-...
-
-brctl show
-```
-7. Active `./quectel-qmi-proxy -d /dev/cdc-wdm0 &`
-8. Use Quectel-CM to setup data call
-```
-./quectel-CM -n 1
-./quectel-CM -n 2
-./quectel-CM -n 3
 ...
 ```
+
+7. Check `bridge`interfaces
+```bash
+ip link show type bridge
+```
+
+8. Active QMI proxy
+```bash
+./quectel-qmi-proxy -d /dev/cdc-wdm0
+```
+
+8. Use `quectel-CM` to setup data call with proper PDN and interface binding
+```bash
+./quectel-CM -n 1 -m 1 -s backhaul
+./quectel-CM -n 3 -m 2 -s client
+./quectel-CM -n 4 -m 3 -s client
+...
+```
+
+> Flags `-n` specifies which PDN to setup data call, and `-m` binds a QMI data call to `wwan0_<iface_idx>` when QMAP is used. E.g  `-n 1 -m 1`, it binds the PDN 1 to wwan0_1. the `-s` flag allows us to specify which APN to connect to.
+
 9. Get IP address via DHCP
-```
+```bash
 udhcpc -i br2
 udhcpc -i br3
 ...
+``` 
+
+10. If the QMI data call is left running in the background, you can later kill the connection, by **specifying the PDN ID number**
+```bash
+./quectel-CM -k 1
 ```
-### Via `qmicli`
+
+### Regarding QMAP and bridge
