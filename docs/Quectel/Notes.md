@@ -150,7 +150,7 @@ qmicli -d /dev/cdc-wdm0 --device-open-qmi --dms-get-capabilites
 ```
 - Scan for networks
 ```
-qmicli -d /dev/cdc-wdm0 --device-open-qmi --nas-network-scan
+qmicli -d /dev/cdc-wdm0 - -device-open-qmi --nas-network-scan
 ```
 - Get home network
 ```
@@ -177,10 +177,12 @@ qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile-list=3gpp[,<key>=
 ```
 - **Example of creating a new PDP context**
 ```
-sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
+sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,apn=clients,pdp-type=IPV4,auth=NONE"
 ```
 
 **NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able 
+
+
 # Multiplexing connections
 Read these to understand how multiplexing interfaces works for qmi:
-- [HOWTO: using QMAP multiplexing with libqmi](https://lists.freedesktop.org/archives/libqmi-devel/2018-July/002935.html)
+- [HOWTO: using **QMAP** multiplexing with libqmi](https://lists.freedesktop.org/archives/libqmi-devel/2018-July/002935.html)

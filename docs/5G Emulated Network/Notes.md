@@ -138,18 +138,13 @@ module_param( bridge_mode, uint, S_IRUGO );
 ```
 
 4. Compile with `make install`
-5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=14`
-6. Activate bridges
 
-> You can install `brctl`via `sudo apt install bridge-util` or just use  *busybox*
+5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=6`
 
-```
-brctl addbr br2
-brctl addif br2 wwan0.2
-
-brctl addbr br3
-brctl addif br3 wwan0.3
-...
+6. Activate bridge
+```bash
+sudo ip link add name lan_bridge type bridge
+sudo ip link set dev <wwan0_idx> master br maslan_bridge
 ```
 
 7. Check `bridge`interfaces
@@ -157,31 +152,41 @@ brctl addif br3 wwan0.3
 ip link show type bridge
 ```
 
-8. Active QMI proxy
+8. Check interfaces connected to the bridge
+```bash
+sudo bridge link show br lan_brige
+```
+
+9. Create new PDP Context if needed
+```bash
+sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
+```
+
+10. Active QMI proxy
 ```bash
 ./quectel-qmi-proxy -d /dev/cdc-wdm0
 ```
 
-8. Use `quectel-CM` to setup data call with proper PDN and interface binding
+11. Use `quectel-CM` to setup data call with proper PDN and interface binding
 ```bash
-./quectel-CM -n 1 -m 1 -s backhaul
-./quectel-CM -n 3 -m 2 -s client
+./quectel-CM -n 1 -m 2 -s internet # backhaul DNN
 ./quectel-CM -n 4 -m 3 -s client
-...
 ```
 
-> Flags `-n` specifies which PDN to setup data call, and `-m` binds a QMI data call to `wwan0_<iface_idx>` when QMAP is used. E.g  `-n 1 -m 1`, it binds the PDN 1 to wwan0_1. the `-s` flag allows us to specify which APN to connect to.
+Flags:
+- `-b` enables network interface bridge function
+- `-n` specifies which PDN to setup data call;
+- `-m` binds a QMI data call to `wwan0_<iface_idx>` when QMAP is used. E.g  `-n 1 -m 1`, it binds the PDN 1 to `wwan0_1` .
+- `-s` flag allows us to specify which APN to connect to.
 
-9. Get IP address via DHCP
+12. Get IP address **via** DHCP
 ```bash
 udhcpc -i br2
 udhcpc -i br3
 ...
 ``` 
 
-10. If the QMI data call is left running in the background, you can later kill the connection, by **specifying the PDN ID number**
+13. If the QMI data call is left running in the background, you can later kill the connection, by **specifying the PDN ID number**
 ```bash
 ./quectel-CM -k 1
 ```
-
-### Regarding QMAP and bridge
