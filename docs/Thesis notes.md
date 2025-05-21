@@ -60,7 +60,7 @@ This session-based proxy identity approach offers several advantages:
 - **Individual Device Management:** By providing a per-device PDU session, it allows for potentially granular policy application (QoS, security) at the 5GC level based on the session, indirectly controlling individual device flows.
 ## Framework Architecture and Integration
 ### Overall Architecture Overview
-![[general-topology.png]]
+![[general_topology.png]]
 ### Component Integration and Interactions
 The proposed framework integrates several distinct components, coordinating their standard functionalities to achieve the goal of connecting NAUN3 devices to the 5G network. The interactions are orchestrated primarily by the 5G-RG, as illustrated in Figure [X.Z - Replace with actual figure number from the architecture diagram]:
 
@@ -77,8 +77,6 @@ The proposed framework integrates several distinct components, coordinating thei
     - **UPF:** Establishes GTP-U tunnels as instructed by the SMF for each PDU session and forwards user plane traffic between the 5G RAN (via N3 interface towards the 5G-RG) and the respective Data Network (DN) associated with the DNN.    
 This integration ensures that while the NAUN3 device only undergoes local authentication, its traffic is securely tunneled through the 5GC via a dedicated, dynamically established PDU session managed by the mediating 5G-RG.
 ### Key Communication Flows in the Integrated System
-
-!! CREATE A FLOW CHART !!
 
 Illustrate the end-to-end flow for onboarding an NAUN3 device:
 - Initial 5G-RG registration with the 5GC.
