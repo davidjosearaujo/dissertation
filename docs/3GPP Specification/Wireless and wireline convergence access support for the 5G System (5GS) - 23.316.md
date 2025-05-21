@@ -53,9 +53,9 @@ This clause defines the support for identifying the traffic of individual non-3G
 [Clause 5.52 of TS 23.501](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-501_zzd.html#e-5-52) applies to the 5G-RG with the following deltas:
 - The UE is replaced by 5G-RG.
 
-The overall architecture is illustrated in [Figure 4.10e-1](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_f.html#tinv-23-316-4.10e-1). Non-3GPP devices associated with the same PDU Session can be further differentiated using their Non-3GPP Device Identifiers. This is further described in [[#Annex C QoS differentiation of traffic of individual non-3GPP devices behind 5G-RG R19|Annex C]].
+The overall architecture is illustrated in Figure 4.10e-1. Non-3GPP devices associated with the same PDU Session can be further differentiated using their Non-3GPP Device Identifiers. This is further described in [[#Annex C QoS differentiation of traffic of individual non-3GPP devices behind 5G-RG R19|Annex C]].
 
-![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session.gif]]
+![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session.png]]
 # 4.13 Support of FN-RG
 FN-RG is a legacy type of residential gateway that does not support N1 signalling and is not 5GC capable.
 
@@ -151,13 +151,13 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
 # Annex C QoS differentiation of traffic of individual non-3GPP devices behind 5G-RG |R19|
 This Annex describes how the traffic of individual non-3GPP devices behind a 5G-RG can be identified and provided with differentiated QoS.
 
-![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session.gif]]
+![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session.png]]
 
 As in this example, two non-3GPP devices mapped to PDU Session A initially used the default QoS Flow (QFI 1); when differentiated QoS is requested for one device, the 5G-RG binds its traffic to a Non-3GPP Device Identifier, and its traffic is mapped to a separate QoS Flow (QFI 2). Four non-3GPP devices mapped to PDU Session B based on their Connectivity Group ID X initially used the default QoS Flow (QFI 3); when differentiated QoS is requested for two of those four devices, the 5G-RG binds their traffic to Non-3GPP Device Identifiers, and their traffic is mapped to separate QoS Flows (QFI 4 and QFI 5). Similarly, three non-3GPP devices mapped to PDU Session C based on their Connectivity Group ID Y initially used the default QoS Flow (QFI 6); when differentiated, but the same, QoS is requested for two of those three devices, the 5G-RG binds their traffic to Non-3GPP Device Identifiers, and their traffic is mapped to a separate QoS Flow (QFI 7).
 
 [Figure C-2](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_v.html#tinv-23-316-C-2) illustrates a procedure which enables the 5GS to identify the traffic of individual non-3GPP devices initially using the same PDU Session behind a 5G-RG and provide differentiated QoS.
 
-![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session Flow.gif]]
+![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session Flow.png]]
 
 - Step 0a
 	- Non-3GPP device 1 is connected to the 5G-RG.

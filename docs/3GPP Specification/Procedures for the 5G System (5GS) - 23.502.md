@@ -39,3 +39,18 @@ If the TWIF receives a Decorated NAI, in Registration Request message the TWIF s
 The TWIF selects an AMF by using the 5G-GUTI in the NAI, or selects the AMF of the VPLMN indicates by the realm of the decoration in the Decorated NAI, for example "mnc<MNC_visited>.mcc<MCC_visited>.3gppnetwork.org" or selects the AMF by using the local configuration. TWIF sends an N2 message to the AMF including the Registration Request, the User Location and an AN Type.
 #### Step 6
 An EAP authentication procedure takes place between the N5CW device and AUSF. Over the N2 interface, the EAP messages are encapsulated within NAS Authentication messages. The type of EAP authentication procedure is specified in [[Security architecture and procedures for 5G system - 33.501|TS 33.501]].
+# 4.15.6.15 Provisioning of Non-3GPP Device Identifier Information |R19|
+This clause describes the procedures to allow an AF to provision QoS information for the non-3GPP device(s) (as defined in [clause 5.52 of TS 23.501](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-501_zzd.html#e-5-52)) that require differentiated QoS treatment for a UE subscription to the 5G system via NEF. The AF may belong to the operator or to an external party.
+
+To provision QoS information for the non-3GPP device(s) that require differentiated QoS treatment, the steps 1 to 4 of procedure defined in [clause 4.15.6.7.2](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-502_zz.html#e-4-15-6-7-2) is performed with the following considerations:
+
+1. Service Description. Contains an AF-Service-Identifier indicating that the request is for providing Non-3GPP Device Identifier Information.
+2. Service Parameters. Contains the Non-3GPP Device Identifier Information which has the following parameters:
+    - Non-3GPP Device Identifier, a generic string, which uniquely identifies a non-3GPP device behind a specific UE subscription.
+    - QoS reference or individual QoS parameters as described in [clause 6.1.3.22 of TS 23.503](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-503_j.html#e-6-1-3-22).
+    - Optionally, DNN and S-NSSAI. This may be provided by the AF or may be determined by the NEF based on the AF-Service-Identifier if not provided by the AF.
+    - Optionally, Flow description information as specified in [clause 6.1.3.6 of TS 23.503](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-503_h.html#e-6-1-3-6).
+3. The Target UE identifier(s). A specific UE identified by e.g. GPSI or SUPI.
+4. The parameters and operation for UE policy delivery is not needed.
+
+The NEF sets the value of Data Subset Identifier to "Non-3GPP Device Identifier Information" in Nudr_DM_Create/Update/Delete service operations when storing/updating/deleting this data. NEF determines to use this data subset based on AF-Service-Identifier.
