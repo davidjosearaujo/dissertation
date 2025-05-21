@@ -22,7 +22,6 @@ Session management of FN-RG follows the principle defined in TS 23.501 clause 5.
 non-5G capable (N5GC) devices connecting via W-5GAN can be authenticated by the 5GC using EAP based authentication method(s) as defined in TS 33.501.
 
 **Roaming is not supported for N5GC devices.**
-
 ![[2024-10-07_12-39.png]]
 1. The W-AGF registers the FN-CRG to 5GC as specified in [[Wireless and wireline convergence access support for the 5G System (5GS) - 23.316#7.2.1.3 FN-RG Registration via W-5GAN|clause 7.2.1.3]] or the 5G-CRG registers to 5GC as specified in [[Wireless and wireline convergence access support for the 5G System (5GS) - 23.316#7.2.1.1 5G-RG Registration via W-5GAN|clause 7.2.1.1]]
 2. The CRG is configured as L2 bridge mode and forwards any L2 frame to W-AGF. **802.1x authentication may be triggered**. This can be done either by N5GC device sending a EAPOL-start frame to W-AGF or W-AGF receives a frame from an unknown MAC address.
@@ -48,6 +47,15 @@ After successful registration, PDU Session establishment/modification/release pr
 The W-AGF shall request the release of the NGAP connection for each N5GC device served by a CRG whose NGAP connection has been released.
 
 5G-CRG behaves as FN-CRG (i.e. L2 bridge mode) when handling N5GC devices.
+# 4.10e Differentiated QoS for non-3GPP devices behing 5G-RG |R19|
+This clause defines the support for identifying the traffic of individual non-3GPP devices behind a 5G-RG and providing them differentiated QoS.
+
+[Clause 5.52 of TS 23.501](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-501_zzd.html#e-5-52) applies to the 5G-RG with the following deltas:
+- The UE is replaced by 5G-RG.
+
+The overall architecture is illustrated in [Figure 4.10e-1](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_f.html#tinv-23-316-4.10e-1). Non-3GPP devices associated with the same PDU Session can be further differentiated using their Non-3GPP Device Identifiers. This is further described in [[#Annex C QoS differentiation of traffic of individual non-3GPP devices behind 5G-RG R19|Annex C]].
+
+![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session.gif]]
 # 4.13 Support of FN-RG
 FN-RG is a legacy type of residential gateway that does not support N1 signalling and is not 5GC capable.
 
@@ -140,3 +148,42 @@ For W-5GBAN, the L-W-UP protocol stack, between FN-BRG and W-AGF is defined in [
 14. The W-AGF sends a N2 Uplink NAS transport message, including a NAS Registration Complete message, back to the AMF when the procedure is completed. The W-AGF shall store the 5G-GUTI to be able to send it in potential later NAS procedures.
 
 15. The AMF performs step 23-24 in TS 23.502 clause 4.2.2.2.2.
+# Annex C QoS differentiation of traffic of individual non-3GPP devices behind 5G-RG |R19|
+This Annex describes how the traffic of individual non-3GPP devices behind a 5G-RG can be identified and provided with differentiated QoS.
+
+![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session.gif]]
+
+As in this example, two non-3GPP devices mapped to PDU Session A initially used the default QoS Flow (QFI 1); when differentiated QoS is requested for one device, the 5G-RG binds its traffic to a Non-3GPP Device Identifier, and its traffic is mapped to a separate QoS Flow (QFI 2). Four non-3GPP devices mapped to PDU Session B based on their Connectivity Group ID X initially used the default QoS Flow (QFI 3); when differentiated QoS is requested for two of those four devices, the 5G-RG binds their traffic to Non-3GPP Device Identifiers, and their traffic is mapped to separate QoS Flows (QFI 4 and QFI 5). Similarly, three non-3GPP devices mapped to PDU Session C based on their Connectivity Group ID Y initially used the default QoS Flow (QFI 6); when differentiated, but the same, QoS is requested for two of those three devices, the 5G-RG binds their traffic to Non-3GPP Device Identifiers, and their traffic is mapped to a separate QoS Flow (QFI 7).
+
+[Figure C-2](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_v.html#tinv-23-316-C-2) illustrates a procedure which enables the 5GS to identify the traffic of individual non-3GPP devices initially using the same PDU Session behind a 5G-RG and provide differentiated QoS.
+
+![[Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session Flow.gif]]
+
+- Step 0a
+	- Non-3GPP device 1 is connected to the 5G-RG.
+- Step 0b
+	- To provide connectivity to the non-3GPP device 1, the 5G-RG implements the existing behaviour of either using the URSP rule (optionally containing the Connectivity Group ID as described in [clause 4.10b](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_f.html#e-4-10b)), or using UE Local Configuration, to map the traffic of the non-3GPP device 1 to a PDU Session.
+- Step 0c
+	- Non-3GPP device 2 is connected to the 5G-RG.
+- Step 0d
+	- To provide connectivity to the non-3GPP device 2, the 5G-RG implements the existing behaviour of either using the URSP rule (optionally containing the Connectivity Group ID as described in [clause 4.10b](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_f.html#e-4-10b)), or using UE Local Configuration, to map the traffic of the non-3GPP device 2 to the same PDU Session as non-3GPP device 1.
+- Step 1
+	- The 5G-RG subscription owner or an authorized user, using mechanisms out of scope of 3GPP, requests differentiated QoS for the non-3GPP device 2 through the AF.
+- NOTE 1:
+	- The request for differentiated service can be made through an operator portal hosted either in the 5G-RG or in the AF.
+- Step 2
+	- AF provisions the Non-3GPP Device Identifier Information for the non-3GPP device 2 into the UDR, as defined in [clause 4.15.6.15 of TS 23.502](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-502_zzb.html#e-4-15-6-15).
+- NOTE 2:
+	- Provisioning of the Non-3GPP Device Identifier Information into the UDR is done only for the non-3GPP devices that require differentiated QoS. This provisioning could be done before a device is connected to the 5G-RG.
+- Step 3
+	- Based on the network configuration, either a 5G-RG requested PDU Session Modification, or a 5G-RG requested PDU Session Establishment procedure is triggered.
+- Step 3a
+	- (5G-RG requested PDU Session Modification) As defined in [clause 7.3.2](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_n.html#e-7-3-2).
+- Step 3b
+	- (5G-RG requested PDU Session Establishment) As defined in [clause 7.3.1](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-316_n.html#e-7-3-1).
+
+> Editor's note:
+> 	Whether the PCF initiated SM Policy Association Modification procedure as defined in [clause 4.16.5.2 of TS 23.502](https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-502_zzh.html#e-4-16-5-2) can also be used is FFS.
+
+- Step 4
+	- In response to step 1, using mechanisms out of scope of 3GPP, the operator portal returns a response to the 5G-RG subscription owner or the authorized user about the completion of the differentiated QoS request for non-3GPP device 2.
