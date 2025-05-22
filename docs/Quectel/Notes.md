@@ -183,76 +183,55 @@ sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,apn=cl
 **NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able 
 # Multiplexing connections
 ## Establishing Multiple PDU Sessions/PDP Contexts/PDNs with Quectel Cellular Modem
-### How to use QMAP
-#### With bridge and via Quectel-CM
-1. Enable `QUECTEL_BRIDGE_MODE` in `qmi_wwan_q.c`, line 134
-``` C
-#define QUECTEL_BRIDGE_MODE
-```
 
-2. Set `qmap_mode`to 4
+The goal is to establish multiple PDU Sessions in the two DNNs like so:
+- 1 PDU Session in `backhaul` DNN
+- 2 PDUs Session in the `clients` DNN
+	- These two PDUs need to be able to run simultaneously (**THIS IS THE CURRENT ISSUE**)
+## Steps
+
+1. Set `qmap_mode`to 4
 ```C
 #define QUECTEL_WWAN_QMAP 4
 ```
 
-3. Add direct interface to bridge mapping.
-``` C
-#ifdef QUECTEL_BRIDGE_MODE
-static uint __read_mostly bridge_mode = BIT(1)|BIT(2);
-module_param( bridge_mode, uint, S_IRUGO );
-#endif
-```
-
-4. Compile with `make install`
-
-5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=6`
-
-6. Activate bridge. This involves creating a bridge interface, and place inside it the desired interface that will be binded to the PDU Session and also the network interface receiving traffic from the clients (e.g `wlan0`)
+2. Compile with 
 ```bash
-sudo ip link add name lan_bridge type bridge
-sudo ip link set dev <wwan0_idx> master br lan_bridge
+make install
 ```
 
-7. Check `bridge`interfaces
+3. Load module to kernel with
 ```bash
-ip link show type bridge
+sudo modprobe qmi_wwan_q qmap_mode=4
 ```
 
-8. Check interfaces connected to the bridge
-```bash
-sudo bridge link show br lan_brige
-```
-
-9. Create new PDP Context if needed
+4. Create new PDP Contexs (we create two new context, for two hypothetical LAN devices, these will have index 4 and 5)
+	1. We'çç also use the existing default PDP Context (index 1) for `backhaul`
 ```bash
 sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
+
+sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_2,apn=clients,pdp-type=IPV4V6,auth=NONE"
 ```
 
 10. Active QMI proxy
 ```bash
-./quectel-qmi-proxy -d /dev/cdc-wdm0
+./quectel-qmi-proxy -d /dev/cdc-wdm0 &
 ```
 
-11. Use `quectel-CM` to setup data call with proper PDN and interface binding
+11. Use `quectel-CM` to setup data call with specific PDP Context and interface binding
 ```bash
-./quectel-CM -n 1 -m 2 -s internet # backhaul DNN
-./quectel-CM -b -n 4 -m 3 -s client
+./quectel-CM -n 1 -m 2 -s backhaul &
+./quectel-CM -n 4 -m 3 -s clients &
+./quectel-CM -n 5 -m 4 -s clients &
 ```
 
 Flags:
 - `-b` enables network interface bridge function
-- `-n` specifies which PDN to setup data call;
-- `-m` binds a QMI data call to `wwan0_<iface_idx>` when QMAP is used. E.g  `-n 1 -m 1`, it binds the PDN 1 to `wwan0_1` .
+- `-n` specifies which PDP to setup data call;
+- `-m` binds a QMI data call to `wwan0_<iface_index>` when QMAP is used. E.g  `-n 1 -m 1`, it binds the PDP 1 to `wwan0_1` .
 - `-s` flag allows us to specify which APN to connect to.
 
-12. Get IP address **via** DHCP
-```bash
-udhcpc -i br2
-udhcpc -i br3
-...
-``` 
-
-13. If the QMI data call is left running in the background, you can later kill the connection, by **specifying the PDN ID number**
+13. If the QMI data call is left running in the background, you can later kill the connection, by **specifying the PDP ID number**
 ```bash
 ./quectel-CM -k 1
 ```
