@@ -3,6 +3,7 @@ module interceptor
 go 1.24.1
 
 require (
+	github.com/coreos/go-iptables v0.8.0
 	github.com/vishvananda/netlink v1.3.0
 	gopkg.in/yaml.v3 v3.0.1
 )
