@@ -4,27 +4,27 @@
 
 # Network Configuration
 ## 5GC IP
-CORE_IP = "192.168.56.10"
+CORE_IP = "192.168.57.10"
 ## Authentication Server IP via backhaul tunnel
 AUTH_SERVER_IP="10.45.0.1"
 
 ## gNodeB IPs
-GNB_IP_CORE = "192.168.56.11"
-GNB_IP_UE = "192.168.57.11"
+GNB_IP_CORE = "192.168.57.100"
+GNB_IP_UE = "192.168.58.10"
 
 ## UE IPs
-UE_IP = "192.168.57.12"
-UE_LAN_IP = "192.168.60.2"
+UE_IP = "192.168.58.100"
+UE_LAN_IP = "192.168.59.10"
 CLIENT_EAP_IP = "10.45.0.2"
 
 ## UE Configurations
 UE_IMSI = "999700000000001"
 UE_KEY = "465B5CE8B199B49FAA5F0A2EE238A6BC"
 UE_OPC = "E8ED289DEBA952E4283B54E88E6183CA"
-PDU_SESSIONS = "3"
+DEFAULT_PDU_SESSIONS = "0" # Number of PDU sessions in `clients` DNN to be created by default
 
 ## End Device IPs
-NAUN3_IP = "192.168.60.200"
+NAUN3_IP = "192.168.59.100"
 
 ## EAP Auth Configurations
 EAP_SECRETS_FILE = "build/eap-secrets" 
@@ -34,7 +34,7 @@ CERT_CLIENT_PASSWD = SecureRandom.alphanumeric(8)
 CLIENT_SECRET = SecureRandom.alphanumeric(8)
 
 if ARGV.include?("up") && !File.exist?(EAP_SECRETS_FILE)
-  puts `cd interceptor && go build -o ../build/ && cd ..`
+  puts `mkdir build && cd interceptor && go build -o ../build/ && cd ..`
   File.write(EAP_SECRETS_FILE, "#{CERT_CA_PASSWD},#{CERT_SERVER_PASSWD},#{CERT_CLIENT_PASSWD},#{CLIENT_SECRET}")
 elsif File.exist?(EAP_SECRETS_FILE)
   puts `cd interceptor && go build -o ../build/ && cd ..`
@@ -130,9 +130,6 @@ Vagrant.configure("2") do |config|
     # LAN interface
     ue.vm.network "private_network", ip: UE_LAN_IP
 
-    # Copying QUECTEL drivers
-    ue.vm.provision "file", source: "quectel", destination: "quectel"
-
     # Interceptor for hostapd, dnsmasq and pdu session management
     ue.vm.provision "file", source: "build/interceptor", destination: "interceptor"
 
@@ -146,7 +143,7 @@ Vagrant.configure("2") do |config|
     ue.vm.provision "file", source: "ue_install", destination: "ue_install"
     ue.vm.provision "shell" do |s|
       s.inline  = "/bin/bash ue_install $1 $2 $3 $4 $5"
-      s.args    = [GNB_IP_UE, PDU_SESSIONS, CLIENT_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET]
+      s.args    = [GNB_IP_UE, DEFAULT_PDU_SESSIONS, CLIENT_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET]
     end
 
     ue.vm.synced_folder "./build/runtime-logs", "/log", create: true
