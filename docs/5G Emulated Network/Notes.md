@@ -123,40 +123,40 @@ This guide explains how to configure your Linux router to allow a specific LAN d
 # --- START OF COMMANDS ---
 
 # === 1. Enable IP Forwarding ===
-# (Run this once, or ensure it's set to load on boot, e.g., in /etc/sysctl.conf)
 sudo sysctl -w net.ipv4.ip_forward=1
 
-# === 2. IPTables Rules ===
+# === 2. Tag Traffic Based on MAC Address ===
 
-# --- Mangle Table: PREROUTING chain for ROUTE target ---
-# Route Device 1 via WAN1
-sudo iptables -t mangle -A PREROUTING -i <LAN_IF> -m mac --mac-source <MAC_DEVICE1> -j ROUTE --oif <WAN1_IF> --gw <CLIENT_DNN_GW_IP>
-# Route Device 2 via WAN2
-sudo iptables -t mangle -A PREROUTING -i <LAN_IF> -m mac --mac-source <MAC_DEVICE2> -j ROUTE --oif <WAN2_IF> --gw <CLIENT_DNN_GW_IP>
+# Mark packets from Device 1 (MAC1) to route via WAN1
+sudo iptables -t mangle -A PREROUTING -i <LAN_IF> -m mac --mac-source <MAC_DEVICE> -j MARK --set-mark <PDU_SESSION_ID>
 
-# --- NAT Table: POSTROUTING chain for MASQUERADE ---
-# MASQUERADE for traffic going out WAN1
-sudo iptables -t nat -A POSTROUTING -o <WAN1_IF> -j MASQUERADE
-# MASQUERADE for traffic going out WAN2
-sudo iptables -t nat -A POSTROUTING -o <WAN2_IF> -j MASQUERADE
+# === 3. Create Custom Routing Tables ===
+echo "<200+PDU_SESSION_ID> pdu1route" | sudo tee -a /etc/iproute2/rt_tables
 
-# --- Filter Table: FORWARD chain ---
-# (Optional: If your default FORWARD policy is not ACCEPT, you might need to set it.
-# Be cautious with this command if you have existing rules.)
+# Add routes to custom tables
+sudo ip route add default via <PDU_GATEWAY_IP> dev <PDU_IF> table pdu<PDU_SESSION_ID>route
+
+# Create rules to use custom routing tables
+sudo ip rule add fwmark <PDU_SESSION_ID> table pdu<PDU_SESSION_ID>route
+
+# === 4. NAT Rules ===
+# MASQUERADE for both WANs
+sudo iptables -t nat -A POSTROUTING -o <PDU_IF> -j MASQUERADE
+
+# === 5. Firewall Rules (Optional) ===
+# Drop all forwarding by default (optional and careful)
 sudo iptables -P FORWARD DROP
 
-# Allow established and related connections (essential)
+# Allow related/established traffic
 sudo iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-# Allow forwarding for Device 1 via WAN1
-sudo iptables -A FORWARD -i <LAN_IF> -o <WAN1_IF> -m mac --mac-source <MAC_DEVICE1> -j ACCEPT
-# Allow forwarding for Device 2 via WAN2
-sudo iptables -A FORWARD -i <LAN_IF> -o <WAN2_IF> -m mac --mac-source <MAC_DEVICE2> -j ACCEPT
+# Allow forwarding from LAN to each WAN based on MAC
+sudo iptables -A FORWARD -i <LAN_IF> -o <PDU_IF> -m mac --mac-source <MAC_DEVICE> -j ACCEPT
 
 # --- END OF COMMANDS ---
 
-# === 3. Persist Rules (Example for Debian/Ubuntu) ===
-# After confirming the rules work:
-# sudo apt-get install iptables-persistent
-# sudo netfilter-persistent save
+# === 6. Persist the Configuration ===
+# Debian/Ubuntu systems:
+sudo apt install iptables-persistent
+sudo netfilter-persistent save
 ```
