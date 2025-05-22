@@ -28,10 +28,10 @@ NAUN3_IP = "192.168.59.100"
 
 ## EAP Auth Configurations
 EAP_SECRETS_FILE = "build/eap-secrets" 
-CERT_CA_PASSWD = SecureRandom.alphanumeric(8)
-CERT_SERVER_PASSWD = SecureRandom.alphanumeric(8)
-CERT_CLIENT_PASSWD = SecureRandom.alphanumeric(8)
-CLIENT_SECRET = SecureRandom.alphanumeric(8)
+CERT_CA_PASSWD = "password1423" #SecureRandom.alphanumeric(8)
+CERT_SERVER_PASSWD = CERT_CA_PASSWD
+CERT_CLIENT_PASSWD = CERT_CA_PASSWD
+CLIENT_SECRET = CERT_CA_PASSWD
 
 if ARGV.include?("up") && !File.exist?(EAP_SECRETS_FILE)
   puts `mkdir build && cd interceptor && go build -o ../build/ && cd ..`
