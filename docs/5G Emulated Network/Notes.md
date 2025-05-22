@@ -116,77 +116,47 @@ Create my on DHCP server that can check if devices have been successfully authen
 - Hostapd flags [docs](https://w1.fi/wpa_supplicant/devel/wpa__ctrl_8h.html)
 - I need to access `hostapd`to check authenticated devices. Check [this](https://w1.fi/wpa_supplicant/devel/hostapd_ctrl_iface_page.html) documentation.
 - Needs to deauth users and request and close PDU Sessions
-# Establishing Multiple PDU Sessions/PDP Contexts/PDNs with Quectel Cellular Modem
-## How to use QMAP
-### With bridge and via Quectel-CM
-1. Enable `QUECTEL_BRIDGE_MODE` in `qmi_wwan_q.c`, line 134
-``` C
-#define QUECTEL_BRIDGE_MODE
-```
+# MAC-Based Outbound Traffic for a Specific LAN Device
+This guide explains how to configure your Linux router to allow a specific LAN device, identified by its MAC address, to access the internet (WAN). This setup uses a MAC-based firewall rule, so it doesn't require static IP assignment or dynamic IP updates for this specific outbound rule. Port forwarding is not covered in this guide.
 
-2. Set `qmap_mode`to 4
-```C
-#define QUECTEL_WWAN_QMAP 4
-```
-
-3. Add direct interface to bridge mapping.
-``` C
-#ifdef QUECTEL_BRIDGE_MODE
-static uint __read_mostly bridge_mode = BIT(1)|BIT(2);
-module_param( bridge_mode, uint, S_IRUGO );
-#endif
-```
-
-4. Compile with `make install`
-
-5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=6`
-
-6. Activate bridge
 ```bash
-sudo ip link add name lan_bridge type bridge
-sudo ip link set dev <wwan0_idx> master br maslan_bridge
-```
+# --- START OF COMMANDS ---
 
-7. Check `bridge`interfaces
-```bash
-ip link show type bridge
-```
+# === 1. Enable IP Forwarding ===
+# (Run this once, or ensure it's set to load on boot, e.g., in /etc/sysctl.conf)
+sudo sysctl -w net.ipv4.ip_forward=1
 
-8. Check interfaces connected to the bridge
-```bash
-sudo bridge link show br lan_brige
-```
+# === 2. IPTables Rules ===
 
-9. Create new PDP Context if needed
-```bash
-sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
-```
+# --- Mangle Table: PREROUTING chain for ROUTE target ---
+# Route Device 1 via WAN1
+sudo iptables -t mangle -A PREROUTING -i <LAN_IF> -m mac --mac-source <MAC_DEVICE1> -j ROUTE --oif <WAN1_IF> --gw <CLIENT_DNN_GW_IP>
+# Route Device 2 via WAN2
+sudo iptables -t mangle -A PREROUTING -i <LAN_IF> -m mac --mac-source <MAC_DEVICE2> -j ROUTE --oif <WAN2_IF> --gw <CLIENT_DNN_GW_IP>
 
-10. Active QMI proxy
-```bash
-./quectel-qmi-proxy -d /dev/cdc-wdm0
-```
+# --- NAT Table: POSTROUTING chain for MASQUERADE ---
+# MASQUERADE for traffic going out WAN1
+sudo iptables -t nat -A POSTROUTING -o <WAN1_IF> -j MASQUERADE
+# MASQUERADE for traffic going out WAN2
+sudo iptables -t nat -A POSTROUTING -o <WAN2_IF> -j MASQUERADE
 
-11. Use `quectel-CM` to setup data call with proper PDN and interface binding
-```bash
-./quectel-CM -n 1 -m 2 -s internet # backhaul DNN
-./quectel-CM -n 4 -m 3 -s client
-```
+# --- Filter Table: FORWARD chain ---
+# (Optional: If your default FORWARD policy is not ACCEPT, you might need to set it.
+# Be cautious with this command if you have existing rules.)
+sudo iptables -P FORWARD DROP
 
-Flags:
-- `-b` enables network interface bridge function
-- `-n` specifies which PDN to setup data call;
-- `-m` binds a QMI data call to `wwan0_<iface_idx>` when QMAP is used. E.g  `-n 1 -m 1`, it binds the PDN 1 to `wwan0_1` .
-- `-s` flag allows us to specify which APN to connect to.
+# Allow established and related connections (essential)
+sudo iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-12. Get IP address **via** DHCP
-```bash
-udhcpc -i br2
-udhcpc -i br3
-...
-``` 
+# Allow forwarding for Device 1 via WAN1
+sudo iptables -A FORWARD -i <LAN_IF> -o <WAN1_IF> -m mac --mac-source <MAC_DEVICE1> -j ACCEPT
+# Allow forwarding for Device 2 via WAN2
+sudo iptables -A FORWARD -i <LAN_IF> -o <WAN2_IF> -m mac --mac-source <MAC_DEVICE2> -j ACCEPT
 
-13. If the QMI data call is left running in the background, you can later kill the connection, by **specifying the PDN ID number**
-```bash
-./quectel-CM -k 1
+# --- END OF COMMANDS ---
+
+# === 3. Persist Rules (Example for Debian/Ubuntu) ===
+# After confirming the rules work:
+# sudo apt-get install iptables-persistent
+# sudo netfilter-persistent save
 ```

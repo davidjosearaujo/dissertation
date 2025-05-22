@@ -181,8 +181,78 @@ sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,apn=cl
 ```
 
 **NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able 
-
-
 # Multiplexing connections
-Read these to understand how multiplexing interfaces works for qmi:
-- [HOWTO: using **QMAP** multiplexing with libqmi](https://lists.freedesktop.org/archives/libqmi-devel/2018-July/002935.html)
+## Establishing Multiple PDU Sessions/PDP Contexts/PDNs with Quectel Cellular Modem
+### How to use QMAP
+#### With bridge and via Quectel-CM
+1. Enable `QUECTEL_BRIDGE_MODE` in `qmi_wwan_q.c`, line 134
+``` C
+#define QUECTEL_BRIDGE_MODE
+```
+
+2. Set `qmap_mode`to 4
+```C
+#define QUECTEL_WWAN_QMAP 4
+```
+
+3. Add direct interface to bridge mapping.
+``` C
+#ifdef QUECTEL_BRIDGE_MODE
+static uint __read_mostly bridge_mode = BIT(1)|BIT(2);
+module_param( bridge_mode, uint, S_IRUGO );
+#endif
+```
+
+4. Compile with `make install`
+
+5. Load module to kernel with `sudo modprobe qmi_wwan_q qmap_mode=4 bridge_mode=6`
+
+6. Activate bridge. This involves creating a bridge interface, and place inside it the desired interface that will be binded to the PDU Session and also the network interface receiving traffic from the clients (e.g `wlan0`)
+```bash
+sudo ip link add name lan_bridge type bridge
+sudo ip link set dev <wwan0_idx> master br lan_bridge
+```
+
+7. Check `bridge`interfaces
+```bash
+ip link show type bridge
+```
+
+8. Check interfaces connected to the bridge
+```bash
+sudo bridge link show br lan_brige
+```
+
+9. Create new PDP Context if needed
+```bash
+sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,name=naun3_1,apn=clients,pdp-type=IPV4V6,auth=NONE"
+```
+
+10. Active QMI proxy
+```bash
+./quectel-qmi-proxy -d /dev/cdc-wdm0
+```
+
+11. Use `quectel-CM` to setup data call with proper PDN and interface binding
+```bash
+./quectel-CM -n 1 -m 2 -s internet # backhaul DNN
+./quectel-CM -b -n 4 -m 3 -s client
+```
+
+Flags:
+- `-b` enables network interface bridge function
+- `-n` specifies which PDN to setup data call;
+- `-m` binds a QMI data call to `wwan0_<iface_idx>` when QMAP is used. E.g  `-n 1 -m 1`, it binds the PDN 1 to `wwan0_1` .
+- `-s` flag allows us to specify which APN to connect to.
+
+12. Get IP address **via** DHCP
+```bash
+udhcpc -i br2
+udhcpc -i br3
+...
+``` 
+
+13. If the QMI data call is left running in the background, you can later kill the connection, by **specifying the PDN ID number**
+```bash
+./quectel-CM -k 1
+```

@@ -95,6 +95,8 @@ log-dhcp" | sudo tee /etc/dnsmasq.conf
 
 sudo systemctl restart dnsmasq
 
+sudo sysctl -w net.ipv4.ip_forward=1
+
 LOG_FILE_PATH="/log/$(cat /etc/hostname)_interceptor_$(date +%s).log"
 
 echo -e "\nStart Interceptor"
