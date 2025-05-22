@@ -34,9 +34,9 @@ cat wpa_supplicant.conf > ${LOG_FILE_PATH}
 echo -e "\nRunning wpa_supplicant"
 sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
 
-sleep 15
+#sleep 15
 
-sudo dhclient enp0s8
+#sudo dhclient enp0s8
 
 #sleep 30
 
