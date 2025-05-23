@@ -174,10 +174,6 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 						if device.pduSession != nil { pduAddr = device.pduSession.Address }
 						logger.Printf("HostDisconnectListener: Tracked device %s (MAC: %s, State: %s) no longer in ARP list. Scheduling for forget.", pduAddr, trackedMAC, device.state)
 						macsToForget = append(macsToForget, trackedMAC)
-					} else {
-						pduAddr := "N/A"
-						if device.pduSession != nil { pduAddr = device.pduSession.Address }
-						logger.Printf("HostDisconnectListener: Tracked device %s (MAC: %s, State: %s) no longer in ARP list, but was not in an active/stale state. Monitoring.", pduAddr, trackedMAC, device.state)
 					}
 				}
 			}
