@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+
+  config.vm.provision "file", source: "packet_routing_rules.sh", destination: "packet_routing_rules.sh"
+
+  config.vm.provision "shell", inline: "chmod +x packet_routing_rules.sh"
+
+  config.vm.provision "shell" do |s|
+    s.inline  = "/bin/bash packet_routing_rules.sh setup"
+  end
+end
