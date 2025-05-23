@@ -199,7 +199,7 @@ func HostapdListener(
 			}
 			logger.Printf("HostapdListener: Event: %s", logPayload)
 
-			if strings.Contains(message, hostapdEventEAPSuccess) {
+			if strings.Contains(message, hostapdEventEAPSuccess)  {
 				parts := strings.Fields(message)
 				var macAddress string
 				for _, part := range parts {
@@ -211,6 +211,9 @@ func HostapdListener(
 
 				if macAddress == "" {
 					logger.Printf("HostapdListener: No valid MAC in EAP-SUCCESS: %s", message)
+					continue
+				} else if _, exists := allowedDevices[macAddress]; exists {
+					logger.Printf("HostapdListener: Device %s already authenticated.", macAddress)
 					continue
 				}
 
