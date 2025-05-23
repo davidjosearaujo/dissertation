@@ -7,7 +7,8 @@ AUTH_SERVER_IP=$4
 CLIENT_SECRET=$5
 
 echo -e "\nInstalling dependencies for 5G Modem"
-sudo apt install -y \ 
+sudo apt install -y \
+  iptables-persistent \
   linux-headers-$(uname -r) \
   linux-modules-extra-$(uname -r) \
   build-essential \
@@ -82,7 +83,7 @@ echo -e "\nConfiguring dnsmasq DHCP server"
 echo -e "interface=enp0s9
 bind-interfaces
 
-dhcp-range=192.168.60.3,192.168.60.100,255.255.255.0,2m
+dhcp-range=192.168.59.11,192.168.59.100,255.255.255.0,2m
 dhcp-authoritative
 
 dhcp-option=3,192.168.60.2
