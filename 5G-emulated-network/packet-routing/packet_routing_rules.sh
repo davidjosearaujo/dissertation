@@ -161,22 +161,22 @@ configure_router_logic() {
 
   # Phase 3: Packet Marking (Mangle Table)
   echo "Setting up Mangle rules for $LAN_IF..."
-  sudo iptables -t mangle -A PREROUTING -i "$LAN_IF" -m mac --mac-source "$CLIENT_MAC" -j LOG --log-prefix "$LOG_MANGLE_PRE" --log-level 4
+  #sudo iptables -t mangle -A PREROUTING -i "$LAN_IF" -m mac --mac-source "$CLIENT_MAC" -j LOG --log-prefix "$LOG_MANGLE_PRE" --log-level 4
   sudo iptables -t mangle -A PREROUTING -i "$LAN_IF" -m mac --mac-source "$CLIENT_MAC" -j MARK --set-mark "$MARK_VALUE"
-  sudo iptables -t mangle -A PREROUTING -i "$LAN_IF" -m mac --mac-source "$CLIENT_MAC" -m mark --mark "$MARK_VALUE" -j LOG --log-prefix "$LOG_MANGLE_POST" --log-level 4
+  #sudo iptables -t mangle -A PREROUTING -i "$LAN_IF" -m mac --mac-source "$CLIENT_MAC" -m mark --mark "$MARK_VALUE" -j LOG --log-prefix "$LOG_MANGLE_POST" --log-level 4
 
   # Phase 4: Firewall Forwarding Rules
   echo "Setting up FORWARD rules (LAN_IF: $LAN_IF, PDU_IF: $PDU_IF)..."
   sudo iptables -P FORWARD DROP
-  sudo iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j LOG --log-prefix "$LOG_FORWARD_REL_EST" --log-level 4
+  #sudo iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j LOG --log-prefix "$LOG_FORWARD_REL_EST" --log-level 4
   sudo iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-  sudo iptables -A FORWARD -i "$LAN_IF" -o "$PDU_IF" -m mac --mac-source "$CLIENT_MAC" -m mark --mark "$MARK_VALUE" -j LOG --log-prefix "$LOG_FORWARD_SPECIFIC" --log-level 4
+  #sudo iptables -A FORWARD -i "$LAN_IF" -o "$PDU_IF" -m mac --mac-source "$CLIENT_MAC" -m mark --mark "$MARK_VALUE" -j LOG --log-prefix "$LOG_FORWARD_SPECIFIC" --log-level 4
   sudo iptables -A FORWARD -i "$LAN_IF" -o "$PDU_IF" -m mac --mac-source "$CLIENT_MAC" -m mark --mark "$MARK_VALUE" -j ACCEPT
-  sudo iptables -A FORWARD -j LOG --log-prefix "$LOG_FORWARD_DROP" --log-level 4 # Catch-all
+  #sudo iptables -A FORWARD -j LOG --log-prefix "$LOG_FORWARD_DROP" --log-level 4 # Catch-all
 
   # Phase 5: NAT Rule
   echo "Setting up NAT rule for $PDU_IF..."
-  sudo iptables -t nat -A POSTROUTING -o "$PDU_IF" -j LOG --log-prefix "$LOG_NAT_PRE_MASQ" --log-level 4
+  #sudo iptables -t nat -A POSTROUTING -o "$PDU_IF" -j LOG --log-prefix "$LOG_NAT_PRE_MASQ" --log-level 4
   sudo iptables -t nat -A POSTROUTING -o "$PDU_IF" -j MASQUERADE
   
   echo "Router Logic configuration complete."
