@@ -12,20 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Copyright 2025 David Araújo
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package main
 
 import (
@@ -167,7 +153,6 @@ func (rm *RuleManager) manageRTTableEntry(tableID int, tableName string, add boo
 			normalizedExistingLine = fmt.Sprintf("%s\t%s", parts[0], parts[1])
 		}
 
-
 		if normalizedExistingLine == entryLine {
 			found = true
 			if !add { // If removing, mark modified and skip this line
@@ -210,13 +195,12 @@ func (rm *RuleManager) manageRTTableEntry(tableID int, tableName string, add boo
 				finalContentBuilder.WriteString("\n")
 			}
 		}
-		
+
 		contentToWrite := finalContentBuilder.String()
 		// If the file was empty and we added one line, it might not have a trailing newline yet.
 		if contentToWrite != "" && !strings.HasSuffix(contentToWrite, "\n") {
-		    contentToWrite += "\n"
+			contentToWrite += "\n"
 		}
-
 
 		if err := os.WriteFile(rtTablesPath, []byte(contentToWrite), 0644); err != nil {
 			logger.Printf("RuleManager: %s: Error writing updated %s: %v", logPrefix, rtTablesPath, err)
@@ -241,10 +225,52 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	logger.Printf("RuleManager: Applying rules for MAC %s (LAN: %s, PDU_IF: %s, GW: %s, PDU_ID: %d, Comment: %s)", macAddr, lanIF, pduIF, pduGatewayIP, pduSessionID, comment)
 
 	pduSessionIDStr := strconv.Itoa(pduSessionID)
-	routingTableID := 200 + pduSessionID
-	routingTableName := fmt.Sprintf("pdu%droute", pduSessionID)
+	routingTableID := 200 + pduSessionID 
+	routingTableName := fmt.Sprintf("table_pdu_%d", pduSessionID) 
 
-	// 1. Mangle PREROUTING rule to MARK packets
+	// Order based on `configure_router_logic` from the bash script:
+	// 1. /etc/iproute2/rt_tables entry
+	// 2. ip route add ... table ...
+	// 3. ip rule add fwmark ... table ...
+	// 4. iptables ... -j MARK ...
+	// 5. iptables ... FORWARD ... -j ACCEPT
+	// 6. iptables ... NAT ... -j MASQUERADE
+
+	// 1. Create Custom Routing Table Entry in /etc/iproute2/rt_tables
+	if err := rm.manageRTTableEntry(routingTableID, routingTableName, true, macAddr); err != nil {
+		errMsg := fmt.Sprintf("Manage RT Table Entry (%s %s) for %s: %v", strconv.Itoa(routingTableID), routingTableName, macAddr, err)
+		errorsEncountered = append(errorsEncountered, errMsg)
+		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+	} else {
+		logger.Printf("RuleManager: [SUCCESS] RT Table Entry %d %s for %s ensured/added.", routingTableID, routingTableName, macAddr)
+		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeRTTableEntry, RuleSpec: []string{strconv.Itoa(routingTableID), routingTableName}, Comment: comment})
+	}
+
+	// 2. Add route to custom table
+	ipRouteArgs := []string{"default", "via", pduGatewayIP, "dev", pduIF, "table", routingTableName}
+	cmdArgsRoute := append([]string{"route", "add"}, ipRouteArgs...)
+	if err := rm.executeCommand(fmt.Sprintf("IPRouteAdd (%s)", macAddr), "ip", cmdArgsRoute...); err != nil {
+		errMsg := fmt.Sprintf("IP Route Add for %s (table %s): %v", macAddr, routingTableName, err)
+		errorsEncountered = append(errorsEncountered, errMsg)
+		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+	} else {
+		logger.Printf("RuleManager: [SUCCESS] IP Route Add for %s (table %s): default via %s dev %s", macAddr, routingTableName, pduGatewayIP, pduIF)
+		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPRoute, RuleSpec: ipRouteArgs, Comment: comment})
+	}
+
+	// 3. Create rule to use custom routing table
+	ipRuleArgs := []string{"fwmark", pduSessionIDStr, "table", routingTableName}
+	cmdArgsRule := append([]string{"rule", "add"}, ipRuleArgs...)
+	if err := rm.executeCommand(fmt.Sprintf("IPRuleAdd (%s)", macAddr), "ip", cmdArgsRule...); err != nil {
+		errMsg := fmt.Sprintf("IP Rule Add for %s (fwmark %s, table %s): %v", macAddr, pduSessionIDStr, routingTableName, err)
+		errorsEncountered = append(errorsEncountered, errMsg)
+		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+	} else {
+		logger.Printf("RuleManager: [SUCCESS] IP Rule Add for %s: fwmark %s table %s", macAddr, pduSessionIDStr, routingTableName)
+		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPRule, RuleSpec: ipRuleArgs, Comment: comment})
+	}
+
+	// 4. Mangle PREROUTING rule to MARK packets
 	mangleRuleSpec := []string{"-i", lanIF, "-m", "mac", "--mac-source", macAddr, "-j", "MARK", "--set-mark", pduSessionIDStr}
 	if err := rm.ensureRule("mangle", "PREROUTING", mangleRuleSpec, comment); err != nil {
 		errMsg := fmt.Sprintf("Mangle MARK rule for %s: %v", macAddr, err)
@@ -255,43 +281,24 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPTables, Table: "mangle", Chain: "PREROUTING", RuleSpec: mangleRuleSpec, Comment: comment})
 	}
 
-	// 2. Create Custom Routing Table Entry in /etc/iproute2/rt_tables
-	if err := rm.manageRTTableEntry(routingTableID, routingTableName, true, macAddr); err != nil {
-		errMsg := fmt.Sprintf("Manage RT Table Entry (%s %s) for %s: %v", strconv.Itoa(routingTableID), routingTableName, macAddr, err)
+	// 5. Allow forwarding from LAN to PDU IF based on MAC AND MARK
+	forwardMacRuleSpec := []string{
+		"-i", lanIF,
+		"-o", pduIF,
+		"-m", "mac", "--mac-source", macAddr,
+		"-m", "mark", "--mark", pduSessionIDStr, 
+		"-j", "ACCEPT",
+	}
+	if err := rm.ensureRule("filter", "FORWARD", forwardMacRuleSpec, comment); err != nil {
+		errMsg := fmt.Sprintf("FORWARD allow MAC %s with mark %s to PDU %s: %v", macAddr, pduSessionIDStr, pduIF, err)
 		errorsEncountered = append(errorsEncountered, errMsg)
 		logger.Printf("RuleManager: [ERROR] %s", errMsg)
 	} else {
-		logger.Printf("RuleManager: [SUCCESS] RT Table Entry %d %s for %s ensured/added.", routingTableID, routingTableName, macAddr)
-		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeRTTableEntry, RuleSpec: []string{strconv.Itoa(routingTableID), routingTableName}, Comment: comment})
+		logger.Printf("RuleManager: [SUCCESS] FORWARD allow MAC %s from %s with mark %s to %s: %v", macAddr, lanIF, pduSessionIDStr, pduIF, forwardMacRuleSpec)
+		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPTables, Table: "filter", Chain: "FORWARD", RuleSpec: forwardMacRuleSpec, Comment: comment})
 	}
 
-	// 3. Add route to custom table
-	// ip route add default via <PDU_GATEWAY_IP> dev <PDU_IF> table <routingTableName>
-	ipRouteArgs := []string{"default", "via", pduGatewayIP, "dev", pduIF, "table", routingTableName}
-	cmdArgs := append([]string{"route", "add"}, ipRouteArgs...)
-	if err := rm.executeCommand(fmt.Sprintf("IPRouteAdd (%s)", macAddr), "ip", cmdArgs...); err != nil {
-		errMsg := fmt.Sprintf("IP Route Add for %s (table %s): %v", macAddr, routingTableName, err)
-		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
-	} else {
-		logger.Printf("RuleManager: [SUCCESS] IP Route Add for %s (table %s): default via %s dev %s", macAddr, routingTableName, pduGatewayIP, pduIF)
-		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPRoute, RuleSpec: ipRouteArgs, Comment: comment})
-	}
-
-	// 4. Create rule to use custom routing table
-	// ip rule add fwmark <PDU_SESSION_ID> table <routingTableName>
-	ipRuleArgs := []string{"fwmark", pduSessionIDStr, "table", routingTableName}
-	cmdArgsForRule := append([]string{"rule", "add"}, ipRuleArgs...)
-	if err := rm.executeCommand(fmt.Sprintf("IPRuleAdd (%s)", macAddr), "ip", cmdArgsForRule...); err != nil {
-		errMsg := fmt.Sprintf("IP Rule Add for %s (fwmark %s, table %s): %v", macAddr, pduSessionIDStr, routingTableName, err)
-		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
-	} else {
-		logger.Printf("RuleManager: [SUCCESS] IP Rule Add for %s: fwmark %s table %s", macAddr, pduSessionIDStr, routingTableName)
-		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPRule, RuleSpec: ipRuleArgs, Comment: comment})
-	}
-
-	// 5. NAT MASQUERADE for PDU interface
+	// 6. NAT MASQUERADE for PDU interface
 	natMasqueradeRuleSpec := []string{"-o", pduIF, "-j", "MASQUERADE"}
 	if err := rm.ensureRule("nat", "POSTROUTING", natMasqueradeRuleSpec, comment); err != nil {
 		errMsg := fmt.Sprintf("NAT MASQUERADE for PDU %s: %v", pduIF, err)
@@ -302,16 +309,6 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPTables, Table: "nat", Chain: "POSTROUTING", RuleSpec: natMasqueradeRuleSpec, Comment: comment})
 	}
 
-	// 6. Allow forwarding from LAN to PDU IF based on MAC
-	forwardMacRuleSpec := []string{"-i", lanIF, "-o", pduIF, "-m", "mac", "--mac-source", macAddr, "-j", "ACCEPT"}
-	if err := rm.ensureRule("filter", "FORWARD", forwardMacRuleSpec, comment); err != nil {
-		errMsg := fmt.Sprintf("FORWARD allow MAC %s to PDU %s: %v", macAddr, pduIF, err)
-		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
-	} else {
-		logger.Printf("RuleManager: [SUCCESS] FORWARD allow MAC %s from %s to %s: %v", macAddr, lanIF, pduIF, forwardMacRuleSpec)
-		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPTables, Table: "filter", Chain: "FORWARD", RuleSpec: forwardMacRuleSpec, Comment: comment})
-	}
 
 	if len(errorsEncountered) > 0 {
 		logger.Printf("RuleManager: [SUMMARY_ERRORS] Encountered %d error(s) applying rules for MAC %s (PDU_ID: %d):", len(errorsEncountered), macAddr, pduSessionID)
@@ -340,10 +337,10 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 
 		switch rule.Type {
 		case RuleTypeIPTables:
-			// Append comment to ruleSpec for deletion if it was used for creation
+			
 			ruleSpecForDelete := rule.RuleSpec
 			if rule.Comment != "" {
-				// Check if comment is already in ruleSpec (it should be if ensureRule added it)
+				
 				hasComment := false
 				for k := 0; k < len(ruleSpecForDelete)-2; k++ {
 					if ruleSpecForDelete[k] == "-m" && ruleSpecForDelete[k+1] == "comment" && ruleSpecForDelete[k+2] == "--comment" {
@@ -351,22 +348,24 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 						break
 					}
 				}
-				if !hasComment { // if ensureRule didn't add it, but we have a comment stored
-					ruleSpecForDelete = append(rule.RuleSpec, "-m", "comment", "--comment", rule.Comment)
+				if !hasComment { 
+					
+					ruleSpecForDelete = append(make([]string, 0, len(rule.RuleSpec)+3), rule.RuleSpec...) 
+					ruleSpecForDelete = append(ruleSpecForDelete, "-m", "comment", "--comment", rule.Comment)
 				}
 			}
 
 			err = rm.ipt.Delete(rule.Table, rule.Chain, ruleSpecForDelete...)
 			if err != nil {
-				// More robust error checking for "rule not found"
+				
 				errMsgStr := err.Error()
-				if strings.Contains(errMsgStr, "No chain/target/match by that name") || // exit status 2 from iptables
-				   strings.Contains(errMsgStr, "does not exist") || // from iptables lib
-				   strings.Contains(errMsgStr, "No such file or directory") || // from underlying syscalls
-				   strings.Contains(strings.ToLower(errMsgStr), "rule not found") ||
-				   (strings.Contains(errMsgStr, "Bad rule") && (strings.Contains(rule.Table, "mangle") || strings.Contains(rule.Table, "nat") || strings.Contains(rule.Table, "filter"))) { // "Bad rule" can mean not found
+				if strings.Contains(errMsgStr, "No chain/target/match by that name") || 
+					strings.Contains(errMsgStr, "does not exist") || 
+					strings.Contains(errMsgStr, "No such file or directory") || 
+					strings.Contains(strings.ToLower(errMsgStr), "rule not found") ||
+					(strings.Contains(errMsgStr, "Bad rule") && (strings.Contains(rule.Table, "mangle") || strings.Contains(rule.Table, "nat") || strings.Contains(rule.Table, "filter"))) { 
 					logger.Printf("RuleManager: %s: IPTables rule (Table: %s, Chain: %s, Spec: %v) likely already removed or not found: %v", logPrefix, rule.Table, rule.Chain, ruleSpecForDelete, err)
-					// No error to append, effectively removed or was never there
+					
 				} else {
 					errMsg := fmt.Sprintf("deleting IPTables rule for MAC %s (Table: %s, Chain: %s, Spec: %v): %v", macAddr, rule.Table, rule.Chain, ruleSpecForDelete, err)
 					errorsEncountered = append(errorsEncountered, errMsg)
@@ -381,9 +380,6 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 			delArgs := append([]string{"route", "del"}, rule.RuleSpec...)
 			err = rm.executeCommand(logPrefix, "ip", delArgs...)
 			if err != nil {
-				// executeCommand already logs and handles "not found" as non-error
-				// Only append to errorsEncountered if executeCommand itself returned an error
-				// (meaning it wasn't a simple "not found" type of issue)
 				errMsg := fmt.Sprintf("IP Route Del for MAC %s (Spec: %v): %v", macAddr, rule.RuleSpec, err)
 				errorsEncountered = append(errorsEncountered, errMsg)
 			} else {
@@ -438,9 +434,6 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 		for i, e := range errorsEncountered {
 			logger.Printf("  %d: %s", i+1, e)
 		}
-		// Decide if this should return an error to the caller.
-		// For cleanup, often best-effort is acceptable.
-		// return fmt.Errorf("encountered %d errors removing rules for MAC %s. See logs", len(errorsEncountered), macAddr)
 	} else if len(rulesToRemove) > 0 {
 		logger.Printf("RuleManager: Rule removal process completed for MAC %s. Successfully removed/verified absent: %d of %d.", macAddr, successfullyRemovedCount, len(rulesToRemove))
 	} else {
@@ -463,9 +456,6 @@ func (rm *RuleManager) ensureRule(table, chain string, ruleSpec []string, commen
 		for i := 0; i < len(finalRuleSpec)-2; i++ { // Check up to len-2 for "-m comment --comment"
 			if finalRuleSpec[i] == "-m" && finalRuleSpec[i+1] == "comment" && finalRuleSpec[i+2] == "--comment" {
 				hasComment = true
-				// Potentially update comment if different? For now, if -m comment exists, assume it's managed.
-				// If you want to ensure a specific comment, you might need to delete and re-add.
-				// For simplicity, if a comment module is there, we don't add another.
 				break
 			}
 		}
@@ -497,11 +487,49 @@ func (rm *RuleManager) setForwardPolicy(policy string) error {
 		return fmt.Errorf("invalid policy '%s'. Must be ACCEPT, DROP, or REJECT", policy)
 	}
 
-	// The go-iptables library's ChangePolicy method handles setting the policy.
-	// It doesn't provide a direct way to get the current policy, so we just set it.
 	if err := rm.ipt.ChangePolicy("filter", "FORWARD", upperPolicy); err != nil {
 		return fmt.Errorf("setting FORWARD chain policy to %s: %w", upperPolicy, err)
 	}
 	logger.Printf("RuleManager: FORWARD chain policy set to %s.", upperPolicy)
 	return nil
 }
+
+// main function for demonstration or testing purposes
+// func main() {
+// 	logger.Println("Starting PBR Demo...")
+
+// 	rm, err := NewRuleManager()
+// 	if err != nil {
+// 		logger.Fatalf("Failed to create RuleManager: %v", err)
+// 	}
+
+// 	// Example usage:
+// 	lanIF := "enp0s9" // Replace with your actual LAN interface
+// 	macAddr := "08:00:27:01:02:03" // Replace with a test MAC
+// 	pduIF := "uesimtun5" // Replace with a test PDU interface (e.g., uesimtunX)
+// 	pduGatewayIP := "10.46.0.1" // Replace with your PDU gateway
+// 	pduSessionID := 5 // Example PDU Session ID
+
+// 	logger.Printf("Attempting to apply rules for MAC: %s, PDU Session ID: %d", macAddr, pduSessionID)
+// 	appliedRules, err := rm.ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP, pduSessionID)
+// 	if err != nil {
+// 		logger.Printf("Error applying mapping rules: %v", err)
+// 		// Optionally, attempt cleanup even if apply failed partially
+// 		// rm.RemoveRulesForDevice(macAddr, appliedRules)
+// 	} else {
+// 		logger.Printf("Successfully applied %d rules/entries for MAC %s.", len(appliedRules), macAddr)
+// 	}
+
+// 	// Example: Wait for a key press before cleaning up
+// 	// logger.Println("Rules applied. Press Enter to remove rules and exit...")
+// 	// bufio.NewReader(os.Stdin).ReadBytes('\n')
+
+// 	// logger.Printf("Attempting to remove rules for MAC: %s", macAddr)
+// 	// if err := rm.RemoveRulesForDevice(macAddr, appliedRules); err != nil {
+// 	// 	logger.Printf("Error removing rules: %v", err)
+// 	// } else {
+// 	// 	logger.Println("Successfully removed rules.")
+// 	// }
+
+// 	logger.Println("PBR Demo finished.")
+// }
