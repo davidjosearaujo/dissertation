@@ -235,3 +235,12 @@ Flags:
 ```bash
 ./quectel-CM -k 1
 ```
+
+# Obtain modem firmware version
+```bash
+AT+QGMR
+```
+- RG255CGLABR01A04M4G_A0.004.A0.004 - needs 'ims'
+- RG255CGLABR01A04M4G_01.002.01.002 - doesn't need 'ims'
+
+One should request the existence of a  "ims" PDU Session
