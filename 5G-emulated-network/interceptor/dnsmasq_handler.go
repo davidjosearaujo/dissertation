@@ -33,17 +33,18 @@ const (
 type Lease struct {
 	expiration int
 	counter    int
+	duration   time.Duration
 }
 
 // AllowMAC adds a MAC address to the dnsmasq allowed list.
-func AllowMAC(allowedMACsFilePath string, macAddress string) error {
+func AllowMAC(allowedMACsFilePath string, macAddress string, leaseTime string) error {
 	f, err := os.OpenFile(allowedMACsFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return fmt.Errorf("opening %s: %w", allowedMACsFilePath, err)
 	}
 	defer f.Close()
 
-	entry := fmt.Sprintf("dhcp-host=%s,set:known\n", macAddress)
+	entry := fmt.Sprintf("dhcp-host=%s,%s,set:known\n", macAddress,leaseTime)
 	if _, err := f.WriteString(entry); err != nil {
 		return fmt.Errorf("writing MAC %s to %s: %w", macAddress, allowedMACsFilePath, err)
 	}
@@ -120,7 +121,7 @@ func RestartDnsmasq() error {
 }
 
 // DnsmasqListener monitors the dnsmasq lease file for changes.
-func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI string, quit <-chan struct{}) {
+func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI string, leaseTime string, quit <-chan struct{}) {
 	defer wg.Done()
 	logger.Printf("DnsmasqListener: Monitoring %s every %s", leasesFilePath, dnsmasqLeaseCheckInterval)
 
@@ -190,6 +191,12 @@ func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI s
 						if device.lease.expiration != expiration || device.state == "AUTHENTICATED" {
 							device.lease.counter++
 							device.lease.expiration = expiration
+							leaseDuration, err := time.ParseDuration(leaseTime)
+							if err != nil {
+								logger.Printf("DnsmasqListener: Error converting lease duration '%s' to time.Duration: %v" , leaseTime, err)
+								continue
+							}
+							device.lease.duration = leaseDuration
 							pduAddr := "N/A"
 							if device.pduSession != nil { // Nil check for pduSession
 								pduAddr = device.pduSession.Address

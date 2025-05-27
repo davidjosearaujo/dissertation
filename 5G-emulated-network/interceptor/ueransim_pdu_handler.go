@@ -45,16 +45,17 @@ type Session struct {
 const (
 	pduSessionEstablishRetries  = 20
 	pduSessionEstablishInterval = 3 * time.Second
-	pduSessionCmdEstablish      = "ps-establish IPv4 --sst 1 --dnn clients"
+	pduSessionCmdEstablish      = "ps-establish IPv4 --sst 1"
 	pduSessionCmdList           = "ps-list"
 	pduSessionCmdRelease        = "ps-release"
 	pduSessionStateActive       = "PS-ACTIVE"
 )
 
 // NewPDUSession establishes a new PDU session using nr-cli and waits for it to become active.
-func NewPDUSession(ueIMSI string) (*Session, error) {
+func NewPDUSession(ueIMSI string, dnn string) (*Session, error) {
 	logger.Printf("NewPDUSession: IMSI %s establishing...", ueIMSI)
-	cmd := exec.Command("nr-cli", ueIMSI, "--exec", pduSessionCmdEstablish)
+	args := fmt.Sprintf(pduSessionCmdEstablish+" --dnn %s", dnn)
+	cmd := exec.Command("nr-cli", ueIMSI, "--exec", args)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return nil, fmt.Errorf("PDU establish for %s failed: %w. Output: %s", ueIMSI, err, string(output))

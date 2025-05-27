@@ -142,7 +142,7 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 						device.state = "REACHABLE"
 						allowedDevices[macAddress] = device
 					}
-				} else if isStale || isFailed { 
+				} else if (isStale || isFailed) && time.Until(time.Unix(int64(device.lease.expiration), 0)) < (device.lease.duration * time.Second * 3 / 4) { // Define a grace period of 25% of the lease duration for devices to become reachable again
 					if device.state == "REACHABLE" || device.state == "LEASED" {
 						pduAddr := "N/A"
 						if device.pduSession != nil { pduAddr = device.pduSession.Address }

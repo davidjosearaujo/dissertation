@@ -27,20 +27,14 @@ import (
 	"time"
 
 	"github.com/vishvananda/netlink"
-	// "github.com/coreos/go-iptables/iptables" // Not directly used in main.go, but routing_handler.go uses it
 )
-
-// Session struct is defined in pdu_handling.go
-// Lease struct is defined in dnsmasq_handler.go
-// Device struct is defined in network_handler.go
-// RuleManager and AppliedRuleDetail are defined in routing_handler.go
 
 var (
 	logger                     *log.Logger
 	allowedDevices             = make(map[string]Device)
 	wg                         sync.WaitGroup
 	hostapdInterceptor         *HostapdInterceptor
-	ruleManager                *RuleManager // Global RuleManager instance
+	ruleManager                *RuleManager
 	quitHostapdInterceptor     chan struct{}
 	quitHostDisconnectListener chan struct{}
 	quitDnsmasqListener        chan struct{}
@@ -66,9 +60,10 @@ func main() {
 	allowedMACsFileFlag := flag.String("allowed", "/etc/dnsmasq.d/allowed-macs.conf", "Dnsmasq allowed MACs file")
 	leasesFileFlag := flag.String("leases", "/var/lib/misc/dnsmasq.leases", "Dnsmasq DHCP leases file")
 	ueIMSIFlag := flag.String("imsi", "imsi-999700000000001", "UE IMSI for PDU sessions")
-	
 	lanIFFlag := flag.String("lan-if", "enp0s9", "LAN interface name for iptables rules")
+	dnnFlag := flag.String("dnn", "clients", "DNN for PDU sessions (default: 'clients')")
 	pduGatewayIPFlag := flag.String("pdu-gw-ip", "10.46.0.1", "SMF Session Gateway IP for PDU sessions")
+	leasesTimeFlag := flag.String("lease-time", "2m", "Lease time for DHCP leases (e.g., '12h', '2m')")
 
 	flag.Parse()
 
@@ -79,6 +74,8 @@ func main() {
 	ueIMSI := *ueIMSIFlag
 	lanIF := *lanIFFlag
 	pduGatewayIP := *pduGatewayIPFlag
+	leaseTime := *leasesTimeFlag
+	dnn := *dnnFlag
 
 	SetLogging(logMode)
 	logger.Println("Interceptor starting...")
@@ -130,10 +127,10 @@ func main() {
 
 	wg.Add(1)
 
-	go HostapdListener(allowedMACsFilePath, ueIMSI, quitHostapdInterceptor, lanIF, pduGatewayIP) 
+	go HostapdListener(allowedMACsFilePath, ueIMSI, dnn, lanIF, pduGatewayIP, leaseTime, quitHostapdInterceptor) 
 	
 	wg.Add(1)
-	go DnsmasqListener(allowedMACsFilePath, leasesFilePath, ueIMSI, quitDnsmasqListener)
+	go DnsmasqListener(allowedMACsFilePath, leasesFilePath, ueIMSI, leaseTime, quitDnsmasqListener)
 
 	wg.Add(1)
 	go HostDisconnectListener(allowedMACsFilePath, leasesFilePath, ueIMSI, link, quitHostDisconnectListener)

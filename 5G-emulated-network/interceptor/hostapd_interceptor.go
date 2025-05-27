@@ -83,7 +83,7 @@ func (i *HostapdInterceptor) Request(command []byte) ([]byte, error) {
 	}
 
 	n, err := i.conn.Read(buf)
-	_ = i.conn.SetReadDeadline(time.Time{}) 
+	_ = i.conn.SetReadDeadline(time.Time{})
 
 	if err != nil {
 		if netErr, ok := err.(net.Error); ok && netErr.Timeout() {
@@ -136,37 +136,39 @@ func (i *HostapdInterceptor) Shutdown() {
 		} else {
 			logger.Println("HostapdInterceptor: Connection closed.")
 		}
-		i.conn = nil 
+		i.conn = nil
 	}
 }
 
 // HostapdListener listens for messages from hostapd.
 func HostapdListener(
-	allowedMACsFilePath string, 
-	ueIMSI string, 
-	quit <-chan struct{}, 
-	lanIF string,          
-	pduGatewayIP string,   
+	allowedMACsFilePath string,
+	ueIMSI string,
+	dnn string,
+	lanIF string,
+	pduGatewayIP string,
+	leaseTime string,
+	quit <-chan struct{},
 ) {
-	defer wg.Done() 
+	defer wg.Done()
 	logger.Println("HostapdListener: Started.")
 
 	buf := make([]byte, hostapdSocketBufferSize)
 	for {
 		select {
-		case <- quit: 
+		case <-quit:
 			logger.Println("HostapdListener: Received quit signal. Stopping...")
 			return
 		default:
 			if hostapdInterceptor == nil || hostapdInterceptor.conn == nil {
 				logger.Println("HostapdListener: Interceptor or its connection is nil. Stopping.")
-				return 
+				return
 			}
 
 			err := hostapdInterceptor.conn.SetReadDeadline(time.Now().Add(hostapdListenerReadTimeout))
 			if err != nil {
 				logger.Printf("HostapdListener: SetReadDeadline failed: %v. Retrying.", err)
-				time.Sleep(hostapdListenerReadTimeout) 
+				time.Sleep(hostapdListenerReadTimeout)
 				continue
 			}
 
@@ -175,10 +177,10 @@ func HostapdListener(
 
 			if err != nil {
 				if netErr, ok := err.(net.Error); ok && netErr.Timeout() {
-					continue 
+					continue
 				}
 				select {
-				case <-quit: 
+				case <-quit:
 					logger.Println("HostapdListener: Quitting during read error.")
 					return
 				default:
@@ -187,7 +189,7 @@ func HostapdListener(
 						logger.Println("HostapdListener: Connection closed externally. Stopping.")
 						return
 					}
-					time.Sleep(1 * time.Second) 
+					time.Sleep(1 * time.Second)
 				}
 				continue
 			}
@@ -199,7 +201,7 @@ func HostapdListener(
 			}
 			logger.Printf("HostapdListener: Event: %s", logPayload)
 
-			if strings.Contains(message, hostapdEventEAPSuccess)  {
+			if strings.Contains(message, hostapdEventEAPSuccess) {
 				parts := strings.Fields(message)
 				var macAddress string
 				for _, part := range parts {
@@ -220,7 +222,7 @@ func HostapdListener(
 				logger.Printf("HostapdListener: Auth success for %s", macAddress)
 				logger.Printf("HostapdListener: Requesting PDU for %s (IMSI: %s)", macAddress, ueIMSI)
 
-				session, pduErr := NewPDUSession(ueIMSI) 
+				session, pduErr := NewPDUSession(ueIMSI, dnn)
 				if pduErr != nil {
 					logger.Printf("HostapdListener: PDU session for %s failed: %v", macAddress, pduErr)
 					logger.Printf("HostapdListener: Deauthenticating %s due to PDU failure.", macAddress)
@@ -229,43 +231,39 @@ func HostapdListener(
 					}
 					continue
 				}
-				
+
 				pduIF := fmt.Sprintf("uesimtun%d", session.ID-1)
 				logger.Printf("HostapdListener: PDU Session ID %d, constructed PDU Interface: %s", session.ID, pduIF)
 
-				
 				var appliedRules []AppliedRuleDetail
-				/*
 				var applyErr error
 				if ruleManager != nil { // Use the global ruleManager
 					logger.Printf("HostapdListener: Applying iptables rules for MAC %s (LAN: %s, PDU_IF: %s, GW: %s)", macAddress, lanIF, pduIF, pduGatewayIP)
-					appliedRules, applyErr = ruleManager.ApplyMappingRules(lanIF, macAddress, pduIF, pduGatewayIP, session.ID) 
+					appliedRules, applyErr = ruleManager.ApplyMappingRules(lanIF, macAddress, pduIF, pduGatewayIP, session.ID)
 					if applyErr != nil {
 						logger.Printf("HostapdListener: Error applying iptables rules for %s: %v. Proceeding without rules.", macAddress, applyErr)
 					} else {
 						logger.Printf("HostapdListener: Successfully applied %d iptables rules for %s.", len(appliedRules), macAddress)
 					}
+
+					allowedDevices[macAddress] = Device{
+						state:                "AUTHENTICATED",
+						lease:                Lease{},
+						pduSession:           session,
+						AppliedIPTablesRules: appliedRules,
+					}
+					logger.Printf("HostapdListener: Device %s tracked, PDU ID %d. Stored %d iptables rules.", macAddress, session.ID, len(appliedRules))
+
+					if err := AllowMAC(allowedMACsFilePath, macAddress, leaseTime); err != nil {
+						logger.Printf("HostapdListener: AllowMAC for %s failed: %v", macAddress, err)
+					}
+					if err := RestartDnsmasq(); err != nil {
+						logger.Printf("HostapdListener: RestartDnsmasq for %s failed: %v", macAddress, err)
+					}
 				} else {
 					logger.Printf("HostapdListener: Global ruleManager not initialized, skipping iptables rule application for %s.", macAddress)
-				}
-				*/
-
-				allowedDevices[macAddress] = Device{
-					state:                "AUTHENTICATED",
-					lease:                Lease{}, 
-					pduSession:           session,
-					AppliedIPTablesRules: appliedRules, 
-				}
-				logger.Printf("HostapdListener: Device %s tracked, PDU ID %d. Stored %d iptables rules.", macAddress, session.ID, len(appliedRules))
-
-				if err := AllowMAC(allowedMACsFilePath, macAddress); err != nil {
-					logger.Printf("HostapdListener: AllowMAC for %s failed: %v", macAddress, err)
-				}
-				if err := RestartDnsmasq(); err != nil {
-					logger.Printf("HostapdListener: RestartDnsmasq for %s failed: %v", macAddress, err)
 				}
 			}
 		}
 	}
 }
-
