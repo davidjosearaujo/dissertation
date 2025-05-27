@@ -143,7 +143,7 @@ Vagrant.configure("2") do |config|
     ue.vm.provision "file", source: "ue_install", destination: "ue_install"
     ue.vm.provision "shell" do |s|
       s.inline  = "/bin/bash ue_install $1 $2 $3 $4 $5"
-      s.args    = [GNB_IP_UE, DEFAULT_PDU_SESSIONS, CLIENT_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET]
+      s.args    = [GNB_IP_UE, DEFAULT_PDU_SESSIONS, CLIENT_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET, UE_LAN_IP]
     end
 
     ue.vm.synced_folder "./build/runtime-logs", "/log", create: true
