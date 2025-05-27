@@ -228,7 +228,8 @@ With local EAP-TLS authentication successfully implemented, this section details
     - The device's entry is removed from the global `allowedDevices` map.
 - The `DnsmasqListener` (in `dnsmasq_handler.go` [cite: dnsmasq_handler.go]) monitors the DHCP lease file, updating lease details and device state to "LEASED" within the `allowedDevices` map.
 
-**6. Implemented Traffic Mapping:** The `interceptor` system, through the `routing_handler.go` module [cite: routing_handler.go], implements concrete traffic mapping for each authenticated NAUN3 device. This is no longer conceptual.
+**6. Implemented Traffic Mapping:**
+The `interceptor` system, through the `routing_handler.go` module [cite: routing_handler.go], implements concrete traffic mapping for each authenticated NAUN3 device. This is no longer conceptual.
 - After a PDU session is established for an NAUN3 device, the `HostapdListener` calls `ruleManager.ApplyMappingRules()`. The `ruleManager` is initialized in `main.go` [cite: main.go].
 - `ApplyMappingRules` takes the LAN interface (e.g., `enp0s9`), NAUN3's MAC address, the PDU session's interface name (e.g., `uesimtun<ID-1>`), the PDU session's gateway IP (e.g., `10.46.0.1` for the `clients` DNN, passed as `--pdu-gw-ip` flag [cite: main.go]), and the PDU session ID.
 - It then systematically configures policy-based routing:
