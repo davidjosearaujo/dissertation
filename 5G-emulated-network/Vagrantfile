@@ -59,19 +59,19 @@ Vagrant.configure("2") do |config|
     core.vm.network "forwarded_port", guest: 8080, host: 9999
 
     # Copying the DBCTL script
-    core.vm.provision "file", source: "open5gs-dbctl", destination: "open5gs-dbctl"
+    core.vm.provision "file", source: "open5gs-dbctl.sh", destination: "open5gs-dbctl.sh"
 
     # Open5GS installation
-    core.vm.provision "file", source: "core_install", destination: "core_install"
+    core.vm.provision "file", source: "core_install.sh", destination: "core_install.sh"
     core.vm.provision "shell" do |s|
-      s.inline  = "/bin/bash core_install $1 $2 $3 $4"
+      s.inline  = "/bin/bash core_install.sh $1 $2 $3 $4"
       s.args    = [CORE_IP, UE_IMSI, UE_KEY, UE_OPC]
     end
 
     # Authenticator Server configuration
-    core.vm.provision "file", source: "auth_server_install", destination: "auth_server_install"
+    core.vm.provision "file", source: "auth_server_install.sh", destination: "auth_server_install.sh"
     core.vm.provision "shell" do |s|
-      s.inline  = "/bin/bash auth_server_install $1 $2 $3 $4 $5"
+      s.inline  = "/bin/bash auth_server_install.sh $1 $2 $3 $4 $5"
       s.args    = [CLIENT_EAP_IP, CERT_CA_PASSWD, CERT_SERVER_PASSWD, CERT_CLIENT_PASSWD, CLIENT_SECRET]
     end
 
@@ -99,15 +99,15 @@ Vagrant.configure("2") do |config|
     gnb.vm.network "private_network", ip: GNB_IP_UE
 
     # UERANSIM installation
-    gnb.vm.provision "file", source: "ueransim_install", destination: "ueransim_install"
+    gnb.vm.provision "file", source: "ueransim_install.sh", destination: "ueransim_install.sh"
     gnb.vm.provision "shell" do |s|
-      s.inline  = "/bin/bash ueransim_install"
+      s.inline  = "/bin/bash ueransim_install.sh"
     end
 
     # gNodeB configuration
-    gnb.vm.provision "file", source: "gnb_install", destination: "gnb_install"
+    gnb.vm.provision "file", source: "gnb_install.sh", destination: "gnb_install.sh"
     gnb.vm.provision "shell" do |s|
-      s.inline  = "/bin/bash gnb_install $1 $2 $3"
+      s.inline  = "/bin/bash gnb_install.sh $1 $2 $3"
       s.args    = [CORE_IP, GNB_IP_CORE, GNB_IP_UE]
     end
 
@@ -134,42 +134,66 @@ Vagrant.configure("2") do |config|
     ue.vm.provision "file", source: "build/interceptor", destination: "interceptor"
 
     # UERANSIM installation
-    ue.vm.provision "file", source: "ueransim_install", destination: "ueransim_install"
+    ue.vm.provision "file", source: "ueransim_install.sh", destination: "ueransim_install.sh"
     ue.vm.provision "shell" do |s|
-      s.inline = "/bin/bash ueransim_install"
+      s.inline = "/bin/bash ueransim_install.sh"
     end
 
     # UE configuration
-    ue.vm.provision "file", source: "ue_install", destination: "ue_install"
+    ue.vm.provision "file", source: "ue_install.sh", destination: "ue_install.sh"
     ue.vm.provision "shell" do |s|
-      s.inline  = "/bin/bash ue_install $1 $2 $3 $4 $5"
+      s.inline  = "/bin/bash ue_install.sh $1 $2 $3 $4 $5"
       s.args    = [GNB_IP_UE, DEFAULT_PDU_SESSIONS, CLIENT_EAP_IP, AUTH_SERVER_IP, CLIENT_SECRET, UE_LAN_IP]
     end
 
     ue.vm.synced_folder "./build/runtime-logs", "/log", create: true
   end
 
-  config.vm.define "naun3" do |naun3|
-    naun3.vm.box = "ubuntu/jammy64"
+  config.vm.define "naun3_1" do |naun3_1|
+    naun3_1.vm.box = "ubuntu/jammy64"
 
-    naun3.vm.provider "virtualbox" do |v|
+    naun3_1.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
     end
 
-    naun3.vm.hostname = "naun3"
-    naun3.vm.network "private_network", ip: NAUN3_IP, auto_config: false
+    naun3_1.vm.hostname = "naun301"
+    naun3_1.vm.network "private_network", ip: NAUN3_IP, auto_config: false
 
     # EAP Auth Server Certs
-    naun3.vm.synced_folder "./build/eap-radius-certs-sync", "/certs", create: true
+    naun3_1.vm.synced_folder "./build/eap-radius-certs-sync", "/certs", create: true
 
     # NAUN3 configuration
-    naun3.vm.provision "file", source: "naun3_install", destination: "naun3_install"
-    naun3.vm.provision "shell" do |s|
-      s.inline  = "/bin/bash naun3_install $1 $2"
+    naun3_1.vm.provision "file", source: "naun3_install.sh", destination: "naun3_install.sh"
+    naun3_1.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash naun3_install.sh $1 $2"
       s.args    = [CERT_CLIENT_PASSWD, NAUN3_IP]
     end
 
-    naun3.vm.synced_folder "./build/runtime-logs", "/log", create: true
+    naun3_1.vm.synced_folder "./build/runtime-logs", "/log", create: true
+  end
+
+  config.vm.define "naun3_2" do |naun3_2|
+    naun3_2.vm.box = "ubuntu/jammy64"
+
+    naun3_2.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    naun3_2.vm.hostname = "naun302"
+    naun3_2.vm.network "private_network", ip: NAUN3_IP, auto_config: false
+
+    # EAP Auth Server Certs
+    naun3_2.vm.synced_folder "./build/eap-radius-certs-sync", "/certs", create: true
+
+    # NAUN3 configuration
+    naun3_2.vm.provision "file", source: "naun3_install.sh", destination: "naun3_install.sh"
+    naun3_2.vm.provision "shell" do |s|
+      s.inline  = "/bin/bash naun3_install.sh $1 $2"
+      s.args    = [CERT_CLIENT_PASSWD, NAUN3_IP]
+    end
+
+    naun3_2.vm.synced_folder "./build/runtime-logs", "/log", create: true
   end
 end

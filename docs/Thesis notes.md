@@ -241,82 +241,72 @@ The `interceptor` system, through the `routing_handler.go` module [cite: routing
     6. **NAT:** An `iptables` rule in the `nat` table's `POSTROUTING` chain (`-o <PDU_IF_NAME> -j MASQUERADE`) performs SNAT for traffic exiting via the PDU session interface.  
 - These rules ensure that traffic from a specific NAUN3 device is marked, routed through its dedicated PDU session, and NATted appropriately, effectively isolating its traffic and using its PDU session IP for external communication. The applied rules are stored in the `Device` struct and removed by `RemoveRulesForDevice` upon termination..
 ## Adaptation of Network Functions
-The successful implementation of the proposed framework did not require code-level modifications to the standard 5G Network Functions (NFs) or RAN/UE simulators. Instead, these components were adapted through specific configurations to support the gateway-centric authentication and identity management scheme for NAUN3 devices. The primary tools used for this were Open5GS for the 5GC, UERANSIM for the gNB and the 5G-RG's UE stack, all provisioned and configured via scripts within a Vagrant-managed virtualized environment [cite: `Vagrantfile.txt`, `core_install.sh`, `gnb_install.sh`, `ue_install.sh`].
+The successful implementation of the proposed framework did not require code-level modifications to the standard 5G Network Functions (NFs) or RAN/UE simulators. Instead, these components were adapted through specific configurations to support the gateway-centric authentication and identity management scheme for NAUN3 devices. The primary tools used for this were Open5GS for the 5GC, UERANSIM for the gNB and the 5G-RG's UE stack, all provisioned and configured via scripts within a Vagrant-managed virtualized environment.
 
-**Open5GS (5GC) on `core` VM:** The Open5GS components (AMF, SMF, UPF, AUSF, UDM) were configured as follows [cite: `core_install.sh`]:
-
+**Open5GS (5GC) on `core` VM:** The Open5GS components (AMF, SMF, UPF, AUSF, UDM) were configured as follows:
 - **Connectivity Configuration:** The AMF's NGAP interface and the UPF's GTP-U interface were bound to the `core` VM's specific IP address (`CORE_IP` variable from `Vagrantfile.txt`, e.g., `192.168.57.10`) within the private network connecting to the gNB. This was achieved by modifying `amf.yaml` and `upf.yaml` configuration files using `yq`.
-    
 - **DNN Configuration:** Two distinct DNNs were defined to segregate traffic:
-    
     - `backhaul` DNN: Configured in `smf.yaml` and `upf.yaml`, associated with the default `ogstun` tunnel interface. This DNN provides the primary PDU session for the 5G-RG itself, used for operational traffic such as RADIUS communication with the EAP Authentication Server. The SMF configuration for this DNN typically assigns IPs from a specific subnet (e.g., `10.45.0.0/24` is a common Open5GS default, and the scripts use `AUTH_SERVER_IP="10.45.0.1"` and `CLIENT_EAP_IP="10.45.0.2"` which fall into this range).
-        
     - `clients` DNN: Also configured in `smf.yaml` and `upf.yaml`. A dedicated tunnel interface (`clientun0`) was created on the `core` VM and assigned an IP address (e.g., `10.46.0.1/24`). The `clients` DNN was associated with this interface and subnet (`10.46.0.0/24`), enabling the SMF/UPF to allocate IPs from this range for the individual PDU sessions established for each NAUN3 device.
-        
-- **Subscriber Provisioning (for the 5G-RG):** The 5G-RG itself was provisioned as a standard UE in the Open5GS MongoDB database using the `open5gs-dbctl.sh` script [cite: `open5gs-dbctl.sh`]. This involved adding an entry with the 5G-RG's IMSI (`UE_IMSI`), pre-shared key (`UE_KEY`), and OPC (`UE_OPC`). This subscription was configured to allow the 5G-RG to establish PDU sessions on both the `backhaul` and `clients` DNNs using the `update_apn` command of `open5gs-dbctl.sh`.
-    
+- **Subscriber Provisioning (for the 5G-RG):** The 5G-RG itself was provisioned as a standard UE in the Open5GS MongoDB database using the `open5gs-dbctl.sh` script. This involved adding an entry with the 5G-RG's IMSI (`UE_IMSI`), pre-shared key (`UE_KEY`), and OPC (`UE_OPC`). This subscription was configured to allow the 5G-RG to establish PDU sessions on both the `backhaul` and `clients` DNNs using the `update_apn` command of `open5gs-dbctl.sh`.
 - **AUSF/UDM Operation:** These functions operate in a standard manner for the 5G-RG. The 5G-RG authenticates to the 5GC using its provisioned USIM credentials. The NAUN3 devices are not directly known to or authenticated by the 5GC's AUSF/UDM. The 5GC only interacts with the authenticated 5G-RG, which then requests PDU sessions on behalf of the NAUN3 devices.
-    
 
-**UERANSIM (gNB on `gnb` VM and UE stack on `ue` VM):** The UERANSIM components were configured without any code modifications, using their standard YAML configuration files manipulated by `yq` [cite: `gnb_install.sh`, `ue_install.sh`]:
-
+**UERANSIM (gNB on `gnb` VM and UE stack on `ue` VM):** The UERANSIM components were configured without any code modifications, using their standard YAML configuration files manipulated by `yq`:
 - **gNB Configuration (`gnb` VM):** The `open5gs-gnb.yaml` configuration file was modified to set:
-    
     - The gNB's link IP address (`GNB_IP_UE` from `Vagrantfile.txt`, e.g., `192.168.58.10`) for communication towards the UE (5G-RG).
-        
     - The gNB's NGAP and GTP IP addresses (`GNB_IP_CORE` from `Vagrantfile.txt`, e.g., `192.168.56.100`) for N2 and N3 interface communication with the AMF and UPF respectively.
-        
     - The AMF's IP address (`CORE_IP` from `Vagrantfile.txt`, e.g., `192.168.57.10`) for establishing the N2 connection.
-        
 - **5G-RG UE Stack Configuration (`ue` VM):** The `open5gs-ue.yaml` file for the UERANSIM instance representing the 5G-RG was configured to:
-    
     - Specify the gNB's IP address in its search list (`GNB_IP_UE`).
-        
     - Use the provisioned USIM credentials (IMSI, Key, OPC) identical to those configured in the Open5GS database.
-        
     - Support multiple PDU sessions. The `ue_install.sh` script explicitly configures the first session (index 0) to use the `backhaul` APN/DNN. It then prepares subsequent session configurations (though `DEFAULT_PDU_SESSIONS` is 0 in the `Vagrantfile.txt`, the script allows for more) to support IPv4 type PDU sessions on the `clients` APN/DNN with SST 1. This configuration enables the 5G-RG's UE stack to request the necessary PDU sessions as orchestrated by the `interceptor` application.
-        
 
 These configurations ensured that the standard 5G components could support the project's architecture, where the 5G-RG acts as a legitimate UE capable of managing multiple distinct data paths (via PDU Sessions on different DNNs) for its own operational needs and for proxying connectivity for the locally authenticated NAUN3 devices.
-
 ## System Integration and Configuration
-
-\label{sec:system_integration_and_configuration}
-
-The various implemented components were integrated into a cohesive test environment using Vagrant for VM orchestration and shell scripts for provisioning. This ensured consistent configurations and network connectivity across the simulated 5G system and attached devices [cite: `Vagrantfile.txt`].
+The various implemented components were integrated into a cohesive test environment using Vagrant for VM orchestration and shell scripts for provisioning. This ensured consistent configurations and network connectivity across the simulated 5G system and attached devices.
 
 **Virtual Machine Orchestration and Network Topology:** The `Vagrantfile.txt` defines four VMs (`core`, `gnb`, `ue`, `naun3`), each running Ubuntu 22.04 LTS. Vagrant establishes several private networks to facilitate communication:
-
 - **5GC-gNB Network (`192.168.57.0/24`):** Connects the `core` VM (hosting Open5GS NFs) with the `gnb` VM. The `core` VM uses `CORE_IP` (e.g., `192.168.57.10`) and the `gnb` VM uses `GNB_IP_CORE` (e.g., `192.168.57.100`) on this network for N2 (AMF-gNB) and N3 (UPF-gNB) interface traffic.
-    
 - **gNB-UE (5G-RG) Network (`192.168.58.0/24`):** Connects the `gnb` VM with the `ue` VM (representing the 5G-RG). The `gnb` VM uses `GNB_IP_UE` (e.g., `192.168.58.10`) and the `ue` VM uses `UE_IP` (e.g., `192.168.58.100`) for the simulated Uu radio interface.
-    
 - **5G-RG LAN (`192.168.59.0/24`):** Connects the `ue` VM (interface `enp0s9` with IP `UE_LAN_IP` from `Vagrantfile.txt`, e.g., `192.168.59.10`) to the `naun3` VM (interface `enp0s8` with IP `NAUN3_IP` from `Vagrantfile.txt`, e.g., `192.168.59.100`). This segment handles local EAPoL for authentication and the NAUN3 device's data traffic before it's routed into a PDU session. Vagrant's synced folders facilitate sharing of EAP/RADIUS certificates (from `core` to `naun3` via `/certs`), runtime logs from all VMs to the host (`./build/runtime-logs`), and the compiled `interceptor` binary to the `ue` VM (`./build/interceptor` to `/home/vagrant/interceptor`).
-    
 
 **5G-RG (`ue` VM) as the Central Integration Hub:** The `ue` VM is the cornerstone of the integration, performing multiple functions simultaneously:
-
 - **RAN Connectivity:** Its UERANSIM UE stack connects to the simulated gNB on the `gnb` VM.
-    
 - **Local Network Services:**
-    
-    - `hostapd` [cite: `ue_install.sh`] is configured on its LAN interface (`enp0s9`) to provide 802.1X/EAP-TLS authentication for devices on the `192.168.59.0/24` network, relaying authentication requests to the FreeRADIUS server.
-        
-    - `dnsmasq` [cite: `ue_install.sh`] acts as a DHCP server for this LAN, dynamically assigning IPs to authenticated NAUN3 devices based on the `/etc/allowed-macs.conf` file managed by the `interceptor`.
-        
+    - `hostapd` is configured on its LAN interface (`enp0s9`) to provide 802.1X/EAP-TLS authentication for devices on the `192.168.59.0/24` network, relaying authentication requests to the FreeRADIUS server.
+    - `dnsmasq` acts as a DHCP server for this LAN, dynamically assigning IPs to authenticated NAUN3 devices based on the `/etc/allowed-macs.conf` file managed by the `interceptor`.
 - **`backhaul` PDU Session:** Upon registration with Open5GS, the 5G-RG's UE stack establishes its primary PDU session on the `backhaul` DNN. This session receives an IP address (e.g., `CLIENT_EAP_IP = 10.45.0.2`) from the 5GC. This IP is then used as the source for RADIUS messages sent from `hostapd` (via the 5G-RG) to the FreeRADIUS server (`AUTH_SERVER_IP = 10.45.0.1`) on the `core` VM.
-    
-- **`clients` PDU Sessions:** Orchestrated by the `interceptor` application [cite: `main.go`, `ueransim_pdu_handler.go`], for each successfully EAP-authenticated NAUN3 device, the 5G-RG's UE stack requests a new, dedicated PDU session on the `clients` DNN. These sessions are assigned IPs from the `10.46.0.0/24` subnet by the SMF/UPF.
-    
+- **`clients` PDU Sessions:** Orchestrated by the `interceptor` application, for each successfully EAP-authenticated NAUN3 device, the 5G-RG's UE stack requests a new, dedicated PDU session on the `clients` DNN. These sessions are assigned IPs from the `10.46.0.0/24` subnet by the SMF/UPF.  
 - **IP Forwarding and Traffic Routing:**
-    
-    - IP forwarding is enabled on the `ue` VM (`sudo sysctl -w net.ipv4.ip_forward=1`) [cite: `ue_install.sh`].
-        
-    - The `interceptor`, through its `routing_handler.go` module [cite: `routing_handler.go`], dynamically configures policy-based routing using `ip rule` and `ip route` commands, and `iptables` rules for packet marking (`mangle` table), NAT (`nat` table, `MASQUERADE`), and forwarding (`filter` table). This ensures that traffic originating from an NAUN3 device on the local LAN is marked, routed through its dedicated `clients` PDU session tunnel interface (e.g., `uesimtunX`), and NATted with that PDU session's assigned 5GC IP address.
-        
+    - IP forwarding is enabled on the `ue` VM (`sudo sysctl -w net.ipv4.ip_forward=1`).
+    - The `interceptor`, through its `routing_handler.go` module, dynamically configures policy-based routing using `ip rule` and `ip route` commands, and `iptables` rules for packet marking (`mangle` table), NAT (`nat` table, `MASQUERADE`), and forwarding (`filter` table). This ensures that traffic originating from an NAUN3 device on the local LAN is marked, routed through its dedicated `clients` PDU session tunnel interface (e.g., `uesimtunX`), and NATted with that PDU session's assigned 5GC IP address.
 
-**NAUN3 Device (`naun3` VM) Configuration:** The `naun3` VM connects to the 5G-RG's LAN interface (`enp0s8` on `naun3` to `enp0s9` on `ue`). Its `wpa_supplicant` service [cite: `naun3_install.sh`] is configured for EAP-TLS authentication using the client certificate and CA certificate shared via the Vagrant synced folder (`/certs`). Upon successful authentication, it obtains a local IP address via DHCP from the `dnsmasq` server on the 5G-RG.
+**NAUN3 Device (`naun3` VM) Configuration:** The `naun3` VM connects to the 5G-RG's LAN interface (`enp0s8` on `naun3` to `enp0s9` on `ue`). Its `wpa_supplicant` service is configured for EAP-TLS authentication using the client certificate and CA certificate shared via the Vagrant synced folder (`/certs`). Upon successful authentication, it obtains a local IP address via DHCP from the `dnsmasq` server on the 5G-RG.
 
-**EAP Authentication Server (FreeRADIUS on `core` VM):** FreeRADIUS [cite: `auth_server_install.sh`] on the `core` VM is configured to listen for RADIUS requests. The `ue` VM (5G-RG) is defined as a RADIUS client, identified by its `backhaul` PDU session IP address (`CLIENT_EAP_IP`). It authenticates NAUN3 devices based on the client certificates issued by its internal CA.
+**EAP Authentication Server (FreeRADIUS on `core` VM):** FreeRADIUS on the `core` VM is configured to listen for RADIUS requests. The `ue` VM (5G-RG) is defined as a RADIUS client, identified by its `backhaul` PDU session IP address (`CLIENT_EAP_IP`). It authenticates NAUN3 devices based on the client certificates issued by its internal CA.
 
 **Parameter Consistency:** The `Vagrantfile.txt` serves as the central point for defining critical network parameters (IP addresses, IMSI, keys, shared secrets, certificate passwords). These parameters are passed as arguments to the respective provisioning scripts (`*.sh`), ensuring consistency across the configurations of Open5GS, UERANSIM, FreeRADIUS, `hostapd`, and the command-line flags for the `interceptor` application. This integrated setup allows for the end-to-end simulation and testing of the proposed NAUN3 device integration framework.
+## Implementation Challenges
+
+The development and implementation of this framework, while ultimately successful in the simulated environment, encountered several technical challenges. These ranged from complexities in orchestrating the virtualized 5G system to specific issues encountered when attempting to integrate physical hardware.
+
+**1. Orchestration of Simulated 5G Components:**
+- **Configuration Complexity:** Setting up a multi-VM environment with Open5GS, UERANSIM, FreeRADIUS, `hostapd`, and `dnsmasq` required careful management of numerous configuration files and network parameters. Ensuring IP address consistency, correct DNN definitions, subscriber provisioning, and proper inter-component communication (e.g., RADIUS, NGAP, GTP-U) across different virtual networks demanded meticulous scripting (as seen in the Vagrant provisioning scripts). Any misconfiguration in one component often had cascading effects, making debugging a time-consuming process.
+- **Service Dependencies and Startup Order:** Ensuring that services started in the correct order and that dependencies were met (e.g., MongoDB before Open5GS NFs, Open5GS NFs before UERANSIM components could connect) was crucial and required careful scripting within the Vagrant provisioning process.
+- **Dynamic PDU Session Management with UERANSIM:** While UERANSIM's `nr-cli` tool provides a command-line interface to manage PDU sessions, programmatically triggering and monitoring these from an external application (the custom orchestration logic) involved parsing command output and implementing polling mechanisms, which is less robust than a direct API-based interaction might be.
+
+**2. Development of the Custom Orchestration Logic:**
+- **Event Handling and State Management:** The custom orchestration application needed to reliably capture events from `hostapd` (EAP success), manage the state of multiple NAUN3 devices (authentication status, associated PDU session, applied routing rules), and react to network events (DHCP lease changes, device disconnections via ARP/neighbor cache monitoring). Coordinating these asynchronous events and maintaining a consistent internal state for each device was a key challenge.
+- **Interfacing with System Utilities:** The custom logic interacts with system utilities like `nr-cli` (for PDU sessions), `iptables`, and `ip route`/`ip rule` (for traffic mapping). Ensuring these commands were executed correctly with the appropriate parameters for each device, and handling their output or potential errors, required careful implementation and robust error checking within the Go application.
+- **Concurrency and Resource Management:** Managing multiple goroutines for listening to `hostapd`, `dnsmasq` leases, and network disconnects, while ensuring thread-safe access to shared data structures (like the map of allowed devices), required careful use of synchronization primitives.
+
+**3. Challenges with Physical Modem Integration (Quectel RG500Q-GL RedCap Attempt):** An attempt was made to integrate a physical 5G modem, specifically a Quectel RG500Q-GL (RedCap) USB modem, to explore the feasibility of the solution with real hardware acting as the 5G-RG's connection to the 5G network. This presented significant challenges distinct from the simulated UERANSIM environment [cite: `Notes.md`]:
+- **Proprietary Drivers and Kernel Dependencies:** The Quectel RG500Q-GL, being an experimental sample, relied on proprietary drivers provided by Quectel rather than standard Linux kernel drivers. These drivers had to be compiled from source and were highly sensitive to specific kernel versions. This severely restricted the choice of host operating system and often necessitated the use of a dedicated Single Board Computer (SBC) that met the kernel requirements, complicating the development workflow (requiring SSH access to the SBC for modem interaction).
+- **Lack of Public Documentation:** Comprehensive public documentation for the modem's AT commands, QMI interface (`qmicli`), and particularly for advanced features like establishing multiple concurrent PDU sessions with QMAP (Quectel Multiplexing an APplication processor) mode, was scarce or non-existent. This made configuring the modem for the project's specific needs (e.g., one `backhaul` PDU session, multiple `clients` PDU sessions) a process of trial, error, and reliance on limited provided snippets.
+- **Difficulties with Multiple PDU Sessions:**
+    - While AT commands and `qmicli` could be used to define PDP contexts for different APNs/DNNs (e.g., `AT+CGDCONT` or `qmicli --wds-create-profile`), activating and managing multiple _simultaneous_ PDU sessions, especially binding them to distinct virtual network interfaces for independent routing by the custom orchestration logic, proved extremely challenging with the provided Quectel tools (`quectel-qmi-proxy`, `quectel-CM`).
+    - The available examples and tools from Quectel primarily demonstrated setting up multiple connections to different APNs but did not clearly address the scenario of multiple active PDU sessions to the _same_ APN (our `clients` DNN) or robustly exposing these as distinct network interfaces to the Linux system in a way that the custom routing logic could easily manage.
+    - The `qmicli` tool, while powerful, did not offer a straightforward or well-documented method for QMAP-based multiplexing of multiple PDU sessions that was confirmed to work with this specific modem model and firmware.
+- **Contrast with UERANSIM:** The UERANSIM environment, by comparison, allowed for relatively straightforward programmatic control over PDU session establishment and release via `nr-cli`, making it a more tractable platform for developing and testing the core logic of the custom orchestration application and the overall framework. The complexities of the physical modem's driver and proprietary connection manager abstracted away much of the direct control needed for fine-grained, multi-session management.
+
+These challenges highlight the gap that can exist between simulated environments and the intricacies of physical hardware, especially when dealing with proprietary drivers and limited documentation for specialized or pre-release components. While the core concepts of the project were validated in simulation, porting to such physical hardware would require significant additional effort in driver-level integration and modem-specific control.

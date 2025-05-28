@@ -1,14 +1,15 @@
 ********> Quectel UMTS&LTE&5G modules are USB composite devices with multiple USB interfaces. Each USB interface supports different functionalities, which are implemented by loading different USB interface drivers. After a driver is loaded successfully, the corresponding device node is generated, which can be used by the Linux system to implement the module functionalities, such as AT command, GNSS, DIAG, log and USB network adapter. 
-> 
+
 > The following table describes the USB interface information of different modules in the Linux system, including USB driver, interface number, device name and interface function. 
 > 
 > You can obtain the corresponding VID, PID and interface information of the relevant model, and then port the USB interface driver listed in the following table.
+# RG500Q-GL
 
-[[Quectel_UMTS_LTE_5G_Linux_USB_Driver_User_Guide_V3.2.pdf#page=12&selection=25,0,113,1|Quectel_UMTS_LTE_5G_Linux_USB_Driver_User_Guide_V3.2, page 12]]
+This a Quectel RedCap 5G USB modem. There are no public drivers for this experimental samples and soo the drivers we "handed-out" by Quectel for use to use.
 
-# RG255C series/ RM255C-GL
-- VID: 0x2c7c
-- PID: 0x0316
+This was a huge difficulty has these need to be compiled from source and loaded as kernel modules, and not all kernels versions are provisioned for, which forced us to use a single board computer to handle the module and ssh to it do work with the board.
+
+Not only that, the documentation is almost non-existent, which makes the guessing game for the correct configurations to issue to the board a bit difficult.
 
 | USB Driver | Interface Number | Device Name         | Function                                                                   |
 | ---------- | ---------------- | ------------------- | -------------------------------------------------------------------------- |
@@ -138,6 +139,11 @@ This command returns a list of PDP addresses for the specified context identifie
 AT+CGPADDR=[<cid>[,<cid>[,…]]]    // Write command
 ```
 # Steps to create interfaces and PDP contexts
+
+Commands AT are not ideal for programmatic use since they are issued via a serial connection. 
+
+It was quite a challenge to find the correct set of commands via the `qmicli`tool that would replicate the configuration issued via AT
+
 1. To generated new interfaces, first unload the kernel module `qmi_wwan_q` and load it with the desired number of new interfaces.
 ```
 sudo rmmod qmi_wwan_q
@@ -182,6 +188,14 @@ sudo qmicli -d /dev/cdc-wdm0 --device-open-qmi --wds-create-profile="3gpp,apn=cl
 
 **NOTE:** Contexts with `cid` **2** and **3** are reserved for `ims` and `sos`respectively. We are able 
 # Multiplexing connections
+
+Unfortunately, multiplexing connection via the `qmicli`tools is not trivial, and it's, in some cases, dependent on the modem's version. There was no documentation on how to to it with our particular modem and despite of best efforts, we were not successfull in doing so.
+
+This leaves us limited with using the proprietary tools (drivers and Quectel's connection manager) to configure network interfaces with QMAP for multiplexing the main interfaces.
+
+Quectel provides some rough text files and terminal snippets on how to use their tool, and although it does provide examples on how to setup multiple connections, these are always PDU using different DNNs.
+
+Based on those, we've setup using the following set of steps:
 ## Establishing Multiple PDU Sessions/PDP Contexts/PDNs with Quectel Cellular Modem
 
 The goal is to establish multiple PDU Sessions in the two DNNs like so:
@@ -235,12 +249,3 @@ Flags:
 ```bash
 ./quectel-CM -k 1
 ```
-
-# Obtain modem firmware version
-```bash
-AT+QGMR
-```
-- RG255CGLABR01A04M4G_A0.004.A0.004 - needs 'ims'
-- RG255CGLABR01A04M4G_01.002.01.002 - doesn't need 'ims'
-
-One should request the existence of a  "ims" PDU Session
