@@ -310,3 +310,55 @@ The development and implementation of this framework, while ultimately successfu
 - **Contrast with UERANSIM:** The UERANSIM environment, by comparison, allowed for relatively straightforward programmatic control over PDU session establishment and release via `nr-cli`, making it a more tractable platform for developing and testing the core logic of the custom orchestration application and the overall framework. The complexities of the physical modem's driver and proprietary connection manager abstracted away much of the direct control needed for fine-grained, multi-session management.
 
 These challenges highlight the gap that can exist between simulated environments and the intricacies of physical hardware, especially when dealing with proprietary drivers and limited documentation for specialized or pre-release components. While the core concepts of the project were validated in simulation, porting to such physical hardware would require significant additional effort in driver-level integration and modem-specific control.
+
+# Validation and Results Evaluation
+This chapter details the methodology employed to validate the proposed framework for integrating Wi-Fi-only/NAUN3 devices into the 5G network. It outlines the test scenarios, key performance indicators (KPIs), and the evaluation of the results obtained from the implemented simulation environment.
+## 1. Validation Methodology
+To assess the feasibility, functionality, and effectiveness of the proposed solution, a series of tests were conducted within the simulated environment described in the "Development and Implementation" chapter. The overall validation approach was **simulation-based testing**, leveraging the orchestrated virtual machines and configured 5G components (Open5GS, UERANSIM) and local network services (`hostapd`, `dnsmasq`, and the custom `interceptor` application).
+
+The validation focused on several key aspects of the system:
+
+**I. Overall Validation Approach:**
+- **Simulation-Based Testing:** All validation activities were performed within the virtualized environment created using Vagrant, Open5GS, UERANSIM, FreeRADIUS, and the custom `interceptor` application. This allowed for controlled and repeatable testing of the end-to-end solution.
+- **Focus on Functional Correctness and Integration:** The primary goal was to verify that the proposed mechanisms for authentication, proxy identity creation (per-device PDU session), traffic mapping, and lifecycle management operate as designed.
+- **Qualitative Security Assessment:** While not a formal security audit, the validation included observing whether the implemented security measures (EAP-TLS, traffic separation) were functioning as intended.
+
+**II. Key Performance Indicators (KPIs) and Metrics for Evaluation:**
+The evaluation of the framework centered on the following indicators and metrics, primarily assessed through functional testing and observation of system logs and behavior:
+
+**1. Functional Correctness:**
+The functional correctness of the core mechanisms was evaluated based on the following aspects: 
+* **NAUN3 Device Authentication Success:** 
+	* Metric: Successful completion of the EAP-TLS authentication process for an NAUN3 device with the FreeRADIUS server, relayed by the 5G-RG (`hostapd` and `interceptor`).
+	* Verification: Logs from `wpa_supplicant` (NAUN3 VM), `hostapd` (5G-RG/`ue` VM), FreeRADIUS (`core` VM), and the custom `interceptor` application on the 5G-RG. 
+* **Dedicated PDU Session Establishment:**
+	* Metric: Successful establishment of a unique PDU session on the `clients` DNN by the 5G-RG for each successfully authenticated NAUN3 device.
+	* Verification: Output of `nr-cli ps-list` command on the 5G-RG (`ue` VM); logs from Open5GS SMF and UPF on the `core` VM. 
+* **IP Address Allocation:** 
+	* Metric (Local): Successful assignment of a local IP address to the NAUN3 device by `dnsmasq` on the 5G-RG after EAP-TLS authentication. 
+	* Metric (5GC): Successful assignment of a 5GC IP address by the 5GC (SMF/UPF) to the dedicated PDU session for the NAUN3 device. 
+	* Verification: `ip addr` command output on the NAUN3 VM; `dnsmasq` logs on the 5G-RG; `nr-cli ps-list` output on the 5G-RG; Open5GS SMF/UPF logs. 
+* **End-to-End Data Plane Connectivity:** 
+	* Metric: Ability of an authenticated NAUN3 device to send and receive IP traffic to/from an external network via its dedicated PDU session. 
+	* Verification: Ping tests and simple data transfer (e.g., HTTP GET) from the NAUN3 VM to a target beyond the UPF; packet captures (`tcpdump`) on NAUN3 LAN interface, 5G-RG's PDU session tunnel interface, and UPF interfaces. 
+* **Traffic Isolation and Mapping:** 
+	* Metric: Confirmation that traffic from a specific NAUN3 device is routed exclusively through its dedicated PDU session and associated routing rules. 
+	* Verification: Packet captures on the 5G-RG; analysis of `iptables` counters, `ip rule` and `ip route` configurations on the 5G-RG during active traffic from one or more NAUN3 devices. 
+* **Lifecycle Management Correctness:** 
+	* Metric: Successful de-authentication of an NAUN3 device and termination of its associated PDU session upon simulated disconnection/unreachability. 
+	* Verification: Logs from the `interceptor` application, `hostapd`, and `dnsmasq`; `nr-cli ps-list` output showing PDU session release; verification of removal of `iptables` rules and `dnsmasq` permissions.
+
+**2. Security Aspects (Qualitative Observation):**
+- **EAP-TLS Authentication Integrity:** Observation of the complete EAP-TLS handshake and successful mutual authentication through detailed logs from involved components (`wpa_supplicant`, `hostapd`, FreeRADIUS).
+- **Traffic Segregation:** Confirmation via network monitoring and PDU session analysis that `backhaul` DNN traffic (e.g., RADIUS) remains logically separate from the `clients` DNN traffic (NAUN3 user plane data).
+- **NAUN3 Identity Concealment from 5GC:** Verification that the NAUN3 device's local identifiers (e.g., MAC address) are not directly signaled to or stored by the core 5GC NFs (AMF, SMF, UDM), with the 5G-RG acting as the boundary.
+
+**3. Resource Management (Observational):**
+- **PDU Session Correlation:** The number of active PDU sessions on the `clients` DNN should directly correspond to the number of currently authenticated and connected NAUN3 devices, as tracked by the `interceptor` application.
+- **Timeliness of Operations (Qualitative):** General observation of the time taken for the end-to-end process: NAUN3 device EAP-TLS authentication, subsequent PDU session establishment, and the teardown process upon device disconnection. Formal latency measurements were considered outside the primary scope of this functional validation.
+
+**4. System Stability and Robustness (Qualitative):**
+- **Handling Multiple Devices:** The ability of the `interceptor` application and the overall simulated system to manage sequential and concurrent connections and disconnections of multiple NAUN3 devices without instability.
+- **Error Handling:** Observation of error logging and any recovery mechanisms within the `interceptor` application in scenarios such as a failed PDU session establishment attempt or unexpected disconnection.
+
+This validation methodology aims to provide a comprehensive assessment of the implemented solution's ability to meet its design goals, focusing on correct functionality and integration within the simulated 5G environment. The subsequent sections will detail the specific test scenarios designed and the evaluation of the results obtained.
