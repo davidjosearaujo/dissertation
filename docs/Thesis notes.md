@@ -313,7 +313,7 @@ These challenges highlight the gap that can exist between simulated environments
 
 # Validation and Results Evaluation
 This chapter details the methodology employed to validate the proposed framework for integrating Wi-Fi-only/NAUN3 devices into the 5G network. It outlines the test scenarios, key performance indicators (KPIs), and the evaluation of the results obtained from the implemented simulation environment.
-## 1. Validation Methodology
+## Validation Methodology
 To assess the feasibility, functionality, and effectiveness of the proposed solution, a series of tests were conducted within the simulated environment described in the "Development and Implementation" chapter. The overall validation approach was **simulation-based testing**, leveraging the orchestrated virtual machines and configured 5G components (Open5GS, UERANSIM) and local network services (`hostapd`, `dnsmasq`, and the custom `interceptor` application).
 
 The validation focused on several key aspects of the system:
@@ -362,3 +362,14 @@ The functional correctness of the core mechanisms was evaluated based on the fol
 - **Error Handling:** Observation of error logging and any recovery mechanisms within the `interceptor` application in scenarios such as a failed PDU session establishment attempt or unexpected disconnection.
 
 This validation methodology aims to provide a comprehensive assessment of the implemented solution's ability to meet its design goals, focusing on correct functionality and integration within the simulated 5G environment. The subsequent sections will detail the specific test scenarios designed and the evaluation of the results obtained.
+## Test Scenarios and Setup
+To validate the different aspects of the proposed framework, a series of distinct test scenarios, or experiments, were designed and executed. These scenarios leveraged the fully configured simulation environment detailed in the "Development and Implementation" chapter, which includes the `core` VM (Open5GS, FreeRADIUS), `gnb` VM (UERANSIM gNB), `ue` VM (5G-RG with UERANSIM UE, `hostapd`, `dnsmasq`, and the custom `interceptor`), and one or more `naun3` VMs (EAP supplicant).
+Specific tools were employed for monitoring and verification in each scenario:
+- **Log Analysis:** Reviewing logs from Open5GS NFs, UERANSIM components, FreeRADIUS, `hostapd`, `wpa_supplicant`, and the custom `interceptor` application was fundamental across all tests.
+- **Packet Capture:** `tcpdump` and `tshark` (Wireshark CLI) were used on various interfaces (NAUN3 LAN, 5G-RG's `backhaul` and `clients` PDU session interfaces, gNB interfaces, UPF interfaces) to inspect signaling and data plane traffic.
+- **Network Utilities:** Standard Linux utilities like `ping`, `ip addr`, `ip route`, `ip rule`, `iptables -L -v -n -t mangle -t nat -t filter`, and UERANSIM's `nr-cli` were used for connectivity testing and state verification.
+- **Traffic Generation:** `iperf3` was used for generating controlled network traffic to test data plane throughput and routing.
+### Experiment 1: Single NAUN3 Device Onboarding and Basic Connectivity
+The objective was to verify the successful EAP-TLS authentication of a single NAUN3 device, the subsequent establishment of its dedicated PDU session on the `clients` DNN, local and 5GC IP address allocation, and basic end-to-end data plane connectivity.
+
+Procedure:

@@ -3,8 +3,6 @@
 CERT_CLIENT_PASSWD=$1
 NAUN3_IP=$2
 
-sudo apt update
-
 sudo apt-get update
 sudo apt-get -y install wpasupplicant
 

@@ -1,11 +1,10 @@
 #!/bin/bash
 
 GNB_IP_UE=$1
-PDU_SESSIONS=$2
-CLIENT_EAP_IP=$3
-AUTH_SERVER_IP=$4
-CLIENT_SECRET=$5
-UE_LAN_IP=$6
+CLIENT_EAP_IP=$2
+AUTH_SERVER_IP=$3
+CLIENT_SECRET=$4
+UE_LAN_IP=$5
 
 echo -e "\nInstalling dependencies for 5G Modem"
 sudo apt install -y \
@@ -27,20 +26,8 @@ cat config/open5gs-ue.yaml \
 | yq '.sessions[0].apn style="single"' \
 | sudo tee config/open5gs-ue.yaml
 
-echo -e "\nEnabling multiple PDU Sessions in 'clients' APN"
-UL=$(($PDU_SESSIONS))
-for ((i=1;i<=$UL;i++)); do
-  cat config/open5gs-ue.yaml \
-  | yq '.sessions['$i'].type = "IPv4"' \
-  | yq '.sessions['$i'].type style="single"' \
-  | yq '.sessions['$i'].apn = "clients"' \
-  | yq '.sessions['$i'].apn style="single"' \
-  | yq '.sessions['$i'].slice.sst = 1' \
-  | sudo tee config/open5gs-ue.yaml
-done
-
 echo -e "\nRunning UE"
-build/nr-ue -c config/open5gs-ue.yaml &> /log/ue_$(date +%s).log &
+build/nr-ue -c config/open5gs-ue.yaml &> /home/vagrant/ue_$(date +%s).log &
 
 echo -e "Install dependencies for hostapd and dnsmasq"
 sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev dnsmasq python3 python3-dev
@@ -74,6 +61,7 @@ auth_server_shared_secret=$CLIENT_SECRET" > hostapd.conf
 
 LOG_FILE_PATH="/log/$(cat /etc/hostname)_hostapd_$(date +%s).log"
 cat hostapd.conf > ${LOG_FILE_PATH}
+
 
 echo -e "\nRunning hostapd"
 sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
