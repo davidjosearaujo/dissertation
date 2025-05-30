@@ -409,7 +409,7 @@ Procedure:
 9. On the `core` VM (`iperf3` server logs), verify that connections are received from the distinct 5GC IP addresses assigned to each NAUN3's PDU session.
 
 Metrics/Verification Points:
-- - Each NAUN3 device establishes its own unique PDU session on the `clients` DNN with a distinct 5GC IP.
+- Each NAUN3 device establishes its own unique PDU session on the `clients` DNN with a distinct 5GC IP.
 - `ping -R` from each NAUN3 shows a path NATted through its unique PDU session IP.
 - `iperf3` server logs show connections from distinct PDU session IPs.
 - `iptables` and routing rules correctly isolate traffic per device.
