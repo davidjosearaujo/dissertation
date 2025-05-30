@@ -6,42 +6,36 @@ AUTH_SERVER_IP=$3
 CLIENT_SECRET=$4
 UE_LAN_IP=$5
 
+sudo apt update
+
 echo -e "\nInstalling dependencies for 5G Modem"
 sudo apt install -y \
-  iptables-persistent \
-  linux-headers-$(uname -r) \
-  linux-modules-extra-$(uname -r) \
   build-essential \
-  net-tool \
-  dwarves
+  linux-headers-$(uname -r) \
+  lksctp-tools \
+  libsctp-dev \
+  iproute2 \
+  net-tools \
+  python3 \
+  dnsmasq \
+  yq
 
-cd ~/UERANSIM
+
+sudo snap install yq
 
 echo -e "\nUpdate gNodeB IP"
-cat config/open5gs-ue.yaml | yq ".gnbSearchList[0] = \"$GNB_IP_UE\"" | sudo tee config/open5gs-ue.yaml
+cat /home/vagrant/open5gs-ue.yaml | yq ".gnbSearchList[0] = \"$GNB_IP_UE\"" | sudo tee /home/vagrant/open5gs-ue.yaml
 
 echo -e "\nEnabling 'backhaul' APN"
-cat config/open5gs-ue.yaml \
+cat /home/vagrant/open5gs-ue.yaml \
 | yq '.sessions[0].apn = "backhaul"' \
 | yq '.sessions[0].apn style="single"' \
-| sudo tee config/open5gs-ue.yaml
+| sudo tee /home/vagrant/open5gs-ue.yaml
 
 echo -e "\nRunning UE"
-build/nr-ue -c config/open5gs-ue.yaml &> /home/vagrant/ue_$(date +%s).log &
+/home/vagrant/nr-ue -c /home/vagrant/open5gs-ue.yaml &> /log/ue.log &
 
-echo -e "Install dependencies for hostapd and dnsmasq"
-sudo apt-get install -y pkgconf libssl-dev libnl-3-dev libnl-genl-3-dev dnsmasq python3 python3-dev
-
-echo -e "\nInstalling hostapd"
-git clone git://w1.fi/hostap.git /hostap
-cd /hostap/hostapd
-
-echo -e "Enable wired driver and debug file"
-cp defconfig .config
-sed -i "s/#CONFIG_DRIVER_WIRED=y/CONFIG_DRIVER_WIRED=y/" .config
-
-echo -e "\nCompile hostapd"
-make
+sudo sysctl -w net.ipv4.ip_forward=1
 
 echo -e "Writing hostapd configurations"
 echo -e "interface=enp0s9
@@ -57,14 +51,12 @@ own_ip_addr=$CLIENT_EAP_IP
 
 auth_server_addr=$AUTH_SERVER_IP
 auth_server_port=1812
-auth_server_shared_secret=$CLIENT_SECRET" > hostapd.conf
+auth_server_shared_secret=$CLIENT_SECRET" > /home/vagrant/hostapd.conf
 
-LOG_FILE_PATH="/log/$(cat /etc/hostname)_hostapd_$(date +%s).log"
-cat hostapd.conf > ${LOG_FILE_PATH}
-
+cat hostapd.conf > /log/hostapd.log
 
 echo -e "\nRunning hostapd"
-sudo ./hostapd -tKdd ./hostapd.conf &>> ${LOG_FILE_PATH} &
+sudo /home/vagrant/hostapd -tKdd /home/vagrant/hostapd.conf &>> /log/hostapd.log &
 
 sudo touch /etc/allowed-macs.conf
 
@@ -85,10 +77,5 @@ log-dhcp" | sudo tee /etc/dnsmasq.conf
 
 sudo systemctl restart dnsmasq
 
-sudo sysctl -w net.ipv4.ip_forward=1
-
-LOG_FILE_PATH="/log/$(cat /etc/hostname)_interceptor_$(date +%s).log"
-
 echo -e "\nStart Interceptor"
-cd /home/vagrant/
-sudo ./interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> ${LOG_FILE_PATH} &
+sudo /home/vagrant/interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> /log/interceptor.log &

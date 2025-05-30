@@ -12,6 +12,7 @@ sudo apt-get update && apt-get install -y \
     libqmi-glib-dev \
     net-tools \
     minicom \
+    iperf3 \
     gnupg \
     curl
 

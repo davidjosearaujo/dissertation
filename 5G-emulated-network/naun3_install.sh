@@ -1,13 +1,12 @@
 #!/bin/bash
 
 CERT_CLIENT_PASSWD=$1
-NAUN3_IP=$2
 
 sudo apt-get update
-sudo apt-get -y install wpasupplicant
+sudo apt-get -y install wpasupplicant iperf3 traceroute
 
 echo -e "\nRemove IP address"
-sudo ip addr del $NAUN3_IP/24 dev enp0s8
+sudo ip addr flush enp0s8
 
 echo -e "\nWriting wpa_supplicant configurations"
 echo -e 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
@@ -26,7 +25,7 @@ network={
     private_key_passwd="'$CERT_CLIENT_PASSWD'"
 }' > wpa_supplicant.conf
 
-LOG_FILE_PATH="/log/$(cat /etc/hostname)_wpa_supplicant_$(date +%s).log"
+LOG_FILE_PATH="/log/$(cat /etc/hostname).log"
 cat wpa_supplicant.conf > ${LOG_FILE_PATH}
 
 echo -e "\nRunning wpa_supplicant"

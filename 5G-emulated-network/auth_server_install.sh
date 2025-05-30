@@ -51,4 +51,4 @@ echo -e "\nCopying certificates to shared folder"
 cp /etc/freeradius/3.0/certs/* /certs
 
 echo -e "\nStarting FreeRADIUS in full debugging"
-sudo freeradius -X -xx &>> /log/$(cat /etc/hostname)_freeradius_$(date +%s).log &
+sudo freeradius -X &>> /log/freeradius.log &
