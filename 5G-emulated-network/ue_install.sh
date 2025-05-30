@@ -10,34 +10,33 @@ sudo apt update
 
 echo -e "\nInstalling dependencies for 5G Modem"
 sudo apt install -y \
-  build-essential \
   linux-headers-$(uname -r) \
+  build-essential \
   lksctp-tools \
   libsctp-dev \
-  iproute2 \
   net-tools \
+  iproute2 \
   python3 \
-  dnsmasq \
-  yq
-
+  dnsmasq
 
 sudo snap install yq
 
 echo -e "\nUpdate gNodeB IP"
-cat /home/vagrant/open5gs-ue.yaml | yq ".gnbSearchList[0] = \"$GNB_IP_UE\"" | sudo tee /home/vagrant/open5gs-ue.yaml
+cat /home/vagrant/open5gs-ue.yaml | yq ".gnbSearchList[0] = \"$GNB_IP_UE\"" | sudo tee /home/vagrant/open5gs-ue.yaml > /dev/null
 
-echo -e "\nEnabling 'backhaul' APN"
+echo -e "\nEnabling 'backhaul' DNN"
 cat /home/vagrant/open5gs-ue.yaml \
 | yq '.sessions[0].apn = "backhaul"' \
 | yq '.sessions[0].apn style="single"' \
-| sudo tee /home/vagrant/open5gs-ue.yaml
+| sudo tee /home/vagrant/open5gs-ue.yaml > /dev/null
 
 echo -e "\nRunning UE"
-/home/vagrant/nr-ue -c /home/vagrant/open5gs-ue.yaml &> /log/ue.log &
+/home/vagrant/nr-ue -c /home/vagrant/open5gs-ue.yaml &>> /log/ue.log &
 
+echo -e "\nEnabling IP forwarding"
 sudo sysctl -w net.ipv4.ip_forward=1
 
-echo -e "Writing hostapd configurations"
+echo -e "\nWriting hostapd configurations"
 echo -e "interface=enp0s9
 driver=wired
 ctrl_interface=/var/run/hostapd
@@ -73,9 +72,20 @@ dhcp-option=option:dns-server,8.8.8.8,8.8.4.4
 dhcp-ignore=tag:!known
 conf-file=/etc/allowed-macs.conf
 
-log-dhcp" | sudo tee /etc/dnsmasq.conf
+log-dhcp" | sudo tee /etc/dnsmasq.conf > /dev/null
 
 sudo systemctl restart dnsmasq
 
 echo -e "\nStart Interceptor"
 sudo /home/vagrant/interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> /log/interceptor.log &
+
+echo -e "\nMaking UE, hostapd and inteceptor start at boot"
+echo -e "
+sudo /home/vagrant/nr-ue -c /home/vagrant/open5gs-ue.yaml &>> /log/ue.log &
+sleep 5
+sudo ip addr flush uesimtun0
+sudo ip addr add $CLIENT_EAP_IP/24 dev uesimtun0
+sudo /home/vagrant/hostapd -tKdd /home/vagrant/hostapd.conf &>> /log/hostapd.log &
+sudo /home/vagrant/interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> /log/interceptor.log &
+" | sudo tee /etc/init.d/ue > /dev/null
+sudo chmod +x /etc/init.d/ue

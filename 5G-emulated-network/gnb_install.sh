@@ -18,7 +18,11 @@ cat /home/vagrant/open5gs-gnb.yaml \
 | yq ".ngapIp = \"$GNB_IP_CORE\"" \
 | yq ".gtpIp = \"$GNB_IP_CORE\"" \
 | yq ".amfConfigs[0].address = \"$CORE_IP\"" \
-| sudo tee /home/vagrant/open5gs-gnb.yaml
+| sudo tee /home/vagrant/open5gs-gnb.yaml > /dev/null
+
+echo -e "\nMaking gNB start at boot"
+echo -e "sudo /home/vagrant/nr-gnb -c open5gs-gnb.yaml &>> /log/gnb.log &" | sudo tee /etc/init.d/gnb > /dev/null
+sudo chmod +x /etc/init.d/gnb
 
 echo -e "\nRunning gNB"
 /home/vagrant/nr-gnb -c open5gs-gnb.yaml &> /log/gnb.log &

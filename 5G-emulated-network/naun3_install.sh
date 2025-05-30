@@ -31,4 +31,12 @@ cat wpa_supplicant.conf > ${LOG_FILE_PATH}
 echo -e "\nRunning wpa_supplicant"
 sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
 
+echo -e "\nMaking wpa_supplicant start at boot"
+echo -e "
+sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
+" | sudo tee /etc/init.d/wpa_supplicant > /dev/null
+sudo chmod +x /etc/init.d/wpa_supplicant
+
+echo -e "\nWaiting for authentication to finish to request IP"
+sleep 30
 sudo dhclient enp0s8

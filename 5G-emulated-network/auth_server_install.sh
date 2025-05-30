@@ -52,3 +52,9 @@ cp /etc/freeradius/3.0/certs/* /certs
 
 echo -e "\nStarting FreeRADIUS in full debugging"
 sudo freeradius -X &>> /log/freeradius.log &
+
+echo -e "\nMaking freeradius start at boot"
+echo -e "
+sudo freeradius -X &>> /log/freeradius.log &
+" | sudo tee /etc/init.d/freeradius > /dev/null
+sudo chmod +x /etc/init.d/freeradius
