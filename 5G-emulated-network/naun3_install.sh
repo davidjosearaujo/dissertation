@@ -41,14 +41,10 @@ sudo chmod +x /etc/init.d/wpa_supplicant
 
 sudo dhclient enp0s8
 
-finishTime=$(date +%s)
-elapsedTime=$(($finishTime - $startTime))
+elapsedTime=$(($(date +%s) - $startTime))
 
 echo -e "
-Authentication and Connection Process Duration
-
-Timestamp just before authentication request: $startTime
-Timestamp just after IP assignment: $finishTime
+Authentication and Connection Process Finished!
 
 Total time elapsed: $elapsedTime seconds
 " | sudo tee /log/$(cat /etc/hostname)_connection_delay.log
