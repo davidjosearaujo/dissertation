@@ -363,13 +363,92 @@ The functional correctness of the core mechanisms was evaluated based on the fol
 
 This validation methodology aims to provide a comprehensive assessment of the implemented solution's ability to meet its design goals, focusing on correct functionality and integration within the simulated 5G environment. The subsequent sections will detail the specific test scenarios designed and the evaluation of the results obtained.
 ## Test Scenarios and Setup
-To validate the different aspects of the proposed framework, a series of distinct test scenarios, or experiments, were designed and executed. These scenarios leveraged the fully configured simulation environment detailed in the "Development and Implementation" chapter, which includes the `core` VM (Open5GS, FreeRADIUS), `gnb` VM (UERANSIM gNB), `ue` VM (5G-RG with UERANSIM UE, `hostapd`, `dnsmasq`, and the custom `interceptor`), and one or more `naun3` VMs (EAP supplicant).
+To validate the different aspects of the proposed framework, a series of distinct test scenarios, or experiments, were designed and executed. These scenarios leveraged the fully configured simulation environment detailed in the "Development and Implementation" chapter, which includes the `core` VM (Open5GS, FreeRADIUS), `gnb` VM (UERANSIM gNB), `ue` VM (5G-RG with UERANSIM UE, `hostapd`, `dnsmasq`, and the custom `interceptor` application), and one or more `naun3` VMs (EAP supplicant).
+
 Specific tools were employed for monitoring and verification in each scenario:
 - **Log Analysis:** Reviewing logs from Open5GS NFs, UERANSIM components, FreeRADIUS, `hostapd`, `wpa_supplicant`, and the custom `interceptor` application was fundamental across all tests.
-- **Packet Capture:** `tcpdump` and `tshark` (Wireshark CLI) were used on various interfaces (NAUN3 LAN, 5G-RG's `backhaul` and `clients` PDU session interfaces, gNB interfaces, UPF interfaces) to inspect signaling and data plane traffic.
-- **Network Utilities:** Standard Linux utilities like `ping`, `ip addr`, `ip route`, `ip rule`, `iptables -L -v -n -t mangle -t nat -t filter`, and UERANSIM's `nr-cli` were used for connectivity testing and state verification.
-- **Traffic Generation:** `iperf3` was used for generating controlled network traffic to test data plane throughput and routing.
+- **Packet Capture:** `tcpdump` and `tshark` (Wireshark CLI) were used on various interfaces (NAUN3 LAN, 5G-RG's `backhaul` and `clients` PDU session interfaces `uesimtunX`, gNB interfaces) to inspect signaling and data plane traffic.
+- **Network Utilities:** Standard Linux utilities like `ping` (with the `-R` record route option), `ip addr`, `ip route`, `ip rule`, `iptables -L -v -n -t mangle -t nat -t filter`, and UERANSIM's `nr-cli` were used for connectivity testing and state verification.
+- **Traffic Generation & Throughput Measurement:** `iperf3` was used for generating controlled TCP/UDP network traffic between NAUN3 devices and a server on the `core` VM (simulating an N6-connected server) to test data plane throughput and routing.
+- **Timestamping/Scripting:** Basic shell scripting was used to capture timestamps before and after key events (e.g., `wpa_supplicant` start and `dhclient` IP acquisition) to measure onboarding delay.
 ### Experiment 1: Single NAUN3 Device Onboarding and Basic Connectivity
-The objective was to verify the successful EAP-TLS authentication of a single NAUN3 device, the subsequent establishment of its dedicated PDU session on the `clients` DNN, local and 5GC IP address allocation, and basic end-to-end data plane connectivity.
+The objective was to verify the successful EAP-TLS authentication of a single NAUN3 device, the subsequent establishment of its dedicated PDU session on the `clients` DNN, local and 5GC IP address allocation, basic end-to-end data plane connectivity with path verification, and to measure the approximate onboarding delay.
 
 Procedure:
+1. Ensure all 5GC NFs, gNB, 5G-RG (including `hostapd` and `interceptor`), and FreeRADIUS are running. Start an `iperf3` server on the `core` VM listening on the IP address of its `clientun0` interface (e.g., `10.46.0.1`).
+2. On the `naun3` VM, record a timestamp (`date +%s`). Immediately start the `wpa_supplicant` service.
+3. Monitor the authentication process through logs on the `naun3` VM, `ue` VM (`hostapd`, `interceptor`), and `core` VM (FreeRADIUS).
+4. Once `wpa_supplicant` indicates success and `dhclient` (run subsequently or as part of the script on `naun3`) obtains a local IP, record another timestamp. Calculate the difference to estimate onboarding delay.
+5. Verify PDU session establishment for the `clients` DNN using `nr-cli ps-list` on the `ue` VM. Note the assigned 5GC IP address for this PDU session.
+6. Verify local IP address assignment to the `naun3` VM via `ip addr` on the `naun3` VM.
+7. Verify the application of `iptables` and `ip rule`/`ip route` rules on the `ue` VM specific to the authenticated NAUN3 device's MAC and PDU session ID.
+8. From the `naun3` VM, initiate `ping -R <PDU_Session_Gateway_IP>` (e.g., `10.46.0.1`). Analyze the recorded route to confirm it passes through the NAUN3's local IP, then its assigned 5GC PDU session IP, and then to the target.
+9. From the `naun3` VM, run an `iperf3` client connecting to the `iperf3` server on the `core` VM.
+10. Capture traffic on relevant interfaces (`naun3` LAN, `ue` VM LAN, `uesimtunX` on `ue` VM, `clientun0` on `core` VM) to observe data flow and NAT.
+
+Metrics/Verification Points:
+- Successful EAP-TLS authentication (logs).
+- Onboarding delay (timestamp difference).
+- One new PDU session active on `clients` DNN for the 5G-RG, with a unique 5GC IP.
+- NAUN3 device receives a local IP.
+- Successful `ping` with recorded route showing NAT via the PDU session IP.
+- Successful `iperf3` data transfer.
+- Correct `iptables` and policy routing rules applied.
+### Experiment 2: Multi-Device Connectivity, Traffic Isolation, and PDU Session Mapping
+In this experiment the goal was to verify that when multiple NAUN3 devices connect simultaneously, each gets a unique dedicated PDU session, their traffic is correctly mapped and isolated, and NAT occurs via their respective PDU session IPs.
+
+Procedure:
+1. Start two (or more) `naun3` VMs (e.g., `naun3-1`, `naun3-2`), each configured with a client certificates for EAP-TLS.
+2. Allow both devices to authenticate and establish their dedicated PDU sessions as per Experiment 1. Verify that two distinct `clients` PDU sessions are created by the 5G-RG, each with a unique 5GC IP address (e.g., `10.46.0.3` and `10.46.0.4`).
+3. On the `ue` VM, verify that distinct sets of `iptables` and `ip rule`/`ip route` entries are created for each NAUN3 device, mapping each to its unique PDU session ID and tunnel interface.
+4. From `naun3-1`, execute `ping -R <PDU_Session_Gateway_IP>`. Note the recorded route, particularly the 5GC IP address assigned to `naun3-1`'s PDU session.
+5. From `naun3-2`, execute `ping -R <PDU_Session_Gateway_IP>`. Note the recorded route, verifying it uses a _different_ 5GC IP address assigned to `naun3-2`'s PDU session.
+6. Start an `iperf3` server on the `core` VM.
+7. Simultaneously (or sequentially) run `iperf3` clients from `naun3-1` and `naun3-2` to the server on the `core` VM.
+8. Monitor traffic on the `ue` VM's `uesimtunX` interfaces and check `iptables` counters to confirm traffic from each NAUN3 device is routed through its distinct PDU session.
+9. On the `core` VM (`iperf3` server logs), verify that connections are received from the distinct 5GC IP addresses assigned to each NAUN3's PDU session.
+
+Metrics/Verification Points:
+- - Each NAUN3 device establishes its own unique PDU session on the `clients` DNN with a distinct 5GC IP.
+- `ping -R` from each NAUN3 shows a path NATted through its unique PDU session IP.
+- `iperf3` server logs show connections from distinct PDU session IPs.
+- `iptables` and routing rules correctly isolate traffic per device.
+### Experiment 3: Lifecycle Management (Device Disconnection and Resource Cleanup)
+In order to verify that when an NAUN3 device disconnects or becomes unreachable, its local authentication is revoked, its dedicated PDU session is terminated, and associated network resources (IP addresses, routing rules) are correctly cleaned up by the `interceptor` the following procedure was followed.
+
+1. Successfully onboard a single NAUN3 device as per Experiment 1. Verify its PDU session is active and traffic flows.
+2. Simulate device disconnection:
+	1. Option A (Graceful): Stop the `wpa_supplicant` service on the `naun3` VM.
+	2. Option B (Abrupt): Power off or disconnect the network interface of the `naun3` VM.
+3. Monitor the `interceptor` logs on the `ue` VM for detection of device unreachability and initiation of cleanup procedures.
+4. Verify the following cleanup actions occur:
+	1. `hostapd` deauthenticates the client (logs).
+	2. The `interceptor` removes the device's MAC from `/etc/allowed-macs.conf` and restarts `dnsmasq`.
+	3. The `interceptor` removes the specific `iptables` and `ip rule`/`ip route` entries for the device.
+	4. The `interceptor` initiates a PDU session release for the `clients` DNN using `nr-cli`.
+	5. Verify using `nr-cli ps-list` that the PDU session is terminated.
+	6. Verify in Open5GS SMF/UPF logs that the session and associated resources are released.
+
+Metrics/Verification Points:
+- Detection of device disconnection by the `interceptor`.
+- Successful local deauthentication.
+- Removal of DHCP permission.
+- Correct removal of all associated `iptables` and routing rules.
+- Successful PDU session termination in UERANSIM and Open5GS.
+- Internal state of the `interceptor` (e.g., `allowedDevices` map) reflects the device removal.
+### Experiment 4: Security Aspects Observation (Qualitative)
+To qualitatively observe key security aspects of the implemented solution, such as the EAP-TLS handshake and traffic segregation, we performed the following:
+1. During Experiment 1 (NAUN3 Device Onboarding):
+	1. Use `tshark` or `tcpdump` on the `ue` VM's LAN interface to capture the EAPoL and EAP-TLS handshake.
+	2. Use `tshark` or `tcpdump` on the `ue` VM's `backhaul` PDU session interface and on the `core` VM's interface connected to the `ue` VM's `backhaul` to capture RADIUS traffic.
+2. During Experiment 2 (Multiple Devices):
+	1. Observe the source and destination IPs of the RADIUS traffic on the `backhaul` PDU session.
+	2. Observe the source and destination IPs of the NAUN3 user plane traffic on the respective `clients` PDU sessions.
+
+Metrics/Verification Points:
+- Observation of a complete and successful EAP-TLS handshake.
+- Confirmation that RADIUS traffic is encapsulated and transported over the `backhaul` PDU session.
+- Confirmation that user plane traffic for each NAUN3 device is transported over its distinct `clients` PDU session.
+- Review of Open5GS logs (AMF, SMF) to confirm that only the 5G-RG's identity (IMSI) is used for 5GC signaling, and NAUN3 MAC addresses are not propagated to these core NFs.
+
+These experiments are designed to provide a holistic view of the system's functionality, its ability to manage multiple devices correctly, handle their lifecycle, and maintain basic security and traffic segregation principles, incorporating the specific types of data you've collected.
