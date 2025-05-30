@@ -28,6 +28,8 @@ network={
 LOG_FILE_PATH="/log/$(cat /etc/hostname).log"
 cat wpa_supplicant.conf > ${LOG_FILE_PATH}
 
+startTime=$(date +%s)
+
 echo -e "\nRunning wpa_supplicant"
 sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
 
@@ -37,6 +39,16 @@ sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FIL
 " | sudo tee /etc/init.d/wpa_supplicant > /dev/null
 sudo chmod +x /etc/init.d/wpa_supplicant
 
-echo -e "\nWaiting for authentication to finish to request IP"
-sleep 30
 sudo dhclient enp0s8
+
+finishTime=$(date +%s)
+elapsedTime=$(($finishTime - $startTime))
+
+echo -e "
+Authentication and Connection Process Duration
+
+Timestamp just before authentication request: $startTime
+Timestamp just after IP assignment: $finishTime
+
+Total time elapsed: $elapsedTime seconds
+" | sudo tee /log/$(cat /etc/hostname)_connection_delay.log
