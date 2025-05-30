@@ -195,12 +195,6 @@ func HostapdListener(
 			}
 
 			message := string(buf[:n])
-			logPayload := message
-			if idx := strings.Index(message, ">"); strings.HasPrefix(message, "<") && idx != -1 && idx+1 < len(message) {
-				logPayload = message[idx+1:]
-			}
-			logger.Printf("HostapdListener: Event: %s", logPayload)
-
 			if strings.Contains(message, hostapdEventEAPSuccess) {
 				parts := strings.Fields(message)
 				var macAddress string
