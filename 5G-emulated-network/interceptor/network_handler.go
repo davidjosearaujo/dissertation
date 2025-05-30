@@ -21,15 +21,17 @@ import (
 )
 
 const (
-	hostDisconnectCheckInterval = 30 * time.Second
+	hostDisconnectCheckInterval = 10 * time.Second
+	hostStaleGracePeriod        = 10 * time.Minute
 )
 
 // Device struct represents a connected client device.
 // It now includes a field to store applied iptables rules.
 type Device struct {
+	lastSeen			 time.Time          // Last time the device was seen
 	state                string
-	lease                Lease    // Lease type is defined in dnsmasq_handler.go
-	pduSession           *Session // Session type is defined in pdu_handling.go
+	lease                Lease               // Lease type is defined in dnsmasq_handler.go
+	pduSession           *Session            // Session type is defined in pdu_handling.go
 	AppliedIPTablesRules []AppliedRuleDetail // Stores rules applied by routing_handler.go
 }
 
@@ -83,7 +85,6 @@ func ForgetDevice(allowedMACsFilePath string, leasesFilePath string, macAddress 
 		logger.Printf("ForgetDevice: ruleManager not initialized, cannot remove iptables rules for MAC %s.", macAddress)
 	}
 
-
 	if device.pduSession != nil {
 		logger.Printf("ForgetDevice: Releasing PDU ID %d for %s", device.pduSession.ID, macAddress)
 		if err := ReleasePDUSession(ueIMSI, device.pduSession.ID); err != nil {
@@ -114,7 +115,7 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 			neighs, err := netlink.NeighList(link.Attrs().Index, netlink.FAMILY_V4)
 			if err != nil {
 				logger.Printf("HostDisconnectListener: NeighList for %s failed: %v.", link.Attrs().Name, err)
-				continue 
+				continue
 			}
 
 			activeMACsOnLink := make(map[string]bool)
@@ -127,31 +128,36 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 
 				device, deviceExists := allowedDevices[macAddress]
 				if !deviceExists {
-					continue 
+					continue
 				}
 
 				isReachable := (neigh.State & netlink.NUD_REACHABLE) != 0
 				isStale := (neigh.State & netlink.NUD_STALE) != 0
 				isFailed := (neigh.State & netlink.NUD_FAILED) != 0
-			
+
 				if isReachable {
+					device.lastSeen = time.Now()
 					if device.state != "REACHABLE" {
 						pduAddr := "N/A"
-						if device.pduSession != nil { pduAddr = device.pduSession.Address }
+						if device.pduSession != nil {
+							pduAddr = device.pduSession.Address
+						}
 						logger.Printf("HostDisconnectListener: Device %s (MAC: %s) state -> REACHABLE (was %s)", pduAddr, macAddress, device.state)
 						device.state = "REACHABLE"
 						allowedDevices[macAddress] = device
 					}
-				} else if (isStale || isFailed) && time.Until(time.Unix(int64(device.lease.expiration), 0)) < (device.lease.duration * time.Second * 3 / 4) {
+				} else if (isStale || isFailed) && time.Since(device.lastSeen) > hostStaleGracePeriod {
 					if device.state == "REACHABLE" || device.state == "LEASED" {
 						pduAddr := "N/A"
-						if device.pduSession != nil { pduAddr = device.pduSession.Address }
+						if device.pduSession != nil {
+							pduAddr = device.pduSession.Address
+						}
 						logger.Printf("HostDisconnectListener: Device %s (MAC: %s) -> STALE (was %s) -> Forgetting.", pduAddr, macAddress, device.state)
 						ForgetDevice(allowedMACsFilePath, leasesFilePath, macAddress, ueIMSI)
-						continue 
+						continue
 					}
 				}
-			} 
+			}
 
 			macsToForget := []string{}
 			for trackedMAC, device := range allowedDevices {
@@ -161,16 +167,18 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 				if !activeMACsOnLink[trackedMAC] {
 					if device.state == "REACHABLE" || device.state == "LEASED" || device.state == "STALE" {
 						pduAddr := "N/A"
-						if device.pduSession != nil { pduAddr = device.pduSession.Address }
+						if device.pduSession != nil {
+							pduAddr = device.pduSession.Address
+						}
 						logger.Printf("HostDisconnectListener: Tracked device %s (MAC: %s, State: %s) no longer in ARP list. Scheduling for forget.", pduAddr, trackedMAC, device.state)
 						macsToForget = append(macsToForget, trackedMAC)
 					}
 				}
 			}
 			for _, macToForget := range macsToForget {
-                if _, ok := allowedDevices[macToForget]; ok {
-				    ForgetDevice(allowedMACsFilePath, leasesFilePath, macToForget, ueIMSI)
-                }
+				if _, ok := allowedDevices[macToForget]; ok {
+					ForgetDevice(allowedMACsFilePath, leasesFilePath, macToForget, ueIMSI)
+				}
 			}
 		}
 	}
