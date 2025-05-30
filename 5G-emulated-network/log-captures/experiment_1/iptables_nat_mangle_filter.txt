@@ -1,0 +1,11 @@
+vagrant@ue:~$ sudo iptables -L -v -n -t mangle -t nat -t filter
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* global_related_established_interceptor */
+    4   304 ACCEPT     all  --  enp0s9 uesimtun1  0.0.0.0/0            0.0.0.0/0            MAC08:00:27:95:49:96 mark match 0x2 /* interceptor_mac_08_00_27_95_49_96_pduid_2 */
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination

@@ -1,0 +1,61 @@
+[DEBUG] 2025/05/30 17:55:40 main.go:81: Interceptor starting...
+[DEBUG] 2025/05/30 17:55:40 main.go:82: Config - Mode: debug, Socket: /var/run/hostapd/enp0s9, AllowedMACs: /etc/dnsmasq.d/allowed-macs.conf, Leases: /var/lib/misc/dnsmasq.leases, IMSI: imsi-999700000000001, LAN_IF: enp0s9, PDU_GW_IP: 10.46.0.1
+[DEBUG] 2025/05/30 17:55:40 routing_handler.go:68: RuleManager: Initializing global iptables rules...
+[DEBUG] 2025/05/30 17:55:40 routing_handler.go:493: RuleManager: FORWARD chain policy set to DROP.
+[DEBUG] 2025/05/30 17:55:40 routing_handler.go:75: RuleManager: [SUCCESS] Global: FORWARD chain policy set to DROP.
+[DEBUG] 2025/05/30 17:55:40 routing_handler.go:475: RuleManager: Appended rule to filter FORWARD: [-m state --state RELATED,ESTABLISHED -j ACCEPT -m comment --comment global_related_established_interceptor]
+[DEBUG] 2025/05/30 17:55:40 routing_handler.go:83: RuleManager: [SUCCESS] Global: FORWARD RELATED,ESTABLISHED rule ensured: [-m state --state RELATED,ESTABLISHED -j ACCEPT]
+[DEBUG] 2025/05/30 17:55:40 routing_handler.go:85: RuleManager: iptables manager and global rules initialized successfully.
+[DEBUG] 2025/05/30 17:55:40 main.go:91: RuleManager initialized successfully (global rules applied).
+[DEBUG] 2025/05/30 17:55:40 main.go:103: Monitoring link enp0s9 (Index 4) for disconnects.
+[DEBUG] 2025/05/30 17:55:40 main.go:111: Hostapd interceptor created.
+[DEBUG] 2025/05/30 17:55:40 hostapd_interceptor.go:109: HostapdInterceptor: Attached successfully.
+[DEBUG] 2025/05/30 17:55:40 main.go:116: Attached to hostapd: /var/run/hostapd/enp0s9
+[DEBUG] 2025/05/30 17:55:40 main.go:121: Hostapd PING successful.
+[DEBUG] 2025/05/30 17:55:40 hostapd_interceptor.go:154: HostapdListener: Started.
+[DEBUG] 2025/05/30 17:55:40 dnsmasq_handler.go:126: DnsmasqListener: Monitoring /var/lib/misc/dnsmasq.leases every 10s
+[DEBUG] 2025/05/30 17:55:40 network_handler.go:104: HostDisconnectListener: Monitoring link enp0s9 (Index 4) every 30s
+[DEBUG] 2025/05/30 17:55:40 main.go:140: Application running. Ctrl+C to exit.
+[DEBUG] 2025/05/30 17:59:15 hostapd_interceptor.go:216: HostapdListener: Auth success for 08:00:27:95:49:96
+[DEBUG] 2025/05/30 17:59:15 hostapd_interceptor.go:217: HostapdListener: Requesting PDU for 08:00:27:95:49:96 (IMSI: imsi-999700000000001)
+[DEBUG] 2025/05/30 17:59:15 ueransim_pdu_handler.go:56: NewPDUSession: IMSI imsi-999700000000001 establishing...
+[DEBUG] 2025/05/30 17:59:15 ueransim_pdu_handler.go:63: NewPDUSession: IMSI imsi-999700000000001 requested. Output: PDU session establishment procedure triggered. Waiting activation...
+[DEBUG] 2025/05/30 17:59:18 ueransim_pdu_handler.go:83: NewPDUSession: Retry 1/20 IMSI imsi-999700000000001: waiting (ID: 2, State: PS-ACTIVE-PENDING, Addr: )...
+[DEBUG] 2025/05/30 17:59:21 ueransim_pdu_handler.go:83: NewPDUSession: Retry 2/20 IMSI imsi-999700000000001: waiting (ID: 2, State: PS-ACTIVE-PENDING, Addr: )...
+[DEBUG] 2025/05/30 17:59:24 ueransim_pdu_handler.go:83: NewPDUSession: Retry 3/20 IMSI imsi-999700000000001: waiting (ID: 2, State: PS-ACTIVE-PENDING, Addr: )...
+[DEBUG] 2025/05/30 17:59:28 ueransim_pdu_handler.go:83: NewPDUSession: Retry 4/20 IMSI imsi-999700000000001: waiting (ID: 2, State: PS-ACTIVE-PENDING, Addr: )...
+[DEBUG] 2025/05/30 17:59:31 ueransim_pdu_handler.go:83: NewPDUSession: Retry 5/20 IMSI imsi-999700000000001: waiting (ID: 2, State: PS-ACTIVE-PENDING, Addr: )...
+[DEBUG] 2025/05/30 17:59:34 ueransim_pdu_handler.go:75: NewPDUSession: PDU ID 2 IMSI imsi-999700000000001 ACTIVE (State: PS-ACTIVE, Addr: 10.46.0.2).
+[DEBUG] 2025/05/30 17:59:34 hostapd_interceptor.go:230: HostapdListener: PDU Session ID 2, constructed PDU Interface: uesimtun1
+[DEBUG] 2025/05/30 17:59:34 hostapd_interceptor.go:235: HostapdListener: Applying iptables rules for MAC 08:00:27:95:49:96 (LAN: enp0s9, PDU_IF: uesimtun1, GW: 10.46.0.1)
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:225: RuleManager: Applying rules for MAC 08:00:27:95:49:96 (LAN: enp0s9, PDU_IF: uesimtun1, GW: 10.46.0.1, PDU_ID: 2, Comment: interceptor_mac_08_00_27_95_49_96_pduid_2)
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:176: RuleManager: RTTable (08:00:27:95:49:96): Adding line '202	table_pdu_2' to /etc/iproute2/rt_tables
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:209: RuleManager: RTTable (08:00:27:95:49:96): Successfully updated /etc/iproute2/rt_tables.
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:245: RuleManager: [SUCCESS] RT Table Entry 202 table_pdu_2 for 08:00:27:95:49:96 ensured/added.
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:119: RuleManager: IPRouteAdd (08:00:27:95:49:96): Command 'ip route add default via 10.46.0.1 dev uesimtun1 table table_pdu_2' executed successfully. Output: 
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:257: RuleManager: [SUCCESS] IP Route Add for 08:00:27:95:49:96 (table table_pdu_2): default via 10.46.0.1 dev uesimtun1
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:119: RuleManager: IPRuleAdd (08:00:27:95:49:96): Command 'ip rule add fwmark 2 table table_pdu_2' executed successfully. Output: 
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:269: RuleManager: [SUCCESS] IP Rule Add for 08:00:27:95:49:96: fwmark 2 table table_pdu_2
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:475: RuleManager: Appended rule to mangle PREROUTING: [-i enp0s9 -m mac --mac-source 08:00:27:95:49:96 -j MARK --set-mark 2 -m comment --comment interceptor_mac_08_00_27_95_49_96_pduid_2]
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:280: RuleManager: [SUCCESS] Mangle PREROUTING MARK for 08:00:27:95:49:96: [-i enp0s9 -m mac --mac-source 08:00:27:95:49:96 -j MARK --set-mark 2]
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:475: RuleManager: Appended rule to filter FORWARD: [-i enp0s9 -o uesimtun1 -m mac --mac-source 08:00:27:95:49:96 -m mark --mark 2 -j ACCEPT -m comment --comment interceptor_mac_08_00_27_95_49_96_pduid_2]
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:297: RuleManager: [SUCCESS] FORWARD allow MAC 08:00:27:95:49:96 from enp0s9 with mark 2 to uesimtun1: [-i enp0s9 -o uesimtun1 -m mac --mac-source 08:00:27:95:49:96 -m mark --mark 2 -j ACCEPT]
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:475: RuleManager: Appended rule to nat POSTROUTING: [-o uesimtun1 -j MASQUERADE -m comment --comment interceptor_mac_08_00_27_95_49_96_pduid_2]
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:308: RuleManager: [SUCCESS] NAT POSTROUTING MASQUERADE for uesimtun1: [-o uesimtun1 -j MASQUERADE]
+[DEBUG] 2025/05/30 17:59:34 routing_handler.go:321: RuleManager: All rules processed successfully for MAC 08:00:27:95:49:96 (PDU_ID: 2). Applied 6 rules/entries.
+[DEBUG] 2025/05/30 17:59:34 hostapd_interceptor.go:240: HostapdListener: Successfully applied 6 iptables rules for 08:00:27:95:49:96.
+[DEBUG] 2025/05/30 17:59:34 hostapd_interceptor.go:249: HostapdListener: Device 08:00:27:95:49:96 tracked, PDU ID 2. Stored 6 iptables rules.
+[DEBUG] 2025/05/30 17:59:34 dnsmasq_handler.go:51: MAC 08:00:27:95:49:96 added to /etc/dnsmasq.d/allowed-macs.conf.
+[DEBUG] 2025/05/30 17:59:34 dnsmasq_handler.go:119: dnsmasq restarted.
+[DEBUG] 2025/05/30 18:00:00 dnsmasq_handler.go:163: DnsmasqListener: Lease file /var/lib/misc/dnsmasq.leases changed. Processing...
+[DEBUG] 2025/05/30 18:00:00 dnsmasq_handler.go:207: DnsmasqListener: Device 10.46.0.2 (MAC: 08:00:27:95:49:96, IP: 192.168.59.84) transitioned to LEASED state.
+[DEBUG] 2025/05/30 18:00:00 dnsmasq_handler.go:210: DnsmasqListener: Lease updated for 10.46.0.2 (MAC: 08:00:27:95:49:96, IP: 192.168.59.84). Exp: 1748628111, Count: 1. State: LEASED
+[DEBUG] 2025/05/30 18:00:10 network_handler.go:145: HostDisconnectListener: Device 10.46.0.2 (MAC: 08:00:27:95:49:96) state -> REACHABLE (was LEASED)
+[DEBUG] 2025/05/30 18:00:40 dnsmasq_handler.go:163: DnsmasqListener: Lease file /var/lib/misc/dnsmasq.leases changed. Processing...
+[DEBUG] 2025/05/30 18:00:40 dnsmasq_handler.go:210: DnsmasqListener: Lease updated for 10.46.0.2 (MAC: 08:00:27:95:49:96, IP: 192.168.59.84). Exp: 1748628159, Count: 2. State: REACHABLE
+[DEBUG] 2025/05/30 18:01:40 dnsmasq_handler.go:163: DnsmasqListener: Lease file /var/lib/misc/dnsmasq.leases changed. Processing...
+[DEBUG] 2025/05/30 18:01:40 dnsmasq_handler.go:210: DnsmasqListener: Lease updated for 10.46.0.2 (MAC: 08:00:27:95:49:96, IP: 192.168.59.84). Exp: 1748628213, Count: 3. State: REACHABLE
+[DEBUG] 2025/05/30 18:02:30 dnsmasq_handler.go:163: DnsmasqListener: Lease file /var/lib/misc/dnsmasq.leases changed. Processing...
+[DEBUG] 2025/05/30 18:02:30 dnsmasq_handler.go:210: DnsmasqListener: Lease updated for 10.46.0.2 (MAC: 08:00:27:95:49:96, IP: 192.168.59.84). Exp: 1748628266, Count: 4. State: REACHABLE
+[DEBUG] 2025/05/30 18:03:20 dnsmasq_handler.go:163: DnsmasqListener: Lease file /var/lib/misc/dnsmasq.leases changed. Processing...
+[DEBUG] 2025/05/30 18:03:20 dnsmasq_handler.go:210: DnsmasqListener: Lease updated for 10.46.0.2 (MAC: 08:00:27:95:49:96, IP: 192.168.59.84). Exp: 1748628317, Count: 5. State: REACHABLE
