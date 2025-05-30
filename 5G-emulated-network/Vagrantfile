@@ -58,7 +58,7 @@ Vagrant.configure("2") do |config|
     core.vm.network "forwarded_port", guest: 8080, host: 9999
 
     # Copying the DBCTL script
-    core.vm.provision "file", source: "open5gs-dbctl.sh", destination: "open5gs-dbctl"
+    core.vm.provision "file", source: "open5gs-dbctl.sh", destination: "open5gs-dbctl.sh"
 
     # Open5GS installation
     core.vm.provision "file", source: "core_install.sh", destination: "core_install.sh"
