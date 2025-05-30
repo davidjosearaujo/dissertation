@@ -4,6 +4,7 @@ CORE_IP=$1
 UE_IMSI=$2
 UE_KEY=$3
 UE_OPC=$4
+CLIENT_EAP_IP=$5
 
 sudo add-apt-repository ppa:open5gs/latest
 sudo apt-get update && apt-get install -y \
@@ -90,10 +91,9 @@ sudo systemctl restart nginx
 
 echo -e "\nPre-loading UE in the AMF"
 sudo chmod +x open5gs-dbctl.sh
-./open5gs-dbctl.sh add $UE_IMSI $UE_KEY $UE_OPC
+./open5gs-dbctl.sh add_ue_with_apn_and_ip $UE_IMSI $UE_KEY $UE_OPC backhaul $CLIENT_EAP_IP
 
 echo -e "\nPre-loading UE APN sessions"
-./open5gs-dbctl.sh update_apn $UE_IMSI backhaul 0
 ./open5gs-dbctl.sh update_apn $UE_IMSI clients 0
 
 echo -e "\mMaking clientun0 interface persistent"

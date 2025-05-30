@@ -63,8 +63,8 @@ Vagrant.configure("2") do |config|
     # Open5GS installation
     core.vm.provision "file", source: "core_install.sh", destination: "core_install.sh"
     core.vm.provision "shell" do |s|
-      s.inline  = "/bin/bash core_install.sh $1 $2 $3 $4"
-      s.args    = [CORE_IP, UE_IMSI, UE_KEY, UE_OPC]
+      s.inline  = "/bin/bash core_install.sh $1 $2 $3 $4 $5"
+      s.args    = [CORE_IP, UE_IMSI, UE_KEY, UE_OPC, CLIENT_EAP_IP]
     end
 
     # Authenticator Server configuration

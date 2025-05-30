@@ -17,7 +17,7 @@ display_help() {
     echo "   type {imsi type}: changes the PDN-Type of the first PDN: 1 = IPv4, 2 = IPv6, 3 = IPv4v6"
     echo "   help: displays this message and exits"
     echo "   default values are as follows: APN \"internet\", dl_bw/ul_bw 1 Gbps, PGW address is 127.0.0.3, IPv4 only"
-    echo "   add_ue_with_apn {imsi key opc apn}: adds a user to the database with a specific apn,"
+    echo "   add_ue_with_apn_and_ip {imsi key opc apn ip}: adds a user to the database with a specific apn and an IPv4 address"
     echo "   add_ue_with_slice {imsi key opc apn sst sd}: adds a user to the database with a specific apn, sst and sd"
     echo "   update_apn {imsi apn slice_num}: adds an APN to the slice number slice_num of an existent UE"
     echo "   update_slice {imsi apn sst sd}: adds an slice to an existent UE"
@@ -540,12 +540,13 @@ if [ "$1" = "type" ]; then
     exit $?
 fi
 
-if [ "$1" = "add_ue_with_apn" ]; then
-    if [ "$#" -eq 5 ]; then
+if [ "$1" = "add_ue_with_apn_and_ip" ]; then
+    if [ "$#" -eq 6 ]; then
         IMSI=$2
         KI=$3
         OPC=$4
         APN=$5
+        IP=$6
 
         mongosh --eval "db.subscribers.insertOne(
             {
@@ -587,6 +588,10 @@ if [ "$1" = "add_ue_with_apn" ]; then
                                 \"unit\": NumberInt(0)
                             }
                         },
+                        \"ue\":
+                        {
+                            \"ipv4\": \"$IP\"
+                        },
                         \"pcc_rule\": [],
                         \"_id\": new ObjectId(),
                     }],
@@ -615,7 +620,7 @@ if [ "$1" = "add_ue_with_apn" ]; then
         exit $?
     fi
 
-    echo "open5gs-dbctl: incorrect number of args, format is \"open5gs-dbctl add_ue_with_apn imsi key opc apn\""
+    echo "open5gs-dbctl: incorrect number of args, format is \"open5gs-dbctl add_ue_with_apnadd_ue_with_apn_and_ip imsi key opc apn ip\""
     exit 1
 fi
 
