@@ -1,0 +1,32 @@
+Connecting to host 10.46.0.1, port 5201
+[  6] local 192.168.59.100 port 38848 connected to 10.46.0.1 port 5201
+[  8] local 192.168.59.100 port 38864 connected to 10.46.0.1 port 5201
+[ ID][Role] Interval           Transfer     Bitrate         Retr  Cwnd
+[  6][TX-C]   0.00-1.00   sec   802 KBytes  6.57 Mbits/sec    0   56.6 KBytes       
+[  8][RX-C]   0.00-1.00   sec   691 KBytes  5.66 Mbits/sec                  
+[  6][TX-C]   1.00-2.00   sec   758 KBytes  6.21 Mbits/sec    0   86.9 KBytes       
+[  8][RX-C]   1.00-2.00   sec   712 KBytes  5.83 Mbits/sec                  
+[  6][TX-C]   2.00-3.00   sec   758 KBytes  6.21 Mbits/sec    0    122 KBytes       
+[  8][RX-C]   2.00-3.00   sec   878 KBytes  7.19 Mbits/sec                  
+[  6][TX-C]   3.00-4.00   sec  1011 KBytes  8.28 Mbits/sec    0    151 KBytes       
+[  8][RX-C]   3.00-4.00   sec   725 KBytes  5.94 Mbits/sec                  
+[  6][TX-C]   4.00-5.00   sec   379 KBytes  3.11 Mbits/sec    0    179 KBytes       
+[  8][RX-C]   4.00-5.00   sec   603 KBytes  4.94 Mbits/sec                  
+[  6][TX-C]   5.00-6.00   sec   885 KBytes  7.24 Mbits/sec    0    208 KBytes       
+[  8][RX-C]   5.00-6.00   sec   669 KBytes  5.48 Mbits/sec                  
+[  6][TX-C]   6.00-7.00   sec   506 KBytes  4.14 Mbits/sec    0    234 KBytes       
+[  8][RX-C]   6.00-7.00   sec   721 KBytes  5.91 Mbits/sec                  
+[  6][TX-C]   7.00-8.00   sec   569 KBytes  4.66 Mbits/sec    0    266 KBytes       
+[  8][RX-C]   7.00-8.00   sec   616 KBytes  5.05 Mbits/sec                  
+[  6][TX-C]   8.00-9.00   sec  1.36 MBytes  11.4 Mbits/sec    0    353 KBytes       
+[  8][RX-C]   8.00-9.00   sec   635 KBytes  5.19 Mbits/sec                  
+[  6][TX-C]   9.00-10.00  sec   948 KBytes  7.77 Mbits/sec    0    461 KBytes       
+[  8][RX-C]   9.00-10.00  sec   584 KBytes  4.79 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID][Role] Interval           Transfer     Bitrate         Retr
+[  6][TX-C]   0.00-10.00  sec  7.82 MBytes  6.56 Mbits/sec    0             sender
+[  6][TX-C]   0.00-10.44  sec  6.02 MBytes  4.83 Mbits/sec                  receiver
+[  8][RX-C]   0.00-10.00  sec  7.86 MBytes  6.59 Mbits/sec    0             sender
+[  8][RX-C]   0.00-10.44  sec  6.67 MBytes  5.36 Mbits/sec                  receiver
+
+iperf Done.
