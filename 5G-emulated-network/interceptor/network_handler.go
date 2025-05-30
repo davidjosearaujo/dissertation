@@ -142,23 +142,13 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 						device.state = "REACHABLE"
 						allowedDevices[macAddress] = device
 					}
-				} else if (isStale || isFailed) && time.Until(time.Unix(int64(device.lease.expiration), 0)) < (device.lease.duration * time.Second * 3 / 4) { // Define a grace period of 25% of the lease duration for devices to become reachable again
+				} else if (isStale || isFailed) && time.Until(time.Unix(int64(device.lease.expiration), 0)) < (device.lease.duration * time.Second * 3 / 4) {
 					if device.state == "REACHABLE" || device.state == "LEASED" {
 						pduAddr := "N/A"
 						if device.pduSession != nil { pduAddr = device.pduSession.Address }
-						logger.Printf("HostDisconnectListener: Device %s (MAC: %s, State: %s). Forgetting.", pduAddr, macAddress, device.state)
+						logger.Printf("HostDisconnectListener: Device %s (MAC: %s) -> STALE (was %s) -> Forgetting.", pduAddr, macAddress, device.state)
 						ForgetDevice(allowedMACsFilePath, leasesFilePath, macAddress, ueIMSI)
 						continue 
-					} else {
-						pduAddr := "N/A"
-						if device.pduSession != nil { pduAddr = device.pduSession.Address }
-						logger.Printf("HostDisconnectListener: Device %s (MAC: %s, State: %s), but was not active. Monitoring.", pduAddr, macAddress, device.state)
-					}
-				} else { 
-					if device.state == "REACHABLE" || device.state == "LEASED" {
-						pduAddr := "N/A"
-						if device.pduSession != nil { pduAddr = device.pduSession.Address }
-						logger.Printf("HostDisconnectListener: Device %s (MAC: %s, State: %s). Monitoring.", pduAddr, macAddress, device.state)
 					}
 				}
 			} 
