@@ -21,8 +21,8 @@ import (
 )
 
 const (
-	hostDisconnectCheckInterval = 10 * time.Second
-	hostStaleGracePeriod        = 10 * time.Minute
+	hostDisconnectCheckInterval = 3 * time.Second
+	hostStaleGracePeriod        = 10 * time.Second
 )
 
 // Device struct represents a connected client device.
@@ -42,6 +42,11 @@ func ForgetDevice(allowedMACsFilePath string, leasesFilePath string, macAddress 
 
 	// Retrieve device details, including applied iptables rules
 	device, exists := allowedDevices[macAddress]
+
+	logger.Printf("ForgetDevice: Removing %s from internal tracking map.", macAddress)
+	delete(allowedDevices, macAddress)
+	logger.Printf("ForgetDevice: Completed for MAC %s", macAddress)
+
 	if !exists {
 		logger.Printf("ForgetDevice: Device %s not found in tracking. Cannot perform full cleanup.", macAddress)
 		// Attempt MAC disallow and Deauth as a best effort if device is not tracked but MAC is known
@@ -68,11 +73,6 @@ func ForgetDevice(allowedMACsFilePath string, leasesFilePath string, macAddress 
 		logger.Printf("ForgetDevice: Error restarting dnsmasq for %s: %v", macAddress, err)
 	}
 
-	logger.Printf("ForgetDevice: Deauthenticating %s via hostapd", macAddress)
-	if err := Deauth(macAddress); err != nil {
-		logger.Printf("ForgetDevice: Deauth %s failed: %v", macAddress, err)
-	}
-
 	// Remove stored iptables rules
 	if ruleManager != nil && len(device.AppliedIPTablesRules) > 0 { // ruleManager is assumed global
 		if err := ruleManager.RemoveRulesForDevice(macAddress, device.AppliedIPTablesRules); err != nil {
@@ -94,9 +94,10 @@ func ForgetDevice(allowedMACsFilePath string, leasesFilePath string, macAddress 
 		logger.Printf("ForgetDevice: No PDU session for %s to release.", macAddress)
 	}
 
-	logger.Printf("ForgetDevice: Removing %s from internal tracking map.", macAddress)
-	delete(allowedDevices, macAddress)
-	logger.Printf("ForgetDevice: Completed for MAC %s", macAddress)
+	logger.Printf("ForgetDevice: Deauthenticating %s via hostapd", macAddress)
+	if err := Deauth(macAddress); err != nil {
+		logger.Printf("ForgetDevice: Deauth %s failed: %v", macAddress, err)
+	}
 }
 
 func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI string, link netlink.Link, quit <-chan struct{}) {
