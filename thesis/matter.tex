@@ -231,6 +231,33 @@
   \setcounter{page}{\temppagenumber}%
 }
 
+\usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{code}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                   
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=code}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document begins here
@@ -246,7 +273,6 @@
 
 % Uncomment to enable English
 \selectlanguage{english}
-
 
 % Front matter
 
@@ -325,8 +351,6 @@
 \clearpage
 {\small\listoftables}
 
-% List of code snippets
-
 % Fix for Listings with memoir
 
 \RenewDocumentCommand \chapter { s O{#3} m }{%
@@ -336,11 +360,11 @@
     {\oldchapter#1{#2}}
 }
 
-%\renewcommand{\listingscaption}{Código}
-%\renewcommand{\listoflistingscaption}{Lista de Excertos de Código}
-%\clearpage
-%{\small\listoflistings}
-%\addcontentsline{toc}{chapter}{\listoflistingscaption}
+\renewcommand{\listingscaption}{Code}
+\renewcommand{\listoflistingscaption}{List of Code Snippets}
+\clearpage
+{\small\listoflistings}
+\addcontentsline{toc}{chapter}{\listoflistingscaption}
 
 % Reset Chapters
 \renewcommand{\chapter}[2][]{

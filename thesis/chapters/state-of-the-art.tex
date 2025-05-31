@@ -370,7 +370,7 @@ Authentication of the \ac{N5GC} device is carried out by the \ac{AUSF} using \ac
 
 Following successful authentication, the \ac{AMF} completes additional registration procedures. If a \ac{PEI} is required, the \ac{W-AGF} uses the \ac{MAC} address of the \ac{N5GC} device, with an option to encode it in IEEE \ac{EUI-64} format depending on operator policy. Once registration is finalized, the \ac{W-AGF} communicates the \textit{Registration Accept} message to the \ac{N5GC} device, marking the completion of the process.
 
-After registration, the \AC{W-AGF} establishes a single \ac{PDU} session for each \ac{N5GC} device, ensuring each device is assigned its own unique data session within the \ac{5GC} while accounting for the device's limitations. This ensures secure and individualized connectivity. Additionally, the \ac{W-AGF} manages \ac{NGAP} connections, ensuring that if the \ac{NGAP} connection for a \ac{CRG} is released, all associated \ac{N5GC} device connections are also terminated. The \ac{CRG} continues to operate as an \ac{FN-CRG}, supporting seamless communication for connected devices~\cite{23.316-p25}.
+After registration, the \ac{W-AGF} establishes a single \ac{PDU} session for each \ac{N5GC} device, ensuring each device is assigned its own unique data session within the \ac{5GC} while accounting for the device's limitations. This ensures secure and individualized connectivity. Additionally, the \ac{W-AGF} manages \ac{NGAP} connections, ensuring that if the \ac{NGAP} connection for a \ac{CRG} is released, all associated \ac{N5GC} device connections are also terminated. The \ac{CRG} continues to operate as an \ac{FN-CRG}, supporting seamless communication for connected devices~\cite{23.316-p25}.
 
 \begin{figure}
     \centering
@@ -385,7 +385,7 @@ In Annex 0 of TS 33.501, we can get more detail regarding this registration and 
 
 A \acf{NAUN3} device does not support \ac{NAS} signalling, is connected to \ac{5GC} via a \ac{RG} and does not support authentication with the \ac{5GC}~\cite{23.316-p10}.
 
-\ac{NAUN3} devices, which cannot be authenticated by the \ac{5GC}, may be locally authenticated by the \ac{5G-RG} using methods like pre-shared secrets. Examples of pre-shared secrets include Wi-Fi passphrases for \acp{SSID}, \ac{PIN} codes, or static security keys configured during device setup. Differentiated services, including \ac{QoS} and network slicing, can be applied to these devices through \acp{CGID} (see Figure \ref{fig:NAUN3 devices behind 5G-RG based on connectivity groups}).
+\ac{NAUN3} devices, which cannot be authenticated by the \ac{5GC}, may be locally authenticated by the \ac{5G-RG} using methods like pre-shared secrets. Examples of pre-shared secrets include Wi-Fi passphrases for \acp{SSID}, \ac{PIN} codes, or static security keys configured during device setup. Differentiated services, including \ac{QoS} and network slicing, can be applied to these devices through \acp{CGID} (see Figure \ref{fig:NAUN3 devices behind 5G-RG based on connectivity groups})~\cite{23.316-p27}.
 
 \begin{figure}
     \centering
@@ -449,3 +449,62 @@ The main difference between \ac{NAUN3} and \ac{N5GC} devices lies in their capab
 \end{itemize}
 
 In summary, \ac{NAUN3} devices operate entirely locally, with no interaction with the \ac{5GC}, while \ac{N5GC} devices leverage intermediaries like the \ac{W-AGF} to authenticate and establish \ac{PDU} Sessions with the \ac{5GC}, maintaining unique subscription records and dedicated \ac{NGAP} connections.
+
+\subsection{\ac{3GPP} Advancements on \ac{QoS} Traffic Differentiation}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{figs/Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session.png}
+    \caption{Example scenario for mapping traffic of individual non-\ac{3GPP} devices behind \ac{5G-RG} to a \ac{PDU} Session}
+    \label{fig:Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session}
+\end{figure}
+
+Recent updates within \ac{3GPP} Release 19, particularly in TS 23.316 (Wireless and wireline convergence access support for the \ac{5G} System), TS 23.501 (System Architecture), TS 23.502 (Procedures), and TS 23.503 (Policy and Charging Control), have introduced and refined mechanisms for providing differentiated \ac{QoS} to individual non-\ac{3GPP} devices operating behind a \ac{5G-RG} as ilustrated in Figure \ref{fig:Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session}. These enhancements detailed in TS 23.316 clauses 4.10e~\cite{23.316-p29}, Annex C~\cite{23.316-p95}, and TS 23.501 clause 5.52~\cite{23.502-p447}, signify a focused effort towards granular traffic management and service personalization for devices in converged environments.
+
+\textbf{Key Developments in Differentiated \ac{QoS} for Non-\ac{3GPP} Devices}
+
+\begin{enumerate}
+    \item {
+        Identification of Individual Non-\ac{3GPP} Devices
+        \begin{itemize}
+            \item A central concept is the "Non-\ac{3GPP} Device Identifier" a generic string unique within the scope of the \ac{5G-RG}'s \ac{SUPI}~\cite{23.501-p564}. This identifier enables the \ac{5G} System to distinguish traffic from different non-\ac{3GPP} devices connected through the same \ac{5G-RG}, even if they initially share a \ac{PDU} Session.
+            \item The \ac{5G-RG} (acting as the \ac{UE} in this context) may bind this identifier to a specific non-\ac{3GPP} device, although the exact method of binding and how the \ac{5G-RG} becomes aware of these identifiers is considered implementation-specific~\cite{23.501-p564}.
+        \end{itemize}
+    }
+    \item {
+        Provisioning of Device-Specific \ac{QoS} Information
+        \begin{itemize}
+            \item An \ac{AF}, which can belong to the operator or a third party, can provision "Non-\ac{3GPP} Device Identifier Information" into the \ac{UDR} via the \ac{NEF}~\cite{23.502-p447}.
+            \item This information includes the Non-\ac{3GPP} Device Identifier, associated \ac{QoS} parameters (either a \ac{QoS} reference or individual parameters), and optionally \ac{DNN}/\ac{S-NSSAI} or flow descriptions. The \ac{NEF} uses an \ac{AF}-Service-Identifier to recognize the request type and sets the Data Subset Identifier to "Non-\ac{3GPP} Device Identifier Information" when interacting with the \ac{UDR}. This provisioning is typically done for devices requiring specific \ac{QoS} treatment.
+        \end{itemize}
+    }
+    \item {
+        Session Management and Policy Control Enhancements
+        \begin{itemize}
+            \item The \ac{5G-RG} can signal "Non-\ac{3GPP} Device Connection Information" (which includes the Non-\ac{3GPP} Device Identifier, \ac{MAC} address, and optionally \ac{VLAN} ID or \ac{IP} address/port ranges for different \ac{PDU} session types) to the \ac{SMF} via a \ac{PDU} Session Modification Request~\cite{23.501-p564}.
+            \item The \ac{SMF} forwards this information to the \ac{PCF}~\cite{23.503-p110}
+            \item The \ac{PCF}, upon receiving the Non-\ac{3GPP} Device Identifier and its user plane address, creates or modifies \ac{PCC} rules. It determines the appropriate \ac{QoS} parameters based on the Non-\ac{3GPP} Device Identifier Information retrieved from the \ac{UDR} and/or operator policy. These \ac{PCC} rules are then installed at the \ac{SMF}.
+            \item If the \ac{PCF} finds that a provided Non-\ac{3GPP} Device Identifier is not available for the \ac{5G-RG}'s subscription, it informs the \ac{SMF}, which then rejects the \ac{PDU} Session Modification. Similarly, if an identifier is removed from the subscription, the \ac{UDR} notifies the \ac{PCF}, which then initiates the removal of associated \ac{PCC} rules.
+        \end{itemize}
+    }
+    \item {
+        Procedural Framework for Differentiated Service Activation ~\cite{23.316-p29}~\cite{23.316-p95}
+
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.75\linewidth]{figs/Example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session Flow.png}
+            \caption{Registration flow for an example scenario for mapping traffic of individual non-\ac{3GPP} devices behind \ac{5G-RG} to a \ac{PDU} Session}
+            \label{fig:Registration flow for an example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session}
+        \end{figure}
+        
+        \begin{itemize}
+            \item As shown in Figure \ref{fig:Registration flow for an example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session}, initially a non-\ac{3GPP} device connecting to the \ac{5G-RG} might have its traffic mapped to a \ac{PDU} Session based on \ac{URSP} rules (potentially using a Connectivity Group ID~\cite{23.316-p27}) or local configuration. Multiple devices might share this \ac{PDU} Session and its default \ac{QoS} Flow.
+            \item A request for differentiated \ac{QoS} for a specific device (e.g., device 2) can be initiated by the \ac{5G-RG} subscription owner via an \ac{AF} (e.g., an operator portal).
+            \item The \ac{AF} then provisions the Non-\ac{3GPP} Device Identifier Information for device 2 into the \ac{UDR} (step 2 in Figure \ref{fig:Registration flow for an example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session}).
+            \item This triggers (Step 3 of Figure \ref{fig:Registration flow for an example scenario for mapping traffic of individual non-3GPP devices behind 5G-RG to a PDU Session}) either a \ac{5G-RG} requested \ac{PDU} Session Modification or a \ac{5G-RG} requested \ac{PDU} Session Establishment. The choice between modification of an existing \ac{PDU} Session (to add/modify \ac{QoS} Flows) or establishment of a new \ac{PDU} Session for the device appears to be based on network configuration.
+            \item Following this, the traffic of the identified device is mapped to a specific \ac{QoS} Flow (potentially a new one within an existing \ac{PDU} session or within a newly established \ac{PDU} session) that provides the requested differentiated service.
+        \end{itemize}
+    }
+\end{enumerate}
+
+These \ac{3GPP} advancements in Release 19 provide a standardized framework for identifying individual non-\ac{3GPP} devices behind a \ac{5G-RG} and applying differentiated \ac{QoS} policies to their traffic, enhancing service flexibility and network resource management.
