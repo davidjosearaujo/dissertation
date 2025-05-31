@@ -1,0 +1,68 @@
+iperf3: error - unable to start listener for connections: Address already in use
+iperf3: exiting
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 10.46.0.2, port 36080
+[  6] local 10.46.0.1 port 5201 connected to 10.46.0.2 port 36094
+[  9] local 10.46.0.1 port 5201 connected to 10.46.0.2 port 36096
+[ ID][Role] Interval           Transfer     Bitrate         Retr  Cwnd
+[  6][RX-S]   0.00-1.00   sec  1.71 MBytes  14.3 Mbits/sec                  
+[  9][TX-S]   0.00-1.00   sec  5.72 MBytes  48.0 Mbits/sec    0    307 KBytes       
+[  6][RX-S]   1.00-2.00   sec  2.73 MBytes  22.9 Mbits/sec                  
+[  9][TX-S]   1.00-2.00   sec  2.80 MBytes  23.5 Mbits/sec   10    178 KBytes       
+[  6][RX-S]   2.00-3.00   sec  3.32 MBytes  27.8 Mbits/sec                  
+[  9][TX-S]   2.00-3.00   sec  2.05 MBytes  17.2 Mbits/sec    0    191 KBytes       
+[  6][RX-S]   3.00-4.00   sec  3.68 MBytes  30.9 Mbits/sec                  
+[  9][TX-S]   3.00-4.00   sec  1.37 MBytes  11.5 Mbits/sec    0    197 KBytes       
+[  6][RX-S]   4.00-5.00   sec  2.88 MBytes  24.1 Mbits/sec                  
+[  9][TX-S]   4.00-5.00   sec  1.37 MBytes  11.5 Mbits/sec    1    147 KBytes       
+[  6][RX-S]   5.00-6.00   sec  3.17 MBytes  26.6 Mbits/sec                  
+[  9][TX-S]   5.00-6.00   sec  2.05 MBytes  17.2 Mbits/sec    0    175 KBytes       
+[  6][RX-S]   6.00-7.00   sec  3.05 MBytes  25.6 Mbits/sec                  
+[  9][TX-S]   6.00-7.00   sec  2.05 MBytes  17.2 Mbits/sec    0    189 KBytes       
+[  6][RX-S]   7.00-8.00   sec  2.94 MBytes  24.6 Mbits/sec                  
+[  9][TX-S]   7.00-8.00   sec  2.05 MBytes  17.2 Mbits/sec    0    195 KBytes       
+[  6][RX-S]   8.00-9.00   sec  2.05 MBytes  17.2 Mbits/sec                  
+[  9][TX-S]   8.00-9.00   sec  2.05 MBytes  17.2 Mbits/sec    4    164 KBytes       
+[  6][RX-S]   9.00-10.00  sec  2.72 MBytes  22.8 Mbits/sec                  
+[  9][TX-S]   9.00-10.00  sec  3.42 MBytes  28.7 Mbits/sec    0    184 KBytes       
+[  6][RX-S]  10.00-10.06  sec   192 KBytes  27.8 Mbits/sec                  
+[  9][TX-S]  10.00-10.06  sec  0.00 Bytes  0.00 bits/sec    0    185 KBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID][Role] Interval           Transfer     Bitrate         Retr
+[  6][RX-S]   0.00-10.06  sec  28.4 MBytes  23.7 Mbits/sec                  receiver
+[  9][TX-S]   0.00-10.06  sec  24.9 MBytes  20.8 Mbits/sec   15             sender
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 10.46.0.3, port 46222
+[  7] local 10.46.0.1 port 5201 connected to 10.46.0.3 port 46232
+[ 10] local 10.46.0.1 port 5201 connected to 10.46.0.3 port 46236
+[ ID][Role] Interval           Transfer     Bitrate         Retr  Cwnd
+[  7][RX-S]   0.00-1.00   sec  3.02 MBytes  25.3 Mbits/sec                  
+[ 10][TX-S]   0.00-1.00   sec  2.20 MBytes  18.5 Mbits/sec    0    115 KBytes       
+[  7][RX-S]   1.00-2.00   sec  3.60 MBytes  30.2 Mbits/sec                  
+[ 10][TX-S]   1.00-2.00   sec  2.36 MBytes  19.8 Mbits/sec    0    214 KBytes       
+[  7][RX-S]   2.00-3.00   sec  3.37 MBytes  28.3 Mbits/sec                  
+[ 10][TX-S]   2.00-3.00   sec  2.11 MBytes  17.7 Mbits/sec    0    301 KBytes       
+[  7][RX-S]   3.00-4.00   sec  3.21 MBytes  26.9 Mbits/sec                  
+[ 10][TX-S]   3.00-4.00   sec  2.86 MBytes  24.0 Mbits/sec    0    411 KBytes       
+[  7][RX-S]   4.00-5.00   sec  2.89 MBytes  24.2 Mbits/sec                  
+[ 10][TX-S]   4.00-5.00   sec  2.86 MBytes  24.0 Mbits/sec    0    549 KBytes       
+[  7][RX-S]   5.00-6.00   sec  2.89 MBytes  24.3 Mbits/sec                  
+[ 10][TX-S]   5.00-6.00   sec  3.61 MBytes  30.3 Mbits/sec    0    701 KBytes       
+[  7][RX-S]   6.00-7.00   sec  2.54 MBytes  21.3 Mbits/sec                  
+[ 10][TX-S]   6.00-7.00   sec  3.75 MBytes  31.5 Mbits/sec    0    872 KBytes       
+[  7][RX-S]   7.00-8.00   sec  2.50 MBytes  21.0 Mbits/sec                  
+[ 10][TX-S]   7.00-8.00   sec  3.75 MBytes  31.5 Mbits/sec    0   1.03 MBytes       
+[  7][RX-S]   8.00-9.00   sec  2.33 MBytes  19.5 Mbits/sec                  
+[ 10][TX-S]   8.00-9.00   sec  3.75 MBytes  31.5 Mbits/sec    0   1.22 MBytes       
+[  7][RX-S]   9.00-10.00  sec  2.01 MBytes  16.8 Mbits/sec                  
+[ 10][TX-S]   9.00-10.00  sec  3.75 MBytes  31.5 Mbits/sec    0   1.41 MBytes       
+[  7][RX-S]  10.00-10.18  sec   274 KBytes  12.3 Mbits/sec                  
+[ 10][TX-S]  10.00-10.18  sec  0.00 Bytes  0.00 bits/sec    0   1.45 MBytes       
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID][Role] Interval           Transfer     Bitrate         Retr
+[  7][RX-S]   0.00-10.18  sec  28.6 MBytes  23.6 Mbits/sec                  receiver
+[ 10][TX-S]   0.00-10.18  sec  31.0 MBytes  25.5 Mbits/sec    0             sender

@@ -1,0 +1,105 @@
+Sat May 31 14:43:09 UTC 2025
+
+PDU Session1: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: backhaul
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: 10.45.0.2
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
+ data-pending: false
+
+
+
+Sat May 31 14:43:19 UTC 2025
+
+PDU Session1: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: backhaul
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: 10.45.0.2
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
+ data-pending: false
+PDU Session2: 
+ state: PS-ACTIVE-PENDING
+ session-type: IPv4
+ apn: clients
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: null
+ ambr: null
+ data-pending: false
+
+
+
+Sat May 31 14:44:10 UTC 2025
+
+PDU Session1: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: backhaul
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: 10.45.0.2
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
+ data-pending: false
+PDU Session2: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: clients
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: 10.46.0.2
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
+ data-pending: false
+PDU Session3: 
+ state: PS-ACTIVE-PENDING
+ session-type: IPv4
+ apn: clients
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: null
+ ambr: null
+ data-pending: false
+
+
+
+Sat May 31 14:44:51 UTC 2025
+
+PDU Session1: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: backhaul
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: 10.45.0.2
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
+ data-pending: false
+PDU Session3: 
+ state: PS-ACTIVE
+ session-type: IPv4
+ apn: clients
+ s-nssai: 
+  sst: 0x01
+  sd: null
+ emergency: false
+ address: 10.46.0.3
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
+ data-pending: false

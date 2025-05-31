@@ -1,8 +1,0 @@
-
-Authentication and Connection Process Duration
-
-Timestamp just before authentication request: 1748617658
-Timestamp just after IP assignment: 1748617793
-
-Total time elapsed: 135 seconds
-

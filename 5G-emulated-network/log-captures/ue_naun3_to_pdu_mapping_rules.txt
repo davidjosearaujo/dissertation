@@ -1,0 +1,57 @@
+Sat May 31 14:40:08 UTC 2025
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* global_related_established_interceptor */
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+
+
+Sat May 31 14:43:30 UTC 2025
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+    0     0 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* global_related_established_interceptor */
+    0     0 ACCEPT     all  --  enp0s9 uesimtun1  0.0.0.0/0            0.0.0.0/0            MAC08:00:27:b4:18:a9 mark match 0x2 /* interceptor_mac_08_00_27_b4_18_a9_pduid_2 */
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+
+
+Sat May 31 14:44:30 UTC 2025
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+43701   58M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* global_related_established_interceptor */
+    6   456 ACCEPT     all  --  enp0s9 uesimtun1  0.0.0.0/0            0.0.0.0/0            MAC08:00:27:b4:18:a9 mark match 0x2 /* interceptor_mac_08_00_27_b4_18_a9_pduid_2 */
+    0     0 ACCEPT     all  --  enp0s9 uesimtun2  0.0.0.0/0            0.0.0.0/0            MAC08:00:27:51:7f:ef mark match 0x3 /* interceptor_mac_08_00_27_51_7f_ef_pduid_3 */
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+
+
+Sat May 31 14:44:51 UTC 2025
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy DROP 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+97585  124M ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            state RELATED,ESTABLISHED /* global_related_established_interceptor */
+    4   304 ACCEPT     all  --  enp0s9 uesimtun2  0.0.0.0/0            0.0.0.0/0            MAC08:00:27:51:7f:ef mark match 0x3 /* interceptor_mac_08_00_27_51_7f_ef_pduid_3 */
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
