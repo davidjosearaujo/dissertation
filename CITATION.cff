@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Araújo Ferreira
+    given-names: David José
+title: "Integration of Wi-Fi-Only Devices in 5G Core
+Networks: Addressing Authentication and
+Identity Management Challenges"
+version: 1.0.0
+date-released: 2025-06-03
