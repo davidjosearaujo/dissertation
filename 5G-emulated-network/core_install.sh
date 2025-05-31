@@ -96,7 +96,7 @@ sudo chmod +x open5gs-dbctl.sh
 echo -e "\nPre-loading UE APN sessions"
 ./open5gs-dbctl.sh update_apn $UE_IMSI clients 0
 
-echo -e "\mMaking clientun0 interface persistent"
+echo -e "\nMaking clientun0 interface persistent"
 echo -e "
 sudo ip tuntap add dev clientun0 mode tun
 sudo ip link set clientun0 up
