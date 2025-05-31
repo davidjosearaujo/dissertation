@@ -452,3 +452,79 @@ Metrics/Verification Points:
 - Review of Open5GS logs (AMF, SMF) to confirm that only the 5G-RG's identity (IMSI) is used for 5GC signaling, and NAUN3 MAC addresses are not propagated to these core NFs.
 
 These experiments are designed to provide a holistic view of the system's functionality, its ability to manage multiple devices correctly, handle their lifecycle, and maintain basic security and traffic segregation principles, incorporating the specific types of data you've collected.
+## Functional Validation Results
+
+This section presents the results obtained from executing the test scenarios described previously, demonstrating the functional correctness of the proposed authentication and identity management mechanisms. The evidence is drawn from system logs, network interface states, routing table configurations, and packet captures.
+
+**NAUN3 Device Authentication and Onboarding:** The primary test involved onboarding NAUN3 devices (`naun301`, `naun302`) one after another.
+
+- **EAP-TLS Authentication:** Logs from `wpa_supplicant` on each NAUN3 device (e.g., `wpa_supplicant_naun301.txt`, `wpa_supplicant_naun302.txt`) confirmed the initiation and successful completion of the EAP-TLS handshake ("`CTRL-EVENT-EAP-SUCCESS EAP authentication completed successfully`"). Correspondingly, `hostapd.txt` on the 5G-RG (`ue` VM) showed the EAP exchange, including the relay of messages to the RADIUS server and the reception of Access-Accept. The `freeradius.txt` log on the `core` VM detailed the processing of these RADIUS requests, certificate validation, and the issuance of Access-Accept messages. The `interceptor.txt` log captured the `CTRL-EVENT-EAP-SUCCESS` from `hostapd`, indicating its awareness of the successful local authentication.
+    
+- **Dedicated PDU Session Establishment:** Following each successful EAP-TLS authentication, the `interceptor.txt` log shows the initiation of a new PDU session request for the `clients` DNN (e.g., "`Requesting PDU for 08:00:27:b4:18:a9`" followed by "`NewPDUSession: PDU ID 2 IMSI imsi-999700000000001 ACTIVE`"). The `ue_pdu_sessions.txt` log, which snapshots the output of `nr-cli ps-list` on the 5G-RG, corroborates this:
+    
+    - Initially (14:43:09 UTC), only `PDU Session1` (DNN: `backhaul`, IP: `10.45.0.2`) is active.
+        
+    - After `naun301` (MAC `08:00:27:b4:18:a9`) authenticates (around 14:43:10 UTC in `interceptor.txt`), `PDU Session2` (DNN: `clients`, IP: `10.46.0.2`) becomes active by 14:43:30 UTC.
+        
+    - After `naun302` (MAC `08:00:27:51:7f:ef`) authenticates (around 14:44:08 UTC in `interceptor.txt`), `PDU Session3` (DNN: `clients`, IP: `10.46.0.3`) becomes active by 14:44:30 UTC.
+        
+- **Network Interface Creation:** The `ue_pdu_sessions_nics.txt` log confirms the dynamic creation of network interfaces on the 5G-RG for each `clients` PDU session. `uesimtun0` (IP `10.45.0.2`) corresponds to the `backhaul` session. `uesimtun1` (IP `10.46.0.2`) appears after `naun301` connects, and `uesimtun2` (IP `10.46.0.3`) appears after `naun302` connects.
+    
+- **IP Address Allocation:** The NAUN3 devices successfully obtained local IP addresses from `dnsmasq` on the 5G-RG after authentication (e.g., `naun301_ping_gw.txt` shows source `192.168.59.100`; `naun302_ping_gw.txt` shows source `192.168.59.15`). The 5GC assigned unique IPs (`10.46.0.2`, `10.46.0.3`) to their respective PDU sessions, as confirmed by `ue_pdu_sessions.txt` and `ue_pdu_sessions_nics.txt`.
+    
+- **Onboarding Delay:** The `naun301_auth_and_connection_delay.txt` indicates an approximate total time of 135 seconds from initiating `wpa_supplicant` to the NAUN3 device obtaining an IP address. This duration encompasses the EAP-TLS handshake, RADIUS communication, PDU session establishment by the `interceptor` via `nr-cli`, and local DHCP lease acquisition.
+    
+
+**End-to-End Connectivity and Path Verification:** Ping tests with the record route option (`-R`) were conducted from `naun301` and `naun302` to the `clients` DNN gateway IP on the `core` VM (`10.46.0.1`).
+
+- `naun301_ping_gw.txt`: Shows successful pings. The recorded route is `192.168.59.100` (NAUN301 local IP) -> `10.46.0.2` (PDU Session 2 IP for NAUN301) -> `10.46.0.1` (Target). This clearly demonstrates that traffic from `naun301` is NATted using the IP address of its dedicated PDU session.
+    
+- `naun302_ping_gw.txt`: Shows successful pings. The recorded route is `192.168.59.15` (NAUN302 local IP) -> `10.46.0.3` (PDU Session 3 IP for NAUN302) -> `10.46.0.1` (Target). This confirms that `naun302`'s traffic is also NATted, but crucially, via its _own distinct_ PDU session IP.
+    
+
+**Traffic Isolation and Correct PDU Session Mapping (Multiple Devices):** The `iperf3` tests further validated traffic isolation and mapping:
+
+- `naun301_iperf.txt` and `naun302_iperf.txt` show client-side successful data transfer to `10.46.0.1`.
+    
+- The `core_clients_iperf.txt` (server log) is key: it shows the `iperf3` server on `10.46.0.1` accepting connections from two different source IPs: `10.46.0.2` and `10.46.0.3`. These correspond to the unique PDU session IPs assigned to `naun301` and `naun302` respectively. This confirms that traffic from each NAUN3 device is correctly mapped to its dedicated PDU session and is identifiable by this unique PDU session IP at the N6 network.
+    
+- The `ue_naun3_to_pdu_mapping_rules.txt` log shows the dynamic application of `iptables` FORWARD rules and `ip rule`/`ip route` entries. For instance, at 14:43:30 UTC (after `naun301` connects), rules are present for MAC `08:00:27:b4:18:a9` (naun301) to use PDU ID 2 (interface `uesimtun1`). By 14:44:30 UTC (after `naun302` connects), additional rules appear for MAC `08:00:27:51:7f:ef` (naun302) to use PDU ID 3 (interface `uesimtun2`), while rules for PDU ID 2 remain. This demonstrates the per-device rule application.
+    
+- The Wireshark capture in `naun3_to_core_ue_view.jpg` visually confirms this: traffic on the 5G-RG's LAN interface shows the NAUN3's local IP (e.g., `192.168.59.100`), while on the corresponding PDU session tunnel interface (`uesimtunX`), the source IP is the PDU session's 5GC-assigned IP (e.g., `10.46.0.3`).
+    
+
+**Lifecycle Management (Device Disconnection):** The logs demonstrate correct resource cleanup when `naun301` (associated with PDU Session2, IP `10.46.0.2`, interface `uesimtun1`) disconnects:
+
+- `interceptor.txt` (around 14:44:49 UTC) logs: "`Tracked device 10.46.0.2 (MAC: 08:00:27:b4:18:a9, State: REACHABLE) no longer in ARP list. Scheduling for forget.`" This is followed by logs indicating removal from `allowedDevices`, deauthentication via `hostapd`, removal of `iptables` rules, and PDU session release for PDU ID 2.
+    
+- `ue_pdu_sessions.txt` shows that at 14:44:51 UTC, `PDU Session2` (IP `10.46.0.2`) is no longer listed, while `PDU Session1` (`backhaul`) and `PDU Session3` (for `naun302`, IP `10.46.0.3`) remain active.
+    
+- `ue_pdu_sessions_nics.txt` confirms that by 14:44:51 UTC, the `uesimtun1` interface (associated with `10.46.0.2`) is gone, while `uesimtun0` and `uesimtun2` persist.
+    
+- `ue_naun3_to_pdu_mapping_rules.txt` shows that at 14:44:51 UTC, the `iptables` FORWARD rule for MAC `08:00:27:b4:18:a9` (PDU ID 2) has been removed, while the rule for MAC `08:00:27:51:7f:ef` (PDU ID 3) remains.
+    
+
+These results collectively demonstrate that the proposed mechanisms for NAUN3 device authentication, proxy identity creation via dedicated PDU sessions, per-device traffic mapping and NAT, and lifecycle management function correctly within the simulated environment.
+
+## 4. Security Evaluation
+
+The security aspects of the solution were evaluated qualitatively based on the implemented mechanisms and observations from the test scenarios.
+
+- **EAP-TLS Authentication Integrity:** The logs from `wpa_supplicant` (e.g., `wpa_supplicant_naun301.txt`), `hostapd` (`hostapd.txt`), and FreeRADIUS (`freeradius.txt`) consistently show the successful completion of the EAP-TLS handshake. This includes the exchange of certificates and the mutual verification steps inherent to the protocol. For instance, `freeradius.txt` logs details like "`eap_tls: (TLS) Connection Established`" and "`eap: Sending EAP Success`". This provides confidence that the local authentication of NAUN3 devices is cryptographically secured as per EAP-TLS standards.
+    
+- **Traffic Segregation (Control vs. User Plane):**
+    
+    - The `RADIUS_traffic_via_backhaul.jpg` Wireshark capture clearly shows RADIUS packets (UDP port 1812), which carry the EAP authentication messages, being exchanged between the 5G-RG's `backhaul` PDU session IP (`10.45.0.2`) and the FreeRADIUS server's IP (`10.45.0.1`). This confirms that sensitive authentication control plane traffic is isolated to the dedicated `backhaul` DNN.
+        
+    - The `hostapd.txt` log further details the RADIUS exchange, initially attempting to send from a default system IP (e.g., `10.0.2.15`) and failing (evident by retransmissions), then succeeding once the `own_ip_addr` (`10.45.0.2` - the `backhaul` PDU session IP) is correctly used. This highlights the correct binding and use of the `backhaul` PDU for RADIUS.
+        
+    - Conversely, user plane traffic from NAUN3 devices (e.g., `iperf3` data in `core_clients_iperf.txt` and ping traffic in `naun301_ping_gw.txt`) is shown to originate from the `clients` DNN IP addresses (e.g., `10.46.0.2`, `10.46.0.3`) assigned to their respective PDU sessions. This demonstrates effective segregation between the authentication control plane and the user data plane.
+        
+- **NAUN3 Identity Concealment from 5GC:**
+    
+    - The 5G Core Network (AMF, SMF, UDM) interacts only with the 5G-RG, which authenticates using its own 5G credentials (IMSI `999700000000001`). The local identities of the NAUN3 devices (e.g., their MAC addresses or the `user@example.org` EAP identity) are handled by the 5G-RG (specifically by `hostapd` and the `interceptor`) and the FreeRADIUS server.
+        
+    - There is no indication in the 5G procedures (PDU session establishment requests initiated by the 5G-RG) that these local NAUN3 identities are passed to the AMF or SMF. The 5GC manages PDU sessions based on the 5G-RG's SUPI and the requested DNN. This aligns with the design goal of not requiring modifications to the 5GC for handling non-standard device identities. The proxy identity (the PDU session) is what the 5GC manages, abstracting the actual NAUN3 device behind it.
+        
+
+While these observations do not constitute a formal penetration test or vulnerability assessment, they confirm that the fundamental security design principles—strong local authentication, traffic segregation, and abstraction of local device identities from the 5GC—are correctly implemented and operational within the test environment.
