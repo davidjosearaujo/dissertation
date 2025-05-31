@@ -14,7 +14,7 @@ PDU Session1:
 
 
 
-Sat May 31 14:43:19 UTC 2025
+Sat May 31 14:43:30 UTC 2025
 
 PDU Session1: 
  state: PS-ACTIVE
@@ -28,20 +28,20 @@ PDU Session1:
  ambr: up[1000000Kb/s] down[1000000Kb/s]
  data-pending: false
 PDU Session2: 
- state: PS-ACTIVE-PENDING
+ state: PS-ACTIVE
  session-type: IPv4
  apn: clients
  s-nssai: 
   sst: 0x01
   sd: null
  emergency: false
- address: null
- ambr: null
+ address: 10.46.0.2
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
  data-pending: false
 
 
 
-Sat May 31 14:44:10 UTC 2025
+Sat May 31 14:44:30 UTC 2025
 
 PDU Session1: 
  state: PS-ACTIVE
@@ -66,15 +66,15 @@ PDU Session2:
  ambr: up[1000000Kb/s] down[1000000Kb/s]
  data-pending: false
 PDU Session3: 
- state: PS-ACTIVE-PENDING
+ state: PS-ACTIVE
  session-type: IPv4
  apn: clients
  s-nssai: 
   sst: 0x01
   sd: null
  emergency: false
- address: null
- ambr: null
+ address: 10.46.0.3
+ ambr: up[1000000Kb/s] down[1000000Kb/s]
  data-pending: false
 
 
