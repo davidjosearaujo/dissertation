@@ -3,7 +3,7 @@
 CERT_CLIENT_PASSWD=$1
 
 sudo apt-get update
-sudo apt-get -y install wpasupplicant iperf3 traceroute
+sudo apt-get install -y wpasupplicant iperf3
 
 echo -e "\nRemove IP address"
 sudo ip addr flush enp0s8
@@ -28,23 +28,26 @@ network={
 LOG_FILE_PATH="/log/$(cat /etc/hostname).log"
 cat wpa_supplicant.conf > ${LOG_FILE_PATH}
 
-startTime=$(date +%s)
-
-echo -e "\nRunning wpa_supplicant"
-sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
-
 echo -e "\nMaking wpa_supplicant start at boot"
 echo -e "
 sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
 " | sudo tee /etc/init.d/wpa_supplicant > /dev/null
 sudo chmod +x /etc/init.d/wpa_supplicant
 
-sudo dhclient enp0s8
+for i in $(seq 1 10); do
+    startTime=$(date +%s)
 
-elapsedTime=$(($(date +%s) - $startTime))
+    sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
 
-echo -e "
-Authentication and Connection Process Finished!
+    sudo dhclient enp0s8
 
-Total time elapsed: $elapsedTime seconds
-" | sudo tee /log/$(cat /etc/hostname)_connection_delay.log
+    elapsedTime=$(($(date +%s) - startTime))
+    echo -e "
+    Attempt #$i elapsed time: $elapsedTime seconds
+    " | sudo tee -a /log/$(cat /etc/hostname)_connection_delay.log
+
+    sudo killall wpa_supplicant
+    sudo ip addr flush enp0s8
+
+    sleep 20
+done
