@@ -359,13 +359,122 @@ The primary test involved onboarding \ac{NAUN3} devices (\texttt{naun301}, \text
 
 \subsection{End-to-End Connectivity and Path Verification}
 
+Ping tests with the record route option (\texttt{-R}) were conducted from \texttt{naun301} and \texttt{naun302} (see Figure \ref{fig:ping_gw}) to the clients \ac{DNN} gateway \ac{IP} on the \texttt{core} \ac{VM} (\texttt{10.46.0.1}).
 
+\begin{itemize}
+    \item The recorded route when \texttt(naun301) pings the \ac{5GC} gateway is, \texttt{192.168.59.100} (\texttt{naun301} local \ac{IP}) -> \texttt{10.46.0.2} (\ac{PDU} Session 2 \ac{IP} for \texttt{naun302}) -> \texttt{10.46.0.1} (Target). This clearly demonstrates that traffic from \texttt{naun301} is \textit{NATted} using the \ac{IP} address of its dedicated \ac{PDU} session.
+
+    \item The recorded route is \texttt{naun302} pings the \ac{5GC} gateway is, \texttt{192.168.59.15} (\texttt{naun302} local \ac{IP}) -> \texttt{10.46.0.3} (\ac{PDU} Session 3 \ac{IP} for \texttt{naun302}) -> \texttt{10.46.0.1} (Target). This confirms that \texttt{naun302}'s traffic is also \textit{NATted}, but crucially, via its own distinct \ac{PDU} session \ac{IP}.
+\end{itemize}
+
+\subsection{Traffic Isolation and Correct \acs{PDU} Session Mapping (Multiple Devices)}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/iperf_naun3_to_core.png}
+    \caption{\texttt{iperf3} session between \acp{NAUN3} and \ac{5GC}}
+    \label{fig:iperf_naun3_to_core}
+\end{figure}
+
+The \texttt{iperf3} tests further validated traffic isolation and mapping. As seen in the Figure \ref{fig:iperf_naun3_to_core}, it shows the \texttt{iperf3} server on \texttt{10.46.0.1} (on the left) accepting connections from two different source \acp{IP}: \texttt{10.46.0.2} and \texttt{10.46.0.3}. These correspond to the unique \ac{PDU} session \acp{IP} assigned to \texttt{naun301} and \texttt{naun302} respectively. This confirms that traffic from each \ac{NAUN3} device is correctly mapped to its dedicated \ac{PDU} session and is identifiable by this unique \ac{PDU} session \ac{IP} at the N6 network.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/iptable_mapping_rules.png}
+    \caption{\texttt{iptables} mapping rules and tables for segregating traffic}
+    \label{fig:iptable_mapping_rules}
+\end{figure}
+
+Also, Figure \ref{fig:iptable_mapping_rules} shows the dynamic application of \texttt{iptables FORWARD} rules and \texttt{ip rule}/\texttt{ip route} entries. For instance, at 14:43:30 \ac{UTC} (after \texttt{naun301} connects), rules are present for \ac{MAC} \texttt{08:00:27:b4:18:a9} (\ac{naun301}) to use \ac{PDU} ID 2 (interface \texttt{uesimtun1}). By 14:44:30 \ac{UTC} (after \texttt{naun302} connects), additional rules appear for \ac{MAC} \texttt{08:00:27:51:7f:ef} (\texttt{naun302}) to use \ac{PDU} ID 3 (interface \texttt{uesimtun2}), while rules for \ac{PDU} ID 2 remain. This demonstrates the per-device rule application.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/naun3_to_core_ue_view.png}
+    \caption{\ac{NAUN3} to \ac{5GC} \texttt{iperf3} session, captured at the \ac{5G-RG} showing the mapping between the local address and \ac{PDU} session address}
+    \label{fig:naun3_to_core_ue_view}
+\end{figure}
+
+The Wireshark capture in Figure \ref{fig:naun3_to_core_ue_view} visually confirms this: traffic on the \ac{5G-RG}'s \ac{LAN} interface shows the \ac{NAUN3}'s local \ac{IP} (e.g., \texttt{192.168.59.100}), while on the corresponding \ac{PDU} session tunnel interface (\texttt{uesimtunX}), the source \ac{IP} is the \ac{PDU} session's \ac{5GC}-assigned \ac{IP} (e.g., \texttt{10.46.0.3})
+
+\subsection{Lifecycle Management (Device Disconnection)}
+
+The logs demonstrate correct resource cleanup when \texttt{naun301} (associated with \ac{PDU} Session2, \ac{IP} \texttt{10.46.0.2}, interface \texttt{uesimtun1}) disconnects:
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/naun3_removed.png}
+    \caption{\texttt{naun301} disconnected and \ac{5G-RG}'s \texttt{interceptor} proceeds to deauthenticating it, removing traffic mapping rules for it, and releasing it's dedicated \ac{PDU} session.}
+    \label{fig:naun3_removed}
+\end{figure}
+
+\begin{itemize}
+    \item \texttt{interceptor} (around 14:44:49 \ac{UTC}) logs, according to Figure \ref{fig:naun3_removed}: \textttt{"Tracked device 10.46.0.2 (MAC: 08:00:27:b4:18:a9, State: REACHABLE) no longer in ARP list. Scheduling for forget."} This is followed by logs indicating removal from \texttt{allowedDevices}, deauthentication via \texttt{hostapd}, removal of \texttt{iptables} rules, and \ac{PDU} session release for \ac{PDU} ID 2.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.20\linewidth]{figs/nr-cli_ps-list.png}
+        \caption{\ac{PDU} session listing from UERANSIM}
+        \label{fig:nr-cli_ps-list}
+    \end{figure}
+
+    \item According to Figure \ref{fig:nr-cli_ps-list}, at 14:44:51 \ac{UTC}, \ac{PDU} Session2 (\ac{IP} \texttt{10.46.0.2}) is no longer listed, while \ac{PDU} Session1 (\texttt{backhaul}) and \ac{PDU} Session3 (for \texttt{naun302}, \ac{IP} \texttt{10.46.0.3}) remain active.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{figs/ue_pdu_sessions_nics_release.png}
+        \caption{\ac{PDU} binded network interfaces after \texttt{uesimtun1} removal}
+        \label{fig:ue_pdu_sessions_nics_release}
+    \end{figure}
+    
+    \item Figure \ref{figs:ue_pdu_sessions_nics_release} also confirms that by 14:44:51 \ac{UTC}, the \texttt{uesimtun1} interface (associated with \texttt{10.46.0.2}) is gone, while \texttt{uesimtun0} and \texttt{uesimtun2} persist.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\linewidth]{figs/ue_naun3_to_pdu_mapping_rules.png}
+        \caption{Mapping rules after \texttt{naun301} disconnect and \ac{PDU} Session2 release}
+        \label{fig:ue_naun3_to_pdu_mapping_rules}
+    \end{figure}
+
+    \item Lastly, Figure \ref{figs:ue_naun3_to_pdu_mapping_rules} also hows that at 14:44:51 \ac{UTC}, the \texttt{iptables} \texttt{FORWARD} rule for \ac{MAC} \texttt{08:00:27:b4:18:a9} (\ac{PDU} ID 2) has been removed, while the rule for \ac{MAC} \texttt{08:00:27:51:7f:ef} (\ac{PDU} ID 3) remains.
+\end{itemize}
+
+These results collectively demonstrate that the proposed mechanisms for \ac{NAUN3} device authentication, proxy identity creation via dedicated \ac{PDU} sessions, per-device traffic mapping and \ac{NAT}, and lifecycle management function correctly within the simulated environment.
 
 \section{Security Evaluation}
 
-% Analyze the security aspects of your solution based on the test scenarios or theoretical assessment.
+The security aspects of the solution were evaluated qualitatively based on the implemented mechanisms and observations from the test scenarios.
 
-% Discuss how well it addresses the identified security challenges (e.g., identity concealment, resistance to specific attacks).
+\begin{itemize}
+    \item \textbf{\ac{EAP-TLS} Authentication Integrity:} The logs from \texttt{wpa\_supplicant} in the \acs{NAUN3}, \texttt{hostapd}, and FreeRADIUS consistently show the successful completion of the \ac{EAP-TLS} handshake. This includes the exchange of certificates and the mutual verification steps inherent to the protocol. For instance, FreeRADIUS logs details like \texttt{"eap\_tls: (TLS) Connection Established"} and \texttt{"eap: Sending EAP Success"}. This provides confidence that the local authentication of \ac{NAUN3} devices is cryptographically secured as per \ac{EAP-TLS} standards.
+
+    \item{
+        \textbf{Traffic Segregation (Control vs. User Plane):}
+        \begin{itemize}
+            \item In Figure \ref{fig:RADIUS_traffic_via_backhaul} a Wireshark capture clearly shows \ac{RADIUS} packets (\ac{UDP} port 1812), which carry the \ac{EAP} authentication messages, being exchanged between the \ac{5G-RG}'s \texttt{backhaul} \ac{PDU} session \ac{IP} (\texttt{10.45.0.2}) and the FreeRADIUS server's \ac{IP} (\texttt{10.45.0.1}). This confirms that sensitive authentication control plane traffic is isolated to the dedicated \texttt{backhaul} \ac{DNN}.
+
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.75\linewidth]{figs/RADIUS_traffic_via_backhaul.png}
+                \caption{\ac{RADIUS} traffic captured at \texttt{backhaul} channel via Wireshark}
+                \label{fig:RADIUS_traffic_via_backhaul}
+            \end{figure}
+
+            \item The \texttt{hostapd} log (see Listing \ref{lst:hostapd_fail} ) further details the \ac{RADIUS} exchange, initially attempting to send from a default system \ac{IP} (e.g., \texttt{10.0.2.15}) and failing (evident by retransmissions), then succeeding once the \texttt{own\_ip\_addr} (\texttt{10.45.0.2} - the \texttt{backhaul} \ac{PDU} session \ac{IP}) is correctly used. This highlights the correct binding and use of the \texttt{backhaul} \ac{PDU} for \ac{RADIUS}.
+
+\begin{lstlisting}[caption=hostapd failing due to wrong local address,label={lst:hostapd_fail}]
+(...)
+25 | 1748702388.755637: RADIUS local address: 10.0.2.15:42579
+(...)
+216| 1748702566.372520: RADIUS local address: 10.45.0.2:50371
+(...)
+\end{lstlisting}
+
+            \item Conversely, user plane traffic from \ac{NAUN3} devices (e.g., \texttt{iperf3} data in Figure \ref{fig:iperf_naun3_to_core} and ping traffic in Figure \ref{fig:ping_gw}) is shown to originate from the \texttt{clients} \ac{DNN} \ac{IP} addresses (e.g., \texttt{10.46.0.2}, \texttt{10.46.0.3}) assigned to their respective \ac{PDU} sessions. This demonstrates effective segregation between the authentication control plane and the user data plane.
+        \end{itemize}
+    }
+\end{itemize}
+
+While these observations do not constitute a formal penetration test or vulnerability assessment, they confirm that the fundamental security design principles, strong local authentication via \ac{EAP-TLS}, segregation of control and user plane traffic via distinct \acp{DNN}, and abstraction of local \ac{NAUN3} device identities from the \ac{5GC}, are correctly implemented and operational within the test environment. The envisioned enhancement suggests a pathway to more integrated policy control if desired in future iterations.
 
 \section{Performance Evaluation}
 
@@ -375,10 +484,24 @@ The primary test involved onboarding \ac{NAUN3} devices (\texttt{naun301}, \text
 
 \section{Discussion and Analysis}
 
-% Interpret the results presented in the previous subsections.
+The validation results presented in the preceding sections provide substantial evidence for the functional viability and integrity of the proposed framework for integrating Wi-Fi-only/\ac{NAUN3} devices into a \ac{5G} network. This discussion will interpret these findings in the context of the initial research objectives and requirements, compare the solution with standard \ac{3GPP} approaches, and acknowledge observed limitations.
 
-% Discuss how effectively your solution meets the requirements identified earlier.
+\subsection{Interpretation of Results and Effectiveness in Meeting Requirements}
 
-% Compare your findings (functionality, security, performance) with existing solutions or the standard 3GPP methods described in the State of the Art.
+The primary goal was to devise a solution that allows \ac{NAUN3} devices, which lack \ac{5G} credentials, to securely access \ac{5G} network services with minimal impact on the devices themselves and the standard \ac{5GC}.
 
-% Acknowledge any unexpected results or limitations observed during validation.
+\begin{itemize}
+    \item \textbf{Local Authentication (Requirement Met):} The successful \ac{EAP-TLS} authentication demonstrates that \ac{NAUN3} devices can be securely authenticated at the edge by the \ac{5G-RG} before any \ac{5G} resources are committed. This meets the requirement for a robust local authentication mechanism.
+
+    \item \textbf{Individual Device Handling and Proxy Identity (Requirement Met):} The core concept of using a dedicated \ac{PDU} session as a proxy identity for each \ac{NAUN3} device was successfully implemented and validated. The \ac{UE} logs and Figures \ref{fig:ue_pdu_sessions_nics} and \ref{fig:iptable_mapping_rules} clearly show the dynamic creation of distinct \ac{PDU} sessions on the \texttt{clients} \ac{DNN}, each with a unique \ac{5GC}-assigned \ac{IP} address, corresponding to each authenticated \ac{NAUN3} device. The \texttt{interceptor} logs (see Figure \ref{fig:interceptor_eap_success}) further detail the interceptor application's role in orchestrating these \ac{PDU} session establishments via \texttt{nr-cli} upon \ac{EAP} success.
+
+    \item \textbf{Traffic Mapping and Isolation (Requirement Met):} The \texttt{ping -R} tests (Figure \ref{fig:ping_gw}) and \texttt{iperf3} results (Figure \ref{fig:iperf_naun3_to_core} showing distinct source \acp{IP} \texttt{10.46.0.2} and \texttt{10.46.0.3}) confirm that traffic from each \ac{NAUN3} device is correctly \textit{NATted} and routed through its unique \ac{PDU} session. The Wireshark capture in Figure \ref{fig:naun3_to_core_ue_view} and the dynamic \texttt{iptables} rules in Figure \ref{fig:iptable_mapping_rules} further substantiate that the \ac{5G-RG} effectively maps local device traffic to its designated \ac{5G} \ac{PDU} session, ensuring traffic isolation.
+
+    \item \textbf{Minimal Core Network and Device Impact (Requirement Met):} The solution operates without requiring any modifications to the \ac{NAUN3} devices beyond standard \ac{EAP-TLS} supplicant capabilities. The \ac{5GC} (Open5GS) interacts with the \ac{5G-RG} as a standard \ac{UE} requesting \ac{PDU} sessions; no changes to core \acp{NF} were needed beyond configuration (\acp{DNN}, subscriber data for the \ac{5G-RG}). This fulfills the critical requirement of minimal disruption.
+
+    \item \textbf{Gateway-Centric Logic (Requirement Met):} All the specialized logic for \ac{NAUN3} authentication relay, \ac{PDU} session orchestration, and traffic mapping is concentrated within the \ac{5G-RG} (\texttt{ue} \ac{VM}), primarily within the custom \texttt{interceptor} application and configurations of \textt{hostapd} and \texttt{dnsmasq}.
+
+    \item \textbf{Lifecycle Management (Requirement Met):} The logs in Figures \ref{fig:naun3_removed}, \ref{fig:ue_pdu_sessions_nics_release} and \ref{fig:ue_naun3_to_pdu_mapping_rules} demonstrate that upon simulated \ac{NAUN3} device disconnection, the \texttt{interceptor} correctly triggers local deauthentication, \ac{PDU} session termination, and cleanup of associated routing rules and \ac{DHCP} permissions.
+
+    \item \textbf{Traffic Segregation (Requirement Met):} The capture seen in Figure \ref{fig:RADIUS_traffic_via_backhaul} confirm that authentication control plane traffic (\ac{RADIUS}/\ac{EAP}) is successfully segregated onto the \texttt{backhaul} \ac{DNN}, using the \ac{5G-RG}'s \ac{PDU} session \ac{IP} designated for this purpose, while \ac{NAUN3} user plane traffic utilizes the separate \texttt{clients} \ac{DNN} \ac{PDU} sessions.
+\end{itemize}
