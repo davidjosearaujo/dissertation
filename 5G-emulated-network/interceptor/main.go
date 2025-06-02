@@ -43,7 +43,7 @@ var (
 
 func SetLogging(mode string) {
 	if mode == "debug" {
-		logger = log.New(os.Stdout, "[DEBUG] ", log.LstdFlags)
+		logger = log.New(os.Stdout, "", log.LstdFlags)
 	} else {
 		w, err := syslog.New(syslog.LOG_INFO|syslog.LOG_DAEMON, "interceptor")
 		if err != nil {

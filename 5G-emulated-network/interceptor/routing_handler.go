@@ -65,24 +65,24 @@ func NewRuleManager() (*RuleManager, error) {
 	}
 	rm := &RuleManager{ipt: ipt}
 
-	logger.Println("RuleManager: Initializing global iptables rules...")
+	logger.Println("Initializing global iptables rules...")
 
 	// Set FORWARD policy to DROP
 	if err := rm.setForwardPolicy("DROP"); err != nil {
-		logger.Printf("RuleManager: [CRITICAL_ERROR] Failed to set FORWARD Policy to DROP during init: %v", err)
+		logger.Printf("[CRITICAL_ERROR] Failed to set FORWARD Policy to DROP during init: %v", err)
 		return nil, fmt.Errorf("failed to set initial FORWARD policy: %w", err)
 	}
-	logger.Println("RuleManager: [SUCCESS] Global: FORWARD chain policy set to DROP.")
+	logger.Println("[SUCCESS] Global: FORWARD chain policy set to DROP.")
 
 	// Allow RELATED,ESTABLISHED traffic in FORWARD chain
 	// Adding a generic comment for global rules
 	if err := rm.ensureRule("filter", "FORWARD", globalRuleRelatedEstablishedSpec, "global_related_established_interceptor"); err != nil {
-		logger.Printf("RuleManager: [CRITICAL_ERROR] Failed to ensure FORWARD RELATED,ESTABLISHED rule during init: %v", err)
+		logger.Printf("[CRITICAL_ERROR] Failed to ensure FORWARD RELATED,ESTABLISHED rule during init: %v", err)
 		return nil, fmt.Errorf("failed to set initial FORWARD RELATED,ESTABLISHED rule: %w", err)
 	}
-	logger.Printf("RuleManager: [SUCCESS] Global: FORWARD RELATED,ESTABLISHED rule ensured: %v", globalRuleRelatedEstablishedSpec)
+	logger.Printf("[SUCCESS] Global: FORWARD RELATED,ESTABLISHED rule ensured: %v", globalRuleRelatedEstablishedSpec)
 
-	logger.Println("RuleManager: iptables manager and global rules initialized successfully.")
+	logger.Println("iptables manager and global rules initialized successfully.")
 	return rm, nil
 }
 
@@ -100,7 +100,7 @@ func (rm *RuleManager) executeCommand(logPrefix string, command string, args ...
 
 		// "RTNETLINK answers: File exists" for 'ip rule add' or 'ip route add' if already present
 		if isAddCmd && (strings.Contains(outStr, "File exists") || strings.Contains(outStr, "Object already exists")) {
-			logger.Printf("RuleManager: %s: Command '%s' indicated rule/object likely already exists: %s", logPrefix, fullCmdStr, strings.TrimSpace(outStr))
+			logger.Printf("%s: Command '%s' indicated rule/object likely already exists: %s", logPrefix, fullCmdStr, strings.TrimSpace(outStr))
 			return nil // Not an error if rule already exists for an 'add' operation
 		}
 		// "RTNETLINK answers: No such file or directory" for 'ip rule del' or 'ip route del' if not found
@@ -109,14 +109,14 @@ func (rm *RuleManager) executeCommand(logPrefix string, command string, args ...
 			strings.Contains(outStr, "Cannot find device") ||
 			strings.Contains(outStr, "No such process") ||
 			strings.Contains(outStr, "does not exist")) {
-			logger.Printf("RuleManager: %s: Command '%s' indicated rule/object likely already deleted/not found: %s", logPrefix, fullCmdStr, strings.TrimSpace(outStr))
+			logger.Printf("%s: Command '%s' indicated rule/object likely already deleted/not found: %s", logPrefix, fullCmdStr, strings.TrimSpace(outStr))
 			return nil // Not an error if rule already gone for a 'delete' operation
 		}
 
-		logger.Printf("RuleManager: %s: Command '%s' failed. Output: %s, Error: %v", logPrefix, fullCmdStr, strings.TrimSpace(outStr), err)
+		logger.Printf("%s: Command '%s' failed. Output: %s, Error: %v", logPrefix, fullCmdStr, strings.TrimSpace(outStr), err)
 		return fmt.Errorf("executing %s: %w. Output: %s", fullCmdStr, err, outStr)
 	}
-	logger.Printf("RuleManager: %s: Command '%s' executed successfully. Output: %s", logPrefix, fullCmdStr, strings.TrimSpace(strings.ReplaceAll(string(output), "\n", " ")))
+	logger.Printf("%s: Command '%s' executed successfully. Output: %s", logPrefix, fullCmdStr, strings.TrimSpace(strings.ReplaceAll(string(output), "\n", " ")))
 	return nil
 }
 
@@ -128,7 +128,7 @@ func (rm *RuleManager) manageRTTableEntry(tableID int, tableName string, add boo
 	logPrefix := fmt.Sprintf("RTTable (%s)", macAddr)
 	fileContent, err := os.ReadFile(rtTablesPath)
 	if err != nil && !os.IsNotExist(err) { // Allow not exist for initial creation
-		logger.Printf("RuleManager: %s: Error reading %s: %v", logPrefix, rtTablesPath, err)
+		logger.Printf("%s: Error reading %s: %v", logPrefix, rtTablesPath, err)
 		return fmt.Errorf("%s: reading %s: %w", logPrefix, rtTablesPath, err)
 	}
 
@@ -156,7 +156,7 @@ func (rm *RuleManager) manageRTTableEntry(tableID int, tableName string, add boo
 		if normalizedExistingLine == entryLine {
 			found = true
 			if !add { // If removing, mark modified and skip this line
-				logger.Printf("RuleManager: %s: Removing line '%s' from %s", logPrefix, scanner.Text(), rtTablesPath)
+				logger.Printf("%s: Removing line '%s' from %s", logPrefix, scanner.Text(), rtTablesPath)
 				modified = true
 				continue
 			}
@@ -164,21 +164,21 @@ func (rm *RuleManager) manageRTTableEntry(tableID int, tableName string, add boo
 		newLines = append(newLines, scanner.Text()) // Preserve original line
 	}
 	if err := scanner.Err(); err != nil {
-		logger.Printf("RuleManager: %s: Error scanning %s content: %v", logPrefix, rtTablesPath, err)
+		logger.Printf("%s: Error scanning %s content: %v", logPrefix, rtTablesPath, err)
 		return fmt.Errorf("%s: scanning %s content: %w", logPrefix, rtTablesPath, err)
 	}
 
 	if add {
 		if found {
-			logger.Printf("RuleManager: %s: Entry '%s' already exists in %s.", logPrefix, entryLine, rtTablesPath)
+			logger.Printf("%s: Entry '%s' already exists in %s.", logPrefix, entryLine, rtTablesPath)
 			return nil // Already exists, no change needed
 		}
-		logger.Printf("RuleManager: %s: Adding line '%s' to %s", logPrefix, entryLine, rtTablesPath)
+		logger.Printf("%s: Adding line '%s' to %s", logPrefix, entryLine, rtTablesPath)
 		newLines = append(newLines, entryLine)
 		modified = true
 	} else { // If removing
 		if !found {
-			logger.Printf("RuleManager: %s: Entry '%s' not found in %s for removal.", logPrefix, entryLine, rtTablesPath)
+			logger.Printf("%s: Entry '%s' not found in %s for removal.", logPrefix, entryLine, rtTablesPath)
 			return nil // Not found, no change needed
 		}
 		// 'modified' is already true if found and !add
@@ -203,12 +203,12 @@ func (rm *RuleManager) manageRTTableEntry(tableID int, tableName string, add boo
 		}
 
 		if err := os.WriteFile(rtTablesPath, []byte(contentToWrite), 0644); err != nil {
-			logger.Printf("RuleManager: %s: Error writing updated %s: %v", logPrefix, rtTablesPath, err)
+			logger.Printf("%s: Error writing updated %s: %v", logPrefix, rtTablesPath, err)
 			return fmt.Errorf("%s: writing updated %s: %w", logPrefix, rtTablesPath, err)
 		}
-		logger.Printf("RuleManager: %s: Successfully updated %s.", logPrefix, rtTablesPath)
+		logger.Printf("%s: Successfully updated %s.", logPrefix, rtTablesPath)
 	} else {
-		logger.Printf("RuleManager: %s: No changes made to %s.", logPrefix, rtTablesPath)
+		logger.Printf("%s: No changes made to %s.", logPrefix, rtTablesPath)
 	}
 	return nil
 }
@@ -222,7 +222,7 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	safeMacForComment := strings.ReplaceAll(macAddr, ":", "_")
 	comment := fmt.Sprintf("interceptor_mac_%s_pduid_%d", safeMacForComment, pduSessionID)
 
-	logger.Printf("RuleManager: Applying rules for MAC %s (LAN: %s, PDU_IF: %s, GW: %s, PDU_ID: %d, Comment: %s)", macAddr, lanIF, pduIF, pduGatewayIP, pduSessionID, comment)
+	logger.Printf("Applying rules for MAC %s (LAN: %s, PDU_IF: %s, GW: %s, PDU_ID: %d, Comment: %s)", macAddr, lanIF, pduIF, pduGatewayIP, pduSessionID, comment)
 
 	pduSessionIDStr := strconv.Itoa(pduSessionID)
 	routingTableID := 200 + pduSessionID 
@@ -240,9 +240,9 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	if err := rm.manageRTTableEntry(routingTableID, routingTableName, true, macAddr); err != nil {
 		errMsg := fmt.Sprintf("Manage RT Table Entry (%s %s) for %s: %v", strconv.Itoa(routingTableID), routingTableName, macAddr, err)
 		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+		logger.Printf("[ERROR] %s", errMsg)
 	} else {
-		logger.Printf("RuleManager: [SUCCESS] RT Table Entry %d %s for %s ensured/added.", routingTableID, routingTableName, macAddr)
+		logger.Printf("[SUCCESS] RT Table Entry %d %s for %s ensured/added.", routingTableID, routingTableName, macAddr)
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeRTTableEntry, RuleSpec: []string{strconv.Itoa(routingTableID), routingTableName}, Comment: comment})
 	}
 
@@ -252,9 +252,9 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	if err := rm.executeCommand(fmt.Sprintf("IPRouteAdd (%s)", macAddr), "ip", cmdArgsRoute...); err != nil {
 		errMsg := fmt.Sprintf("IP Route Add for %s (table %s): %v", macAddr, routingTableName, err)
 		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+		logger.Printf("[ERROR] %s", errMsg)
 	} else {
-		logger.Printf("RuleManager: [SUCCESS] IP Route Add for %s (table %s): default via %s dev %s", macAddr, routingTableName, pduGatewayIP, pduIF)
+		logger.Printf("[SUCCESS] IP Route Add for %s (table %s): default via %s dev %s", macAddr, routingTableName, pduGatewayIP, pduIF)
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPRoute, RuleSpec: ipRouteArgs, Comment: comment})
 	}
 
@@ -264,9 +264,9 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	if err := rm.executeCommand(fmt.Sprintf("IPRuleAdd (%s)", macAddr), "ip", cmdArgsRule...); err != nil {
 		errMsg := fmt.Sprintf("IP Rule Add for %s (fwmark %s, table %s): %v", macAddr, pduSessionIDStr, routingTableName, err)
 		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+		logger.Printf("[ERROR] %s", errMsg)
 	} else {
-		logger.Printf("RuleManager: [SUCCESS] IP Rule Add for %s: fwmark %s table %s", macAddr, pduSessionIDStr, routingTableName)
+		logger.Printf("[SUCCESS] IP Rule Add for %s: fwmark %s table %s", macAddr, pduSessionIDStr, routingTableName)
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPRule, RuleSpec: ipRuleArgs, Comment: comment})
 	}
 
@@ -275,9 +275,9 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	if err := rm.ensureRule("mangle", "PREROUTING", mangleRuleSpec, comment); err != nil {
 		errMsg := fmt.Sprintf("Mangle MARK rule for %s: %v", macAddr, err)
 		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+		logger.Printf("[ERROR] %s", errMsg)
 	} else {
-		logger.Printf("RuleManager: [SUCCESS] Mangle PREROUTING MARK for %s: %v", macAddr, mangleRuleSpec)
+		logger.Printf("[SUCCESS] Mangle PREROUTING MARK for %s: %v", macAddr, mangleRuleSpec)
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPTables, Table: "mangle", Chain: "PREROUTING", RuleSpec: mangleRuleSpec, Comment: comment})
 	}
 
@@ -292,9 +292,9 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	if err := rm.ensureRule("filter", "FORWARD", forwardMacRuleSpec, comment); err != nil {
 		errMsg := fmt.Sprintf("FORWARD allow MAC %s with mark %s to PDU %s: %v", macAddr, pduSessionIDStr, pduIF, err)
 		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+		logger.Printf("[ERROR] %s", errMsg)
 	} else {
-		logger.Printf("RuleManager: [SUCCESS] FORWARD allow MAC %s from %s with mark %s to %s: %v", macAddr, lanIF, pduSessionIDStr, pduIF, forwardMacRuleSpec)
+		logger.Printf("[SUCCESS] FORWARD allow MAC %s from %s with mark %s to %s: %v", macAddr, lanIF, pduSessionIDStr, pduIF, forwardMacRuleSpec)
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPTables, Table: "filter", Chain: "FORWARD", RuleSpec: forwardMacRuleSpec, Comment: comment})
 	}
 
@@ -303,29 +303,29 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 	if err := rm.ensureRule("nat", "POSTROUTING", natMasqueradeRuleSpec, comment); err != nil {
 		errMsg := fmt.Sprintf("NAT MASQUERADE for PDU %s: %v", pduIF, err)
 		errorsEncountered = append(errorsEncountered, errMsg)
-		logger.Printf("RuleManager: [ERROR] %s", errMsg)
+		logger.Printf("[ERROR] %s", errMsg)
 	} else {
-		logger.Printf("RuleManager: [SUCCESS] NAT POSTROUTING MASQUERADE for %s: %v", pduIF, natMasqueradeRuleSpec)
+		logger.Printf("[SUCCESS] NAT POSTROUTING MASQUERADE for %s: %v", pduIF, natMasqueradeRuleSpec)
 		appliedRuleDetails = append(appliedRuleDetails, AppliedRuleDetail{Type: RuleTypeIPTables, Table: "nat", Chain: "POSTROUTING", RuleSpec: natMasqueradeRuleSpec, Comment: comment})
 	}
 
 
 	if len(errorsEncountered) > 0 {
-		logger.Printf("RuleManager: [SUMMARY_ERRORS] Encountered %d error(s) applying rules for MAC %s (PDU_ID: %d):", len(errorsEncountered), macAddr, pduSessionID)
+		logger.Printf("[SUMMARY_ERRORS] Encountered %d error(s) applying rules for MAC %s (PDU_ID: %d):", len(errorsEncountered), macAddr, pduSessionID)
 		for i, e := range errorsEncountered {
 			logger.Printf("  %d: %s", i+1, e)
 		}
 		return appliedRuleDetails, fmt.Errorf("encountered %d error(s) applying rules for MAC %s. See logs", len(errorsEncountered), macAddr)
 	}
 
-	logger.Printf("RuleManager: All rules processed successfully for MAC %s (PDU_ID: %d). Applied %d rules/entries.", macAddr, pduSessionID, len(appliedRuleDetails))
+	logger.Printf("All rules processed successfully for MAC %s (PDU_ID: %d). Applied %d rules/entries.", macAddr, pduSessionID, len(appliedRuleDetails))
 	return appliedRuleDetails, nil
 }
 
 // RemoveRulesForDevice removes the specified rules for a device.
 // Rules are removed in reverse order of application for dependency management.
 func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []AppliedRuleDetail) error {
-	logger.Printf("RuleManager: Removing %d stored rules for MAC %s", len(rulesToRemove), macAddr)
+	logger.Printf("Removing %d stored rules for MAC %s", len(rulesToRemove), macAddr)
 	var errorsEncountered []string
 	var successfullyRemovedCount int
 
@@ -364,15 +364,15 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 					strings.Contains(errMsgStr, "No such file or directory") || 
 					strings.Contains(strings.ToLower(errMsgStr), "rule not found") ||
 					(strings.Contains(errMsgStr, "Bad rule") && (strings.Contains(rule.Table, "mangle") || strings.Contains(rule.Table, "nat") || strings.Contains(rule.Table, "filter"))) { 
-					logger.Printf("RuleManager: %s: IPTables rule (Table: %s, Chain: %s, Spec: %v) likely already removed or not found: %v", logPrefix, rule.Table, rule.Chain, ruleSpecForDelete, err)
+					logger.Printf("%s: IPTables rule (Table: %s, Chain: %s, Spec: %v) likely already removed or not found: %v", logPrefix, rule.Table, rule.Chain, ruleSpecForDelete, err)
 					
 				} else {
 					errMsg := fmt.Sprintf("deleting IPTables rule for MAC %s (Table: %s, Chain: %s, Spec: %v): %v", macAddr, rule.Table, rule.Chain, ruleSpecForDelete, err)
 					errorsEncountered = append(errorsEncountered, errMsg)
-					logger.Printf("RuleManager: [ERROR] %s: %s", logPrefix, errMsg)
+					logger.Printf("[ERROR] %s: %s", logPrefix, errMsg)
 				}
 			} else {
-				logger.Printf("RuleManager: [SUCCESS] %s: Deleted IPTables rule (Table: %s, Chain: %s, Spec: %v)", logPrefix, rule.Table, rule.Chain, ruleSpecForDelete)
+				logger.Printf("[SUCCESS] %s: Deleted IPTables rule (Table: %s, Chain: %s, Spec: %v)", logPrefix, rule.Table, rule.Chain, ruleSpecForDelete)
 				successfullyRemovedCount++
 			}
 
@@ -383,7 +383,7 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 				errMsg := fmt.Sprintf("IP Route Del for MAC %s (Spec: %v): %v", macAddr, rule.RuleSpec, err)
 				errorsEncountered = append(errorsEncountered, errMsg)
 			} else {
-				logger.Printf("RuleManager: [SUCCESS] %s: Deleted IP Route (Spec: %v)", logPrefix, rule.RuleSpec)
+				logger.Printf("[SUCCESS] %s: Deleted IP Route (Spec: %v)", logPrefix, rule.RuleSpec)
 				successfullyRemovedCount++
 			}
 
@@ -394,7 +394,7 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 				errMsg := fmt.Sprintf("IP Rule Del for MAC %s (Spec: %v): %v", macAddr, rule.RuleSpec, err)
 				errorsEncountered = append(errorsEncountered, errMsg)
 			} else {
-				logger.Printf("RuleManager: [SUCCESS] %s: Deleted IP Rule (Spec: %v)", logPrefix, rule.RuleSpec)
+				logger.Printf("[SUCCESS] %s: Deleted IP Rule (Spec: %v)", logPrefix, rule.RuleSpec)
 				successfullyRemovedCount++
 			}
 
@@ -404,7 +404,7 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 				if convErr != nil {
 					errMsg := fmt.Sprintf("Invalid table ID in RuleSpec for RTTableEntry removal for MAC %s: %v", macAddr, rule.RuleSpec)
 					errorsEncountered = append(errorsEncountered, errMsg)
-					logger.Printf("RuleManager: [ERROR] %s: %s", logPrefix, errMsg)
+					logger.Printf("[ERROR] %s: %s", logPrefix, errMsg)
 					continue
 				}
 				tableName := rule.RuleSpec[1]
@@ -412,32 +412,32 @@ func (rm *RuleManager) RemoveRulesForDevice(macAddr string, rulesToRemove []Appl
 				if err != nil {
 					errMsg := fmt.Sprintf("Manage RT Table Entry Del for MAC %s (ID: %d, Name: %s): %v", macAddr, tableID, tableName, err)
 					errorsEncountered = append(errorsEncountered, errMsg)
-					logger.Printf("RuleManager: [ERROR] %s: %s", logPrefix, errMsg)
+					logger.Printf("[ERROR] %s: %s", logPrefix, errMsg)
 				} else {
-					logger.Printf("RuleManager: [SUCCESS] %s: Removed/Ensured absent RT Table Entry (ID: %d, Name: %s)", logPrefix, tableID, tableName)
+					logger.Printf("[SUCCESS] %s: Removed/Ensured absent RT Table Entry (ID: %d, Name: %s)", logPrefix, tableID, tableName)
 					successfullyRemovedCount++
 				}
 			} else {
 				errMsg := fmt.Sprintf("Invalid RuleSpec for RTTableEntry removal for MAC %s: %v", macAddr, rule.RuleSpec)
 				errorsEncountered = append(errorsEncountered, errMsg)
-				logger.Printf("RuleManager: [ERROR] %s: %s", logPrefix, errMsg)
+				logger.Printf("[ERROR] %s: %s", logPrefix, errMsg)
 			}
 		default:
 			errMsg := fmt.Sprintf("Unknown rule type '%s' for MAC %s, cannot remove.", rule.Type, macAddr)
 			errorsEncountered = append(errorsEncountered, errMsg)
-			logger.Printf("RuleManager: [ERROR] %s: %s", logPrefix, errMsg)
+			logger.Printf("[ERROR] %s: %s", logPrefix, errMsg)
 		}
 	}
 
 	if len(errorsEncountered) > 0 {
-		logger.Printf("RuleManager: [SUMMARY_ERRORS] Encountered %d error(s) during rule removal for MAC %s. Successfully removed: %d.", len(errorsEncountered), macAddr, successfullyRemovedCount)
+		logger.Printf("[SUMMARY_ERRORS] Encountered %d error(s) during rule removal for MAC %s. Successfully removed: %d.", len(errorsEncountered), macAddr, successfullyRemovedCount)
 		for i, e := range errorsEncountered {
 			logger.Printf("  %d: %s", i+1, e)
 		}
 	} else if len(rulesToRemove) > 0 {
-		logger.Printf("RuleManager: Rule removal process completed for MAC %s. Successfully removed/verified absent: %d of %d.", macAddr, successfullyRemovedCount, len(rulesToRemove))
+		logger.Printf("Rule removal process completed for MAC %s. Successfully removed/verified absent: %d of %d.", macAddr, successfullyRemovedCount, len(rulesToRemove))
 	} else {
-		logger.Printf("RuleManager: No rules specified for removal for MAC %s.", macAddr)
+		logger.Printf("No rules specified for removal for MAC %s.", macAddr)
 	}
 
 	return nil // Best-effort removal
@@ -472,9 +472,9 @@ func (rm *RuleManager) ensureRule(table, chain string, ruleSpec []string, commen
 		if err := rm.ipt.Append(table, chain, finalRuleSpec...); err != nil {
 			return fmt.Errorf("appending rule (table: %s, chain: %s, rule: %v): %w", table, chain, finalRuleSpec, err)
 		}
-		logger.Printf("RuleManager: Appended rule to %s %s: %v", table, chain, finalRuleSpec)
+		logger.Printf("Appended rule to %s %s: %v", table, chain, finalRuleSpec)
 	} else {
-		logger.Printf("RuleManager: Rule already exists in %s %s: %v", table, chain, finalRuleSpec)
+		logger.Printf("Rule already exists in %s %s: %v", table, chain, finalRuleSpec)
 	}
 	return nil
 }
@@ -490,7 +490,7 @@ func (rm *RuleManager) setForwardPolicy(policy string) error {
 	if err := rm.ipt.ChangePolicy("filter", "FORWARD", upperPolicy); err != nil {
 		return fmt.Errorf("setting FORWARD chain policy to %s: %w", upperPolicy, err)
 	}
-	logger.Printf("RuleManager: FORWARD chain policy set to %s.", upperPolicy)
+	logger.Printf("FORWARD chain policy set to %s.", upperPolicy)
 	return nil
 }
 
@@ -500,7 +500,7 @@ func (rm *RuleManager) setForwardPolicy(policy string) error {
 
 // 	rm, err := NewRuleManager()
 // 	if err != nil {
-// 		logger.Fatalf("Failed to create RuleManager: %v", err)
+// 		logger.Fatalf("Failed to create %v", err)
 // 	}
 
 // 	// Example usage:

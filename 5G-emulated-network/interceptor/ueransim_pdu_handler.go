@@ -53,26 +53,26 @@ const (
 
 // NewPDUSession establishes a new PDU session using nr-cli and waits for it to become active.
 func NewPDUSession(ueIMSI string, dnn string) (*Session, error) {
-	logger.Printf("NewPDUSession: IMSI %s establishing...", ueIMSI)
+	logger.Printf("IMSI %s establishing...", ueIMSI)
 	args := fmt.Sprintf(pduSessionCmdEstablish+" --dnn %s", dnn)
 	cmd := exec.Command("nr-cli", ueIMSI, "--exec", args)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return nil, fmt.Errorf("PDU establish for %s failed: %w. Output: %s", ueIMSI, err, string(output))
 	}
-	logger.Printf("NewPDUSession: IMSI %s requested. Output: %s. Waiting activation...", ueIMSI, strings.TrimSpace(string(output)))
+	logger.Printf("IMSI %s requested. Output: %s. Waiting activation...", ueIMSI, strings.TrimSpace(string(output)))
 
 	var session *Session
 	for i := 0; i < pduSessionEstablishRetries; i++ {
 		time.Sleep(pduSessionEstablishInterval)
 		session, err = LastPDUSession(ueIMSI)
 		if err != nil {
-			logger.Printf("NewPDUSession: Retry %d/%d IMSI %s: get status failed: %v", i+1, pduSessionEstablishRetries, ueIMSI, err)
+			logger.Printf("Retry %d/%d IMSI %s: get status failed: %v", i+1, pduSessionEstablishRetries, ueIMSI, err)
 			continue
 		}
 
 		if session != nil && session.State == pduSessionStateActive && session.Address != "" {
-			logger.Printf("NewPDUSession: PDU ID %d IMSI %s ACTIVE (State: %s, Addr: %s).", session.ID, ueIMSI, session.State, session.Address)
+			logger.Printf("PDU ID %d IMSI %s ACTIVE (State: %s, Addr: %s).", session.ID, ueIMSI, session.State, session.Address)
 			return session, nil
 		}
 
@@ -80,16 +80,16 @@ func NewPDUSession(ueIMSI string, dnn string) (*Session, error) {
 		if session != nil {
 			sID, sState, sAddr = session.ID, session.State, session.Address
 		}
-		logger.Printf("NewPDUSession: Retry %d/%d IMSI %s: waiting (ID: %d, State: %s, Addr: %s)...", i+1, pduSessionEstablishRetries, ueIMSI, sID, sState, sAddr)
+		logger.Printf("Retry %d/%d IMSI %s: waiting (ID: %d, State: %s, Addr: %s)...", i+1, pduSessionEstablishRetries, ueIMSI, sID, sState, sAddr)
 	}
 
 	if session != nil {
-		logger.Printf("NewPDUSession: PDU ID %d IMSI %s not active after %d retries. Releasing.", session.ID, ueIMSI, pduSessionEstablishRetries)
+		logger.Printf("PDU ID %d IMSI %s not active after %d retries. Releasing.", session.ID, ueIMSI, pduSessionEstablishRetries)
 		if releaseErr := ReleasePDUSession(ueIMSI, session.ID); releaseErr != nil {
-			logger.Printf("NewPDUSession: Release PDU ID %d IMSI %s failed: %v", session.ID, ueIMSI, releaseErr)
+			logger.Printf("Release PDU ID %d IMSI %s failed: %v", session.ID, ueIMSI, releaseErr)
 		}
 	} else {
-		logger.Printf("NewPDUSession: No PDU for IMSI %s or not active after %d retries.", ueIMSI, pduSessionEstablishRetries)
+		logger.Printf("No PDU for IMSI %s or not active after %d retries.", ueIMSI, pduSessionEstablishRetries)
 	}
 	return nil, fmt.Errorf("PDU for IMSI %s not active after %d retries", ueIMSI, pduSessionEstablishRetries)
 }

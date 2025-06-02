@@ -38,65 +38,65 @@ type Device struct {
 // ForgetDevice performs a best-effort cleanup for a device.
 // It now uses stored iptables rules for removal.
 func ForgetDevice(allowedMACsFilePath string, leasesFilePath string, macAddress string, ueIMSI string) {
-	logger.Printf("ForgetDevice: Initiating for MAC %s (IMSI: %s)", macAddress, ueIMSI)
+	logger.Printf("Initiating for MAC %s (IMSI: %s)", macAddress, ueIMSI)
 
 	// Retrieve device details, including applied iptables rules
 	device, exists := allowedDevices[macAddress]
 
-	logger.Printf("ForgetDevice: Removing %s from internal tracking map.", macAddress)
+	logger.Printf("Removing %s from internal tracking map.", macAddress)
 	delete(allowedDevices, macAddress)
-	logger.Printf("ForgetDevice: Completed for MAC %s", macAddress)
+	logger.Printf("Completed for MAC %s", macAddress)
 
 	if !exists {
-		logger.Printf("ForgetDevice: Device %s not found in tracking. Cannot perform full cleanup.", macAddress)
+		logger.Printf("Device %s not found in tracking. Cannot perform full cleanup.", macAddress)
 		// Attempt MAC disallow and Deauth as a best effort if device is not tracked but MAC is known
 		if err := DisallowMAC(allowedMACsFilePath, macAddress); err != nil {
-			logger.Printf("ForgetDevice: Error disallowing MAC %s from %s (device not tracked): %v", macAddress, allowedMACsFilePath, err)
+			logger.Printf("Error disallowing MAC %s from %s (device not tracked): %v", macAddress, allowedMACsFilePath, err)
 		}
 		if err := DisallowMAC(leasesFilePath, macAddress); err != nil {
-			logger.Printf("ForgetDevice: Error removing lease for MAC %s from %s (device not tracked): %v", macAddress, leasesFilePath, err)
+			logger.Printf("Error removing lease for MAC %s from %s (device not tracked): %v", macAddress, leasesFilePath, err)
 		}
 		if err := Deauth(macAddress); err != nil {
-			logger.Printf("ForgetDevice: Deauth %s failed (device not tracked): %v", macAddress, err)
+			logger.Printf("Deauth %s failed (device not tracked): %v", macAddress, err)
 		}
 		return
 	}
 
 	// Standard cleanup steps
 	if err := DisallowMAC(allowedMACsFilePath, macAddress); err != nil {
-		logger.Printf("ForgetDevice: Error disallowing MAC %s from %s: %v", macAddress, allowedMACsFilePath, err)
+		logger.Printf("Error disallowing MAC %s from %s: %v", macAddress, allowedMACsFilePath, err)
 	}
 	if err := DisallowMAC(leasesFilePath, macAddress); err != nil {
-		logger.Printf("ForgetDevice: Error removing lease for MAC %s from %s: %v", macAddress, leasesFilePath, err)
+		logger.Printf("Error removing lease for MAC %s from %s: %v", macAddress, leasesFilePath, err)
 	}
 	if err := RestartDnsmasq(); err != nil {
-		logger.Printf("ForgetDevice: Error restarting dnsmasq for %s: %v", macAddress, err)
+		logger.Printf("Error restarting dnsmasq for %s: %v", macAddress, err)
 	}
 
 	// Remove stored iptables rules
 	if ruleManager != nil && len(device.AppliedIPTablesRules) > 0 { // ruleManager is assumed global
 		if err := ruleManager.RemoveRulesForDevice(macAddress, device.AppliedIPTablesRules); err != nil {
 			// RemoveRulesForDevice already logs details, this is a summary log
-			logger.Printf("ForgetDevice: Issues encountered removing iptables rules for MAC %s: %v", macAddress, err)
+			logger.Printf("Issues encountered removing iptables rules for MAC %s: %v", macAddress, err)
 		}
 	} else if len(device.AppliedIPTablesRules) == 0 {
-		logger.Printf("ForgetDevice: No stored iptables rules to remove for MAC %s.", macAddress)
+		logger.Printf("No stored iptables rules to remove for MAC %s.", macAddress)
 	} else {
-		logger.Printf("ForgetDevice: ruleManager not initialized, cannot remove iptables rules for MAC %s.", macAddress)
+		logger.Printf("ruleManager not initialized, cannot remove iptables rules for MAC %s.", macAddress)
 	}
 
 	if device.pduSession != nil {
-		logger.Printf("ForgetDevice: Releasing PDU ID %d for %s", device.pduSession.ID, macAddress)
+		logger.Printf("Releasing PDU ID %d for %s", device.pduSession.ID, macAddress)
 		if err := ReleasePDUSession(ueIMSI, device.pduSession.ID); err != nil {
-			logger.Printf("ForgetDevice: Release PDU ID %d for %s failed: %v", device.pduSession.ID, macAddress, err)
+			logger.Printf("Release PDU ID %d for %s failed: %v", device.pduSession.ID, macAddress, err)
 		}
 	} else {
-		logger.Printf("ForgetDevice: No PDU session for %s to release.", macAddress)
+		logger.Printf("No PDU session for %s to release.", macAddress)
 	}
 
-	logger.Printf("ForgetDevice: Deauthenticating %s via hostapd", macAddress)
+	logger.Printf("Deauthenticating %s via hostapd", macAddress)
 	if err := Deauth(macAddress); err != nil {
-		logger.Printf("ForgetDevice: Deauth %s failed: %v", macAddress, err)
+		logger.Printf("Deauth %s failed: %v", macAddress, err)
 	}
 }
 

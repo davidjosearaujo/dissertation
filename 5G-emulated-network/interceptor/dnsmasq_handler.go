@@ -123,16 +123,16 @@ func RestartDnsmasq() error {
 // DnsmasqListener monitors the dnsmasq lease file for changes.
 func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI string, leaseTime string, quit <-chan struct{}) {
 	defer wg.Done()
-	logger.Printf("DnsmasqListener: Monitoring %s every %s", leasesFilePath, dnsmasqLeaseCheckInterval)
+	logger.Printf("Monitoring %s every %s", leasesFilePath, dnsmasqLeaseCheckInterval)
 
 	var lastModTime time.Time
 	initialStat, err := os.Stat(leasesFilePath)
 	if err != nil {
 		if !os.IsNotExist(err) {
-			logger.Printf("DnsmasqListener: Initial stat for %s failed: %v.", leasesFilePath, err)
+			logger.Printf("Initial stat for %s failed: %v.", leasesFilePath, err)
 			// Consider if this is a fatal error for the listener. For now, it will try to continue.
 		}
-		logger.Printf("DnsmasqListener: %s not found initially. Will check periodically.", leasesFilePath)
+		logger.Printf("%s not found initially. Will check periodically.", leasesFilePath)
 	} else {
 		lastModTime = initialStat.ModTime()
 	}
@@ -143,27 +143,27 @@ func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI s
 	for {
 		select {
 		case <-quit:
-			logger.Println("DnsmasqListener: Received quit signal. Stopping...")
+			logger.Println("Received quit signal. Stopping...")
 			return
 		case <-ticker.C:
 			currentStat, statErr := os.Stat(leasesFilePath)
 			if statErr != nil {
 				if os.IsNotExist(statErr) {
 					if lastModTime != (time.Time{}) { // Log only if it previously existed
-						logger.Printf("DnsmasqListener: Lease file %s not found.", leasesFilePath)
+						logger.Printf("Lease file %s not found.", leasesFilePath)
 						lastModTime = time.Time{} // Reset to detect recreation
 					}
 				} else {
-					logger.Printf("DnsmasqListener: Error retrieving lease file stats for %s: %v", leasesFilePath, statErr)
+					logger.Printf("Error retrieving lease file stats for %s: %v", leasesFilePath, statErr)
 				}
 				continue
 			}
 
 			if currentStat.ModTime().After(lastModTime) {
-				logger.Printf("DnsmasqListener: Lease file %s changed. Processing...", leasesFilePath)
+				logger.Printf("Lease file %s changed. Processing...", leasesFilePath)
 				file, openErr := os.Open(leasesFilePath)
 				if openErr != nil {
-					logger.Printf("DnsmasqListener: Error opening lease file %s: %v", leasesFilePath, openErr)
+					logger.Printf("Error opening lease file %s: %v", leasesFilePath, openErr)
 					lastModTime = currentStat.ModTime() // Update time to avoid reprocessing error immediately
 					continue
 				}
@@ -177,13 +177,13 @@ func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI s
 
 					expirationStr, macAddressLease, ipAddress := fields[0], fields[1], fields[2]
 					if _, parseErr := net.ParseMAC(macAddressLease); parseErr != nil {
-						logger.Printf("DnsmasqListener: Invalid MAC address '%s' in lease line: %s", macAddressLease, scanner.Text())
+						logger.Printf("Invalid MAC address '%s' in lease line: %s", macAddressLease, scanner.Text())
 						continue
 					}
 
 					expiration, convErr := strconv.Atoi(expirationStr)
 					if convErr != nil {
-						logger.Printf("DnsmasqListener: Error converting expiration '%s' to int for MAC %s: %v", expirationStr, macAddressLease, convErr)
+						logger.Printf("Error converting expiration '%s' to int for MAC %s: %v", expirationStr, macAddressLease, convErr)
 						continue
 					}
 
@@ -193,7 +193,7 @@ func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI s
 							device.lease.expiration = expiration
 							leaseDuration, err := time.ParseDuration(leaseTime)
 							if err != nil {
-								logger.Printf("DnsmasqListener: Error converting lease duration '%s' to time.Duration: %v" , leaseTime, err)
+								logger.Printf("Error converting lease duration '%s' to time.Duration: %v" , leaseTime, err)
 								continue
 							}
 							device.lease.duration = leaseDuration
@@ -204,16 +204,16 @@ func DnsmasqListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI s
 
 							if device.state == "AUTHENTICATED" {
 								device.state = "LEASED"
-								logger.Printf("DnsmasqListener: Device %s (MAC: %s, IP: %s) transitioned to LEASED state.", pduAddr, macAddressLease, ipAddress)
+								logger.Printf("Device %s (MAC: %s, IP: %s) transitioned to LEASED state.", pduAddr, macAddressLease, ipAddress)
 							}
 							allowedDevices[macAddressLease] = device
-							logger.Printf("DnsmasqListener: Lease updated for %s (MAC: %s, IP: %s). Exp: %d, Count: %d. State: %s", pduAddr, macAddressLease, ipAddress, expiration, device.lease.counter, device.state)
+							logger.Printf("Lease updated for %s (MAC: %s, IP: %s). Exp: %d, Count: %d. State: %s", pduAddr, macAddressLease, ipAddress, expiration, device.lease.counter, device.state)
 						}
 					}
 				}
 				file.Close()
 				if scanErr := scanner.Err(); scanErr != nil {
-					logger.Printf("DnsmasqListener: Error scanning lease file %s: %v", leasesFilePath, scanErr)
+					logger.Printf("Error scanning lease file %s: %v", leasesFilePath, scanErr)
 				}
 				lastModTime = currentStat.ModTime()
 			}
