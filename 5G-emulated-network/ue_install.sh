@@ -57,9 +57,14 @@ cat hostapd.conf > /log/hostapd.log
 echo -e "\nRunning hostapd"
 sudo /home/vagrant/hostapd -tKdd /home/vagrant/hostapd.conf &>> /log/hostapd.log &
 
-sudo touch /etc/allowed-macs.conf
+echo -e "\nSetting 'backhaul' DNN channel as default route"
+sudo ip route delete default
+sudo ip route add default via 10.45.0.1 dev uesimtun0
 
 echo -e "\nConfiguring dnsmasq DHCP server"
+
+sudo touch /etc/allowed-macs.conf
+
 echo -e "interface=enp0s9
 bind-interfaces
 
@@ -83,8 +88,8 @@ echo -e "\nMaking UE, hostapd and inteceptor start at boot"
 echo -e "
 sudo /home/vagrant/nr-ue -c /home/vagrant/open5gs-ue.yaml &>> /log/ue.log &
 sleep 5
-sudo ip addr flush uesimtun0
-sudo ip addr add $CLIENT_EAP_IP/24 dev uesimtun0
+sudo ip route delete default
+sudo ip route add default via 10.45.0.1 dev uesimtun0
 sudo /home/vagrant/hostapd -tKdd /home/vagrant/hostapd.conf &>> /log/hostapd.log &
 sudo /home/vagrant/interceptor --mode="debug" --interface="/var/run/hostapd/enp0s9" &>> /log/interceptor.log &
 " | sudo tee /etc/init.d/ue > /dev/null

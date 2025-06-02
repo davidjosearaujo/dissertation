@@ -42,12 +42,12 @@ for i in $(seq 1 10); do
     sudo dhclient enp0s8
 
     elapsedTime=$(($(date +%s) - startTime))
-    echo -e "
-    Attempt #$i elapsed time: $elapsedTime seconds
-    " | sudo tee -a /log/$(cat /etc/hostname)_connection_delay.log
+    echo -e "Attempt #$i elapsed time: $elapsedTime seconds" \
+    | sudo tee -a /log/$(cat /etc/hostname)_connection_delay.log
 
     sudo killall wpa_supplicant
+    sudo killall dhclient
     sudo ip addr flush enp0s8
 
-    sleep 20
+    sleep 180
 done
