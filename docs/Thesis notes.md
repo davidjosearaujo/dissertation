@@ -1,3 +1,4 @@
+
  [Gemini conversation](https://gemini.google.com/app/75915c139d9aa2a2)
 # Methodology and Proposed Framework
 ## Overall Research Approach
