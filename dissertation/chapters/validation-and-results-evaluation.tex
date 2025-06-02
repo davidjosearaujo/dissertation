@@ -7,7 +7,7 @@ This chapter presents the validation process and evaluates the performance and e
 
 \section{Methodology}
 
-To assess the feasibility, functionality, and effectiveness of the proposed solution, a series of tests were conducted within the simulated environment described in the \ref{chapter:development-and-implementation} chapter. The overall validation approach was simulation-based testing, leveraging the orchestrated virtual machines and configured \ac{5G} components (Open5GS, UERANSIM) and local network services (\texttt{hostapd}, \texttt{dnsmasq}, and the custom \texttt{interceptor} application).
+To assess the feasibility, functionality, and effectiveness of the proposed solution, a series of tests were conducted within the simulated environment described in the chapter \ref{chapter:development-and-implementation}. The overall validation approach was simulation-based testing, leveraging the orchestrated virtual machines and configured \ac{5G} components (Open5GS, UERANSIM) and local network services (\texttt{hostapd}, \texttt{dnsmasq}, and the custom \texttt{interceptor} application).
 
 The validation focused on several key aspects of the system:
 
@@ -32,7 +32,7 @@ The evaluation of the framework centered on the following indicators and metrics
             \item {
                 \textbf{\ac{NAUN3} Device Authentication Success:}
                 \begin{itemize}
-                    \item \textbf{Metric:} Successful completion of the EAP-TLS authentication process for an NAUN3 device with the FreeRADIUS server, relayed by the 5G-RG (hostapd and interceptor).
+                    \item \textbf{Metric:} Successful completion of the \ac{EAP-TLS} authentication process for an \ac{NAUN3} device with the FreeRADIUS server, relayed by the \ac{5G-RG} (\texttt{hostapd} and \texttt{interceptor}).
 
                     \item \textbf{Verification:} Logs from \texttt{wpa\_supplicant} (\texttt{naun3} \ac{VM}), \texttt{hostapd} (\ac{5G-RG}/\texttt{ue} \ac{VM}), FreeRADIUS (\texttt{core} \ac{VM}), and the custom \texttt{interceptor} application on the \ac{5G-RG}. 
                 \end{itemize}
@@ -113,7 +113,7 @@ This validation methodology aims to provide a comprehensive assessment of the im
 
 \section{Test Scenarios and Setup}
 
-To validate the different aspects of the proposed framework, a series of distinct test scenarios, or experiments, were designed and executed. These scenarios leveraged the fully configured simulation environment detailed in the \ref{chapter:development-and-implementation}, which includes the \texttt{core} \ac{VM} (Open5GS, FreeRADIUS), \texttt{gnb} \ac{VM} (UERANSIM gNB), \texttt{ue} \ac{VM} (5G-RG with UERANSIM UE, \texttt{hostapd}, \texttt{dnsmasq}, and the custom \texttt{interceptor} application), and one or more \texttt{naun3} \acp{VM} (\ac{EAP} supplicant).
+To validate the different aspects of the proposed framework, a series of distinct test scenarios, or experiments, were designed and executed. These scenarios leveraged the fully configured simulation environment detailed in the \ref{chapter:development-and-implementation}, which includes the \texttt{core} \ac{VM} (Open5GS, FreeRADIUS), \texttt{gnb} \ac{VM} (UERANSIM gNB), \texttt{ue} \ac{VM} (\ac{5G-RG} with UERANSIM UE, \texttt{hostapd}, \texttt{dnsmasq}, and the custom \texttt{interceptor} application), and one or more \texttt{naun3} \acp{VM} (\ac{EAP} supplicant).
 
 Specific tools were employed for monitoring and verification in each scenario:
 
@@ -126,12 +126,12 @@ Specific tools were employed for monitoring and verification in each scenario:
 
     \item \textbf{Traffic Generation and Throughput Measurement:} \texttt{iperf3} was used for generating controlled \ac{TCP}/\ac{UDP} network traffic between \ac{NAUN3} devices and a server on the \texttt{core} \ac{VM} (simulating an N6-connected server) to test data plane throughput and routing.
 
-    \item \textbf{Timestamping/Scripting:} Basic shell scripting was used to capture timestamps before and after key events (e.g., `wpa\_supplicant` start and `dhclient` IP acquisition) to measure onboarding delay.
+    \item \textbf{Timestamping/Scripting:} Basic shell scripting was used to capture timestamps before and after key events (e.g., \texttt{wpa\_supplicant} start and \texttt{dhclient} \ac{IP} acquisition) to measure onboarding delay.
 \end{itemize}
 
 \subsection{Experiment 1: Single \acs{NAUN3} Device Onboarding and Basic Connectivity}
 
-The objective was to verify the successful \ac{EAP-TLS} authentication of a single \ac{NAUN3} device, the subsequent establishment of its dedicated \ac{PDU} session on the \texttt{clients} \aDNN, local and 5GC IP address allocation, basic end-to-end data plane connectivity with path verification, and to measure the approximate onboarding delay.
+The objective was to verify the successful \ac{EAP-TLS} authentication of a single \ac{NAUN3} device, the subsequent establishment of its dedicated \ac{PDU} session on the \texttt{clients} \ac{DNN}, local and \ac{5GC} \ac{IP} address allocation, basic end-to-end data plane connectivity with path verification, and to measure the approximate onboarding delay.
 
 Procedure:
 \begin{enumerate}
@@ -143,7 +143,7 @@ Procedure:
 
     \item Once \texttt{wpa\_supplicant} indicates success and \texttt{dhclient} (run subsequently or as part of the script on \texttt{naun3}) obtains a local \ac{IP}, record another timestamp. Calculate the difference to estimate onboarding delay.
     
-    \item Verify \ac{PDU} session establishment for the \texttt{clients} \ac{DNN} using \textttnr{-cli ps-list} on the \texttt{ue} \ac{VM}. Note the assigned \ac{5GC} \ac{IP} address for this \ac{PDU} session.
+    \item Verify \ac{PDU} session establishment for the \texttt{clients} \ac{DNN} using \texttt{nr-cli ps-list} on the \texttt{ue} \ac{VM}. Note the assigned \ac{5GC} \ac{IP} address for this \ac{PDU} session.
     
     \item Verify local \ac{IP} address assignment to the \texttt{naun3} \ac{VM} via \texttt{ip addr} on the \texttt{naun3} \ac{VM}.
     
@@ -162,7 +162,7 @@ Metrics/Verification Points:
     \item Onboarding delay (timestamp difference).
     \item One new \ac{PDU} session active on \texttt{clients} \ac{DNN} for the \ac{5G-RG}, with a unique \ac{5GC} \ac{IP}.
     \item \ac{NAUN3} device receives a local \ac{IP}.
-    \item Successful \texttt{ping} with recorded route showing \ac{NAT} via the \ac{PDU} session IP.
+    \item Successful \texttt{ping} with recorded route showing \ac{NAT} via the \ac{PDU} session \ac{IP}.
     \item Successful \texttt{iperf3} data transfer.
     \item Correct \texttt{iptables} and policy routing rules applied.
 \end{itemize}
@@ -326,14 +326,14 @@ The primary test involved onboarding \ac{NAUN3} devices (\texttt{naun301}, \text
         \begin{figure}
         \centering
             \includegraphics[width=1\linewidth]{figs/interceptor_eap_success.png}
-            \caption{\texttt{interceptor} captures authentication success, requests \ac{PDU} session and applies mapping rules}
+            \caption{\texttt{interceptor} captures authentication success, requests \acs{PDU} session and applies mapping rules}
             \label{fig:interceptor_eap_success}
         \end{figure}
 
         \begin{figure}
             \centering
             \includegraphics[width=1\linewidth]{figs/ue_pdu_sessions.png}
-            \caption{\ac{PDU} Session via \texttt{nr-cli ps-list}}
+            \caption{\acs{PDU} Session via \texttt{nr-cli ps-list}}
             \label{fig:ue_pdu_sessions}
         \end{figure}
     }
@@ -343,7 +343,7 @@ The primary test involved onboarding \ac{NAUN3} devices (\texttt{naun301}, \text
     \begin{figure}
         \centering
         \includegraphics[width=1\linewidth]{figs/ue_pdu_sessions_nics.png}
-        \caption{Network interfaces created by UERANSIM to bind to \ac{PDU} Sessions}
+        \caption{Network interfaces created by UERANSIM to bind to \acs{PDU} Sessions}
         \label{fig:ue_pdu_sessions_nics}
     \end{figure}
 
@@ -352,9 +352,11 @@ The primary test involved onboarding \ac{NAUN3} devices (\texttt{naun301}, \text
     \begin{figure}
         \centering
         \includegraphics[width=1\linewidth]{figs/ping_gw.png}
-        \caption{Pings from \texttt{naun301} and \texttt{naun302} to the \ac{5GC} gateway}
+        \caption{Pings from \texttt{naun301} and \texttt{naun302} to the \acs{5GC} gateway}
         \label{fig:ping_gw}
     \end{figure}
+
+    \item \textbf{Onboarding Delay:} An average approximate total time of 27 seconds from the start of \texttt{wpa\_supplicant} to the \ac{NAUN3} device receiving its local \ac{IP} address. This comprehensive duration includes the \ac{EAP-TLS} handshake, all \ac{RADIUS} communications, \ac{PDU} session establishment orchestrated by the \texttt{interceptor} via \texttt{nr-cli}, and the final \ac{DHCP} lease acquisition on the local network.
 \end{itemize}
 
 \subsection{End-to-End Connectivity and Path Verification}
@@ -372,7 +374,7 @@ Ping tests with the record route option (\texttt{-R}) were conducted from \textt
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{figs/iperf_naun3_to_core.png}
-    \caption{\texttt{iperf3} session between \acp{NAUN3} and \ac{5GC}}
+    \caption{\texttt{iperf3} session between \acs{NAUN3}s and \acs{5GC}}
     \label{fig:iperf_naun3_to_core}
 \end{figure}
 
@@ -385,12 +387,12 @@ The \texttt{iperf3} tests further validated traffic isolation and mapping. As se
     \label{fig:iptable_mapping_rules}
 \end{figure}
 
-Also, Figure \ref{fig:iptable_mapping_rules} shows the dynamic application of \texttt{iptables FORWARD} rules and \texttt{ip rule}/\texttt{ip route} entries. For instance, at 14:43:30 \ac{UTC} (after \texttt{naun301} connects), rules are present for \ac{MAC} \texttt{08:00:27:b4:18:a9} (\ac{naun301}) to use \ac{PDU} ID 2 (interface \texttt{uesimtun1}). By 14:44:30 \ac{UTC} (after \texttt{naun302} connects), additional rules appear for \ac{MAC} \texttt{08:00:27:51:7f:ef} (\texttt{naun302}) to use \ac{PDU} ID 3 (interface \texttt{uesimtun2}), while rules for \ac{PDU} ID 2 remain. This demonstrates the per-device rule application.
+Also, Figure \ref{fig:iptable_mapping_rules} shows the dynamic application of \texttt{iptables FORWARD} rules and \texttt{ip rule}/\texttt{ip route} entries. For instance, at 14:43:30 \ac{UTC} (after \texttt{naun301} connects), rules are present for \ac{MAC} \texttt{08:00:27:b4:18:a9} (\texttt{naun301}) to use \ac{PDU} ID 2 (interface \texttt{uesimtun1}). By 14:44:30 \ac{UTC} (after \texttt{naun302} connects), additional rules appear for \ac{MAC} \texttt{08:00:27:51:7f:ef} (\texttt{naun302}) to use \ac{PDU} ID 3 (interface \texttt{uesimtun2}), while rules for \ac{PDU} ID 2 remain. This demonstrates the per-device rule application.
 
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{figs/naun3_to_core_ue_view.png}
-    \caption{\ac{NAUN3} to \ac{5GC} \texttt{iperf3} session, captured at the \ac{5G-RG} showing the mapping between the local address and \ac{PDU} session address}
+    \caption{\acs{NAUN3} to \acs{5GC} \texttt{iperf3} session, captured at the \acs{5G-RG} showing the mapping between the local address and \acs{PDU} session address}
     \label{fig:naun3_to_core_ue_view}
 \end{figure}
 
@@ -403,17 +405,17 @@ The logs demonstrate correct resource cleanup when \texttt{naun301} (associated 
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{figs/naun3_removed.png}
-    \caption{\texttt{naun301} disconnected and \ac{5G-RG}'s \texttt{interceptor} proceeds to deauthenticating it, removing traffic mapping rules for it, and releasing it's dedicated \ac{PDU} session.}
+    \caption{\texttt{naun301} disconnected and \acs{5G-RG}'s \texttt{interceptor} proceeds to deauthenticating it, removing traffic mapping rules for it, and releasing it's dedicated \acs{PDU} session.}
     \label{fig:naun3_removed}
 \end{figure}
 
 \begin{itemize}
-    \item \texttt{interceptor} (around 14:44:49 \ac{UTC}) logs, according to Figure \ref{fig:naun3_removed}: \textttt{"Tracked device 10.46.0.2 (MAC: 08:00:27:b4:18:a9, State: REACHABLE) no longer in ARP list. Scheduling for forget."} This is followed by logs indicating removal from \texttt{allowedDevices}, deauthentication via \texttt{hostapd}, removal of \texttt{iptables} rules, and \ac{PDU} session release for \ac{PDU} ID 2.
+    \item \texttt{interceptor} (around 14:44:49 \ac{UTC}) logs, according to Figure \ref{fig:naun3_removed}: \textttt{"Tracked device 10.46.0.2 (\ac{MAC}: 08:00:27:b4:18:a9, State: REACHABLE) no longer in \ac{ARP} list. Scheduling for forget."} This is followed by logs indicating removal from \texttt{allowedDevices}, deauthentication via \texttt{hostapd}, removal of \texttt{iptables} rules, and \ac{PDU} session release for \ac{PDU} ID 2.
 
     \begin{figure}
         \centering
         \includegraphics[width=0.20\linewidth]{figs/nr-cli_ps-list.png}
-        \caption{\ac{PDU} session listing from UERANSIM}
+        \caption{\acs{PDU} session listing from UERANSIM}
         \label{fig:nr-cli_ps-list}
     \end{figure}
 
@@ -422,7 +424,7 @@ The logs demonstrate correct resource cleanup when \texttt{naun301} (associated 
     \begin{figure}
         \centering
         \includegraphics[width=1\linewidth]{figs/ue_pdu_sessions_nics_release.png}
-        \caption{\ac{PDU} binded network interfaces after \texttt{uesimtun1} removal}
+        \caption{\acs{PDU} binded network interfaces after \texttt{uesimtun1} removal}
         \label{fig:ue_pdu_sessions_nics_release}
     \end{figure}
     
@@ -431,7 +433,7 @@ The logs demonstrate correct resource cleanup when \texttt{naun301} (associated 
     \begin{figure}
         \centering
         \includegraphics[width=1\linewidth]{figs/ue_naun3_to_pdu_mapping_rules.png}
-        \caption{Mapping rules after \texttt{naun301} disconnect and \ac{PDU} Session2 release}
+        \caption{Mapping rules after \texttt{naun301} disconnect and \acs{PDU} Session2 release}
         \label{fig:ue_naun3_to_pdu_mapping_rules}
     \end{figure}
 
@@ -455,13 +457,13 @@ The security aspects of the solution were evaluated qualitatively based on the i
             \begin{figure}
                 \centering
                 \includegraphics[width=0.75\linewidth]{figs/RADIUS_traffic_via_backhaul.png}
-                \caption{\ac{RADIUS} traffic captured at \texttt{backhaul} channel via Wireshark}
+                \caption{\acs{RADIUS} traffic captured at \texttt{backhaul} channel via Wireshark}
                 \label{fig:RADIUS_traffic_via_backhaul}
             \end{figure}
 
             \item The \texttt{hostapd} log (see Listing \ref{lst:hostapd_fail} ) further details the \ac{RADIUS} exchange, initially attempting to send from a default system \ac{IP} (e.g., \texttt{10.0.2.15}) and failing (evident by retransmissions), then succeeding once the \texttt{own\_ip\_addr} (\texttt{10.45.0.2} - the \texttt{backhaul} \ac{PDU} session \ac{IP}) is correctly used. This highlights the correct binding and use of the \texttt{backhaul} \ac{PDU} for \ac{RADIUS}.
 
-\begin{lstlisting}[caption=hostapd failing due to wrong local address,label={lst:hostapd_fail}]
+\begin{lstlisting}[caption=\texttt{hostapd} failing due to wrong local address,label={lst:hostapd_fail}]
 (...)
 25 | 1748702388.755637: RADIUS local address: 10.0.2.15:42579
 (...)
@@ -475,12 +477,6 @@ The security aspects of the solution were evaluated qualitatively based on the i
 \end{itemize}
 
 While these observations do not constitute a formal penetration test or vulnerability assessment, they confirm that the fundamental security design principles, strong local authentication via \ac{EAP-TLS}, segregation of control and user plane traffic via distinct \acp{DNN}, and abstraction of local \ac{NAUN3} device identities from the \ac{5GC}, are correctly implemented and operational within the test environment. The envisioned enhancement suggests a pathway to more integrated policy control if desired in future iterations.
-
-\section{Performance Evaluation}
-
-% Present the results related to the performance metrics defined earlier (e.g., authentication delay, computational overhead on involved network functions).
-
-% Compare these results against baseline scenarios or standard procedures if possible.
 
 \section{Discussion and Analysis}
 
@@ -499,7 +495,7 @@ The primary goal was to devise a solution that allows \ac{NAUN3} devices, which 
 
     \item \textbf{Minimal Core Network and Device Impact (Requirement Met):} The solution operates without requiring any modifications to the \ac{NAUN3} devices beyond standard \ac{EAP-TLS} supplicant capabilities. The \ac{5GC} (Open5GS) interacts with the \ac{5G-RG} as a standard \ac{UE} requesting \ac{PDU} sessions; no changes to core \acp{NF} were needed beyond configuration (\acp{DNN}, subscriber data for the \ac{5G-RG}). This fulfills the critical requirement of minimal disruption.
 
-    \item \textbf{Gateway-Centric Logic (Requirement Met):} All the specialized logic for \ac{NAUN3} authentication relay, \ac{PDU} session orchestration, and traffic mapping is concentrated within the \ac{5G-RG} (\texttt{ue} \ac{VM}), primarily within the custom \texttt{interceptor} application and configurations of \textt{hostapd} and \texttt{dnsmasq}.
+    \item \textbf{Gateway-Centric Logic (Requirement Met):} All the specialized logic for \ac{NAUN3} authentication relay, \ac{PDU} session orchestration, and traffic mapping is concentrated within the \ac{5G-RG} (\texttt{ue} \ac{VM}), primarily within the custom \texttt{interceptor} application and configurations of \texttt{hostapd} and \texttt{dnsmasq}.
 
     \item \textbf{Lifecycle Management (Requirement Met):} The logs in Figures \ref{fig:naun3_removed}, \ref{fig:ue_pdu_sessions_nics_release} and \ref{fig:ue_naun3_to_pdu_mapping_rules} demonstrate that upon simulated \ac{NAUN3} device disconnection, the \texttt{interceptor} correctly triggers local deauthentication, \ac{PDU} session termination, and cleanup of associated routing rules and \ac{DHCP} permissions.
 

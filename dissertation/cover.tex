@@ -186,20 +186,26 @@
 \JuriMember{Prof. Doutor João Antunes da Silva}{professor associado da Universidade de Aveiro}
 \JuriMember{Prof. Doutor João Antunes da Silva}{professor associado da Universidade de Aveiro}
 
-
-
 %%% OPTIONAL: Add an acknowledgement text
 %% Optional Acknowledgement text
-\Acknowledgements{Agradeço toda a ajuda a todos os meus colegas e companheiros. Em especifico, gostaria de agradecer ao Miguel Freitas e ao Francisco Fontes da Altice Labs. Esta dissertação foi realizada com o apoio do Instituto de Telecomunicações. <!! Acabar agradecimentos !!>}
+\Acknowledgements{\selectlanguage{portuguese}Em primeiro lugar, quero expressar a minha profunda gratidão ao meu orientador, Prof. Doutor Daniel Corujo, por ter acreditado em mim e no meu trabalho desde o primeiro momento. Desde os tempos da licenciatura, onde também me orientou no projeto final, tem sido um exemplo de confiança, orientação e incentivo constante. O seu acompanhamento próximo ao longo destes mais de dois anos foi fundamental para a concretização deste trabalho, e estarei sempre imensamente grato pelas oportunidades que me proporcionou.
 
+Agradeço igualmente ao Doutor Francisco Fontes, pelo apoio contínuo ao longo deste projeto e pela disponibilidade incansável em mobilizar os recursos da Altice Labs, permitindo que esta investigação atingisse os seus objetivos. A sua confiança e dedicação criaram um ambiente ideal que em muito contribuiu para os resultados alcançados.
+
+Ao Miguel Freitas, da Altice Labs, deixo um agradecimento muito especial. Um colega e engenheiro cuja competência técnica, dedicação e capacidade de execução continuo a admirar. A sua colaboração foi essencial para o desenvolvimento dos projetos em que trabalhámos juntos, e aprendi imenso com ele ao longo destes dois anos.
+
+Por fim, e talvez mais importante, quero agradecer à minha família. À minha mãe, Ana Araújo, e à minha irmã, Ana Catarina, pelo apoio incondicional que sempre me deram, não só ao longo deste percurso académico, mas em toda a minha vida. Este trabalho também é vosso, assim como o futuro que me esforço para contruir.
+
+A todos, muito obrigado.
+}
 
 %%% Edit the keywords and abstract in Portuguese
 %%% Don't forget to remove the \blindtext[3]
 %%%  declaration.
 %%% Don't remove the \selectlanguage statement or you will end with incorrect hyphenation
 %% Mandatory Keywords and Abstract in Portuguese
-\Abstract{palavras-chave}{texto livro, arquitetura, história, construção, materiais de construção, saber tradicional.}
-         {resumo}{\selectlanguage{portuguese}Um resumo é um pequeno apanhado de um trabalho mais longo (como uma tese, dissertação ou trabalho de pesquisa). O resumo relata de forma concisa os objetivos e resultados da sua pesquisa, para que os leitores saibam exatamente o que se aborda no seu documento.\\Embora a estrutura possa variar um pouco dependendo da sua área de estudo, o seu resumo deve descrever o propósito do seu trabalho, os métodos que você usou e as conclusões a que chegou.\\Uma maneira comum de estruturar um resumo é usar a estrutura IMRaD. Isso significa: \begin{itemize} \item Introdução \item Métodos \item Resultados \item Discussão \end{itemize} Veja mais pormenores aqui:\\\texttt{https://www.scribbr.com/dissertation/abstract/}}
+\Abstract{palavras-chave}{Rede 5G, Non-3GPP Access, Integração Wi-Fi, Authentication, Gestão de Identidade, EAP-TLS, RADIUS, 5G Residential Gateway, Identidade Proxy, Open5GS, UERANSIM.}
+         {resumo}{\selectlanguage{portuguese}À medida que as redes de quinta geração (5G) evoluem, a integração de dispositivos exclusivamente Wi-Fi, sem capacidades como um \textit{Universal Subscriber Identity Module} (USIM), no núcleo da rede 5G (5GC) continua a representar um desafio significativo, especialmente em ambientes empresariais e residenciais. Esta dissertação aborda a lacuna existente nas normas atuais do 3GPP, propondo uma estrutura inovadora que permite a autenticação segura e a gestão de identidade para este tipo de dispositivos. A solução desenvolvida baseia-se em métodos do \textit{Extensible Authentication Protocol} (EAP), com ênfase no EAP-TLS, e num mecanismo de identidade por \textit{proxy} através de sessões de \textit{Protocol Data Unit} (PDU), permitindo a identificação consistente dos dispositivos e a gestão do tráfego dentro da 5GC. A arquitetura foi implementada utilizando componentes virtualizados de redes 5G e validada através de cenários experimentais que simularam o registo, mapeamento de sessões e gestão do ciclo de vida de dispositivos não autenticáveis de acesso não-3GPP (NAUN3). Os resultados demonstram que a estrutura proposta suporta eficazmente a integração segura, o isolamento de tráfego e o controlo dinâmico de sessões, oferecendo um caminho viável para a conectividade segura e inclusiva de dispositivos \textit{Wi-Fi-only} no ecossistema 5G.}
 
 %%% OPTIONAL: you can write the keywords and
 %%%  abstract in other languages. You can repeat
@@ -208,12 +214,12 @@
 %%% Don't remove the \selectlanguage statement or you will end with incorrect hyphenation.
 %%% You can modify the language to any other supported by Latex
 %% Optional Keywords and Abstract in additional languages.
-\Abstract{keywords}{textbook, architecture, history, construction, construction materials, traditional knowledge.}
-         {abstract}{\selectlanguage{english}An abstract is a short summary of a longer work (such as a thesis, dissertation or research paper).\\The abstract concisely reports the aims and outcomes of your research, so that readers know exactly what your paper is about.\\Although the structure may vary slightly depending on your discipline, your abstract should describe the purpose of your work, the methods you’ve used, and the conclusions you’ve drawn.\\One common way to structure your abstract is to use the IMRaD structure. This stands for: \begin{itemize} \item Introduction \item Methods \item Results \item Discussion \end{itemize} Check for more details here:\\\texttt{https://www.scribbr.com/dissertation/abstract/}}
+\Abstract{keywords}{5G Network, Non-3GPP Access, Wi-Fi Integration, Authentication, Identity Management, EAP-TLS, RADIUS, 5G Residential Gateway, Proxy Identity, Open5GS, UERANSIM.}
+         {abstract}{\selectlanguage{english}As fifth-generation (5G) networks continue to evolve, integrating Wi-Fi, only devices, lacking Universal Subscriber Identity Module (USIM) capabilities, into the 5G Core (5GC) remains a significant challenge, particularly in enterprise and residential environments. This dissertation addresses the gap in existing 3GPP standards by proposing a novel framework that enables secure authentication and identity management for such devices. The proposed solution leverages Extensible Authentication Protocol (EAP) methods, particularly EAP-TLS, alongside a proxy identity mechanism using Protocol Data Unit (PDU) sessions, allowing for consistent device identification and traffic management within the 5GC. The architecture was implemented using virtualized 5G components and validated through a series of experiments simulating onboarding, session mapping, and lifecycle management of non-authenticable non-3GPP (NAUN3) devices. Results demonstrate that the framework effectively supports secure integration, traffic isolation, and dynamic session control, offering a practical path toward inclusive and secure 5G connectivity for legacy Wi-Fi devices.}
 
 
 %%% OPTIONAL: Acknowledge the use of AI Tools
-\AIUse{I acknowledge the use of Perplexity AI (Perplexity AI, Inc., https://www.perplexity.ai/) to summarise the initial notes, document structuring, spell and phrashing check and to proofread the final draft.}
+\AIUse{I acknowledge the use of Perplexity AI (Perplexity AI, Inc., https://www.perplexity.ai/) and Gemini (https://gemini.google.com/) to summarize the initial notes, document structuring, spell and phrashing check and to proofread the final draft.}
 %Reconheço o uso de [inserir sistema(s) de IA e respetiva hiperligação] para [indicar utilização específica de IA ou outras tarefas]. Reconheço a utilização de [indicar software, código ou plataforma] para [indicar utilização específica de software, código ou platafoma ou para outras tarefas].
 %Exemplo 1: Reconheço a utilização do ChatGPT 3.5 (Open AI, https://chat.openai.com) para resumir as notas iniciais e para rever o rascunho final, a utilização do Office365 (Microsoft, https://www.office.com) para a escrita do texto.
 %Exemplo 2: Não foram utilizados no presente trabalho quaisquer conteúdos gerados por tecnologias de IA.

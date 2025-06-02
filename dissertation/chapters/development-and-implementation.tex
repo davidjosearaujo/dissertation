@@ -62,7 +62,7 @@ The following core software components and tools were utilized across these \acp
     \item {
         \textbf{Custom Tools and Scripts}
         \begin{itemize}
-            \item \textbf{\texttt{open5gs-dbctl}:} A shell script provided and used on the \texttt{core} VM to interact with the MongoDB database for managing Open5GS subscriber entries (adding \acp{UE}, defining \acp{APN} and slices).
+            \item \textbf{\texttt{open5gs-dbctl}:} A shell script provided and used on the \texttt{core} \ac{VM} to interact with the MongoDB database for managing Open5GS subscriber entries (adding \acp{UE}, defining \acp{APN} and slices).
 
             \item \textbf{\texttt{interceptor}:} A custom Go application (compiled from source located in an \texttt{interceptor} directory, as indicated in the \texttt{Vagrantfile}) deployed on the \texttt{ue} \ac{VM}. This is the key tool developed to orchestrate the logic for monitoring \texttt{hostapd} events and managing \ac{PDU} sessions. It's specific internal workings are detailed later.
 
@@ -76,7 +76,7 @@ The following core software components and tools were utilized across these \acp
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figs/topology_vagrant_machine_topology.png}
-    \caption{Vagrant deployed \acp{VM} with respecting services and interconnecting networks topology}
+    \caption{Vagrant deployed \acs{VM}s with respecting services and interconnecting networks topology}
     \label{fig:topology_vagrant_machine_topology}
 \end{figure}
 
@@ -98,7 +98,7 @@ This comprehensive setup provides a fully functional, albeit simulated, environm
 
 This section details the practical implementation of the \ac{EAP-TLS} authentication mechanism, which forms the first crucial step in integrating \ac{NAUN3} devices. The setup involves configuring an \ac{EAP} Authentication Server (FreeRADIUS), an Authenticator (\texttt{hostapd} on the \ac{5G-RG}), and an \ac{EAP} Supplicant (\texttt{wpa\_supplicant} on the \ac{NAUN3} device), with a custom Go application (\texttt{interceptor}) orchestrating the events on the \ac{5G-RG}.
 
-Firstly, the \ac{EAP} Authentication Server was implemented using FreeRADIUS on the \texttt{core} \ac{VM}, provisioned by the \texttt{auth\_server\_install} script. This script is responsible for configuring FreeRADIUS and they keys it uses.
+Firstly, the \ac{EAP} Authentication Server was implemented using FreeRADIUS on the \texttt{core} \ac{VM}, provisioned by the \texttt{auth\_server\_install} script. This script is responsible for configuring FreeRADIUS and the keys it uses.
 
 Regarding \ac{RADIUS} Client Configuration, the \ac{5G-RG} (\texttt{ue} \ac{VM}) was registered as a \ac{RADIUS} client in \texttt{/etc/freeradius/3.0/clients.conf}. This entry specified the \texttt{ue} \ac{VM}'s \ac{IP} address designated for \ac{EAP} traffic (the \texttt{CLIENT\_EAP\_IP} variable defined in the \texttt{Vagrantfile} as \texttt{10.45.0.2}) and a shared secret (the \texttt{CLIENT\_SECRET} variable also defined in the \texttt{Vagrantfile}, holding a randomly generated value) for securing \ac{RADIUS} communication.
 
@@ -124,9 +124,9 @@ Secondly, the \ac{5G-RG} (\texttt{ue} \ac{VM}) acts as the \ac{EAP} Authenticato
 
 Starting installation, \texttt{hostapd} is cloned from \texttt{w1.fi/hostap.git} and compiled from source, ensuring the \texttt{CONFIG\_DRIVER\_WIRED=y} option was enabled in its \texttt{.config} file to support \ac{EAP} authentication over the virtual interface connecting both the \texttt{ue} \ac{VM} to the \texttt{naun3} \ac{VM}.
 
-Regarding the \texttt{hostadp} configuration, which is the entity responsible for \ac{LAN} authentication, we can review it bellow (see Code Snippet \ref{lst:hostapd-configurations}).
+Regarding the \texttt{hostadp} configuration, which is the entity responsible for \ac{LAN} authentication, we can review it bellow (see Listing \ref{lst:hostapd-configurations}).
 
-\begin{lstlisting}[caption=hostapd configurations,label={lst:hostapd-configurations}]
+\begin{lstlisting}[caption=\texttt{hostapd} configurations,label={lst:hostapd-configurations}]
 interface=enp0s9
 driver=wired
 ctrl_interface=/var/run/hostapd
@@ -144,17 +144,15 @@ auth_server_shared_secret=$CLIENT_SECRET
 \end{lstlisting}
 
 \begin{itemize}
-    \item \texttt{auth\_server\_addr}: Set to \texttt{AUTH\_SERVER\_IP} (the \ac{IP} of the \texttt{core} \ac{VM} (10.45.0.1) reachable via the \texttt{backhaul} \ac{PDU} session).
+    \item \texttt{auth\_server\_addr}: Set to \texttt{AUTH\_SERVER\_IP} (the \ac{IP} of the \texttt{core} \ac{VM} (\texttt{10.45.0.1}) reachable via the \texttt{backhaul} \ac{PDU} session).
     \item \texttt{auth\_server\_port=1812}.
     \item \texttt{auth\_server\_shared\_secret}: Set to \texttt{CLIENT\_SECRET}.
-    \item \texttt{own\_ip\_addr}: Set to \texttt{CLIENT\_EAP\_IP} (10.45.0.2), ensuring \ac{RADIUS} packets from \texttt{hostapd} originate from the correct \ac{IP} address within the \texttt{backhaul} \ac{PDU} session
+    \item \texttt{own\_ip\_addr}: Set to \texttt{CLIENT\_EAP\_IP} (\texttt{10.45.0.2}), ensuring \ac{RADIUS} packets from \texttt{hostapd} originate from the correct \ac{IP} address within the \texttt{backhaul} \ac{PDU} session
 \end{itemize}
 
 When implementing the \texttt{naun3} device, it configured to act as an \ac{EAP} Supplicant using \texttt{wpa\_supplicant}, as detailed in the \texttt{naun3\_install} installation script.
 
-Going through the configurations in Code Snippet \ref{lst:wpa-supplicant-configurations} we can see the following.
-
-\begin{lstlisting}[caption=wpa\_supplicant configurations,label={lst:wpa-supplicant-configurations}]
+\begin{lstlisting}[caption=\texttt{wpa\_supplicant} configurations,label={lst:wpa-supplicant-configurations}]
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
 eapol_version=2
 ap_scan=0
@@ -172,7 +170,7 @@ network={
 }
 \end{lstlisting}
 
-A network block was defined specifically for \ac{EAP-TLS} authentication:
+In the configurations shown in the Listing \ref{lst:wpa-supplicant-configurations}, a network block was defined specifically for \ac{EAP-TLS} authentication:
 
 \begin{itemize}
     \item \texttt{key\_mgmt=IEEE8021X}.
@@ -183,15 +181,15 @@ A network block was defined specifically for \ac{EAP-TLS} authentication:
     \item \texttt{private\_key\_passwd} was set to \texttt{CERT\_CLIENT\_PASSWD}.
 \end{itemize}
 
-Also, \texttt{wpa\_supplicant} was configured to use the wired driver (via the \texttt{-Dwired} argument) for its network interface (via the \texttt{-ienp0s8} argument).The scan for \acp{AP} is also disabled via \texttt{ap\_scan=0}, which is appropriate for wired connections.
+Also, \texttt{wpa\_supplicant} was configured to use the wired driver (via the \texttt{-Dwired} argument) for its network interface (via the \texttt{-ienp0s8} argument). The scan for \acp{AP} is also disabled via \texttt{ap\_scan=0}, which is appropriate for wired connections.
 
 When it comes to orchestrating the authentication events, the custom Go application, \texttt{interceptor.go}, deployed on the \texttt{ue} \ac{VM}, plays a pivotal role in bridging the \ac{EAP} authentication outcome with the \ac{5G} session management logic.
 
-In it s interaction with \texttt{hostapd}, the \texttt{interceptor} establishes a connection to \texttt{hostapd}'s control interface socket (e.g., \texttt{/var/run/hostapd/enp0s9}) using a Unix domain socket. It sends an \texttt{"ATTACH"} command to subscribe to \texttt{hostapd} events, and the \texttt{HostapdListener} goroutine continuously monitors messages from \texttt{hostapd}.
+In it's interaction with \texttt{hostapd}, the \texttt{interceptor} establishes a connection to \texttt{hostapd}'s control interface socket (e.g., \texttt{/var/run/hostapd/enp0s9}) using a Unix domain socket. It sends an \texttt{"ATTACH"} command to subscribe to \texttt{hostapd} events, and the \texttt{HostapdListener} goroutine continuously monitors messages from \texttt{hostapd}.
 
 To detect \ac{EAP} successes, it specifically parses incoming messages for the string \texttt{"CTRL-EVENT-EAP-SUCCESS"}. An when one is detected,  the \texttt{interceptor} extracts the \ac{MAC} address of the authenticated \ac{NAUN3} device from the event message (e.g., \texttt{CTRL-EVENT-EAP-SUCCESS aa:bb:cc:dd:ee:ff}). This serves as a primary trigger for the \texttt{interceptor} that then proceeds to manage the device in its \texttt{allowed\_devices} map and initiates the logic for establishing a new \ac{PDU} session for this device.
 
-\subsection{Implemented \ac{EAP-TLS} Authentication Flow Summary}
+\subsection{Implemented \acs{EAP-TLS} Authentication Flow Summary}
 
 The implemented authentication sequence is as follows:
 
@@ -223,7 +221,7 @@ Once an \ac{NAUN3} device is authenticated, the \texttt{HostapdListener} calls t
     \item{ 
         It constructs and executes the UERANSIM command-line interface tool: \texttt{nr-cli <5G-RG\_IMSI> --exec "ps-establish IPv4 --sst 1 --dnn <DNN\_NAME>"}.
         \begin{itemize}
-            \item The \texttt{<5G-RG\_IMSI>} (e.g., 999700000000001) is the pre-configured \ac{IMSI} of the \ac{5G-RG} itself, passed as a command-line argument (\texttt{--imsi}) to the main application and subsequently to the \texttt{HostapdListener} and \texttt{NewPDUSession}.
+            \item The \texttt{<5G-RG\_IMSI>} (e.g., \texttt{999700000000001}) is the pre-configured \ac{IMSI} of the \ac{5G-RG} itself, passed as a command-line argument (\texttt{--imsi}) to the main application and subsequently to the \texttt{HostapdListener} and \texttt{NewPDUSession}.
             \item The \texttt{<DNN\_NAME>} (e.g., \texttt{clients}) is also passed as a command-line argument (\texttt{--dnn}) and used to target the \ac{PDU} session request. This \ac{DNN} was specifically configured in Open5GS on the \texttt{core} \ac{VM} and made known to the UERANSIM \ac{UE} stack on the \texttt{ue} \ac{VM}.
         \end{itemize}
     }
@@ -237,10 +235,10 @@ The main application maintains a global map: \texttt{allowedDevices} which is a 
 \begin{itemize}
     \item When an \ac{NAUN3} device successfully authenticates and its dedicated \ac{PDU} session (type \texttt{Session} from \texttt{ueransim\_pdu\_handler.go}) becomes active, an entry is added to this map by the \texttt{HostapdListener}. The \ac{MAC} address of the \ac{NAUN3} device serves as the key.
     
-    \item The \texttt{Device} object stores crucial information: its current \texttt{state} (e.g., "AUTHENTICATED", "LEASED", "REACHABLE"), a pointer to the \texttt{Session} object (containing \ac{PDU} Session ID, state, \ac{APN}/\ac{DNN}, and the \ac{5GC}-allocated \ac{IP} Address), Lease information (from \texttt{dnsmasq\_handler.go}, and \texttt{AppliedIPTablesRules} (a slice of \texttt{AppliedRuleDetail} from \texttt{routing\_handler.go}. This map is central to linking the local device to its \ac{5G} network representation and its specific traffic routing rules.
+    \item The \texttt{Device} object stores crucial information: its current \texttt{state} (e.g., \texttt{"AUTHENTICATED"}, \texttt{"LEASED"}, \texttt{"REACHABLE"}), a pointer to the \texttt{Session} object (containing \ac{PDU} Session ID, state, \ac{APN}/\ac{DNN}, and the \ac{5GC}-allocated \ac{IP} Address), Lease information (from \texttt{dnsmasq\_handler.go}, and \texttt{AppliedIPTablesRules} (a slice of \texttt{AppliedRuleDetail} from \texttt{routing\_handler.go}. This map is central to linking the local device to its \ac{5G} network representation and its specific traffic routing rules.
 \end{itemize}
 
-\subsection{4. \ac{NAUN3} Device Local \ac{IP} Addressing}
+\subsection{4. \acs{NAUN3} Device Local \acs{IP} Addressing}
 
 For the \ac{NAUN3} device to communicate on the local network segment:
 
@@ -249,7 +247,7 @@ For the \ac{NAUN3} device to communicate on the local network segment:
 
     \item \texttt{dnsmasq} on the \ac{5G-RG} (configured in \texttt{ue\_install}) serves \ac{DHCP} only to \ac{MAC} addresses listed as \texttt{"known"} in this file.
 
-    \item \texttt{wpa\_supplicant} on the \ac{NAUN3} \ac{VM} then executes \texttt{sudo dhclient enp0s8} to obtain a local \ac{IP} address (e.g., from 192.168.60.0/24).
+    \item \texttt{wpa\_supplicant} on the \ac{NAUN3} \ac{VM} then executes \texttt{sudo dhclient enp0s8} to obtain a local \ac{IP} address (e.g., from \texttt{192.168.60.0/24}).
 \end{itemize}
 
 \subsection{5. Proxy Identity Lifecycle Management (Termination)}
@@ -262,7 +260,7 @@ The \texttt{HostDisconnectListener} \textit{goroutine} (in \texttt{network\_hand
     \item{
         This triggers the \texttt{ForgetDevice} function, which performs cleanup:
         \begin{itemize}
-            \item \texttt{DisallowMAC()} (from dnsmasq\_handler.go): Removes the \ac{NAUN3} device's \ac{MAC} address entry from the \texttt{allowedMACsFilePath} and the \texttt{leasesFilePath} (passed via \texttt{--leases} flag to \texttt{main.go}), followed by a \texttt{RestartDnsmasq()} call which will force \texttt{dnsmasq} to restart and thus reload the configurations now updated.
+            \item \texttt{DisallowMAC()} (from \texttt{dnsmasq\_handler.go}): Removes the \ac{NAUN3} device's \ac{MAC} address entry from the \texttt{allowedMACsFilePath} and the \texttt{leasesFilePath} (passed via \texttt{--leases} flag to \texttt{main.go}), followed by a \texttt{RestartDnsmasq()} call which will force \texttt{dnsmasq} to restart and thus reload the configurations now updated.
 
             \item \texttt{Deauth()} (from \texttt{hostapd\_interceptor.go}): Sends a \texttt{"DEAUTHENTICATE <MAC\_ADDRESS>"} command to \texttt{hostapd}.
 
@@ -283,7 +281,7 @@ The \texttt{interceptor} system, through the \texttt{routing\_handler.go} module
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{figs/topology-Policy Based Routing.png}
+    \includegraphics[width=0.60\linewidth]{figs/topology-Policy Based Routing.png}
     \caption{Policy Based Routing}
     \label{fig:policy-based-routing}
 \end{figure}
@@ -319,7 +317,7 @@ The \texttt{interceptor} system, through the \texttt{routing\_handler.go} module
 
 The successful implementation of the proposed framework did not require code-level modifications to the standard \ac{5G} \acp{NF} or \ac{RAN}/\ac{UE} simulators. Instead, these components were adapted through specific configurations to support the gateway-centric authentication and identity management scheme for \ac{NAUN3} devices. The primary tools used for this were \Open5GS for the \ac{5GC}, UERANSIM for the \ac{gNB} and the \ac{5G-RG}'s \ac{UE} stack, all provisioned and configured via scripts within a Vagrant-managed virtualized environment.
 
-\subsection{Open5GS (\ac{5GC}) on \texttt{core} \ac{VM}}
+\subsection{Open5GS (\acs{5GC}) on \texttt{core} \acs{VM}}
 
 The Open5GS components whose configurations were specifically adapted for this framework were the \ac{AMF}, \ac{SMF}, and \ac{UPF}. The \ac{AUSF} and \ac{UDM} operated in a standard manner for the \ac{5G-RG}'s own registration and authentication. The relevant configurations were applied as follows.
 
@@ -339,7 +337,7 @@ The Open5GS components whose configurations were specifically adapted for this f
     \item \textbf{Subscriber Provisioning (for the \ac{5G-RG}):} The \ac{5G-RG} itself was provisioned as a standard \ac{UE} in the Open5GS MongoDB database using the \texttt{open5gs-dbctl} script. This involved adding an entry with the \ac{5G-RG}'s \ac{IMSI}, pre-shared key, and \ac{OPC}. This subscription was configured to allow the \ac{5G-RG} to establish \ac{PDU} sessions on both the \texttt{backhaul} and \texttt{clients} \acp{DNN} using the \texttt{update\_apn} command of \texttt{open5gs-dbctl.sh}.
 \end{itemize}
 
-\subsection{UERANSIM (\ac{gNB} on \texttt{gnb} \ac{VM} and \ac{UE} stack on \texttt{ue} \ac{VM})}
+\subsection{UERANSIM (\acs{gNB} on \texttt{gnb} \acs{VM} and \acs{UE} stack on \texttt{ue} \acs{VM})}
 
 The UERANSIM components were configured without any code modifications, using their standard YAML configuration files manipulated by \texttt{yq}:
 
@@ -372,7 +370,7 @@ These configurations ensured that the standard \ac{5G} components could support 
 
 The various implemented components were integrated into a cohesive test environment using Vagrant for \ac{VM} orchestration and shell scripts for provisioning. This ensured consistent configurations and network connectivity across the simulated \ac{5G} system and attached devices.
 
-\subsection{Virtual Machine Orchestration and Network Topology:}
+\subsection{\acs{VM} Orchestration and Network Topology:}
 
 The \texttt{Vagrantfile} defines four \acp{VM} (\texttt{core}, \texttt{gnb}, \texttt{ue}, \texttt{naun3}), each running Ubuntu 22.04 LTS. Vagrant establishes several private networks, each serving a distinct functional purpose, to facilitate communication:
 
@@ -388,7 +386,7 @@ The \texttt{Vagrantfile} defines four \acp{VM} (\texttt{core}, \texttt{gnb}, \te
     }
 \end{itemize}
 
-\subsection{\ac{5G-RG} (\texttt{ue} \ac{VM}) as the Central Integration Hub:}
+\subsection{\acs{5G-RG} (\texttt{ue} \acs{VM}) as the Central Integration Hub:}
 
 The \texttt{ue} \ac{VM} is the cornerstone of the integration, performing multiple functions simultaneously:
 
@@ -418,11 +416,11 @@ The \texttt{ue} \ac{VM} is the cornerstone of the integration, performing multip
     }
 \end{itemize}
 
-\subsection{\ac{NAUN3} Device (\texttt{naun3} \ac{VM}) Configuration:}
+\subsection{\acs{NAUN3} Device (\texttt{naun3} \acs{VM}) Configuration:}
 
 The \texttt{naun3} \ac{VM} connects to the \ac{5G-RG}'s \ac{LAN} interface. Its \texttt{wpa\_supplicant} service is configured for \ac{EAP-TLS} authentication using the client certificate and \ac{CA} certificate shared via the Vagrant synced folder (\texttt{/certs}). Upon successful authentication, it obtains a local \ac{IP} address via \ac{DHCP} from the \texttt{dnsmasq} server on the \ac{5G-RG}.
 
-\subsection{\ac{EAP} Authentication Server (FreeRADIUS on \texttt{core} \ac{VM})}
+\subsection{\acs{EAP} Authentication Server (FreeRADIUS on \texttt{core} \acs{VM})}
 
 FreeRADIUS on the \texttt{core} \ac{VM} is configured to listen for \ac{RADIUS} requests. The \texttt{ue} \ac{VM} (\ac{5G-RG}) is defined as a \ac{RADIUS} client, identified by its \texttt{backhaul} \ac{PDU} session \ac{IP} address. It authenticates \ac{NAUN3} devices based on the client certificates issued by its internal \ac{CA}.
 
@@ -434,7 +432,7 @@ The \texttt{Vagrantfile} serves as the central point for defining critical netwo
 
 The development and implementation of this framework, while ultimately successful in the simulated environment, encountered several technical challenges. These ranged from complexities in orchestrating the virtualized \ac{5G} system to specific issues encountered when attempting to integrate physical hardware.
 
-\subsection{Orchestration of Simulated \ac{5G} Components}
+\subsection{Orchestration of Simulated \acs{5G} Components}
 
 Regarding configuration complexity, setting up a multi-\ac{VM} environment with Open5GS, UERANSIM, FreeRADIUS, \texttt{hostapd}, and \texttt{dnsmasq} required careful management of numerous configuration files and network parameters. Ensuring \ac{IP} address consistency, correct \ac{DNN} definitions, subscriber provisioning, and proper inter-component communication (e.g., \ac{RADIUS}, \ac{NGAP}, \ac{GTP-U}) across different virtual networks demanded meticulous scripting (as seen in the Vagrant provisioning scripts). Any misconfiguration in one component often had cascading effects, making debugging a time-consuming process.
 
@@ -446,7 +444,7 @@ For dynamic \ac{PDU} Session management with UERANSIM, while the \texttt{nr-cli}
 
 Handling the events and managing the state, the custom orchestration application needed to reliably capture events from \texttt{hostapd} (\ac{EAP} success), manage the state of multiple \ac{NAUN3} devices (authentication status, associated \ac{PDU} session, applied routing rules), and react to network events (\ac{DHCP} lease changes, device disconnections via \ac{ARP}/neighbor cache monitoring). Coordinating these asynchronous events and maintaining a consistent internal state for each device was a key challenge.
 
-The custom logic for interfacing with system Utilities, interacts with tools like \texttt{nr-cli} (for \ac{PDU} sessions), \texttt{iptables}, and \texttt{ip route}/\texttt{ip rule} (for traffic mapping). Ensuring these commands were executed correctly with the appropriate parameters for each device, and handling their output or potential errors, required careful implementation and robust error checking within the Go application.
+The custom logic for interfacing with system utilities, interacts with tools like \texttt{nr-cli} (for \ac{PDU} sessions), \texttt{iptables}, and \texttt{ip route}/\texttt{ip rule} (for traffic mapping). Ensuring these commands were executed correctly with the appropriate parameters for each device, and handling their output or potential errors, required careful implementation and robust error checking within the Go application.
 
 The developed \texttt{interceptor} tool is highly concurrency driven, managing multiple \textit{goroutines} for listening to \texttt{hostapd}, \texttt{dnsmasq} leases, and network disconnects, while ensuring thread-safe access to shared data structures (like the map of allowed devices), required careful use of synchronization primitives.
 
@@ -475,7 +473,7 @@ An attempt was made to integrate a physical \ac{5G} modem, specifically a Quecte
 
 These challenges highlight the gap that can exist between simulated environments and the specificity of physical hardware, especially when dealing with proprietary drivers and limited documentation for specialized or pre-release components. While the core concepts of the project were validated in simulation, porting to such physical hardware would require significant additional effort in driver-level integration and modem-specific control.
 
-\section{Latest \ac{3GPP} Developments}
+\section{Latest \acs{3GPP} Developments}
 
 During the course of this project's development and implementation, \ac{3GPP} Release 19 specifications have evolved, introducing mechanisms that are highly pertinent to the challenge of managing non-\ac{3GPP} devices behind a \ac{5G-RG}~\cite{23.316-p29}. These developments, validate the problem space addressed by this thesis and underscore the industry's movement towards more granular control and differentiated services for such devices. This section discusses the relevance of these advancements to the implemented framework.
 

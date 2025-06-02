@@ -26,13 +26,13 @@ To address the challenge of integrating \ac{NAUN3} devices lacking native \ac{5G
         \textbf{Minimal Impact on Existing Infrastructure}
         \begin{enumerate}
             \item {
-                \textbf{Core Network:} Standard \acl{5GC} functions (\acl{AMF}, \acl{SMF}, \acl{UPF}) must remain unaltered at the code level, with only configuration changes (e.g., \ac{IP} bindings, \ac{DNN} definitions) permitted.
+                \textbf{Core Network:} Standard \ac{5GC} functions (\ac{AMF}, \ac{SMF}, \ac{UPF}) must remain unaltered at the code level, with only configuration changes (e.g., \ac{IP} bindings, \ac{DNN} definitions) permitted.
             }
             \item {
                 \textbf{End Devices:} \ac{NAUN3} devices must operate without hardware or software modifications, requiring only standard \ac{EAP} Supplicant functionality.
             }
             \item {
-                \textbf{\acl{RAN}:} Standard \ac{5G} \ac{RAN} components (\acp{gNB}) must function without modification, maintaining standard interface operations with the core.
+                \textbf{\ac{RAN}:} Standard \ac{5G} \ac{RAN} components (\acp{gNB}) must function without modification, maintaining standard interface operations with the core.
             }
         \end{enumerate}
     }
@@ -79,7 +79,6 @@ To address the challenge of integrating \ac{NAUN3} devices lacking native \ac{5G
 
 Together, these requirements establish the foundation for a solution that integrates unmodified \ac{NAUN3} devices into the \ac{5G} ecosystem with minimal disruption to existing network components and processes.
 
-
 \section{Proposed Authentication Mechanism}
 
 To securely onboard \ac{NAUN3} devices lacking native \ac{5G} credentials, this framework employs \ac{EAP-TLS}—a mutual certificate-based authentication method offering strong security and compatibility with standard operator-managed components like \ac{RADIUS} servers. \ac{EAP-TLS} is particularly suitable for \ac{IoT} devices, where password-based methods are often impractical or insecure. Figure~\ref{fig:EAP-TLS-topology} illustrates the architecture, which comprises three roles:
@@ -87,7 +86,7 @@ To securely onboard \ac{NAUN3} devices lacking native \ac{5G} credentials, this 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{figs/topology-EAP.png}
-    \caption{\ac{EAP-TLS} Topology}
+    \caption{\acs{EAP-TLS} Topology}
     \label{fig:EAP-TLS-topology}
 \end{figure}
 
@@ -99,7 +98,7 @@ To securely onboard \ac{NAUN3} devices lacking native \ac{5G} credentials, this 
             \item A \ac{CA} certificate to validate the server
             \item A client certificate and private key (optionally password-protected)
         \end{itemize}
-        Standard software such as \texttt{wpa\_Supplicant} is used to handle this role.
+        Standard software such as \texttt{wpa\_supplicant} is used to handle this role.
     }
     \item {
         \textbf{Authenticator (\ac{5G-RG}):} Acts as a relay, not terminating the \ac{EAP-TLS} session. Responsibilities include:
@@ -125,7 +124,7 @@ To securely onboard \ac{NAUN3} devices lacking native \ac{5G} credentials, this 
 \begin{figure}
     \centering
     \includegraphics[width=0.75\linewidth]{figs/eap-tls-auth-flow.png}
-    \caption{\ac{EAP-TLS} Authentication Flow}
+    \caption{\acs{EAP-TLS} Authentication Flow}
     \label{fig:eap-tls-auth-flow}
 \end{figure}
 
@@ -175,13 +174,13 @@ In the proposed model, every \ac{PDU} Session, created and owned by the \ac{5G-R
 
 After a device has been successfully authenticated through \ac{EAP-TLS}, as described in the earlier section, the \ac{5G-RG} then initiates a \ac{PDU} Session establishment procedure. This is done through its own credentials and \ac{SUPI}, to the \ac{SMF}, through the \ac{AMF}, and specifying the special-purpose \texttt{clients} \ac{DNN}.
 
-Upon the assignment of resources — like an \ac{IP} address — by the \ac{5GC} to the session, the session is bound by the \ac{5G-RG} to the authenticated \ac{NAUN3} device. From there on, the session becomes the device’s operational identity in the \ac{5G} system.
+Upon the assignment of resources, like an \ac{IP} address, by the \ac{5GC} to the session, the session is bound by the \ac{5G-RG} to the authenticated \ac{NAUN3} device. From there on, the session becomes the device’s operational identity in the \ac{5G} system.
 
 \subsection{Gateway’s Role in Identity Mapping}
 
 The \ac{5G-RG} maintains an internal mapping table that links each \ac{NAUN3} device’s local identifier (e.g., \ac{MAC} address) to its associated \ac{PDU} Session ID. This mapping enables accurate routing of data between the local network and the corresponding session within the \ac{5GC}.
 
-\subsection{\ac{5GC} Perspective and Management}
+\subsection{\acs{5GC} Perspective and Management}
 
 From the point of view of the \ac{5GC}, the procedure is all standard. It communicates to just one registered \ac{UE}, the \ac{5G-RG}, to establish and release numerous \ac{PDU} Sessions related to the \texttt{clients} \ac{DNN}. Each session is managed by the \ac{SMF}, and it follows traditional techniques for resource assignment, policy control, and life cycle management.
 
@@ -271,4 +270,4 @@ This framework is able to bring \ac{NAUN3} devices into the \ac{5G} ecosystem by
 
 Integration is handled dynamically across the device's connection lifecycle. After a device completes local \ac{EAP-TLS} authentication, the \ac{5G-RG} requests a dedicated \ac{PDU} Session (under the \texttt{clients} \ac{DNN}) from the \ac{5GC}. The \ac{5G-RG} keeps an internal mapping between the device's local identity and its assigned \ac{PDU} Session. If the device disconnects or loses connectivity, the \ac{5G-RG} promptly terminates the related \ac{PDU} Session to free up \ac{5G} resources, ensuring only active and authenticated devices consume network capacity.
 
-Lastly, this setup enables the \ac{5GC} to manage each device individually—applying policies like \ac{QoS} and routing—through standard \ac{PDU} Session management, all without requiring changes to the \ac{NAUN3} devices or \ac{5G} core network functions. Integration relies entirely on configurations and the gateway's mediation, avoiding any need to alter fundamental \ac{5G} protocols or the capabilities of the devices themselves.
+Lastly, this setup enables the \ac{5GC} to manage each device individually, applying policies like \ac{QoS} and routing, through standard \ac{PDU} Session management, all without requiring changes to the \ac{NAUN3} devices or \ac{5G} core network functions. Integration relies entirely on configurations and the gateway's mediation, avoiding any need to alter fundamental \ac{5G} protocols or the capabilities of the devices themselves.
