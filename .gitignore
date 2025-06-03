@@ -94,16 +94,11 @@ sftp-config.json
 tags
 tramp
 
-*.obsidian/*
-/5G-emulated-network/.vagrant
-/5G-emulated-network/runtime-logs
-/5G-emulated-network/eap-radius-certs-sync
-/docs/.obsidian
+*.obsidian
 *.vagrant
-5G-emulated-network/lan-to-pdu-traffic-routing-poc/.vagrant/machines/naun31/virtualbox/action_provision
+*build
+*.vagrant
 *.venv
-
-
 EngineeringSample.rar
 
-*dissertation-application/*
+*application/*
