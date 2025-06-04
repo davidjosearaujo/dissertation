@@ -3,9 +3,14 @@ marp: true
 class: lead
 size: 4K
 style: |
-    .columns {
+    .columns2 {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    .columns3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 1rem;
     }
 ---
@@ -14,7 +19,7 @@ style: |
 
 # Integration of Wi-Fi-Only Devices in 5G Core Networks: Addressing Authentication and Identity Management Challenges
 
-<div class="columns">
+<div class="columns2">
 <div>
 
 
@@ -44,7 +49,7 @@ Doctor Francisco Fontes, _Altice Labs_
 # Table of Contents
 
 
-<div class="columns">
+<div class="columns2">
 <div>
 
 1. Introduction and Motivation
@@ -72,7 +77,37 @@ Doctor Francisco Fontes, _Altice Labs_
 
 # Introduction
 
-## The Evolving Telecom Landscape
+## The Dawn of 5G: A Paradigm Shift
+
+<div class="columns3">
+<div>
+
+**Enhanced Mobile Broadband (eMBB)** 
+
+High-data-rate applications and improved user experience for mobile broadband.
+
+</div>
+<div>
+
+**Massive Machine-Type Communications (mMTC)**
+
+Connecting vast numbers of devices, facilitating the growth of the Internet of Things (IoT).
+
+</div>
+<div>
+
+**Ultra-Reliable Low-Latency Communications (URLLC)**
+
+Critical for applications requiring high reliability and near-instantaneous response times.
+
+</div>
+</div>
+
+---
+
+###### Introduction
+
+## 5G's Impact on Private Networks
 
 ---
 
