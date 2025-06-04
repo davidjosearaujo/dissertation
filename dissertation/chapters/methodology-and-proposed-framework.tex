@@ -229,7 +229,7 @@ This session-based proxy identification scheme offers a number of beneficial fea
     \label{fig:Overall Architecture}
 \end{figure}
 
-This top-level architecture Figure \ref{fig:Overall Architecture} shows the integration framework. The \ac{NAUN3} device connects locally (through Wi-Fi or cable) to the \ac{5G-RG}, the latter serving as a regular \ac{UE} to the \ac{gNB} and to the \ac{5GC} and serving as an \ac{EAP} Authenticator forwarding requests to the external \ac{EAP-TLS} Authentication Server within the domain of the \ac{ISP}. The connection between the \ac{5G-RG} and the \ac{EAP} server is done through the use of \ac{RADIUS}, over a dedicated \ac{PDU} session belonging to the \texttt{backhaul} \ac{DNN}. Most importantly, when the local authentication of the \ac{5G-RG} was successful, the latter creates a different \ac{PDU} session for the \ac{NAUN3} device.
+This top-level architecture Figure \ref{fig:Overall Architecture} shows the integration framework. The \ac{NAUN3} device connects locally (through Wi-Fi or cable) to the \ac{5G-RG}, the latter serving as a regular \ac{UE} to the \ac{gNB} and to the \ac{5GC} and serving as an \ac{EAP} Authenticator forwarding requests to the external \ac{EAP-TLS} Authentication Server within the domain of the \ac{ISP}. The connection between the \ac{5G-RG} and the \ac{EAP} server is done through the use of \ac{RADIUS}, over a dedicated \ac{PDU} session belonging to the \texttt{backhaul} \ac{DNN}. Most importantly, when the local authentication of the \ac{5G-RG} is successful, the latter creates a different \ac{PDU} session for the \ac{NAUN3} device.
 
 \subsection{Interface and Protocol Integration}
 
@@ -266,7 +266,7 @@ The novelty lies not in modifying these protocols but in configuring the system 
 
 \section{Scope and Assumptions}
 
-This framework is able to bring \ac{NAUN3} devices into the \ac{5G} ecosystem by coordinating standard protocols and interfaces using smart logic centralized within the \ac{5G-RG}. Its main innovation is using individual \ac{PDU} Sessions, set up by the \ac{5G-RG}, as flexible proxy identities for each locally authenticated \ac{NAUN3} device. This method eliminates the need for devices to have native \ac{5G} credentials like \ac{SUPI} or \ac{USIM}.
+This framework is able to bring \ac{NAUN3} devices into the \ac{5G} ecosystem by coordinating standard protocols and interfaces using smart logic centralized within the \ac{5G-RG}. Its main innovation is using individual \ac{PDU} Sessions, set up by the \ac{5G-RG}, as flexible proxy identities for each locally authenticated \ac{NAUN3} device. This method allows devices with no \ac{5G} support to still connect and interact natively with other \ac{5G} devices
 
 Integration is handled dynamically across the device's connection lifecycle. After a device completes local \ac{EAP-TLS} authentication, the \ac{5G-RG} requests a dedicated \ac{PDU} Session (under the \texttt{clients} \ac{DNN}) from the \ac{5GC}. The \ac{5G-RG} keeps an internal mapping between the device's local identity and its assigned \ac{PDU} Session. If the device disconnects or loses connectivity, the \ac{5G-RG} promptly terminates the related \ac{PDU} Session to free up \ac{5G} resources, ensuring only active and authenticated devices consume network capacity.
 

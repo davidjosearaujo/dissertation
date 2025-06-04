@@ -1,5 +1,5 @@
 \chapter{State of the Art}
-\label{chapter:State of the Art}
+\label{chapter:state-of-the-art}
 
 \begin{introduction}
 This chapter will provide a comprehensive review of current \ac{5G} and Wi-Fi integration efforts, existing authentication mechanisms, and challenges in device identification, authentication and authorization. It will also explore recent developments and proposed solutions in the field, setting the context for our research.
@@ -103,7 +103,7 @@ Central to this framework is the \ac{EAP}, which facilitates secure communicatio
     \label{fig:Initiation of authentication procedure and selection of authentication method}
 \end{figure}
 
-The \ac{5G-AKA} authentication process begins when the \ac{SEAF} receives a request from the \ac{UE} seeking network access (see Figure \ref{fig:Initiation of authentication procedure and selection of authentication method}). The \ac{UE} provides either a \acf{5G-GUTI} or a \ac{SUCI} to begin the authentication. The \ac{AUSF} first ensures that the requesting \ac{SN} is legitimate, then it sends an authentication request to the \ac{UDM}/\ac{ARPF}. If the \ac{SUCI} is provided, the \ac{SIDF} decrypts it to obtain the \ac{SUPI}, which is used to determine the authentication method~\cite{33.501-p48}.
+The authentication process begins authentication method selection. When the \ac{SEAF} receives a request from the \ac{UE} seeking network access (see Figure \ref{fig:Initiation of authentication procedure and selection of authentication method}). The \ac{UE} provides either a \acf{5G-GUTI} or a \ac{SUCI} to begin the authentication. The \ac{AUSF} first ensures that the requesting \ac{SN} is legitimate, then it sends an authentication request to the \ac{UDM}/\ac{ARPF}. If the \ac{SUCI} is provided, the \ac{SIDF} decrypts it to obtain the \ac{SUPI}, which is used to determine the authentication method~\cite{33.501-p48}.
 
 \begin{figure}
     \centering
@@ -112,7 +112,7 @@ The \ac{5G-AKA} authentication process begins when the \ac{SEAF} receives a requ
     \label{fig:Authentication procedure for 5G AKA}
 \end{figure}
 
-Next the \ac{UDM}/\ac{ARPF} generates an authentication response containing tokens and keys (see Figure \ref{fig:Authentication procedure for 5G AKA} message 1). These are sent to the \ac{AUSF}(message 2), which computes a hash ($HXRES$) and checks the expected response (message 3). The \ac{AUSF} sends the authentication result, including the $AUTH$ token and $HXRES$, to the \ac{SEAF} (message 5), ensuring that the \ac{SUPI} is not exposed to the \ac{SEAF}, preserving privacy. The \ac{SEAF} forwards the $AUTH$ token to the \ac{UE} (message 6), which then validates it using a secret key shared with the home network (message 7). If successful, the \ac{UE} computes a $RES$ token and sends it back to the \ac{SEAF} (message 8). The \ac{SEAF} calculates the $HRES$ and compares it (message 9), and then forwards this to the \ac{AUSF} (message 10), which validates the response (message 11).
+In the case of \ac{5G-AKA}, in the next step the \ac{UDM}/\ac{ARPF} generates an authentication response containing tokens and keys (see Figure \ref{fig:Authentication procedure for 5G AKA} message 1). These are sent to the \ac{AUSF}(message 2), which computes a hash ($HXRES$) and checks the expected response (message 3). The \ac{AUSF} sends the authentication result, including the $AUTH$ token and $HXRES$, to the \ac{SEAF} (message 5), ensuring that the \ac{SUPI} is not exposed to the \ac{SEAF}, preserving privacy. The \ac{SEAF} forwards the $AUTH$ token to the \ac{UE} (message 6), which then validates it using a secret key shared with the home network (message 7). If successful, the \ac{UE} computes a $RES$ token and sends it back to the \ac{SEAF} (message 8). The \ac{SEAF} calculates the $HRES$ and compares it (message 9), and then forwards this to the \ac{AUSF} (message 10), which validates the response (message 11).
 
 Once the $RES$ token is verified, the \ac{AUSF} sends an anchor key to the \ac{SEAF} (message 12). The \ac{SEAF} derives an \acs{AMF} key, which the \acl{AMF} uses to generate further keys for securing signaling messages between the \ac{UE} and network elements. The \ac{UE}, using its root key, can derive all necessary keys for secure communication with the network, ensuring mutual trust and security~\cite{33.501-p52}.
 
@@ -123,16 +123,25 @@ Once the $RES$ token is verified, the \ac{AUSF} sends an anchor key to the \ac{S
     \label{fig:Authentication procedure for EAP-AKA'}
 \end{figure}
 
+\break
+
 An alternative authentication method in \ac{5G} is \ac{EAP-AKA'}, which provides mutual authentication between the \ac{UE} and the network using a shared cryptographic key (see Figure \ref{fig:Authentication procedure for EAP-AKA'}). Unlike \ac{5G-AKA}, \ac{EAP-AKA'} uses \ac{EAP} messages within \ac{NAS} messages between the \ac{UE} and \ac{SEAF}, and between the \ac{SEAF} and \ac{AUSF}. In \ac{EAP-AKA'}, the \ac{SEAF} merely relays messages between the \ac{UE} and the \ac{AUSF} without making authentication decisions. In contrast, in \ac{5G-AKA}, the \ac{SEAF} verifies the \ac{UE}'s authentication response and can act on failures. The $K_{AUSF}$ key in \ac{5G-AKA} is generated by the \ac{UDM}/\ac{ARPF} and sent to the \ac{AUSF}, while in \ac{EAP-AKA'}, the \ac{AUSF} derives this key from the \ac{EMSK}, which is provided by \ac{UDM}/\ac{ARPF}~\cite{33.501-p49}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication.png}
-    \caption{Using \acs{EAP-TLS} Authentication Procedures over \acs{5G} Networks for initial authentication}
-    \label{fig:Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication}
+    \includegraphics[width=1\linewidth]{figs/Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication_1.png}
+    \caption{Using \acs{EAP-TLS} Authentication Procedures over \acs{5G} Networks for initial authentication (Part 1)}
+    \label{fig:Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication_1}
 \end{figure}
 
-Additionally, \ac{EAP-TLS} (see Figure \ref{fig:Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication}) is another optional authentication method suitable for specific scenarios such as private networks or \ac{IoT} devices. Like \ac{EAP-AKA'}, \ac{EAP-TLS} involves mutual authentication via public key certificates or a \ac{PSK}. The \ac{SEAF} acts as an \ac{EAP} authenticator, forwarding \ac{EAP-TLS} messages between the \ac{UE} and the \ac{AUSF}. This method differs from the \ac{AKA}-based approaches by relying on public key certificates for trust, eliminating the need for symmetric keys shared between the \ac{UE} and the network. This reduces key management risks and does not require a traditional \ac{USIM}, although secure elements are still needed for storing credentials~\cite{33.501-p232}.
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figs/Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication_2.png}
+    \caption{Using \acs{EAP-TLS} Authentication Procedures over \acs{5G} Networks for initial authentication (Part 2)}
+    \label{fig:Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication_2}
+\end{figure}
+
+Additionally, \ac{EAP-TLS} (see Figures \ref{fig:Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication_1} and \ref{fig:Using EAP-TLS Authentication Procedures over 5G Networks for initial authentication_2}) is another optional authentication method suitable for specific scenarios such as private networks or \ac{IoT} devices. Like \ac{EAP-AKA'}, \ac{EAP-TLS} involves mutual authentication via public key certificates or a \ac{PSK}. The \ac{SEAF} acts as an \ac{EAP} authenticator, forwarding \ac{EAP-TLS} messages between the \ac{UE} and the \ac{AUSF}. This method differs from the \ac{AKA}-based approaches by relying on public key certificates for trust, eliminating the need for symmetric keys shared between the \ac{UE} and the network. This reduces key management risks and does not require a traditional \ac{USIM}, although secure elements are still needed for storing credentials~\cite{33.501-p232}.
 
 \section{Identity Management in \acs{5G}}
 
@@ -302,41 +311,13 @@ In non-roaming scenarios, the home operator (or \ac{HPLMN}) decides whether a no
 
 The \ac{UE} stores trusted non-\ac{3GPP} access network information in the \ac{USIM}, which takes priority over the \ac{ME}, the device itself.
 
-For authentication over untrusted non-\ac{3GPP} networks (see Figure \ref{fig:Authentication for untrusted non-3GPP access}), the \ac{UE} uses a vendor-specific \ac{EAP} method called "EAP-5G", which employs the "Expanded" \ac{EAP} type and the \ac{3GPP} Vendor-Id. The \ac{EAP-5G} method is used between the \ac{UE} and \ac{N3IWF} to encapsulate \ac{NAS} messages. If the \ac{UE} requires authentication by the \ac{3GPP} home network, standard authentication methods are applied between the \ac{UE} and the \ac{AUSF}. Whenever possible, the \ac{UE} will reuse the existing \ac{NAS} security context from the \ac{AMF} for authentication~\cite{33.501-p128}.
+For authentication over untrusted non-\ac{3GPP} networks (see Annex \ref{chapter:appendix-b}), the \ac{UE} uses a vendor-specific \ac{EAP} method called "EAP-5G", which employs the "Expanded" \ac{EAP} type and the \ac{3GPP} Vendor-Id. The \ac{EAP-5G} method is used between the \ac{UE} and \ac{N3IWF} to encapsulate \ac{NAS} messages. If the \ac{UE} requires authentication by the \ac{3GPP} home network, standard authentication methods are applied between the \ac{UE} and the \ac{AUSF}. Whenever possible, the \ac{UE} will reuse the existing \ac{NAS} security context from the \ac{AMF} for authentication~\cite{33.501-p128}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{figs/Authentication for untrusted non-3GPP access.png}
-    \caption{Authentication for untrusted non-\acs{3GPP} access}
-    \label{fig:Authentication for untrusted non-3GPP access}
-\end{figure}
-
-Security for trusted non-\ac{3GPP} access to the \ac{5GC} involves the \ac{UE} registering to the \ac{5GC} via a \ac{TNAN} using the \ac{EAP-5G} procedure, similar to that used for untrusted access (see Figure \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_1}, \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_2} and \ref{fig:Authentication and PDU Session establishment for trusted non-3GPP access_3} ). The link between the \ac{UE} and the \ac{TNAN} relies on Layer-2 security, making \ac{IPSec} encryption unnecessary between the \ac{UE} and the \ac{TNGF}, though integrity protection is ensured~\cite{33.501-p132}.
+Security for trusted non-\ac{3GPP} access to the \ac{5GC} involves the \ac{UE} registering to the \ac{5GC} via a \ac{TNAN} using the \ac{EAP-5G} procedure, similar to that used for untrusted access (see Appendix \ref{chapter:appendix-c}). The link between the \ac{UE} and the \ac{TNAN} relies on Layer-2 security, making \ac{IPSec} encryption unnecessary between the \ac{UE} and the \ac{TNGF}, though integrity protection is ensured~\cite{33.501-p132}.
 
 During registration, the \ac{TNGF} terminates \ac{EAP-5G} signaling and forwards \ac{NAS} messages to the \ac{5GC}. At the registration's conclusion, an \ac{IPSec SA (NWt)} (an \acl{IPSec SA} managing secure communication parameters at a Network Termination point) is established between the \ac{UE} and \ac{TNGF} to protect \ac{NAS} messages. Additional \acp{IPSec SA} are created during \ac{PDU} session establishment for user plane transport. Security policies, determined by the home operator, define whether non-\ac{3GPP} access is trusted based on security domains or other considerations.
 
 For trusted non-\ac{3GPP} access authentication, key differences from untrusted access include avoiding \ac{IKEv2} encapsulation for \ac{EAP-5G} packets, utilizing \ac{5G-GUTI} or \ac{SUCI} for \ac{UE} identity, and deriving keys like $K_TNGF$ and $K_TNAP$ for secure communication. These keys are shared between the \ac{AMF}, \ac{TNGF}, and \ac{TNAP} to establish secure communication flows.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{figs/Authentication and PDU Session establishment for trusted non-3GPP access_1.png}
-    \caption{Authentication and \acs{PDU} Session establishment for trusted non-\acs{3GPP} access}
-    \label{fig:Authentication and PDU Session establishment for trusted non-3GPP access_1}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{figs/Authentication and PDU Session establishment for trusted non-3GPP access_2.png}
-    \caption{Authentication and \acs{PDU} Session establishment for trusted non-\acs{3GPP} access (continuation)}
-    \label{fig:Authentication and PDU Session establishment for trusted non-3GPP access_2}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{figs/Authentication and PDU Session establishment for trusted non-3GPP access_3.png}
-    \caption{Authentication and \acs{PDU} Session establishment for trusted non-\acs{3GPP} access (continuation)}
-    \label{fig:Authentication and PDU Session establishment for trusted non-3GPP access_3}
-\end{figure}
 
 \section{Device Support Behind Wireline}
 
@@ -373,14 +354,7 @@ Following successful authentication, the \ac{AMF} completes additional registrat
 
 After registration, the \ac{W-AGF} establishes a single \ac{PDU} session for each \ac{N5GC} device, ensuring each device is assigned its own unique data session within the \ac{5GC} while accounting for the device's limitations. This ensures secure and individualized connectivity. Additionally, the \ac{W-AGF} manages \ac{NGAP} connections, ensuring that if the \ac{NGAP} connection for a \ac{CRG} is released, all associated \ac{N5GC} device connections are also terminated. The \ac{CRG} continues to operate as an \ac{FN-CRG}, supporting seamless communication for connected devices~\cite{23.316-p25}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.75\linewidth]{figs/Detailed registration and authentication flow of a non-5G capable device to the 5GC.png}
-    \caption{Detailed registration and authentication flow of a \acs{N5GC} device to the \acs{5GC}}
-    \label{fig:Detailed registration and authentication flow of a non-5G capable device to the 5GC}
-\end{figure}
-
-In Annex 0 of TS 33.501, we can get more detail regarding this registration and authentication process (see Firgure \ref{fig:Detailed registration and authentication flow of a non-5G capable device to the 5GC})~\cite{33.501-p279}.
+In Annex 0 of TS 33.501, we can get more detail regarding this registration and authentication process (see Appendix \ref{chapter:appendix-d})~\cite{33.501-p279}.
 
 \subsection{\acs{N5GC} and \acs{NAUN3} devices}
 
