@@ -7,6 +7,7 @@ sudo apt-get install -y wpasupplicant iperf3
 
 echo -e "\nRemove IP address"
 sudo ip addr flush enp0s8
+sudo ip link set enp0s8 up
 
 echo -e "\nWriting wpa_supplicant configurations"
 echo -e 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=vagrant
@@ -34,7 +35,11 @@ sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FIL
 " | sudo tee /etc/init.d/wpa_supplicant > /dev/null
 sudo chmod +x /etc/init.d/wpa_supplicant
 
+sudo tcpdump -i enp0s8 -w /log/$(cat /etc/hostname)_tcpdump.pcap &
+
 for i in $(seq 1 10); do
+    sudo ip addr flush enp0s8
+
     startTime=$(date +%s)
 
     sudo wpa_supplicant -tKdd -ienp0s8 -Dwired -c./wpa_supplicant.conf &>> ${LOG_FILE_PATH} &
@@ -47,7 +52,8 @@ for i in $(seq 1 10); do
 
     sudo killall wpa_supplicant
     sudo killall dhclient
-    sudo ip addr flush enp0s8
 
-    sleep 180
+    sleep 130
 done
+
+killall tcpdump

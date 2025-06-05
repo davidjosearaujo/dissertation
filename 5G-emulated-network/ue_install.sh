@@ -33,6 +33,8 @@ cat /home/vagrant/open5gs-ue.yaml \
 echo -e "\nRunning UE"
 /home/vagrant/nr-ue -c /home/vagrant/open5gs-ue.yaml &>> /log/ue.log &
 
+sleep 10
+
 echo -e "\nEnabling IP forwarding"
 sudo sysctl -w net.ipv4.ip_forward=1
 
