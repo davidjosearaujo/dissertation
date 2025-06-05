@@ -3,14 +3,9 @@ marp: true
 class: lead
 size: 4K
 style: |
-    .columns2 {
+    .columns {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-    }
-    .columns3 {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
         gap: 1rem;
     }
 ---
@@ -49,224 +44,50 @@ Doctor Francisco Fontes, _Altice Labs_
 # Table of Contents
 
 
-<div class="columns2">
+<div class="columns" style="--columns:2;">
 <div>
 
-1. Introduction and Motivation
-2. Problem Statement and Research Objectives
-3. 5G Foundations
-4. Non-3GPP Access and Device Types
-5. Proposed Framework
-6. Authentication and Identity
-7. Development and Implementation Environment
-
-</div>
-<div>
-
-8. Implementation Details: Key Components
-9. Validation Methodology and Scenarios
-10. Validation Results: Functionality
-11. Validation Results: Security and Performance
-12. Discussion and Future Work
-13. Conclusions and Contributions
-
-</div>
-</div>
-
----
-
-# Introduction
-
-## The Dawn of 5G: A Paradigm Shift
-
-<div class="columns3">
-<div>
-
-**Enhanced Mobile Broadband (eMBB)** 
-
-High-data-rate applications and improved user experience for mobile broadband.
+1. The Core Problem and Its Significance
+2. Research Objectives
+3. State of the Art and The Specific Gap
+4. Framework Concept and Architecture
+5. Key Mechanisms: Authentication, Identity, Traffic
 
 </div>
 <div>
 
-**Massive Machine-Type Communications (mMTC)**
+6. Implementation: Testbed and Orchestration Logic
+7. Validation: Key Results
+8. Conclusion and Contributions
+9. Limitations and Future Work
 
-Connecting vast numbers of devices, facilitating the growth of the Internet of Things (IoT).
+</div>
+</div>
+
+---
+
+# The Core Problem and Its Significance
+
+<div class="columns" style="--columns:3;">
+<div>
+
+## The Challenge
+
+Current 3GPP standards don't fully address integrating **Wi-Fi-only devices lacking 5G credentials** into the 5G network, preventing standard 5G authentication.
 
 </div>
 <div>
 
-**Ultra-Reliable Low-Latency Communications (URLLC)**
+## Impact
 
-Critical for applications requiring high reliability and near-instantaneous response times.
+A significant hurdle for enterprise/residential environments with many such devices.
+
+</div>
+<div>
+
+## Motivation
+
+Solving this is crucial for 5G's success, enabling true **5G-Wi-Fi convergence** and extending 5G benefits (eMBB, mMTC, URLLC) to this vast device ecosystem.
 
 </div>
 </div>
-
----
-
-###### Introduction
-
-## 5G's Impact on Private Networks
-
----
-
-###### Introduction
-
-## The Wi-Fi Integration Imperative
-
----
-
-# Problem Statement
-
----
-
-# Research Objectives
-
----
-
-# State of the Art
-
-## Evolution of Cellular Security (2G to 4G)
-
----
-
-###### State of the Art
-
-## 5G Security Architecture
-
----
-
-###### State of the Art
-
-## 5G Authentication Methods
-
----
-
-###### State of the Art
-
-## 5G Identity Management
-
----
-
-###### State of the Art
-
-## Non-3GPP Access Architectures
-
----
-
-###### State of the Art
-
-## Wireline Access and Device Diversity
-
----
-
-###### State of the Art
-
-## N5GC Devices
-
----
-
-###### State of the Art
-
-## NAUN3 Devices & Recent 3GPP Advancements
-
----
-
-# Proposed Framework 
-
-## Overall Research Approach and Guiding Principles
-
----
-
-###### Proposed Framework
-
-## Key Requirements
-
----
-
-###### Proposed Framework
-
-## Authentication Mechanism (EAP-TLS)
-
----
-
-###### Proposed Framework
-
-## EAP-TLS Authentication Flow
-
----
-
-###### Proposed Framework
-
-## Identity Management: PDU Session as Proxy
-
----
-
-###### Proposed Framework
-
-## Identity Management: Gateway and 5GC Roles
-
----
-
-###### Proposed Framework
-
-## Overall Architecture Diagram
-
----
-
-# Development and Implementation
-
-## Environment and Tools
-
----
-
-###### Development and Implementation
-
-## Authentication and Orchestration Logic
-
----
-
-###### Development and Implementation
-
-## Traffic Mapping and Lifecycle Management
-
----
-
-# Validation
-
-## Methodology and KPIs
-
----
-
-###### Validation
-
-## Test Scenarios Overview
-
----
-
-# Validation Results
-
-## Authentication, PDU Sessions, Connectivity
-
----
-
-# Validation Results
-
-## Traffic Isolation and Lifecycle Management
-
----
-
-# Discussion, Conclusions and Contributions
-
----
-
-# Limitations and Future Work
-
----
-
-# Acknowledgements
-
----
-
-# Q&A
