@@ -53,7 +53,6 @@ const (
 
 // NewPDUSession establishes a new PDU session using nr-cli and waits for it to become active.
 func NewPDUSession(ueIMSI string, dnn string) (*Session, error) {
-	logger.Printf("IMSI %s establishing...", ueIMSI)
 	args := fmt.Sprintf(pduSessionCmdEstablish+" --dnn %s", dnn)
 	cmd := exec.Command("nr-cli", ueIMSI, "--exec", args)
 	output, err := cmd.CombinedOutput()
@@ -148,12 +147,12 @@ func LastPDUSession(ueIMSI string) (*Session, error) {
 
 // ReleasePDUSession instructs nr-cli to release a specific PDU session.
 func ReleasePDUSession(ueIMSI string, pduID int) error {
-	logger.Printf("ReleasePDUSession: PDU ID %d IMSI %s releasing...", pduID, ueIMSI)
+	logger.Printf("PDU ID %d IMSI %s releasing...", pduID, ueIMSI)
 	cmd := exec.Command("nr-cli", ueIMSI, "--exec", fmt.Sprintf("%s %d", pduSessionCmdRelease, pduID))
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return fmt.Errorf("release PDU #%d IMSI %s failed: %w. Output: %s", pduID, ueIMSI, err, string(output))
 	}
-	logger.Printf("ReleasePDUSession: PDU ID %d IMSI %s released. Output: %s", pduID, ueIMSI, strings.TrimSpace(string(output)))
+	logger.Printf("PDU ID %d IMSI %s released. Output: %s", pduID, ueIMSI, strings.TrimSpace(string(output)))
 	return nil
 }

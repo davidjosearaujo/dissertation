@@ -247,7 +247,6 @@ func HostapdListener(
 						pduSession:           session,
 						AppliedIPTablesRules: appliedRules,
 					}
-					logger.Printf("Device %s tracked, PDU ID %d. Stored %d iptables rules.", macAddress, session.ID, len(appliedRules))
 
 					if err := AllowMAC(allowedMACsFilePath, macAddress, leaseTime); err != nil {
 						logger.Printf("AllowMAC for %s failed: %v", macAddress, err)

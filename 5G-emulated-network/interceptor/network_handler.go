@@ -102,7 +102,7 @@ func ForgetDevice(allowedMACsFilePath string, leasesFilePath string, macAddress 
 
 func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, ueIMSI string, link netlink.Link, quit <-chan struct{}) {
 	defer wg.Done()
-	logger.Printf("HostDisconnectListener: Monitoring link %s (Index %d) every %s", link.Attrs().Name, link.Attrs().Index, hostDisconnectCheckInterval)
+	logger.Printf("Monitoring link %s (Index %d) every %s", link.Attrs().Name, link.Attrs().Index, hostDisconnectCheckInterval)
 
 	ticker := time.NewTicker(hostDisconnectCheckInterval)
 	defer ticker.Stop()
@@ -110,12 +110,12 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 	for {
 		select {
 		case <-quit:
-			logger.Println("HostDisconnectListener: Stopping...")
+			logger.Println("Stopping...")
 			return
 		case <-ticker.C:
 			neighs, err := netlink.NeighList(link.Attrs().Index, netlink.FAMILY_V4)
 			if err != nil {
-				logger.Printf("HostDisconnectListener: NeighList for %s failed: %v.", link.Attrs().Name, err)
+				logger.Printf("NeighList for %s failed: %v.", link.Attrs().Name, err)
 				continue
 			}
 
@@ -143,7 +143,7 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 						if device.pduSession != nil {
 							pduAddr = device.pduSession.Address
 						}
-						logger.Printf("HostDisconnectListener: Device %s (MAC: %s) state -> REACHABLE (was %s)", pduAddr, macAddress, device.state)
+						logger.Printf("Device %s (MAC: %s) state -> REACHABLE (was %s)", pduAddr, macAddress, device.state)
 						device.state = "REACHABLE"
 						allowedDevices[macAddress] = device
 					}
@@ -153,7 +153,7 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 						if device.pduSession != nil {
 							pduAddr = device.pduSession.Address
 						}
-						logger.Printf("HostDisconnectListener: Device %s (MAC: %s) -> STALE (was %s) -> Forgetting.", pduAddr, macAddress, device.state)
+						logger.Printf("Device %s (MAC: %s) -> STALE (was %s) -> Forgetting.", pduAddr, macAddress, device.state)
 						ForgetDevice(allowedMACsFilePath, leasesFilePath, macAddress, ueIMSI)
 						continue
 					}
@@ -171,7 +171,7 @@ func HostDisconnectListener(allowedMACsFilePath string, leasesFilePath string, u
 						if device.pduSession != nil {
 							pduAddr = device.pduSession.Address
 						}
-						logger.Printf("HostDisconnectListener: Tracked device %s (MAC: %s, State: %s) no longer in ARP list. Scheduling for forget.", pduAddr, trackedMAC, device.state)
+						logger.Printf("Tracked device %s (MAC: %s, State: %s) no longer in ARP list. Scheduling for forget.", pduAddr, trackedMAC, device.state)
 						macsToForget = append(macsToForget, trackedMAC)
 					}
 				}

@@ -317,8 +317,6 @@ func (rm *RuleManager) ApplyMappingRules(lanIF, macAddr, pduIF, pduGatewayIP str
 		}
 		return appliedRuleDetails, fmt.Errorf("encountered %d error(s) applying rules for MAC %s. See logs", len(errorsEncountered), macAddr)
 	}
-
-	logger.Printf("All rules processed successfully for MAC %s (PDU_ID: %d). Applied %d rules/entries.", macAddr, pduSessionID, len(appliedRuleDetails))
 	return appliedRuleDetails, nil
 }
 
