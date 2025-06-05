@@ -308,33 +308,41 @@ This section presents the results obtained from executing the test scenarios des
 The primary test involved onboarding \ac{NAUN3} devices (\texttt{naun301}, \texttt{naun302}) one after another.
 
 \begin{itemize}
-    \item \textbf{EAP-TLS Authentication:} Logs from \texttt{wpa\_supplicant} on each \ac{NAUN3} device (see Listing \ref{lst:wpa_supplicant_eap_success}) confirmed the initiation and successful completion of the \ac{EAP-TLS} handshake ("\texttt{CTRL-EVENT-EAP-SUCCESS EAP authentication completed successfully}"). Correspondingly, the \texttt{hostapd} log on the 5G-RG (\texttt{ue} \ac{VM}) showed the \ac{EAP} exchange, including the relay of messages to the \ac{RADIUS} server and the reception of Access-Accept (see Listing \ref{lst:hostapd_naun301_eap_success}). The \texttt{interceptor} (see Listing \ref{lst:interceptor_eap_success}) captured the \texttt{CTRL-EVENT-EAP-SUCCESS} from \texttt{hostapd}, indicating its awareness of the successful local authentication.
+    \item \textbf{EAP-TLS Authentication:} Logs from \texttt{wpa\_supplicant} on each \ac{NAUN3} device (see Listing \ref{lst:wpa_supplicant_eap_success}) confirmed the initiation and successful completion of the \ac{EAP-TLS} handshake ("\texttt{CTRL-EVENT-EAP-SUCCESS EAP authentication completed successfully}"). Correspondingly, the \texttt{hostapd} log on the 5G-RG (\texttt{ue} \ac{VM}) showed the \ac{EAP} exchange, including the relay of messages to the \ac{RADIUS} server and the reception of Access-Accept (see Listing \ref{lst:hostapd_naun301_eap_success}). The \texttt{interceptor} (see Listing \ref{lst:interceptor_eap_success1}) captured the \texttt{CTRL-EVENT-EAP-SUCCESS} from \texttt{hostapd}, indicating its awareness of the successful local authentication.
 
     \begin{lstlisting}[caption=wpa\_supplicant successful authentication,label={lst:wpa_supplicant_eap_success}]
 (...)
-584| 1748702590.706948: enp0s8: CTRL-EVENT-EAP-SUCCESS EAP authentication completed successfully
-585| 1748702590.706998: EAPOL: IEEE 802.1X for plaintext connection; no EAPOL-Key frames required
+584| 1748702590.706948: enp0s8: CTRL-EVENT-EAP-SUCCESS EAP authenticati
+on completed successfully
+585| 1748702590.706998: EAPOL: IEEE 802.1X for plaintext connection; no 
+EAPOL-Key frames required
 586| 1748702590.707047: enp0s8: WPA: EAPOL processing complete
 587| 1748702590.707096: enp0s8: Cancelling authentication timeout
 586| 1748702590.707147: enp0s8: State: ASSOCIATED -> COMPLETED
-586| 1748702590.707201: enp0s8: CTRL-EVENT-CONNECTED - Connection to 01:80:c2:00:00:03 completed [id=0 id_str=]
+586| 1748702590.707201: enp0s8: CTRL-EVENT-CONNECTED - Connection to 01:
+80:c2:00:00:03 completed [id=0 id_str=]
 (...)
     \end{lstlisting}
 
     \begin{lstlisting}[caption=\texttt{hostapd} successful authentication,label={lst:hostapd_naun301_eap_success}]
 (...)
 802| 1748702590.717640: EAP: EAP entering state SUCCESS2
-803| 1748702590.717722: enp0s9: CTRL-EVENT-EAP-SUCCESS2 08:00:27:b4:18:a9
-804| 1748702590.717775: CTRL_IFACE monitor send /tmp/interceptor_7025.sock\x00
-805| 1748702590.717923: IEEE 802.1X: 08:00:27:b4:18:a9 BE_AUTH entering state SUCCESS
-806| 1748702590.718200: 1748702590.718200: enp0s9: STA 08:00:27:b4:18:a9 IEEE 802.1X: Sending EAP Packet (identifier 224)
-807| 1748702590.718452: IEEE 802.1X: 08:00:27:b4:18:a9 AUTH_PAE entering state AUTHENTICATED
+803| 1748702590.717722: enp0s9: CTRL-EVENT-EAP-SUCCESS2 08:00:27:b4:18:a
+9
+804| 1748702590.717775: CTRL_IFACE monitor send /tmp/interceptor_7025.so
+ck\x00
+805| 1748702590.717923: IEEE 802.1X: 08:00:27:b4:18:a9 BE_AUTH entering 
+state SUCCESS
+806| 1748702590.718200: 1748702590.718200: enp0s9: STA 08:00:27:b4:18:a9 
+IEEE 802.1X: Sending EAP Packet (identifier 224)
+807| 1748702590.718452: IEEE 802.1X: 08:00:27:b4:18:a9 AUTH_PAE entering 
+state AUTHENTICATED
 808| 1748702590.718565: enp0s9: AP-STA-CONNECTED 08:00:27:b4:18:a9
 (...)
     \end{lstlisting}
 
     \item{
-        \textbf{Dedicated \ac{PDU} Session Establishment:} Following each successful \ac{EAP-TLS} authentication (see Listing \ref{lst:interceptor_eap_success1}), the \texttt{interceptor} log shows the initiation of a new \ac{PDU} session request for the \texttt{clients} \ac{DNN} (see Listing \ref{lst:interceptor_eap_success2}), and finally allows the device to request \ac{IP} addresses via \ac{DHCP}  (see Listing \ref{lst:interceptor_eap_success3}). The UERANSIM tool \texttt{nr-cli ps-list} on the \ac{5G-RG}, corroborates this (see Listing \ref{fig:ue_pdu_sessions}):
+        \textbf{Dedicated \ac{PDU} Session Establishment:} Following each successful \ac{EAP-TLS} authentication (see Listing \ref{lst:interceptor_eap_success2}), the \texttt{interceptor} log shows the initiation of a new \ac{PDU} session request for the \texttt{clients} \ac{DNN} (see Listing \ref{lst:interceptor_eap_success2}), and finally allows the device to request \ac{IP} addresses via \ac{DHCP}  (see Listing \ref{lst:interceptor_eap_success3}). The UERANSIM tool \texttt{nr-cli ps-list} on the \ac{5G-RG}, corroborates this (see Listing \ref{fig:ue_pdu_sessions}):
         \begin{itemize}
             \item Initially (14:43:09 \ac{UTC}), only \texttt{PDU Session1} (\ac{DNN}: \texttt{backhaul}, \ac{IP}: \texttt{10.45.0.2}) is active.
             
@@ -352,18 +360,25 @@ The primary test involved onboarding \ac{NAUN3} devices (\texttt{naun301}, \text
 \begin{lstlisting}[caption=\texttt{interceptor} requests \acs{PDU} session,label={lst:interceptor_eap_success2}]
 (...)
 19| [DEBUG] 2025/05/31 14:43:10  Auth success for 08:00:27:b4:18:a9
-20| [DEBUG] 2025/05/31 14:43:10  Requesting PDU for 08:00:27:b4:18:a9 (IMSI: imsi-999700000000001)
-21| [DEBUG] 2025/05/31 14:43:10  IMSI imsi-999700000000001 establishing...
-22| [DEBUG] 2025/05/31 14:43:10  IMSI imsi-999700000000001 requested. Output: PDU session establishment procedure triggered. Waiting activation...
+20| [DEBUG] 2025/05/31 14:43:10  Requesting PDU for 08:00:27:b4:18:a9 (I
+MSI: imsi-999700000000001)
+21| [DEBUG] 2025/05/31 14:43:10  IMSI imsi-999700000000001 establishing
+...
+22| [DEBUG] 2025/05/31 14:43:10  IMSI imsi-999700000000001 requested. O
+utput: PDU session establishment procedure triggered. Waiting activatio
+n...
 (...)
-28| [DEBUG] 2025/05/31 14:43:28  PDU ID 2 IMSI imsi-999700000000001 ACTIVE (State: PS-ACTIVE, Addr: 10.46.0.2).
-29| [DEBUG] 2025/05/31 14:43:28  PDU Session ID 2, constructed PDU Interface: uesimtun1
+28| [DEBUG] 2025/05/31 14:43:28  PDU ID 2 IMSI imsi-999700000000001 ACT
+IVE (State: PS-ACTIVE, Addr: 10.46.0.2).
+29| [DEBUG] 2025/05/31 14:43:28  PDU Session ID 2, constructed PDU Inte
+rface: uesimtun1
 (...)
 \end{lstlisting}
 
-\begin{lstlisting}[caption=\texttt{interceptor} \ac{MAC} address permited for \ac{IP} attribution,label={lst:interceptor_eap_success3}]
+\begin{lstlisting}[caption=\texttt{interceptor} \acs{MAC} address permited for \acs{IP} attribution,label={lst:interceptor_eap_success3}]
 (...)
-48| [DEBUG] 2025/05/31 14:43:28  MAC 08:00:27:b4:18:a9 added to /etc/dnsmasq.d/allowed-macs.conf.
+48| [DEBUG] 2025/05/31 14:43:28  MAC 08:00:27:b4:18:a9 added to /etc/dns
+masq.d/allowed-macs.conf.
 (...)
 \end{lstlisting}
 
@@ -424,7 +439,21 @@ RR: 	192.168.59.15
 (...)
 \end{lstlisting}
 
-    \item \textbf{Onboarding Delay:} Repeating the onboarding process ten consecutive times in each power-up (as the environment setup was the replicated multiple times), the average approximate total time was 27 seconds, from the start of \texttt{wpa\_supplicant}, which initiates the authentication process, to the \ac{NAUN3} device being authenticated and receiving its local \ac{IP} address along with a dedicated a \ac{PDU} Session. This comprehensive duration includes the \ac{EAP-TLS} handshake, all \ac{RADIUS} communications, \ac{PDU} session establishment orchestrated by the \texttt{interceptor} via \texttt{nr-cli}, and the final \ac{DHCP} lease acquisition on the local network.
+\begin{lstlisting}[caption=Timestamps from traffic captures at the \texttt{naun301} during authentication and \acs{IP} atribution,label={lst:onboarding_delay}]
+Measured between first EAP Identity Request to last DHCP ACK
+Attempt #1 0.005833 to 37.134592
+Attempt #2 167.449142 to 196.922320
+Attempt #3 327.151600 to 367.484920
+Attempt #4 497.703455 to 530.219903
+Attempt #5 660.442262 to 689.500301
+Attempt #6 819.773031 to 858.609561
+Attempt #7 988.818362 to 1025.744125
+Attempt #8 1155.971666 to 1187.690164
+Attempt #9 1317.914145 to 1349.066786
+Attempt #10 1479.301829 to 1503.792846
+\end{lstlisting}
+
+    \item \textbf{Onboarding Delay:} The onboarding delay was measured by repeating the onboarding process ten consecutive times using the \texttt{naun301} device. For each of the ten attempts, timestamps from traffic captures were used to determine the interval from the first \ac{EAP} \textit{Identity Request} to the final \ac{DHCP} ACK (raw data in Listing~\ref{lst:onboarding_delay}).This procedure yielded an average onboarding delay of 33.1634193 seconds with a standard deviation of 5.0077937 seconds for this measured interval. This duration signifies the time taken from the initial \ac{EAP} exchange (which is part of the authentication sequence initiated by \texttt{wpa\_supplicant}) until the \ac{NAUN3} device is fully authenticated, receives its local \ac{IP} address (confirmed by the \ac{DHCP} ACK), with its dedicated \ac{PDU} Session. This comprehensive measured period includes the \ac{EAP-TLS} handshake, all \ac{RADIUS} communications, the \ac{PDU} session establishment orchestrated by the \texttt{interceptor} via \texttt{nr-cli}, and the final \ac{DHCP} lease acquisition on the local network.
 \end{itemize}
 
 \subsection{End-to-End Connectivity and Path Verification}
@@ -613,7 +642,7 @@ The primary goal was to devise a solution that allows \ac{NAUN3} devices, which 
 \begin{itemize}
     \item \textbf{Local Authentication (Requirement Met) (Metric ID-1):} The successful \ac{EAP-TLS} authentication demonstrates that \ac{NAUN3} devices can be securely authenticated at the edge by the \ac{5G-RG} before any \ac{5G} resources are committed. This meets the requirement for a robust local authentication mechanism.
 
-    \item \textbf{Individual Device Handling and Proxy Identity (Requirement Met) (Metric ID-3, ID-4 and ID-5):} The core concept of using a dedicated \ac{PDU} session as a proxy identity for each \ac{NAUN3} device was successfully implemented and validated. The \ac{UE} logs and Listing \ref{lst:ue_pdu_sessions_nics} and \ref{lst:iptable_mapping_rules} clearly show the dynamic creation of distinct \ac{PDU} sessions on the \texttt{clients} \ac{DNN}, each with a unique \ac{5GC}-assigned \ac{IP} address, corresponding to each authenticated \ac{NAUN3} device. The \texttt{interceptor} logs (see Figure \ref{lst:interceptor_eap_success}) further detail the interceptor application's role in orchestrating these \ac{PDU} session establishments via \texttt{nr-cli} upon \ac{EAP} success.
+    \item \textbf{Individual Device Handling and Proxy Identity (Requirement Met) (Metric ID-3, ID-4 and ID-5):} The core concept of using a dedicated \ac{PDU} session as a proxy identity for each \ac{NAUN3} device was successfully implemented and validated. The \ac{UE} logs and Listing \ref{lst:ue_pdu_sessions_nics} and \ref{lst:iptable_mapping_rules} clearly show the dynamic creation of distinct \ac{PDU} sessions on the \texttt{clients} \ac{DNN}, each with a unique \ac{5GC}-assigned \ac{IP} address, corresponding to each authenticated \ac{NAUN3} device. The \texttt{interceptor} logs (see Listings \ref{lst:interceptor_eap_success1}, \ref{lst:interceptor_eap_success1} and \ref{lst:interceptor_eap_success3}) further detail the interceptor application's role in orchestrating these \ac{PDU} session establishments via \texttt{nr-cli} upon \ac{EAP} success.
 
     \item \textbf{Traffic Mapping and Isolation (Requirement Met) (Metric ID-6 and ID-7):} The \texttt{ping -R} tests (Listings \ref{lst:ping_gw_naun301} and \ref{lst:ping_gw_naun302}) and \texttt{iperf3} results (Listings \ref{lst:iperf_naun3_to_core} showing distinct source \acp{IP} \texttt{10.46.0.2} and \texttt{10.46.0.3}) confirm that traffic from each \ac{NAUN3} device is correctly \textit{NATted} and routed through its unique \ac{PDU} session. The Wireshark capture in Figure \ref{fig:naun3_to_core_ue_view} and the dynamic \texttt{iptables} rules in Listing \ref{lst:iptable_mapping_rules} further substantiate that the \ac{5G-RG} effectively maps local device traffic to its designated \ac{5G} \ac{PDU} session, ensuring traffic isolation.
 
