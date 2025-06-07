@@ -51,30 +51,6 @@ Doctor Francisco Fontes, _Altice Labs_
 <!-- header: Masters in Cybersecurity — Integration of Wi-Fi-Only Devices in 5G Core Networks: Addressing Authentication and Identity Management Challenges -->
 <!-- footer: ![width:40px](./images/institutotelecomunicacoes.png) &ensp; ![width:90px](./images/alticelabs.png) &ensp; ![width:35px](./images/ua.png) &ensp; Instituto de Telecomunicações, Altice Labs and DETI-->
 
-# Table of Contents
-
-<div class="columns2">
-<div>
-
-1. The Core Problem and Its Significance
-2. Research Objectives
-3. State of the Art and The Specific Gap
-4. Framework Concept and Architecture
-5. Key Mechanisms: Authentication, Identity, Traffic
-
-</div>
-<div>
-
-6. Implementation: Testbed and Orchestration Logic
-7. Validation: Key Results
-8. Conclusion and Contributions
-9. Limitations and Future Work
-
-</div>
-</div>
-
----
-
 # The Core Problem and Its Significance
 
 <div class="columns3">
@@ -142,40 +118,16 @@ A robust mechanism for **individualized**, **secure authentication** of _credent
 <div class="columns2">
 <div>
 
-Connectivity Group ID (CGID) can manage **groups of devices behind** a 5G-RG.
-
-The 5G-RG establishes one PDU Session for the entire group.
+Connectivity Group ID (CGID) can manage **groups of devices behind** a 5G-RG with one PDU Session.
 
 Thi dos not provide per-device traffic management granularity.
+
+Later developments envision a **network capable of distinguishing traffic from specific devices** behind an RG.
 
 </div>
 <div>
 
 ![height:400px center](images/cgid.png)
-
-</div>
-</div>
-
----
-
-###### State of the Art
-
-<div class="columns2">
-<div>
-
-## Industry Direction (3GPP R19)
-
-3GPP introduced advancements in R19.
-
-Allows the network to distinguish traffic from specific devices behind an RG.
-Can trigger a PDU Session modification or establishment for a single device.
-
-Industry is moving towards more granular, per-device management.
-
-</div>
-<div>
-
-![height:500px center](images/differentiated-qos.png)
 
 </div>
 </div>
@@ -282,22 +234,25 @@ After successful EAP-TLS authentication:
 
 ---
 
-# Testbed, Components, and _Interceptor_ Logic
+# Testbed and _Interceptor_: Central Orchestrator
 
 ![height:480px center](images/emulated-environment-topology.png)
 
 ---
 
-###### Testbed, Components, and _Interceptor_ Logic
+###### Testbed and _Interceptor_: Central Orchestrator
 
-**Virtualized testing environment** with Vagrant, Open5GS, UERANSIM, FreeRADIUS, hostapd, and wpa_supplicant.
+**Virtualized testing environment** with Vagrant, Open5GS, UERANSIM, FreeRADIUS, `hostapd`, and `wpa_supplicant`.
 
 <div class="columns2">
 <div>
 
-The custom logic developed, _Interceptor_, is the **brain of the solution**.
+The custom logic developed, **_Interceptor_**, is the **brain of the solution**, responsible for:
 
-It's role is to **monitor for successful authentication**, orchestrate **PDU session creation** and attribution, manage **local DHCP permissions**, and **control all routing rules**.
+- ☑ Monitor `hostapd`
+- ☑ Trigger new PDU Sessions
+- ☑ Configure DHCP and routing
+- ☑ Clean up on disconnect
 
 </div>
 <div>
@@ -419,20 +374,20 @@ Using `ping -R` and `iperf3` we can confirm that traffic from different NAUN3 de
 
 # Limitations
 
-- **Onboarding Delay:** Approximately 33s in the PoC.
-- **Scalability:** Not stress-tested; CLI-based orchestration is a potential bottleneck.
-- **NAT Implications:** Restricts inbound connection initiation to NAUN3 devices.
-- **Physical Hardware:** Challenges encountered with physical modem integration.
-- **Security:** The custom _Interceptor_ logic requires further hardening for production environments.
+- **Physical Hardware Integration:** Physical 5G modem integration is an ongoing challenge. Proprietary drivers, kernel dependencies, and lack of documentation for multi-PDU session management.
+
+- **Implementation Specifics:** The simulated PoC relies on CLI-based orchestration (`nr-cli`), which is not ideal for performance. The onboarding delay of ~33 (±5) seconds reflects this.
+
+- **NAT Implications:** Inbound connection initiation to NAUN3 devices is restricted.
 
 ---
 
 # Future Work
 
-- **Optimize Onboarding Delay:** Explore API-based PDU control or pre-established session pools.
+- **Modem Interface Adaptation:** The _Interceptor_ logic must be adapted to interface with modem-specific APIs, such as AT commands or QMI, replacing the UERANSIM CLI used in the simulation.
 - **Performance and Scalability Analysis:** Rigorous testing and exploring alternatives like eBPF.
-- **Enhanced Security:** Harden the _Interceptor_ and secure RADIUS transport (e.g., with IPSec).
-- **Address NAT:** Investigate solutions like Framed-Route or UPF port forwarding.
+- **Enhanced Robustness:** Harden the _Interceptor_ and secure RADIUS transport (e.g., with IPSec).
+- **Address NAT:** Investigate solutions like Framed-Routing.
 
 ---
 
