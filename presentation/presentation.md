@@ -104,7 +104,7 @@ To address this problem, this research aimed to:
 </div>
 <div>
 
-A robust mechanism for **individualized**, **secure authentication** of _credential-less_ Wi-Fi-only devices and their subsequent per-device management within the 5GC is the focus of this project.
+A robust mechanism for **individualized**, **secure authentication** of _5G-credential-less_ Wi-Fi-only devices and their subsequent per-device management within the 5GC is the focus of this project.
 
 </div>
 </div>
@@ -120,7 +120,7 @@ A robust mechanism for **individualized**, **secure authentication** of _credent
 
 Connectivity Group ID (CGID) can manage **groups of devices behind** a 5G-RG with one PDU Session.
 
-Thi dos not provide per-device traffic management granularity.
+This does not provide per-device traffic management granularity.
 
 Later developments envision a **network capable of distinguishing traffic from specific devices** behind an RG.
 
@@ -273,7 +273,7 @@ The custom logic developed, **_Interceptor_**, is the **brain of the solution**,
 
 Local EAP-TLS authentication was consistently successful.
 
-Each authenticated NAUN3 device triggered the 5G-RG to establish a unique, **dedicated "clients" PDU session**, and the 5GC assigned a **unique IP to each session**.
+Each authenticated NAUN3 device triggered the 5G-RG to establish a unique, **dedicated PDU session in "clients" DNN**, and the 5GC assigned a **unique IP to each session**.
 
 </div>
 <div>

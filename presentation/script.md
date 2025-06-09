@@ -1,214 +1,156 @@
-##  **Slide 1: Title Slide**
+# Presentation Script: Integration of Wi-Fi-Only Devices in 5G
 
-**(30 seconds)**
-“Good \[morning/afternoon], everyone. My name is David Araújo, and today I’m presenting my Master’s dissertation: *Integration of Wi-Fi-Only Devices in 5G Core Networks: Addressing Authentication and Identity Management Challenges*. This work was developed at the University of Aveiro with the collaboration of Altice Labs and Instituto de Telecomunicações, under the supervision of Dr. Daniel Corujo and Dr. Francisco Fontes.”
+Instructions for Training:
+- Time yourself: Read through the script at a natural, comfortable pace. Use a stopwatch to see if you're hitting the approximate timings.
 
----
+- Don't just read: Use the script to understand the key points for each slide. The goal is to speak knowledgeably, not to read from a paper.
 
-##  **Slide 2: The Core Problem and Its Significance**
+- Emphasize key terms: The words in bold are concepts you should stress.
 
-**(1.5 minutes)**
-“The core challenge tackled in this work is that, as it stands, Wi-Fi-only devices—those that do not have 5G credentials and thus can't be directly integrated into the 5G Core network using standard 3GPP methods. This is a real-world limitation in enterprise and residential environments where many devices rely solely on Wi-Fi.
+- Pause: The notes like `[pause briefly]` are suggestions for letting a concept sink in before moving on.
 
-As 5G expands, the lack of a seamless integration path for these devices becomes a bottleneck. Solving this gap is crucial to unlock true Wi-Fi–5G convergence and extend key 5G benefits—such as enhanced mobile broadband, massive IoT support, and low-latency applications—to legacy or resource-constrained Wi-Fi-only devices.”
+## Slide 1: Title Slide
+(Time: ~30 seconds)
 
----
+"Good morning/afternoon, everyone. My name is David Araújo, and today I will be presenting my Master’s dissertation, titled Integration of Wi-Fi-Only Devices in 5G Core Networks: Addressing Authentication and Identity Management Challenges.
 
-##  **Slide 3: Research Objectives**
+This work was conducted at the University of Aveiro, in collaboration with Altice Labs and the Instituto de Telecomunicações, under the supervision of Dr. Daniel Corujo and Dr. Francisco Fontes."
 
-**(1.5 minutes)**
-“To solve this integration challenge, this work focused on three main research goals:
+## Slide 2: The Core Problem and Its Significance
+(Time: ~1 minute)
 
-1. First, to design a secure local authentication mechanism that does not rely on 5G credentials.
-2. Second, to develop a way for the 5G Core to recognize and individually manage each Wi-Fi-only device connection.
-3. And third, to combine both into an integrated solution that introduces minimal changes to the existing 5G architecture or the end devices.
+The core challenge this dissertation tackles is a significant gap in the current 5G ecosystem. As it stands, Wi-Fi-only devices—meaning those without 5G credentials like a USIM os SIM card — cannot be directly integrated into the 5G Core network using standard methods as they are not capable of communicating and thus, authenticating into the network. This is a major hurdle in today's enterprise and residential environments, where countless devices rely solely on Wi-Fi like IoT.
 
-The approach needed to be practical, scalable, and transparent from the network’s point of view.”
+As 5G continues to expand, this lack of a seamless integration path becomes a critical bottleneck. Solving this problem is essential for achieving true 5G-Wi-Fi convergence and for extending the powerful benefits of 5G—like enhanced mobile broadband and massive IoT support—to this huge ecosystem of legacy and resource-constrained devices.
 
----
+## Slide 3: Research Objectives
+(Time: ~1 minute)
 
-##  **Slide 4: State of the Art – Device Gap**
+To address this challenge, this research was guided by three main objectives:
 
-**(1.5 minutes)**
-“In the current landscape, there are two categories of non-3GPP devices.
+1. First, to design a secure and robust local authentication mechanism that doesn't depend on 5G credentials.
 
-* N5GC devices which can authenticate, but have limited capabilities.
-* NAUN3 devices — Non-Authenticable Non-3GPP — which have no native support for 5G authentication and cannot be directly onboarded.
+2. Second, to develop a method for the 5G Core to recognize and, crucially, individually manage each Wi-Fi-only device's connection.
 
-These NAUN3 devices are typically treated as a group behind a Residential Gateway. While manageable in small-scale scenarios, this approach lacks identity and traffic granularity. My work focuses on enabling **per-device authentication and management** for NAUN3 devices.”
+3. And third, to combine these into an integrated solution that requires minimal impact on both the existing 5G architecture and the end devices themselves.
 
----
+## Slide 4: State of the Art - The Gap
+(Time: ~1.5 minutes)
 
-##  **Slide 5: State of the Art – CGID Limitations**
+To understand the context, it's important to differentiate between two types of non-3GPP devices. There are N5GC devices, which have some limited 5G capabilities and can authenticate. But our focus is on NAUN3 devices — Non-Authenticable Non-3GPP devices. These have no native 5G capabilities and cannot be directly authenticated.
 
-**(1.5 minutes)**
+Typically, these devices are simply grouped together behind a residential gateway, which prevents any form of individual management. The central gap this research targets is the lack of a robust mechanism for providing secure, per-device authentication and management for these NUN3 devices.
 
-“One mechanism proposed by 3GPP is CGID — Connectivity Group ID — which allows a group of devices behind a 5G-RG to share a single PDU session. But this approach fails when individual device identity and traffic isolation are needed.
+## Slide 5: State of the Art - Managing Device Groups (CGID)
+(Time: ~1.5 minutes)
 
-Later developments in 3GPP, specifically in Release 19 in January this year, introduced the idea of per-device traffic distinction in QoS flows. However, these are mostly in early stages. This research anticipates those directions and provides a working, validated proof-of-concept that demonstrates per-device authentication and policy control using current tools.”
+One existing 3GPP concept is the Connectivity Group ID, or CGID. As you can see in the diagram, this allows a group of devices—for example, everything connected to a specific Wi-Fi SSID—to share a single PDU session.
 
----
+While this provides connectivity, it's a blunt instrument. It offers no per-device traffic granularity. You can't apply a specific security policy to just the printer, or prioritize bandwidth for the television.
 
-##  **Slide 6: Framework Overview and Principles**
+More recent developments in 3GPP Release 19 are moving towards enabling per-device traffic distinction. My research anticipates this direction and provides a working, validated proof-of-concept that demonstrates how to achieve this today.
 
-**(2 minutes)**
-“My framework is centered around a smart 5G Residential Gateway. The key principle here is **local intelligence** — all adaptation logic is placed at the 5G-RG. This allows:
+## Slides 6 & 7: Framework Concept and Architecture
+(Time: ~2 minutes)
 
-* Minimal impact on NAUN3 devices — no firmware or configuration changes required.
-* Minimal disruption to the 5GC — no additional interfaces or extensions were added to core components.
+So, how did we solve this? Our framework is centered around the concept of a smart 5G Residential Gateway. The key principle here is local intelligence—we placed all the adaptation logic at the network edge, within the 5G-RG itself. This approach ensures minimal impact on the end devices, which require no changes, and minimal disruption to the 5G Core, which sees standard interactions.
 
-This edge-based approach is operator-friendly, scalable, and leverages familiar components like RADIUS, hostapd, and EAP.”
+[Click to Slide 7]
 
----
+This slide shows the high-level architecture. On the right, we have the Wi-Fi-only NAUN3 device. On the left, the operator's ISP network, containing the 5G Core and an EAP Authentication Server. In the middle is our intelligent 5G-RG.
 
-##  **Slide 7: Overall Architecture**
+The flow is simple:
 
-**(1.5 minutes)**
-“This is the high-level view of the system.
+1. The NAUN3 device connects to the RG and is authenticated locally via the EAP server.
+2. Once authenticated, the RG establishes a unique PDU session for that device.
 
-* NAUN3 devices connect over Wi-Fi to the 5G-RG.
-* The 5G-RG handles local certificate-based authentication along with an Authentication Server.
-* Once authenticated, the RG requests a new PDU session and allocate it to handle this new device's traffic.
-* Traffic from the device is then routed through this assigned PDU interface, achieving per-device IP allocation and routing.”
+All traffic from that device is then routed through its dedicated PDU session, making it a distinct, manageable entity within the 5G network.
 
----
+## Slide 8: Authentication Mechanism
+(Time: ~1.5 minutes)
 
-##  **Slide 8: Authentication Mechanism – EAP-TLS**
+For the crucial first step of local authentication, we chose EAP-TLS. This is a highly secure, mutual authentication method based on digital certificates.
 
-**(2 minutes)**
-“For authentication, we use EAP-TLS, a widely accepted and secure method based on mutual certificate validation. Here’s how it works:
+The NAUN3 device acts as the Supplicant and holds a client certificate. The 5G-RG, running hostapd, acts as the Authenticator, but more accurately as a relay—it forwards EAP messages inside of RADIUS packets to the Authentication Server. This server, operated by the ISP, is what actually validates the device's certificate and grants or denies access.
 
-* The NAUN3 device holds a client certificate and acts as a supplicant.
-* The 5G-RG uses `hostapd` to manage the Wi-Fi access point and relay EAP messages.
-* The authentication server — FreeRADIUS — is operated by the ISP and validates the device certificate.
+This setup provides strong, zero-trust style security without relying on 5G credentials, using standard, well-understood enterprise protocols.
 
-This setup achieves zero-trust-style security without relying on 5G credentials. It also reuses proven standards, making the solution practical and extensible.”
+## Slide 9: Identity Management (PDU Session as Proxy)
+(Time: ~2 minutes)
 
----
+This brings us to the core innovation of my work. Once a device is locally authenticated, it still needs an identity in the 5G Core. How do we create one?
 
-##  **Slide 9: Identity Management – Proxy PDU Sessions**
+We do this by having the 5G-RG establish a new, dedicated PDU session and using it as a proxy identity for the NAUN3 device.
 
-**(2 minutes)**
-“Once a device is authenticated, it doesn’t yet have an identity in the 5G Core. So the RG creates a new PDU session and uses it as a **proxy identity** for the NAUN3 device.
+As shown in this flow, after a successful EAP authentication, my custom-developed Interceptor application on the RG automatically requests a new PDU session from the 5G Core. The RG maintains a local mapping between the device’s MAC address and its assigned PDU Session ID. This effectively gives a Wi-Fi-only device a unique, manageable 5G identity, using entirely standard 5G mechanisms.
 
-A local mapping is maintained between each device’s MAC address and its PDU session. This enables:
+## Slide 10: Traffic Management and Policy-Based Routing
+(Time: ~1.5 minutes)
 
-* Per-device routing,
-* Accurate lifecycle control,
-* Individual policy application.
+With a proxy identity established, we need to ensure traffic is routed correctly. We achieve this with a dynamic, policy-based routing approach, which is also automated by the Interceptor.
 
-This method effectively gives a Wi-Fi-only device a unique 5G identity using standard mechanisms.”
+First, every incoming packet from the device's MAC address is marked with a unique identifier.
 
----
+A policy rule then directs these marked packets to a dedicated routing table.
 
-##  **Slide 10: Traffic Management – Policy-Based Routing**
+This table contains a single default route, pointing all traffic out through the correct PDU session's virtual interface.
 
-**(2 minutes)**
-“Routing is handled using a policy-based approach:
+Finally, NAT is applied, so the traffic appears to the outside world as originating from the 5G-Core-assigned IP address.
 
-1. Packets from each device are marked using their MAC address.
-2. Marked packets are directed to a dedicated routing table.
-3. That table routes traffic through the appropriate PDU session interface.
-4. Finally, NAT ensures the traffic uses the IP assigned by the 5GC.
+This ensures complete traffic segregation and allows the 5G Core to manage the flow as a distinct session.
 
-This gives complete traffic segregation between devices — even though they share the same physical Wi-Fi link and gateway.”
+## Slides 11 & 12: Testbed and Interceptor
+(Time: ~1 minute)
 
----
+To validate this framework, we built a fully virtualized testbed using Vagrant, Open5GS, and UERANSIM. The environment simulated everything from the end device to the 5G Core.
 
-##  **Slide 11 and 12: Testbed Overview**
+[Click to Slide 12]
 
-**(1 minute)**
-“The testbed was built using Vagrant to orchestrate several virtual machines:
+The brain of the solution is the custom Interceptor application I developed. This Go program is the central orchestrator. It monitors hostapd for successful authentications, triggers the creation of new PDU sessions via UERANSIM's command-line tool, configures all the necessary DHCP and routing rules, and, just as importantly, cleans everything up when the device disconnects.
 
-* Open5GS for the 5G Core,
-* UERANSIM for gNB and UE emulation,
-* FreeRADIUS, hostapd, and `wpa_supplicant`.
+## Slide 13: Validation - Successful Onboarding
+(Time: ~1 minute)
 
-At the heart of the framework is a custom component which I developed: the *Interceptor*. It monitors authentication events and coordinates PDU session creation, DHCP permissions, routing table management, and teardown on disconnect.”
+Our validation tests confirmed the framework functions as designed. First, we verified successful onboarding. Local EAP-TLS authentication was consistently successful. As you can see in the log snippet, this immediately triggered the creation of a unique PDU session on the 'clients' data network, and the 5G Core assigned a unique IP address to that session.
 
----
+## Slide 14: Validation - Connectivity and Isolation
+(Time: ~1 minute)
 
-##  **Slide 13: Validation – Onboarding and PDU Creation**
+Next, we confirmed end-to-end connectivity and traffic isolation. Using the ping -R command, which records the route of the packet, we could see definitive proof of our mechanism.
 
-**(1.5 minutes)**
-“For each authenticated device:
+The top example shows a device's traffic being routed through the proxy IP 10.46.0.2. The bottom example shows a second device's traffic being routed through a different proxy IP, 10.46.0.3. This proves that traffic is correctly mapped and completely isolated between devices.
 
-* A dedicated PDU session was created.
-* The 5GC assigned a unique IP address.
-* The session appeared active and independently manageable.
+## Slide 15: Validation - Lifecycle Management
+(Time: ~1 minute)
 
-This confirmed the viability of using proxy PDU sessions as per-device identities.”
+Finally, we validated the full resource lifecycle. When a device disconnected, our Interceptor correctly detected the event, deauthenticated the client, purged all of its associated routing rules and DHCP permissions, and terminated the dedicated PDU session in the 5G Core. This ensures that resources are managed efficiently.
 
----
+We also measured the onboarding delay. In our proof-of-concept environment, this process took an average of approximately 33 seconds.
 
-##  **Slide 14: Validation – Connectivity and Isolation**
+## Slide 16: Key Contributions
+(Time: ~1 minute)
 
-**(1.5 minutes)**
-“To confirm routing and traffic isolation, we used `ping -R` and `iperf3`.
-Each NAUN3 device could independently reach the 5GC using a different path and IP, and no cross-device traffic leakage occurred.
+To summarize, my dissertation makes four key contributions:
 
-The system correctly enforced per-device NAT, routing, and IP attribution.”
+- It provides a practical, end-to-end framework for integrating these 5G-credential-less devices.
 
----
+- It introduces the innovative use of per-device PDU Sessions as dynamic proxy identities.
 
-##  **Slide 15: Validation – Lifecycle Management**
+- It demonstrates the tight and practical coupling of strong, local EAP-TLS authentication with 5G session management at the network edge.
 
-**(1.5 minutes)**
-“When a device disconnected:
+- And finally, it delivers a working, validated proof-of-concept, built with open-source tools and custom logic."
 
-* It was deauthenticated.
-* Its DHCP lease was revoked.
-* Its routing rules were purged.
-* The PDU session was released.
+## Slide 17: Limitations
+(Time: ~1 minute)
 
-This clean lifecycle management demonstrates the framework’s operational viability in dynamic environments.”
+Of course, this research has some limitations. The proof-of-concept relies on a CLI-based orchestration because of UERANSIM, which contributes to the 33-second onboarding delay. The use of NAT inherently restricts inbound connections to the devices. And finally, our attempts at physical hardware integration were challenging due to the proprietary nature and lack of documentation for the experimental 5G modem we used.
 
----
+## Slide 18: Future Work
+(Time: ~1 minute)
 
-##  **Slide 16: Key Contributions**
+These limitations point directly to future work. The next steps would be to adapt the Interceptor to use native modem APIs, like AT commands or QMI, which would drastically reduce the onboarding delay. We could also explore high-performance routing mechanisms like eBPF for scalability, and investigate using the Framed-Route RADIUS attribute to address the NAT limitations. These steps would bring this framework even closer to production-readiness.
 
-**(1 minute)**
-“To summarize, this work contributes:
+## Slide 19: Thank You and Q&A
+(Time: ~30 seconds)
 
-1. A full framework for onboarding Wi-Fi-only devices into 5GC.
-2. A novel use of proxy PDU sessions for identity.
-3. A practical integration of EAP-TLS and 5G session control.
-4. A validated, open-source proof-of-concept with real 5G components.”
-
----
-
-##  **Slide 17: Limitations**
-
-**(1 minute)**
-“There are a few limitations:
-
-* Onboarding time averages 33 seconds.
-* The Interceptor logic is CLI-driven which increased overhead.
-* NAT prevents inbound connections to NAUN3 devices.
-* Hardware integration was challenging do to experimental hardware.
-* The robustness of the orchestration logic needs reinforcement.”
-
----
-
-##  **Slide 18: Future Work**
-
-**(1.5 minutes)**
-“To address these issues, future work could:
-
-* Reduce delay by using APIs or pre-pooling sessions.
-* Explore high-performance mechanisms like eBPF.
-* Add security layers to Interceptor and RADIUS transport.
-* Address NAT using Framed-Route or UPF port forwarding.
-
-These steps would bring the prototype closer to production-readiness.”
-
----
-
-##  **Slide 18: Q\&A Slide**
-
-**(30 seconds)**
-“Thank you for your attention. I’m now happy to take any questions you may have.”
-
----
-
-Would you like a version of this script formatted for cue cards or speaker notes, with time stamps for rehearsing?
+Thank you for your attention. I am now happy to answer any questions you may have.
