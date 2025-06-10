@@ -96,15 +96,17 @@ To address this problem, this research aimed to:
 <div class="columns2">
 <div>
 
-**Non-3GPP Capable Device Types Behind RGs**
+**Device Types**
 
-- **N5GC** have limited 5G capabilities but can authenticate
-- **NAUN3** have no 5G capabilities and cannot directly authenticate and are often grouped.
+- **3GPP:** Have credentials and connect to the cellular network.
+- **Non-3GPP:** Use technologies other than cellular and may or may not have 5G credentials.
 
 </div>
 <div>
 
-A robust mechanism for **individualized**, **secure authentication** of _5G-credential-less_ Wi-Fi-only devices and their subsequent per-device management within the 5GC is the focus of this project.
+_WiFi-only_ ➜ **Non-Authenticable Non-3GPP (NAUN3)** 
+
+A robust mechanism for **individualized**, **secure authentication** of these devices and their subsequent per-device management within the 5GC is the focus of this project.
 
 </div>
 </div>
